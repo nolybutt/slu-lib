@@ -13,6 +13,7 @@ where
 }
 
 fn main() {
+    std::fs::create_dir_all("./dist").unwrap();
     write_schema::<Settings>("./dist/settings.schema.json");
     write_schema::<Placeholder>("./dist/placeholder.schema.json");
     write_schema::<Theme>("./dist/theme.schema.json");
