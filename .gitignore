@@ -1,0 +1,10 @@
+.vscode
+.cert
+
+# dependencies
+node_modules
+
+# builds
+dist
+out
+target
