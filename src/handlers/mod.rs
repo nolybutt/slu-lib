@@ -70,7 +70,7 @@ slu_events_declaration! {
     WMAddWindow = "add-window",
     WMUpdateWindow = "update-window",
     WMRemoveWindow = "remove-window",
-    
+
     WMForceRetiling = "wm-force-retiling",
     WMSetLayout = "wm-set-layout",
     WMSetOverlayVisibility = "wm-set-overlay-visibility",

@@ -1,26 +1,26 @@
 mod icon_pack;
 mod placeholder;
+mod plugin;
+mod profile;
 mod settings;
 mod settings_by_app;
 mod settings_by_monitor;
 mod theme;
 mod weg_items;
-mod wm_layout;
-mod plugin;
 mod widget;
-mod profile;
+mod wm_layout;
 
 pub use icon_pack::*;
 pub use placeholder::*;
+pub use plugin::*;
+pub use profile::*;
 pub use settings::*;
 pub use settings_by_app::*;
 pub use settings_by_monitor::*;
 pub use theme::*;
 pub use weg_items::*;
-pub use wm_layout::*;
-pub use plugin::*;
 pub use widget::*;
-pub use profile::*;
+pub use wm_layout::*;
 
 use schemars::JsonSchema;
 use serde::{Deserialize, Serialize};
