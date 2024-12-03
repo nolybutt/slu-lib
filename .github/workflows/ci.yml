@@ -19,15 +19,13 @@ jobs:
       - run: deno test
 
   rust-linter:
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - uses: dtolnay/rust-toolchain@master
         with:
           toolchain: nightly-2024-06-25
       - uses: Swatinem/rust-cache@v2
-
-      - run: mkdir dist
 
       - name: Linter
         run: |-
@@ -40,12 +38,11 @@ jobs:
           cargo clippy --locked --all-targets -- -D warnings
 
   rust-test:
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - uses: dtolnay/rust-toolchain@master
         with:
           toolchain: nightly-2024-06-25
       - uses: Swatinem/rust-cache@v2
-      - run: mkdir dist
       - run: cargo test --locked --verbose
