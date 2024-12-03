@@ -87,6 +87,7 @@ export enum SeelenCommand {
 }
 
 type ReturnTypeByCommand = Record<SeelenCommand, unknown> & {
+  [SeelenCommand.IsDevMode]: boolean;
   [SeelenCommand.CheckForUpdates]: boolean;
   [SeelenCommand.InstallLastAvailableUpdate]: never;
   [SeelenCommand.StateGetPlugins]: Plugin[];
