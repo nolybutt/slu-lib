@@ -1,5 +1,5 @@
-import { invoke, SeelenCommand } from '../handlers';
-import { Placeholder } from './placeholder';
+import { invoke, SeelenCommand } from '../handlers/index.ts';
+import { Placeholder } from './placeholder.ts';
 
 export interface ProfileSettings {
   themes: string[];

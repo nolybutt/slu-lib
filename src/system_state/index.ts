@@ -1,4 +1,4 @@
-import { Obtainable, SeelenCommand, SeelenEvent } from '../handlers';
+import { Obtainable, SeelenCommand, SeelenEvent } from '../handlers/index.ts';
 
 export interface UIColors {
   background: string;
@@ -37,15 +37,21 @@ export class UIColors extends Obtainable<UIColors>(
       if (typeof value !== 'string') {
         continue;
       }
-      let hex = value.replace('#', '').slice(0, 6);
-      var color = parseInt(hex, 16);
-      var r = (color >> 16) & 255;
-      var g = (color >> 8) & 255;
-      var b = color & 255;
+      const hex = value.replace('#', '').slice(0, 6);
+      const color = parseInt(hex, 16);
+      const r = (color >> 16) & 255;
+      const g = (color >> 8) & 255;
+      const b = color & 255;
       // replace rust snake case with kebab case
-      let name = key.replace('_', '-');
-      document.documentElement.style.setProperty(`--config-${name}-color`, value.slice(0, 7));
-      document.documentElement.style.setProperty(`--config-${name}-color-rgb`, `${r}, ${g}, ${b}`);
+      const name = key.replace('_', '-');
+      document.documentElement.style.setProperty(
+        `--config-${name}-color`,
+        value.slice(0, 7),
+      );
+      document.documentElement.style.setProperty(
+        `--config-${name}-color-rgb`,
+        `${r}, ${g}, ${b}`,
+      );
     }
   }
 }

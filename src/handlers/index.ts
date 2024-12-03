@@ -1,11 +1,11 @@
-export * from './invokers';
-export * from './events';
+export * from './invokers.ts';
+export * from './events.ts';
 
 import { invoke } from '@tauri-apps/api/core';
-import { listen, UnlistenFn } from '@tauri-apps/api/event';
+import { listen } from '@tauri-apps/api/event';
 
-import { SeelenEvent } from './events';
-import { SeelenCommand } from './invokers';
+import { SeelenEvent } from './events.ts';
+import { SeelenCommand } from './invokers.ts';
 
 export function Obtainable<T>(invokeKey: SeelenCommand, eventKey: SeelenEvent) {
   return class {
@@ -13,8 +13,8 @@ export function Obtainable<T>(invokeKey: SeelenCommand, eventKey: SeelenEvent) {
       return await invoke(invokeKey);
     }
 
-    static async onChange(cb: (value: T) => void): Promise<UnlistenFn> {
-      return listen<T>(eventKey, (event) => {
+    static async onChange(cb: (value: T) => void): Promise<() => void> {
+      return await listen<T>(eventKey, (event) => {
         cb(event.payload);
       });
     }

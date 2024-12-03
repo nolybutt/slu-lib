@@ -13,14 +13,14 @@ where
 }
 
 fn main() {
-    std::fs::create_dir_all("./dist").unwrap();
-    write_schema::<Settings>("./dist/settings.schema.json");
-    write_schema::<Placeholder>("./dist/placeholder.schema.json");
-    write_schema::<Theme>("./dist/theme.schema.json");
-    write_schema::<WindowManagerLayout>("./dist/layout.schema.json");
-    write_schema::<Vec<AppConfig>>("./dist/settings_by_app.schema.json");
-    write_schema::<Vec<WegItem>>("./dist/weg_items.schema.json");
-    write_schema::<IconPack>("./dist/icon_pack.schema.json");
+    std::fs::create_dir_all("./schemas").unwrap();
+    write_schema::<Settings>("./schemas/settings.schema.json");
+    write_schema::<Placeholder>("./schemas/placeholder.schema.json");
+    write_schema::<Theme>("./schemas/theme.schema.json");
+    write_schema::<WindowManagerLayout>("./schemas/layout.schema.json");
+    write_schema::<Vec<AppConfig>>("./schemas/settings_by_app.schema.json");
+    write_schema::<Vec<WegItem>>("./schemas/weg_items.schema.json");
+    write_schema::<IconPack>("./schemas/icon_pack.schema.json");
 
     handlers::SeelenEvent::generate_ts_file("./src/handlers/events.ts");
 }

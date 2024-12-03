@@ -1,6 +1,6 @@
 import { getCurrentWindow } from '@tauri-apps/api/window';
-import { useEffect, useRef } from 'react';
-
+// import { useEffect, useRef } from 'npm:react';
+/*
 export function useWindowFocusChange(cb: (focused: boolean) => void) {
   useEffect(() => {
     const promise = getCurrentWindow().onFocusChanged((event) => {
@@ -13,7 +13,7 @@ export function useWindowFocusChange(cb: (focused: boolean) => void) {
 }
 
 export function useInterval(cb: () => void, ms: number, deps: any[] = []) {
-  const ref = useRef<NodeJS.Timeout | null>(null);
+  const ref = useRef<number | null>(null);
   const clearLastInterval = () => {
     if (ref.current) {
       clearInterval(ref.current);
@@ -27,7 +27,7 @@ export function useInterval(cb: () => void, ms: number, deps: any[] = []) {
 }
 
 export function useTimeout(cb: () => void, ms: number, deps: any[] = []) {
-  const ref = useRef<NodeJS.Timeout | null>(null);
+  const ref = useRef<number | null>(null);
   const clearLastTimeout = () => {
     if (ref.current) {
       clearTimeout(ref.current);
@@ -39,3 +39,4 @@ export function useTimeout(cb: () => void, ms: number, deps: any[] = []) {
     return clearLastTimeout;
   }, [ms, ...deps]);
 }
+ */

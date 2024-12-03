@@ -1,0 +1,30 @@
+{
+  "description": "Seelen UI Library for Widgets",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Seelen-Inc/slu-lib.git"
+  },
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/Seelen-Inc/slu-lib/issues"
+  },
+  "main": "./script/lib.js",
+  "module": "./esm/lib.js",
+  "exports": {
+    ".": {
+      "import": "./esm/lib.js",
+      "require": "./script/lib.js"
+    }
+  },
+  "scripts": {
+    "test": "node test_runner.js"
+  },
+  "dependencies": {
+    "@deno/shim-crypto": "~0.3.1",
+    "@tauri-apps/api": "^2.1.1"
+  },
+  "devDependencies": {
+    "picocolors": "^1.0.0"
+  },
+  "_generatedBy": "dnt@dev"
+}

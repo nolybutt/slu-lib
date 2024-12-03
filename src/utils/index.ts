@@ -1,7 +1,7 @@
 import { getCurrentWindow } from '@tauri-apps/api/window';
 
-export * from './hooks';
-export * from './layered_hitbox';
+export * from './hooks.ts';
+export * from './layered_hitbox.ts';
 
 export function getRootElement() {
   const element = document.getElementById('root');
@@ -19,7 +19,7 @@ export class Rect {
 }
 
 export function disableWebviewShortcutsAndContextMenu() {
-  window.addEventListener('keydown', function (event) {
+  globalThis.addEventListener('keydown', function (event) {
     // prevent refresh
     if (event.key === 'F5') {
       event.preventDefault();
@@ -44,9 +44,11 @@ export function disableWebviewShortcutsAndContextMenu() {
       }
     }
   });
-  window.addEventListener('contextmenu', (e) => e.preventDefault(), { capture: true });
-  window.addEventListener('drop', (e) => e.preventDefault());
-  window.addEventListener('dragover', (e) => e.preventDefault());
+  globalThis.addEventListener('contextmenu', (e) => e.preventDefault(), {
+    capture: true,
+  });
+  globalThis.addEventListener('drop', (e) => e.preventDefault());
+  globalThis.addEventListener('dragover', (e) => e.preventDefault());
 }
 
 // label schema: user/resource__query__monitor:display5

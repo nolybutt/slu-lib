@@ -1,7 +1,7 @@
 import { invoke as tauriInvoke, InvokeArgs, InvokeOptions } from '@tauri-apps/api/core';
 
-import { Plugin } from '../state/plugin';
-import { Profile } from '../state/profile';
+import { Plugin } from '../state/plugin.ts';
+import { Profile } from '../state/profile.ts';
 
 export enum SeelenCommand {
   // General
@@ -96,7 +96,7 @@ type ReturnTypeByCommand = Record<SeelenCommand, unknown> & {
 
 export type SeelenCommandReturn<T extends SeelenCommand> = ReturnTypeByCommand[T];
 
-export async function invoke<T extends SeelenCommand>(
+export function invoke<T extends SeelenCommand>(
   command: T,
   args?: InvokeArgs,
   options?: InvokeOptions,

@@ -1,5 +1,5 @@
-import { Rect } from '../utils';
-import { SeelenWallWallpaper } from './settings';
+import { Rect } from '../utils/index.ts';
+import { SeelenWallWallpaper } from './settings.ts';
 
 export class FancyToolbarSettingsByMonitor {
   enabled: boolean = true;

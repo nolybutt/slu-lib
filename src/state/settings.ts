@@ -1,6 +1,6 @@
-import { Obtainable, SeelenCommand, SeelenEvent } from '../handlers';
-import { Rect } from '../utils';
-import { MonitorConfiguration } from './settings_by_monitor';
+import { Obtainable, SeelenCommand, SeelenEvent } from '../handlers/index.ts';
+import { Rect } from '../utils/index.ts';
+import { MonitorConfiguration } from './settings_by_monitor.ts';
 
 export enum VirtualDesktopStrategy {
   Native = 'Native',

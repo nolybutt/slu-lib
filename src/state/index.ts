@@ -1,16 +1,16 @@
-import { Obtainable, SeelenCommand, SeelenEvent } from '../handlers';
+import { Obtainable, SeelenCommand, SeelenEvent } from '../handlers/index.ts';
 
-export * from './theme';
-export * from './settings';
-export * from './weg_items';
-export * from './wm_layout';
-export * from './placeholder';
-export * from './settings_by_app';
-export * from './settings_by_monitor';
-export * from './icon_pack';
-export * from './plugin';
-export * from './widget';
-export * from './profile';
+export * from './theme.ts';
+export * from './settings.ts';
+export * from './weg_items.ts';
+export * from './wm_layout.ts';
+export * from './placeholder.ts';
+export * from './settings_by_app.ts';
+export * from './settings_by_monitor.ts';
+export * from './icon_pack.ts';
+export * from './plugin.ts';
+export * from './widget.ts';
+export * from './profile.ts';
 
 export interface LauncherHistory {
   [x: string]: string[];

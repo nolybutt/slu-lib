@@ -57,7 +57,12 @@ export interface WmFallbackNode extends WmNodeBase {
   handles: number[];
 }
 
-export type WmNode = WmVerticalNode | WmHorizontalNode | WmLeafNode | WmStackNode | WmFallbackNode;
+export type WmNode =
+  | WmVerticalNode
+  | WmHorizontalNode
+  | WmLeafNode
+  | WmStackNode
+  | WmFallbackNode;
 
 export interface WindowManagerLayout {
   info: WManagerLayoutInfo;
