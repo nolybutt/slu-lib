@@ -33,9 +33,7 @@ await build({
   test: false,
   entryPoints: ['./src/lib.ts'],
   outDir: './npm',
-  shims: {
-    crypto: true,
-  },
+  shims: {},
   package: packageJson,
   postBuild() {
     Deno.copyFileSync('LICENSE', 'npm/LICENSE');
