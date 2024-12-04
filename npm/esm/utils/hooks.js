@@ -1,4 +1,4 @@
-export {};
+// import type { getCurrentWindow } from '@tauri-apps/api/window';
 // import { useEffect, useRef } from 'npm:react';
 /*
 export function useWindowFocusChange(cb: (focused: boolean) => void) {
@@ -39,4 +39,5 @@ export function useTimeout(cb: () => void, ms: number, deps: any[] = []) {
     return clearLastTimeout;
   }, [ms, ...deps]);
 }
- */ 
+ */
+export {};

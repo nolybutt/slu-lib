@@ -53,12 +53,7 @@ export declare enum UpdateChannel {
 export declare class UpdaterSettings {
     channel: UpdateChannel;
 }
-declare const Settings_base: {
-    new (): {};
-    getAsync(): Promise<Settings>;
-    onChange(cb: (value: Settings) => void): Promise<() => void>;
-};
-export declare class Settings extends Settings_base {
+export declare class Settings {
     fancyToolbar: FancyToolbarSettings;
     seelenweg: SeelenWegSettings;
     windowManager: WindowManagerSettings;
@@ -74,6 +69,8 @@ export declare class Settings extends Settings_base {
     dateFormat: string;
     virtualDesktopStrategy: VirtualDesktopStrategy;
     updater: UpdaterSettings;
+    static getAsync(): Promise<Settings>;
+    static onChange(cb: (value: Settings) => void): Promise<() => void>;
 }
 export declare class FancyToolbarSettings {
     enabled: boolean;
@@ -175,5 +172,4 @@ export declare class AhkVarList {
     miscToggleLockTracing: AhkVar;
     miscToggleWinEventTracing: AhkVar;
 }
-export {};
 //# sourceMappingURL=settings.d.ts.map

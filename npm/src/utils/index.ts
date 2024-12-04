@@ -3,7 +3,7 @@ import { getCurrentWindow } from '@tauri-apps/api/window';
 export * from './hooks.js';
 export * from './layered_hitbox.js';
 
-export function getRootElement() {
+export function getRootElement(): HTMLElement | null {
   const element = document.getElementById('root');
   if (!element) {
     throw new Error('Root element not found');
@@ -44,13 +44,21 @@ export function disableWebviewShortcutsAndContextMenu() {
       }
     }
   });
-  globalThis.addEventListener('contextmenu', (e) => e.preventDefault(), { capture: true });
+  globalThis.addEventListener('contextmenu', (e) => e.preventDefault(), {
+    capture: true,
+  });
   globalThis.addEventListener('drop', (e) => e.preventDefault());
   globalThis.addEventListener('dragover', (e) => e.preventDefault());
 }
 
+interface WidgetInformation {
+  id: string;
+  label: string;
+  attachedMonitor: string | null;
+}
+
 // label schema: user/resource__query__monitor:display5
-export function getCurrentWidget() {
+export function getCurrentWidget(): WidgetInformation {
   const { label } = getCurrentWindow();
   const parsedLabel = label.replace('__query__', '?').replace(':', '=');
   const query = new URLSearchParams(parsedLabel);

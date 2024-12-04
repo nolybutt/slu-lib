@@ -59,7 +59,9 @@ function disableWebviewShortcutsAndContextMenu() {
             }
         }
     });
-    globalThis.addEventListener('contextmenu', (e) => e.preventDefault(), { capture: true });
+    globalThis.addEventListener('contextmenu', (e) => e.preventDefault(), {
+        capture: true,
+    });
     globalThis.addEventListener('drop', (e) => e.preventDefault());
     globalThis.addEventListener('dragover', (e) => e.preventDefault());
 }

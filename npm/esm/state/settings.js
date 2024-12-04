@@ -61,7 +61,8 @@ export var UpdateChannel;
 export class UpdaterSettings {
     channel = UpdateChannel.Nightly;
 }
-export class Settings extends Obtainable(SeelenCommand.StateGetSettings, SeelenEvent.StateSettingsChanged) {
+const _Settings = Obtainable(SeelenCommand.StateGetSettings, SeelenEvent.StateSettingsChanged);
+export class Settings {
     fancyToolbar = new FancyToolbarSettings();
     seelenweg = new SeelenWegSettings();
     windowManager = new WindowManagerSettings();
@@ -77,6 +78,12 @@ export class Settings extends Obtainable(SeelenCommand.StateGetSettings, SeelenE
     dateFormat = 'ddd D MMM, hh:mm A';
     virtualDesktopStrategy = VirtualDesktopStrategy.Native;
     updater = new UpdaterSettings();
+    static async getAsync() {
+        return await _Settings.getAsync();
+    }
+    static async onChange(cb) {
+        return await _Settings.onChange(cb);
+    }
 }
 export class FancyToolbarSettings {
     enabled = true;

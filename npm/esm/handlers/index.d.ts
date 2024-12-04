@@ -1,10 +1,11 @@
 export * from './invokers.js';
 export * from './events.js';
-import { SeelenEvent } from './events.js';
-import { SeelenCommand } from './invokers.js';
-export declare function Obtainable<T>(invokeKey: SeelenCommand, eventKey: SeelenEvent): {
-    new (): {};
+import type { SeelenEvent } from './events.js';
+import type { SeelenCommand } from './invokers.js';
+interface _Obtainable<T> {
+    new (): object;
     getAsync(): Promise<T>;
     onChange(cb: (value: T) => void): Promise<() => void>;
-};
+}
+export declare function Obtainable<T>(invokeKey: SeelenCommand, eventKey: SeelenEvent): _Obtainable<T>;
 //# sourceMappingURL=index.d.ts.map

@@ -40,7 +40,7 @@ export interface BaseToolbarModule {
   /** @deprecated, use `onClickV2` instead */
   onClick: string | null;
   onClickV2: string | null;
-  style: Record<string, any>;
+  style: Record<string, string | number>;
 }
 
 export interface GenericToolbarModule extends BaseToolbarModule {

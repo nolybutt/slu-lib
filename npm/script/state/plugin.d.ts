@@ -1,9 +1,9 @@
-import { UnlistenFn } from '@tauri-apps/api/event';
+import { type UnlistenFn } from '@tauri-apps/api/event';
 export declare class Plugin {
     id: string;
     icon: string;
     target: string;
-    plugin: any;
+    plugin: object;
     bundled: boolean;
 }
 export declare class PluginList {

@@ -40,3 +40,5 @@ export function useTimeout(cb: () => void, ms: number, deps: any[] = []) {
   }, [ms, ...deps]);
 }
  */
+
+export {};

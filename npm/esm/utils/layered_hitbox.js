@@ -24,7 +24,7 @@ export async function declareDocumentAsLayeredHitbox() {
             return;
         }
         const [mouseX, mouseY] = event.payload;
-        const { x: windowX, y: windowY, width: windowWidth, height: windowHeight } = webviewRect;
+        const { x: windowX, y: windowY, width: windowWidth, height: windowHeight, } = webviewRect;
         // check if the mouse is inside the window
         const isHoverWindow = mouseX >= windowX &&
             mouseX <= windowX + windowWidth &&

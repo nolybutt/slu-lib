@@ -1,6 +1,6 @@
-import { InvokeArgs, InvokeOptions } from '@tauri-apps/api/core';
-import { Plugin } from '../state/plugin.js';
-import { Profile } from '../state/profile.js';
+import { type InvokeArgs, type InvokeOptions } from '@tauri-apps/api/core';
+import type { Plugin } from '../state/plugin.js';
+import type { Profile } from '../state/profile.js';
 export declare enum SeelenCommand {
     Run = "run",
     IsDevMode = "is_dev_mode",

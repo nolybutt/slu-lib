@@ -4,10 +4,16 @@ export * from './events.js';
 import { invoke } from '@tauri-apps/api/core';
 import { listen } from '@tauri-apps/api/event';
 
-import { SeelenEvent } from './events.js';
-import { SeelenCommand } from './invokers.js';
+import type { SeelenEvent } from './events.js';
+import type { SeelenCommand } from './invokers.js';
 
-export function Obtainable<T>(invokeKey: SeelenCommand, eventKey: SeelenEvent) {
+interface _Obtainable<T> {
+  new (): object;
+  getAsync(): Promise<T>;
+  onChange(cb: (value: T) => void): Promise<() => void>;
+}
+
+export function Obtainable<T>(invokeKey: SeelenCommand, eventKey: SeelenEvent): _Obtainable<T> {
   return class {
     static async getAsync(): Promise<T> {
       return await invoke(invokeKey);

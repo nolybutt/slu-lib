@@ -1,4 +1,4 @@
-import { Placeholder } from './placeholder.js';
+import type { Placeholder } from './placeholder.js';
 export interface ProfileSettings {
     themes: string[];
 }

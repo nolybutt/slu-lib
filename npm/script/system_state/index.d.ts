@@ -10,14 +10,10 @@ export interface UIColors {
     accent_lightest: string;
     complement: string | null;
 }
-declare const UIColors_base: {
-    new (): {};
-    getAsync(): Promise<UIColors>;
-    onChange(cb: (value: UIColors) => void): Promise<() => void>;
-};
-export declare class UIColors extends UIColors_base {
+export declare class UIColors {
     static default(): UIColors;
+    static getAsync(): Promise<UIColors>;
+    static onChange(cb: (value: UIColors) => void): Promise<() => void>;
     static setAssCssVariables(colors: UIColors): void;
 }
-export {};
 //# sourceMappingURL=index.d.ts.map

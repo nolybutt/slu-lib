@@ -1,5 +1,6 @@
 import { Obtainable, SeelenCommand, SeelenEvent } from '../handlers/index.js';
-export class UIColors extends Obtainable(SeelenCommand.GetSystemColors, SeelenEvent.ColorsChanged) {
+const _UIColors = Obtainable(SeelenCommand.GetSystemColors, SeelenEvent.ColorsChanged);
+export class UIColors {
     static default() {
         return {
             background: '#ffffff',
@@ -13,6 +14,12 @@ export class UIColors extends Obtainable(SeelenCommand.GetSystemColors, SeelenEv
             accent_lightest: '#ff0000',
             complement: null,
         };
+    }
+    static async getAsync() {
+        return await _UIColors.getAsync();
+    }
+    static async onChange(cb) {
+        return await _UIColors.onChange(cb);
     }
     static setAssCssVariables(colors) {
         for (const [key, value] of Object.entries(colors)) {

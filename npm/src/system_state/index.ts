@@ -13,10 +13,8 @@ export interface UIColors {
   complement: string | null;
 }
 
-export class UIColors extends Obtainable<UIColors>(
-  SeelenCommand.GetSystemColors,
-  SeelenEvent.ColorsChanged,
-) {
+const _UIColors = Obtainable<UIColors>(SeelenCommand.GetSystemColors, SeelenEvent.ColorsChanged);
+export class UIColors {
   static default(): UIColors {
     return {
       background: '#ffffff',
@@ -30,6 +28,14 @@ export class UIColors extends Obtainable<UIColors>(
       accent_lightest: '#ff0000',
       complement: null,
     };
+  }
+
+  static async getAsync(): Promise<UIColors> {
+    return await _UIColors.getAsync();
+  }
+
+  static async onChange(cb: (value: UIColors) => void): Promise<() => void> {
+    return await _UIColors.onChange(cb);
   }
 
   static setAssCssVariables(colors: UIColors) {

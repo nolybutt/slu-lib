@@ -10,7 +10,15 @@ export * from './icon_pack.js';
 export * from './plugin.js';
 export * from './widget.js';
 export * from './profile.js';
-export const LauncherHistory = Obtainable(SeelenCommand.StateGetHistory, SeelenEvent.StateHistoryChanged);
+const _LauncherHistory = Obtainable(SeelenCommand.StateGetHistory, SeelenEvent.StateHistoryChanged);
+export class LauncherHistory {
+    static async getAsync() {
+        return await _LauncherHistory.getAsync();
+    }
+    static async onChange(cb) {
+        return await _LauncherHistory.onChange(cb);
+    }
+}
 export class ResourceMetadata {
     displayName = 'Unknown';
     author = 'Unknown';

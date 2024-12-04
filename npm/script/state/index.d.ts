@@ -9,14 +9,11 @@ export * from './icon_pack.js';
 export * from './plugin.js';
 export * from './widget.js';
 export * from './profile.js';
-export interface LauncherHistory {
+export declare class LauncherHistory {
     [x: string]: string[];
+    static getAsync(): Promise<LauncherHistory>;
+    static onChange(cb: (value: LauncherHistory) => void): Promise<() => void>;
 }
-export declare const LauncherHistory: {
-    new (): {};
-    getAsync(): Promise<LauncherHistory>;
-    onChange(cb: (value: LauncherHistory) => void): Promise<() => void>;
-};
 export declare class ResourceMetadata {
     displayName: string;
     author: string;

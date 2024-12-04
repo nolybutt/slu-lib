@@ -27,7 +27,16 @@ __exportStar(require("./icon_pack.js"), exports);
 __exportStar(require("./plugin.js"), exports);
 __exportStar(require("./widget.js"), exports);
 __exportStar(require("./profile.js"), exports);
-exports.LauncherHistory = (0, index_js_1.Obtainable)(index_js_1.SeelenCommand.StateGetHistory, index_js_1.SeelenEvent.StateHistoryChanged);
+const _LauncherHistory = (0, index_js_1.Obtainable)(index_js_1.SeelenCommand.StateGetHistory, index_js_1.SeelenEvent.StateHistoryChanged);
+class LauncherHistory {
+    static async getAsync() {
+        return await _LauncherHistory.getAsync();
+    }
+    static async onChange(cb) {
+        return await _LauncherHistory.onChange(cb);
+    }
+}
+exports.LauncherHistory = LauncherHistory;
 class ResourceMetadata {
     displayName = 'Unknown';
     author = 'Unknown';

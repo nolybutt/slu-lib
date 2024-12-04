@@ -92,7 +92,8 @@ class UpdaterSettings {
     channel = UpdateChannel.Nightly;
 }
 exports.UpdaterSettings = UpdaterSettings;
-class Settings extends (0, index_js_1.Obtainable)(index_js_1.SeelenCommand.StateGetSettings, index_js_1.SeelenEvent.StateSettingsChanged) {
+const _Settings = (0, index_js_1.Obtainable)(index_js_1.SeelenCommand.StateGetSettings, index_js_1.SeelenEvent.StateSettingsChanged);
+class Settings {
     fancyToolbar = new FancyToolbarSettings();
     seelenweg = new SeelenWegSettings();
     windowManager = new WindowManagerSettings();
@@ -108,6 +109,12 @@ class Settings extends (0, index_js_1.Obtainable)(index_js_1.SeelenCommand.State
     dateFormat = 'ddd D MMM, hh:mm A';
     virtualDesktopStrategy = VirtualDesktopStrategy.Native;
     updater = new UpdaterSettings();
+    static async getAsync() {
+        return await _Settings.getAsync();
+    }
+    static async onChange(cb) {
+        return await _Settings.onChange(cb);
+    }
 }
 exports.Settings = Settings;
 class FancyToolbarSettings {

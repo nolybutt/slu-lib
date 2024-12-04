@@ -2,7 +2,8 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.UIColors = void 0;
 const index_js_1 = require("../handlers/index.js");
-class UIColors extends (0, index_js_1.Obtainable)(index_js_1.SeelenCommand.GetSystemColors, index_js_1.SeelenEvent.ColorsChanged) {
+const _UIColors = (0, index_js_1.Obtainable)(index_js_1.SeelenCommand.GetSystemColors, index_js_1.SeelenEvent.ColorsChanged);
+class UIColors {
     static default() {
         return {
             background: '#ffffff',
@@ -16,6 +17,12 @@ class UIColors extends (0, index_js_1.Obtainable)(index_js_1.SeelenCommand.GetSy
             accent_lightest: '#ff0000',
             complement: null,
         };
+    }
+    static async getAsync() {
+        return await _UIColors.getAsync();
+    }
+    static async onChange(cb) {
+        return await _UIColors.onChange(cb);
     }
     static setAssCssVariables(colors) {
         for (const [key, value] of Object.entries(colors)) {

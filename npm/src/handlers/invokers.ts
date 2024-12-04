@@ -1,7 +1,7 @@
-import { invoke as tauriInvoke, InvokeArgs, InvokeOptions } from '@tauri-apps/api/core';
+import { invoke as tauriInvoke, type InvokeArgs, type InvokeOptions } from '@tauri-apps/api/core';
 
-import { Plugin } from '../state/plugin.js';
-import { Profile } from '../state/profile.js';
+import type { Plugin } from '../state/plugin.js';
+import type { Profile } from '../state/profile.js';
 
 export enum SeelenCommand {
   // General
