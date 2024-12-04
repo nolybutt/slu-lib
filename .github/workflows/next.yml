@@ -50,5 +50,5 @@ jobs:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_ACCESS_TOKEN }}
         run: |
           cd ./npm
-          npm publish --provenance --dry-run --tag next
+          npm publish --provenance --tag next
 
