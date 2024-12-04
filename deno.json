@@ -5,10 +5,9 @@
   "license": "Apache-2.0",
   "exports": "./src/lib.ts",
   "tasks": {
-    "build:js": "deno run -A ./scripts/build.ts",
+    "build:npm": "deno run -A ./scripts/build_npm.ts",
     "build:rs": "cargo run",
-    "build": "deno task build:rs && deno task build:js",
-    "publish": "deno publish"
+    "build": "deno task build:rs && deno task build:js"
   },
   "test": {
     "include": [
