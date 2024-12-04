@@ -10,15 +10,22 @@
     "build": "deno task build:rs && deno task build:js",
     "publish": "deno publish"
   },
+  "test": {
+    "include": [
+      "src/**/*.test.ts"
+    ]
+  },
   "imports": {
     "@deno/dnt": "jsr:@deno/dnt@^0.41.3",
+    "@std/assert": "jsr:@std/assert@^1.0.8",
     "@tauri-apps/api": "npm:@tauri-apps/api@^2.1.1"
   },
   "compilerOptions": {
     "lib": [
       "dom",
       "dom.iterable",
-      "ES2023"
+      "ES2023",
+      "deno.ns"
     ]
   },
   "fmt": {
@@ -40,6 +47,9 @@
       "src",
       "LICENSE",
       "readme.md"
+    ],
+    "exclude": [
+      "src/**/*.test.ts"
     ]
   }
 }
