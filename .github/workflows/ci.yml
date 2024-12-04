@@ -21,7 +21,7 @@ jobs:
       - run: deno test
 
   rust-linter:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     steps:
       - uses: actions/checkout@v4
       - uses: dtolnay/rust-toolchain@master
@@ -40,7 +40,7 @@ jobs:
           cargo clippy --locked --all-targets -- -D warnings
 
   rust-test:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     steps:
       - uses: actions/checkout@v4
       - uses: dtolnay/rust-toolchain@master
