@@ -9,8 +9,11 @@ on:
 jobs:
   continuous-integration:
     uses: ./.github/workflows/ci.yml
-  update-version:
+  build-and-plublish:
     needs: continuous-integration
+    permissions:
+      contents: read
+      id-token: write
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
