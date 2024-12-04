@@ -66,10 +66,12 @@ export class UpdaterSettings {
   channel: UpdateChannel = UpdateChannel.Nightly;
 }
 
-export class Settings extends Obtainable<Settings>(
+const _Settings = Obtainable<Settings>(
   SeelenCommand.StateGetSettings,
   SeelenEvent.StateSettingsChanged,
-) {
+);
+
+export class Settings {
   fancyToolbar: FancyToolbarSettings = new FancyToolbarSettings();
   seelenweg: SeelenWegSettings = new SeelenWegSettings();
   windowManager: WindowManagerSettings = new WindowManagerSettings();
@@ -85,6 +87,14 @@ export class Settings extends Obtainable<Settings>(
   dateFormat: string = 'ddd D MMM, hh:mm A';
   virtualDesktopStrategy: VirtualDesktopStrategy = VirtualDesktopStrategy.Native;
   updater: UpdaterSettings = new UpdaterSettings();
+
+  static async getAsync(): Promise<Settings> {
+    return await _Settings.getAsync();
+  }
+
+  static async onChange(cb: (value: Settings) => void): Promise<() => void> {
+    return await _Settings.onChange(cb);
+  }
 }
 
 export class FancyToolbarSettings {
@@ -148,57 +158,57 @@ export class AhkVar {
 /// TODO: find the way to avoid duplicated code between rust and this class
 export class AhkVarList {
   // launcher
-  toggleLauncher = new AhkVar('Win + Space', 'LWin & Space');
+  toggleLauncher: AhkVar = new AhkVar('Win + Space', 'LWin & Space');
   // wm
-  reserveTop = new AhkVar('Win + Shift + I', '#+i');
-  reserveBottom = new AhkVar('Win + Shift + K', '#+k');
-  reserveLeft = new AhkVar('Win + Shift + J', '#+j');
-  reserveRight = new AhkVar('Win + Shift + L', '#+l');
-  reserveFloat = new AhkVar('Win + Shift + U', '#+u');
-  reserveStack = new AhkVar('Win + Shift + O', '#+o');
-  focusTop = new AhkVar('Win + Shift + W', '#+w');
-  focusBottom = new AhkVar('Win + Shift + S', '#+s');
-  focusLeft = new AhkVar('Win + Shift + A', '#+a');
-  focusRight = new AhkVar('Win + Shift + D', '#+d');
-  focusLatest = new AhkVar('Win + Shift + E', '#+e');
-  increaseWidth = new AhkVar('Win + Alt + =', '#!=');
-  decreaseWidth = new AhkVar('Win + Alt + -', '#!-');
-  increaseHeight = new AhkVar('Win + Shift + =', '#+=');
-  decreaseHeight = new AhkVar('Win + Shift + -', '#+-');
-  restoreSizes = new AhkVar('Win + Alt + 0', '#!0');
+  reserveTop: AhkVar = new AhkVar('Win + Shift + I', '#+i');
+  reserveBottom: AhkVar = new AhkVar('Win + Shift + K', '#+k');
+  reserveLeft: AhkVar = new AhkVar('Win + Shift + J', '#+j');
+  reserveRight: AhkVar = new AhkVar('Win + Shift + L', '#+l');
+  reserveFloat: AhkVar = new AhkVar('Win + Shift + U', '#+u');
+  reserveStack: AhkVar = new AhkVar('Win + Shift + O', '#+o');
+  focusTop: AhkVar = new AhkVar('Win + Shift + W', '#+w');
+  focusBottom: AhkVar = new AhkVar('Win + Shift + S', '#+s');
+  focusLeft: AhkVar = new AhkVar('Win + Shift + A', '#+a');
+  focusRight: AhkVar = new AhkVar('Win + Shift + D', '#+d');
+  focusLatest: AhkVar = new AhkVar('Win + Shift + E', '#+e');
+  increaseWidth: AhkVar = new AhkVar('Win + Alt + =', '#!=');
+  decreaseWidth: AhkVar = new AhkVar('Win + Alt + -', '#!-');
+  increaseHeight: AhkVar = new AhkVar('Win + Shift + =', '#+=');
+  decreaseHeight: AhkVar = new AhkVar('Win + Shift + -', '#+-');
+  restoreSizes: AhkVar = new AhkVar('Win + Alt + 0', '#!0');
   // virtual desktops
-  switchWorkspace0 = new AhkVar('Alt + 1', '!1');
-  switchWorkspace1 = new AhkVar('Alt + 2', '!2');
-  switchWorkspace2 = new AhkVar('Alt + 3', '!3');
-  switchWorkspace3 = new AhkVar('Alt + 4', '!4');
-  switchWorkspace4 = new AhkVar('Alt + 5', '!5');
-  switchWorkspace5 = new AhkVar('Alt + 6', '!6');
-  switchWorkspace6 = new AhkVar('Alt + 7', '!7');
-  switchWorkspace7 = new AhkVar('Alt + 8', '!8');
-  switchWorkspace8 = new AhkVar('Alt + 9', '!9');
-  switchWorkspace9 = new AhkVar('Alt + 0', '!0');
-  moveToWorkspace0 = new AhkVar('Alt + Shift + 1', '!+1');
-  moveToWorkspace1 = new AhkVar('Alt + Shift + 2', '!+2');
-  moveToWorkspace2 = new AhkVar('Alt + Shift + 3', '!+3');
-  moveToWorkspace3 = new AhkVar('Alt + Shift + 4', '!+4');
-  moveToWorkspace4 = new AhkVar('Alt + Shift + 5', '!+5');
-  moveToWorkspace5 = new AhkVar('Alt + Shift + 6', '!+6');
-  moveToWorkspace6 = new AhkVar('Alt + Shift + 7', '!+7');
-  moveToWorkspace7 = new AhkVar('Alt + Shift + 8', '!+8');
-  moveToWorkspace8 = new AhkVar('Alt + Shift + 9', '!+9');
-  moveToWorkspace9 = new AhkVar('Alt + Shift + 0', '!+0');
-  sendToWorkspace0 = new AhkVar('Win + Shift + 1', '#+1');
-  sendToWorkspace1 = new AhkVar('Win + Shift + 2', '#+2');
-  sendToWorkspace2 = new AhkVar('Win + Shift + 3', '#+3');
-  sendToWorkspace3 = new AhkVar('Win + Shift + 4', '#+4');
-  sendToWorkspace4 = new AhkVar('Win + Shift + 5', '#+5');
-  sendToWorkspace5 = new AhkVar('Win + Shift + 6', '#+6');
-  sendToWorkspace6 = new AhkVar('Win + Shift + 7', '#+7');
-  sendToWorkspace7 = new AhkVar('Win + Shift + 8', '#+8');
-  sendToWorkspace8 = new AhkVar('Win + Shift + 9', '#+9');
-  sendToWorkspace9 = new AhkVar('Win + Shift + 0', '#+0');
+  switchWorkspace0: AhkVar = new AhkVar('Alt + 1', '!1');
+  switchWorkspace1: AhkVar = new AhkVar('Alt + 2', '!2');
+  switchWorkspace2: AhkVar = new AhkVar('Alt + 3', '!3');
+  switchWorkspace3: AhkVar = new AhkVar('Alt + 4', '!4');
+  switchWorkspace4: AhkVar = new AhkVar('Alt + 5', '!5');
+  switchWorkspace5: AhkVar = new AhkVar('Alt + 6', '!6');
+  switchWorkspace6: AhkVar = new AhkVar('Alt + 7', '!7');
+  switchWorkspace7: AhkVar = new AhkVar('Alt + 8', '!8');
+  switchWorkspace8: AhkVar = new AhkVar('Alt + 9', '!9');
+  switchWorkspace9: AhkVar = new AhkVar('Alt + 0', '!0');
+  moveToWorkspace0: AhkVar = new AhkVar('Alt + Shift + 1', '!+1');
+  moveToWorkspace1: AhkVar = new AhkVar('Alt + Shift + 2', '!+2');
+  moveToWorkspace2: AhkVar = new AhkVar('Alt + Shift + 3', '!+3');
+  moveToWorkspace3: AhkVar = new AhkVar('Alt + Shift + 4', '!+4');
+  moveToWorkspace4: AhkVar = new AhkVar('Alt + Shift + 5', '!+5');
+  moveToWorkspace5: AhkVar = new AhkVar('Alt + Shift + 6', '!+6');
+  moveToWorkspace6: AhkVar = new AhkVar('Alt + Shift + 7', '!+7');
+  moveToWorkspace7: AhkVar = new AhkVar('Alt + Shift + 8', '!+8');
+  moveToWorkspace8: AhkVar = new AhkVar('Alt + Shift + 9', '!+9');
+  moveToWorkspace9: AhkVar = new AhkVar('Alt + Shift + 0', '!+0');
+  sendToWorkspace0: AhkVar = new AhkVar('Win + Shift + 1', '#+1');
+  sendToWorkspace1: AhkVar = new AhkVar('Win + Shift + 2', '#+2');
+  sendToWorkspace2: AhkVar = new AhkVar('Win + Shift + 3', '#+3');
+  sendToWorkspace3: AhkVar = new AhkVar('Win + Shift + 4', '#+4');
+  sendToWorkspace4: AhkVar = new AhkVar('Win + Shift + 5', '#+5');
+  sendToWorkspace5: AhkVar = new AhkVar('Win + Shift + 6', '#+6');
+  sendToWorkspace6: AhkVar = new AhkVar('Win + Shift + 7', '#+7');
+  sendToWorkspace7: AhkVar = new AhkVar('Win + Shift + 8', '#+8');
+  sendToWorkspace8: AhkVar = new AhkVar('Win + Shift + 9', '#+9');
+  sendToWorkspace9: AhkVar = new AhkVar('Win + Shift + 0', '#+0');
   // miscellaneous
-  miscOpenSettings = new AhkVar('Win + K', '#k');
-  miscToggleLockTracing = new AhkVar('Ctrl + Win + Alt + T', '^#!t');
-  miscToggleWinEventTracing = new AhkVar('Ctrl + Win + Alt + L', '^#!l');
+  miscOpenSettings: AhkVar = new AhkVar('Win + K', '#k');
+  miscToggleLockTracing: AhkVar = new AhkVar('Ctrl + Win + Alt + T', '^#!t');
+  miscToggleWinEventTracing: AhkVar = new AhkVar('Ctrl + Win + Alt + L', '^#!l');
 }

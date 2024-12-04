@@ -13,10 +13,8 @@ export interface UIColors {
   complement: string | null;
 }
 
-export class UIColors extends Obtainable<UIColors>(
-  SeelenCommand.GetSystemColors,
-  SeelenEvent.ColorsChanged,
-) {
+const _UIColors = Obtainable<UIColors>(SeelenCommand.GetSystemColors, SeelenEvent.ColorsChanged);
+export class UIColors {
   static default(): UIColors {
     return {
       background: '#ffffff',
@@ -32,6 +30,14 @@ export class UIColors extends Obtainable<UIColors>(
     };
   }
 
+  static async getAsync(): Promise<UIColors> {
+    return await _UIColors.getAsync();
+  }
+
+  static async onChange(cb: (value: UIColors) => void): Promise<() => void> {
+    return await _UIColors.onChange(cb);
+  }
+
   static setAssCssVariables(colors: UIColors) {
     for (const [key, value] of Object.entries(colors)) {
       if (typeof value !== 'string') {
@@ -44,14 +50,8 @@ export class UIColors extends Obtainable<UIColors>(
       const b = color & 255;
       // replace rust snake case with kebab case
       const name = key.replace('_', '-');
-      document.documentElement.style.setProperty(
-        `--config-${name}-color`,
-        value.slice(0, 7),
-      );
-      document.documentElement.style.setProperty(
-        `--config-${name}-color-rgb`,
-        `${r}, ${g}, ${b}`,
-      );
+      document.documentElement.style.setProperty(`--config-${name}-color`, value.slice(0, 7));
+      document.documentElement.style.setProperty(`--config-${name}-color-rgb`, `${r}, ${g}, ${b}`);
     }
   }
 }

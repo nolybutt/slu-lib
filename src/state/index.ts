@@ -12,13 +12,22 @@ export * from './plugin.ts';
 export * from './widget.ts';
 export * from './profile.ts';
 
-export interface LauncherHistory {
-  [x: string]: string[];
-}
-export const LauncherHistory = Obtainable<LauncherHistory>(
+const _LauncherHistory = Obtainable<LauncherHistory>(
   SeelenCommand.StateGetHistory,
   SeelenEvent.StateHistoryChanged,
 );
+
+export class LauncherHistory {
+  [x: string]: string[];
+
+  static async getAsync(): Promise<LauncherHistory> {
+    return await _LauncherHistory.getAsync();
+  }
+
+  static async onChange(cb: (value: LauncherHistory) => void): Promise<() => void> {
+    return await _LauncherHistory.onChange(cb);
+  }
+}
 
 export class ResourceMetadata {
   displayName: string = 'Unknown';

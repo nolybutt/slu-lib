@@ -1,4 +1,4 @@
-import { listen, UnlistenFn } from '@tauri-apps/api/event';
+import { listen, type UnlistenFn } from '@tauri-apps/api/event';
 
 import { invoke, SeelenCommand, SeelenEvent } from '../handlers/index.ts';
 import { getCurrentWidget } from '../utils/index.ts';
@@ -7,7 +7,7 @@ export class Plugin {
   id: string = '';
   icon: string = '';
   target: string = '';
-  plugin: any = {};
+  plugin: object = {};
   bundled: boolean = false;
 }
 

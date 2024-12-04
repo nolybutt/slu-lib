@@ -8,7 +8,7 @@
     "build:js": "deno run -A ./scripts/build.ts",
     "build:rs": "cargo run",
     "build": "deno task build:rs && deno task build:js",
-    "publish": "deno publish --allow-slow-types"
+    "publish": "deno publish"
   },
   "imports": {
     "@deno/dnt": "jsr:@deno/dnt@^0.41.3",

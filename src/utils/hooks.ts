@@ -1,4 +1,4 @@
-import { getCurrentWindow } from '@tauri-apps/api/window';
+// import type { getCurrentWindow } from '@tauri-apps/api/window';
 // import { useEffect, useRef } from 'npm:react';
 /*
 export function useWindowFocusChange(cb: (focused: boolean) => void) {
