@@ -25,7 +25,7 @@ jobs:
             const currentVersion = denoJson.version;
 
             const timestamp = new Date().toISOString().replace(/[-:T]/g, '').slice(0, 14);
-            const nightlyVersion = `${currentVersion}+${timestamp}`;
+            const nightlyVersion = `${currentVersion}-next.${timestamp}`;
 
             denoJson.version = nightlyVersion;
             fs.writeFileSync('deno.json', JSON.stringify(denoJson, null, 2));
