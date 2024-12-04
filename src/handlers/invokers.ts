@@ -2,6 +2,7 @@ import { invoke as tauriInvoke, type InvokeArgs, type InvokeOptions } from '@tau
 
 import type { Plugin } from '../state/plugin.ts';
 import type { Profile } from '../state/profile.ts';
+import type { Widget } from '../state/widget.ts';
 
 export enum SeelenCommand {
   // General
@@ -36,7 +37,7 @@ export enum SeelenCommand {
   StateGetHistory = 'state_get_history',
   StateGetPlugins = 'state_get_plugins',
   StateGetWidgets = 'state_get_widgets',
-  stateGetProfiles = 'state_get_profiles',
+  StateGetProfiles = 'state_get_profiles',
 
   // Media
   MediaPrev = 'media_prev',
@@ -91,7 +92,8 @@ type ReturnTypeByCommand = Record<SeelenCommand, unknown> & {
   [SeelenCommand.CheckForUpdates]: boolean;
   [SeelenCommand.InstallLastAvailableUpdate]: never;
   [SeelenCommand.StateGetPlugins]: Plugin[];
-  [SeelenCommand.stateGetProfiles]: Profile[];
+  [SeelenCommand.StateGetWidgets]: Widget[];
+  [SeelenCommand.StateGetProfiles]: Profile[];
 };
 
 export type SeelenCommandReturn<T extends SeelenCommand> = ReturnTypeByCommand[T];

@@ -15,7 +15,7 @@ export class ProfileList {
   private constructor(private inner: Profile[]) {}
 
   static async getAsync(): Promise<ProfileList> {
-    return new ProfileList(await invoke(SeelenCommand.stateGetProfiles));
+    return new ProfileList(await invoke(SeelenCommand.StateGetProfiles));
   }
 
   toArray(): Profile[] {
