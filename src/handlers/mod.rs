@@ -5,7 +5,7 @@ macro_rules! slu_events_declaration {
         #[allow(non_upper_case_globals)]
         impl SeelenEvent {
             $(
-                pub const $name: &str = $value;
+                pub const $name: &'static str = $value;
             )*
 
             #[allow(dead_code)]
