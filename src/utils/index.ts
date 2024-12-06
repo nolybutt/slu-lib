@@ -1,4 +1,4 @@
-import { decodeBase64Url } from 'jsr:@std/encoding'
+import { decodeBase64Url } from 'jsr:@std/encoding';
 import { getCurrentWindow } from '@tauri-apps/api/window';
 import type { WidgetId } from '../lib.ts';
 
@@ -63,7 +63,7 @@ interface WidgetInformation {
 }
 
 export function getCurrentWidget(): WidgetInformation {
-  const { label: base64url } = getCurrentWindow();  
+  const { label: base64url } = getCurrentWindow();
   const label = new TextDecoder().decode(decodeBase64Url(base64url));
   const [id, query] = label.split('?');
   const params = new URLSearchParams(query);
