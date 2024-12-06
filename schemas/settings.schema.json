@@ -338,32 +338,11 @@
         }
       ]
     },
-    "monitors": {
-      "description": "list of monitors",
-      "default": [
-        {
-          "tb": {
-            "enabled": true
-          },
-          "wall": {
-            "backgrounds": null,
-            "enabled": true
-          },
-          "weg": {
-            "enabled": true
-          },
-          "wm": {
-            "enabled": true,
-            "gap": null,
-            "layout": null,
-            "margin": null,
-            "padding": null
-          },
-          "workspacesV2": []
-        }
-      ],
-      "type": "array",
-      "items": {
+    "monitorsV2": {
+      "description": "list of monitors and their configurations",
+      "default": {},
+      "type": "object",
+      "additionalProperties": {
         "$ref": "#/definitions/MonitorConfiguration"
       }
     },
@@ -432,6 +411,15 @@
           "$ref": "#/definitions/SeelenWallSettings"
         }
       ]
+    },
+    "widgets": {
+      "description": "Custom settings for widgets",
+      "default": {},
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "additionalProperties": true
+      }
     },
     "windowManager": {
       "description": "window manager config",

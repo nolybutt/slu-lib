@@ -1,20 +1,9 @@
+use std::collections::HashMap;
+
 use schemars::JsonSchema;
 use serde::{Deserialize, Serialize};
 
-#[derive(Debug, Clone, Default, Serialize, Deserialize, JsonSchema)]
-#[serde(default, rename_all = "camelCase")]
-pub struct ThemeCss {
-    /// Css Styles for the dock/taskbar
-    pub weg: String,
-    /// Css Styles for the toolbar
-    pub toolbar: String,
-    /// Css Styles for the window manager
-    pub wm: String,
-    /// Css Styles for the app launcher
-    pub launcher: String,
-    /// Css Styles for the wall
-    pub wall: String,
-}
+use super::WidgetId;
 
 #[derive(Debug, Clone, Default, Serialize, Deserialize, JsonSchema)]
 #[serde(default, rename_all = "camelCase")]
@@ -37,5 +26,5 @@ pub struct Theme {
     /// Metadata about the theme
     pub info: ThemeInfo,
     /// Css Styles of the theme
-    pub styles: ThemeCss,
+    pub styles: HashMap<WidgetId, String>,
 }

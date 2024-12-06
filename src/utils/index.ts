@@ -1,4 +1,6 @@
+import { decodeBase64Url } from 'jsr:@std/encoding'
 import { getCurrentWindow } from '@tauri-apps/api/window';
+import type { WidgetId } from '../lib.ts';
 
 export * from './hooks.ts';
 export * from './layered_hitbox.ts';
@@ -52,19 +54,23 @@ export function disableWebviewShortcutsAndContextMenu() {
 }
 
 interface WidgetInformation {
-  id: string;
+  id: WidgetId;
+  /** decoded webview label */
   label: string;
-  attachedMonitor: string | null;
+  /** base64 url encoded label (used as identifier of the webview) */
+  rawLabel: string;
+  params: Record<string, string>;
 }
 
-// label schema: user/resource__query__monitor:display5
 export function getCurrentWidget(): WidgetInformation {
-  const { label } = getCurrentWindow();
-  const parsedLabel = label.replace('__query__', '?').replace(':', '=');
-  const query = new URLSearchParams(parsedLabel);
+  const { label: base64url } = getCurrentWindow();  
+  const label = new TextDecoder().decode(decodeBase64Url(base64url));
+  const [id, query] = label.split('?');
+  const params = new URLSearchParams(query);
   return {
-    id: `@${parsedLabel.split('?')[0]}`,
+    id: id as WidgetId,
     label,
-    attachedMonitor: query.get('monitor'),
+    rawLabel: base64url,
+    params: Object.fromEntries(params),
   };
 }

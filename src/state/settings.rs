@@ -11,7 +11,7 @@ use serde_alias::serde_alias;
 
 use crate::rect::Rect;
 
-use super::MonitorConfiguration;
+use super::{MonitorConfiguration, PluginId};
 
 // ============== Fancy Toolbar Settings ==============
 
@@ -521,8 +521,8 @@ pub struct Settings {
     pub wall: SeelenWallSettings,
     /// App launcher settings
     pub launcher: SeelenLauncherSettings,
-    /// list of monitors
-    pub monitors: Vec<MonitorConfiguration>,
+    /// list of monitors and their configurations
+    pub monitors_v2: HashMap<String, MonitorConfiguration>,
     /// enable or disable ahk
     pub ahk_enabled: bool,
     /// ahk variables
@@ -542,6 +542,8 @@ pub struct Settings {
     pub virtual_desktop_strategy: VirtualDesktopStrategy,
     /// Updater Settings
     pub updater: UpdaterSettings,
+    /// Custom settings for widgets
+    pub widgets: HashMap<PluginId, HashMap<String, serde_json::Value>>,
 }
 
 impl Default for Settings {
@@ -550,7 +552,7 @@ impl Default for Settings {
             ahk_enabled: true,
             selected_themes: vec!["default".to_string()],
             icon_packs: vec!["system".to_string()],
-            monitors: vec![MonitorConfiguration::default()],
+            monitors_v2: HashMap::new(),
             fancy_toolbar: FancyToolbarSettings::default(),
             seelenweg: SeelenWegSettings::default(),
             window_manager: WindowManagerSettings::default(),
@@ -562,6 +564,7 @@ impl Default for Settings {
             date_format: "ddd D MMM, hh:mm A".to_owned(),
             virtual_desktop_strategy: VirtualDesktopStrategy::Native,
             updater: UpdaterSettings::default(),
+            widgets: HashMap::new(),
         }
     }
 }

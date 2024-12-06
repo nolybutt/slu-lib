@@ -1,15 +1,4 @@
-export interface ThemeCssByApp {
-  /** Css Styles for the dock/taskbar */
-  weg: string;
-  /** Css Styles for the window manager */
-  toolbar: string;
-  /** Css Styles for the window manager */
-  wm: string;
-  /** Css Styles for the app launcher */
-  launcher: string;
-  /** Css Styles for the wall */
-  wall: string;
-}
+import type { WidgetId } from './index.ts';
 
 export interface ThemeInfo {
   /** Display name of the theme */
@@ -28,5 +17,5 @@ export interface Theme {
   /** Metadata about the theme */
   info: ThemeInfo;
   /** Css Styles of the theme */
-  styles: ThemeCssByApp & Record<string, string>;
+  styles: Record<WidgetId, string>;
 }

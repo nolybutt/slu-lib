@@ -1,8 +1,10 @@
 import { listen, type UnlistenFn } from '@tauri-apps/api/event';
 import { invoke, SeelenCommand, SeelenEvent } from '../lib.ts';
 
+export type WidgetId = string & { __brand: 'WidgetId' };
+
 export interface Widget {
-  id: string;
+  id: WidgetId;
   js: string | null;
   css: string | null;
   html: string | null;

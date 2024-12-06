@@ -1,6 +1,7 @@
 import { Obtainable, SeelenCommand, SeelenEvent } from '../handlers/index.ts';
 import { Rect } from '../utils/index.ts';
-import { MonitorConfiguration } from './settings_by_monitor.ts';
+import type { WidgetId } from './index.ts';
+import type { MonitorConfiguration } from './settings_by_monitor.ts';
 
 export enum VirtualDesktopStrategy {
   Native = 'Native',
@@ -77,7 +78,7 @@ export class Settings {
   windowManager: WindowManagerSettings = new WindowManagerSettings();
   wall: SeelenWallSettings = new SeelenWallSettings();
   launcher: SeelenLauncherSettings = new SeelenLauncherSettings();
-  monitors: MonitorConfiguration[] = [new MonitorConfiguration()];
+  monitorsV2: Record<string, MonitorConfiguration> = {};
   ahkEnabled: boolean = true;
   ahkVariables: AhkVarList = new AhkVarList();
   selectedThemes: string[] = ['default'];
@@ -87,6 +88,7 @@ export class Settings {
   dateFormat: string = 'ddd D MMM, hh:mm A';
   virtualDesktopStrategy: VirtualDesktopStrategy = VirtualDesktopStrategy.Native;
   updater: UpdaterSettings = new UpdaterSettings();
+  widgets: Record<WidgetId, Record<string, unknown>> = {};
 
   static async getAsync(): Promise<Settings> {
     return await _Settings.getAsync();

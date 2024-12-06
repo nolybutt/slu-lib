@@ -25,6 +25,44 @@ pub use wm_layout::*;
 use schemars::JsonSchema;
 use serde::{Deserialize, Serialize};
 
+#[derive(Debug, Clone, Hash, PartialEq, Eq, Serialize, Deserialize)]
+pub struct ResourceId(String);
+
+impl ResourceId {
+    pub fn is_valid(&self) -> bool {
+        let regex =
+            regex::Regex::new("^@[a-zA-Z0-9_\\-]+\\/[a-zA-Z0-9_\\-]+$").expect("Invalid regex");
+        regex.is_match(&self.0)
+    }
+
+    /// Creator username of the resource
+    ///
+    /// # Safety
+    ///
+    /// The string is a valid resource id
+    pub fn creator(&self) -> String {
+        self.0.split('/').next().unwrap().to_string()
+    }
+}
+
+impl From<String> for ResourceId {
+    fn from(value: String) -> Self {
+        Self(value)
+    }
+}
+
+impl From<&str> for ResourceId {
+    fn from(value: &str) -> Self {
+        Self(value.to_string())
+    }
+}
+
+impl std::fmt::Display for ResourceId {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        write!(f, "{}", self.0)
+    }
+}
+
 #[derive(Debug, Clone, Serialize, Deserialize, JsonSchema)]
 #[serde(default, rename_all = "camelCase")]
 pub struct ResourceMetadata {
