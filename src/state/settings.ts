@@ -88,7 +88,7 @@ export class Settings {
   dateFormat: string = 'ddd D MMM, hh:mm A';
   virtualDesktopStrategy: VirtualDesktopStrategy = VirtualDesktopStrategy.Native;
   updater: UpdaterSettings = new UpdaterSettings();
-  widgets: Record<WidgetId, Record<string, unknown>> = {};
+  custom: Record<WidgetId, Record<string, unknown>> = {};
 
   static async getAsync(): Promise<Settings> {
     return await _Settings.getAsync();

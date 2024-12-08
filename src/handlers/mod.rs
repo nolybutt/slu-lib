@@ -30,9 +30,10 @@ slu_events_declaration! {
 
     GlobalFocusChanged = "global-focus-changed",
     GlobalMouseMove = "global-mouse-move",
-    GlobalMonitorsChanged = "global-monitors-changed",
 
     HandleLayeredHitboxes = "handle-layered",
+
+    SystemMonitorsChanged = "system::monitors-changed",
 
     MediaSessions = "media-sessions",
     MediaInputs = "media-inputs",

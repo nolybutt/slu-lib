@@ -1,8 +1,6 @@
 import { invoke as tauriInvoke, type InvokeArgs, type InvokeOptions } from '@tauri-apps/api/core';
 
-import type { Plugin } from '../state/plugin.ts';
-import type { Profile } from '../state/profile.ts';
-import type { Widget } from '../state/widget.ts';
+import type { ConnectedMonitor, Plugin, Profile, Widget } from '../lib.ts';
 
 export enum SeelenCommand {
   // General
@@ -17,11 +15,13 @@ export enum SeelenCommand {
   SwitchWorkspace = 'switch_workspace',
   SendKeys = 'send_keys',
   GetIcon = 'get_icon',
-  GetSystemColors = 'get_system_colors',
   SimulateFullscreen = 'simulate_fullscreen',
   CheckForUpdates = 'check_for_updates',
   /** Restart the app after install the update so it returns a promise resolved with `never` */
   InstallLastAvailableUpdate = 'install_last_available_update',
+
+  SystemGetMonitors = 'get_connected_monitors',
+  SystemGetColors = 'get_system_colors',
 
   // Seelen Settings
   SetAutoStart = 'set_auto_start',
@@ -88,6 +88,7 @@ export enum SeelenCommand {
 }
 
 type ReturnTypeByCommand = Record<SeelenCommand, unknown> & {
+  [SeelenCommand.SystemGetMonitors]: ConnectedMonitor[];
   [SeelenCommand.IsDevMode]: boolean;
   [SeelenCommand.CheckForUpdates]: boolean;
   [SeelenCommand.InstallLastAvailableUpdate]: never;

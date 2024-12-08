@@ -11,7 +11,7 @@ use serde_alias::serde_alias;
 
 use crate::rect::Rect;
 
-use super::{MonitorConfiguration, PluginId};
+use super::{MonitorConfiguration, WidgetId};
 
 // ============== Fancy Toolbar Settings ==============
 
@@ -543,7 +543,7 @@ pub struct Settings {
     /// Updater Settings
     pub updater: UpdaterSettings,
     /// Custom settings for widgets
-    pub widgets: HashMap<PluginId, HashMap<String, serde_json::Value>>,
+    pub custom: HashMap<WidgetId, HashMap<String, serde_json::Value>>,
 }
 
 impl Default for Settings {
@@ -564,7 +564,7 @@ impl Default for Settings {
             date_format: "ddd D MMM, hh:mm A".to_owned(),
             virtual_desktop_strategy: VirtualDesktopStrategy::Native,
             updater: UpdaterSettings::default(),
-            widgets: HashMap::new(),
+            custom: HashMap::new(),
         }
     }
 }
