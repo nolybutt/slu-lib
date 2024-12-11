@@ -55,3 +55,13 @@ jobs:
           cd ./npm
           npm publish --provenance --tag next
 
+  send_event:
+    needs: build-and-plublish
+    runs-on: ubuntu-latest
+    steps:
+    - name: Sending Event
+      uses: peter-evans/repository-dispatch@v3
+      with:
+        token: ${{ secrets.EYTHAN_WORKFLOWS_TOKEN }}
+        repository: eythaann/seelen-ui
+        event-type: update-slu-lib
