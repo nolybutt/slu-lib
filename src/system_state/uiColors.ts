@@ -1,4 +1,17 @@
-import { Obtainable, SeelenCommand, SeelenEvent } from '../handlers/index.ts';
+import { SeelenCommand, SeelenEvent } from '../handlers/index.ts';
+import { invoke, subscribe } from '../lib.ts';
+
+declare global {
+  interface ArgsBySeelenCommand {
+    [SeelenCommand.SystemGetColors]: null;
+  }
+  interface ReturnBySeelenCommand {
+    [SeelenCommand.SystemGetColors]: UIColors;
+  }
+  interface PayloadBySeelenEvent {
+    [SeelenEvent.ColorsChanged]: UIColors;
+  }
+}
 
 export interface UIColors {
   background: string;
@@ -13,7 +26,6 @@ export interface UIColors {
   complement: string | null;
 }
 
-const _UIColors = Obtainable<UIColors>(SeelenCommand.SystemGetColors, SeelenEvent.ColorsChanged);
 export class UIColors {
   static default(): UIColors {
     return {
@@ -30,12 +42,14 @@ export class UIColors {
     };
   }
 
-  static async getAsync(): Promise<UIColors> {
-    return await _UIColors.getAsync();
+  static getAsync() {
+    return invoke(SeelenCommand.SystemGetColors);
   }
 
-  static async onChange(cb: (value: UIColors) => void): Promise<() => void> {
-    return await _UIColors.onChange(cb);
+  static onChange(cb: (value: UIColors) => void) {
+    return subscribe(SeelenEvent.ColorsChanged, (event) => {
+      cb(event.payload);
+    });
   }
 
   static setAssCssVariables(colors: UIColors) {

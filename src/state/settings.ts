@@ -1,7 +1,20 @@
-import { Obtainable, SeelenCommand, SeelenEvent } from '../handlers/index.ts';
+import { SeelenCommand, SeelenEvent } from '../handlers/index.ts';
+import { invoke, subscribe } from '../lib.ts';
 import { Rect } from '../utils/index.ts';
 import type { WidgetId } from './index.ts';
 import type { MonitorConfiguration } from './settings_by_monitor.ts';
+
+declare global {
+  interface ArgsBySeelenCommand {
+    [SeelenCommand.StateGetSettings]: null;
+  }
+  interface ReturnBySeelenCommand {
+    [SeelenCommand.StateGetSettings]: Settings;
+  }
+  interface PayloadBySeelenEvent {
+    [SeelenEvent.StateSettingsChanged]: Settings;
+  }
+}
 
 export enum VirtualDesktopStrategy {
   Native = 'Native',
@@ -67,11 +80,6 @@ export class UpdaterSettings {
   channel: UpdateChannel = UpdateChannel.Nightly;
 }
 
-const _Settings = Obtainable<Settings>(
-  SeelenCommand.StateGetSettings,
-  SeelenEvent.StateSettingsChanged,
-);
-
 export class Settings {
   fancyToolbar: FancyToolbarSettings = new FancyToolbarSettings();
   seelenweg: SeelenWegSettings = new SeelenWegSettings();
@@ -90,12 +98,14 @@ export class Settings {
   updater: UpdaterSettings = new UpdaterSettings();
   custom: Record<WidgetId, Record<string, unknown>> = {};
 
-  static async getAsync(): Promise<Settings> {
-    return await _Settings.getAsync();
+  static getAsync() {
+    return invoke(SeelenCommand.StateGetSettings);
   }
 
-  static async onChange(cb: (value: Settings) => void): Promise<() => void> {
-    return await _Settings.onChange(cb);
+  static onChange(cb: (value: Settings) => void) {
+    return subscribe(SeelenEvent.StateSettingsChanged, (event) => {
+      cb(event.payload);
+    });
   }
 }
 

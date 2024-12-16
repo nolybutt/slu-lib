@@ -1,4 +1,5 @@
-import { Obtainable, SeelenCommand, SeelenEvent } from '../handlers/index.ts';
+import { SeelenCommand, SeelenEvent } from '../handlers/index.ts';
+import { invoke, subscribe } from '../lib.ts';
 
 export * from './theme.ts';
 export * from './settings.ts';
@@ -12,20 +13,29 @@ export * from './plugin.ts';
 export * from './widget.ts';
 export * from './profile.ts';
 
-const _LauncherHistory = Obtainable<LauncherHistory>(
-  SeelenCommand.StateGetHistory,
-  SeelenEvent.StateHistoryChanged,
-);
+declare global {
+  interface ArgsBySeelenCommand {
+    [SeelenCommand.StateGetHistory]: null;
+  }
+  interface ReturnBySeelenCommand {
+    [SeelenCommand.StateGetHistory]: LauncherHistory;
+  }
+  interface PayloadBySeelenEvent {
+    [SeelenEvent.StateHistoryChanged]: LauncherHistory;
+  }
+}
 
 export class LauncherHistory {
   [x: string]: string[];
 
-  static async getAsync(): Promise<LauncherHistory> {
-    return await _LauncherHistory.getAsync();
+  static getAsync() {
+    return invoke(SeelenCommand.StateGetHistory);
   }
 
-  static async onChange(cb: (value: LauncherHistory) => void): Promise<() => void> {
-    return await _LauncherHistory.onChange(cb);
+  static onChange(cb: (value: LauncherHistory) => void) {
+    return subscribe(SeelenEvent.StateHistoryChanged, (event) => {
+      cb(event.payload);
+    });
   }
 }
 

@@ -1,15 +1,10 @@
-import { invoke as tauriInvoke, type InvokeArgs, type InvokeOptions } from "@tauri-apps/api/core";
-import {
-  listen,
-  type UnlistenFn,
-  type Options as ListenerOptions,
-  type EventCallback,
-} from "@tauri-apps/api/event";
+import { invoke as tauriInvoke, type InvokeArgs, type InvokeOptions } from '@tauri-apps/api/core';
+import { type EventCallback, listen, type Options as ListenerOptions, type UnlistenFn } from '@tauri-apps/api/event';
 
-import type { SeelenCommand } from "./commands.ts";
-import type { SeelenEvent } from "../lib.ts";
+import type { SeelenCommand } from './commands.ts';
+import type { SeelenEvent } from '../lib.ts';
 
-export * from "./commands.ts";
+export * from './commands.ts';
 
 declare global {
   interface ArgsBySeelenCommand extends Record<SeelenCommand, InvokeArgs | null> {
@@ -31,7 +26,7 @@ declare global {
 export function invoke<T extends SeelenCommand>(
   command: T,
   args?: NonNullable<ArgsBySeelenCommand[T]>,
-  options?: InvokeOptions
+  options?: InvokeOptions,
 ): Promise<ReturnBySeelenCommand[T]> {
   return tauriInvoke(command, args, options);
 }
@@ -39,7 +34,7 @@ export function invoke<T extends SeelenCommand>(
 export function subscribe<T extends SeelenEvent>(
   event: T,
   cb: EventCallback<PayloadBySeelenEvent[T]>,
-  options?: ListenerOptions
+  options?: ListenerOptions,
 ): Promise<UnlistenFn> {
   return listen(event, cb, options);
 }

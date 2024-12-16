@@ -1,6 +1,6 @@
-import { invoke, SeelenCommand } from "../handlers/index.ts";
-import { List } from "../utils/List.ts";
-import type { Placeholder } from "./placeholder.ts";
+import { invoke, SeelenCommand } from '../handlers/index.ts';
+import { List } from '../utils/List.ts';
+import type { Placeholder } from './placeholder.ts';
 
 declare global {
   interface ArgsBySeelenCommand {

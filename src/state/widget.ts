@@ -1,5 +1,5 @@
-import { invoke, SeelenCommand, SeelenEvent, subscribe } from "../lib.ts";
-import { List } from "../utils/List.ts";
+import { invoke, SeelenCommand, SeelenEvent, subscribe } from '../lib.ts';
+import { List } from '../utils/List.ts';
 
 declare global {
   interface ArgsBySeelenCommand {
@@ -13,7 +13,7 @@ declare global {
   }
 }
 
-export type WidgetId = string & { __brand: "WidgetId" };
+export type WidgetId = string & { __brand: 'WidgetId' };
 
 export interface Widget {
   id: WidgetId;

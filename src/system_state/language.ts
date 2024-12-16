@@ -1,5 +1,5 @@
-import { invoke, SeelenCommand, SeelenEvent, subscribe } from "../lib.ts";
-import { List } from "../utils/List.ts";
+import { invoke, SeelenCommand, SeelenEvent, subscribe } from '../lib.ts';
+import { List } from '../utils/List.ts';
 
 declare global {
   interface ArgsBySeelenCommand {
