@@ -6,6 +6,7 @@ export enum SeelenEvent {
   GlobalMouseMove = 'global-mouse-move',
   HandleLayeredHitboxes = 'handle-layered',
   SystemMonitorsChanged = 'system::monitors-changed',
+  SystemLanguagesChanged = 'system::languages-changed',
   MediaSessions = 'media-sessions',
   MediaInputs = 'media-inputs',
   MediaOutputs = 'media-outputs',

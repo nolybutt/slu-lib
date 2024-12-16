@@ -1,5 +1,17 @@
-import { listen, type UnlistenFn } from '@tauri-apps/api/event';
-import { invoke, SeelenCommand, SeelenEvent } from '../lib.ts';
+import { invoke, SeelenCommand, SeelenEvent, subscribe } from "../lib.ts";
+import { List } from "../utils/List.ts";
+
+declare global {
+  interface ArgsBySeelenCommand {
+    [SeelenCommand.SystemGetMonitors]: null;
+  }
+  interface ReturnBySeelenCommand {
+    [SeelenCommand.SystemGetMonitors]: ConnectedMonitor[];
+  }
+  interface PayloadBySeelenEvent {
+    [SeelenEvent.SystemMonitorsChanged]: ConnectedMonitor[];
+  }
+}
 
 export interface ConnectedMonitor {
   id: string;
@@ -9,20 +21,14 @@ export interface ConnectedMonitor {
   dpi: number;
 }
 
-export class ConnectedMonitorList {
-  private constructor(private inner: ConnectedMonitor[]) {}
-
-  static async getAsync(): Promise<ConnectedMonitorList> {
+export class ConnectedMonitorList extends List<ConnectedMonitor> {
+  static override async getAsync() {
     return new ConnectedMonitorList(await invoke(SeelenCommand.SystemGetMonitors));
   }
 
-  static onChange(cb: (value: ConnectedMonitorList) => void): Promise<UnlistenFn> {
-    return listen<ConnectedMonitor[]>(SeelenEvent.SystemMonitorsChanged, (event) => {
+  static onChange(cb: (value: ConnectedMonitorList) => void) {
+    return subscribe(SeelenEvent.SystemMonitorsChanged, (event) => {
       cb(new ConnectedMonitorList(event.payload));
     });
-  }
-
-  all(): ConnectedMonitor[] {
-    return this.inner;
   }
 }

@@ -2,7 +2,6 @@ import { decodeBase64Url } from 'jsr:@std/encoding';
 import { getCurrentWindow } from '@tauri-apps/api/window';
 import type { WidgetId } from '../lib.ts';
 
-export * from './hooks.ts';
 export * from './layered_hitbox.ts';
 
 export function getRootElement(): HTMLElement {

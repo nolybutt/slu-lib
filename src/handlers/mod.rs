@@ -34,6 +34,7 @@ slu_events_declaration! {
     HandleLayeredHitboxes = "handle-layered",
 
     SystemMonitorsChanged = "system::monitors-changed",
+    SystemLanguagesChanged = "system::languages-changed",
 
     MediaSessions = "media-sessions",
     MediaInputs = "media-inputs",
