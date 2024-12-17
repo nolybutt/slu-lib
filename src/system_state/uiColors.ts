@@ -1,19 +1,19 @@
 import { SeelenCommand, SeelenEvent } from '../handlers/mod.ts';
-import { invoke, subscribe } from '../lib.ts';
+import { TauriCommand, WebviewEvent } from '../utils/State.ts';
 
 declare global {
   interface ArgsByCommand {
     [SeelenCommand.SystemGetColors]: null;
   }
   interface ReturnByCommand {
-    [SeelenCommand.SystemGetColors]: UIColors;
+    [SeelenCommand.SystemGetColors]: IUIColors;
   }
   interface PayloadByEvent {
-    [SeelenEvent.ColorsChanged]: UIColors;
+    [SeelenEvent.ColorsChanged]: IUIColors;
   }
 }
 
-export interface UIColors {
+export interface IUIColors {
   background: string;
   foreground: string;
   accent_darkest: string;
@@ -26,9 +26,16 @@ export interface UIColors {
   complement: string | null;
 }
 
+@TauriCommand(SeelenCommand.SystemGetColors)
+@WebviewEvent(SeelenEvent.ColorsChanged)
 export class UIColors {
+  constructor(public colors: IUIColors) {}
+
+  static readonly getAsync: TauriCommand<UIColors>;
+  static readonly onChange: WebviewEvent<UIColors>;
+
   static default(): UIColors {
-    return {
+    return new this({
       background: '#ffffff',
       foreground: '#000000',
       accent_darkest: '#990000',
@@ -39,21 +46,11 @@ export class UIColors {
       accent_lighter: '#ee0000',
       accent_lightest: '#ff0000',
       complement: null,
-    };
-  }
-
-  static getAsync(): Promise<UIColors> {
-    return invoke(SeelenCommand.SystemGetColors);
-  }
-
-  static onChange(cb: (value: UIColors) => void): Promise<() => void> {
-    return subscribe(SeelenEvent.ColorsChanged, (event) => {
-      cb(event.payload);
     });
   }
 
-  static setAssCssVariables(colors: UIColors): void {
-    for (const [key, value] of Object.entries(colors)) {
+  setAssCssVariables(): void {
+    for (const [key, value] of Object.entries(this.colors)) {
       if (typeof value !== 'string') {
         continue;
       }
