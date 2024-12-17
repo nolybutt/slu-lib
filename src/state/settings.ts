@@ -98,11 +98,11 @@ export class Settings {
   updater: UpdaterSettings = new UpdaterSettings();
   custom: Record<WidgetId, Record<string, unknown>> = {};
 
-  static getAsync() {
+  static getAsync(): Promise<Settings> {
     return invoke(SeelenCommand.StateGetSettings);
   }
 
-  static onChange(cb: (value: Settings) => void) {
+  static onChange(cb: (value: Settings) => void): Promise<() => void> {
     return subscribe(SeelenEvent.StateSettingsChanged, (event) => {
       cb(event.payload);
     });

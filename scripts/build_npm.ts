@@ -35,7 +35,7 @@ await build({
   outDir: './npm',
   shims: {},
   package: packageJson,
-  postBuild() {
+  postBuild(): void {
     Deno.copyFileSync('LICENSE', 'npm/LICENSE');
     Deno.copyFileSync('readme.md', 'npm/readme.md');
   },

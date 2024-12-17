@@ -28,11 +28,11 @@ declare global {
 export class LauncherHistory {
   [x: string]: string[];
 
-  static getAsync() {
+  static getAsync(): Promise<LauncherHistory> {
     return invoke(SeelenCommand.StateGetHistory);
   }
 
-  static onChange(cb: (value: LauncherHistory) => void) {
+  static onChange(cb: (value: LauncherHistory) => void): Promise<() => void> {
     return subscribe(SeelenEvent.StateHistoryChanged, (event) => {
       cb(event.payload);
     });

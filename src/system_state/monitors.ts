@@ -22,11 +22,11 @@ export interface ConnectedMonitor {
 }
 
 export class ConnectedMonitorList extends List<ConnectedMonitor> {
-  static override async getAsync() {
+  static override async getAsync(): Promise<ConnectedMonitorList> {
     return new ConnectedMonitorList(await invoke(SeelenCommand.SystemGetMonitors));
   }
 
-  static onChange(cb: (value: ConnectedMonitorList) => void) {
+  static onChange(cb: (value: ConnectedMonitorList) => void): Promise<() => void> {
     return subscribe(SeelenEvent.SystemMonitorsChanged, (event) => {
       cb(new ConnectedMonitorList(event.payload));
     });

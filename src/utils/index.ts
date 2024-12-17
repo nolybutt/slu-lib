@@ -19,8 +19,8 @@ export class Rect {
   bottom = 0;
 }
 
-export function disableWebviewShortcutsAndContextMenu() {
-  globalThis.addEventListener('keydown', function (event) {
+export function disableWebviewShortcutsAndContextMenu(): void {
+  globalThis.addEventListener('keydown', function (event): void {
     // prevent refresh
     if (event.key === 'F5') {
       event.preventDefault();

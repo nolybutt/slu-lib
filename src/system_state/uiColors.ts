@@ -42,17 +42,17 @@ export class UIColors {
     };
   }
 
-  static getAsync() {
+  static getAsync(): Promise<UIColors> {
     return invoke(SeelenCommand.SystemGetColors);
   }
 
-  static onChange(cb: (value: UIColors) => void) {
+  static onChange(cb: (value: UIColors) => void): Promise<() => void> {
     return subscribe(SeelenEvent.ColorsChanged, (event) => {
       cb(event.payload);
     });
   }
 
-  static setAssCssVariables(colors: UIColors) {
+  static setAssCssVariables(colors: UIColors): void {
     for (const [key, value] of Object.entries(colors)) {
       if (typeof value !== 'string') {
         continue;

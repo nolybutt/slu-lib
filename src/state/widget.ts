@@ -23,11 +23,11 @@ export interface Widget {
 }
 
 export class WidgetList extends List<Widget> {
-  static override async getAsync() {
+  static override async getAsync(): Promise<WidgetList> {
     return new WidgetList(await invoke(SeelenCommand.StateGetWidgets));
   }
 
-  static onChange(cb: (value: WidgetList) => void) {
+  static onChange(cb: (value: WidgetList) => void): Promise<() => void> {
     return subscribe(SeelenEvent.StateWidgetsChanged, (event) => {
       cb(new WidgetList(event.payload));
     });
