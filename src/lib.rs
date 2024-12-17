@@ -18,14 +18,14 @@ fn generate_schemas() {
         std::fs::write(path, serde_json::to_string_pretty(&schema).unwrap()).unwrap();
     }
 
-    std::fs::create_dir_all("./schemas").unwrap();
-    write_schema::<Settings>("./schemas/settings.schema.json");
-    write_schema::<Placeholder>("./schemas/placeholder.schema.json");
-    write_schema::<Theme>("./schemas/theme.schema.json");
-    write_schema::<WindowManagerLayout>("./schemas/layout.schema.json");
-    write_schema::<Vec<AppConfig>>("./schemas/settings_by_app.schema.json");
-    write_schema::<Vec<WegItem>>("./schemas/weg_items.schema.json");
-    write_schema::<IconPack>("./schemas/icon_pack.schema.json");
+    std::fs::create_dir_all("./gen/schemas").unwrap();
+    write_schema::<Settings>("./gen/schemas/settings.schema.json");
+    write_schema::<Placeholder>("./gen/schemas/placeholder.schema.json");
+    write_schema::<Theme>("./gen/schemas/theme.schema.json");
+    write_schema::<WindowManagerLayout>("./gen/schemas/layout.schema.json");
+    write_schema::<Vec<AppConfig>>("./gen/schemas/settings_by_app.schema.json");
+    write_schema::<Vec<WegItem>>("./gen/schemas/weg_items.schema.json");
+    write_schema::<IconPack>("./gen/schemas/icon_pack.schema.json");
 
     handlers::SeelenEvent::generate_ts_file("./src/handlers/events.ts");
 }
