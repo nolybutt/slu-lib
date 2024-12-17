@@ -16,7 +16,7 @@ macro_rules! slu_events_declaration {
                     $(
                         format!("  {} = '{}',", stringify!($name), Self::$name),
                     )*
-                    "}".to_owned(),
+                    "}\n".to_owned(),
                 ];
                 std::fs::write(path, content.join("\n")).unwrap();
             }

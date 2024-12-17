@@ -1,11 +1,12 @@
 use schemars::JsonSchema;
 use serde::{Deserialize, Serialize};
+use ts_rs::TS;
 
 use crate::rect::Rect;
 
 use super::SeelenWallWallpaper;
 
-#[derive(Clone, Debug, Serialize, Deserialize, JsonSchema)]
+#[derive(Clone, Debug, Serialize, Deserialize, JsonSchema, TS)]
 #[serde(default, rename_all = "camelCase")]
 pub struct FancyToolbarSettingsByMonitor {
     pub enabled: bool,
@@ -17,7 +18,7 @@ impl Default for FancyToolbarSettingsByMonitor {
     }
 }
 
-#[derive(Clone, Debug, Serialize, Deserialize, JsonSchema)]
+#[derive(Clone, Debug, Serialize, Deserialize, JsonSchema, TS)]
 #[serde(default, rename_all = "camelCase")]
 pub struct SeelenWegSettingsByMonitor {
     pub enabled: bool,
@@ -29,7 +30,7 @@ impl Default for SeelenWegSettingsByMonitor {
     }
 }
 
-#[derive(Clone, Debug, Serialize, Deserialize, JsonSchema)]
+#[derive(Clone, Debug, Serialize, Deserialize, JsonSchema, TS)]
 #[serde(default, rename_all = "camelCase")]
 pub struct WindowManagerSettingsByMonitor {
     pub enabled: bool,
@@ -51,7 +52,7 @@ impl Default for WindowManagerSettingsByMonitor {
     }
 }
 
-#[derive(Clone, Debug, Serialize, Deserialize, JsonSchema)]
+#[derive(Clone, Debug, Serialize, Deserialize, JsonSchema, TS)]
 #[serde(default, rename_all = "camelCase")]
 pub struct SeelenWallSettingsByMonitor {
     pub enabled: bool,
@@ -67,7 +68,7 @@ impl Default for SeelenWallSettingsByMonitor {
     }
 }
 
-#[derive(Clone, Debug, Serialize, Deserialize, JsonSchema)]
+#[derive(Clone, Debug, Serialize, Deserialize, JsonSchema, TS)]
 pub enum WorkspaceIdentifierType {
     #[serde(alias = "name")]
     Name,
@@ -75,14 +76,14 @@ pub enum WorkspaceIdentifierType {
     Index,
 }
 
-#[derive(Clone, Debug, Serialize, Deserialize, JsonSchema)]
+#[derive(Clone, Debug, Serialize, Deserialize, JsonSchema, TS)]
 #[serde(rename_all = "camelCase")]
 pub struct WorkspaceIdentifier {
     pub id: String,
     pub kind: WorkspaceIdentifierType,
 }
 
-#[derive(Clone, Debug, Serialize, Deserialize, JsonSchema)]
+#[derive(Clone, Debug, Serialize, Deserialize, JsonSchema, TS)]
 #[serde(rename_all = "camelCase")]
 pub struct WorkspaceConfiguration {
     pub identifier: WorkspaceIdentifier,
@@ -90,7 +91,7 @@ pub struct WorkspaceConfiguration {
     pub backgrounds: Option<Vec<SeelenWallWallpaper>>,
 }
 
-#[derive(Clone, Debug, Default, Serialize, Deserialize, JsonSchema)]
+#[derive(Clone, Debug, Default, Serialize, Deserialize, JsonSchema, TS)]
 #[serde(default, rename_all = "camelCase")]
 pub struct MonitorConfiguration {
     pub tb: FancyToolbarSettingsByMonitor,

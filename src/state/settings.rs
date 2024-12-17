@@ -8,6 +8,7 @@ use std::{
 use schemars::JsonSchema;
 use serde::{Deserialize, Serialize};
 use serde_alias::serde_alias;
+use ts_rs::TS;
 
 use crate::rect::Rect;
 
@@ -16,7 +17,7 @@ use super::{MonitorConfiguration, WidgetId};
 // ============== Fancy Toolbar Settings ==============
 
 #[serde_alias(SnakeCase)]
-#[derive(Debug, Clone, Serialize, Deserialize, JsonSchema)]
+#[derive(Debug, Clone, Serialize, Deserialize, JsonSchema, TS)]
 #[serde(default, rename_all = "camelCase")]
 pub struct FancyToolbarSettings {
     /// enable or disable the fancy toolbar
@@ -51,7 +52,7 @@ impl Default for FancyToolbarSettings {
 
 // ============== SeelenWeg Settings ==============
 
-#[derive(Debug, Copy, Clone, Serialize, Deserialize, JsonSchema, PartialEq, Eq)]
+#[derive(Debug, Copy, Clone, PartialEq, Eq, Serialize, Deserialize, JsonSchema, TS)]
 pub enum SeelenWegMode {
     #[serde(rename = "Full-Width")]
     FullWidth,
@@ -59,7 +60,7 @@ pub enum SeelenWegMode {
     MinContent,
 }
 
-#[derive(Debug, Copy, Clone, Serialize, Deserialize, JsonSchema, PartialEq, Eq)]
+#[derive(Debug, Copy, Clone, PartialEq, Eq, Serialize, Deserialize, JsonSchema, TS)]
 pub enum HideMode {
     /// never hide
     Never,
@@ -70,7 +71,7 @@ pub enum HideMode {
     OnOverlap,
 }
 
-#[derive(Debug, Copy, Clone, Serialize, Deserialize, JsonSchema, PartialEq, Eq)]
+#[derive(Debug, Copy, Clone, PartialEq, Eq, Serialize, Deserialize, JsonSchema, TS)]
 pub enum SeelenWegSide {
     Left,
     Right,
@@ -79,7 +80,7 @@ pub enum SeelenWegSide {
 }
 
 #[serde_alias(SnakeCase)]
-#[derive(Debug, Clone, Serialize, Deserialize, JsonSchema)]
+#[derive(Debug, Clone, Serialize, Deserialize, JsonSchema, TS)]
 #[serde(default, rename_all = "camelCase")]
 pub struct SeelenWegSettings {
     /// enable or disable the seelenweg
@@ -140,7 +141,7 @@ impl SeelenWegSettings {
 // ============== Window Manager Settings ==============
 
 #[serde_alias(SnakeCase)]
-#[derive(Debug, Clone, Serialize, Deserialize, JsonSchema)]
+#[derive(Debug, Clone, Serialize, Deserialize, JsonSchema, TS)]
 #[serde(default, rename_all = "camelCase")]
 pub struct Border {
     pub enabled: bool,
@@ -149,7 +150,7 @@ pub struct Border {
 }
 
 #[serde_alias(SnakeCase)]
-#[derive(Debug, Clone, Serialize, Deserialize, JsonSchema)]
+#[derive(Debug, Clone, Serialize, Deserialize, JsonSchema, TS)]
 #[serde(default, rename_all = "camelCase")]
 pub struct FloatingWindowSettings {
     pub width: f64,
@@ -157,7 +158,7 @@ pub struct FloatingWindowSettings {
 }
 
 #[serde_alias(SnakeCase)]
-#[derive(Debug, Clone, Serialize, Deserialize, JsonSchema)]
+#[derive(Debug, Clone, Serialize, Deserialize, JsonSchema, TS)]
 #[serde(default, rename_all = "camelCase")]
 pub struct WindowManagerSettings {
     /// enable or disable the window manager
@@ -218,14 +219,14 @@ impl Default for WindowManagerSettings {
 
 // ================= Seelen Launcher ================
 
-#[derive(Debug, Clone, Serialize, Deserialize, JsonSchema)]
+#[derive(Debug, Clone, Serialize, Deserialize, JsonSchema, TS)]
 pub enum SeelenLauncherMonitor {
     Primary,
     #[serde(rename = "Mouse-Over")]
     MouseOver,
 }
 
-#[derive(Debug, Clone, Default, Serialize, Deserialize, JsonSchema)]
+#[derive(Debug, Clone, Default, Serialize, Deserialize, JsonSchema, TS)]
 #[serde(default, rename_all = "camelCase")]
 pub struct SeelenLauncherRunner {
     pub id: String,
@@ -234,7 +235,7 @@ pub struct SeelenLauncherRunner {
     pub readonly: bool,
 }
 
-#[derive(Debug, Clone, Serialize, Deserialize, JsonSchema)]
+#[derive(Debug, Clone, Serialize, Deserialize, JsonSchema, TS)]
 #[serde(default, rename_all = "camelCase")]
 pub struct SeelenLauncherSettings {
     pub enabled: bool,
@@ -280,14 +281,14 @@ impl SeelenLauncherSettings {
 
 // ================= Seelen Wall ================
 
-#[derive(Debug, Clone, Serialize, Deserialize, JsonSchema)]
+#[derive(Debug, Clone, Serialize, Deserialize, JsonSchema, TS)]
 #[serde(rename_all = "camelCase")]
 pub struct SeelenWallWallpaper {
     pub id: String,
     pub path: PathBuf,
 }
 
-#[derive(Debug, Clone, Serialize, Deserialize, JsonSchema)]
+#[derive(Debug, Clone, Serialize, Deserialize, JsonSchema, TS)]
 #[serde(default, rename_all = "camelCase")]
 pub struct SeelenWallSettings {
     pub enabled: bool,
@@ -322,7 +323,7 @@ macro_rules! define_struct_and_hashmap {
         $($field:ident),*
     ) => {
         #[serde_alias(SnakeCase)]
-        #[derive(Debug, Clone, Serialize, Deserialize, JsonSchema)]
+        #[derive(Debug, Clone, Serialize, Deserialize, JsonSchema, TS)]
         #[serde(default, rename_all = "camelCase")]
         pub struct AhkVarList {
             $(
@@ -345,7 +346,7 @@ macro_rules! define_struct_and_hashmap {
     };
 }
 
-#[derive(Debug, Clone, Serialize, Deserialize, JsonSchema)]
+#[derive(Debug, Clone, Serialize, Deserialize, JsonSchema, TS)]
 pub struct AhkVar {
     pub fancy: String,
     pub ahk: String,
@@ -484,14 +485,14 @@ impl Default for AhkVarList {
 
 // ========================== Seelen Updates ==============================
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize, JsonSchema)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize, JsonSchema, TS)]
 pub enum UpdateChannel {
     Release,
     Beta,
     Nightly,
 }
 
-#[derive(Debug, Clone, Serialize, Deserialize, JsonSchema)]
+#[derive(Debug, Clone, Serialize, Deserialize, JsonSchema, TS)]
 #[serde(rename_all = "camelCase")]
 pub struct UpdaterSettings {
     pub channel: UpdateChannel,
@@ -507,15 +508,16 @@ impl Default for UpdaterSettings {
 
 // ======================== Final Settings Struct ===============================
 
-#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize, JsonSchema)]
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize, JsonSchema, TS)]
 pub enum VirtualDesktopStrategy {
     Native,
     Seelen,
 }
 
 #[serde_alias(SnakeCase)]
-#[derive(Debug, Clone, Serialize, Deserialize, JsonSchema)]
+#[derive(Debug, Clone, Serialize, Deserialize, JsonSchema, TS)]
 #[serde(default, rename_all = "camelCase")]
+#[ts(export)]
 pub struct Settings {
     /// fancy toolbar config
     pub fancy_toolbar: FancyToolbarSettings,

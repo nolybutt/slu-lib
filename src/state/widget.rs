@@ -1,8 +1,9 @@
 use serde::{Deserialize, Serialize};
+use ts_rs::TS;
 
 use super::ResourceId;
 
-#[derive(Debug, Clone, Hash, PartialEq, Eq, Serialize, Deserialize)]
+#[derive(Debug, Clone, Hash, PartialEq, Eq, Serialize, Deserialize, TS)]
 pub struct WidgetId(pub ResourceId);
 
 impl From<ResourceId> for WidgetId {

@@ -18,6 +18,7 @@ pub use settings::*;
 pub use settings_by_app::*;
 pub use settings_by_monitor::*;
 pub use theme::*;
+use ts_rs::TS;
 pub use weg_items::*;
 pub use widget::*;
 pub use wm_layout::*;
@@ -25,7 +26,7 @@ pub use wm_layout::*;
 use schemars::JsonSchema;
 use serde::{Deserialize, Serialize};
 
-#[derive(Debug, Clone, Hash, PartialEq, Eq, Serialize, Deserialize)]
+#[derive(Debug, Clone, Hash, PartialEq, Eq, Serialize, Deserialize, TS)]
 pub struct ResourceId(String);
 
 impl ResourceId {

@@ -1,5 +1,5 @@
 import { SeelenCommand, SeelenEvent } from '../handlers/mod.ts';
-import { invoke, subscribe } from '../lib.ts';
+import { TauriCommand, WebviewEvent } from '../utils/State.ts';
 
 export * from './theme.ts';
 export * from './settings.ts';
@@ -18,25 +18,23 @@ declare global {
     [SeelenCommand.StateGetHistory]: null;
   }
   interface ReturnByCommand {
-    [SeelenCommand.StateGetHistory]: LauncherHistory;
+    [SeelenCommand.StateGetHistory]: ILauncherHistory;
   }
   interface PayloadByEvent {
-    [SeelenEvent.StateHistoryChanged]: LauncherHistory;
+    [SeelenEvent.StateHistoryChanged]: ILauncherHistory;
   }
 }
 
-export class LauncherHistory {
+interface ILauncherHistory {
   [x: string]: string[];
+}
 
-  static getAsync(): Promise<LauncherHistory> {
-    return invoke(SeelenCommand.StateGetHistory);
-  }
-
-  static onChange(cb: (value: LauncherHistory) => void): Promise<() => void> {
-    return subscribe(SeelenEvent.StateHistoryChanged, (event) => {
-      cb(event.payload);
-    });
-  }
+@TauriCommand(SeelenCommand.StateGetHistory)
+@WebviewEvent(SeelenEvent.StateHistoryChanged)
+export class LauncherHistory {
+  constructor(public inner: ILauncherHistory) {}
+  static readonly getAsync: TauriCommand<LauncherHistory>;
+  static readonly onChange: WebviewEvent<LauncherHistory>;
 }
 
 export class ResourceMetadata {

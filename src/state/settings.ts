@@ -47,7 +47,6 @@ export class SeelenWallWallpaper {
 export class SeelenWallSettings {
   enabled: boolean = true;
   backgrounds: SeelenWallWallpaper[] = [];
-  /** Interval in seconds */
   interval: number = 60;
   randomize: boolean = false;
 }
@@ -105,6 +104,27 @@ export class Settings {
   constructor(public inner: ISettings) {}
   static readonly getAsync: TauriCommand<Settings>;
   static readonly onChange: WebviewEvent<Settings>;
+
+  static default(): Settings {
+    return new this({
+      fancyToolbar: new FancyToolbarSettings(),
+      seelenweg: new SeelenWegSettings(),
+      windowManager: new WindowManagerSettings(),
+      wall: new SeelenWallSettings(),
+      launcher: new SeelenLauncherSettings(),
+      monitorsV2: {},
+      ahkEnabled: true,
+      ahkVariables: new AhkVarList(),
+      selectedThemes: ['default'],
+      iconPacks: ['system'],
+      devTools: false,
+      language: '',
+      dateFormat: 'ddd D MMM, hh:mm A',
+      virtualDesktopStrategy: VirtualDesktopStrategy.Native,
+      updater: new UpdaterSettings(),
+      custom: {},
+    });
+  }
 }
 
 export class FancyToolbarSettings {
