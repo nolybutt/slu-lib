@@ -1,4 +1,4 @@
-import { ResourceMetadata } from './index.ts';
+import { ResourceMetadata } from './mod.ts';
 
 export class IconPack {
   info: ResourceMetadata = new ResourceMetadata();

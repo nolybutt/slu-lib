@@ -1,4 +1,4 @@
-import type { WidgetId } from './index.ts';
+import type { WidgetId } from './mod.ts';
 
 export interface ThemeInfo {
   /** Display name of the theme */

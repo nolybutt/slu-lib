@@ -1,5 +1,5 @@
-import { invoke, SeelenCommand, SeelenEvent } from '../handlers/index.ts';
-import { getCurrentWidget } from '../utils/index.ts';
+import { invoke, SeelenCommand, SeelenEvent } from '../handlers/mod.ts';
+import { getCurrentWidget } from '../utils/mod.ts';
 import { List } from '../utils/List.ts';
 import { subscribe } from '../lib.ts';
 

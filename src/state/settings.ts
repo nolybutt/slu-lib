@@ -1,7 +1,7 @@
-import { SeelenCommand, SeelenEvent } from '../handlers/index.ts';
+import { SeelenCommand, SeelenEvent } from '../handlers/mod.ts';
 import { invoke, subscribe } from '../lib.ts';
-import { Rect } from '../utils/index.ts';
-import type { WidgetId } from './index.ts';
+import { Rect } from '../utils/mod.ts';
+import type { WidgetId } from './mod.ts';
 import type { MonitorConfiguration } from './settings_by_monitor.ts';
 
 declare global {

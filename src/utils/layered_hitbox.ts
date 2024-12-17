@@ -1,6 +1,6 @@
 import { getCurrentWebviewWindow } from '@tauri-apps/api/webviewWindow';
 
-import { SeelenEvent } from '../handlers/index.ts';
+import { SeelenEvent } from '../handlers/mod.ts';
 
 export async function declareDocumentAsLayeredHitbox(): Promise<void> {
   const webview = getCurrentWebviewWindow();

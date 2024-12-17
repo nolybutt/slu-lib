@@ -1,4 +1,4 @@
-import type { Rect } from '../utils/index.ts';
+import type { Rect } from '../utils/mod.ts';
 import type { SeelenWallWallpaper } from './settings.ts';
 
 export class FancyToolbarSettingsByMonitor {

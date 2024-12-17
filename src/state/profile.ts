@@ -1,4 +1,4 @@
-import { invoke, SeelenCommand } from '../handlers/index.ts';
+import { invoke, SeelenCommand } from '../handlers/mod.ts';
 import { List } from '../utils/List.ts';
 import type { Placeholder } from './placeholder.ts';
 

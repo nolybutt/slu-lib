@@ -1,4 +1,4 @@
-import { SeelenCommand, SeelenEvent } from '../handlers/index.ts';
+import { SeelenCommand, SeelenEvent } from '../handlers/mod.ts';
 import { invoke, subscribe } from '../lib.ts';
 
 declare global {
