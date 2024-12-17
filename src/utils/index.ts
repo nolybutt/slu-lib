@@ -1,4 +1,4 @@
-import { decodeBase64Url } from 'jsr:@std/encoding';
+import { decodeBase64Url } from '@std/encoding';
 import { getCurrentWindow } from '@tauri-apps/api/window';
 import type { WidgetId } from '../lib.ts';
 
