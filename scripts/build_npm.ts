@@ -17,9 +17,6 @@ const packageJson: BuildOptions['package'] = {
   bugs: {
     url: 'https://github.com/Seelen-Inc/slu-lib/issues',
   },
-  dependencies: {
-    '@tauri-apps/api': '^2.1.1',
-  },
 };
 
 await emptyDir('./npm');
@@ -34,6 +31,7 @@ await build({
   entryPoints: ['./src/lib.ts'],
   outDir: './npm',
   shims: {},
+  importMap: 'deno.json',
   package: packageJson,
   postBuild(): void {
     Deno.copyFileSync('LICENSE', 'npm/LICENSE');
