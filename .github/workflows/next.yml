@@ -48,7 +48,9 @@ jobs:
           registry-url: "https://registry.npmjs.org"
 
       - name: Publish to JSR
-        run: deno publish --allow-slow-types --allow-dirty
+        # Prepare the package for publishing performing all checks and validations without uploading
+        # we just run this step to be safe when running the release workflow
+        run: deno publish --allow-slow-types --allow-dirty --dry-run 
 
       - name: Build NPM package
         run: deno task build:npm
