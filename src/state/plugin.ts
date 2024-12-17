@@ -1,8 +1,7 @@
-import { listen, type UnlistenFn } from '@tauri-apps/api/event';
-
 import { invoke, SeelenCommand, SeelenEvent } from '../handlers/index.ts';
 import { getCurrentWidget } from '../utils/index.ts';
 import { List } from '../utils/List.ts';
+import { subscribe } from '../lib.ts';
 
 declare global {
   interface ArgsBySeelenCommand {
@@ -29,8 +28,8 @@ export class PluginList extends List<Plugin> {
     return new PluginList(await invoke(SeelenCommand.StateGetPlugins));
   }
 
-  static onChange(cb: (value: PluginList) => void): Promise<UnlistenFn> {
-    return listen<Plugin[]>(SeelenEvent.StatePluginsChanged, (event) => {
+  static onChange(cb: (value: PluginList) => void): Promise<() => void> {
+    return subscribe(SeelenEvent.StatePluginsChanged, (event) => {
       cb(new PluginList(event.payload));
     });
   }
