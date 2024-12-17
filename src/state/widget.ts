@@ -1,14 +1,15 @@
-import { invoke, SeelenCommand, SeelenEvent, subscribe } from '../lib.ts';
+import { SeelenCommand, SeelenEvent } from '../lib.ts';
 import { List } from '../utils/List.ts';
+import { TauriCommand, WebviewEvent } from '../utils/State.ts';
 
 declare global {
-  interface ArgsBySeelenCommand {
+  interface ArgsByCommand {
     [SeelenCommand.StateGetWidgets]: null;
   }
-  interface ReturnBySeelenCommand {
+  interface ReturnByCommand {
     [SeelenCommand.StateGetWidgets]: Widget[];
   }
-  interface PayloadBySeelenEvent {
+  interface PayloadByEvent {
     [SeelenEvent.StateWidgetsChanged]: Widget[];
   }
 }
@@ -22,14 +23,9 @@ export interface Widget {
   html: string | null;
 }
 
+@TauriCommand(SeelenCommand.StateGetWidgets)
+@WebviewEvent(SeelenEvent.StateWidgetsChanged)
 export class WidgetList extends List<Widget> {
-  static override async getAsync(): Promise<WidgetList> {
-    return new WidgetList(await invoke(SeelenCommand.StateGetWidgets));
-  }
-
-  static onChange(cb: (value: WidgetList) => void): Promise<() => void> {
-    return subscribe(SeelenEvent.StateWidgetsChanged, (event) => {
-      cb(new WidgetList(event.payload));
-    });
-  }
+  static readonly getAsync: TauriCommand<WidgetList>;
+  static readonly onChange: WebviewEvent<WidgetList>;
 }

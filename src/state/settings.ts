@@ -1,17 +1,17 @@
 import { SeelenCommand, SeelenEvent } from '../handlers/mod.ts';
-import { invoke, subscribe } from '../lib.ts';
 import { Rect } from '../utils/mod.ts';
+import { TauriCommand, WebviewEvent } from '../utils/State.ts';
 import type { WidgetId } from './mod.ts';
 import type { MonitorConfiguration } from './settings_by_monitor.ts';
 
 declare global {
-  interface ArgsBySeelenCommand {
+  interface ArgsByCommand {
     [SeelenCommand.StateGetSettings]: null;
   }
-  interface ReturnBySeelenCommand {
+  interface ReturnByCommand {
     [SeelenCommand.StateGetSettings]: Settings;
   }
-  interface PayloadBySeelenEvent {
+  interface PayloadByEvent {
     [SeelenEvent.StateSettingsChanged]: Settings;
   }
 }
@@ -80,33 +80,31 @@ export class UpdaterSettings {
   channel: UpdateChannel = UpdateChannel.Nightly;
 }
 
+export interface ISettings {
+  fancyToolbar: FancyToolbarSettings;
+  seelenweg: SeelenWegSettings;
+  windowManager: WindowManagerSettings;
+  wall: SeelenWallSettings;
+  launcher: SeelenLauncherSettings;
+  monitorsV2: Record<string, MonitorConfiguration>;
+  ahkEnabled: boolean;
+  ahkVariables: AhkVarList;
+  selectedThemes: string[];
+  iconPacks: string[];
+  devTools: boolean;
+  language: string;
+  dateFormat: string;
+  virtualDesktopStrategy: VirtualDesktopStrategy;
+  updater: UpdaterSettings;
+  custom: Record<WidgetId, Record<string, unknown>>;
+}
+
+@TauriCommand(SeelenCommand.StateGetSettings)
+@WebviewEvent(SeelenEvent.StateSettingsChanged)
 export class Settings {
-  fancyToolbar: FancyToolbarSettings = new FancyToolbarSettings();
-  seelenweg: SeelenWegSettings = new SeelenWegSettings();
-  windowManager: WindowManagerSettings = new WindowManagerSettings();
-  wall: SeelenWallSettings = new SeelenWallSettings();
-  launcher: SeelenLauncherSettings = new SeelenLauncherSettings();
-  monitorsV2: Record<string, MonitorConfiguration> = {};
-  ahkEnabled: boolean = true;
-  ahkVariables: AhkVarList = new AhkVarList();
-  selectedThemes: string[] = ['default'];
-  iconPacks: string[] = ['system'];
-  devTools: boolean = false;
-  language: string = '';
-  dateFormat: string = 'ddd D MMM, hh:mm A';
-  virtualDesktopStrategy: VirtualDesktopStrategy = VirtualDesktopStrategy.Native;
-  updater: UpdaterSettings = new UpdaterSettings();
-  custom: Record<WidgetId, Record<string, unknown>> = {};
-
-  static getAsync(): Promise<Settings> {
-    return invoke(SeelenCommand.StateGetSettings);
-  }
-
-  static onChange(cb: (value: Settings) => void): Promise<() => void> {
-    return subscribe(SeelenEvent.StateSettingsChanged, (event) => {
-      cb(event.payload);
-    });
-  }
+  constructor(public inner: ISettings) {}
+  static readonly getAsync: TauriCommand<Settings>;
+  static readonly onChange: WebviewEvent<Settings>;
 }
 
 export class FancyToolbarSettings {

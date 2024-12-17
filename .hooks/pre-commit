@@ -1,9 +1,7 @@
 #!/usr/bin/env sh
 . "$(dirname -- "$0")/_/hook.sh"
 
-cargo fmt
-# generate assets
-cargo run
-
-deno fmt
+deno fmt --check
 deno lint
+
+cargo fmt -- --check

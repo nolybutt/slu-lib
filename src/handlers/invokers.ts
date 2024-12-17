@@ -7,33 +7,33 @@ import type { SeelenEvent } from '../lib.ts';
 export * from './commands.ts';
 
 declare global {
-  interface ArgsBySeelenCommand extends Record<SeelenCommand, InvokeArgs | null> {
+  interface ArgsByCommand extends Record<SeelenCommand, InvokeArgs | null> {
     [SeelenCommand.IsDevMode]: null;
     [SeelenCommand.CheckForUpdates]: null;
     [SeelenCommand.InstallLastAvailableUpdate]: null;
   }
 
-  interface ReturnBySeelenCommand extends Record<SeelenCommand, unknown> {
+  interface ReturnByCommand extends Record<SeelenCommand, unknown> {
     [SeelenCommand.IsDevMode]: boolean;
     [SeelenCommand.CheckForUpdates]: boolean;
     [SeelenCommand.InstallLastAvailableUpdate]: never; // this will close the app
   }
 
-  interface PayloadBySeelenEvent extends Record<SeelenEvent, unknown> {}
+  interface PayloadByEvent extends Record<SeelenEvent, unknown> {}
 }
 
 /** Will call to the background process */
 export function invoke<T extends SeelenCommand>(
   command: T,
-  args?: NonNullable<ArgsBySeelenCommand[T]>,
+  args?: NonNullable<ArgsByCommand[T]>,
   options?: InvokeOptions,
-): Promise<ReturnBySeelenCommand[T]> {
+): Promise<ReturnByCommand[T]> {
   return tauriInvoke(command, args, options);
 }
 
 export function subscribe<T extends SeelenEvent>(
   event: T,
-  cb: EventCallback<PayloadBySeelenEvent[T]>,
+  cb: EventCallback<PayloadByEvent[T]>,
   options?: ListenerOptions,
 ): Promise<UnlistenFn> {
   return listen(event, cb, options);

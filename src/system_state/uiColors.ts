@@ -2,13 +2,13 @@ import { SeelenCommand, SeelenEvent } from '../handlers/mod.ts';
 import { invoke, subscribe } from '../lib.ts';
 
 declare global {
-  interface ArgsBySeelenCommand {
+  interface ArgsByCommand {
     [SeelenCommand.SystemGetColors]: null;
   }
-  interface ReturnBySeelenCommand {
+  interface ReturnByCommand {
     [SeelenCommand.SystemGetColors]: UIColors;
   }
-  interface PayloadBySeelenEvent {
+  interface PayloadByEvent {
     [SeelenEvent.ColorsChanged]: UIColors;
   }
 }

@@ -14,13 +14,13 @@ export * from './widget.ts';
 export * from './profile.ts';
 
 declare global {
-  interface ArgsBySeelenCommand {
+  interface ArgsByCommand {
     [SeelenCommand.StateGetHistory]: null;
   }
-  interface ReturnBySeelenCommand {
+  interface ReturnByCommand {
     [SeelenCommand.StateGetHistory]: LauncherHistory;
   }
-  interface PayloadBySeelenEvent {
+  interface PayloadByEvent {
     [SeelenEvent.StateHistoryChanged]: LauncherHistory;
   }
 }

@@ -2,13 +2,13 @@ import { invoke, SeelenCommand, SeelenEvent, subscribe } from '../lib.ts';
 import { List } from '../utils/List.ts';
 
 declare global {
-  interface ArgsBySeelenCommand {
+  interface ArgsByCommand {
     [SeelenCommand.SystemGetLanguages]: null;
   }
-  interface ReturnBySeelenCommand {
+  interface ReturnByCommand {
     [SeelenCommand.SystemGetLanguages]: Language[];
   }
-  interface PayloadBySeelenEvent {
+  interface PayloadByEvent {
     [SeelenEvent.SystemLanguagesChanged]: Language[];
   }
 }

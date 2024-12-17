@@ -1,14 +1,15 @@
-import { invoke, SeelenCommand, SeelenEvent, subscribe } from '../lib.ts';
+import { SeelenCommand, SeelenEvent } from '../lib.ts';
 import { List } from '../utils/List.ts';
+import { TauriCommand, WebviewEvent } from '../utils/State.ts';
 
 declare global {
-  interface ArgsBySeelenCommand {
+  interface ArgsByCommand {
     [SeelenCommand.SystemGetMonitors]: null;
   }
-  interface ReturnBySeelenCommand {
+  interface ReturnByCommand {
     [SeelenCommand.SystemGetMonitors]: ConnectedMonitor[];
   }
-  interface PayloadBySeelenEvent {
+  interface PayloadByEvent {
     [SeelenEvent.SystemMonitorsChanged]: ConnectedMonitor[];
   }
 }
@@ -21,14 +22,9 @@ export interface ConnectedMonitor {
   dpi: number;
 }
 
+@TauriCommand(SeelenCommand.SystemGetMonitors)
+@WebviewEvent(SeelenEvent.SystemMonitorsChanged)
 export class ConnectedMonitorList extends List<ConnectedMonitor> {
-  static override async getAsync(): Promise<ConnectedMonitorList> {
-    return new ConnectedMonitorList(await invoke(SeelenCommand.SystemGetMonitors));
-  }
-
-  static onChange(cb: (value: ConnectedMonitorList) => void): Promise<() => void> {
-    return subscribe(SeelenEvent.SystemMonitorsChanged, (event) => {
-      cb(new ConnectedMonitorList(event.payload));
-    });
-  }
+  static readonly getAsync: TauriCommand<ConnectedMonitorList>;
+  static readonly onChange: WebviewEvent<ConnectedMonitorList>;
 }

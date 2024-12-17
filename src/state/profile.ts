@@ -1,12 +1,13 @@
-import { invoke, SeelenCommand } from '../handlers/mod.ts';
+import { SeelenCommand } from '../handlers/mod.ts';
 import { List } from '../utils/List.ts';
+import { TauriCommand } from '../utils/State.ts';
 import type { Placeholder } from './placeholder.ts';
 
 declare global {
-  interface ArgsBySeelenCommand {
+  interface ArgsByCommand {
     [SeelenCommand.StateGetProfiles]: null;
   }
-  interface ReturnBySeelenCommand {
+  interface ReturnByCommand {
     [SeelenCommand.StateGetProfiles]: Profile[];
   }
 }
@@ -21,8 +22,7 @@ export interface Profile {
   settings: ProfileSettings;
 }
 
+@TauriCommand(SeelenCommand.StateGetProfiles)
 export class ProfileList extends List<Profile> {
-  static override async getAsync(): Promise<ProfileList> {
-    return new ProfileList(await invoke(SeelenCommand.StateGetProfiles));
-  }
+  static readonly getAsync: TauriCommand<ProfileList>;
 }
