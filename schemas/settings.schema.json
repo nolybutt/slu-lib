@@ -268,6 +268,15 @@
         }
       ]
     },
+    "custom": {
+      "description": "Custom settings for widgets",
+      "default": {},
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "additionalProperties": true
+      }
+    },
     "dateFormat": {
       "description": "MomentJS date format",
       "default": "ddd D MMM, hh:mm A",
@@ -286,7 +295,8 @@
         "enabled": true,
         "height": 30,
         "hideMode": "Never",
-        "placeholder": "default.yml"
+        "placeholder": "default.yml",
+        "useMultiMonitorOverlapLogic": false
       },
       "allOf": [
         {
@@ -359,6 +369,7 @@
         "position": "Bottom",
         "size": 40,
         "spaceBetweenItems": 8,
+        "useMultiMonitorOverlapLogic": false,
         "visibleSeparators": true,
         "zoomSize": 70
       },
@@ -411,15 +422,6 @@
           "$ref": "#/definitions/SeelenWallSettings"
         }
       ]
-    },
-    "widgets": {
-      "description": "Custom settings for widgets",
-      "default": {},
-      "type": "object",
-      "additionalProperties": {
-        "type": "object",
-        "additionalProperties": true
-      }
     },
     "windowManager": {
       "description": "window manager config",
@@ -1139,6 +1141,11 @@
           "description": "default placeholder for the fancy toolbar",
           "default": "default.yml",
           "type": "string"
+        },
+        "useMultiMonitorOverlapLogic": {
+          "description": "enables the logic which persists last overlapped HWND to enchance multimonitor overlap feature",
+          "default": false,
+          "type": "boolean"
         }
       }
     },
@@ -1485,6 +1492,11 @@
           "type": "integer",
           "format": "uint32",
           "minimum": 0.0
+        },
+        "useMultiMonitorOverlapLogic": {
+          "description": "enables the logic which persists last overlapped HWND to enchance multimonitor overlap feature",
+          "default": false,
+          "type": "boolean"
         },
         "visibleSeparators": {
           "description": "enable or disable separators visibility",
