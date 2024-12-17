@@ -7,7 +7,8 @@
   "tasks": {
     "build:npm": "deno run -A ./scripts/build_npm.ts",
     "build:rs": "cargo run",
-    "build": "deno task build:rs && deno task build:npm"
+    "build": "deno task build:rs && deno task build:npm",
+    "hook": "deno run --allow-read --allow-run --allow-write https://deno.land/x/deno_hooks@0.1.1/mod.ts"
   },
   "test": {
     "include": [
@@ -45,7 +46,9 @@
       "include": [
         "explicit-function-return-type"
       ],
-      "exclude": ["no-slow-types"]
+      "exclude": [
+        "no-slow-types"
+      ]
     }
   },
   "publish": {
