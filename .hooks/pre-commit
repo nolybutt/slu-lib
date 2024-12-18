@@ -5,3 +5,6 @@ deno fmt --check
 deno lint
 
 cargo fmt -- --check
+# cargo test # we skip this cuz cargo test generate files
+
+deno test

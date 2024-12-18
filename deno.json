@@ -30,7 +30,8 @@
     "lib": [
       "dom",
       "dom.iterable",
-      "ES2023"
+      "ES2023",
+      "deno.ns"
     ]
   },
   "fmt": {
