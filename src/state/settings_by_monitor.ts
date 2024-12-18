@@ -2,6 +2,7 @@ import { SeelenCommand } from '../lib.ts';
 
 import type { MonitorConfiguration as IMonitorConfiguration, WorkspaceIdentifierType } from '@seelen-ui/types';
 import { createInstanceInvoker } from '../utils/State.ts';
+import { enumFromUnion } from '../utils/enums.ts';
 
 declare global {
   interface ArgsByCommand {
@@ -24,7 +25,9 @@ export class MonitorConfiguration {
 //    From here some enums as helpers like @seelen-ui/types only contains types
 // =================================================================================
 
-export const WorkspaceIdentifierTypeEnum = {
+const WorkspaceIdentifierType = enumFromUnion<WorkspaceIdentifierType>({
   Name: 'Name',
   Index: 'Index',
-} satisfies Record<WorkspaceIdentifierType, WorkspaceIdentifierType>;
+});
+
+export { WorkspaceIdentifierType };

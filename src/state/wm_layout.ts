@@ -1,71 +1,46 @@
-export enum NodeType {
-  Vertical = 'Vertical',
-  Horizontal = 'Horizontal',
-  Leaf = 'Leaf',
-  Stack = 'Stack',
-  Fallback = 'Fallback',
+import type { NodeSubtype, NoFallbackBehavior, WindowManagerLayout, WmNode } from '@seelen-ui/types';
+import { List } from '../utils/List.ts';
+import { SeelenCommand, SeelenEvent } from '../lib.ts';
+import { createInstanceInvoker, createInstanceOnEvent } from '../utils/State.ts';
+import { enumFromUnion } from '../utils/enums.ts';
+
+declare global {
+  interface ArgsByCommand {
+    [SeelenCommand.StateGetLayouts]: null;
+  }
+  interface ReturnByCommand {
+    [SeelenCommand.StateGetLayouts]: WindowManagerLayout[];
+  }
+  interface PayloadByEvent {
+    [SeelenEvent.StateLayoutsChanged]: WindowManagerLayout[];
+  }
 }
 
-export enum NodeSubtype {
-  Temporal = 'Temporal',
-  Permanent = 'Permanent',
+export class WindowManagerLayoutList extends List<WindowManagerLayout> {
+  static readonly getAsync = createInstanceInvoker(this, SeelenCommand.StateGetLayouts);
+  static readonly onChange = createInstanceOnEvent(this, SeelenEvent.StateLayoutsChanged);
 }
 
-export enum NoFallbackBehavior {
-  Float = 'Float',
-  Unmanaged = 'Unmanaged',
-}
+// =================================================================================
+//    From here some enums as helpers like @seelen-ui/types only contains types
+// =================================================================================
 
-export interface WManagerLayoutInfo {
-  displayName: string;
-  author: string;
-  description: string;
-  filename: string;
-}
+const NodeType = enumFromUnion<WmNode['type']>({
+  Vertical: 'Vertical',
+  Horizontal: 'Horizontal',
+  Leaf: 'Leaf',
+  Stack: 'Stack',
+  Fallback: 'Fallback',
+});
 
-export interface WmNodeBase {
-  subtype: NodeSubtype;
-  priority: number;
-  growFactor: number;
-  condition: string | null;
-}
+const NodeSubtype = enumFromUnion<NodeSubtype>({
+  Temporal: 'Temporal',
+  Permanent: 'Permanent',
+});
 
-export interface WmVerticalNode extends WmNodeBase {
-  type: NodeType.Vertical;
-  children: WmNode[];
-}
+const NoFallbackBehavior = enumFromUnion<NoFallbackBehavior>({
+  Float: 'Float',
+  Unmanaged: 'Unmanaged',
+});
 
-export interface WmHorizontalNode extends WmNodeBase {
-  type: NodeType.Horizontal;
-  children: WmNode[];
-}
-
-export interface WmLeafNode extends WmNodeBase {
-  type: NodeType.Leaf;
-  handle: number | null;
-}
-
-export interface WmStackNode extends WmNodeBase {
-  type: NodeType.Stack;
-  active: number | null;
-  handles: number[];
-}
-
-export interface WmFallbackNode extends WmNodeBase {
-  type: NodeType.Fallback;
-  active: number | null;
-  handles: number[];
-}
-
-export type WmNode =
-  | WmVerticalNode
-  | WmHorizontalNode
-  | WmLeafNode
-  | WmStackNode
-  | WmFallbackNode;
-
-export interface WindowManagerLayout {
-  info: WManagerLayoutInfo;
-  structure: WmNode;
-  noFallbackBehavior: NoFallbackBehavior;
-}
+export { NodeSubtype, NodeType, NoFallbackBehavior };

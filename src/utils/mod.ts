@@ -1,6 +1,6 @@
 import { decodeBase64Url } from '@std/encoding';
 import { getCurrentWindow } from '@tauri-apps/api/window';
-import type { WidgetId } from '../lib.ts';
+import type { WidgetId } from '@seelen-ui/types';
 
 export * from './layered_hitbox.ts';
 

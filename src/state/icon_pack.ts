@@ -1,6 +1,4 @@
-import { ResourceMetadata } from './mod.ts';
+import type { IconPack } from '@seelen-ui/types';
+import { List } from '../utils/List.ts';
 
-export class IconPack {
-  info: ResourceMetadata = new ResourceMetadata();
-  apps: Record<string, string> = {};
-}
+export class IconPackList extends List<IconPack> {}

@@ -1,117 +1,56 @@
-export enum ToolbarModuleType {
-  Generic = 'generic',
-  Text = 'text',
-  Date = 'date',
-  Power = 'power',
-  Settings = 'settings',
-  Network = 'network',
-  Workspaces = 'workspaces',
-  Media = 'media',
-  Tray = 'tray',
-  Device = 'device',
-  Notifications = 'notifications',
+import type { DateUpdateInterval, Placeholder, ToolbarItem, WorkspaceToolbarItemMode } from '@seelen-ui/types';
+import { List } from '../utils/List.ts';
+import { SeelenCommand, SeelenEvent } from '../lib.ts';
+import { createInstanceInvoker, createInstanceOnEvent } from '../utils/State.ts';
+import { enumFromUnion } from '../utils/enums.ts';
+
+declare global {
+  interface ArgsByCommand {
+    [SeelenCommand.StateGetPlaceholders]: null;
+  }
+  interface ReturnByCommand {
+    [SeelenCommand.StateGetPlaceholders]: Placeholder[];
+  }
+  interface PayloadByEvent {
+    [SeelenEvent.StatePlaceholdersChanged]: Placeholder[];
+  }
 }
 
-export enum WorkspaceTMMode {
-  Dotted = 'dotted',
-  Named = 'named',
-  Numbered = 'numbered',
+export class PlaceholderList extends List<Placeholder> {
+  static readonly getAsync = createInstanceInvoker(this, SeelenCommand.StateGetPlaceholders);
+  static readonly onChange = createInstanceOnEvent(this, SeelenEvent.StatePlaceholdersChanged);
 }
 
-export enum TimeUnit {
-  SECOND = 'second',
-  MINUTE = 'minute',
-  HOUR = 'hour',
-  DAY = 'day',
-}
+// =================================================================================
+//    From here some enums as helpers like @seelen-ui/types only contains types
+// =================================================================================
 
-export enum DeviceTMSubType {
-  Disk = 'disk',
-  CPU = 'cpu',
-  Memory = 'memory',
-}
+const ToolbarModuleType = enumFromUnion<ToolbarItem['type']>({
+  Text: 'text',
+  Generic: 'generic',
+  Date: 'date',
+  Power: 'power',
+  Network: 'network',
+  Media: 'media',
+  Tray: 'tray',
+  Notifications: 'notifications',
+  Device: 'device',
+  Settings: 'settings',
+  Workspaces: 'workspaces',
+});
 
-export interface BaseToolbarModule {
-  id: string;
-  type: ToolbarModuleType;
-  template: string;
-  tooltip: string | null;
-  badge: string | null;
-  /** @deprecated, use `onClickV2` instead */
-  onClick: string | null;
-  onClickV2: string | null;
-  style: Record<string, string | number>;
-}
+const WorkspaceToolbarItemMode = enumFromUnion<WorkspaceToolbarItemMode>({
+  Dotted: 'dotted',
+  Named: 'named',
+  Numbered: 'numbered',
+});
 
-export interface GenericToolbarModule extends BaseToolbarModule {
-  type: ToolbarModuleType.Generic | ToolbarModuleType.Text;
-}
+const DateUpdateInterval = enumFromUnion<DateUpdateInterval>({
+  Millisecond: 'millisecond',
+  Second: 'second',
+  Minute: 'minute',
+  Hour: 'hour',
+  Day: 'day',
+});
 
-export interface TrayTM extends BaseToolbarModule {
-  type: ToolbarModuleType.Tray;
-}
-
-export interface DateToolbarModule extends BaseToolbarModule {
-  type: ToolbarModuleType.Date;
-  /** @deprecated v2 uses settings date format instead (it will perform the minimal updates) */
-  each: TimeUnit;
-  /** @deprecated v2 uses settings date format instead */
-  format: string;
-}
-
-export interface PowerToolbarModule extends BaseToolbarModule {
-  type: ToolbarModuleType.Power;
-}
-
-export interface NetworkTM extends BaseToolbarModule {
-  type: ToolbarModuleType.Network;
-  withWlanSelector: boolean;
-}
-
-export interface MediaTM extends BaseToolbarModule {
-  type: ToolbarModuleType.Media;
-  withMediaControls: boolean;
-}
-
-export interface NotificationsTM extends BaseToolbarModule {
-  type: ToolbarModuleType.Notifications;
-}
-
-export interface DeviceTM extends BaseToolbarModule {
-  type: ToolbarModuleType.Device;
-}
-
-export interface SettingsToolbarModule extends BaseToolbarModule {
-  type: ToolbarModuleType.Settings;
-}
-
-export interface WorkspacesTM extends BaseToolbarModule {
-  type: ToolbarModuleType.Workspaces;
-  mode: WorkspaceTMMode;
-}
-
-export type ToolbarModule =
-  | GenericToolbarModule
-  | DateToolbarModule
-  | PowerToolbarModule
-  | SettingsToolbarModule
-  | WorkspacesTM
-  | TrayTM
-  | NetworkTM
-  | MediaTM
-  | DeviceTM
-  | NotificationsTM;
-
-export interface CreatorInfo {
-  displayName: string;
-  author: string;
-  description: string;
-  filename: string;
-}
-
-export interface Placeholder {
-  info: CreatorInfo;
-  left: (string | ToolbarModule)[];
-  center: (string | ToolbarModule)[];
-  right: (string | ToolbarModule)[];
-}
+export { DateUpdateInterval, ToolbarModuleType, WorkspaceToolbarItemMode };

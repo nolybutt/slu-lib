@@ -2,6 +2,7 @@ import { SeelenCommand, SeelenEvent } from '../handlers/mod.ts';
 import { getCurrentWidget } from '../utils/mod.ts';
 import { List } from '../utils/List.ts';
 import { createInstanceInvoker, createInstanceOnEvent } from '../utils/State.ts';
+import type { Plugin } from '@seelen-ui/types';
 
 declare global {
   interface ArgsByCommand {
@@ -13,14 +14,6 @@ declare global {
   interface PayloadByEvent {
     [SeelenEvent.StatePluginsChanged]: Plugin[];
   }
-}
-
-export interface Plugin {
-  id: string;
-  icon: string;
-  target: string;
-  plugin: object;
-  bundled: boolean;
 }
 
 export class PluginList extends List<Plugin> {

@@ -10,6 +10,7 @@ import type {
   VirtualDesktopStrategy,
 } from '@seelen-ui/types';
 import { createInstanceInvoker, createInstanceOnEvent } from '../utils/State.ts';
+import { enumFromUnion } from '../utils/enums.ts';
 
 declare global {
   interface ArgsByCommand {
@@ -36,36 +37,38 @@ export class Settings {
 //    From here some enums as helpers like @seelen-ui/types only contains types
 // =================================================================================
 
-export const VirtualDesktopStrategyEnum = {
+const VirtualDesktopStrategy = enumFromUnion<VirtualDesktopStrategy>({
   Native: 'Native',
   Seelen: 'Seelen',
-} satisfies Record<VirtualDesktopStrategy, VirtualDesktopStrategy>;
+});
 
-export const SeelenWegModeEnum = {
+const SeelenWegMode = enumFromUnion<SeelenWegMode>({
   FullWidth: 'FullWidth',
   MinContent: 'MinContent',
-} satisfies Record<SeelenWegMode, SeelenWegMode>;
+});
 
-export const HideModeEnum = {
+const HideMode = enumFromUnion<HideMode>({
   Never: 'Never',
   Always: 'Always',
   OnOverlap: 'OnOverlap',
-} satisfies Record<HideMode, HideMode>;
+});
 
-export const SeelenWegSideEnum = {
+const SeelenWegSide = enumFromUnion<SeelenWegSide>({
   Left: 'Left',
   Right: 'Right',
   Top: 'Top',
   Bottom: 'Bottom',
-} satisfies Record<SeelenWegSide, SeelenWegSide>;
+});
 
-export const SeelenLauncherMonitorEnum = {
+const SeelenLauncherMonitor = enumFromUnion<SeelenLauncherMonitor>({
   Primary: 'Primary',
   MouseOver: 'MouseOver',
-} satisfies Record<SeelenLauncherMonitor, SeelenLauncherMonitor>;
+});
 
-export const UpdateChannelEnum = {
+const UpdateChannel = enumFromUnion<UpdateChannel>({
   Release: 'Release',
   Beta: 'Beta',
   Nightly: 'Nightly',
-} satisfies Record<UpdateChannel, UpdateChannel>;
+});
+
+export { HideMode, SeelenLauncherMonitor, SeelenWegMode, SeelenWegSide, UpdateChannel, VirtualDesktopStrategy };
