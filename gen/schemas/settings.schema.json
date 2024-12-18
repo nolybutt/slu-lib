@@ -326,7 +326,7 @@
       "description": "App launcher settings",
       "default": {
         "enabled": false,
-        "monitor": "Mouse-Over",
+        "monitor": "MouseOver",
         "runners": [
           {
             "id": "RUN",
@@ -362,9 +362,9 @@
         "delayToHide": 800,
         "delayToShow": 100,
         "enabled": true,
-        "hideMode": "On-Overlap",
+        "hideMode": "OnOverlap",
         "margin": 8,
-        "mode": "Min-Content",
+        "mode": "MinContent",
         "padding": 8,
         "position": "Bottom",
         "size": 40,
@@ -1193,7 +1193,7 @@
           "description": "auto-hide only if is overlaped by the focused window",
           "type": "string",
           "enum": [
-            "On-Overlap"
+            "OnOverlap"
           ]
         }
       ]
@@ -1287,7 +1287,7 @@
       "type": "string",
       "enum": [
         "Primary",
-        "Mouse-Over"
+        "MouseOver"
       ]
     },
     "SeelenLauncherRunner": {
@@ -1319,7 +1319,7 @@
           "type": "boolean"
         },
         "monitor": {
-          "default": "Mouse-Over",
+          "default": "MouseOver",
           "allOf": [
             {
               "$ref": "#/definitions/SeelenLauncherMonitor"
@@ -1412,8 +1412,8 @@
     "SeelenWegMode": {
       "type": "string",
       "enum": [
-        "Full-Width",
-        "Min-Content"
+        "FullWidth",
+        "MinContent"
       ]
     },
     "SeelenWegSettings": {
@@ -1440,7 +1440,7 @@
         },
         "hideMode": {
           "description": "When to hide the dock",
-          "default": "On-Overlap",
+          "default": "OnOverlap",
           "allOf": [
             {
               "$ref": "#/definitions/HideMode"
@@ -1456,7 +1456,7 @@
         },
         "mode": {
           "description": "Dock/Taskbar mode",
-          "default": "Min-Content",
+          "default": "MinContent",
           "allOf": [
             {
               "$ref": "#/definitions/SeelenWegMode"

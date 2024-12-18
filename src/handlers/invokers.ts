@@ -22,7 +22,10 @@ declare global {
   interface PayloadByEvent extends Record<SeelenEvent, unknown> {}
 }
 
-/** Will call to the background process */
+/**
+ * Will call to the background process
+ * @return Result of the command
+ */
 export function invoke<T extends SeelenCommand>(
   command: T,
   args?: NonNullable<ArgsByCommand[T]>,

@@ -2,6 +2,7 @@ use std::collections::{HashMap, HashSet};
 
 use schemars::JsonSchema;
 use serde::{Deserialize, Serialize};
+use ts_rs::TS;
 
 macro_rules! common_item {
     (
@@ -13,7 +14,7 @@ macro_rules! common_item {
         )*
     ) => {
         $(
-            #[derive(Debug, Clone, Serialize, Deserialize, JsonSchema)]
+            #[derive(Debug, Clone, Serialize, Deserialize, JsonSchema, TS)]
             #[serde(rename_all = "camelCase")]
             pub struct $name {
                 /// Id to identify the item, should be unique.
@@ -55,7 +56,7 @@ macro_rules! common_item {
     };
 }
 
-#[derive(Debug, Clone, Serialize, Deserialize, JsonSchema)]
+#[derive(Debug, Clone, Serialize, Deserialize, JsonSchema, TS)]
 #[serde(untagged)]
 pub enum StyleValue {
     String(String),
@@ -66,7 +67,7 @@ pub enum StyleValue {
     Float(f64),
 }
 
-#[derive(Debug, Clone, Serialize, Deserialize, JsonSchema)]
+#[derive(Debug, Clone, Serialize, Deserialize, JsonSchema, TS)]
 #[serde(rename_all = "camelCase")]
 pub enum DateUpdateInterval {
     Millisecond,
@@ -76,7 +77,7 @@ pub enum DateUpdateInterval {
     Day,
 }
 
-#[derive(Debug, Clone, Serialize, Deserialize, JsonSchema)]
+#[derive(Debug, Clone, Serialize, Deserialize, JsonSchema, TS)]
 #[serde(rename_all = "camelCase")]
 pub enum WorkspaceToolbarItemMode {
     Dotted,
@@ -265,7 +266,7 @@ impl WorkspaceToolbarItem {
     }
 }
 
-#[derive(Debug, Clone, Serialize, Deserialize, JsonSchema)]
+#[derive(Debug, Clone, Serialize, Deserialize, JsonSchema, TS)]
 #[serde(tag = "type", rename_all = "camelCase")]
 pub enum ToolbarItem {
     Text(TextToolbarItem),
@@ -315,14 +316,14 @@ impl ToolbarItem {
     }
 }
 
-#[derive(Debug, Clone, Serialize, Deserialize, JsonSchema)]
+#[derive(Debug, Clone, Serialize, Deserialize, JsonSchema, TS)]
 #[serde(untagged)]
 pub enum ToolbarItem2 {
     PluginId(String),
     Inline(ToolbarItem),
 }
 
-#[derive(Debug, Clone, Default, Serialize, Deserialize, JsonSchema)]
+#[derive(Debug, Clone, Default, Serialize, Deserialize, JsonSchema, TS)]
 #[serde(default, rename_all = "camelCase")]
 pub struct PlaceholderInfo {
     /// Display name of the placeholder
@@ -335,8 +336,9 @@ pub struct PlaceholderInfo {
     pub filename: String,
 }
 
-#[derive(Debug, Clone, Default, Serialize, Deserialize, JsonSchema)]
+#[derive(Debug, Clone, Default, Serialize, Deserialize, JsonSchema, TS)]
 #[serde(default, rename_all = "camelCase")]
+#[ts(export)]
 pub struct Placeholder {
     /// Metadata about the placeholder
     pub info: PlaceholderInfo,

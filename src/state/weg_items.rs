@@ -2,8 +2,9 @@ use std::{collections::HashSet, path::PathBuf};
 
 use schemars::JsonSchema;
 use serde::{Deserialize, Serialize};
+use ts_rs::TS;
 
-#[derive(Debug, Clone, Serialize, Deserialize, JsonSchema)]
+#[derive(Debug, Clone, Serialize, Deserialize, JsonSchema, TS)]
 pub struct PinnedWegItemData {
     /// Direct path to file, forder or program.
     ///
@@ -30,7 +31,7 @@ pub struct PinnedWegItemData {
     pub is_dir: bool,
 }
 
-#[derive(Debug, Clone, Serialize, Deserialize, JsonSchema)]
+#[derive(Debug, Clone, Serialize, Deserialize, JsonSchema, TS)]
 #[serde(tag = "type")]
 pub enum WegItem {
     #[serde(alias = "PinnedApp")]
@@ -43,8 +44,9 @@ pub enum WegItem {
     StartMenu,
 }
 
-#[derive(Debug, Clone, Serialize, Deserialize, JsonSchema)]
+#[derive(Debug, Clone, Serialize, Deserialize, JsonSchema, TS)]
 #[serde(default)]
+#[ts(export)]
 pub struct WegItems {
     pub left: Vec<WegItem>,
     pub center: Vec<WegItem>,

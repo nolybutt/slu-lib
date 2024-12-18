@@ -3,7 +3,11 @@
   "version": "0.1.2",
   "description": "Seelen UI Library for Widgets",
   "license": "Apache-2.0",
-  "exports": "./src/lib.ts",
+  "exports": {
+    ".": "./src/lib.ts",
+    "./api": "./src/lib.ts",
+    "./types": "./gen/types/mod.ts"
+  },
   "tasks": {
     "build:npm": "deno run -A ./scripts/build_npm.ts",
     "build:rs": "deno run -A ./scripts/rust_bindings.ts",
@@ -19,7 +23,8 @@
     "@deno/dnt": "jsr:@deno/dnt@^0.41.3",
     "@std/assert": "jsr:@std/assert@^1.0.8",
     "@std/encoding": "jsr:@std/encoding@^1.0.5",
-    "@tauri-apps/api": "npm:@tauri-apps/api@^2.1.1"
+    "@tauri-apps/api": "npm:@tauri-apps/api@^2.1.1",
+    "@seelen-ui/types": "./gen/types/mod.ts"
   },
   "compilerOptions": {
     "lib": [

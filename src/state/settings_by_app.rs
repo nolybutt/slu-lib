@@ -2,8 +2,9 @@ use regex::Regex;
 use schemars::JsonSchema;
 use serde::{Deserialize, Serialize};
 use serde_alias::serde_alias;
+use ts_rs::TS;
 
-#[derive(Clone, Debug, Eq, PartialEq, Serialize, Deserialize, JsonSchema)]
+#[derive(Clone, Debug, Eq, PartialEq, Serialize, Deserialize, JsonSchema, TS)]
 #[serde(rename_all = "snake_case")]
 pub enum AppExtraFlag {
     /// Start the app in the center of the screen as floating in the wm.
@@ -18,7 +19,7 @@ pub enum AppExtraFlag {
     Hidden,
 }
 
-#[derive(Clone, Debug, Serialize, Deserialize, JsonSchema)]
+#[derive(Clone, Debug, Serialize, Deserialize, JsonSchema, TS)]
 pub enum AppIdentifierType {
     #[serde(alias = "exe")]
     Exe,
@@ -30,7 +31,7 @@ pub enum AppIdentifierType {
     Path,
 }
 
-#[derive(Clone, Debug, Eq, PartialEq, Serialize, Deserialize, JsonSchema)]
+#[derive(Clone, Debug, Eq, PartialEq, Serialize, Deserialize, JsonSchema, TS)]
 pub enum MatchingStrategy {
     #[serde(alias = "equals", alias = "legacy", alias = "Legacy")]
     Equals,
@@ -45,7 +46,7 @@ pub enum MatchingStrategy {
 }
 
 #[serde_alias(SnakeCase)]
-#[derive(Clone, Debug, Serialize, Deserialize, JsonSchema)]
+#[derive(Clone, Debug, Serialize, Deserialize, JsonSchema, TS)]
 #[serde(rename_all = "camelCase")]
 pub struct AppIdentifier {
     pub id: String,
@@ -125,8 +126,9 @@ impl AppIdentifier {
 }
 
 #[serde_alias(SnakeCase)]
-#[derive(Clone, Debug, Serialize, Deserialize, JsonSchema)]
+#[derive(Clone, Debug, Serialize, Deserialize, JsonSchema, TS)]
 #[serde(rename_all = "camelCase")]
+#[ts(export)]
 pub struct AppConfig {
     /// name of the app
     pub name: String,

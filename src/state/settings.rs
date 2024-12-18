@@ -54,9 +54,9 @@ impl Default for FancyToolbarSettings {
 
 #[derive(Debug, Copy, Clone, PartialEq, Eq, Serialize, Deserialize, JsonSchema, TS)]
 pub enum SeelenWegMode {
-    #[serde(rename = "Full-Width")]
+    #[serde(alias = "Full-Width")]
     FullWidth,
-    #[serde(rename = "Min-Content")]
+    #[serde(alias = "Min-Content")]
     MinContent,
 }
 
@@ -67,7 +67,7 @@ pub enum HideMode {
     /// auto-hide always on
     Always,
     /// auto-hide only if is overlaped by the focused window
-    #[serde(rename = "On-Overlap")]
+    #[serde(alias = "On-Overlap")]
     OnOverlap,
 }
 
@@ -222,7 +222,7 @@ impl Default for WindowManagerSettings {
 #[derive(Debug, Clone, Serialize, Deserialize, JsonSchema, TS)]
 pub enum SeelenLauncherMonitor {
     Primary,
-    #[serde(rename = "Mouse-Over")]
+    #[serde(alias = "Mouse-Over")]
     MouseOver,
 }
 

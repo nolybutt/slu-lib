@@ -2,6 +2,7 @@ use std::cell::Cell;
 
 use schemars::JsonSchema;
 use serde::{Deserialize, Serialize};
+use ts_rs::TS;
 
 macro_rules! common_item {
     (
@@ -12,7 +13,7 @@ macro_rules! common_item {
         )*
     ) => {
         $(
-            #[derive(Debug, Clone, Serialize, Deserialize, JsonSchema)]
+            #[derive(Debug, Clone, Serialize, Deserialize, JsonSchema, TS)]
             #[serde(rename_all = "camelCase")]
             pub struct $name {
                 #[serde(default = "WmNode::default_subtype")]
@@ -60,7 +61,7 @@ common_item! {
     }
 }
 
-#[derive(Debug, Clone, Serialize, Deserialize, JsonSchema)]
+#[derive(Debug, Clone, Serialize, Deserialize, JsonSchema, TS)]
 #[serde(tag = "type")]
 pub enum WmNode {
     Vertical(WmVerticalNode),
@@ -150,7 +151,7 @@ impl WmNode {
     }
 }
 
-#[derive(Debug, Clone, Default, Serialize, Deserialize, JsonSchema)]
+#[derive(Debug, Clone, Default, Serialize, Deserialize, JsonSchema, TS)]
 #[serde(default, rename_all = "camelCase")]
 pub struct WManagerLayoutInfo {
     /// Display name of the layout
@@ -163,20 +164,21 @@ pub struct WManagerLayoutInfo {
     pub filename: String,
 }
 
-#[derive(Debug, Clone, Serialize, Deserialize, JsonSchema)]
+#[derive(Debug, Clone, Serialize, Deserialize, JsonSchema, TS)]
 pub enum NodeSubtype {
     Temporal,
     Permanent,
 }
 
-#[derive(Debug, Clone, Serialize, Deserialize, JsonSchema)]
+#[derive(Debug, Clone, Serialize, Deserialize, JsonSchema, TS)]
 pub enum NoFallbackBehavior {
     Float,
     Unmanaged,
 }
 
-#[derive(Debug, Clone, Serialize, Deserialize, JsonSchema)]
+#[derive(Debug, Clone, Serialize, Deserialize, JsonSchema, TS)]
 #[serde(default, rename_all = "camelCase")]
+#[ts(export)]
 pub struct WindowManagerLayout {
     pub info: WManagerLayoutInfo,
     pub structure: WmNode,

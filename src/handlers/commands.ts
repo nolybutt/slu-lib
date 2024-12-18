@@ -28,6 +28,8 @@ export enum SeelenCommand {
   StateGetLayouts = 'state_get_layouts',
   StateGetWegItems = 'state_get_weg_items',
   StateGetSettings = 'state_get_settings',
+  StateGetDefaultSettings = 'state_get_default_settings',
+  StateGetDefaultMonitorSettings = 'state_get_default_monitor_settings',
   StateGetSpecificAppsConfigurations = 'state_get_specific_apps_configurations',
   StateGetWallpaper = 'state_get_wallpaper',
   StateSetWallpaper = 'state_set_wallpaper',

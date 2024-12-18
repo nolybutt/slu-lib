@@ -1,47 +1,37 @@
-export enum SwItemType {
-  Pinned = 'Pinned',
-  TemporalApp = 'TemporalPin',
-  Separator = 'Separator',
-  Media = 'Media',
-  Start = 'StartMenu',
+import type { WegItem, WegItems as IWegItems } from '@seelen-ui/types';
+import { SeelenCommand, SeelenEvent } from '../lib.ts';
+import { TauriCommand, WebviewEvent } from '../utils/State.ts';
+
+declare global {
+  interface ArgsByCommand {
+    [SeelenCommand.StateGetWegItems]: null;
+  }
+  interface ReturnByCommand {
+    [SeelenCommand.StateGetWegItems]: IWegItems;
+  }
+  interface PayloadByEvent {
+    [SeelenEvent.StateWegItemsChanged]: IWegItems;
+  }
 }
 
-export interface PinnedWegItem {
-  type: SwItemType.Pinned;
-  path: string;
-  execution_command: string;
-  is_dir: boolean;
+@TauriCommand(SeelenCommand.StateGetWegItems)
+@WebviewEvent(SeelenEvent.StateWegItemsChanged)
+export class WegItems {
+  constructor(public inner: IWegItems) {}
+
+  static readonly getAsync: TauriCommand<WegItems>;
+  static readonly onChange: WebviewEvent<WegItems>;
 }
 
-export interface TemporalPinnedWegItem {
-  type: SwItemType.TemporalApp;
-  path: string;
-  execution_command: string;
-  is_dir: boolean;
-}
+// =================================================================================
+//    From here some enums as helpers like @seelen-ui/types only contains types
+// =================================================================================
 
-export interface SeparatorWegItem {
-  type: SwItemType.Separator;
-  id: string;
-}
-
-export interface MediaWegItem {
-  type: SwItemType.Media;
-}
-
-export interface StartWegItem {
-  type: SwItemType.Start;
-}
-
-export type WegItem =
-  | PinnedWegItem
-  | TemporalPinnedWegItem
-  | SeparatorWegItem
-  | MediaWegItem
-  | StartWegItem;
-
-export interface WegItems {
-  left: WegItem[];
-  center: WegItem[];
-  right: WegItem[];
-}
+type WegItemType = WegItem['type'];
+export const WegItemTypeEnum = {
+  Pinned: 'Pinned',
+  Temporal: 'Temporal',
+  Separator: 'Separator',
+  Media: 'Media',
+  StartMenu: 'StartMenu',
+} satisfies Record<WegItemType, WegItemType>;

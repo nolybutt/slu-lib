@@ -18,7 +18,8 @@ impl std::fmt::Display for WidgetId {
     }
 }
 
-#[derive(Debug, Clone, Serialize, Deserialize)]
+#[derive(Debug, Clone, Serialize, Deserialize, TS)]
+#[ts(export)]
 pub struct Widget {
     pub id: WidgetId,
     pub js: Option<String>,
