@@ -1,3 +1,4 @@
+// TODO: automatization of the generation of this file
 export enum SeelenCommand {
   // General
   Run = 'run',
