@@ -1,6 +1,4 @@
 import { SeelenCommand, SeelenEvent } from '../handlers/mod.ts';
-import { invoke } from '../lib.ts';
-import { TauriCommand, WebviewEvent } from '../utils/State.ts';
 
 import type {
   HideMode,
@@ -11,6 +9,7 @@ import type {
   UpdateChannel,
   VirtualDesktopStrategy,
 } from '@seelen-ui/types';
+import { createInstanceInvoker, createInstanceOnEvent } from '../utils/State.ts';
 
 declare global {
   interface ArgsByCommand {
@@ -26,17 +25,11 @@ declare global {
   }
 }
 
-@TauriCommand(SeelenCommand.StateGetSettings)
-@WebviewEvent(SeelenEvent.StateSettingsChanged)
 export class Settings {
   constructor(public inner: ISettings) {}
-
-  static readonly getAsync: TauriCommand<Settings>;
-  static readonly onChange: WebviewEvent<Settings>;
-
-  static async default(): Promise<Settings> {
-    return new this(await invoke(SeelenCommand.StateGetDefaultSettings));
-  }
+  static readonly default = createInstanceInvoker(this, SeelenCommand.StateGetDefaultSettings);
+  static readonly getAsync = createInstanceInvoker(this, SeelenCommand.StateGetSettings);
+  static readonly onChange = createInstanceOnEvent(this, SeelenEvent.StateSettingsChanged);
 }
 
 // =================================================================================

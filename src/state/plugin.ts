@@ -1,7 +1,7 @@
 import { SeelenCommand, SeelenEvent } from '../handlers/mod.ts';
 import { getCurrentWidget } from '../utils/mod.ts';
 import { List } from '../utils/List.ts';
-import { TauriCommand, WebviewEvent } from '../utils/State.ts';
+import { createInstanceInvoker, createInstanceOnEvent } from '../utils/State.ts';
 
 declare global {
   interface ArgsByCommand {
@@ -23,11 +23,9 @@ export interface Plugin {
   bundled: boolean;
 }
 
-@TauriCommand(SeelenCommand.StateGetPlugins)
-@WebviewEvent(SeelenEvent.StatePluginsChanged)
 export class PluginList extends List<Plugin> {
-  static readonly getAsync: TauriCommand<PluginList>;
-  static readonly onChange: WebviewEvent<PluginList>;
+  static readonly getAsync = createInstanceInvoker(this, SeelenCommand.StateGetPlugins);
+  static readonly onChange = createInstanceOnEvent(this, SeelenEvent.StatePluginsChanged);
 
   forCurrentWidget(): Plugin[] {
     const target = getCurrentWidget().id;

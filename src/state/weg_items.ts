@@ -1,6 +1,6 @@
 import type { WegItem, WegItems as IWegItems } from '@seelen-ui/types';
 import { SeelenCommand, SeelenEvent } from '../lib.ts';
-import { TauriCommand, WebviewEvent } from '../utils/State.ts';
+import { createInstanceInvoker, createInstanceOnEvent } from '../utils/State.ts';
 
 declare global {
   interface ArgsByCommand {
@@ -14,13 +14,10 @@ declare global {
   }
 }
 
-@TauriCommand(SeelenCommand.StateGetWegItems)
-@WebviewEvent(SeelenEvent.StateWegItemsChanged)
 export class WegItems {
   constructor(public inner: IWegItems) {}
-
-  static readonly getAsync: TauriCommand<WegItems>;
-  static readonly onChange: WebviewEvent<WegItems>;
+  static readonly getAsync = createInstanceInvoker(this, SeelenCommand.StateGetWegItems);
+  static readonly onChange = createInstanceOnEvent(this, SeelenEvent.StateWegItemsChanged);
 }
 
 // =================================================================================

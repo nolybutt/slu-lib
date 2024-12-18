@@ -1,6 +1,7 @@
 import { SeelenCommand, SeelenEvent } from '../lib.ts';
 import { List } from '../utils/List.ts';
-import { TauriCommand, WebviewEvent } from '../utils/State.ts';
+import { createInstanceInvoker, createInstanceOnEvent } from '../utils/State.ts';
+
 import type { WidgetId } from './mod.ts';
 
 declare global {
@@ -35,9 +36,7 @@ export interface Theme {
   styles: Record<WidgetId, string>;
 }
 
-@TauriCommand(SeelenCommand.StateGetWidgets)
-@WebviewEvent(SeelenEvent.StateWidgetsChanged)
 export class ThemeList extends List<Theme> {
-  static readonly getAsync: TauriCommand<ThemeList>;
-  static readonly onChange: WebviewEvent<ThemeList>;
+  static readonly getAsync = createInstanceInvoker(this, SeelenCommand.StateGetWidgets);
+  static readonly onChange = createInstanceOnEvent(this, SeelenEvent.StateWidgetsChanged);
 }

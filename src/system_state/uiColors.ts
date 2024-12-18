@@ -1,5 +1,5 @@
 import { SeelenCommand, SeelenEvent } from '../handlers/mod.ts';
-import { TauriCommand, WebviewEvent } from '../utils/State.ts';
+import { createInstanceInvoker, createInstanceOnEvent } from '../utils/State.ts';
 
 declare global {
   interface ArgsByCommand {
@@ -26,13 +26,11 @@ export interface IUIColors {
   complement: string | null;
 }
 
-@TauriCommand(SeelenCommand.SystemGetColors)
-@WebviewEvent(SeelenEvent.ColorsChanged)
 export class UIColors {
-  constructor(public colors: IUIColors) {}
+  constructor(public inner: IUIColors) {}
 
-  static readonly getAsync: TauriCommand<UIColors>;
-  static readonly onChange: WebviewEvent<UIColors>;
+  static readonly getAsync = createInstanceInvoker(this, SeelenCommand.SystemGetColors);
+  static readonly onChange = createInstanceOnEvent(this, SeelenEvent.ColorsChanged);
 
   static default(): UIColors {
     return new this({
@@ -50,7 +48,7 @@ export class UIColors {
   }
 
   setAssCssVariables(): void {
-    for (const [key, value] of Object.entries(this.colors)) {
+    for (const [key, value] of Object.entries(this.inner)) {
       if (typeof value !== 'string') {
         continue;
       }

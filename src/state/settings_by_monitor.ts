@@ -1,6 +1,7 @@
-import { invoke, SeelenCommand } from '../lib.ts';
+import { SeelenCommand } from '../lib.ts';
 
 import type { MonitorConfiguration as IMonitorConfiguration, WorkspaceIdentifierType } from '@seelen-ui/types';
+import { createInstanceInvoker } from '../utils/State.ts';
 
 declare global {
   interface ArgsByCommand {
@@ -13,9 +14,10 @@ declare global {
 
 export class MonitorConfiguration {
   constructor(public inner: IMonitorConfiguration) {}
-  static async default(): Promise<MonitorConfiguration> {
-    return new this(await invoke(SeelenCommand.StateGetDefaultMonitorSettings));
-  }
+  static readonly default = createInstanceInvoker(
+    this,
+    SeelenCommand.StateGetDefaultMonitorSettings,
+  );
 }
 
 // =================================================================================

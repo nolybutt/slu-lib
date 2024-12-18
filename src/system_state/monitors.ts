@@ -1,6 +1,6 @@
 import { SeelenCommand, SeelenEvent } from '../lib.ts';
 import { List } from '../utils/List.ts';
-import { TauriCommand, WebviewEvent } from '../utils/State.ts';
+import { createInstanceInvoker, createInstanceOnEvent } from '../utils/State.ts';
 
 declare global {
   interface ArgsByCommand {
@@ -22,9 +22,7 @@ export interface ConnectedMonitor {
   dpi: number;
 }
 
-@TauriCommand(SeelenCommand.SystemGetMonitors)
-@WebviewEvent(SeelenEvent.SystemMonitorsChanged)
 export class ConnectedMonitorList extends List<ConnectedMonitor> {
-  static readonly getAsync: TauriCommand<ConnectedMonitorList>;
-  static readonly onChange: WebviewEvent<ConnectedMonitorList>;
+  static readonly getAsync = createInstanceInvoker(this, SeelenCommand.SystemGetMonitors);
+  static readonly onChange = createInstanceOnEvent(this, SeelenEvent.SystemMonitorsChanged);
 }

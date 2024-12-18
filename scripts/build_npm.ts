@@ -28,7 +28,7 @@ await build({
     target: 'ES2022',
   },
   test: false,
-  entryPoints: ['./src/lib.ts'],
+  entryPoints: ['./gen/types/mod.ts', './src/lib.ts'],
   outDir: './npm',
   shims: {},
   importMap: 'deno.json',

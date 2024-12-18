@@ -1,5 +1,5 @@
 import { SeelenCommand, SeelenEvent } from '../handlers/mod.ts';
-import { TauriCommand, WebviewEvent } from '../utils/State.ts';
+import { createInstanceInvoker, createInstanceOnEvent } from '../utils/State.ts';
 
 export * from './theme.ts';
 export * from './settings.ts';
@@ -29,12 +29,10 @@ interface ILauncherHistory {
   [x: string]: string[];
 }
 
-@TauriCommand(SeelenCommand.StateGetHistory)
-@WebviewEvent(SeelenEvent.StateHistoryChanged)
 export class LauncherHistory {
   constructor(public inner: ILauncherHistory) {}
-  static readonly getAsync: TauriCommand<LauncherHistory>;
-  static readonly onChange: WebviewEvent<LauncherHistory>;
+  static readonly getAsync = createInstanceInvoker(this, SeelenCommand.StateGetHistory);
+  static readonly onChange = createInstanceOnEvent(this, SeelenEvent.StateHistoryChanged);
 }
 
 export class ResourceMetadata {

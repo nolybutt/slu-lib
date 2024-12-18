@@ -1,6 +1,6 @@
 import { SeelenCommand, SeelenEvent } from '../lib.ts';
 import { List } from '../utils/List.ts';
-import { TauriCommand, WebviewEvent } from '../utils/State.ts';
+import { createInstanceInvoker, createInstanceOnEvent } from '../utils/State.ts';
 
 declare global {
   interface ArgsByCommand {
@@ -23,9 +23,7 @@ export interface Widget {
   html: string | null;
 }
 
-@TauriCommand(SeelenCommand.StateGetWidgets)
-@WebviewEvent(SeelenEvent.StateWidgetsChanged)
 export class WidgetList extends List<Widget> {
-  static readonly getAsync: TauriCommand<WidgetList>;
-  static readonly onChange: WebviewEvent<WidgetList>;
+  static readonly getAsync = createInstanceInvoker(this, SeelenCommand.StateGetWidgets);
+  static readonly onChange = createInstanceOnEvent(this, SeelenEvent.StateWidgetsChanged);
 }
