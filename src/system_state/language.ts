@@ -1,6 +1,6 @@
 import { SeelenCommand, SeelenEvent } from '../lib.ts';
 import { List } from '../utils/List.ts';
-import { TauriCommand, WebviewEvent } from '../utils/State.ts';
+import { createInstanceInvoker, createInstanceOnEvent } from '../utils/State.ts';
 
 declare global {
   interface ArgsByCommand {
@@ -25,9 +25,7 @@ export interface Language {
   inputMethods: KeyboardLayout[];
 }
 
-@TauriCommand(SeelenCommand.SystemGetLanguages)
-@WebviewEvent(SeelenEvent.SystemLanguagesChanged)
 export class LanguageList extends List<Language> {
-  static readonly getAsync: TauriCommand<LanguageList>;
-  static readonly onChange: WebviewEvent<LanguageList>;
+  static readonly getAsync = createInstanceInvoker(this, SeelenCommand.SystemGetLanguages);
+  static readonly onChange = createInstanceOnEvent(this, SeelenEvent.SystemLanguagesChanged);
 }
