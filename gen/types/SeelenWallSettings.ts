@@ -7,6 +7,6 @@ export type SeelenWallSettings = {
   /**
    * update interval in seconds
    */
-  interval: bigint;
+  interval: number;
   randomize: boolean;
 };

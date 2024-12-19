@@ -294,7 +294,7 @@ pub struct SeelenWallSettings {
     pub enabled: bool,
     pub backgrounds: Vec<SeelenWallWallpaper>,
     /// update interval in seconds
-    pub interval: u64,
+    pub interval: u32,
     pub randomize: bool,
 }
 

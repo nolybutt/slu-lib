@@ -1366,7 +1366,7 @@
           "description": "update interval in seconds",
           "default": 60,
           "type": "integer",
-          "format": "uint64",
+          "format": "uint32",
           "minimum": 0.0
         },
         "randomize": {
