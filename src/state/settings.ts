@@ -11,14 +11,17 @@ import type {
 } from '@seelen-ui/types';
 import { createInstanceInvoker, createInstanceOnEvent } from '../utils/State.ts';
 import { enumFromUnion } from '../utils/enums.ts';
+import { invoke } from '../lib.ts';
 
 declare global {
   interface ArgsByCommand {
     [SeelenCommand.StateGetSettings]: null;
+    [SeelenCommand.StateWriteSettings]: { settings: ISettings };
     [SeelenCommand.StateGetDefaultSettings]: null;
   }
   interface ReturnByCommand {
     [SeelenCommand.StateGetSettings]: ISettings;
+    [SeelenCommand.StateWriteSettings]: void;
     [SeelenCommand.StateGetDefaultSettings]: ISettings;
   }
   interface PayloadByEvent {
@@ -31,6 +34,11 @@ export class Settings {
   static readonly default = createInstanceInvoker(this, SeelenCommand.StateGetDefaultSettings);
   static readonly getAsync = createInstanceInvoker(this, SeelenCommand.StateGetSettings);
   static readonly onChange = createInstanceOnEvent(this, SeelenEvent.StateSettingsChanged);
+
+  /** Will store the settings on disk */
+  save(): Promise<void> {
+    return invoke(SeelenCommand.StateWriteSettings, { settings: this.inner });
+  }
 }
 
 // =================================================================================
