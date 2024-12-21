@@ -59,6 +59,7 @@ export enum SeelenCommand {
   Shutdown = 'shutdown',
 
   // SeelenWeg
+  WegGetItemsForWidget = 'weg_get_items_for_widget',
   WegCloseApp = 'weg_close_app',
   WegKillApp = 'weg_kill_app',
   WegToggleWindowState = 'weg_toggle_window_state',
