@@ -54,6 +54,7 @@ export * from './TrayToolbarItem.ts';
 export * from './UpdateChannel.ts';
 export * from './UpdaterSettings.ts';
 export * from './VirtualDesktopStrategy.ts';
+export * from './WegAppGroupItem.ts';
 export * from './WegItem.ts';
 export * from './WegItems.ts';
 export * from './Widget.ts';

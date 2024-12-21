@@ -38,6 +38,7 @@ export enum SeelenCommand {
   StateGetHistory = 'state_get_history',
   StateGetPlugins = 'state_get_plugins',
   StateGetWidgets = 'state_get_widgets',
+  StateGetIconPacks = 'state_get_icon_packs',
   StateGetProfiles = 'state_get_profiles',
 
   // Media

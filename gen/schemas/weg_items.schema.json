@@ -6,6 +6,22 @@
     "$ref": "#/definitions/WegItem"
   },
   "definitions": {
+    "WegAppGroupItem": {
+      "type": "object",
+      "required": [
+        "handle",
+        "title"
+      ],
+      "properties": {
+        "handle": {
+          "type": "integer",
+          "format": "int"
+        },
+        "title": {
+          "type": "string"
+        }
+      }
+    },
     "WegItem": {
       "oneOf": [
         {
@@ -34,6 +50,15 @@
               "enum": [
                 "Pinned"
               ]
+            },
+            "windows": {
+              "description": "Window handles in the app group, in case of pinned file/dir always will be empty",
+              "default": [],
+              "readOnly": true,
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/WegAppGroupItem"
+              }
             }
           }
         },
@@ -63,6 +88,15 @@
               "enum": [
                 "Temporal"
               ]
+            },
+            "windows": {
+              "description": "Window handles in the app group, in case of pinned file/dir always will be empty",
+              "default": [],
+              "readOnly": true,
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/WegAppGroupItem"
+              }
             }
           }
         },

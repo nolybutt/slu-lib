@@ -5,6 +5,12 @@ use serde::{Deserialize, Serialize};
 use ts_rs::TS;
 
 #[derive(Debug, Clone, Serialize, Deserialize, JsonSchema, TS)]
+pub struct WegAppGroupItem {
+    pub title: String,
+    pub handle: isize,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, JsonSchema, TS)]
 pub struct PinnedWegItemData {
     /// Direct path to file, forder or program.
     ///
@@ -29,6 +35,9 @@ pub struct PinnedWegItemData {
     /// true if self.path is a folder
     #[serde(default)]
     pub is_dir: bool,
+    /// Window handles in the app group, in case of pinned file/dir always will be empty
+    #[serde(default, skip_deserializing)]
+    pub windows: Vec<WegAppGroupItem>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, JsonSchema, TS)]
@@ -61,6 +70,7 @@ impl Default for WegItems {
                 path: "C:\\Windows\\explorer.exe".into(),
                 execution_command: "C:\\Windows\\explorer.exe".into(),
                 is_dir: false,
+                windows: vec![],
             })],
             right: vec![WegItem::Media],
         }
