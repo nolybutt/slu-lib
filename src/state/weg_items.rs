@@ -95,7 +95,7 @@ impl WegItems {
                     }
                 }
                 WegItem::Temporal(data) => {
-                    if data.windows.len() == 0 || !data.path.exists() {
+                    if data.windows.is_empty() || !data.path.exists() {
                         continue;
                     }
                     if data.execution_command.is_empty() {
