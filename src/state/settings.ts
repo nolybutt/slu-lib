@@ -15,7 +15,7 @@ import { invoke } from '../lib.ts';
 
 declare global {
   interface ArgsByCommand {
-    [SeelenCommand.StateGetSettings]: null;
+    [SeelenCommand.StateGetSettings]: { path?: string };
     [SeelenCommand.StateWriteSettings]: { settings: ISettings };
     [SeelenCommand.StateGetDefaultSettings]: null;
   }
@@ -34,6 +34,10 @@ export class Settings {
   static readonly default = createInstanceInvoker(this, SeelenCommand.StateGetDefaultSettings);
   static readonly getAsync = createInstanceInvoker(this, SeelenCommand.StateGetSettings);
   static readonly onChange = createInstanceOnEvent(this, SeelenEvent.StateSettingsChanged);
+
+  static async loadCustom(path: string): Promise<Settings> {
+    return new this(await invoke(SeelenCommand.StateGetSettings, { path }));
+  }
 
   /** Will store the settings on disk */
   save(): Promise<void> {
