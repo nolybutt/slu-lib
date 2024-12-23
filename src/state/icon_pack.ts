@@ -93,9 +93,12 @@ export class IconPackManager {
   /**
    * Return the icon URL for an app or file, in case of no icon available will return `null`
    *
-   * @param filePath The path to the app could be umid o full path
+   * @param filePath The path to the app could be umid, full path.
    * @example
    * const iconUrl = instance.getIcon("C:\\Program Files\\Steam\\steam.exe");
+   * // full path to an uwp app
+   * const iconUrl = instance.getIcon("shell:AppsFolder\\Seelen.SeelenUI_p6yyn03m1894e!App"); 
+   * // UMID
    * const iconUrl = instance.getIcon("Seelen.SeelenUI_p6yyn03m1894e!App");
    */
   public getIcon(filePath: string): string | null {
@@ -105,9 +108,9 @@ export class IconPackManager {
       if (!pack) {
         continue;
       }
-      const icon = appFilename ? pack.apps[appFilename] : pack.apps[filePath];
+      const icon = appFilename ? pack.apps[appFilename] || pack.apps[filePath] : pack.apps[filePath];
       if (icon) {
-        return convertFileSrc(this.iconPackPath + '/' + pack.info.filename + '/' + icon);
+        return convertFileSrc(this.iconPackPath + '\\' + pack.info.filename + '\\' + icon);
       }
     }
     return null;
@@ -120,9 +123,10 @@ export class IconPackManager {
    * @param filePath The path to the app could be umid o full path
    * @example
    * const iconPathPromise = IconPackManager.extractIcon("C:\\Program Files\\Steam\\steam.exe");
-   * const iconPathPromise = IconPackManager.extractIcon("Seelen.SeelenUI_p6yyn03m1894e!App");
-   * // prefix also is allowed
+   * // full path to an uwp app
    * const iconPathPromise = IconPackManager.extractIcon("shell:AppsFolder\\Seelen.SeelenUI_p6yyn03m1894e!App");
+   * // UMID
+   * const iconPathPromise = IconPackManager.extractIcon("Seelen.SeelenUI_p6yyn03m1894e!App");
    */
   public static extractIcon(filePath: string): Promise<string | null> {
     return invoke(SeelenCommand.GetIcon, { path: filePath });
