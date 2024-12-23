@@ -97,7 +97,7 @@ export class IconPackManager {
    * @example
    * const iconUrl = instance.getIcon("C:\\Program Files\\Steam\\steam.exe");
    * // full path to an uwp app
-   * const iconUrl = instance.getIcon("shell:AppsFolder\\Seelen.SeelenUI_p6yyn03m1894e!App"); 
+   * const iconUrl = instance.getIcon("shell:AppsFolder\\Seelen.SeelenUI_p6yyn03m1894e!App");
    * // UMID
    * const iconUrl = instance.getIcon("Seelen.SeelenUI_p6yyn03m1894e!App");
    */
