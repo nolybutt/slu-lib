@@ -103,7 +103,7 @@ export class IconPackManager {
    */
   public getIcon(filePath: string): string | null {
     const appFilename = filePath.split(/[/\\]/g).pop();
-    for (const active of this.actives) {
+    for (const active of this.actives.toReversed()) {
       const pack = this._iconPacks.asArray().find((p) => p.info.filename === active);
       if (!pack) {
         continue;
