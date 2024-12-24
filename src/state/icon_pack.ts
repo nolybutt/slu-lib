@@ -63,7 +63,7 @@ export class IconPackManager {
    */
   public static async create(): Promise<IconPackManager> {
     const manager = new IconPackManager(
-      await path.resolve(await path.appDataDir(), 'icon_packs'),
+      await path.resolve(await path.appDataDir(), 'icons'),
       await IconPackList.getAsync(),
       (await Settings.getAsync()).inner.iconPacks,
     );
