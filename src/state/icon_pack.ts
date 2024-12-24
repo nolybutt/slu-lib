@@ -9,7 +9,7 @@ import { convertFileSrc } from '@tauri-apps/api/core';
 declare global {
   interface ArgsByCommand {
     [SeelenCommand.StateGetIconPacks]: null;
-    [SeelenCommand.GetIcon]: { path: string };
+    [SeelenCommand.GetIcon]: { path: string; umid?: string };
   }
   interface ReturnByCommand {
     [SeelenCommand.StateGetIconPacks]: IconPack;
@@ -95,20 +95,34 @@ export class IconPackManager {
    *
    * @param filePath The path to the app could be umid, full path.
    * @example
-   * const iconUrl = instance.getIcon("C:\\Program Files\\Steam\\steam.exe");
-   * // full path to an uwp app
-   * const iconUrl = instance.getIcon("shell:AppsFolder\\Seelen.SeelenUI_p6yyn03m1894e!App");
-   * // UMID
-   * const iconUrl = instance.getIcon("Seelen.SeelenUI_p6yyn03m1894e!App");
+   * const iconUrl = instance.getIcon({
+   *   path: "C:\\Program Files\\Steam\\steam.exe"
+   * });
+   * const iconUrl = instance.getIcon({
+   *   umid: "Seelen.SeelenUI_p6yyn03m1894e!App"
+   * });
    */
-  public getIcon(filePath: string): string | null {
-    const appFilename = filePath.split(/[/\\]/g).pop();
+  public getIcon({ path, umid }: { path?: string; umid?: string }): string | null {
+    if (!path && !umid) {
+      return null;
+    }
+
     for (const active of this.actives.toReversed()) {
       const pack = this._iconPacks.asArray().find((p) => p.info.filename === active);
       if (!pack) {
         continue;
       }
-      const icon = appFilename ? pack.apps[appFilename] || pack.apps[filePath] : pack.apps[filePath];
+
+      let icon: string | undefined;
+      if (umid) {
+        icon = pack.apps[umid];
+      }
+
+      if (!icon && path) {
+        const filename = path?.split(/[/\\]/g).pop();
+        icon = filename ? pack.apps[filename] || pack.apps[path] : pack.apps[path];
+      }
+
       if (icon) {
         return convertFileSrc(this.iconPackPath + '\\' + pack.info.filename + '\\' + icon);
       }
@@ -122,13 +136,14 @@ export class IconPackManager {
    *
    * @param filePath The path to the app could be umid o full path
    * @example
-   * const iconPathPromise = IconPackManager.extractIcon("C:\\Program Files\\Steam\\steam.exe");
-   * // full path to an uwp app
-   * const iconPathPromise = IconPackManager.extractIcon("shell:AppsFolder\\Seelen.SeelenUI_p6yyn03m1894e!App");
-   * // UMID
-   * const iconPathPromise = IconPackManager.extractIcon("Seelen.SeelenUI_p6yyn03m1894e!App");
+   * const iconPath = instance.extractIcon({
+   *   path: "C:\\Program Files\\Steam\\steam.exe"
+   * });
+   * const iconPath = instance.extractIcon({
+   *   umid: "Seelen.SeelenUI_p6yyn03m1894e!App"
+   * });
    */
-  public static extractIcon(filePath: string): Promise<string | null> {
-    return invoke(SeelenCommand.GetIcon, { path: filePath });
+  public static extractIcon(args: { path: string; umid?: string }): Promise<string | null> {
+    return invoke(SeelenCommand.GetIcon, args);
   }
 }

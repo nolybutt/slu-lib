@@ -27,27 +27,32 @@
         {
           "type": "object",
           "required": [
+            "displayName",
+            "id",
+            "isDir",
             "path",
+            "relaunchCommand",
             "type"
           ],
           "properties": {
-            "execution_command": {
-              "description": "Program, file or folder to execute/open when clicking the item.\n\nExclusion: On `.lnk` files this is the target of the link and when open action is triggered, this field and arguments are ignored, using the link file as command.\n\nImportant: This should be unique across all weg items because this is used as identifier, dupes will be removed on load.\n\nNote: this field is mandatory and will be filled with `path` if it is not set",
-              "default": "",
+            "displayName": {
+              "description": "display name of the item",
               "type": "string"
             },
             "id": {
-              "description": "unique id of the item to be used as internal identifier, will be filled if empty",
-              "default": "",
+              "description": "internal UUID to differentiate items",
               "type": "string"
             },
-            "is_dir": {
+            "isDir": {
               "description": "true if self.path is a folder",
-              "default": false,
               "type": "boolean"
             },
             "path": {
-              "description": "Direct path to file, forder or program.\n\nPWA: In case of pwa programs this will be the creator of the process, will point to the browser executable so this is not unique across PWA apps, and can't be used to identify apps. Also this can't be used to launch the app.\n\nUWP: In case of UWP apps this will be the path to the app executable, but this can't be used to invoke the app instead should be used the `shell:AppsFolder` + app user model id.",
+              "description": "Direct path to file, forder or program.",
+              "type": "string"
+            },
+            "relaunchCommand": {
+              "description": "literal command to be executed via CMD.",
               "type": "string"
             },
             "type": {
@@ -56,47 +61,11 @@
                 "Pinned"
               ]
             },
-            "windows": {
-              "description": "Window handles in the app group, in case of pinned file/dir always will be empty",
-              "default": [],
-              "readOnly": true,
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/WegAppGroupItem"
-              }
-            }
-          }
-        },
-        {
-          "type": "object",
-          "required": [
-            "path",
-            "type"
-          ],
-          "properties": {
-            "execution_command": {
-              "description": "Program, file or folder to execute/open when clicking the item.\n\nExclusion: On `.lnk` files this is the target of the link and when open action is triggered, this field and arguments are ignored, using the link file as command.\n\nImportant: This should be unique across all weg items because this is used as identifier, dupes will be removed on load.\n\nNote: this field is mandatory and will be filled with `path` if it is not set",
-              "default": "",
-              "type": "string"
-            },
-            "id": {
-              "description": "unique id of the item to be used as internal identifier, will be filled if empty",
-              "default": "",
-              "type": "string"
-            },
-            "is_dir": {
-              "description": "true if self.path is a folder",
-              "default": false,
-              "type": "boolean"
-            },
-            "path": {
-              "description": "Direct path to file, forder or program.\n\nPWA: In case of pwa programs this will be the creator of the process, will point to the browser executable so this is not unique across PWA apps, and can't be used to identify apps. Also this can't be used to launch the app.\n\nUWP: In case of UWP apps this will be the path to the app executable, but this can't be used to invoke the app instead should be used the `shell:AppsFolder` + app user model id.",
-              "type": "string"
-            },
-            "type": {
-              "type": "string",
-              "enum": [
-                "Temporal"
+            "umid": {
+              "description": "Application user model id.",
+              "type": [
+                "string",
+                "null"
               ]
             },
             "windows": {
@@ -113,11 +82,66 @@
         {
           "type": "object",
           "required": [
+            "displayName",
+            "id",
+            "isDir",
+            "path",
+            "relaunchCommand",
+            "type"
+          ],
+          "properties": {
+            "displayName": {
+              "description": "display name of the item",
+              "type": "string"
+            },
+            "id": {
+              "description": "internal UUID to differentiate items",
+              "type": "string"
+            },
+            "isDir": {
+              "description": "true if self.path is a folder",
+              "type": "boolean"
+            },
+            "path": {
+              "description": "Direct path to file, forder or program.",
+              "type": "string"
+            },
+            "relaunchCommand": {
+              "description": "literal command to be executed via CMD.",
+              "type": "string"
+            },
+            "type": {
+              "type": "string",
+              "enum": [
+                "Temporal"
+              ]
+            },
+            "umid": {
+              "description": "Application user model id.",
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "windows": {
+              "description": "Window handles in the app group, in case of pinned file/dir always will be empty",
+              "default": [],
+              "readOnly": true,
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/WegAppGroupItem"
+              }
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": [
+            "id",
             "type"
           ],
           "properties": {
             "id": {
-              "default": "",
               "type": "string"
             },
             "type": {
@@ -131,11 +155,11 @@
         {
           "type": "object",
           "required": [
+            "id",
             "type"
           ],
           "properties": {
             "id": {
-              "default": "",
               "type": "string"
             },
             "type": {
@@ -149,11 +173,11 @@
         {
           "type": "object",
           "required": [
+            "id",
             "type"
           ],
           "properties": {
             "id": {
-              "default": "",
               "type": "string"
             },
             "type": {
