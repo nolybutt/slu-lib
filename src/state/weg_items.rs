@@ -12,6 +12,9 @@ pub struct WegAppGroupItem {
 
 #[derive(Debug, Clone, Serialize, Deserialize, JsonSchema, TS)]
 pub struct PinnedWegItemData {
+    /// unique id of the item to be used as internal identifier, will be filled if empty
+    #[serde(default)]
+    pub id: String,
     /// Direct path to file, forder or program.
     ///
     /// PWA: In case of pwa programs this will be the creator of the process, will point to the
@@ -47,10 +50,39 @@ pub enum WegItem {
     Pinned(PinnedWegItemData),
     Temporal(PinnedWegItemData),
     Separator {
+        #[serde(default)]
         id: String,
     },
-    Media,
-    StartMenu,
+    Media {
+        #[serde(default)]
+        id: String,
+    },
+    StartMenu {
+        #[serde(default)]
+        id: String,
+    },
+}
+
+impl WegItem {
+    pub fn id(&self) -> &String {
+        match self {
+            WegItem::Pinned(data) => &data.id,
+            WegItem::Temporal(data) => &data.id,
+            WegItem::Separator { id } => id,
+            WegItem::Media { id } => id,
+            WegItem::StartMenu { id } => id,
+        }
+    }
+
+    fn set_id(&mut self, identifier: String) {
+        match self {
+            WegItem::Pinned(data) => data.id = identifier,
+            WegItem::Temporal(data) => data.id = identifier,
+            WegItem::Separator { id } => *id = identifier,
+            WegItem::Media { id } => *id = identifier,
+            WegItem::StartMenu { id } => *id = identifier,
+        }
+    }
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, JsonSchema, TS)]
@@ -65,14 +97,19 @@ pub struct WegItems {
 impl Default for WegItems {
     fn default() -> Self {
         Self {
-            left: vec![WegItem::StartMenu],
+            left: vec![WegItem::StartMenu {
+                id: uuid::Uuid::new_v4().to_string(),
+            }],
             center: vec![WegItem::Pinned(PinnedWegItemData {
+                id: uuid::Uuid::new_v4().to_string(),
                 path: "C:\\Windows\\explorer.exe".into(),
                 execution_command: "C:\\Windows\\explorer.exe".into(),
                 is_dir: false,
                 windows: vec![],
             })],
-            right: vec![WegItem::Media],
+            right: vec![WegItem::Media {
+                id: uuid::Uuid::new_v4().to_string(),
+            }],
         }
     }
 }
@@ -89,10 +126,6 @@ impl WegItems {
                     if data.execution_command.is_empty() {
                         data.execution_command = data.path.to_string_lossy().to_string();
                     }
-                    if !dict.contains(&data.execution_command) {
-                        dict.insert(data.execution_command.clone());
-                        result.push(item);
-                    }
                 }
                 WegItem::Temporal(data) => {
                     if data.windows.is_empty() || !data.path.exists() {
@@ -101,29 +134,17 @@ impl WegItems {
                     if data.execution_command.is_empty() {
                         data.execution_command = data.path.to_string_lossy().to_string();
                     }
-                    if !dict.contains(&data.execution_command) {
-                        dict.insert(data.execution_command.clone());
-                        result.push(item);
-                    }
                 }
-                WegItem::Separator { id } => {
-                    if !dict.contains(id) {
-                        dict.insert(id.clone());
-                        result.push(item);
-                    }
-                }
-                WegItem::StartMenu => {
-                    if !dict.contains("StartMenu") {
-                        dict.insert("StartMenu".to_owned());
-                        result.push(item);
-                    }
-                }
-                WegItem::Media => {
-                    if !dict.contains("Media") {
-                        dict.insert("Media".to_owned());
-                        result.push(item);
-                    }
-                }
+                _ => {}
+            }
+
+            if item.id().is_empty() {
+                item.set_id(uuid::Uuid::new_v4().to_string());
+            }
+
+            if !dict.contains(item.id()) {
+                dict.insert(item.id().clone());
+                result.push(item);
             }
         }
         result

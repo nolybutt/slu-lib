@@ -36,6 +36,11 @@
               "default": "",
               "type": "string"
             },
+            "id": {
+              "description": "unique id of the item to be used as internal identifier, will be filled if empty",
+              "default": "",
+              "type": "string"
+            },
             "is_dir": {
               "description": "true if self.path is a folder",
               "default": false,
@@ -74,6 +79,11 @@
               "default": "",
               "type": "string"
             },
+            "id": {
+              "description": "unique id of the item to be used as internal identifier, will be filled if empty",
+              "default": "",
+              "type": "string"
+            },
             "is_dir": {
               "description": "true if self.path is a folder",
               "default": false,
@@ -103,11 +113,11 @@
         {
           "type": "object",
           "required": [
-            "id",
             "type"
           ],
           "properties": {
             "id": {
+              "default": "",
               "type": "string"
             },
             "type": {
@@ -124,6 +134,10 @@
             "type"
           ],
           "properties": {
+            "id": {
+              "default": "",
+              "type": "string"
+            },
             "type": {
               "type": "string",
               "enum": [
@@ -138,6 +152,10 @@
             "type"
           ],
           "properties": {
+            "id": {
+              "default": "",
+              "type": "string"
+            },
             "type": {
               "type": "string",
               "enum": [

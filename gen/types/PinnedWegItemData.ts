@@ -3,6 +3,10 @@ import type { WegAppGroupItem } from './WegAppGroupItem.ts';
 
 export type PinnedWegItemData = {
   /**
+   * unique id of the item to be used as internal identifier, will be filled if empty
+   */
+  id: string;
+  /**
    * Direct path to file, forder or program.
    *
    * PWA: In case of pwa programs this will be the creator of the process, will point to the
