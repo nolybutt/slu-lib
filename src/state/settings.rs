@@ -61,6 +61,12 @@ pub enum SeelenWegMode {
 }
 
 #[derive(Debug, Copy, Clone, PartialEq, Eq, Serialize, Deserialize, JsonSchema, TS)]
+pub enum WegTemporalItemsVisibility {
+    All,
+    OnMonitor,
+}
+
+#[derive(Debug, Copy, Clone, PartialEq, Eq, Serialize, Deserialize, JsonSchema, TS)]
 pub enum HideMode {
     /// never hide
     Never,
@@ -89,6 +95,8 @@ pub struct SeelenWegSettings {
     pub mode: SeelenWegMode,
     /// When to hide the dock
     pub hide_mode: HideMode,
+    /// Wich temporal items to show on the dock instance (this can be overridden per monitor)
+    pub temporal_items_visibility: WegTemporalItemsVisibility,
     /// Dock position
     pub position: SeelenWegSide,
     /// enables the logic which persists last overlapped HWND to enchance multimonitor overlap feature
@@ -120,6 +128,7 @@ impl Default for SeelenWegSettings {
             position: SeelenWegSide::Bottom,
             use_multi_monitor_overlap_logic: false,
             visible_separators: true,
+            temporal_items_visibility: WegTemporalItemsVisibility::All,
             size: 40,
             zoom_size: 70,
             margin: 8,
@@ -352,6 +361,8 @@ pub struct AhkVar {
     pub ahk: String,
     #[serde(default)]
     pub readonly: bool,
+    #[serde(default)]
+    pub devonly: bool,
 }
 
 impl AhkVar {
@@ -360,11 +371,17 @@ impl AhkVar {
             fancy: f.to_string(),
             ahk: ahk.to_string(),
             readonly: false,
+            devonly: false,
         }
     }
 
     pub fn readonly(mut self) -> Self {
         self.readonly = true;
+        self
+    }
+
+    pub fn devonly(mut self) -> Self {
+        self.devonly = true;
         self
     }
 }
@@ -424,9 +441,13 @@ define_struct_and_hashmap![
 
 impl Default for AhkVarList {
     fn default() -> Self {
+        // some aproaches taken in care to write default values
+        // Alt -> when modifying the current window/workspace/monitor
+        // Shift -> when sending/moving something of place
+        // Ctrl -> alternative to already used keys
         Self {
             // launcher
-            toggle_launcher: AhkVar::new("Win + Space", "LWin & Space").readonly(),
+            toggle_launcher: AhkVar::new("Win + S", "#s").readonly(),
             // wm
             reserve_top: AhkVar::new("Win + Shift + I", "#+i"),
             reserve_bottom: AhkVar::new("Win + Shift + K", "#+k"),
@@ -434,15 +455,17 @@ impl Default for AhkVarList {
             reserve_right: AhkVar::new("Win + Shift + L", "#+l"),
             reserve_float: AhkVar::new("Win + Shift + U", "#+u"),
             reserve_stack: AhkVar::new("Win + Shift + O", "#+o"),
-            focus_top: AhkVar::new("Win + Shift + W", "#+w"),
-            focus_bottom: AhkVar::new("Win + Shift + S", "#+s"),
-            focus_left: AhkVar::new("Win + Shift + A", "#+a"),
-            focus_right: AhkVar::new("Win + Shift + D", "#+d"),
-            focus_latest: AhkVar::new("Win + Shift + E", "#+e"),
+
+            focus_top: AhkVar::new("Win + Alt + I", "#!i"),
+            focus_bottom: AhkVar::new("Win + Alt + K", "#!k"),
+            focus_left: AhkVar::new("Win + Alt + J", "#!j"),
+            focus_right: AhkVar::new("Win + Alt + L", "#!l"),
+            focus_latest: AhkVar::new("Win + Alt + U", "#!u"),
+
             increase_width: AhkVar::new("Win + Alt + =", "#!="),
             decrease_width: AhkVar::new("Win + Alt + -", "#!-"),
-            increase_height: AhkVar::new("Win + Shift + =", "#+="),
-            decrease_height: AhkVar::new("Win + Shift + -", "#+-"),
+            increase_height: AhkVar::new("Ctrl + Win + Alt + =", "^#!="),
+            decrease_height: AhkVar::new("Ctrl + Win + Alt + -", "^#!-"),
             restore_sizes: AhkVar::new("Win + Alt + 0", "#!0"),
             // virtual desktops
             switch_workspace_0: AhkVar::new("Alt + 1", "!1"),
@@ -476,9 +499,13 @@ impl Default for AhkVarList {
             send_to_workspace_8: AhkVar::new("Win + Shift + 9", "#+9"),
             send_to_workspace_9: AhkVar::new("Win + Shift + 0", "#+0"),
             // miscellaneous
-            misc_open_settings: AhkVar::new("Win + K", "#k").readonly(),
-            misc_toggle_lock_tracing: AhkVar::new("Ctrl + Win + Alt + T", "^#!t").readonly(),
-            misc_toggle_win_event_tracing: AhkVar::new("Ctrl + Win + Alt + L", "^#!l").readonly(),
+            misc_open_settings: AhkVar::new("Ctrl + Win + I", "^#i").readonly(),
+            misc_toggle_lock_tracing: AhkVar::new("Ctrl + Win + Alt + T", "^#!t")
+                .readonly()
+                .devonly(),
+            misc_toggle_win_event_tracing: AhkVar::new("Ctrl + Win + Alt + L", "^#!l")
+                .readonly()
+                .devonly(),
         }
     }
 }
