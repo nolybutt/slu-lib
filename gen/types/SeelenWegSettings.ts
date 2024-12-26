@@ -2,6 +2,7 @@
 import type { HideMode } from './HideMode.ts';
 import type { SeelenWegMode } from './SeelenWegMode.ts';
 import type { SeelenWegSide } from './SeelenWegSide.ts';
+import type { WegTemporalItemsVisibility } from './WegTemporalItemsVisibility.ts';
 
 export type SeelenWegSettings = {
   /**
@@ -16,6 +17,10 @@ export type SeelenWegSettings = {
    * When to hide the dock
    */
   hideMode: HideMode;
+  /**
+   * Wich temporal items to show on the dock instance (this can be overridden per monitor)
+   */
+  temporalItemsVisibility: WegTemporalItemsVisibility;
   /**
    * Dock position
    */
