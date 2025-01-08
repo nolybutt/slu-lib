@@ -6,10 +6,15 @@ import { path } from '@tauri-apps/api';
 import { Settings } from './settings.ts';
 import { convertFileSrc } from '@tauri-apps/api/core';
 
+export interface GetIconArgs {
+  path?: string | null;
+  umid?: string | null;
+}
+
 declare global {
   interface ArgsByCommand {
     [SeelenCommand.StateGetIconPacks]: null;
-    [SeelenCommand.GetIcon]: { path: string; umid?: string };
+    [SeelenCommand.GetIcon]: GetIconArgs;
   }
   interface ReturnByCommand {
     [SeelenCommand.StateGetIconPacks]: IconPack;
@@ -102,7 +107,7 @@ export class IconPackManager {
    *   umid: "Seelen.SeelenUI_p6yyn03m1894e!App"
    * });
    */
-  public getIcon({ path, umid }: { path?: string; umid?: string }): string | null {
+  public getIcon({ path, umid }: GetIconArgs): string | null {
     if (!path && !umid) {
       return null;
     }
@@ -143,7 +148,7 @@ export class IconPackManager {
    *   umid: "Seelen.SeelenUI_p6yyn03m1894e!App"
    * });
    */
-  public static extractIcon(args: { path: string; umid?: string }): Promise<string | null> {
-    return invoke(SeelenCommand.GetIcon, args);
+  public static extractIcon(obj: GetIconArgs): Promise<string | null> {
+    return invoke(SeelenCommand.GetIcon, obj);
   }
 }
