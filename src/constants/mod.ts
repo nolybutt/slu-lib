@@ -73,11 +73,11 @@ const _languageList = [
 
 export type SupportedLanguagesCode = (typeof _languageList)[number]['value'];
 
-export interface Language {
+export interface SupportedLanguage {
   label: string;
   enLabel: string;
   /** language code @example 'de' 'es' 'zh' 'en_us' 'en_uk' */
   value: string;
 }
 
-export const SupportedLanguages: Language[] = _languageList.toSorted((a, b) => a.label.localeCompare(b.label));
+export const SupportedLanguages: SupportedLanguage[] = _languageList.toSorted((a, b) => a.label.localeCompare(b.label));
