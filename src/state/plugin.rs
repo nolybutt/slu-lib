@@ -1,9 +1,10 @@
+use schemars::JsonSchema;
 use serde::{Deserialize, Serialize};
 use ts_rs::TS;
 
-use super::{ResourceId, WidgetId};
+use super::{ResourceId, ResourceMetadata, WidgetId};
 
-#[derive(Debug, Clone, Hash, PartialEq, Eq, Serialize, Deserialize, TS)]
+#[derive(Debug, Clone, Hash, PartialEq, Eq, Serialize, Deserialize, JsonSchema, TS)]
 pub struct PluginId(pub ResourceId);
 
 impl From<ResourceId> for PluginId {
@@ -26,8 +27,9 @@ pub struct Plugin {
     #[serde(default = "Plugin::default_icon")]
     pub icon: String,
     pub target: WidgetId,
+    pub metadata: ResourceMetadata,
     pub plugin: serde_json::Value,
-    #[serde(default)]
+    #[serde(skip_deserializing)]
     pub bundled: bool,
 }
 

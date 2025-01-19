@@ -9,6 +9,8 @@ mod weg_items;
 mod widget;
 mod wm_layout;
 
+use std::sync::OnceLock;
+
 pub use icon_pack::*;
 pub use placeholder::*;
 pub use plugin::*;
@@ -24,14 +26,18 @@ use schemars::JsonSchema;
 use serde::{Deserialize, Serialize};
 use ts_rs::TS;
 
-#[derive(Debug, Clone, Hash, PartialEq, Eq, Serialize, Deserialize, TS)]
+#[derive(Debug, Clone, Hash, PartialEq, Eq, Serialize, Deserialize, JsonSchema, TS)]
 pub struct ResourceId(String);
 
+static REGEX: OnceLock<regex::Regex> = OnceLock::new();
+
 impl ResourceId {
+    fn regex() -> &'static regex::Regex {
+        REGEX.get_or_init(|| regex::Regex::new("^@[a-zA-Z0-9\\-]+\\/[a-zA-Z0-9\\-]+$").unwrap())
+    }
+
     pub fn is_valid(&self) -> bool {
-        let regex =
-            regex::Regex::new("^@[a-zA-Z0-9_\\-]+\\/[a-zA-Z0-9_\\-]+$").expect("Invalid regex");
-        regex.is_match(&self.0)
+        Self::regex().is_match(&self.0)
     }
 
     /// Creator username of the resource
@@ -40,7 +46,21 @@ impl ResourceId {
     ///
     /// The string is a valid resource id
     pub fn creator(&self) -> String {
-        self.0.split('/').next().unwrap().to_string()
+        self.0
+            .split('/')
+            .next()
+            .unwrap()
+            .trim_start_matches('@')
+            .to_string()
+    }
+
+    /// Name of the resource
+    ///
+    /// # Safety
+    ///
+    /// The string is a valid resource id
+    pub fn name(&self) -> String {
+        self.0.split('/').last().unwrap().to_string()
     }
 }
 
@@ -66,20 +86,19 @@ impl std::fmt::Display for ResourceId {
 #[serde(default, rename_all = "camelCase")]
 pub struct ResourceMetadata {
     pub display_name: String,
-    pub author: String,
     pub description: String,
-    pub filename: String,
     pub tags: Vec<String>,
+    #[serde(skip_deserializing)]
+    pub filename: String,
 }
 
 impl Default for ResourceMetadata {
     fn default() -> Self {
         Self {
             display_name: "Unknown".to_string(),
-            author: "Unknown".to_string(),
             description: String::new(),
-            filename: String::new(),
             tags: Vec::new(),
+            filename: String::new(),
         }
     }
 }

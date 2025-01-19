@@ -13,7 +13,6 @@
     },
     "info": {
       "default": {
-        "author": "Unknown",
         "description": "",
         "displayName": "Unknown",
         "filename": "",
@@ -30,10 +29,6 @@
     "ResourceMetadata": {
       "type": "object",
       "properties": {
-        "author": {
-          "default": "Unknown",
-          "type": "string"
-        },
         "description": {
           "default": "",
           "type": "string"
@@ -44,6 +39,7 @@
         },
         "filename": {
           "default": "",
+          "readOnly": true,
           "type": "string"
         },
         "tags": {

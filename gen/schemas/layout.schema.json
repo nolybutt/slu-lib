@@ -3,19 +3,6 @@
   "title": "WindowManagerLayout",
   "type": "object",
   "properties": {
-    "info": {
-      "default": {
-        "author": "",
-        "description": "",
-        "displayName": "",
-        "filename": ""
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/WManagerLayoutInfo"
-        }
-      ]
-    },
     "noFallbackBehavior": {
       "default": "Float",
       "allOf": [
@@ -55,31 +42,6 @@
         "Temporal",
         "Permanent"
       ]
-    },
-    "WManagerLayoutInfo": {
-      "type": "object",
-      "properties": {
-        "author": {
-          "description": "Author of the layout",
-          "default": "",
-          "type": "string"
-        },
-        "description": {
-          "description": "Description of the layout",
-          "default": "",
-          "type": "string"
-        },
-        "displayName": {
-          "description": "Display name of the layout",
-          "default": "",
-          "type": "string"
-        },
-        "filename": {
-          "description": "Filename of the layout, is overridden by the program on load.",
-          "default": "",
-          "type": "string"
-        }
-      }
     },
     "WmNode": {
       "oneOf": [

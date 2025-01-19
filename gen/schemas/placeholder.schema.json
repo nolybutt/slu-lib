@@ -11,20 +11,6 @@
         "$ref": "#/definitions/ToolbarItem2"
       }
     },
-    "info": {
-      "description": "Metadata about the placeholder",
-      "default": {
-        "author": "",
-        "description": "",
-        "displayName": "",
-        "filename": ""
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/PlaceholderInfo"
-        }
-      ]
-    },
     "left": {
       "description": "Items to be displayed in the toolbar",
       "default": [],
@@ -53,30 +39,11 @@
         "day"
       ]
     },
-    "PlaceholderInfo": {
-      "type": "object",
-      "properties": {
-        "author": {
-          "description": "Author of the placeholder",
-          "default": "",
-          "type": "string"
-        },
-        "description": {
-          "description": "Description of the placeholder",
-          "default": "",
-          "type": "string"
-        },
-        "displayName": {
-          "description": "Display name of the placeholder",
-          "default": "",
-          "type": "string"
-        },
-        "filename": {
-          "description": "Filename of the placeholder, is overridden by the program on load.",
-          "default": "",
-          "type": "string"
-        }
-      }
+    "PluginId": {
+      "$ref": "#/definitions/ResourceId"
+    },
+    "ResourceId": {
+      "type": "string"
     },
     "StyleValue": {
       "anyOf": [
@@ -876,7 +843,7 @@
     "ToolbarItem2": {
       "anyOf": [
         {
-          "type": "string"
+          "$ref": "#/definitions/PluginId"
         },
         {
           "$ref": "#/definitions/ToolbarItem"

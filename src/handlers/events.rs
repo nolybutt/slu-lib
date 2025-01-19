@@ -79,8 +79,6 @@ slu_events_declaration! {
     StateSettingsChanged = "settings-changed",
     StateWegItemsChanged = "weg-items",
     StateThemesChanged = "themes",
-    StatePlaceholdersChanged = "placeholders",
-    StateLayoutsChanged = "layouts",
     StateSettingsByAppChanged = "settings-by-app",
     StateHistoryChanged = "history",
     StateIconPacksChanged = "icon-packs",

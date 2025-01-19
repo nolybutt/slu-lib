@@ -4,6 +4,8 @@ use schemars::JsonSchema;
 use serde::{Deserialize, Serialize};
 use ts_rs::TS;
 
+use super::PluginId;
+
 macro_rules! common_item {
     (
         $(
@@ -319,29 +321,14 @@ impl ToolbarItem {
 #[derive(Debug, Clone, Serialize, Deserialize, JsonSchema, TS)]
 #[serde(untagged)]
 pub enum ToolbarItem2 {
-    PluginId(String),
+    Plugin(PluginId),
     Inline(ToolbarItem),
-}
-
-#[derive(Debug, Clone, Default, Serialize, Deserialize, JsonSchema, TS)]
-#[serde(default, rename_all = "camelCase")]
-pub struct PlaceholderInfo {
-    /// Display name of the placeholder
-    pub display_name: String,
-    /// Author of the placeholder
-    pub author: String,
-    /// Description of the placeholder
-    pub description: String,
-    /// Filename of the placeholder, is overridden by the program on load.
-    pub filename: String,
 }
 
 #[derive(Debug, Clone, Default, Serialize, Deserialize, JsonSchema, TS)]
 #[serde(default, rename_all = "camelCase")]
 #[ts(export)]
 pub struct Placeholder {
-    /// Metadata about the placeholder
-    pub info: PlaceholderInfo,
     /// Items to be displayed in the toolbar
     pub left: Vec<ToolbarItem2>,
     /// Items to be displayed in the toolbar
@@ -355,10 +342,11 @@ impl Placeholder {
         let mut result = Vec::new();
         for item in items {
             match item {
-                ToolbarItem2::PluginId(id) => {
-                    if !dict.contains(&id) {
-                        dict.insert(id.clone());
-                        result.push(ToolbarItem2::PluginId(id));
+                ToolbarItem2::Plugin(id) => {
+                    let str_id = id.to_string();
+                    if !dict.contains(&str_id) && id.0.is_valid() {
+                        dict.insert(str_id);
+                        result.push(ToolbarItem2::Plugin(id));
                     }
                 }
                 ToolbarItem2::Inline(mut item) => {
