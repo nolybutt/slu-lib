@@ -78,6 +78,7 @@ slu_events_declaration! {
 
     StateSettingsChanged = "settings-changed",
     StateWegItemsChanged = "weg-items",
+    StateToolbarItemsChanged = "toolbar-items",
     StateThemesChanged = "themes",
     StateSettingsByAppChanged = "settings-by-app",
     StateHistoryChanged = "history",

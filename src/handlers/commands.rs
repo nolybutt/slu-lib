@@ -65,6 +65,7 @@ slu_commands_declaration! {
   GetAutoStartStatus = get_auto_start_status,
   StateGetThemes = state_get_themes,
   StateGetWegItems = state_get_weg_items,
+  StateGetToolbarItems = state_get_toolbar_items,
   StateWriteWegItems = state_write_weg_items,
   StateGetSettings = state_get_settings,
   StateWriteSettings = state_write_settings,

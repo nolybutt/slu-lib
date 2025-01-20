@@ -51,19 +51,7 @@
           "type": "string"
         },
         {
-          "type": "integer",
-          "format": "uint64",
-          "minimum": 0.0
-        },
-        {
-          "description": "Always less than zero.",
-          "type": "integer",
-          "format": "int64"
-        },
-        {
-          "description": "Always finite.",
-          "type": "number",
-          "format": "double"
+          "type": "number"
         }
       ]
     },
