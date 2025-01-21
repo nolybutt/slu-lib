@@ -31,7 +31,7 @@ impl From<&str> for PluginId {
 }
 
 #[derive(Debug, Clone, Default, Serialize, Deserialize, JsonSchema, TS)]
-#[serde(rename_all = "camelCase")]
+#[serde(default, rename_all = "camelCase")]
 #[ts(export)]
 pub struct Plugin {
     pub id: PluginId,

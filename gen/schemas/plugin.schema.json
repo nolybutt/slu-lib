@@ -2,26 +2,46 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "Plugin",
   "type": "object",
-  "required": [
-    "id",
-    "metadata",
-    "plugin",
-    "target"
-  ],
   "properties": {
     "icon": {
       "default": "PiPuzzlePieceDuotone",
       "type": "string"
     },
     "id": {
-      "$ref": "#/definitions/PluginId"
+      "default": "@unknown/unknown",
+      "allOf": [
+        {
+          "$ref": "#/definitions/PluginId"
+        }
+      ]
     },
     "metadata": {
-      "$ref": "#/definitions/ResourceMetadata"
+      "default": {
+        "author": "",
+        "bundled": false,
+        "description": {},
+        "displayName": {},
+        "filename": "",
+        "portrait": null,
+        "screenshots": [],
+        "tags": []
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResourceMetadata"
+        }
+      ]
     },
-    "plugin": true,
+    "plugin": {
+      "default": null
+    },
     "target": {
-      "$ref": "#/definitions/WidgetId"
+      "default": "@unknown/unknown",
+      "allOf": [
+        {
+          "$ref": "#/definitions/WidgetId"
+        }
+      ]
     }
   },
   "definitions": {

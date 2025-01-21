@@ -1,5 +1,18 @@
-import type { DateUpdateInterval, ToolbarItem, WorkspaceToolbarItemMode } from '@seelen-ui/types';
+import type { DateUpdateInterval, Placeholder, ToolbarItem, WorkspaceToolbarItemMode } from '@seelen-ui/types';
 import { enumFromUnion } from '../utils/enums.ts';
+import type { SeelenCommand, SeelenEvent } from '../lib.ts';
+
+declare global {
+  interface ArgsByCommand {
+    [SeelenCommand.StateGetToolbarItems]: null;
+  }
+  interface ReturnByCommand {
+    [SeelenCommand.StateGetToolbarItems]: Placeholder;
+  }
+  interface PayloadByEvent {
+    [SeelenEvent.StateToolbarItemsChanged]: Placeholder;
+  }
+}
 
 // =================================================================================
 //    From here some enums as helpers like @seelen-ui/types only contains types

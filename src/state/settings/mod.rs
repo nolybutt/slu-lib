@@ -31,8 +31,6 @@ pub struct FancyToolbarSettings {
     pub enabled: bool,
     /// height of the fancy toolbar
     pub height: u32,
-    /// default placeholder for the fancy toolbar
-    pub placeholder: String,
     /// hide mode
     pub hide_mode: HideMode,
     /// enables the logic which persists last overlapped HWND to enchance multimonitor overlap feature
@@ -48,7 +46,6 @@ impl Default for FancyToolbarSettings {
         Self {
             enabled: true,
             height: 30,
-            placeholder: String::from("default.yml"),
             hide_mode: HideMode::Never,
             use_multi_monitor_overlap_logic: false,
             delay_to_show: 100,

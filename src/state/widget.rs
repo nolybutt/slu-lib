@@ -49,6 +49,7 @@ impl From<&str> for WidgetId {
 }
 
 #[derive(Debug, Clone, Default, Serialize, Deserialize, JsonSchema, TS)]
+#[serde(default, rename_all = "camelCase")]
 #[ts(export)]
 pub struct Widget {
     pub id: WidgetId,

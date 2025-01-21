@@ -2,38 +2,60 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "Widget",
   "type": "object",
-  "required": [
-    "id",
-    "metadata",
-    "settings"
-  ],
   "properties": {
     "css": {
+      "default": null,
       "type": [
         "string",
         "null"
       ]
     },
     "html": {
+      "default": null,
       "type": [
         "string",
         "null"
       ]
     },
     "id": {
-      "$ref": "#/definitions/WidgetId"
+      "default": "@unknown/unknown",
+      "allOf": [
+        {
+          "$ref": "#/definitions/WidgetId"
+        }
+      ]
     },
     "js": {
+      "default": null,
       "type": [
         "string",
         "null"
       ]
     },
     "metadata": {
-      "$ref": "#/definitions/ResourceMetadata"
+      "default": {
+        "author": "",
+        "bundled": false,
+        "description": {},
+        "displayName": {},
+        "filename": "",
+        "portrait": null,
+        "screenshots": [],
+        "tags": []
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResourceMetadata"
+        }
+      ]
     },
     "settings": {
-      "$ref": "#/definitions/WidgetSettingsDeclarationList"
+      "default": [],
+      "allOf": [
+        {
+          "$ref": "#/definitions/WidgetSettingsDeclarationList"
+        }
+      ]
     }
   },
   "definitions": {

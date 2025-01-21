@@ -387,7 +387,6 @@
           "enabled": true,
           "height": 30,
           "hideMode": "Never",
-          "placeholder": "default.yml",
           "useMultiMonitorOverlapLogic": false
         },
         "@seelen/launcher": {
@@ -1453,11 +1452,6 @@
               "$ref": "#/definitions/HideMode"
             }
           ]
-        },
-        "placeholder": {
-          "description": "default placeholder for the fancy toolbar",
-          "default": "default.yml",
-          "type": "string"
         },
         "useMultiMonitorOverlapLogic": {
           "description": "enables the logic which persists last overlapped HWND to enchance multimonitor overlap feature",
