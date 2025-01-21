@@ -438,7 +438,7 @@
             "offset": 0.0,
             "width": 3.0
           },
-          "defaultLayout": "default.yml",
+          "defaultLayout": "@default/wm-bspwm",
           "enabled": false,
           "floating": {
             "height": 500.0,
@@ -1605,6 +1605,9 @@
         }
       }
     },
+    "PluginId": {
+      "$ref": "#/definitions/ResourceId"
+    },
     "Rect": {
       "type": "object",
       "required": [
@@ -1631,6 +1634,10 @@
           "format": "int32"
         }
       }
+    },
+    "ResourceId": {
+      "description": "visual id composed of the creator username and the resource name",
+      "type": "string"
     },
     "SeelenLauncherMonitor": {
       "type": "string",
@@ -1989,8 +1996,12 @@
         },
         "defaultLayout": {
           "description": "default layout",
-          "default": "default.yml",
-          "type": "string"
+          "default": "@default/wm-bspwm",
+          "allOf": [
+            {
+              "$ref": "#/definitions/PluginId"
+            }
+          ]
         },
         "enabled": {
           "description": "enable or disable the window manager",

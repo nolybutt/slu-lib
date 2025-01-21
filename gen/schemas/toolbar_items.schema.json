@@ -43,6 +43,7 @@
       "$ref": "#/definitions/ResourceId"
     },
     "ResourceId": {
+      "description": "visual id composed of the creator username and the resource name",
       "type": "string"
     },
     "StyleValue": {

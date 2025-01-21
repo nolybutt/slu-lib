@@ -113,7 +113,7 @@ export class IconPackManager {
     }
 
     for (const active of this.actives.toReversed()) {
-      const pack = this._iconPacks.asArray().find((p) => p.info.filename === active);
+      const pack = this._iconPacks.asArray().find((p) => p.metadata.filename === active);
       if (!pack) {
         continue;
       }
@@ -129,7 +129,7 @@ export class IconPackManager {
       }
 
       if (icon) {
-        return convertFileSrc(this.iconPackPath + '\\' + pack.info.filename + '\\' + icon);
+        return convertFileSrc(this.iconPackPath + '\\' + pack.metadata.filename + '\\' + icon);
       }
     }
     return null;

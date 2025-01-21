@@ -340,7 +340,7 @@ impl Placeholder {
             match item {
                 ToolbarItem2::Plugin(id) => {
                     let str_id = id.to_string();
-                    if !dict.contains(&str_id) && id.0.is_valid() {
+                    if !dict.contains(&str_id) && id.is_valid() {
                         dict.insert(str_id);
                         result.push(ToolbarItem2::Plugin(id));
                     }

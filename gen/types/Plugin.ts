@@ -4,11 +4,4 @@ import type { PluginId } from './PluginId.ts';
 import type { ResourceMetadata } from './ResourceMetadata.ts';
 import type { WidgetId } from './WidgetId.ts';
 
-export type Plugin = {
-  id: PluginId;
-  icon: string;
-  target: WidgetId;
-  metadata: ResourceMetadata;
-  plugin: JsonValue;
-  bundled: boolean;
-};
+export type Plugin = { id: PluginId; metadata: ResourceMetadata; icon: string; target: WidgetId; plugin: JsonValue };
