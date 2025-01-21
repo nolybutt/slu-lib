@@ -7,7 +7,7 @@
       "default": [
         {
           "displayName": "Explorer",
-          "id": "df2b887a-9871-42f1-b4fc-380108dbfe81",
+          "id": "fd8bb147-0702-42b3-8272-9ec59987c191",
           "isDir": false,
           "path": "C:\\Windows\\explorer.exe",
           "pinDisabled": false,
@@ -25,7 +25,7 @@
     "left": {
       "default": [
         {
-          "id": "5a1c4333-e030-4e11-a154-0d3aa0a56478",
+          "id": "813804b7-bbcd-437c-8146-a25388784afa",
           "type": "StartMenu"
         }
       ],
@@ -37,7 +37,7 @@
     "right": {
       "default": [
         {
-          "id": "0a73e0ce-d766-45c9-9cbe-ab1d82de6a64",
+          "id": "cf71861c-b2e5-4882-8b43-5606a58e7022",
           "type": "Media"
         }
       ],

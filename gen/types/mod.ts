@@ -6,7 +6,6 @@ export * from './AppIdentifier.ts';
 export * from './AppIdentifierType.ts';
 export * from './Border.ts';
 export * from './DateToolbarItem.ts';
-export * from './DateUpdateInterval.ts';
 export * from './DeviceToolbarItem.ts';
 export * from './FancyToolbarSettings.ts';
 export * from './FancyToolbarSettingsByMonitor.ts';

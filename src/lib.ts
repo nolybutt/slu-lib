@@ -11,7 +11,9 @@ interface WidgetInformation {
   params: Readonly<Record<string, string>>;
 }
 
-let CURRENT_WIDGET_INFORMATION: Readonly<WidgetInformation>;
+const CURRENT_WIDGET_INFORMATION: { ref: Readonly<WidgetInformation> | null } = {
+  ref: null,
+};
 function _getCurrentWidget(): Readonly<WidgetInformation> {
   const encodedLabel = getCurrentWebviewWindow().label;
   const decodedLabel = new TextDecoder().decode(decodeBase64Url(encodedLabel));
@@ -27,14 +29,14 @@ function _getCurrentWidget(): Readonly<WidgetInformation> {
 }
 
 export function getCurrentWidget(): Readonly<WidgetInformation> {
-  if (!CURRENT_WIDGET_INFORMATION) {
-    CURRENT_WIDGET_INFORMATION = _getCurrentWidget();
+  if (!CURRENT_WIDGET_INFORMATION.ref) {
+    CURRENT_WIDGET_INFORMATION.ref = _getCurrentWidget();
   }
-  return CURRENT_WIDGET_INFORMATION;
+  return CURRENT_WIDGET_INFORMATION.ref;
 }
 
+export * from './constants/mod.ts';
 export * from './state/mod.ts';
 export * from './system_state/mod.ts';
 export * from './utils/mod.ts';
 export * from './handlers/mod.ts';
-export * from './constants/mod.ts';

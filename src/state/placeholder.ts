@@ -1,4 +1,4 @@
-import type { DateUpdateInterval, Placeholder, ToolbarItem, WorkspaceToolbarItemMode } from '@seelen-ui/types';
+import type { Placeholder, ToolbarItem, WorkspaceToolbarItemMode } from '@seelen-ui/types';
 import { enumFromUnion } from '../utils/enums.ts';
 import type { SeelenCommand, SeelenEvent } from '../lib.ts';
 
@@ -38,12 +38,4 @@ const WorkspaceToolbarItemMode = enumFromUnion<WorkspaceToolbarItemMode>({
   Numbered: 'numbered',
 });
 
-const DateUpdateInterval = enumFromUnion<DateUpdateInterval>({
-  Millisecond: 'millisecond',
-  Second: 'second',
-  Minute: 'minute',
-  Hour: 'hour',
-  Day: 'day',
-});
-
-export { DateUpdateInterval, ToolbarModuleType, WorkspaceToolbarItemMode };
+export { ToolbarModuleType, WorkspaceToolbarItemMode };
