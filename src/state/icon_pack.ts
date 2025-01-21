@@ -1,7 +1,7 @@
 import type { IconPack } from '@seelen-ui/types';
 import { List } from '../utils/List.ts';
 import { createInstanceInvoker, createInstanceOnEvent } from '../utils/State.ts';
-import { invoke, SeelenCommand, SeelenEvent } from '../lib.ts';
+import { invoke, SeelenCommand, SeelenEvent } from '../handlers/mod.ts';
 import { path } from '@tauri-apps/api';
 import { Settings } from './settings/mod.ts';
 import { convertFileSrc } from '@tauri-apps/api/core';
