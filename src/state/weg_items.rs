@@ -130,7 +130,8 @@ impl WegItems {
                     }
                 }
                 WegItem::Temporal(data) => {
-                    if data.windows.is_empty() || (data.should_ensure_path() && !data.path.exists()) {
+                    if data.windows.is_empty() || (data.should_ensure_path() && !data.path.exists())
+                    {
                         continue;
                     }
                     if data.relaunch_command.is_empty() {
