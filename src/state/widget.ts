@@ -62,7 +62,7 @@ export function getCurrentWidget(): Readonly<WidgetInformation> {
       label: '',
       rawLabel: '',
       params: {},
-    }
+    };
   }
   if (!CURRENT_WIDGET_INFORMATION.ref) {
     CURRENT_WIDGET_INFORMATION.ref = _getCurrentWidget();
