@@ -49,7 +49,7 @@ impl Theme {
     pub fn load_from_file(path: &Path) -> Result<Theme> {
         let extension = path
             .extension()
-            .ok_or_else(|| "Invalid theme path extension")?;
+            .ok_or("Invalid theme path extension")?;
         if extension != "yml" && extension != "yaml" {
             return Err("Invalid theme path extension".into());
         }
