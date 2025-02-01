@@ -29,12 +29,18 @@ slu_events_declaration! {
     ActiveWorkspaceChanged = "active-workspace-changed",
 
     GlobalFocusChanged = "global-focus-changed",
+    GlobalHistoryChanged = "global-history-changed",
+    HistoryChangedOnMonitor = "global-history-changed-on-monitor",
     GlobalMouseMove = "global-mouse-move",
+
 
     HandleLayeredHitboxes = "handle-layered",
 
     SystemMonitorsChanged = "system::monitors-changed",
     SystemLanguagesChanged = "system::languages-changed",
+
+    UserChanged = "user-changed",
+    UserFolderChanged = "user-folder-changed",
 
     MediaSessions = "media-sessions",
     MediaInputs = "media-inputs",

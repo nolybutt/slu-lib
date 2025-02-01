@@ -207,6 +207,17 @@ common_item! {
     /// ```ts
     /// const count: number;
     /// ```
+    struct UserToolbarItem {
+        /// Show user control popup on click
+        #[serde(default)]
+        with_user_folder: bool,
+    }
+
+
+    /// ## Notifications Item Scope
+    /// ```ts
+    /// const count: number;
+    /// ```
     struct NotificationsToolbarItem {}
 
     /// ## Workspace Item Scope
@@ -237,6 +248,7 @@ pub enum ToolbarItem {
     Power(PowerToolbarItem),
     Network(NetworkToolbarItem),
     Media(MediaToolbarItem),
+    User(UserToolbarItem),
     Notifications(NotificationsToolbarItem),
     Tray(TrayToolbarItem),
     Device(DeviceToolbarItem),
@@ -253,6 +265,7 @@ impl ToolbarItem {
             ToolbarItem::Power(item) => item.id.clone(),
             ToolbarItem::Network(item) => item.id.clone(),
             ToolbarItem::Media(item) => item.id.clone(),
+            ToolbarItem::User(item) => item.id.clone(),
             ToolbarItem::Notifications(item) => item.id.clone(),
             ToolbarItem::Tray(item) => item.id.clone(),
             ToolbarItem::Device(item) => item.id.clone(),
@@ -269,6 +282,7 @@ impl ToolbarItem {
             ToolbarItem::Power(item) => item.id = id,
             ToolbarItem::Network(item) => item.id = id,
             ToolbarItem::Media(item) => item.id = id,
+            ToolbarItem::User(item) => item.id = id,
             ToolbarItem::Notifications(item) => item.id = id,
             ToolbarItem::Tray(item) => item.id = id,
             ToolbarItem::Device(item) => item.id = id,

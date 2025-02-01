@@ -26,6 +26,7 @@ const ToolbarModuleType = enumFromUnion<ToolbarItem['type']>({
   Network: 'network',
   Media: 'media',
   Tray: 'tray',
+  User: 'user',
   Notifications: 'notifications',
   Device: 'device',
   Settings: 'settings',
