@@ -1,8 +1,10 @@
-import { SeelenCommand, SeelenEvent } from '../lib.ts';
-import { createInstanceInvoker, createInstanceInvokerWithArgs, createInstanceOnEvent } from '../utils/State.ts';
-import { List } from '../utils/List.ts';
-import { enumFromUnion } from '../utils/enums.ts';
-import type { File, FolderChangedArgs, FolderType, User } from '@seelen-ui/types';
+import { SeelenCommand, SeelenEvent, invoke } from "../handlers/mod.ts";
+import { createInstanceInvoker, createInstanceOnEvent } from "../utils/State.ts";
+import { List } from "../utils/List.ts";
+import { enumFromUnion } from "../utils/enums.ts";
+import type { File, FolderChangedArgs, FolderType, User } from "@seelen-ui/types";
+import type { UnlistenFn } from "@tauri-apps/api/event";
+import { subscribe } from "../handlers/invokers.ts";
 
 declare global {
   interface ArgsByCommand {
@@ -13,7 +15,7 @@ declare global {
   interface ReturnByCommand {
     [SeelenCommand.GetUser]: User;
     [SeelenCommand.GetUserFolderContent]: File[];
-    [SeelenCommand.SetUserFolderLimit]: null;
+    [SeelenCommand.SetUserFolderLimit]: void;
   }
   interface PayloadByEvent {
     [SeelenEvent.UserChanged]: User;
@@ -22,13 +24,13 @@ declare global {
 }
 
 const FolderType = enumFromUnion<FolderType>({
-  Unknown: 'Unknown',
-  Recent: 'Recent',
-  Downloads: 'Downloads',
-  Documents: 'Documents',
-  Pictures: 'Pictures',
-  Videos: 'Videos',
-  Music: 'Music',
+  Unknown: "Unknown",
+  Recent: "Recent",
+  Downloads: "Downloads",
+  Documents: "Documents",
+  Pictures: "Pictures",
+  Videos: "Videos",
+  Music: "Music",
 });
 
 export class UserDetails {
@@ -38,134 +40,52 @@ export class UserDetails {
   static readonly onChange = createInstanceOnEvent(this, SeelenEvent.UserChanged);
 }
 
-class Folders {
-  constructor(public inner: FolderChangedArgs) {}
+export class UserDirectory extends List<File> {
+  static readonly folderType: FolderType = FolderType.Unknown;
 
-  static readonly onChange = createInstanceOnEvent(this, SeelenEvent.UserFolderChanged);
-}
+  static async getAsync(): Promise<UserDirectory> {
+    return new this(
+      await invoke(SeelenCommand.GetUserFolderContent, { folderType: this.folderType })
+    );
+  }
 
-export class RecentFolder extends List<File> {
-  static readonly _getAsync = createInstanceInvokerWithArgs(this, SeelenCommand.GetUserFolderContent);
-  static readonly _setFolderLimit = createInstanceInvokerWithArgs(this, SeelenCommand.SetUserFolderLimit);
+  static setDirectoryLimit(amount: number): Promise<void> {
+    return invoke(SeelenCommand.SetUserFolderLimit, { folderType: this.folderType, amount });
+  }
 
-  static readonly getAsync = () => RecentFolder._getAsync({ folderType: FolderType.Recent });
-  static readonly onChange = (cb: (instance: RecentFolder) => void) => {
-    Folders.onChange((folder) => {
-      if (folder.inner.ofFolder == FolderType.Recent) {
-        cb(new RecentFolder(folder.inner.content!));
+  static onChange(cb: (instance: RecentFolder) => void): Promise<UnlistenFn> {
+    return subscribe(SeelenEvent.UserFolderChanged, (data) => {
+      if (data.payload.ofFolder == this.folderType && data.payload.content) {
+        cb(new this(data.payload.content));
       }
     });
-  };
+  }
 
-  static readonly setFolderLimit = (amount: number) =>
-    RecentFolder._setFolderLimit({ folderType: FolderType.Recent, amount });
-
-  static default(): RecentFolder {
+  static default(): UserDirectory {
     return new this([]);
   }
 }
 
-export class DownloadsFolder extends List<File> {
-  static readonly _getAsync = createInstanceInvokerWithArgs(this, SeelenCommand.GetUserFolderContent);
-  static readonly _setFolderLimit = createInstanceInvokerWithArgs(this, SeelenCommand.SetUserFolderLimit);
-
-  static readonly getAsync = () => DownloadsFolder._getAsync({ folderType: FolderType.Downloads });
-  static readonly onChange = (cb: (instance: DownloadsFolder) => void) => {
-    Folders.onChange((folder) => {
-      if (folder.inner.ofFolder == FolderType.Downloads) {
-        cb(new DownloadsFolder(folder.inner.content!));
-      }
-    });
-  };
-
-  static readonly setFolderLimit = (amount: number) =>
-    DownloadsFolder._setFolderLimit({ folderType: FolderType.Downloads, amount });
-
-  static default(): DownloadsFolder {
-    return new this([]);
-  }
+export class RecentFolder extends UserDirectory {
+  static override readonly folderType = FolderType.Recent;
 }
 
-export class DocumentsFolder extends List<File> {
-  static readonly _getAsync = createInstanceInvokerWithArgs(this, SeelenCommand.GetUserFolderContent);
-  static readonly _setFolderLimit = createInstanceInvokerWithArgs(this, SeelenCommand.SetUserFolderLimit);
-
-  static readonly getAsync = () => DocumentsFolder._getAsync({ folderType: FolderType.Documents });
-  static readonly onChange = (cb: (instance: DocumentsFolder) => void) => {
-    Folders.onChange((folder) => {
-      if (folder.inner.ofFolder == FolderType.Documents) {
-        cb(new DocumentsFolder(folder.inner.content!));
-      }
-    });
-  };
-
-  static readonly setFolderLimit = (amount: number) =>
-    DocumentsFolder._setFolderLimit({ folderType: FolderType.Documents, amount });
-
-  static default(): DocumentsFolder {
-    return new this([]);
-  }
+export class DownloadsFolder extends UserDirectory {
+  static override readonly folderType = FolderType.Downloads;
 }
 
-export class PicturesFolder extends List<File> {
-  static readonly _getAsync = createInstanceInvokerWithArgs(this, SeelenCommand.GetUserFolderContent);
-  static readonly _setFolderLimit = createInstanceInvokerWithArgs(this, SeelenCommand.SetUserFolderLimit);
-
-  static readonly getAsync = () => PicturesFolder._getAsync({ folderType: FolderType.Pictures });
-  static readonly onChange = (cb: (instance: PicturesFolder) => void) => {
-    Folders.onChange((folder) => {
-      if (folder.inner.ofFolder == FolderType.Pictures) {
-        cb(new PicturesFolder(folder.inner.content!));
-      }
-    });
-  };
-
-  static readonly setFolderLimit = (amount: number) =>
-    PicturesFolder._setFolderLimit({ folderType: FolderType.Pictures, amount });
-
-  static default(): PicturesFolder {
-    return new this([]);
-  }
+export class DocumentsFolder extends UserDirectory {
+  static override readonly folderType = FolderType.Documents;
 }
 
-export class VideosFolder extends List<File> {
-  static readonly _getAsync = createInstanceInvokerWithArgs(this, SeelenCommand.GetUserFolderContent);
-  static readonly _setFolderLimit = createInstanceInvokerWithArgs(this, SeelenCommand.SetUserFolderLimit);
-
-  static readonly getAsync = () => VideosFolder._getAsync({ folderType: FolderType.Videos });
-  static readonly onChange = (cb: (instance: VideosFolder) => void) => {
-    Folders.onChange((folder) => {
-      if (folder.inner.ofFolder == FolderType.Videos) {
-        cb(new VideosFolder(folder.inner.content!));
-      }
-    });
-  };
-
-  static readonly setFolderLimit = (amount: number) =>
-    VideosFolder._setFolderLimit({ folderType: FolderType.Videos, amount });
-
-  static default(): VideosFolder {
-    return new this([]);
-  }
+export class PicturesFolder extends UserDirectory {
+  static override readonly folderType = FolderType.Pictures;
 }
 
-export class MusicFolder extends List<File> {
-  static readonly _getAsync = createInstanceInvokerWithArgs(this, SeelenCommand.GetUserFolderContent);
-  static readonly _setFolderLimit = createInstanceInvokerWithArgs(this, SeelenCommand.SetUserFolderLimit);
+export class VideosFolder extends UserDirectory {
+  static override readonly folderType = FolderType.Videos;
+}
 
-  static readonly getAsync = () => MusicFolder._getAsync({ folderType: FolderType.Music });
-  static readonly onChange = (cb: (instance: RecentFolder) => void) => {
-    Folders.onChange((folder) => {
-      if (folder.inner.ofFolder == FolderType.Music) {
-        cb(new RecentFolder(folder.inner.content!));
-      }
-    });
-  };
-
-  static readonly setFolderLimit = (amount: number) =>
-    MusicFolder._setFolderLimit({ folderType: FolderType.Music, amount });
-
-  static default(): MusicFolder {
-    return new this([]);
-  }
+export class MusicFolder extends UserDirectory {
+  static override readonly folderType = FolderType.Music;
 }
