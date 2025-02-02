@@ -1,6 +1,6 @@
-import type { UnlistenFn } from "@tauri-apps/api/event";
-import { invoke, type SeelenCommand, type SeelenEvent, subscribe } from "../handlers/mod.ts";
-import type { Options as ListenerOptions } from "@tauri-apps/api/event";
+import type { UnlistenFn } from '@tauri-apps/api/event';
+import { invoke, type SeelenCommand, type SeelenEvent, subscribe } from '../handlers/mod.ts';
+import type { Options as ListenerOptions } from '@tauri-apps/api/event';
 
 // deno-lint-ignore no-explicit-any
 interface ConstructorWithSingleArg<T = any> {
@@ -10,11 +10,11 @@ interface ConstructorWithSingleArg<T = any> {
 
 export function createInstanceInvoker<
   This extends ConstructorWithSingleArg<ReturnByCommand[Command]>,
-  Command extends SeelenCommand
+  Command extends SeelenCommand,
 >(
   Class: This,
   command: Command,
-  args?: NonNullable<ArgsByCommand[Command]>
+  args?: NonNullable<ArgsByCommand[Command]>,
 ): () => Promise<InstanceType<This>> {
   return async () => {
     return new Class(await invoke(command, args));
@@ -26,7 +26,7 @@ type InstanceOnEvent<Instance> = (cb: (instance: Instance) => void) => Promise<U
 export function createInstanceOnEvent<This extends ConstructorWithSingleArg>(
   Class: This,
   event: SeelenEvent,
-  options?: ListenerOptions
+  options?: ListenerOptions,
 ): InstanceOnEvent<InstanceType<This>> {
   return (cb: (instance: InstanceType<This>) => void) => {
     return subscribe(
@@ -34,7 +34,7 @@ export function createInstanceOnEvent<This extends ConstructorWithSingleArg>(
       (eventData) => {
         cb(new Class(eventData.payload));
       },
-      options
+      options,
     );
   };
 }

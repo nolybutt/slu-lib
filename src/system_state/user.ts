@@ -1,10 +1,10 @@
-import { SeelenCommand, SeelenEvent, invoke } from "../handlers/mod.ts";
-import { createInstanceInvoker, createInstanceOnEvent } from "../utils/State.ts";
-import { List } from "../utils/List.ts";
-import { enumFromUnion } from "../utils/enums.ts";
-import type { File, FolderChangedArgs, FolderType, User } from "@seelen-ui/types";
-import type { UnlistenFn } from "@tauri-apps/api/event";
-import { subscribe } from "../handlers/invokers.ts";
+import { invoke, SeelenCommand, SeelenEvent } from '../handlers/mod.ts';
+import { createInstanceInvoker, createInstanceOnEvent } from '../utils/State.ts';
+import { List } from '../utils/List.ts';
+import { enumFromUnion } from '../utils/enums.ts';
+import type { File, FolderChangedArgs, FolderType, User } from '@seelen-ui/types';
+import type { UnlistenFn } from '@tauri-apps/api/event';
+import { subscribe } from '../handlers/invokers.ts';
 
 declare global {
   interface ArgsByCommand {
@@ -24,13 +24,14 @@ declare global {
 }
 
 const FolderType = enumFromUnion<FolderType>({
-  Unknown: "Unknown",
-  Recent: "Recent",
-  Downloads: "Downloads",
-  Documents: "Documents",
-  Pictures: "Pictures",
-  Videos: "Videos",
-  Music: "Music",
+  Unknown: 'Unknown',
+  Recent: 'Recent',
+  Desktop: 'Desktop',
+  Downloads: 'Downloads',
+  Documents: 'Documents',
+  Pictures: 'Pictures',
+  Videos: 'Videos',
+  Music: 'Music',
 });
 
 export class UserDetails {
@@ -45,7 +46,7 @@ export class UserDirectory extends List<File> {
 
   static async getAsync(): Promise<UserDirectory> {
     return new this(
-      await invoke(SeelenCommand.GetUserFolderContent, { folderType: this.folderType })
+      await invoke(SeelenCommand.GetUserFolderContent, { folderType: this.folderType }),
     );
   }
 
@@ -70,6 +71,10 @@ export class RecentFolder extends UserDirectory {
   static override readonly folderType = FolderType.Recent;
 }
 
+export class DesktopFolder extends UserDirectory {
+  static override readonly folderType = FolderType.Desktop;
+}
+
 export class DownloadsFolder extends UserDirectory {
   static override readonly folderType = FolderType.Downloads;
 }
@@ -89,3 +94,5 @@ export class VideosFolder extends UserDirectory {
 export class MusicFolder extends UserDirectory {
   static override readonly folderType = FolderType.Music;
 }
+
+export { FolderType };

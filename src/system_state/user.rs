@@ -9,23 +9,27 @@ use ts_rs::TS;
 pub enum FolderType {
     Unknown,
     Recent,
+    Desktop,
     Downloads,
     Documents,
+    Music,
     Pictures,
     Videos,
-    Music,
 }
 
+static ALL_FOLDERS: [FolderType; 7] = [
+    FolderType::Recent,
+    FolderType::Desktop,
+    FolderType::Downloads,
+    FolderType::Documents,
+    FolderType::Music,
+    FolderType::Pictures,
+    FolderType::Videos,
+];
+
 impl FolderType {
-    pub fn values() -> [FolderType; 6] {
-        [
-            FolderType::Recent,
-            FolderType::Downloads,
-            FolderType::Documents,
-            FolderType::Pictures,
-            FolderType::Videos,
-            FolderType::Music,
-        ]
+    pub fn values() -> &'static [FolderType] {
+        &ALL_FOLDERS
     }
 }
 
