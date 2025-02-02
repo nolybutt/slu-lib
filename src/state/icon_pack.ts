@@ -17,11 +17,11 @@ declare global {
     [SeelenCommand.GetIcon]: GetIconArgs;
   }
   interface ReturnByCommand {
-    [SeelenCommand.StateGetIconPacks]: IconPack;
+    [SeelenCommand.StateGetIconPacks]: IconPack[];
     [SeelenCommand.GetIcon]: string | null;
   }
   interface PayloadByEvent {
-    [SeelenEvent.StateIconPacksChanged]: IconPack;
+    [SeelenEvent.StateIconPacksChanged]: IconPack[];
   }
 }
 

@@ -5,12 +5,12 @@ import type { Options as ListenerOptions } from '@tauri-apps/api/event';
 // deno-lint-ignore no-explicit-any
 interface ConstructorWithSingleArg<T = any> {
   // deno-lint-ignore no-explicit-any
-  new (inner: T): any;
+  new (arg0: T): any;
 }
 
 export function createInstanceInvoker<
-  This extends ConstructorWithSingleArg<ReturnByCommand[Command]>,
   Command extends SeelenCommand,
+  This extends ConstructorWithSingleArg<ReturnByCommand[Command]>,
 >(
   Class: This,
   command: Command,
@@ -23,11 +23,10 @@ export function createInstanceInvoker<
 
 type InstanceOnEvent<Instance> = (cb: (instance: Instance) => void) => Promise<UnlistenFn>;
 
-export function createInstanceOnEvent<This extends ConstructorWithSingleArg>(
-  Class: This,
-  event: SeelenEvent,
-  options?: ListenerOptions,
-): InstanceOnEvent<InstanceType<This>> {
+export function createInstanceOnEvent<
+  Event extends SeelenEvent,
+  This extends ConstructorWithSingleArg<PayloadByEvent[Event]>,
+>(Class: This, event: Event, options?: ListenerOptions): InstanceOnEvent<InstanceType<This>> {
   return (cb: (instance: InstanceType<This>) => void) => {
     return subscribe(
       event,
