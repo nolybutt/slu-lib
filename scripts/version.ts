@@ -11,7 +11,7 @@ cargoToml = cargoToml.replace(/^version\s*=\s*".*"/m, `version = "${newVersion}"
 await Deno.writeTextFile("Cargo.toml", cargoToml);
 
 await new Deno.Command("cargo", {
-  args: ["update"],
+  args: ["update", "-p", "seelen-core"],
   stderr: "inherit",
   stdout: "inherit",
 }).output();
@@ -24,6 +24,18 @@ console.log(`Version updated to ${newVersion}`);
 // add to git
 await new Deno.Command("git", {
   args: ["add", "Cargo.toml", "Cargo.lock", "deno.json"],
+  stderr: "inherit",
+  stdout: "inherit",
+}).output();
+
+await new Deno.Command("git", {
+  args: ["commit", "-m", `chore(release): v${newVersion}`],
+  stderr: "inherit",
+  stdout: "inherit",
+}).output();
+
+await new Deno.Command("git", {
+  args: ["tag", '-s', `v${newVersion}`, "-m", `v${newVersion}`],
   stderr: "inherit",
   stdout: "inherit",
 }).output();

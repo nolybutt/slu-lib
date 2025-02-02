@@ -1,6 +1,6 @@
 [package]
 name = "seelen-core"
-version = "1.9.7"
+version = "2.1.0"
 edition = "2021"
 
 [dependencies]
