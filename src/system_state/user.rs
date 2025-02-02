@@ -4,7 +4,7 @@ use serde::{Deserialize, Serialize};
 
 use ts_rs::TS;
 
-#[derive(Debug, Hash, Eq, PartialEq, Clone, Serialize, Deserialize, TS)]
+#[derive(Debug, Copy, Clone, Hash, Eq, PartialEq, Serialize, Deserialize, TS)]
 #[ts(export)]
 pub enum FolderType {
     Unknown,
