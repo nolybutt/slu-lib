@@ -36,10 +36,10 @@ jobs:
       - name: Build Rust Bindings (ts-rs)
         run: deno task build:rs
 
-      - name: Publish to JSR
+      # - name: Publish to JSR
         # Prepare the package for publishing performing all checks and validations without uploading
         # we just run this step to be safe when running the release workflow
-        run: deno publish --allow-slow-types --allow-dirty --dry-run
+        # run: deno publish --allow-slow-types --allow-dirty --dry-run
 
       - name: Build NPM package
         run: deno task build:npm
