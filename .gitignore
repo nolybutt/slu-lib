@@ -6,3 +6,6 @@ node_modules
 # builds
 target
 npm
+
+# generated
+src/types

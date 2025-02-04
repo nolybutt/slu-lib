@@ -6,7 +6,7 @@
   "exports": {
     ".": "./src/lib.ts",
     "./api": "./src/lib.ts",
-    "./types": "./gen/types/mod.ts"
+    "./types": "./src/types/mod.ts"
   },
   "tasks": {
     "build:npm": "deno run -A ./scripts/build_npm.ts",
@@ -25,7 +25,7 @@
     "@std/assert": "jsr:@std/assert@^1.0.8",
     "@std/encoding": "jsr:@std/encoding@^1.0.5",
     "@tauri-apps/api": "npm:@tauri-apps/api@^2.1.1",
-    "@seelen-ui/types": "./gen/types/mod.ts"
+    "@seelen-ui/types": "./src/types/mod.ts"
   },
   "compilerOptions": {
     "lib": [

@@ -29,11 +29,11 @@ await build({
   },
   test: false,
   entryPoints: [{
-    name: './types',
-    path: './gen/types/mod.ts',
-  }, {
     name: '.',
     path: './src/lib.ts',
+  }, {
+    name: './types',
+    path: './src/types/mod.ts',
   }],
   outDir: './npm',
   shims: {},

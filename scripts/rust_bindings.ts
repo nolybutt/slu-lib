@@ -1,5 +1,5 @@
-await Deno.mkdir('./gen/types', { recursive: true });
-const bindingsPath = await Deno.realPath('./gen/types');
+await Deno.mkdir('./src/types', { recursive: true });
+const bindingsPath = await Deno.realPath('./src/types');
 
 console.log('[Task] Removing old bindings...');
 await Deno.remove(bindingsPath, { recursive: true });
