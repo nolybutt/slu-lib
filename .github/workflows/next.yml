@@ -10,7 +10,7 @@ jobs:
   continuous-integration:
     uses: ./.github/workflows/ci.yml
 
-  build-and-plublish:
+  build-and-publish:
     needs: continuous-integration
     permissions:
       contents: read
@@ -47,6 +47,14 @@ jobs:
           node-version: "20.x"
           registry-url: "https://registry.npmjs.org"
 
+      - uses: dtolnay/rust-toolchain@master
+        with:
+          toolchain: nightly-2024-06-25
+      - uses: Swatinem/rust-cache@v2
+
+      - name: Build Rust Bindings (ts-rs)
+        run: deno task build:rs
+
       - name: Publish to JSR
         # Prepare the package for publishing performing all checks and validations without uploading
         # we just run this step to be safe when running the release workflow
@@ -63,7 +71,7 @@ jobs:
           npm publish --provenance --tag next
 
   send_event:
-    needs: build-and-plublish
+    needs: build-and-publish
     runs-on: ubuntu-latest
     steps:
       - name: Sending Event
