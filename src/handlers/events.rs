@@ -29,10 +29,7 @@ slu_events_declaration! {
     ActiveWorkspaceChanged = "active-workspace-changed",
 
     GlobalFocusChanged = "global-focus-changed",
-    GlobalHistoryChanged = "global-history-changed",
-    HistoryChangedOnMonitor = "global-history-changed-on-monitor",
     GlobalMouseMove = "global-mouse-move",
-
 
     HandleLayeredHitboxes = "handle-layered",
 
