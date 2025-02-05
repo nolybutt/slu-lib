@@ -7,7 +7,7 @@ import { decodeBase64Url } from '@std/encoding/base64url';
 
 declare global {
   interface Window {
-    __TAURI__?: unknown;
+    __TAURI_INTERNALS__?: unknown;
   }
 
   interface ArgsByCommand {
@@ -60,7 +60,7 @@ function _getCurrentWidget(): Readonly<WidgetInformation> {
 
 /** If called on backend context, will return an empty structure */
 export function getCurrentWidget(): Readonly<WidgetInformation> {
-  if (!globalThis.window || !globalThis.window.__TAURI__) {
+  if (!globalThis.window || !globalThis.window.__TAURI_INTERNALS__) {
     return {
       id: '',
       label: '',
