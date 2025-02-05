@@ -6,6 +6,10 @@ import { getCurrentWebviewWindow } from '@tauri-apps/api/webviewWindow';
 import { decodeBase64Url } from '@std/encoding/base64url';
 
 declare global {
+  interface Window {
+    __TAURI__?: unknown;
+  }
+
   interface ArgsByCommand {
     [SeelenCommand.StateGetWidgets]: null;
   }
@@ -56,7 +60,7 @@ function _getCurrentWidget(): Readonly<WidgetInformation> {
 
 /** If called on backend context, will return an empty structure */
 export function getCurrentWidget(): Readonly<WidgetInformation> {
-  if (!globalThis.window) {
+  if (!globalThis.window || !globalThis.window.__TAURI__) {
     return {
       id: '',
       label: '',
