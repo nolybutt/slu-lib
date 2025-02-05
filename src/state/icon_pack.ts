@@ -96,7 +96,81 @@ export class IconPackManager {
   }
 
   /**
+   * Return the icon path for an app or file, in case of no icon available will return `null`
+   *
+   * Icons are searching on this priority: umid > full path > filename > extension
+   *
+   * @param filePath The path to the app could be umid, full path.
+   * @example
+   * const iconPath = instance.getIcon({
+   *   path: "C:\\Program Files\\Steam\\steam.exe"
+   * });
+   * const iconPath = instance.getIcon({
+   *   umid: "Seelen.SeelenUI_p6yyn03m1894e!App"
+   * });
+   */
+  public getIconPath({ path, umid }: GetIconArgs): string | null {
+    if (!path && !umid) {
+      return null;
+    }
+
+    const orderedPacks: IconPack[] = [];
+    for (const active of this.actives.toReversed()) {
+      const pack = this._iconPacks.asArray().find((p) => p.metadata.filename === active);
+      if (pack) {
+        orderedPacks.push(pack);
+      }
+    }
+
+    if (umid) {
+      for (const pack of orderedPacks) {
+        const subPath = pack.apps[umid];
+        if (subPath) {
+          return this.iconPackPath + '\\' + pack.metadata.filename + '\\' + subPath;
+        }
+      }
+    }
+
+    if (!path) {
+      return null;
+    }
+    for (const pack of orderedPacks) {
+      const subPath = pack.apps[path];
+      if (subPath) {
+        return this.iconPackPath + '\\' + pack.metadata.filename + '\\' + subPath;
+      }
+    }
+
+    const filename = path.split(/[/\\]/g).pop();
+    if (!filename) {
+      return null;
+    }
+    for (const pack of orderedPacks) {
+      const subPath = pack.apps[filename];
+      if (subPath) {
+        return this.iconPackPath + '\\' + pack.metadata.filename + '\\' + subPath;
+      }
+    }
+
+    const extension = filename.split('.').pop();
+    if (!extension) {
+      return null;
+    }
+    for (const pack of orderedPacks) {
+      const subPath = pack.files[extension];
+      if (subPath) {
+        return this.iconPackPath + '\\' + pack.metadata.filename + '\\' + subPath;
+      }
+    }
+
+    // No icon founnd on any icon pack for this search
+    return null;
+  }
+
+  /**
    * Return the icon URL for an app or file, in case of no icon available will return `null`
+   *
+   * Icons are searching on this priority: umid > full path > filename > extension
    *
    * @param filePath The path to the app could be umid, full path.
    * @example
@@ -108,31 +182,8 @@ export class IconPackManager {
    * });
    */
   public getIcon({ path, umid }: GetIconArgs): string | null {
-    if (!path && !umid) {
-      return null;
-    }
-
-    for (const active of this.actives.toReversed()) {
-      const pack = this._iconPacks.asArray().find((p) => p.metadata.filename === active);
-      if (!pack) {
-        continue;
-      }
-
-      let icon: string | undefined;
-      if (umid) {
-        icon = pack.apps[umid];
-      }
-
-      if (!icon && path) {
-        const filename = path?.split(/[/\\]/g).pop();
-        icon = filename ? pack.apps[filename] || pack.apps[path] : pack.apps[path];
-      }
-
-      if (icon) {
-        return convertFileSrc(this.iconPackPath + '\\' + pack.metadata.filename + '\\' + icon);
-      }
-    }
-    return null;
+    const iconPath = this.getIconPath({ path, umid });
+    return iconPath ? convertFileSrc(iconPath) : null;
   }
 
   /**

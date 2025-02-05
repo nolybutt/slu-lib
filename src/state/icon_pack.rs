@@ -36,7 +36,12 @@ pub struct IconPack {
     #[serde(alias = "info")]
     pub metadata: ResourceMetadata,
     /// Key can be user model id, filename or a full path.
+    /// In case of path this should be an executable or a lnk file, otherwise use `files`.
     ///
     /// Value is the path to the icon relative to the icon pack folder.
     pub apps: HashMap<String, PathBuf>,
+    /// Intended to store file icons by extension
+    ///
+    /// Key is the extension, value is the relative path to the icon
+    pub files: HashMap<String, PathBuf>,
 }
