@@ -1,10 +1,10 @@
-import type { IconPack } from "@seelen-ui/types";
-import { List } from "../utils/List.ts";
-import { createInstanceInvoker, createInstanceOnEvent } from "../utils/State.ts";
-import { invoke, SeelenCommand, SeelenEvent } from "../handlers/mod.ts";
-import { path } from "@tauri-apps/api";
-import { Settings } from "./settings/mod.ts";
-import { convertFileSrc } from "@tauri-apps/api/core";
+import type { IconPack } from '@seelen-ui/types';
+import { List } from '../utils/List.ts';
+import { createInstanceInvoker, createInstanceOnEvent } from '../utils/State.ts';
+import { invoke, SeelenCommand, SeelenEvent } from '../handlers/mod.ts';
+import { path } from '@tauri-apps/api';
+import { Settings } from './settings/mod.ts';
+import { convertFileSrc } from '@tauri-apps/api/core';
 
 export interface GetIconArgs {
   path?: string | null;
@@ -39,7 +39,7 @@ export class IconPackManager {
   protected constructor(
     protected iconPackPath: string,
     protected _iconPacks: IconPackList,
-    protected _actives: string[]
+    protected _actives: string[],
   ) {}
 
   public get iconPacks(): IconPackList {
@@ -58,9 +58,9 @@ export class IconPackManager {
    */
   public static async create(): Promise<IconPackManager> {
     const manager = new IconPackManager(
-      await path.resolve(await path.appDataDir(), "icons"),
+      await path.resolve(await path.appDataDir(), 'icons'),
       await IconPackList.getAsync(),
-      (await Settings.getAsync()).inner.iconPacks
+      (await Settings.getAsync()).inner.iconPacks,
     );
     IconPackList.onChange((list) => {
       manager._iconPacks = list;
@@ -145,11 +145,11 @@ export class IconPackManager {
     }
 
     const lowercasedPath = path.toLowerCase();
-    const isExecutable = lowercasedPath.endsWith(".exe") || lowercasedPath.endsWith(".lnk");
+    const isExecutable = lowercasedPath.endsWith('.exe') || lowercasedPath.endsWith('.lnk');
 
     // For non-executable files, search by file extension
     if (!isExecutable) {
-      const extension = lowercasedPath.split(".").pop();
+      const extension = lowercasedPath.split('.').pop();
       if (!extension) {
         return null;
       }
