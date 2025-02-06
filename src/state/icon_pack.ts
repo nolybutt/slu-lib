@@ -1,10 +1,10 @@
-import type { IconPack } from '@seelen-ui/types';
-import { List } from '../utils/List.ts';
-import { createInstanceInvoker, createInstanceOnEvent } from '../utils/State.ts';
-import { invoke, SeelenCommand, SeelenEvent } from '../handlers/mod.ts';
-import { path } from '@tauri-apps/api';
-import { Settings } from './settings/mod.ts';
-import { convertFileSrc } from '@tauri-apps/api/core';
+import type { IconPack } from "@seelen-ui/types";
+import { List } from "../utils/List.ts";
+import { createInstanceInvoker, createInstanceOnEvent } from "../utils/State.ts";
+import { invoke, SeelenCommand, SeelenEvent } from "../handlers/mod.ts";
+import { path } from "@tauri-apps/api";
+import { Settings } from "./settings/mod.ts";
+import { convertFileSrc } from "@tauri-apps/api/core";
 
 export interface GetIconArgs {
   path?: string | null;
@@ -36,28 +36,18 @@ export class IconPackList extends List<IconPack> {
 export class IconPackManager {
   private callbacks: Set<() => void> = new Set();
 
-  private constructor(
-    private iconPackPath: string,
-    private _iconPacks: IconPackList,
-    private _actives: string[],
+  protected constructor(
+    protected iconPackPath: string,
+    protected _iconPacks: IconPackList,
+    protected _actives: string[]
   ) {}
 
   public get iconPacks(): IconPackList {
     return this._iconPacks;
   }
 
-  private set iconPacks(packs: IconPackList) {
-    this._iconPacks = packs;
-    this.callbacks.forEach((cb) => cb());
-  }
-
   public get actives(): string[] {
     return this._actives;
-  }
-
-  private set actives(actives: string[]) {
-    this._actives = actives;
-    this.callbacks.forEach((cb) => cb());
   }
 
   /**
@@ -68,15 +58,17 @@ export class IconPackManager {
    */
   public static async create(): Promise<IconPackManager> {
     const manager = new IconPackManager(
-      await path.resolve(await path.appDataDir(), 'icons'),
+      await path.resolve(await path.appDataDir(), "icons"),
       await IconPackList.getAsync(),
-      (await Settings.getAsync()).inner.iconPacks,
+      (await Settings.getAsync()).inner.iconPacks
     );
     IconPackList.onChange((list) => {
-      manager.iconPacks = list;
+      manager._iconPacks = list;
+      manager.callbacks.forEach((cb) => cb());
     });
     Settings.onChange((settings) => {
-      manager.actives = settings.inner.iconPacks;
+      manager._actives = settings.inner.iconPacks;
+      manager.callbacks.forEach((cb) => cb());
     });
     return manager;
   }
@@ -96,24 +88,39 @@ export class IconPackManager {
   }
 
   /**
-   * Return the icon path for an app or file, in case of no icon available will return `null`
+   * Returns the icon path for an app or file. If no icon is available, returns `null`.
    *
-   * Icons are searching on this priority: umid > full path > filename > extension
+   * The search for icons follows this priority order:
+   * 1. UMID (App User Model Id)
+   * 2. Full path or filename (for executable files like .exe or .lnk)
+   * 3. File extension (for non-executable files like .png, .jpg, .txt)
    *
-   * @param filePath The path to the app could be umid, full path.
+   * Icon packs are searched in the order of their priority. An icon from a higher-priority pack
+   * will override an icon from a lower-priority pack, even if the latter matches the search criteria.
+   *
+   * @param {Object} args - Arguments for retrieving the icon path.
+   * @param {string} [args.path] - The full path to the app or file.
+   * @param {string} [args.umid] - The UMID of the app.
+   * @returns {string | null} - The path to the icon, or `null` if no icon is found.
+   *
    * @example
-   * const iconPath = instance.getIcon({
+   * // Example 1: Get icon by full path
+   * const iconPath = instance.getIconPath({
    *   path: "C:\\Program Files\\Steam\\steam.exe"
    * });
-   * const iconPath = instance.getIcon({
+   *
+   * // Example 2: Get icon by UMID
+   * const iconPath = instance.getIconPath({
    *   umid: "Seelen.SeelenUI_p6yyn03m1894e!App"
    * });
    */
   public getIconPath({ path, umid }: GetIconArgs): string | null {
+    // If neither path nor UMID is provided, return null
     if (!path && !umid) {
       return null;
     }
 
+    // Create an ordered list of icon packs based on their priority
     const orderedPacks: IconPack[] = [];
     for (const active of this.actives.toReversed()) {
       const pack = this._iconPacks.asArray().find((p) => p.metadata.filename === active);
@@ -122,62 +129,81 @@ export class IconPackManager {
       }
     }
 
+    // Search by UMID first (highest priority)
     if (umid) {
       for (const pack of orderedPacks) {
         const subPath = pack.apps[umid];
         if (subPath) {
-          return this.iconPackPath + '\\' + pack.metadata.filename + '\\' + subPath;
+          return `${this.iconPackPath}\\${pack.metadata.filename}\\${subPath}`;
         }
       }
     }
 
+    // If no UMID is provided, search by path
     if (!path) {
       return null;
     }
-    for (const pack of orderedPacks) {
-      const subPath = pack.apps[path];
-      if (subPath) {
-        return this.iconPackPath + '\\' + pack.metadata.filename + '\\' + subPath;
+
+    const lowercasedPath = path.toLowerCase();
+    const isExecutable = lowercasedPath.endsWith(".exe") || lowercasedPath.endsWith(".lnk");
+
+    // For non-executable files, search by file extension
+    if (!isExecutable) {
+      const extension = lowercasedPath.split(".").pop();
+      if (!extension) {
+        return null;
       }
+
+      for (const pack of orderedPacks) {
+        const subPath = pack.files[extension];
+        if (subPath) {
+          return `${this.iconPackPath}\\${pack.metadata.filename}\\${subPath}`;
+        }
+      }
+      return null;
     }
 
+    // For executable files, search by full path or filename
     const filename = path.split(/[/\\]/g).pop();
     if (!filename) {
       return null;
     }
+
     for (const pack of orderedPacks) {
-      const subPath = pack.apps[filename];
+      const subPath = pack.apps[path] || pack.apps[filename];
       if (subPath) {
-        return this.iconPackPath + '\\' + pack.metadata.filename + '\\' + subPath;
+        return `${this.iconPackPath}\\${pack.metadata.filename}\\${subPath}`;
       }
     }
 
-    const extension = filename.split('.').pop();
-    if (!extension) {
-      return null;
-    }
-    for (const pack of orderedPacks) {
-      const subPath = pack.files[extension];
-      if (subPath) {
-        return this.iconPackPath + '\\' + pack.metadata.filename + '\\' + subPath;
-      }
-    }
-
-    // No icon founnd on any icon pack for this search
+    // If no icon is found in any icon pack, return null
     return null;
   }
 
   /**
-   * Return the icon URL for an app or file, in case of no icon available will return `null`
+   * Returns the icon Url/Src for an app or file. If no icon is available, returns `null`.
    *
-   * Icons are searching on this priority: umid > full path > filename > extension
+   * The search for icons follows this priority order:
+   * 1. UMID (App User Model Id)
+   * 2. Full path or filename (for executable files like .exe or .lnk)
+   * 3. File extension (for non-executable files like .png, .jpg, .txt)
    *
-   * @param filePath The path to the app could be umid, full path.
+   * Icon packs are searched in the order of their priority. An icon from a higher-priority pack
+   * will override an icon from a lower-priority pack, even if the latter matches the search criteria.
+   *
+   * @param {Object} args - Arguments for retrieving the icon path.
+   * @param {string} [args.path] - The full path to the app or file.
+   * @param {string} [args.umid] - The UMID of the app.
+   * @returns {string | null} - The path to the icon, or `null` if no icon is found.
+   *
    * @example
-   * const iconUrl = instance.getIcon({
+   * // Example 1: Get icon by full path
+   * const iconSrc = instance.getIconPath({
    *   path: "C:\\Program Files\\Steam\\steam.exe"
    * });
-   * const iconUrl = instance.getIcon({
+   *
+   * // Example 2: Get icon by UMID
+   * const iconSrc = instance.getIconPath({
    *   umid: "Seelen.SeelenUI_p6yyn03m1894e!App"
    * });
    */
