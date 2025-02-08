@@ -10,20 +10,37 @@ pub struct WegAppGroupItem {
     pub handle: isize,
 }
 
+#[derive(Debug, Clone, Default, PartialEq, Eq, Serialize, Deserialize, JsonSchema, TS)]
+pub enum WegItemSubtype {
+    File,
+    Folder,
+    App,
+    /// this is used for backward compatibility, will be removed in v3
+    #[default]
+    UnknownV2_1_6,
+}
+
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize, JsonSchema, TS)]
 #[serde(rename_all = "camelCase")]
 pub struct PinnedWegItemData {
     /// internal UUID to differentiate items
     pub id: String,
+    /// Subtype of the item (mandatory, but is optional for backward compatibility)
+    #[serde(default)]
+    pub subtype: WegItemSubtype,
     /// Application user model id.
     pub umid: Option<String>,
-    /// Direct path to file, forder or program.
+    /// path to file, forder or program.
     pub path: PathBuf,
     /// literal command to be executed via CMD.
     pub relaunch_command: String,
+    /// path where ejecute the relaunch command
+    pub relaunch_in: Option<PathBuf>,
     /// display name of the item
     pub display_name: String,
-    /// true if self.path is a folder
+    /// @deprecated, use subtype `Folder` instead will be removed in v3
+    #[ts(skip)]
+    #[serde(skip_serializing)]
     pub is_dir: bool,
     /// Window handles in the app group, in case of pinned file/dir always will be empty
     #[serde(default, skip_deserializing)]
@@ -103,9 +120,11 @@ impl Default for WegItems {
             center: vec![WegItem::Pinned(PinnedWegItemData {
                 id: String::new(),
                 umid: None,
+                subtype: WegItemSubtype::App,
                 path: "C:\\Windows\\explorer.exe".into(),
                 display_name: "Explorer".into(),
                 relaunch_command: "C:\\Windows\\explorer.exe".into(),
+                relaunch_in: None,
                 is_dir: false,
                 windows: vec![],
                 pin_disabled: false,
@@ -126,6 +145,17 @@ impl WegItems {
                     }
                     if data.relaunch_command.is_empty() {
                         data.relaunch_command = data.path.to_string_lossy().to_string();
+                    }
+
+                    // migration step for items before v2.1.6
+                    if data.subtype == WegItemSubtype::UnknownV2_1_6 {
+                        data.subtype = if data.is_dir {
+                            WegItemSubtype::Folder
+                        } else if data.relaunch_command.to_lowercase().contains(".exe") {
+                            WegItemSubtype::App
+                        } else {
+                            WegItemSubtype::File
+                        };
                     }
                 }
                 WegItem::Temporal(data) => {

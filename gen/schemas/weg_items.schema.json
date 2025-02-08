@@ -8,10 +8,11 @@
         {
           "displayName": "Explorer",
           "id": "",
-          "isDir": false,
           "path": "C:\\Windows\\explorer.exe",
           "pinDisabled": false,
           "relaunchCommand": "C:\\Windows\\explorer.exe",
+          "relaunchIn": null,
+          "subtype": "App",
           "type": "Pinned",
           "umid": null,
           "windows": []
@@ -91,11 +92,12 @@
               "type": "string"
             },
             "isDir": {
-              "description": "true if self.path is a folder",
+              "description": "@deprecated, use subtype `Folder` instead will be removed in v3",
+              "writeOnly": true,
               "type": "boolean"
             },
             "path": {
-              "description": "Direct path to file, forder or program.",
+              "description": "path to file, forder or program.",
               "type": "string"
             },
             "pinDisabled": {
@@ -107,6 +109,22 @@
             "relaunchCommand": {
               "description": "literal command to be executed via CMD.",
               "type": "string"
+            },
+            "relaunchIn": {
+              "description": "path where ejecute the relaunch command",
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "subtype": {
+              "description": "Subtype of the item (mandatory, but is optional for backward compatibility)",
+              "default": "UnknownV2_1_6",
+              "allOf": [
+                {
+                  "$ref": "#/definitions/WegItemSubtype"
+                }
+              ]
             },
             "type": {
               "type": "string",
@@ -152,11 +170,12 @@
               "type": "string"
             },
             "isDir": {
-              "description": "true if self.path is a folder",
+              "description": "@deprecated, use subtype `Folder` instead will be removed in v3",
+              "writeOnly": true,
               "type": "boolean"
             },
             "path": {
-              "description": "Direct path to file, forder or program.",
+              "description": "path to file, forder or program.",
               "type": "string"
             },
             "pinDisabled": {
@@ -168,6 +187,22 @@
             "relaunchCommand": {
               "description": "literal command to be executed via CMD.",
               "type": "string"
+            },
+            "relaunchIn": {
+              "description": "path where ejecute the relaunch command",
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "subtype": {
+              "description": "Subtype of the item (mandatory, but is optional for backward compatibility)",
+              "default": "UnknownV2_1_6",
+              "allOf": [
+                {
+                  "$ref": "#/definitions/WegItemSubtype"
+                }
+              ]
             },
             "type": {
               "type": "string",
@@ -246,6 +281,25 @@
               ]
             }
           }
+        }
+      ]
+    },
+    "WegItemSubtype": {
+      "oneOf": [
+        {
+          "type": "string",
+          "enum": [
+            "File",
+            "Folder",
+            "App"
+          ]
+        },
+        {
+          "description": "this is used for backward compatibility, will be removed in v3",
+          "type": "string",
+          "enum": [
+            "UnknownV2_1_6"
+          ]
         }
       ]
     }
