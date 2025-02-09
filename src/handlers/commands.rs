@@ -65,8 +65,8 @@ slu_commands_declaration! {
     GetAutoStartStatus = get_auto_start_status,
     StateGetThemes = state_get_themes,
     StateGetWegItems = state_get_weg_items,
-    StateGetToolbarItems = state_get_toolbar_items,
     StateWriteWegItems = state_write_weg_items,
+    StateGetToolbarItems = state_get_toolbar_items,
     StateGetSettings = state_get_settings,
     StateWriteSettings = state_write_settings,
     StateGetDefaultSettings = state_get_default_settings,
@@ -79,6 +79,7 @@ slu_commands_declaration! {
     StateGetWidgets = state_get_widgets,
     StateGetIconPacks = state_get_icon_packs,
     StateGetProfiles = state_get_profiles,
+    StateDeleteCachedIcons = state_delete_cached_icons,
 
     // User
     GetUser = get_user,
