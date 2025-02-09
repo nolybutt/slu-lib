@@ -40,7 +40,7 @@ pub struct PinnedWegItemData {
     pub display_name: String,
     /// @deprecated, use subtype `Folder` instead will be removed in v3
     #[ts(skip)]
-    #[serde(skip_serializing)]
+    #[serde(default, skip_serializing)]
     pub is_dir: bool,
     /// Window handles in the app group, in case of pinned file/dir always will be empty
     #[serde(default, skip_deserializing)]
