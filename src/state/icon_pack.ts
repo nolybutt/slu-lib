@@ -5,6 +5,7 @@ import { invoke, SeelenCommand, SeelenEvent } from '../handlers/mod.ts';
 import { path } from '@tauri-apps/api';
 import { Settings } from './settings/mod.ts';
 import { convertFileSrc } from '@tauri-apps/api/core';
+import type { UnlistenFn } from '@tauri-apps/api/event';
 
 export interface GetIconArgs {
   path?: string | null;
@@ -37,6 +38,8 @@ export class IconPackList extends List<IconPack> {
  */
 export class IconPackManager {
   private callbacks: Set<() => void> = new Set();
+  private unlistenerSettings: UnlistenFn | null = null;
+  private unlistenerIcons: UnlistenFn | null = null;
 
   protected constructor(
     protected iconPackPath: string,
@@ -59,34 +62,65 @@ export class IconPackManager {
    * @returns A new instance of IconPackManager
    */
   public static async create(): Promise<IconPackManager> {
-    const manager = new IconPackManager(
+    const instance = new IconPackManager(
       await path.resolve(await path.appDataDir(), 'icons'),
       await IconPackList.getAsync(),
       (await Settings.getAsync()).inner.iconPacks,
     );
-    IconPackList.onChange((list) => {
-      manager._iconPacks = list;
-      manager.callbacks.forEach((cb) => cb());
-    });
-    Settings.onChange((settings) => {
-      manager._actives = settings.inner.iconPacks;
-      manager.callbacks.forEach((cb) => cb());
-    });
-    return manager;
+
+    return instance;
   }
 
   /**
-   * Register a callback to be called when the list of active icon packs changes
+   * Registers a callback to be invoked when the list of active icon packs changes.
+   * This method also sets up listeners to detect changes in the icon pack list and
+   * the active icon packs settings. If no callbacks are registered beforehand, the
+   * listeners are initialized. When no callbacks remain registered, the listeners are stopped.
    *
-   * @param cb The callback to be called when the list of icon packs changes
+   * @param {() => void} cb - The callback to be invoked when the list of active icon packs changes.
+   *                          This callback takes no arguments and returns no value.
+   * @returns {Promise<UnlistenFn>} A promise that resolves to an `UnlistenFn` function. When invoked,
+   *                                this function unregisters the callback and stops listening for changes
+   *                                if no other callbacks are registered.
+   *
    * @example
    * const manager = await IconPackManager.create();
-   * manager.onChange(() => {
+   * const unlisten = await manager.onChange(() => {
    *   console.log("Icon packs changed: ", manager.actives);
    * });
+   *
+   * // Later, to stop listening for changes:
+   * unlisten();
+   *
+   * @remarks
+   * - The `this` context inside the callback refers to the `IconPackManager` instance, provided the callback
+   *   is not rebound to another context (e.g., using `bind`, `call`, or `apply`).
+   * - If the callback is defined as an arrow function, `this` will be lexically bound to the surrounding context.
+   * - If the callback is a regular function, ensure it is bound correctly to avoid `this` being `undefined` (in strict mode)
+   *   or the global object (in non-strict mode).
+   *
+   * @see {@link IconPackManager} for the class this method belongs to.
+   * @see {@link UnlistenFn} for the type of the function returned by this method.
    */
-  public onChange(cb: () => void): void {
+  public async onChange(cb: () => void): Promise<UnlistenFn> {
     this.callbacks.add(cb);
+    if (!this.unlistenerIcons && !this.unlistenerSettings) {
+      this.unlistenerIcons = await IconPackList.onChange((list) => {
+        this._iconPacks = list;
+        this.callbacks.forEach((cb) => cb());
+      });
+      this.unlistenerSettings = await Settings.onChange((settings) => {
+        this._actives = settings.inner.iconPacks;
+        this.callbacks.forEach((cb) => cb());
+      });
+    }
+    return () => {
+      this.callbacks.delete(cb);
+      if (this.callbacks.size === 0) {
+        this.unlistenerIcons?.();
+        this.unlistenerSettings?.();
+      }
+    };
   }
 
   /**
