@@ -1,6 +1,6 @@
 {
   "name": "@seelen-ui/lib",
-  "version": "2.1.3",
+  "version": "2.1.8",
   "description": "Seelen UI Library for Widgets",
   "license": "Apache-2.0",
   "exports": {
