@@ -2,7 +2,7 @@ use schemars::JsonSchema;
 use serde::{Deserialize, Serialize};
 use ts_rs::TS;
 
-use crate::rect::Rect;
+use crate::{error::Result, rect::Rect};
 
 use super::{
     by_widget::SettingsByWidget, SeelenWallWallpaper, WegPinnedItemsVisibility,
@@ -137,22 +137,22 @@ impl Default for MonitorConfiguration {
     fn default() -> Self {
         let mut settings_by_widget = SettingsByWidget::default();
         settings_by_widget
-            .set_config(
+            .set(
                 WidgetId::known_toolbar(),
                 FancyToolbarSettingsByMonitor::default(),
             )
             .unwrap();
         settings_by_widget
-            .set_config(WidgetId::known_weg(), SeelenWegSettingsByMonitor::default())
+            .set(WidgetId::known_weg(), SeelenWegSettingsByMonitor::default())
             .unwrap();
         settings_by_widget
-            .set_config(
+            .set(
                 WidgetId::known_wm(),
                 WindowManagerSettingsByMonitor::default(),
             )
             .unwrap();
         settings_by_widget
-            .set_config(
+            .set(
                 WidgetId::known_wall(),
                 SeelenWallSettingsByMonitor::default(),
             )
@@ -171,40 +171,46 @@ impl Default for MonitorConfiguration {
 
 impl MonitorConfiguration {
     pub fn tb(&self) -> FancyToolbarSettingsByMonitor {
-        self.by_widget.get_config(&WidgetId::known_toolbar())
+        self.by_widget.get(&WidgetId::known_toolbar())
     }
 
     pub fn weg(&self) -> SeelenWegSettingsByMonitor {
-        self.by_widget.get_config(&WidgetId::known_weg())
+        self.by_widget.get(&WidgetId::known_weg())
     }
 
     pub fn wm(&self) -> WindowManagerSettingsByMonitor {
-        self.by_widget.get_config(&WidgetId::known_wm())
+        self.by_widget.get(&WidgetId::known_wm())
     }
 
     pub fn wall(&self) -> SeelenWallSettingsByMonitor {
-        self.by_widget.get_config(&WidgetId::known_wall())
+        self.by_widget.get(&WidgetId::known_wall())
     }
 
     /// Migrate old settings (before v2.1.0) (will be removed in v3.0.0)
-    pub fn migrate(&mut self) -> Result<(), serde_json::Error> {
+    pub fn migrate(&mut self) -> Result<()> {
         let dict = &mut self.by_widget;
         if let Some(tb) = self.tb.take() {
-            dict.set_config(WidgetId::known_toolbar(), tb)?;
+            dict.set(WidgetId::known_toolbar(), tb)?;
         }
         if let Some(weg) = self.weg.take() {
-            dict.set_config(WidgetId::known_weg(), weg)?;
+            dict.set(WidgetId::known_weg(), weg)?;
         }
         if let Some(wm) = self.wm.take() {
-            dict.set_config(WidgetId::known_wm(), wm)?;
+            dict.set(WidgetId::known_wm(), wm)?;
         }
         if let Some(wall) = self.wall.take() {
-            dict.set_config(WidgetId::known_wall(), wall)?;
+            dict.set(WidgetId::known_wall(), wall)?;
         }
         Ok(())
     }
 
-    pub fn sanitize(&mut self) {
+    pub fn sanitize(&mut self) -> Result<()> {
+        self.by_widget.set(WidgetId::known_toolbar(), self.tb())?;
+        self.by_widget.set(WidgetId::known_wm(), self.wm())?;
+        self.by_widget.set(WidgetId::known_wall(), self.wall())?;
+        self.by_widget.set(WidgetId::known_weg(), self.weg())?;
+
         self.by_widget.sanitize();
+        Ok(())
     }
 }

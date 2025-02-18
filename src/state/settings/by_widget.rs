@@ -24,14 +24,14 @@ impl SettingsByWidget {
         self.0.get_mut(widget_id)
     }
 
-    pub fn get_config<T: Default + for<'de> Deserialize<'de>>(&self, widget_id: &WidgetId) -> T {
+    pub fn get<T: Default + for<'de> Deserialize<'de>>(&self, widget_id: &WidgetId) -> T {
         self.0
             .get(widget_id)
             .and_then(|v| serde_json::from_value(v.clone().into()).ok())
             .unwrap_or_default()
     }
 
-    pub fn set_config<T: Serialize>(
+    pub fn set<T: Serialize>(
         &mut self,
         widget_id: WidgetId,
         config: T,
