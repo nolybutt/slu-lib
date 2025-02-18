@@ -31,6 +31,8 @@ pub struct FancyToolbarSettings {
     pub enabled: bool,
     /// height of the fancy toolbar
     pub height: u32,
+    /// position of the toolbar
+    pub position: FancyToolbarSide,
     /// hide mode
     pub hide_mode: HideMode,
     /// enables the logic which persists last overlapped HWND to enchance multimonitor overlap feature
@@ -46,12 +48,19 @@ impl Default for FancyToolbarSettings {
         Self {
             enabled: true,
             height: 30,
+            position: FancyToolbarSide::Top,
             hide_mode: HideMode::Never,
             use_multi_monitor_overlap_logic: false,
             delay_to_show: 100,
             delay_to_hide: 800,
         }
     }
+}
+
+#[derive(Debug, Copy, Clone, PartialEq, Eq, Serialize, Deserialize, JsonSchema, TS)]
+pub enum FancyToolbarSide {
+    Top,
+    Bottom,
 }
 
 // ============== SeelenWeg Settings ==============
