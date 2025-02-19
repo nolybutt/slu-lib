@@ -24,7 +24,7 @@
     "@deno/dnt": "jsr:@deno/dnt@^0.41.3",
     "@std/assert": "jsr:@std/assert@^1.0.8",
     "@std/encoding": "jsr:@std/encoding@^1.0.5",
-    "@tauri-apps/api": "npm:@tauri-apps/api@^2.1.1",
+    "@tauri-apps/api": "npm:@tauri-apps/api@^2.2.0",
     "@seelen-ui/types": "./src/types/mod.ts"
   },
   "compilerOptions": {

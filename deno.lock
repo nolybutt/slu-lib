@@ -25,7 +25,7 @@
     "jsr:@std/path@~0.225.2": "0.225.2",
     "jsr:@ts-morph/bootstrap@0.24": "0.24.0",
     "jsr:@ts-morph/common@0.24": "0.24.0",
-    "npm:@tauri-apps/api@^2.1.1": "2.1.1"
+    "npm:@tauri-apps/api@^2.2.0": "2.2.0"
   },
   "jsr": {
     "@david/code-block-writer@13.0.3": {
@@ -140,8 +140,8 @@
     }
   },
   "npm": {
-    "@tauri-apps/api@2.1.1": {
-      "integrity": "sha512-fzUfFFKo4lknXGJq8qrCidkUcKcH2UHhfaaCNt4GzgzGaW2iS26uFOg4tS3H4P8D6ZEeUxtiD5z0nwFF0UN30A=="
+    "@tauri-apps/api@2.2.0": {
+      "integrity": "sha512-R8epOeZl1eJEl603aUMIGb4RXlhPjpgxbGVEaqY+0G5JG9vzV/clNlzTeqc+NLYXVqXcn8mb4c5b9pJIUDEyAg=="
     }
   },
   "redirects": {
@@ -261,7 +261,7 @@
       "jsr:@deno/dnt@~0.41.3",
       "jsr:@std/assert@^1.0.8",
       "jsr:@std/encoding@^1.0.5",
-      "npm:@tauri-apps/api@^2.1.1"
+      "npm:@tauri-apps/api@^2.2.0"
     ]
   }
 }
