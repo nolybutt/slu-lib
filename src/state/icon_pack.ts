@@ -1,4 +1,4 @@
-import type { IconPack } from '@seelen-ui/types';
+import type { Icon, IconPack } from '@seelen-ui/types';
 import { List } from '../utils/List.ts';
 import { createInstanceInvoker, createInstanceOnEvent } from '../utils/State.ts';
 import { invoke, SeelenCommand, SeelenEvent } from '../handlers/mod.ts';
@@ -40,6 +40,16 @@ export class IconPackManager {
   private callbacks: Set<() => void> = new Set();
   private unlistenerSettings: UnlistenFn | null = null;
   private unlistenerIcons: UnlistenFn | null = null;
+
+  private static resolveIcon(parent: string, icon: Icon): string {
+    if (typeof icon === 'string') {
+      return `${parent}\\${icon}`;
+    }
+    if (globalThis.window.matchMedia('(prefers-color-scheme: dark)').matches) {
+      return `${parent}\\${icon.dark}`;
+    }
+    return `${parent}\\${icon.light}`;
+  }
 
   protected constructor(
     protected iconPackPath: string,
@@ -168,9 +178,12 @@ export class IconPackManager {
     // Search by UMID first (highest priority)
     if (umid) {
       for (const pack of orderedPacks) {
-        const subPath = pack.apps[umid];
-        if (subPath) {
-          return `${this.iconPackPath}\\${pack.metadata.filename}\\${subPath}`;
+        const icon = pack.apps[umid];
+        if (icon) {
+          return IconPackManager.resolveIcon(
+            `${this.iconPackPath}\\${pack.metadata.filename}`,
+            icon,
+          );
         }
       }
     }
@@ -189,11 +202,10 @@ export class IconPackManager {
       if (!extension) {
         return null;
       }
-
       for (const pack of orderedPacks) {
-        const subPath = pack.files[extension];
-        if (subPath) {
-          return `${this.iconPackPath}\\${pack.metadata.filename}\\${subPath}`;
+        const icon = pack.files[extension];
+        if (icon) {
+          return IconPackManager.resolveIcon(`${this.iconPackPath}\\${pack.metadata.filename}`, icon);
         }
       }
       return null;
@@ -206,9 +218,9 @@ export class IconPackManager {
     }
 
     for (const pack of orderedPacks) {
-      const subPath = pack.apps[path] || pack.apps[filename];
-      if (subPath) {
-        return `${this.iconPackPath}\\${pack.metadata.filename}\\${subPath}`;
+      const icon = pack.apps[path] || pack.apps[filename];
+      if (icon) {
+        return IconPackManager.resolveIcon(`${this.iconPackPath}\\${pack.metadata.filename}`, icon);
       }
     }
 
@@ -245,6 +257,56 @@ export class IconPackManager {
    */
   public getIcon({ path, umid }: GetIconArgs): string | null {
     const iconPath = this.getIconPath({ path, umid });
+    return iconPath ? convertFileSrc(iconPath) : null;
+  }
+
+  /**
+   * Will return the special missing icon path from the highest priority icon pack.
+   * If no icon pack haves a missing icon, will return null.
+   */
+  public getMissingIconPath(): string | null {
+    for (const active of this.actives.toReversed()) {
+      const pack = this.iconPacks.asArray().find((p) => p.metadata.filename === active);
+      if (pack && pack.missing) {
+        return IconPackManager.resolveIcon(
+          `${this.iconPackPath}\\${pack.metadata.filename}`,
+          pack.missing,
+        );
+      }
+    }
+    return null;
+  }
+
+  /**
+   * Will return the special missing icon SRC from the highest priority icon pack.
+   * If no icon pack haves a missing icon, will return null.
+   */
+  public getMissingIcon(): string | null {
+    const iconPath = this.getMissingIconPath();
+    return iconPath ? convertFileSrc(iconPath) : null;
+  }
+
+  /**
+   * Will return the specifit icon path from the highest priority icon pack.
+   * If no icon pack haves the searched icon, will return null.
+   */
+  public getSpecificIconPath(name: string): string | null {
+    for (const active of this.actives.toReversed()) {
+      const pack = this.iconPacks.asArray().find((p) => p.metadata.filename === active);
+      const icon = pack?.specific[name];
+      if (icon) {
+        return IconPackManager.resolveIcon(`${this.iconPackPath}\\${pack.metadata.filename}`, icon);
+      }
+    }
+    return null;
+  }
+
+  /**
+   * Will return the specifit icon SRC from the highest priority icon pack.
+   * If no icon pack haves the searched icon, will return null.
+   */
+  public getSpecificIcon(name: string): string | null {
+    const iconPath = this.getSpecificIconPath(name);
     return iconPath ? convertFileSrc(iconPath) : null;
   }
 

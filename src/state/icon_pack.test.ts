@@ -1,7 +1,7 @@
 import type { IconPack, ResourceMetadata } from '@seelen-ui/types';
 import { IconPackList } from './icon_pack.ts';
 import { IconPackManager } from './icon_pack.ts';
-import { assert } from '@std/assert/assert';
+import { assert, assertEquals } from '@std/assert';
 
 const GOT_BY_PATH = 'GOT_BY_PATH';
 const GOT_BY_FILENAME = 'GOT_BY_FILENAME';
@@ -13,6 +13,7 @@ const mockedIconPackA: IconPack = {
   metadata: {
     filename: 'a',
   } as ResourceMetadata,
+  missing: 'MissingIconA.png',
   apps: {
     MSEdge: GOT_BY_UMID,
     'C:\\Program Files (x86)\\Microsoft\\Edge\\msedge.exe': GOT_BY_PATH,
@@ -23,6 +24,9 @@ const mockedIconPackA: IconPack = {
     png: GOT_BY_EXTENSION,
     jpg: GOT_BY_EXTENSION,
     txt: GOT_BY_EXTENSION,
+  },
+  specific: {
+    'my-custom-icon': 'CustomA.png',
   },
 };
 
@@ -38,6 +42,10 @@ const mockedIconPackB: IconPack = {
   files: {
     txt: GOT_BY_EXTENSION,
   },
+  missing: 'MissingIconB.png',
+  specific: {
+    'my-custom-icon': 'CustomB.png',
+  },
 };
 
 const mockedIconPackC: IconPack = {
@@ -48,7 +56,9 @@ const mockedIconPackC: IconPack = {
   apps: {
     'C:\\folder\\app1.exe': GOT_BY_PATH,
   },
+  missing: null,
   files: {},
+  specific: {},
 };
 
 class IconPackManagerMock extends IconPackManager {
@@ -136,6 +146,32 @@ Deno.test('IconPackManager > getIconPath', async (t) => {
           path: 'C:\\Program Files (x86)\\Some\\App\\someFile.png',
         }) === `\\a\\${GOT_BY_EXTENSION}`,
       );
+    },
+  });
+});
+
+Deno.test('IconPackManager > getMissingIconPath', async (t) => {
+  const manager = new IconPackManagerMock();
+
+  await t.step({
+    name: 'should get the missing icon',
+    fn: () => {
+      assertEquals(manager.getMissingIconPath(), `\\b\\MissingIconB.png`);
+      manager.setActives(['b', 'a']);
+      assertEquals(manager.getMissingIconPath(), `\\a\\MissingIconA.png`);
+    },
+  });
+});
+
+Deno.test('IconPackManager > getSpecificIconPath', async (t) => {
+  const manager = new IconPackManagerMock();
+
+  await t.step({
+    name: 'should get the specific icon',
+    fn: () => {
+      assertEquals(manager.getSpecificIconPath('my-custom-icon'), `\\b\\CustomB.png`);
+      manager.setActives(['b', 'a']);
+      assertEquals(manager.getSpecificIconPath('my-custom-icon'), `\\a\\CustomA.png`);
     },
   });
 });

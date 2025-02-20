@@ -28,6 +28,21 @@ impl From<&str> for IconPackId {
     }
 }
 
+#[derive(Debug, PartialEq, Eq, Clone, Serialize, Deserialize, JsonSchema, TS)]
+#[serde(untagged)]
+pub enum Icon {
+    /// Value is the path to the icon relative to the icon pack folder.
+    Simple(PathBuf),
+    Dynamic {
+        /// Icon to use when system theme is light\
+        /// Value is the path to the icon relative to the icon pack folder.
+        light: PathBuf,
+        /// Icon to use when system theme is dark\
+        /// Value is the path to the icon relative to the icon pack folder.
+        dark: PathBuf,
+    },
+}
+
 #[derive(Debug, Default, PartialEq, Eq, Clone, Serialize, Deserialize, JsonSchema, TS)]
 #[serde(default, rename_all = "camelCase")]
 #[ts(export)]
@@ -35,13 +50,19 @@ pub struct IconPack {
     pub id: IconPackId,
     #[serde(alias = "info")]
     pub metadata: ResourceMetadata,
+    /// Special icon used when some other icon is not found
+    pub missing: Option<Icon>,
     /// Key can be user model id, filename or a full path.
     /// In case of path this should be an executable or a lnk file, otherwise use `files`.
     ///
     /// Value is the path to the icon relative to the icon pack folder.
-    pub apps: HashMap<String, PathBuf>,
+    pub apps: HashMap<String, Icon>,
     /// Intended to store file icons by extension
     ///
     /// Key is the extension, value is the relative path to the icon
-    pub files: HashMap<String, PathBuf>,
+    pub files: HashMap<String, Icon>,
+    /// Here specific icons for widgets can be stored.
+    /// we recomend following the widget id + icon name to avoid collisions
+    /// e.g. "@username/widgetid::iconname" but you can use whatever you want
+    pub specific: HashMap<String, Icon>,
 }

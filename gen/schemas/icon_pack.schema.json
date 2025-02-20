@@ -8,7 +8,7 @@
       "default": {},
       "type": "object",
       "additionalProperties": {
-        "type": "string"
+        "$ref": "#/definitions/Icon"
       }
     },
     "files": {
@@ -16,7 +16,7 @@
       "default": {},
       "type": "object",
       "additionalProperties": {
-        "type": "string"
+        "$ref": "#/definitions/Icon"
       }
     },
     "id": {
@@ -43,9 +43,54 @@
           "$ref": "#/definitions/ResourceMetadata"
         }
       ]
+    },
+    "missing": {
+      "description": "Special icon used when some other icon is not found",
+      "default": null,
+      "anyOf": [
+        {
+          "$ref": "#/definitions/Icon"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "specific": {
+      "description": "Here specific icons for widgets can be stored. we recomend following the widget id + icon name to avoid collisions e.g. \"@username/widgetid::iconname\" but you can use whatever you want",
+      "default": {},
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/definitions/Icon"
+      }
     }
   },
   "definitions": {
+    "Icon": {
+      "anyOf": [
+        {
+          "description": "Value is the path to the icon relative to the icon pack folder.",
+          "type": "string"
+        },
+        {
+          "type": "object",
+          "required": [
+            "dark",
+            "light"
+          ],
+          "properties": {
+            "dark": {
+              "description": "Icon to use when system theme is dark\\ Value is the path to the icon relative to the icon pack folder.",
+              "type": "string"
+            },
+            "light": {
+              "description": "Icon to use when system theme is light\\ Value is the path to the icon relative to the icon pack folder.",
+              "type": "string"
+            }
+          }
+        }
+      ]
+    },
     "IconPackId": {
       "$ref": "#/definitions/ResourceId"
     },
