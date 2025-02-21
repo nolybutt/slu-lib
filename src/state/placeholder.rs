@@ -163,6 +163,28 @@ common_item! {
     /// ```
     struct PowerToolbarItem {}
 
+    /// ## Keyboard Item Scope
+    /// ```ts
+    /// interface KeyboardLayout {
+    ///   id: string;
+    ///   displayName: string;
+    ///   active: boolean;
+    /// }
+    ///
+    /// interface SystemLanguage {
+    ///   code: string;
+    ///   name: string;
+    ///   inputMethods: KeyboardLayout[];
+    /// }
+    ///
+    /// const languages: Language[];
+    /// const activeLang: Language;
+    /// const activeKeyboard: KeyboardLayout;
+    /// const activeLangPrefix: string;
+    /// const activeKeyboardPrefix: string;
+    /// ```
+    struct KeyboardToolbarItem {}
+
     /// ## Network Item Scope
     /// ```ts
     /// interface NetworkInterface {
@@ -257,6 +279,7 @@ pub enum ToolbarItem {
     Generic(GenericToolbarItem),
     Date(DateToolbarItem),
     Power(PowerToolbarItem),
+    Keyboard(KeyboardToolbarItem),
     Network(NetworkToolbarItem),
     Media(MediaToolbarItem),
     User(UserToolbarItem),
@@ -274,6 +297,7 @@ impl ToolbarItem {
             ToolbarItem::Generic(item) => item.id.clone(),
             ToolbarItem::Date(item) => item.id.clone(),
             ToolbarItem::Power(item) => item.id.clone(),
+            ToolbarItem::Keyboard(item) => item.id.clone(),
             ToolbarItem::Network(item) => item.id.clone(),
             ToolbarItem::Media(item) => item.id.clone(),
             ToolbarItem::User(item) => item.id.clone(),
@@ -291,6 +315,7 @@ impl ToolbarItem {
             ToolbarItem::Generic(item) => item.id = id,
             ToolbarItem::Date(item) => item.id = id,
             ToolbarItem::Power(item) => item.id = id,
+            ToolbarItem::Keyboard(item) => item.id = id,
             ToolbarItem::Network(item) => item.id = id,
             ToolbarItem::Media(item) => item.id = id,
             ToolbarItem::User(item) => item.id = id,
