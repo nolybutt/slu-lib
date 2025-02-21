@@ -7,6 +7,7 @@ export enum SeelenEvent {
   HandleLayeredHitboxes = 'handle-layered',
   SystemMonitorsChanged = 'system::monitors-changed',
   SystemLanguagesChanged = 'system::languages-changed',
+  SystemKeyboardLayoutChanged = 'system::keyboard-layout-changed',
   UserChanged = 'user-changed',
   UserFolderChanged = 'user-folder-changed',
   MediaSessions = 'media-sessions',
