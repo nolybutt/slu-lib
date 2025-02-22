@@ -43,19 +43,19 @@ impl Color {
     pub fn parse(format: ColorFormat) -> Self {
         match format {
             ColorFormat::Rgba(rgba) => {
-                let [r, g, b, a] = rgba.to_ne_bytes();
+                let [r, g, b, a] = rgba.to_be_bytes();
                 Color::new(r, g, b, a)
             }
             ColorFormat::Rgb(rgb) => {
-                let [_, r, g, b] = rgb.to_ne_bytes();
+                let [_, r, g, b] = rgb.to_be_bytes();
                 Color::new(r, g, b, 0xFF)
             }
             ColorFormat::Bgra(bgra) => {
-                let [b, g, r, a] = bgra.to_ne_bytes();
+                let [b, g, r, a] = bgra.to_be_bytes();
                 Color::new(r, g, b, a)
             }
             ColorFormat::Bgr(bgr) => {
-                let [_, b, g, r] = bgr.to_ne_bytes();
+                let [_, b, g, r] = bgr.to_be_bytes();
                 Color::new(r, g, b, 0xFF)
             }
         }
