@@ -388,6 +388,7 @@
           "height": 30,
           "hideMode": "Never",
           "position": "Top",
+          "showHibernateButton": false,
           "useMultiMonitorOverlapLogic": false
         },
         "@seelen/launcher": {
@@ -1464,6 +1465,11 @@
               "$ref": "#/definitions/FancyToolbarSide"
             }
           ]
+        },
+        "showHibernateButton": {
+          "description": "show the hibernate button on power menu",
+          "default": false,
+          "type": "boolean"
         },
         "useMultiMonitorOverlapLogic": {
           "description": "enables the logic which persists last overlapped HWND to enchance multimonitor overlap feature",

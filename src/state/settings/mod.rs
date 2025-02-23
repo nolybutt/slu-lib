@@ -41,6 +41,8 @@ pub struct FancyToolbarSettings {
     pub delay_to_show: u32,
     /// delay to hide the toolbar on Mouse Leave in milliseconds
     pub delay_to_hide: u32,
+    /// show the hibernate button on power menu
+    pub show_hibernate_button: bool,
 }
 
 impl Default for FancyToolbarSettings {
@@ -53,6 +55,7 @@ impl Default for FancyToolbarSettings {
             use_multi_monitor_overlap_logic: false,
             delay_to_show: 100,
             delay_to_hide: 800,
+            show_hibernate_button: false,
         }
     }
 }
