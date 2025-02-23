@@ -55,6 +55,7 @@ export enum SeelenCommand {
   GetBatteries = 'get_batteries',
   LogOut = 'log_out',
   Suspend = 'suspend',
+  Hibernate = 'hibernate',
   Restart = 'restart',
   Shutdown = 'shutdown',
   Lock = 'lock',
