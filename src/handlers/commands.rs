@@ -89,6 +89,8 @@ slu_commands_declaration! {
     SetUserFolderLimit = set_user_folder_limit,
 
     // Media
+    GetMediaDevices = get_media_devices,
+    GetMediaSessions = get_media_sessions,
     MediaPrev = media_prev,
     MediaTogglePlayPause = media_toggle_play_pause,
     MediaNext = media_next,
