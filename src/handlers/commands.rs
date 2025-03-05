@@ -61,6 +61,7 @@ slu_commands_declaration! {
     SystemGetMonitors = get_connected_monitors,
     SystemGetColors = get_system_colors,
     SystemGetLanguages = get_system_languages,
+    SystemSetKeyboardLayout = set_system_keyboard_layout,
 
     // Seelen Settings
     SetAutoStart = set_auto_start,
@@ -113,6 +114,9 @@ slu_commands_declaration! {
     SetMainMonitorBrightness = set_main_monitor_brightness,
 
     // Power
+    GetPowerStatus = get_power_status,
+    GetPowerMode = get_power_mode,
+    GetBatteries = get_batteries,
     LogOut = log_out,
     Suspend = suspend,
     Hibernate = hibernate,
