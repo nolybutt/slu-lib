@@ -87,6 +87,7 @@ export enum SeelenCommand {
   WlanStopScanning = 'wlan_stop_scanning',
   WlanConnect = 'wlan_connect',
   WlanDisconnect = 'wlan_disconnect',
+  GetNotifications = 'get_notifications',
   NotificationsClose = 'notifications_close',
   NotificationsCloseAll = 'notifications_close_all',
 }

@@ -152,6 +152,7 @@ slu_commands_declaration! {
     WlanDisconnect = wlan_disconnect,
 
     // Notifications
+    GetNotifications = get_notifications,
     NotificationsClose = notifications_close,
     NotificationsCloseAll = notifications_close_all,
 }
