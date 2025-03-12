@@ -3,6 +3,17 @@
 use serde::{Deserialize, Serialize};
 use ts_rs::TS;
 
+#[derive(Debug, Clone, Serialize, TS)]
+#[serde(rename_all = "camelCase")]
+pub struct AppNotification {
+    pub id: u32,
+    pub app_umid: String,
+    pub app_name: String,
+    pub app_description: String,
+    pub date: i64,
+    pub content: Toast,
+}
+
 #[derive(Debug, Clone, Serialize, Deserialize, TS)]
 #[ts(export)]
 pub struct Toast {
