@@ -37,7 +37,6 @@ pub struct ToastHeader {
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, TS)]
-
 pub struct ToastVisual {
     binding: Binding,
 }
@@ -76,7 +75,6 @@ pub enum ToastBindingEntry {
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, TS)]
-
 pub struct ToastText {
     #[serde(rename = "@id")]
     id: Option<u32>,
@@ -85,7 +83,6 @@ pub struct ToastText {
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, TS)]
-
 pub struct ToastImage {
     #[serde(rename = "@id")]
     id: Option<u32>,
@@ -153,20 +150,36 @@ pub enum ToastActionsEntry {
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, TS)]
-
 pub struct ToastInput {
     #[serde(rename = "@id")]
-    id: Option<String>,
+    id: String,
     #[serde(rename = "@type")]
-    r#type: String,
+    r#type: ToastInputType,
     #[serde(rename = "@placeHolderContent")]
     placeholder: Option<String>,
     #[serde(rename = "@title")]
     title: Option<String>,
+    #[serde(default)]
+    selection: Vec<ToastInputSelection>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, TS)]
+pub enum ToastInputType {
+    #[serde(alias = "text")]
+    Text,
+    #[serde(alias = "selection")]
+    Selection,
+}
 
+#[derive(Debug, Clone, Serialize, Deserialize, TS)]
+pub struct ToastInputSelection {
+    #[serde(rename = "@id")]
+    pub id: String,
+    #[serde(rename = "@content")]
+    pub content: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, TS)]
 pub struct ToastAction {
     #[serde(rename = "@content")]
     content: String,
