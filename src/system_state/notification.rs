@@ -5,6 +5,7 @@ use ts_rs::TS;
 
 #[derive(Debug, Clone, Serialize, TS)]
 #[serde(rename_all = "camelCase")]
+#[ts(export)]
 pub struct AppNotification {
     pub id: u32,
     pub app_umid: String,
@@ -15,7 +16,6 @@ pub struct AppNotification {
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, TS)]
-#[ts(export)]
 pub struct Toast {
     #[serde(rename = "@launch")]
     pub launch: Option<String>,
