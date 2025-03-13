@@ -38,7 +38,7 @@ pub struct ToastHeader {
 
 #[derive(Debug, Clone, Serialize, Deserialize, TS)]
 pub struct ToastVisual {
-    binding: Binding,
+    pub binding: Binding,
 }
 
 #[derive(Debug, Clone, Default, Serialize, Deserialize, TS)]
@@ -46,9 +46,9 @@ pub struct ToastVisual {
 
 pub struct Binding {
     #[serde(rename = "@template")]
-    template: ToastTemplateType,
+    pub template: ToastTemplateType,
     #[serde(rename = "$value")]
-    entries: Vec<ToastBindingEntry>,
+    pub entries: Vec<ToastBindingEntry>,
 }
 
 #[derive(Debug, Clone, Default, Serialize, Deserialize, TS)]
@@ -77,25 +77,25 @@ pub enum ToastBindingEntry {
 #[derive(Debug, Clone, Serialize, Deserialize, TS)]
 pub struct ToastText {
     #[serde(rename = "@id")]
-    id: Option<u32>,
+    pub id: Option<u32>,
     #[serde(rename = "$value")]
-    content: String,
+    pub content: String,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, TS)]
 pub struct ToastImage {
     #[serde(rename = "@id")]
-    id: Option<u32>,
+    pub id: Option<u32>,
     #[serde(rename = "@src")]
-    src: String,
+    pub src: String,
     #[serde(rename = "@alt")]
-    alt: Option<String>,
+    pub alt: Option<String>,
     #[serde(default, rename = "@addImageQuery")]
-    add_image_query: bool,
+    pub add_image_query: bool,
     #[serde(rename = "@placement")]
-    placement: Option<ToastImagePlacement>,
+    pub placement: Option<ToastImagePlacement>,
     #[serde(rename = "@hint-crop")]
-    hint_crop: Option<bool>,
+    pub hint_crop: Option<bool>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, TS)]
@@ -108,13 +108,13 @@ pub enum ToastImagePlacement {
 
 #[derive(Debug, Clone, Serialize, Deserialize, TS)]
 pub struct ToastGroup {
-    subgroup: Vec<ToastSubGroup>,
+    pub subgroup: Vec<ToastSubGroup>,
 }
 
 #[derive(Debug, Clone, Default, Serialize, Deserialize, TS)]
 #[serde(default)]
 pub struct ToastSubGroup {
-    entries: Vec<ToastSubGroupEntry>,
+    pub entries: Vec<ToastSubGroupEntry>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, TS)]
@@ -139,7 +139,7 @@ pub struct ToastProgress {
 #[derive(Debug, Clone, Serialize, Deserialize, TS)]
 pub struct ToastActions {
     #[serde(default, rename = "$value")]
-    entries: Vec<ToastActionsEntry>,
+    pub entries: Vec<ToastActionsEntry>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, TS)]
@@ -152,15 +152,15 @@ pub enum ToastActionsEntry {
 #[derive(Debug, Clone, Serialize, Deserialize, TS)]
 pub struct ToastInput {
     #[serde(rename = "@id")]
-    id: String,
+    pub id: String,
     #[serde(rename = "@type")]
-    r#type: ToastInputType,
+    pub r#type: ToastInputType,
     #[serde(rename = "@placeHolderContent")]
-    placeholder: Option<String>,
+    pub placeholder: Option<String>,
     #[serde(rename = "@title")]
-    title: Option<String>,
+    pub title: Option<String>,
     #[serde(default)]
-    selection: Vec<ToastInputSelection>,
+    pub selection: Vec<ToastInputSelection>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, TS)]
@@ -182,26 +182,26 @@ pub struct ToastInputSelection {
 #[derive(Debug, Clone, Serialize, Deserialize, TS)]
 pub struct ToastAction {
     #[serde(rename = "@content")]
-    content: String,
+    pub content: String,
     #[serde(rename = "@arguments")]
-    arguments: String,
+    pub arguments: String,
     #[serde(default, rename = "@activationType")]
-    activation_type: ToastActionActivationType,
+    pub activation_type: ToastActionActivationType,
     #[serde(default, rename = "@afterActivationBehavior")]
-    after_activation_behavior: ToastActionAfterActivationBehavior,
+    pub after_activation_behavior: ToastActionAfterActivationBehavior,
     /// if set to "contextMenu" then the action will be added to_string the context menu intead of the toast
     #[serde(rename = "@placement")]
-    placement: Option<ToastActionPlacement>,
+    pub placement: Option<ToastActionPlacement>,
     /// this is used as button icon
     #[serde(rename = "@imageUri")]
-    image_uri: Option<String>,
+    pub image_uri: Option<String>,
     #[serde(rename = "@hint-inputid")]
-    hint_inputid: Option<String>,
+    pub hint_inputid: Option<String>,
     #[serde(rename = "@hint-buttonStyle")]
-    hint_button_style: Option<ToastActionButtonStyle>,
+    pub hint_button_style: Option<ToastActionButtonStyle>,
     /// button tooltip
     #[serde(rename = "@hint-toolTip")]
-    hint_tooltip: Option<String>,
+    pub hint_tooltip: Option<String>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, TS)]
