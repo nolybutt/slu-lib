@@ -95,7 +95,13 @@ pub struct ToastImage {
     #[serde(rename = "@placement")]
     pub placement: Option<ToastImagePlacement>,
     #[serde(rename = "@hint-crop")]
-    pub hint_crop: Option<bool>,
+    pub hint_crop: Option<ToastImageCropType>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, TS)]
+pub enum ToastImageCropType {
+    #[serde(alias = "circle")]
+    Circle,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, TS)]
@@ -228,6 +234,8 @@ pub enum ToastActionActivationType {
     Background,
     #[serde(alias = "protocol")]
     Protocol,
+    #[serde(alias = "system")]
+    System,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, TS)]
