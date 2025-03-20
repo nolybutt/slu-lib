@@ -140,7 +140,7 @@ slu_commands_declaration! {
     LauncherGetApps = launcher_get_apps,
 
     // Tray Icons
-    TempGetByEventTrayInfo = temp_get_by_event_tray_info,
+    GetTrayIcons = get_tray_icons,
     OnClickTrayIcon = on_click_tray_icon,
     OnContextMenuTrayIcon = on_context_menu_tray_icon,
 
