@@ -47,7 +47,7 @@ pub struct ToastVisual {
 pub struct Binding {
     #[serde(rename = "@template")]
     pub template: ToastTemplateType,
-    #[serde(rename = "$value")]
+    #[serde(default, rename = "$value")]
     pub entries: Vec<ToastBindingEntry>,
 }
 
@@ -63,6 +63,7 @@ pub enum ToastTemplateType {
     ToastText04,
     #[default]
     ToastGeneric,
+    Unknown(String),
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, TS)]
@@ -78,7 +79,7 @@ pub enum ToastBindingEntry {
 pub struct ToastText {
     #[serde(rename = "@id")]
     pub id: Option<u32>,
-    #[serde(rename = "$value")]
+    #[serde(default, rename = "$value")]
     pub content: String,
 }
 
@@ -102,6 +103,7 @@ pub struct ToastImage {
 pub enum ToastImageCropType {
     #[serde(alias = "circle")]
     Circle,
+    Unknown(String),
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, TS)]
@@ -110,6 +112,7 @@ pub enum ToastImagePlacement {
     AppLogoOverride,
     #[serde(alias = "hero")]
     Hero,
+    Unknown(String),
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, TS)]
@@ -175,6 +178,7 @@ pub enum ToastInputType {
     Text,
     #[serde(alias = "selection")]
     Selection,
+    Unknown(String),
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, TS)]
@@ -212,8 +216,11 @@ pub struct ToastAction {
 
 #[derive(Debug, Clone, Serialize, Deserialize, TS)]
 pub enum ToastActionButtonStyle {
+    #[serde(alias = "success")]
     Sucess,
+    #[serde(alias = "critical")]
     Critical,
+    Unknown(String),
 }
 
 #[derive(Debug, Clone, Default, Serialize, Deserialize, TS)]
@@ -223,6 +230,7 @@ pub enum ToastActionAfterActivationBehavior {
     Default,
     #[serde(alias = "pendingUpdate")]
     PendingUpdate,
+    Unknown(String),
 }
 
 #[derive(Debug, Clone, Default, Serialize, Deserialize, TS)]
@@ -236,10 +244,12 @@ pub enum ToastActionActivationType {
     Protocol,
     #[serde(alias = "system")]
     System,
+    Unknown(String),
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, TS)]
 pub enum ToastActionPlacement {
     #[serde(alias = "contextMenu")]
     ContextMenu,
+    Unknown(String),
 }
