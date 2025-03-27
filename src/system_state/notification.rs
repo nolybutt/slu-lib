@@ -63,7 +63,8 @@ pub enum ToastTemplateType {
     ToastText04,
     #[default]
     ToastGeneric,
-    Unknown(String),
+    #[serde(other)]
+    Unknown,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, TS)]
@@ -103,7 +104,8 @@ pub struct ToastImage {
 pub enum ToastImageCropType {
     #[serde(alias = "circle")]
     Circle,
-    Unknown(String),
+    #[serde(other)]
+    Unknown,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, TS)]
@@ -112,7 +114,8 @@ pub enum ToastImagePlacement {
     AppLogoOverride,
     #[serde(alias = "hero")]
     Hero,
-    Unknown(String),
+    #[serde(other)]
+    Unknown,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, TS)]
@@ -178,7 +181,8 @@ pub enum ToastInputType {
     Text,
     #[serde(alias = "selection")]
     Selection,
-    Unknown(String),
+    #[serde(other)]
+    Unknown,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, TS)]
@@ -220,7 +224,8 @@ pub enum ToastActionButtonStyle {
     Sucess,
     #[serde(alias = "critical")]
     Critical,
-    Unknown(String),
+    #[serde(other)]
+    Unknown,
 }
 
 #[derive(Debug, Clone, Default, Serialize, Deserialize, TS)]
@@ -230,7 +235,8 @@ pub enum ToastActionAfterActivationBehavior {
     Default,
     #[serde(alias = "pendingUpdate")]
     PendingUpdate,
-    Unknown(String),
+    #[serde(other)]
+    Unknown,
 }
 
 #[derive(Debug, Clone, Default, Serialize, Deserialize, TS)]
@@ -244,12 +250,14 @@ pub enum ToastActionActivationType {
     Protocol,
     #[serde(alias = "system")]
     System,
-    Unknown(String),
+    #[serde(other)]
+    Unknown,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, TS)]
 pub enum ToastActionPlacement {
     #[serde(alias = "contextMenu")]
     ContextMenu,
-    Unknown(String),
+    #[serde(other)]
+    Unknown,
 }
