@@ -384,6 +384,7 @@
         "@seelen/fancy-toolbar": {
           "delayToHide": 800,
           "delayToShow": 100,
+          "dynamicColor": true,
           "enabled": true,
           "height": 30,
           "hideMode": "Never",
@@ -1433,6 +1434,11 @@
           "type": "integer",
           "format": "uint32",
           "minimum": 0.0
+        },
+        "dynamicColor": {
+          "description": "enable or disable dynamic color based on maximized focused window (themes can override this)",
+          "default": true,
+          "type": "boolean"
         },
         "enabled": {
           "description": "enable or disable the fancy toolbar",
