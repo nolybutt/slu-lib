@@ -7,6 +7,9 @@ pub mod system_state;
 
 pub use error::SeelenLibError;
 
+#[macro_use(FromPrimitive, IntoPrimitive)]
+extern crate num_enum;
+
 #[test]
 fn generate_schemas() {
     use state::{AppConfig, IconPack, Placeholder, Plugin, Settings, Theme, WegItems, Widget};
