@@ -64,10 +64,11 @@ fn build_low_energy_enums() -> crate::error::Result<()> {
         appearance_enum.push(format!("    {name}({sub_enum_name}),"));
         appearance_impl.push(format!("            BLEAppearanceCategory::{name} => BLEAppearance::{name}({sub_enum_name}::from(subcategory)),"));
 
-        let mut subcategory_enum = vec![];
-        subcategory_enum.push(format!("#[derive(Debug, Copy, Clone, Eq, PartialEq, FromPrimitive, IntoPrimitive, Serialize, Deserialize, TS)]"));
-        subcategory_enum.push(format!("#[repr(u16)]"));
-        subcategory_enum.push(format!("pub enum {sub_enum_name} {{"));
+        let mut subcategory_enum = vec![
+            "#[derive(Debug, Copy, Clone, Eq, PartialEq, FromPrimitive, IntoPrimitive, Serialize, Deserialize, TS)]".to_string(),
+            "#[repr(u16)]".to_string(),
+            format!("pub enum {sub_enum_name} {{"),
+        ];
 
         for subcategory in category.subcategory {
             let sub_name = regex.replace_all(&subcategory.name, "");

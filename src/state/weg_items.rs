@@ -58,7 +58,7 @@ impl PinnedWegItemData {
     /// Some apps changes of place on update, commonly this contains an App User Model Id
     /// the path should be updated to the new location on these cases.
     pub fn should_ensure_path(&self) -> bool {
-        self.umid.is_none() || self.path.extension().map_or(false, |ext| ext == "lnk")
+        self.umid.is_none() || self.path.extension().is_some_and(|ext| ext == "lnk")
     }
 }
 

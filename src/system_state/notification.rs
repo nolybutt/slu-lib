@@ -43,11 +43,10 @@ pub struct ToastVisual {
 
 #[derive(Debug, Clone, Default, Serialize, Deserialize, TS)]
 #[serde(default)]
-
 pub struct Binding {
     #[serde(rename = "@template")]
     pub template: ToastTemplateType,
-    #[serde(default, rename = "$value")]
+    #[serde(rename = "$value")]
     pub entries: Vec<ToastBindingEntry>,
 }
 
