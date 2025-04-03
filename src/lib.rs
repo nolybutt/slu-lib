@@ -7,6 +7,12 @@ pub mod system_state;
 
 pub use error::SeelenLibError;
 
+#[macro_use(Serialize, Deserialize)]
+extern crate serde;
+
+#[macro_use(TS)]
+extern crate ts_rs;
+
 #[macro_use(FromPrimitive, IntoPrimitive)]
 extern crate num_enum;
 

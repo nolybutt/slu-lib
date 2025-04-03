@@ -24,3 +24,6 @@ url = { version = "2.5.4", features = ["serde"] }
 grass = { version = "0.13.4", default-features = false, features = ['random'] }
 num_enum = "0.7.3"
 
+[features]
+default = ["gen_enums"]
+gen_enums = []
