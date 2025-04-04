@@ -32,7 +32,7 @@ impl From<&str> for IconPackId {
 #[serde(untagged)]
 pub enum Icon {
     /// Value is the path to the icon relative to the icon pack folder.
-    Simple(PathBuf),
+    Static(PathBuf),
     Dynamic {
         /// Icon to use when system theme is light\
         /// Value is the path to the icon relative to the icon pack folder.
@@ -40,6 +40,10 @@ pub enum Icon {
         /// Icon to use when system theme is dark\
         /// Value is the path to the icon relative to the icon pack folder.
         dark: PathBuf,
+        /// Mask to be applied over the icon, themes can use this to apply custom colors over the icon.\
+        /// Set it to `null` to disable masking. \
+        /// Value is the path to the icon relative to the icon pack folder.
+        mask: Option<PathBuf>,
     },
 }
 
