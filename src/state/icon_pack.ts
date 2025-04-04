@@ -1,4 +1,4 @@
-import type { Icon, IconPack } from '@seelen-ui/types';
+import type { Icon as IIcon, IconPack as IIconPack } from '@seelen-ui/types';
 import { List } from '../utils/List.ts';
 import { createInstanceInvoker, createInstanceOnEvent } from '../utils/State.ts';
 import { invoke, SeelenCommand, SeelenEvent } from '../handlers/mod.ts';
@@ -19,16 +19,16 @@ declare global {
     [SeelenCommand.StateDeleteCachedIcons]: null;
   }
   interface ReturnByCommand {
-    [SeelenCommand.StateGetIconPacks]: IconPack[];
+    [SeelenCommand.StateGetIconPacks]: IIconPack[];
     [SeelenCommand.GetIcon]: string | null;
     [SeelenCommand.StateDeleteCachedIcons]: void;
   }
   interface PayloadByEvent {
-    [SeelenEvent.StateIconPacksChanged]: IconPack[];
+    [SeelenEvent.StateIconPacksChanged]: IIconPack[];
   }
 }
 
-export class IconPackList extends List<IconPack> {
+export class IconPackList extends List<IIconPack> {
   static readonly getAsync = createInstanceInvoker(this, SeelenCommand.StateGetIconPacks);
   static readonly onChange = createInstanceOnEvent(this, SeelenEvent.StateIconPacksChanged);
 }
@@ -41,14 +41,26 @@ export class IconPackManager {
   private unlistenerSettings: UnlistenFn | null = null;
   private unlistenerIcons: UnlistenFn | null = null;
 
-  private static resolveIcon(parent: string, icon: Icon): string {
+  private static resolveIcon(parent: string, icon: IIcon): IIcon {
     if (typeof icon === 'string') {
       return `${parent}\\${icon}`;
     }
-    if (globalThis.window.matchMedia('(prefers-color-scheme: dark)').matches) {
-      return `${parent}\\${icon.dark}`;
+    return {
+      light: `${parent}\\${icon.light}`,
+      dark: `${parent}\\${icon.dark}`,
+      mask: icon.mask ? `${parent}\\${icon.mask}` : null,
+    };
+  }
+
+  private static resolveIconAsSrc(icon: IIcon): IIcon {
+    if (typeof icon === 'string') {
+      return convertFileSrc(icon);
     }
-    return `${parent}\\${icon.light}`;
+    return {
+      light: convertFileSrc(icon.light),
+      dark: convertFileSrc(icon.dark),
+      mask: icon.mask ? convertFileSrc(icon.mask) : null,
+    };
   }
 
   protected constructor(
@@ -114,6 +126,7 @@ export class IconPackManager {
    */
   public async onChange(cb: () => void): Promise<UnlistenFn> {
     this.callbacks.add(cb);
+
     if (!this.unlistenerIcons && !this.unlistenerSettings) {
       this.unlistenerIcons = await IconPackList.onChange((list) => {
         this._iconPacks = list;
@@ -124,6 +137,7 @@ export class IconPackManager {
         this.callbacks.forEach((cb) => cb());
       });
     }
+
     return () => {
       this.callbacks.delete(cb);
       if (this.callbacks.size === 0) {
@@ -160,14 +174,14 @@ export class IconPackManager {
    *   umid: "Seelen.SeelenUI_p6yyn03m1894e!App"
    * });
    */
-  public getIconPath({ path, umid }: GetIconArgs): string | null {
+  public getIconPath({ path, umid }: GetIconArgs): IIcon | null {
     // If neither path nor UMID is provided, return null
     if (!path && !umid) {
       return null;
     }
 
     // Create an ordered list of icon packs based on their priority
-    const orderedPacks: IconPack[] = [];
+    const orderedPacks: IIconPack[] = [];
     for (const active of this.actives.toReversed()) {
       const pack = this._iconPacks.asArray().find((p) => p.metadata.filename === active);
       if (pack) {
@@ -205,7 +219,10 @@ export class IconPackManager {
       for (const pack of orderedPacks) {
         const icon = pack.files[extension];
         if (icon) {
-          return IconPackManager.resolveIcon(`${this.iconPackPath}\\${pack.metadata.filename}`, icon);
+          return IconPackManager.resolveIcon(
+            `${this.iconPackPath}\\${pack.metadata.filename}`,
+            icon,
+          );
         }
       }
       return null;
@@ -255,16 +272,16 @@ export class IconPackManager {
    *   umid: "Seelen.SeelenUI_p6yyn03m1894e!App"
    * });
    */
-  public getIcon({ path, umid }: GetIconArgs): string | null {
+  public getIcon({ path, umid }: GetIconArgs): IIcon | null {
     const iconPath = this.getIconPath({ path, umid });
-    return iconPath ? convertFileSrc(iconPath) : null;
+    return iconPath ? IconPackManager.resolveIconAsSrc(iconPath) : null;
   }
 
   /**
    * Will return the special missing icon path from the highest priority icon pack.
    * If no icon pack haves a missing icon, will return null.
    */
-  public getMissingIconPath(): string | null {
+  public getMissingIconPath(): IIcon | null {
     for (const active of this.actives.toReversed()) {
       const pack = this.iconPacks.asArray().find((p) => p.metadata.filename === active);
       if (pack && pack.missing) {
@@ -281,16 +298,16 @@ export class IconPackManager {
    * Will return the special missing icon SRC from the highest priority icon pack.
    * If no icon pack haves a missing icon, will return null.
    */
-  public getMissingIcon(): string | null {
+  public getMissingIcon(): IIcon | null {
     const iconPath = this.getMissingIconPath();
-    return iconPath ? convertFileSrc(iconPath) : null;
+    return iconPath ? IconPackManager.resolveIconAsSrc(iconPath) : null;
   }
 
   /**
    * Will return the specifit icon path from the highest priority icon pack.
    * If no icon pack haves the searched icon, will return null.
    */
-  public getSpecificIconPath(name: string): string | null {
+  public getSpecificIconPath(name: string): IIcon | null {
     for (const active of this.actives.toReversed()) {
       const pack = this.iconPacks.asArray().find((p) => p.metadata.filename === active);
       const icon = pack?.specific[name];
@@ -305,9 +322,9 @@ export class IconPackManager {
    * Will return the specifit icon SRC from the highest priority icon pack.
    * If no icon pack haves the searched icon, will return null.
    */
-  public getSpecificIcon(name: string): string | null {
+  public getSpecificIcon(name: string): IIcon | null {
     const iconPath = this.getSpecificIconPath(name);
-    return iconPath ? convertFileSrc(iconPath) : null;
+    return iconPath ? IconPackManager.resolveIconAsSrc(iconPath) : null;
   }
 
   /**

@@ -86,6 +86,13 @@
             "light": {
               "description": "Icon to use when system theme is light\\ Value is the path to the icon relative to the icon pack folder.",
               "type": "string"
+            },
+            "mask": {
+              "description": "Mask to be applied over the icon, themes can use this to apply custom colors over the icon.\\ Set it to `null` to disable masking. \\ Value is the path to the icon relative to the icon pack folder.",
+              "type": [
+                "string",
+                "null"
+              ]
             }
           }
         }
