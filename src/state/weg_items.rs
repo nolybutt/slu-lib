@@ -156,9 +156,7 @@ impl WegItems {
         let start_double_quoted = cmd.starts_with("\"");
         if start_double_quoted || cmd.starts_with("'") {
             let delimiter = if start_double_quoted { '"' } else { '\'' };
-            let mut parts = cmd
-                .split(|c| c == '"' || c == '\'')
-                .filter(|s| !s.is_empty());
+            let mut parts = cmd.split(['"', '\'']).filter(|s| !s.is_empty());
 
             let program = parts.next().unwrap_or_default().trim().to_owned();
             let args = cmd
