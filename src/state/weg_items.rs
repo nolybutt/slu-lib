@@ -21,6 +21,13 @@ pub enum WegItemSubtype {
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize, JsonSchema, TS)]
+#[serde(untagged)]
+pub enum RelaunchArguments {
+    Array(Vec<String>),
+    String(String),
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize, JsonSchema, TS)]
 #[serde(rename_all = "camelCase")]
 pub struct PinnedWegItemData {
     /// internal UUID to differentiate items
@@ -32,15 +39,21 @@ pub struct PinnedWegItemData {
     pub umid: Option<String>,
     /// path to file, forder or program.
     pub path: PathBuf,
-    /// literal command to be executed via CMD.
-    pub relaunch_command: String,
+    /// @deprecaed will be removed in v3, use relaunch_program instead.
+    #[deprecated]
+    pub relaunch_command: Option<String>,
+    /// program to be executed
+    pub relaunch_program: String,
+    /// arguments to be passed to the relaunch program
+    pub relaunch_args: Option<RelaunchArguments>,
     /// path where ejecute the relaunch command
     pub relaunch_in: Option<PathBuf>,
     /// display name of the item
     pub display_name: String,
-    /// @deprecated, use subtype `Folder` instead will be removed in v3
+    ///@deprecaed will be removed in v3, use subtype `Folder` instead.
     #[ts(skip)]
     #[serde(default, skip_serializing)]
+    #[deprecated]
     pub is_dir: bool,
     /// Window handles in the app group, in case of pinned file/dir always will be empty
     #[serde(default, skip_deserializing)]
@@ -112,6 +125,7 @@ pub struct WegItems {
     pub right: Vec<WegItem>,
 }
 
+#[allow(deprecated)]
 impl Default for WegItems {
     fn default() -> Self {
         Self {
@@ -123,7 +137,9 @@ impl Default for WegItems {
                 subtype: WegItemSubtype::App,
                 path: "C:\\Windows\\explorer.exe".into(),
                 display_name: "Explorer".into(),
-                relaunch_command: "C:\\Windows\\explorer.exe".into(),
+                relaunch_command: None,
+                relaunch_program: "C:\\Windows\\explorer.exe".into(),
+                relaunch_args: None,
                 relaunch_in: None,
                 is_dir: false,
                 windows: vec![],
@@ -134,7 +150,27 @@ impl Default for WegItems {
     }
 }
 
+#[allow(deprecated)]
 impl WegItems {
+    fn get_parts_of_deprecated_inline_command(cmd: &str) -> (String, String) {
+        let start_double_quoted = cmd.starts_with("\"");
+        if start_double_quoted || cmd.starts_with("'") {
+            let delimiter = if start_double_quoted { '"' } else { '\'' };
+            let mut parts = cmd
+                .split(|c| c == '"' || c == '\'')
+                .filter(|s| !s.is_empty());
+
+            let program = parts.next().unwrap_or_default().trim().to_owned();
+            let args = cmd
+                .trim_start_matches(&format!("{delimiter}{program}{delimiter}"))
+                .trim()
+                .to_owned();
+            (program, args)
+        } else {
+            (cmd.trim().to_string(), String::new())
+        }
+    }
+
     fn sanitize_items(dict: &mut HashSet<String>, items: Vec<WegItem>) -> Vec<WegItem> {
         let mut result = Vec::new();
         for mut item in items {
@@ -143,19 +179,35 @@ impl WegItems {
                     if data.should_ensure_path() && !data.path.exists() {
                         continue;
                     }
-                    if data.relaunch_command.is_empty() {
-                        data.relaunch_command = data.path.to_string_lossy().to_string();
+                    if data.relaunch_program.is_empty() {
+                        data.relaunch_program = data.path.to_string_lossy().to_string();
                     }
 
                     // migration step for items before v2.1.6
                     if data.subtype == WegItemSubtype::UnknownV2_1_6 {
                         data.subtype = if data.is_dir {
                             WegItemSubtype::Folder
-                        } else if data.relaunch_command.to_lowercase().contains(".exe") {
+                        } else if data
+                            .relaunch_command
+                            .as_ref()
+                            .is_some_and(|r| r.to_lowercase().contains(".exe"))
+                        {
                             WegItemSubtype::App
                         } else {
                             WegItemSubtype::File
                         };
+                    }
+
+                    // migration step for items before v2.2.6
+                    if let Some(old_command) = data.relaunch_command.take() {
+                        if data.relaunch_program.is_empty() {
+                            let (program, args) =
+                                Self::get_parts_of_deprecated_inline_command(&old_command);
+                            data.relaunch_program = program;
+                            if !args.is_empty() {
+                                data.relaunch_args = Some(RelaunchArguments::String(args));
+                            }
+                        }
                     }
                 }
                 WegItem::Temporal(data) => {
@@ -163,8 +215,8 @@ impl WegItems {
                     {
                         continue;
                     }
-                    if data.relaunch_command.is_empty() {
-                        data.relaunch_command = data.path.to_string_lossy().to_string();
+                    if data.relaunch_program.is_empty() {
+                        data.relaunch_program = data.path.to_string_lossy().to_string();
                     }
                 }
                 _ => {}
@@ -187,5 +239,94 @@ impl WegItems {
         self.left = Self::sanitize_items(&mut dict, std::mem::take(&mut self.left));
         self.center = Self::sanitize_items(&mut dict, std::mem::take(&mut self.center));
         self.right = Self::sanitize_items(&mut dict, std::mem::take(&mut self.right));
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use crate::state::WegItems;
+
+    #[test]
+    fn should_return_empty_response_for_empty_command() {
+        let (program, args) = WegItems::get_parts_of_deprecated_inline_command("");
+        assert_eq!(program, "");
+        assert_eq!(args, "");
+    }
+
+    #[test]
+    fn should_parse_a_simple_command_without_arguments() {
+        let (program, args) = WegItems::get_parts_of_deprecated_inline_command("node");
+        assert_eq!(program, "node");
+        assert_eq!(args, "");
+    }
+
+    #[test]
+    fn should_parse_a_quoted_program_path_without_splitting_args() {
+        let (program, args) = WegItems::get_parts_of_deprecated_inline_command(
+            "\"C:\\Program Files\\node.exe\" script.js",
+        );
+        assert_eq!(program, "C:\\Program Files\\node.exe");
+        assert_eq!(args, "script.js");
+    }
+
+    #[test]
+    fn should_parse_a_single_quoted_program_path_without_splitting_args() {
+        let (program, args) =
+            WegItems::get_parts_of_deprecated_inline_command("'/usr/local/bin/node' script.js");
+        assert_eq!(program, "/usr/local/bin/node");
+        assert_eq!(args, "script.js");
+    }
+
+    #[test]
+    fn should_handle_program_path_with_spaces_without_quotes() {
+        let (program, args) = WegItems::get_parts_of_deprecated_inline_command(
+            "C:\\Program Files\\node.exe script.js",
+        );
+        assert_eq!(program, "C:\\Program Files\\node.exe script.js");
+        assert_eq!(args, "");
+    }
+
+    #[test]
+    fn should_handle_command_with_only_quoted_program_and_no_args() {
+        let (program, args) =
+            WegItems::get_parts_of_deprecated_inline_command("\"C:\\Program Files\\node.exe\"");
+        assert_eq!(program, "C:\\Program Files\\node.exe");
+        assert_eq!(args, "");
+    }
+
+    #[test]
+    fn should_preserve_all_spaces_between_arguments() {
+        let (program, args) =
+            WegItems::get_parts_of_deprecated_inline_command("node  script.js   arg1   arg2");
+        assert_eq!(program, "node  script.js   arg1   arg2");
+        assert_eq!(args, "");
+    }
+
+    #[test]
+    fn should_trim_spaces_from_program() {
+        let (program, args) = WegItems::get_parts_of_deprecated_inline_command("node    ");
+        assert_eq!(program, "node");
+        assert_eq!(args, "");
+    }
+
+    #[test]
+    fn should_handle_complex_quoted_arguments_as_single_string() {
+        let (program, args) = WegItems::get_parts_of_deprecated_inline_command(
+            "node \"arg with spaces\" 'another arg' --flag=\"value\"",
+        );
+        assert_eq!(
+            program,
+            "node \"arg with spaces\" 'another arg' --flag=\"value\""
+        );
+        assert_eq!(args, "");
+    }
+
+    #[test]
+    fn should_handle_complex_quoted_arguments_as_single_string_2() {
+        let (program, args) = WegItems::get_parts_of_deprecated_inline_command(
+            "\"node\" \"arg with spaces\" 'another arg' --flag=\"value\"",
+        );
+        assert_eq!(program, "node");
+        assert_eq!(args, "\"arg with spaces\" 'another arg' --flag=\"value\"");
     }
 }

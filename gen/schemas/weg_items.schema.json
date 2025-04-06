@@ -10,8 +10,10 @@
           "id": "",
           "path": "C:\\Windows\\explorer.exe",
           "pinDisabled": false,
-          "relaunchCommand": "C:\\Windows\\explorer.exe",
+          "relaunchArgs": null,
+          "relaunchCommand": null,
           "relaunchIn": null,
+          "relaunchProgram": "C:\\Windows\\explorer.exe",
           "subtype": "App",
           "type": "Pinned",
           "umid": null,
@@ -54,6 +56,19 @@
     }
   },
   "definitions": {
+    "RelaunchArguments": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        {
+          "type": "string"
+        }
+      ]
+    },
     "WegAppGroupItem": {
       "type": "object",
       "required": [
@@ -79,7 +94,7 @@
             "id",
             "isDir",
             "path",
-            "relaunchCommand",
+            "relaunchProgram",
             "type"
           ],
           "properties": {
@@ -92,7 +107,8 @@
               "type": "string"
             },
             "isDir": {
-              "description": "@deprecated, use subtype `Folder` instead will be removed in v3",
+              "description": "@deprecaed will be removed in v3, use subtype `Folder` instead.",
+              "deprecated": true,
               "writeOnly": true,
               "type": "boolean"
             },
@@ -106,9 +122,24 @@
               "readOnly": true,
               "type": "boolean"
             },
+            "relaunchArgs": {
+              "description": "arguments to be passed to the relaunch program",
+              "anyOf": [
+                {
+                  "$ref": "#/definitions/RelaunchArguments"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
             "relaunchCommand": {
-              "description": "literal command to be executed via CMD.",
-              "type": "string"
+              "description": "@deprecaed will be removed in v3, use relaunch_program instead.",
+              "deprecated": true,
+              "type": [
+                "string",
+                "null"
+              ]
             },
             "relaunchIn": {
               "description": "path where ejecute the relaunch command",
@@ -116,6 +147,10 @@
                 "string",
                 "null"
               ]
+            },
+            "relaunchProgram": {
+              "description": "program to be executed",
+              "type": "string"
             },
             "subtype": {
               "description": "Subtype of the item (mandatory, but is optional for backward compatibility)",
@@ -157,7 +192,7 @@
             "id",
             "isDir",
             "path",
-            "relaunchCommand",
+            "relaunchProgram",
             "type"
           ],
           "properties": {
@@ -170,7 +205,8 @@
               "type": "string"
             },
             "isDir": {
-              "description": "@deprecated, use subtype `Folder` instead will be removed in v3",
+              "description": "@deprecaed will be removed in v3, use subtype `Folder` instead.",
+              "deprecated": true,
               "writeOnly": true,
               "type": "boolean"
             },
@@ -184,9 +220,24 @@
               "readOnly": true,
               "type": "boolean"
             },
+            "relaunchArgs": {
+              "description": "arguments to be passed to the relaunch program",
+              "anyOf": [
+                {
+                  "$ref": "#/definitions/RelaunchArguments"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
             "relaunchCommand": {
-              "description": "literal command to be executed via CMD.",
-              "type": "string"
+              "description": "@deprecaed will be removed in v3, use relaunch_program instead.",
+              "deprecated": true,
+              "type": [
+                "string",
+                "null"
+              ]
             },
             "relaunchIn": {
               "description": "path where ejecute the relaunch command",
@@ -194,6 +245,10 @@
                 "string",
                 "null"
               ]
+            },
+            "relaunchProgram": {
+              "description": "program to be executed",
+              "type": "string"
             },
             "subtype": {
               "description": "Subtype of the item (mandatory, but is optional for backward compatibility)",
