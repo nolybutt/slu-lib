@@ -181,10 +181,6 @@ impl WegItems {
                         continue;
                     }
 
-                    if data.relaunch_program.is_empty() {
-                        data.relaunch_program = data.path.to_string_lossy().to_string();
-                    }
-
                     // migration step for items before v2.1.6
                     if data.subtype == WegItemSubtype::UnknownV2_1_6 {
                         data.subtype = if data.is_dir {
@@ -210,6 +206,10 @@ impl WegItems {
                                 data.relaunch_args = Some(RelaunchArguments::String(args));
                             }
                         }
+                    }
+
+                    if data.relaunch_program.is_empty() {
+                        data.relaunch_program = data.path.to_string_lossy().to_string();
                     }
                 }
                 WegItem::Temporal(data) => {
