@@ -11,7 +11,6 @@
           "path": "C:\\Windows\\explorer.exe",
           "pinDisabled": false,
           "relaunchArgs": null,
-          "relaunchCommand": null,
           "relaunchIn": null,
           "relaunchProgram": "C:\\Windows\\explorer.exe",
           "subtype": "App",
@@ -90,20 +89,18 @@
         {
           "type": "object",
           "required": [
-            "displayName",
-            "id",
             "isDir",
-            "path",
-            "relaunchProgram",
             "type"
           ],
           "properties": {
             "displayName": {
               "description": "display name of the item",
+              "default": "",
               "type": "string"
             },
             "id": {
               "description": "internal UUID to differentiate items",
+              "default": "",
               "type": "string"
             },
             "isDir": {
@@ -114,6 +111,7 @@
             },
             "path": {
               "description": "path to file, forder or program.",
+              "default": "",
               "type": "string"
             },
             "pinDisabled": {
@@ -124,6 +122,7 @@
             },
             "relaunchArgs": {
               "description": "arguments to be passed to the relaunch program",
+              "default": null,
               "anyOf": [
                 {
                   "$ref": "#/definitions/RelaunchArguments"
@@ -136,6 +135,7 @@
             "relaunchCommand": {
               "description": "@deprecaed will be removed in v3, use relaunch_program instead.",
               "deprecated": true,
+              "writeOnly": true,
               "type": [
                 "string",
                 "null"
@@ -143,6 +143,7 @@
             },
             "relaunchIn": {
               "description": "path where ejecute the relaunch command",
+              "default": null,
               "type": [
                 "string",
                 "null"
@@ -150,6 +151,7 @@
             },
             "relaunchProgram": {
               "description": "program to be executed",
+              "default": "",
               "type": "string"
             },
             "subtype": {
@@ -169,6 +171,7 @@
             },
             "umid": {
               "description": "Application user model id.",
+              "default": null,
               "type": [
                 "string",
                 "null"
@@ -188,20 +191,18 @@
         {
           "type": "object",
           "required": [
-            "displayName",
-            "id",
             "isDir",
-            "path",
-            "relaunchProgram",
             "type"
           ],
           "properties": {
             "displayName": {
               "description": "display name of the item",
+              "default": "",
               "type": "string"
             },
             "id": {
               "description": "internal UUID to differentiate items",
+              "default": "",
               "type": "string"
             },
             "isDir": {
@@ -212,6 +213,7 @@
             },
             "path": {
               "description": "path to file, forder or program.",
+              "default": "",
               "type": "string"
             },
             "pinDisabled": {
@@ -222,6 +224,7 @@
             },
             "relaunchArgs": {
               "description": "arguments to be passed to the relaunch program",
+              "default": null,
               "anyOf": [
                 {
                   "$ref": "#/definitions/RelaunchArguments"
@@ -234,6 +237,7 @@
             "relaunchCommand": {
               "description": "@deprecaed will be removed in v3, use relaunch_program instead.",
               "deprecated": true,
+              "writeOnly": true,
               "type": [
                 "string",
                 "null"
@@ -241,6 +245,7 @@
             },
             "relaunchIn": {
               "description": "path where ejecute the relaunch command",
+              "default": null,
               "type": [
                 "string",
                 "null"
@@ -248,6 +253,7 @@
             },
             "relaunchProgram": {
               "description": "program to be executed",
+              "default": "",
               "type": "string"
             },
             "subtype": {
@@ -267,6 +273,7 @@
             },
             "umid": {
               "description": "Application user model id.",
+              "default": null,
               "type": [
                 "string",
                 "null"

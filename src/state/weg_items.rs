@@ -27,20 +27,21 @@ pub enum RelaunchArguments {
     String(String),
 }
 
-#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize, JsonSchema, TS)]
-#[serde(rename_all = "camelCase")]
+#[derive(Debug, Default, Clone, PartialEq, Eq, Serialize, Deserialize, JsonSchema, TS)]
+#[serde(default, rename_all = "camelCase")]
 pub struct PinnedWegItemData {
     /// internal UUID to differentiate items
     pub id: String,
     /// Subtype of the item (mandatory, but is optional for backward compatibility)
-    #[serde(default)]
     pub subtype: WegItemSubtype,
     /// Application user model id.
     pub umid: Option<String>,
     /// path to file, forder or program.
     pub path: PathBuf,
     /// @deprecaed will be removed in v3, use relaunch_program instead.
+    #[ts(skip)]
     #[deprecated]
+    #[serde(skip_serializing)]
     pub relaunch_command: Option<String>,
     /// program to be executed
     pub relaunch_program: String,
@@ -52,14 +53,14 @@ pub struct PinnedWegItemData {
     pub display_name: String,
     ///@deprecaed will be removed in v3, use subtype `Folder` instead.
     #[ts(skip)]
-    #[serde(default, skip_serializing)]
+    #[serde(skip_serializing)]
     #[deprecated]
     pub is_dir: bool,
     /// Window handles in the app group, in case of pinned file/dir always will be empty
-    #[serde(default, skip_deserializing)]
+    #[serde(skip_deserializing)]
     pub windows: Vec<WegAppGroupItem>,
     /// This intention is to prevent pinned state change, when this is neccesary
-    #[serde(default, skip_deserializing)]
+    #[serde(skip_deserializing)]
     pub pin_disabled: bool,
 }
 
@@ -174,9 +175,12 @@ impl WegItems {
         for mut item in items {
             match &mut item {
                 WegItem::Pinned(data) => {
-                    if data.should_ensure_path() && !data.path.exists() {
+                    if data.path.as_os_str().is_empty()
+                        || (data.should_ensure_path() && !data.path.exists())
+                    {
                         continue;
                     }
+
                     if data.relaunch_program.is_empty() {
                         data.relaunch_program = data.path.to_string_lossy().to_string();
                     }
@@ -209,7 +213,9 @@ impl WegItems {
                     }
                 }
                 WegItem::Temporal(data) => {
-                    if data.windows.is_empty() || (data.should_ensure_path() && !data.path.exists())
+                    if data.path.as_os_str().is_empty()
+                        || data.windows.is_empty()
+                        || (data.should_ensure_path() && !data.path.exists())
                     {
                         continue;
                     }
