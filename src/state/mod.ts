@@ -34,11 +34,3 @@ export class LauncherHistory {
   static readonly getAsync = createInstanceInvoker(this, SeelenCommand.StateGetHistory);
   static readonly onChange = createInstanceOnEvent(this, SeelenEvent.StateHistoryChanged);
 }
-
-export class ResourceMetadata {
-  displayName: string = 'Unknown';
-  author: string = 'Unknown';
-  description: string = '';
-  filename: string = '';
-  tags: string[] = [];
-}

@@ -34,7 +34,6 @@
     },
     "metadata": {
       "default": {
-        "author": "",
         "bundled": false,
         "description": {},
         "displayName": {},
@@ -66,11 +65,6 @@
     "ResourceMetadata": {
       "type": "object",
       "properties": {
-        "author": {
-          "description": "The author name of the resource",
-          "default": "",
-          "type": "string"
-        },
         "bundled": {
           "default": false,
           "readOnly": true,

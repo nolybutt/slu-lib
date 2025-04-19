@@ -18,7 +18,7 @@ static REGEX: OnceLock<regex::Regex> = OnceLock::new();
 
 impl ResourceId {
     fn regex() -> &'static regex::Regex {
-        REGEX.get_or_init(|| regex::Regex::new("^@[a-zA-Z0-9\\-]+\\/[a-zA-Z0-9\\-]+$").unwrap())
+        REGEX.get_or_init(|| regex::Regex::new("^@[\\w\\-]{3,32}\\/[\\w\\-]+\\w$").unwrap())
     }
 
     pub fn is_valid(&self) -> bool {
@@ -104,8 +104,6 @@ pub enum ResourceText {
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize, JsonSchema, TS)]
 #[serde(default, rename_all = "camelCase")]
 pub struct ResourceMetadata {
-    /// The author name of the resource
-    pub author: String,
     /// Map of language code to display name. Could be a string, mapped to `en`.
     pub display_name: ResourceText,
     /// Map of language code to description. Could be a string, mapped to `en`.
@@ -122,7 +120,6 @@ pub struct ResourceMetadata {
 impl Default for ResourceMetadata {
     fn default() -> Self {
         Self {
-            author: String::new(),
             display_name: ResourceText::Localized(HashMap::new()),
             description: ResourceText::Localized(HashMap::new()),
             portrait: None,
@@ -139,10 +136,12 @@ impl Default for ResourceMetadata {
 #[derive(Debug, Clone, Serialize, Deserialize, JsonSchema, TS)]
 #[serde(rename_all = "camelCase")]
 pub enum ResourceKind {
-    Widget,
-    Plugin,
     Theme,
     IconPack,
+    Widget,
+    Plugin,
+    Wallpaper,
+    SoundPack,
 }
 
 // =============================================================================
