@@ -95,7 +95,7 @@ impl std::fmt::Display for ResourceId {
 // =============================================================================
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize, JsonSchema, TS)]
-#[serde(untagged, rename_all = "camelCase")]
+#[serde(untagged)]
 pub enum ResourceText {
     En(String),
     Localized(HashMap<String, String>),
@@ -134,7 +134,6 @@ impl Default for ResourceMetadata {
 // =============================================================================
 
 #[derive(Debug, Clone, Serialize, Deserialize, JsonSchema, TS)]
-#[serde(rename_all = "camelCase")]
 pub enum ResourceKind {
     Theme,
     IconPack,
@@ -147,7 +146,6 @@ pub enum ResourceKind {
 // =============================================================================
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize, JsonSchema, TS)]
-#[serde(rename_all = "camelCase")]
 pub enum ResourceStatus {
     Draft,
     Reviewing,
@@ -158,6 +156,7 @@ pub enum ResourceStatus {
 // =============================================================================
 
 #[derive(Debug, Clone, Serialize, Deserialize, JsonSchema, TS)]
+#[serde(rename_all = "camelCase")]
 #[ts(export)]
 pub struct Resource {
     pub _id: Uuid,
