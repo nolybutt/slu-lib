@@ -159,7 +159,8 @@ pub enum ResourceStatus {
 #[serde(rename_all = "camelCase")]
 #[ts(export)]
 pub struct Resource {
-    pub _id: Uuid,
+    #[serde(rename = "_id")]
+    pub id: Uuid,
     pub creator_id: Uuid,
     /// visual id composed of creator username and resource name
     pub friendly_id: ResourceId,
