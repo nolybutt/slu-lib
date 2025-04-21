@@ -174,6 +174,8 @@ pub struct Resource {
     pub kind: ResourceKind,
     /// id of the document containing the resource
     pub data_id: Uuid,
+    #[serde(default)]
+    pub stars: u32,
 }
 
 impl Resource {
