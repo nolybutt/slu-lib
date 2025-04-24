@@ -1,5 +1,6 @@
 use std::{collections::HashMap, hash::Hash, sync::OnceLock};
 
+use chrono::{DateTime, Utc};
 use schemars::JsonSchema;
 use serde::{Deserialize, Serialize};
 use ts_rs::TS;
@@ -165,17 +166,17 @@ pub struct Resource {
     /// visual id composed of creator username and resource name
     pub friendly_id: ResourceId,
     pub metadata: ResourceMetadata,
-    pub created_at: String,
-    pub updated_at: String,
+    pub created_at: DateTime<Utc>,
+    pub updated_at: DateTime<Utc>,
     pub status: ResourceStatus,
     /// should be filled if `status == ResourceStatus::Deleted`
-    pub deleted_at: Option<String>,
+    pub deleted_at: Option<DateTime<Utc>>,
     pub version: u32,
     pub kind: ResourceKind,
     /// id of the document containing the resource
     pub data_id: Uuid,
-    #[serde(default)]
     pub stars: u32,
+    pub downloads: u32,
 }
 
 impl Resource {

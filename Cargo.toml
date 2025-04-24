@@ -8,7 +8,7 @@ serde = { version = "1.0", features = ["derive"] }
 serde_json = "1.0"
 serde_yaml = "0.9.34"
 serde_alias = "0.0.2"
-schemars = { version = "0.8.21", features = ["url", "uuid1"] }
+schemars = { version = "0.8.21", features = ["url", "uuid1", "chrono"] }
 regex = "1.10.4"
 sys-locale = "0.3.1"
 uuid = { version = "1.8.0", features = ["v4", "serde"] }
@@ -18,11 +18,13 @@ ts-rs = { git = "https://github.com/eythaann/ts-rs.git", features = [
   "serde-json-impl",
   "url-impl",
   "uuid-impl",
+  "chrono-impl",
 ] }
 base64 = "0.22.1"
 url = { version = "2.5.4", features = ["serde"] }
 grass = { version = "0.13.4", default-features = false, features = ['random'] }
 num_enum = "0.7.3"
+chrono = { version = "0.4.40", features = ["serde"] }
 
 [features]
 default = ["gen_enums"]
