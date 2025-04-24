@@ -1,6 +1,7 @@
 mod icon_pack;
 mod placeholder;
 mod plugin;
+mod popups;
 mod profile;
 mod settings;
 mod settings_by_app;
@@ -12,6 +13,7 @@ mod wm_layout;
 pub use icon_pack::*;
 pub use placeholder::*;
 pub use plugin::*;
+pub use popups::*;
 pub use profile::*;
 pub use settings::*;
 pub use settings_by_app::*;
