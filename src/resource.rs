@@ -253,8 +253,14 @@ impl SluResourceFile {
 
     pub fn concrete(&self) -> Result<ConcreteResource> {
         let mut resource = serde_json::value::Map::new();
-        resource["id"] = serde_json::Value::String(self.resource.friendly_id.to_string());
-        resource["metadata"] = serde_json::to_value(&self.resource.metadata)?;
+        resource.insert(
+            "id".to_string(),
+            serde_json::Value::String(self.resource.friendly_id.to_string()),
+        );
+        resource.insert(
+            "metadata".to_string(),
+            serde_json::to_value(&self.resource.metadata)?,
+        );
         resource.append(&mut self.data.clone());
 
         let concrete = match self.resource.kind {
