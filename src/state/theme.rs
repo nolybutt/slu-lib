@@ -6,7 +6,7 @@ use ts_rs::TS;
 
 use crate::{
     error::Result,
-    resource::{ResourceId, ResourceMetadata},
+    resource::{ConcreteResource, ResourceId, ResourceMetadata, SluResourceFile},
 };
 
 use super::WidgetId;
@@ -47,11 +47,21 @@ pub struct Theme {
 
 impl Theme {
     pub fn load_from_file(path: &Path) -> Result<Theme> {
-        let extension = path.extension().ok_or("Invalid theme path extension")?;
-        if extension != "yml" && extension != "yaml" {
-            return Err("Invalid theme path extension".into());
-        }
-        let theme = serde_yaml::from_reader(std::fs::File::open(path)?)?;
+        let extension = path
+            .extension()
+            .ok_or("Invalid theme path extension")?
+            .to_string_lossy();
+
+        let theme = match extension.as_ref() {
+            "yml" | "yaml" => serde_yaml::from_reader(std::fs::File::open(path)?)?,
+            "slu" => match SluResourceFile::load(path)?.concrete()? {
+                ConcreteResource::Theme(theme) => theme,
+                _ => return Err("Resource file is not a theme".into()),
+            },
+            _ => {
+                return Err("Invalid theme path extension".into());
+            }
+        };
         Ok(theme)
     }
 
