@@ -139,6 +139,9 @@ slu_commands_declaration! {
     // App Launcher
     LauncherGetApps = launcher_get_apps,
 
+    // Slu Popups
+    GetPopupConfig = get_popup_config,
+
     // Tray Icons
     GetTrayIcons = get_tray_icons,
     OnClickTrayIcon = on_click_tray_icon,
