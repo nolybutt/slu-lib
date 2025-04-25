@@ -24,6 +24,7 @@ define_app_errors!(
     Io(std::io::Error);
     SerdeJson(serde_json::Error);
     SerdeYaml(serde_yaml::Error);
+    Base64Decode(base64::DecodeError);
     Grass(Box<grass::Error>);
 );
 

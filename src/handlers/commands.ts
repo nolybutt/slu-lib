@@ -79,6 +79,7 @@ export enum SeelenCommand {
   SetWindowPosition = 'set_window_position',
   RequestFocus = 'request_focus',
   LauncherGetApps = 'launcher_get_apps',
+  GetPopupConfig = 'get_popup_config',
   GetTrayIcons = 'get_tray_icons',
   OnClickTrayIcon = 'on_click_tray_icon',
   OnContextMenuTrayIcon = 'on_context_menu_tray_icon',

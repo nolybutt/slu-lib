@@ -1,5 +1,13 @@
-use std::{collections::HashMap, hash::Hash, sync::OnceLock};
+use std::{
+    collections::HashMap,
+    fs::File,
+    hash::Hash,
+    io::{Read, Write},
+    path::Path,
+    sync::OnceLock,
+};
 
+use base64::Engine;
 use chrono::{DateTime, Utc};
 use schemars::JsonSchema;
 use serde::{Deserialize, Serialize};
@@ -7,7 +15,10 @@ use ts_rs::TS;
 use url::Url;
 use uuid::Uuid;
 
-use crate::error::Result;
+use crate::{
+    error::Result,
+    state::{IconPack, Plugin, Theme, Widget},
+};
 
 #[derive(
     Debug, Clone, Hash, PartialEq, Eq, PartialOrd, Ord, Serialize, Deserialize, JsonSchema, TS,
@@ -160,7 +171,6 @@ pub enum ResourceStatus {
 #[serde(rename_all = "camelCase")]
 #[ts(export)]
 pub struct Resource {
-    #[serde(rename = "_id")]
     pub id: Uuid,
     pub creator_id: Uuid,
     /// visual id composed of creator username and resource name
@@ -197,5 +207,72 @@ impl Resource {
             }
         }
         Ok(())
+    }
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, TS)]
+#[serde(rename_all = "camelCase")]
+#[ts(export)]
+pub struct SluResourceFile {
+    pub version: u32,
+    pub resource: Resource,
+    pub data: serde_json::value::Map<String, serde_json::Value>,
+}
+
+pub enum ConcreteResource {
+    Theme(Theme),
+    Plugin(Plugin),
+    IconPack(IconPack),
+    Widget(Widget),
+}
+
+impl SluResourceFile {
+    pub fn load(path: &Path) -> Result<Self> {
+        let mut file = File::open(path)?;
+
+        let mut header = [0u8; 4];
+        file.read_exact(&mut header)?;
+
+        let [_version, _reserved1, _reserved2, _reserved3] = header;
+
+        let mut buffer = Vec::new();
+        file.read_to_end(&mut buffer)?;
+        let decoded = base64::engine::general_purpose::STANDARD.decode(&buffer)?;
+        Ok(serde_yaml::from_slice(&decoded)?)
+    }
+
+    pub fn store(&self, path: &Path) -> Result<()> {
+        let mut file = File::create(path)?;
+        let data = serde_yaml::to_string(self)?;
+        let encoded = base64::engine::general_purpose::STANDARD.encode(data);
+
+        file.write_all(&[1, 0, 0, 0])?;
+        file.write_all(encoded.as_bytes())?;
+        Ok(())
+    }
+
+    pub fn concrete(&self) -> Result<ConcreteResource> {
+        let mut resource = serde_json::value::Map::new();
+        resource["id"] = serde_json::Value::String(self.resource.friendly_id.to_string());
+        resource["metadata"] = serde_json::to_value(&self.resource.metadata)?;
+        resource.append(&mut self.data.clone());
+
+        let concrete = match self.resource.kind {
+            ResourceKind::Theme => {
+                ConcreteResource::Theme(serde_json::from_value(resource.into())?)
+            }
+            ResourceKind::Plugin => {
+                ConcreteResource::Plugin(serde_json::from_value(resource.into())?)
+            }
+            ResourceKind::IconPack => {
+                ConcreteResource::IconPack(serde_json::from_value(resource.into())?)
+            }
+            ResourceKind::Widget => {
+                ConcreteResource::Widget(serde_json::from_value(resource.into())?)
+            }
+            _ => return Err("unsupported resource kind".into()),
+        };
+
+        Ok(concrete)
     }
 }
