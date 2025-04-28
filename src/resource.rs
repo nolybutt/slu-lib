@@ -159,9 +159,15 @@ pub enum ResourceKind {
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize, JsonSchema, TS)]
 pub enum ResourceStatus {
+    /// Initial state
     Draft,
+    /// Waiting for review
     Reviewing,
+    /// review done and rejected
+    Rejected,
+    /// review done and approved
     Published,
+    /// soft delete by user
     Deleted,
 }
 
@@ -179,6 +185,9 @@ pub struct Resource {
     pub created_at: DateTime<Utc>,
     pub updated_at: DateTime<Utc>,
     pub status: ResourceStatus,
+    pub rejected_reason: Option<String>,
+    pub reviewed_at: Option<DateTime<Utc>>,
+    pub reviewed_by: Option<Uuid>,
     /// should be filled if `status == ResourceStatus::Deleted`
     pub deleted_at: Option<DateTime<Utc>>,
     pub version: u32,
