@@ -388,7 +388,7 @@ impl ToolbarItem {
 #[serde(untagged)]
 pub enum ToolbarItem2 {
     Plugin(PluginId),
-    Inline(ToolbarItem),
+    Inline(Box<ToolbarItem>),
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Default, Serialize, Deserialize, JsonSchema, TS)]
