@@ -12,6 +12,7 @@ use super::PluginId;
 pub struct RemoteDataDeclaration {
     url: Url,
     request_init: Option<serde_json::Value>,
+    update_interval_seconds: Option<u32>,
 }
 
 macro_rules! common_item {

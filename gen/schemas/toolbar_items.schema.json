@@ -44,6 +44,14 @@
       ],
       "properties": {
         "requestInit": true,
+        "updateIntervalSeconds": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "format": "uint32",
+          "minimum": 0.0
+        },
         "url": {
           "type": "string",
           "format": "uri"
