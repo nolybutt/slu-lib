@@ -37,6 +37,19 @@
     "PluginId": {
       "$ref": "#/definitions/ResourceId"
     },
+    "RemoteDataDeclaration": {
+      "type": "object",
+      "required": [
+        "url"
+      ],
+      "properties": {
+        "requestInit": true,
+        "url": {
+          "type": "string",
+          "format": "uri"
+        }
+      }
+    },
     "ResourceId": {
       "description": "visual id composed of the creator username and the resource name",
       "type": "string"
@@ -87,6 +100,14 @@
                 "string",
                 "null"
               ]
+            },
+            "remoteData": {
+              "description": "Remote data to be added to the item scope.",
+              "default": {},
+              "type": "object",
+              "additionalProperties": {
+                "$ref": "#/definitions/RemoteDataDeclaration"
+              }
             },
             "style": {
               "description": "Styles to be added to the item. This follow the same interface of React's `style` prop.",
@@ -159,6 +180,14 @@
                 "null"
               ]
             },
+            "remoteData": {
+              "description": "Remote data to be added to the item scope.",
+              "default": {},
+              "type": "object",
+              "additionalProperties": {
+                "$ref": "#/definitions/RemoteDataDeclaration"
+              }
+            },
             "style": {
               "description": "Styles to be added to the item. This follow the same interface of React's `style` prop.",
               "default": {},
@@ -229,6 +258,14 @@
                 "string",
                 "null"
               ]
+            },
+            "remoteData": {
+              "description": "Remote data to be added to the item scope.",
+              "default": {},
+              "type": "object",
+              "additionalProperties": {
+                "$ref": "#/definitions/RemoteDataDeclaration"
+              }
             },
             "style": {
               "description": "Styles to be added to the item. This follow the same interface of React's `style` prop.",
@@ -301,6 +338,14 @@
                 "null"
               ]
             },
+            "remoteData": {
+              "description": "Remote data to be added to the item scope.",
+              "default": {},
+              "type": "object",
+              "additionalProperties": {
+                "$ref": "#/definitions/RemoteDataDeclaration"
+              }
+            },
             "style": {
               "description": "Styles to be added to the item. This follow the same interface of React's `style` prop.",
               "default": {},
@@ -372,6 +417,14 @@
                 "null"
               ]
             },
+            "remoteData": {
+              "description": "Remote data to be added to the item scope.",
+              "default": {},
+              "type": "object",
+              "additionalProperties": {
+                "$ref": "#/definitions/RemoteDataDeclaration"
+              }
+            },
             "style": {
               "description": "Styles to be added to the item. This follow the same interface of React's `style` prop.",
               "default": {},
@@ -442,6 +495,14 @@
                 "string",
                 "null"
               ]
+            },
+            "remoteData": {
+              "description": "Remote data to be added to the item scope.",
+              "default": {},
+              "type": "object",
+              "additionalProperties": {
+                "$ref": "#/definitions/RemoteDataDeclaration"
+              }
             },
             "style": {
               "description": "Styles to be added to the item. This follow the same interface of React's `style` prop.",
@@ -519,6 +580,14 @@
                 "null"
               ]
             },
+            "remoteData": {
+              "description": "Remote data to be added to the item scope.",
+              "default": {},
+              "type": "object",
+              "additionalProperties": {
+                "$ref": "#/definitions/RemoteDataDeclaration"
+              }
+            },
             "style": {
               "description": "Styles to be added to the item. This follow the same interface of React's `style` prop.",
               "default": {},
@@ -594,6 +663,14 @@
                 "string",
                 "null"
               ]
+            },
+            "remoteData": {
+              "description": "Remote data to be added to the item scope.",
+              "default": {},
+              "type": "object",
+              "additionalProperties": {
+                "$ref": "#/definitions/RemoteDataDeclaration"
+              }
             },
             "style": {
               "description": "Styles to be added to the item. This follow the same interface of React's `style` prop.",
@@ -671,6 +748,14 @@
                 "null"
               ]
             },
+            "remoteData": {
+              "description": "Remote data to be added to the item scope.",
+              "default": {},
+              "type": "object",
+              "additionalProperties": {
+                "$ref": "#/definitions/RemoteDataDeclaration"
+              }
+            },
             "style": {
               "description": "Styles to be added to the item. This follow the same interface of React's `style` prop.",
               "default": {},
@@ -747,6 +832,14 @@
                 "null"
               ]
             },
+            "remoteData": {
+              "description": "Remote data to be added to the item scope.",
+              "default": {},
+              "type": "object",
+              "additionalProperties": {
+                "$ref": "#/definitions/RemoteDataDeclaration"
+              }
+            },
             "style": {
               "description": "Styles to be added to the item. This follow the same interface of React's `style` prop.",
               "default": {},
@@ -817,6 +910,14 @@
                 "string",
                 "null"
               ]
+            },
+            "remoteData": {
+              "description": "Remote data to be added to the item scope.",
+              "default": {},
+              "type": "object",
+              "additionalProperties": {
+                "$ref": "#/definitions/RemoteDataDeclaration"
+              }
             },
             "style": {
               "description": "Styles to be added to the item. This follow the same interface of React's `style` prop.",
@@ -889,6 +990,14 @@
                 "null"
               ]
             },
+            "remoteData": {
+              "description": "Remote data to be added to the item scope.",
+              "default": {},
+              "type": "object",
+              "additionalProperties": {
+                "$ref": "#/definitions/RemoteDataDeclaration"
+              }
+            },
             "style": {
               "description": "Styles to be added to the item. This follow the same interface of React's `style` prop.",
               "default": {},
@@ -959,6 +1068,14 @@
                 "string",
                 "null"
               ]
+            },
+            "remoteData": {
+              "description": "Remote data to be added to the item scope.",
+              "default": {},
+              "type": "object",
+              "additionalProperties": {
+                "$ref": "#/definitions/RemoteDataDeclaration"
+              }
             },
             "style": {
               "description": "Styles to be added to the item. This follow the same interface of React's `style` prop.",
@@ -1038,6 +1155,14 @@
                 "string",
                 "null"
               ]
+            },
+            "remoteData": {
+              "description": "Remote data to be added to the item scope.",
+              "default": {},
+              "type": "object",
+              "additionalProperties": {
+                "$ref": "#/definitions/RemoteDataDeclaration"
+              }
             },
             "style": {
               "description": "Styles to be added to the item. This follow the same interface of React's `style` prop.",

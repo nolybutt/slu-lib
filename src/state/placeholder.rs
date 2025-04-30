@@ -3,8 +3,16 @@ use std::collections::{HashMap, HashSet};
 use schemars::JsonSchema;
 use serde::{Deserialize, Serialize};
 use ts_rs::TS;
+use url::Url;
 
 use super::PluginId;
+
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize, JsonSchema, TS)]
+#[serde(rename_all = "camelCase")]
+pub struct RemoteDataDeclaration {
+    url: Url,
+    request_init: Option<serde_json::Value>,
+}
 
 macro_rules! common_item {
     (
@@ -49,6 +57,8 @@ macro_rules! common_item {
                 pub on_click_v2: Option<String>,
                 /// Styles to be added to the item. This follow the same interface of React's `style` prop.
                 pub style: HashMap<String, Option<StyleValue>>,
+                /// Remote data to be added to the item scope.
+                pub remote_data: HashMap<String, RemoteDataDeclaration>,
                 $($rest)*
             }
         )*
