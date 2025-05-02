@@ -225,7 +225,7 @@ impl Resource {
 pub struct SluResourceFile {
     pub version: u32,
     pub resource: Resource,
-    pub data: serde_json::value::Map<String, serde_json::Value>,
+    pub data: serde_json::Value,
 }
 
 pub enum ConcreteResource {
@@ -270,7 +270,9 @@ impl SluResourceFile {
             "metadata".to_string(),
             serde_json::to_value(&self.resource.metadata)?,
         );
-        resource.append(&mut self.data.clone());
+
+        let data = self.data.as_object().ok_or_else(|| "invalid data")?;
+        resource.append(&mut data.clone());
 
         let concrete = match self.resource.kind {
             ResourceKind::Theme => {
