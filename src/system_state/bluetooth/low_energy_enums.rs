@@ -4,6 +4,7 @@
 #[derive(
     Debug, Copy, Clone, Eq, PartialEq, FromPrimitive, IntoPrimitive, Serialize, Deserialize, TS,
 )]
+#[ts(export_to = "BLEAppearanceSubCategory.ts")]
 #[repr(u16)]
 pub enum BLEAppearanceUnknownSubCategory {
     #[num_enum(catch_all)]
@@ -13,6 +14,7 @@ pub enum BLEAppearanceUnknownSubCategory {
 #[derive(
     Debug, Copy, Clone, Eq, PartialEq, FromPrimitive, IntoPrimitive, Serialize, Deserialize, TS,
 )]
+#[ts(export_to = "BLEAppearanceSubCategory.ts")]
 #[repr(u16)]
 pub enum BLEAppearancePhoneSubCategory {
     #[num_enum(catch_all)]
@@ -22,6 +24,7 @@ pub enum BLEAppearancePhoneSubCategory {
 #[derive(
     Debug, Copy, Clone, Eq, PartialEq, FromPrimitive, IntoPrimitive, Serialize, Deserialize, TS,
 )]
+#[ts(export_to = "BLEAppearanceSubCategory.ts")]
 #[repr(u16)]
 pub enum BLEAppearanceComputerSubCategory {
     DesktopWorkstation = 0x1,
@@ -46,6 +49,7 @@ pub enum BLEAppearanceComputerSubCategory {
 #[derive(
     Debug, Copy, Clone, Eq, PartialEq, FromPrimitive, IntoPrimitive, Serialize, Deserialize, TS,
 )]
+#[ts(export_to = "BLEAppearanceSubCategory.ts")]
 #[repr(u16)]
 pub enum BLEAppearanceWatchSubCategory {
     SportsWatch = 0x1,
@@ -57,6 +61,7 @@ pub enum BLEAppearanceWatchSubCategory {
 #[derive(
     Debug, Copy, Clone, Eq, PartialEq, FromPrimitive, IntoPrimitive, Serialize, Deserialize, TS,
 )]
+#[ts(export_to = "BLEAppearanceSubCategory.ts")]
 #[repr(u16)]
 pub enum BLEAppearanceClockSubCategory {
     #[num_enum(catch_all)]
@@ -66,6 +71,7 @@ pub enum BLEAppearanceClockSubCategory {
 #[derive(
     Debug, Copy, Clone, Eq, PartialEq, FromPrimitive, IntoPrimitive, Serialize, Deserialize, TS,
 )]
+#[ts(export_to = "BLEAppearanceSubCategory.ts")]
 #[repr(u16)]
 pub enum BLEAppearanceDisplaySubCategory {
     #[num_enum(catch_all)]
@@ -75,6 +81,7 @@ pub enum BLEAppearanceDisplaySubCategory {
 #[derive(
     Debug, Copy, Clone, Eq, PartialEq, FromPrimitive, IntoPrimitive, Serialize, Deserialize, TS,
 )]
+#[ts(export_to = "BLEAppearanceSubCategory.ts")]
 #[repr(u16)]
 pub enum BLEAppearanceRemoteControlSubCategory {
     #[num_enum(catch_all)]
@@ -84,6 +91,7 @@ pub enum BLEAppearanceRemoteControlSubCategory {
 #[derive(
     Debug, Copy, Clone, Eq, PartialEq, FromPrimitive, IntoPrimitive, Serialize, Deserialize, TS,
 )]
+#[ts(export_to = "BLEAppearanceSubCategory.ts")]
 #[repr(u16)]
 pub enum BLEAppearanceEyeglassesSubCategory {
     #[num_enum(catch_all)]
@@ -93,6 +101,7 @@ pub enum BLEAppearanceEyeglassesSubCategory {
 #[derive(
     Debug, Copy, Clone, Eq, PartialEq, FromPrimitive, IntoPrimitive, Serialize, Deserialize, TS,
 )]
+#[ts(export_to = "BLEAppearanceSubCategory.ts")]
 #[repr(u16)]
 pub enum BLEAppearanceTagSubCategory {
     #[num_enum(catch_all)]
@@ -102,6 +111,7 @@ pub enum BLEAppearanceTagSubCategory {
 #[derive(
     Debug, Copy, Clone, Eq, PartialEq, FromPrimitive, IntoPrimitive, Serialize, Deserialize, TS,
 )]
+#[ts(export_to = "BLEAppearanceSubCategory.ts")]
 #[repr(u16)]
 pub enum BLEAppearanceKeyringSubCategory {
     #[num_enum(catch_all)]
@@ -111,6 +121,7 @@ pub enum BLEAppearanceKeyringSubCategory {
 #[derive(
     Debug, Copy, Clone, Eq, PartialEq, FromPrimitive, IntoPrimitive, Serialize, Deserialize, TS,
 )]
+#[ts(export_to = "BLEAppearanceSubCategory.ts")]
 #[repr(u16)]
 pub enum BLEAppearanceMediaPlayerSubCategory {
     #[num_enum(catch_all)]
@@ -120,6 +131,7 @@ pub enum BLEAppearanceMediaPlayerSubCategory {
 #[derive(
     Debug, Copy, Clone, Eq, PartialEq, FromPrimitive, IntoPrimitive, Serialize, Deserialize, TS,
 )]
+#[ts(export_to = "BLEAppearanceSubCategory.ts")]
 #[repr(u16)]
 pub enum BLEAppearanceBarcodeScannerSubCategory {
     #[num_enum(catch_all)]
@@ -129,6 +141,7 @@ pub enum BLEAppearanceBarcodeScannerSubCategory {
 #[derive(
     Debug, Copy, Clone, Eq, PartialEq, FromPrimitive, IntoPrimitive, Serialize, Deserialize, TS,
 )]
+#[ts(export_to = "BLEAppearanceSubCategory.ts")]
 #[repr(u16)]
 pub enum BLEAppearanceThermometerSubCategory {
     EarThermometer = 0x1,
@@ -139,6 +152,7 @@ pub enum BLEAppearanceThermometerSubCategory {
 #[derive(
     Debug, Copy, Clone, Eq, PartialEq, FromPrimitive, IntoPrimitive, Serialize, Deserialize, TS,
 )]
+#[ts(export_to = "BLEAppearanceSubCategory.ts")]
 #[repr(u16)]
 pub enum BLEAppearanceHeartRateSensorSubCategory {
     HeartRateBelt = 0x1,
@@ -149,6 +163,7 @@ pub enum BLEAppearanceHeartRateSensorSubCategory {
 #[derive(
     Debug, Copy, Clone, Eq, PartialEq, FromPrimitive, IntoPrimitive, Serialize, Deserialize, TS,
 )]
+#[ts(export_to = "BLEAppearanceSubCategory.ts")]
 #[repr(u16)]
 pub enum BLEAppearanceBloodPressureSubCategory {
     ArmBloodPressure = 0x1,
@@ -160,6 +175,7 @@ pub enum BLEAppearanceBloodPressureSubCategory {
 #[derive(
     Debug, Copy, Clone, Eq, PartialEq, FromPrimitive, IntoPrimitive, Serialize, Deserialize, TS,
 )]
+#[ts(export_to = "BLEAppearanceSubCategory.ts")]
 #[repr(u16)]
 pub enum BLEAppearanceHumanInterfaceDeviceSubCategory {
     Keyboard = 0x1,
@@ -179,6 +195,7 @@ pub enum BLEAppearanceHumanInterfaceDeviceSubCategory {
 #[derive(
     Debug, Copy, Clone, Eq, PartialEq, FromPrimitive, IntoPrimitive, Serialize, Deserialize, TS,
 )]
+#[ts(export_to = "BLEAppearanceSubCategory.ts")]
 #[repr(u16)]
 pub enum BLEAppearanceGlucoseMeterSubCategory {
     #[num_enum(catch_all)]
@@ -188,6 +205,7 @@ pub enum BLEAppearanceGlucoseMeterSubCategory {
 #[derive(
     Debug, Copy, Clone, Eq, PartialEq, FromPrimitive, IntoPrimitive, Serialize, Deserialize, TS,
 )]
+#[ts(export_to = "BLEAppearanceSubCategory.ts")]
 #[repr(u16)]
 pub enum BLEAppearanceRunningWalkingSensorSubCategory {
     InShoeRunningWalkingSensor = 0x1,
@@ -200,6 +218,7 @@ pub enum BLEAppearanceRunningWalkingSensorSubCategory {
 #[derive(
     Debug, Copy, Clone, Eq, PartialEq, FromPrimitive, IntoPrimitive, Serialize, Deserialize, TS,
 )]
+#[ts(export_to = "BLEAppearanceSubCategory.ts")]
 #[repr(u16)]
 pub enum BLEAppearanceCyclingSubCategory {
     CyclingComputer = 0x1,
@@ -214,6 +233,7 @@ pub enum BLEAppearanceCyclingSubCategory {
 #[derive(
     Debug, Copy, Clone, Eq, PartialEq, FromPrimitive, IntoPrimitive, Serialize, Deserialize, TS,
 )]
+#[ts(export_to = "BLEAppearanceSubCategory.ts")]
 #[repr(u16)]
 pub enum BLEAppearanceControlDeviceSubCategory {
     Switch = 0x1,
@@ -236,6 +256,7 @@ pub enum BLEAppearanceControlDeviceSubCategory {
 #[derive(
     Debug, Copy, Clone, Eq, PartialEq, FromPrimitive, IntoPrimitive, Serialize, Deserialize, TS,
 )]
+#[ts(export_to = "BLEAppearanceSubCategory.ts")]
 #[repr(u16)]
 pub enum BLEAppearanceNetworkDeviceSubCategory {
     AccessPoint = 0x1,
@@ -248,6 +269,7 @@ pub enum BLEAppearanceNetworkDeviceSubCategory {
 #[derive(
     Debug, Copy, Clone, Eq, PartialEq, FromPrimitive, IntoPrimitive, Serialize, Deserialize, TS,
 )]
+#[ts(export_to = "BLEAppearanceSubCategory.ts")]
 #[repr(u16)]
 pub enum BLEAppearanceSensorSubCategory {
     MotionSensor = 0x1,
@@ -282,6 +304,7 @@ pub enum BLEAppearanceSensorSubCategory {
 #[derive(
     Debug, Copy, Clone, Eq, PartialEq, FromPrimitive, IntoPrimitive, Serialize, Deserialize, TS,
 )]
+#[ts(export_to = "BLEAppearanceSubCategory.ts")]
 #[repr(u16)]
 pub enum BLEAppearanceLightFixturesSubCategory {
     WallLight = 0x1,
@@ -316,6 +339,7 @@ pub enum BLEAppearanceLightFixturesSubCategory {
 #[derive(
     Debug, Copy, Clone, Eq, PartialEq, FromPrimitive, IntoPrimitive, Serialize, Deserialize, TS,
 )]
+#[ts(export_to = "BLEAppearanceSubCategory.ts")]
 #[repr(u16)]
 pub enum BLEAppearanceFanSubCategory {
     CeilingFan = 0x1,
@@ -331,6 +355,7 @@ pub enum BLEAppearanceFanSubCategory {
 #[derive(
     Debug, Copy, Clone, Eq, PartialEq, FromPrimitive, IntoPrimitive, Serialize, Deserialize, TS,
 )]
+#[ts(export_to = "BLEAppearanceSubCategory.ts")]
 #[repr(u16)]
 pub enum BLEAppearanceHVACSubCategory {
     Thermostat = 0x1,
@@ -351,6 +376,7 @@ pub enum BLEAppearanceHVACSubCategory {
 #[derive(
     Debug, Copy, Clone, Eq, PartialEq, FromPrimitive, IntoPrimitive, Serialize, Deserialize, TS,
 )]
+#[ts(export_to = "BLEAppearanceSubCategory.ts")]
 #[repr(u16)]
 pub enum BLEAppearanceAirConditioningSubCategory {
     #[num_enum(catch_all)]
@@ -360,6 +386,7 @@ pub enum BLEAppearanceAirConditioningSubCategory {
 #[derive(
     Debug, Copy, Clone, Eq, PartialEq, FromPrimitive, IntoPrimitive, Serialize, Deserialize, TS,
 )]
+#[ts(export_to = "BLEAppearanceSubCategory.ts")]
 #[repr(u16)]
 pub enum BLEAppearanceHumidifierSubCategory {
     #[num_enum(catch_all)]
@@ -369,6 +396,7 @@ pub enum BLEAppearanceHumidifierSubCategory {
 #[derive(
     Debug, Copy, Clone, Eq, PartialEq, FromPrimitive, IntoPrimitive, Serialize, Deserialize, TS,
 )]
+#[ts(export_to = "BLEAppearanceSubCategory.ts")]
 #[repr(u16)]
 pub enum BLEAppearanceHeatingSubCategory {
     Radiator = 0x1,
@@ -385,6 +413,7 @@ pub enum BLEAppearanceHeatingSubCategory {
 #[derive(
     Debug, Copy, Clone, Eq, PartialEq, FromPrimitive, IntoPrimitive, Serialize, Deserialize, TS,
 )]
+#[ts(export_to = "BLEAppearanceSubCategory.ts")]
 #[repr(u16)]
 pub enum BLEAppearanceAccessControlSubCategory {
     AccessDoor = 0x1,
@@ -403,6 +432,7 @@ pub enum BLEAppearanceAccessControlSubCategory {
 #[derive(
     Debug, Copy, Clone, Eq, PartialEq, FromPrimitive, IntoPrimitive, Serialize, Deserialize, TS,
 )]
+#[ts(export_to = "BLEAppearanceSubCategory.ts")]
 #[repr(u16)]
 pub enum BLEAppearanceMotorizedDeviceSubCategory {
     MotorizedGate = 0x1,
@@ -417,6 +447,7 @@ pub enum BLEAppearanceMotorizedDeviceSubCategory {
 #[derive(
     Debug, Copy, Clone, Eq, PartialEq, FromPrimitive, IntoPrimitive, Serialize, Deserialize, TS,
 )]
+#[ts(export_to = "BLEAppearanceSubCategory.ts")]
 #[repr(u16)]
 pub enum BLEAppearancePowerDeviceSubCategory {
     PowerOutlet = 0x1,
@@ -435,6 +466,7 @@ pub enum BLEAppearancePowerDeviceSubCategory {
 #[derive(
     Debug, Copy, Clone, Eq, PartialEq, FromPrimitive, IntoPrimitive, Serialize, Deserialize, TS,
 )]
+#[ts(export_to = "BLEAppearanceSubCategory.ts")]
 #[repr(u16)]
 pub enum BLEAppearanceLightSourceSubCategory {
     IncandescentLightBulb = 0x1,
@@ -452,6 +484,7 @@ pub enum BLEAppearanceLightSourceSubCategory {
 #[derive(
     Debug, Copy, Clone, Eq, PartialEq, FromPrimitive, IntoPrimitive, Serialize, Deserialize, TS,
 )]
+#[ts(export_to = "BLEAppearanceSubCategory.ts")]
 #[repr(u16)]
 pub enum BLEAppearanceWindowCoveringSubCategory {
     WindowShades = 0x1,
@@ -467,6 +500,7 @@ pub enum BLEAppearanceWindowCoveringSubCategory {
 #[derive(
     Debug, Copy, Clone, Eq, PartialEq, FromPrimitive, IntoPrimitive, Serialize, Deserialize, TS,
 )]
+#[ts(export_to = "BLEAppearanceSubCategory.ts")]
 #[repr(u16)]
 pub enum BLEAppearanceAudioSinkSubCategory {
     StandaloneSpeaker = 0x1,
@@ -481,6 +515,7 @@ pub enum BLEAppearanceAudioSinkSubCategory {
 #[derive(
     Debug, Copy, Clone, Eq, PartialEq, FromPrimitive, IntoPrimitive, Serialize, Deserialize, TS,
 )]
+#[ts(export_to = "BLEAppearanceSubCategory.ts")]
 #[repr(u16)]
 pub enum BLEAppearanceAudioSourceSubCategory {
     Microphone = 0x1,
@@ -499,6 +534,7 @@ pub enum BLEAppearanceAudioSourceSubCategory {
 #[derive(
     Debug, Copy, Clone, Eq, PartialEq, FromPrimitive, IntoPrimitive, Serialize, Deserialize, TS,
 )]
+#[ts(export_to = "BLEAppearanceSubCategory.ts")]
 #[repr(u16)]
 pub enum BLEAppearanceMotorizedVehicleSubCategory {
     Car = 0x1,
@@ -523,6 +559,7 @@ pub enum BLEAppearanceMotorizedVehicleSubCategory {
 #[derive(
     Debug, Copy, Clone, Eq, PartialEq, FromPrimitive, IntoPrimitive, Serialize, Deserialize, TS,
 )]
+#[ts(export_to = "BLEAppearanceSubCategory.ts")]
 #[repr(u16)]
 pub enum BLEAppearanceDomesticApplianceSubCategory {
     Refrigerator = 0x1,
@@ -547,6 +584,7 @@ pub enum BLEAppearanceDomesticApplianceSubCategory {
 #[derive(
     Debug, Copy, Clone, Eq, PartialEq, FromPrimitive, IntoPrimitive, Serialize, Deserialize, TS,
 )]
+#[ts(export_to = "BLEAppearanceSubCategory.ts")]
 #[repr(u16)]
 pub enum BLEAppearanceWearableAudioDeviceSubCategory {
     Earbud = 0x1,
@@ -560,6 +598,7 @@ pub enum BLEAppearanceWearableAudioDeviceSubCategory {
 #[derive(
     Debug, Copy, Clone, Eq, PartialEq, FromPrimitive, IntoPrimitive, Serialize, Deserialize, TS,
 )]
+#[ts(export_to = "BLEAppearanceSubCategory.ts")]
 #[repr(u16)]
 pub enum BLEAppearanceAircraftSubCategory {
     LightAircraft = 0x1,
@@ -573,6 +612,7 @@ pub enum BLEAppearanceAircraftSubCategory {
 #[derive(
     Debug, Copy, Clone, Eq, PartialEq, FromPrimitive, IntoPrimitive, Serialize, Deserialize, TS,
 )]
+#[ts(export_to = "BLEAppearanceSubCategory.ts")]
 #[repr(u16)]
 pub enum BLEAppearanceAVEquipmentSubCategory {
     Amplifier = 0x1,
@@ -592,6 +632,7 @@ pub enum BLEAppearanceAVEquipmentSubCategory {
 #[derive(
     Debug, Copy, Clone, Eq, PartialEq, FromPrimitive, IntoPrimitive, Serialize, Deserialize, TS,
 )]
+#[ts(export_to = "BLEAppearanceSubCategory.ts")]
 #[repr(u16)]
 pub enum BLEAppearanceDisplayEquipmentSubCategory {
     Television = 0x1,
@@ -604,6 +645,7 @@ pub enum BLEAppearanceDisplayEquipmentSubCategory {
 #[derive(
     Debug, Copy, Clone, Eq, PartialEq, FromPrimitive, IntoPrimitive, Serialize, Deserialize, TS,
 )]
+#[ts(export_to = "BLEAppearanceSubCategory.ts")]
 #[repr(u16)]
 pub enum BLEAppearanceHearingaidSubCategory {
     Inearhearingaid = 0x1,
@@ -616,6 +658,7 @@ pub enum BLEAppearanceHearingaidSubCategory {
 #[derive(
     Debug, Copy, Clone, Eq, PartialEq, FromPrimitive, IntoPrimitive, Serialize, Deserialize, TS,
 )]
+#[ts(export_to = "BLEAppearanceSubCategory.ts")]
 #[repr(u16)]
 pub enum BLEAppearanceGamingSubCategory {
     HomeVideoGameConsole = 0x1,
@@ -627,6 +670,7 @@ pub enum BLEAppearanceGamingSubCategory {
 #[derive(
     Debug, Copy, Clone, Eq, PartialEq, FromPrimitive, IntoPrimitive, Serialize, Deserialize, TS,
 )]
+#[ts(export_to = "BLEAppearanceSubCategory.ts")]
 #[repr(u16)]
 pub enum BLEAppearanceSignageSubCategory {
     DigitalSignage = 0x1,
@@ -638,6 +682,7 @@ pub enum BLEAppearanceSignageSubCategory {
 #[derive(
     Debug, Copy, Clone, Eq, PartialEq, FromPrimitive, IntoPrimitive, Serialize, Deserialize, TS,
 )]
+#[ts(export_to = "BLEAppearanceSubCategory.ts")]
 #[repr(u16)]
 pub enum BLEAppearancePulseOximeterSubCategory {
     FingertipPulseOximeter = 0x1,
@@ -649,6 +694,7 @@ pub enum BLEAppearancePulseOximeterSubCategory {
 #[derive(
     Debug, Copy, Clone, Eq, PartialEq, FromPrimitive, IntoPrimitive, Serialize, Deserialize, TS,
 )]
+#[ts(export_to = "BLEAppearanceSubCategory.ts")]
 #[repr(u16)]
 pub enum BLEAppearanceWeightScaleSubCategory {
     #[num_enum(catch_all)]
@@ -658,6 +704,7 @@ pub enum BLEAppearanceWeightScaleSubCategory {
 #[derive(
     Debug, Copy, Clone, Eq, PartialEq, FromPrimitive, IntoPrimitive, Serialize, Deserialize, TS,
 )]
+#[ts(export_to = "BLEAppearanceSubCategory.ts")]
 #[repr(u16)]
 pub enum BLEAppearancePersonalMobilityDeviceSubCategory {
     PoweredWheelchair = 0x1,
@@ -669,6 +716,7 @@ pub enum BLEAppearancePersonalMobilityDeviceSubCategory {
 #[derive(
     Debug, Copy, Clone, Eq, PartialEq, FromPrimitive, IntoPrimitive, Serialize, Deserialize, TS,
 )]
+#[ts(export_to = "BLEAppearanceSubCategory.ts")]
 #[repr(u16)]
 pub enum BLEAppearanceContinuousGlucoseMonitorSubCategory {
     #[num_enum(catch_all)]
@@ -678,6 +726,7 @@ pub enum BLEAppearanceContinuousGlucoseMonitorSubCategory {
 #[derive(
     Debug, Copy, Clone, Eq, PartialEq, FromPrimitive, IntoPrimitive, Serialize, Deserialize, TS,
 )]
+#[ts(export_to = "BLEAppearanceSubCategory.ts")]
 #[repr(u16)]
 pub enum BLEAppearanceInsulinPumpSubCategory {
     InsulinPumpdurablepump = 0x1,
@@ -690,6 +739,7 @@ pub enum BLEAppearanceInsulinPumpSubCategory {
 #[derive(
     Debug, Copy, Clone, Eq, PartialEq, FromPrimitive, IntoPrimitive, Serialize, Deserialize, TS,
 )]
+#[ts(export_to = "BLEAppearanceSubCategory.ts")]
 #[repr(u16)]
 pub enum BLEAppearanceMedicationDeliverySubCategory {
     #[num_enum(catch_all)]
@@ -699,6 +749,7 @@ pub enum BLEAppearanceMedicationDeliverySubCategory {
 #[derive(
     Debug, Copy, Clone, Eq, PartialEq, FromPrimitive, IntoPrimitive, Serialize, Deserialize, TS,
 )]
+#[ts(export_to = "BLEAppearanceSubCategory.ts")]
 #[repr(u16)]
 pub enum BLEAppearanceSpirometerSubCategory {
     HandheldSpirometer = 0x1,
@@ -709,6 +760,7 @@ pub enum BLEAppearanceSpirometerSubCategory {
 #[derive(
     Debug, Copy, Clone, Eq, PartialEq, FromPrimitive, IntoPrimitive, Serialize, Deserialize, TS,
 )]
+#[ts(export_to = "BLEAppearanceSubCategory.ts")]
 #[repr(u16)]
 pub enum BLEAppearanceOutdoorSportsActivitySubCategory {
     LocationDisplay = 0x1,
@@ -722,6 +774,7 @@ pub enum BLEAppearanceOutdoorSportsActivitySubCategory {
 #[derive(
     Debug, Copy, Clone, Eq, PartialEq, FromPrimitive, IntoPrimitive, Serialize, Deserialize, TS,
 )]
+#[ts(export_to = "BLEAppearanceSubCategory.ts")]
 #[repr(u16)]
 pub enum BLEAppearanceIndustrialMeasurementDeviceSubCategory {
     TorqueTestingDevice = 0x1,
@@ -737,6 +790,7 @@ pub enum BLEAppearanceIndustrialMeasurementDeviceSubCategory {
 #[derive(
     Debug, Copy, Clone, Eq, PartialEq, FromPrimitive, IntoPrimitive, Serialize, Deserialize, TS,
 )]
+#[ts(export_to = "BLEAppearanceSubCategory.ts")]
 #[repr(u16)]
 pub enum BLEAppearanceIndustrialToolsSubCategory {
     MachineToolHolder = 0x1,

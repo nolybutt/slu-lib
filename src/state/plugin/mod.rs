@@ -1,3 +1,5 @@
+pub mod known;
+
 use std::ops::{Deref, DerefMut};
 
 use schemars::JsonSchema;

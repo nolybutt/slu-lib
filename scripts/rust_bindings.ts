@@ -11,9 +11,6 @@ await new Deno.Command('cargo', {
   args: ['test', '--no-default-features'],
   stderr: 'inherit',
   stdout: 'inherit',
-  env: {
-    TS_RS_EXPORT_DIR: bindingsPath,
-  },
 }).output();
 
 console.log('[Task] Creating mod.ts...');
@@ -27,6 +24,15 @@ for (const entry of Deno.readDirSync(bindingsPath)) {
     await mod.write(new TextEncoder().encode(`export * from './${entry.name}';\n`));
   }
 }
+
+console.log('[Task] Extracting Types Definitions...');
+const doc = await new Deno.Command('deno', {
+  args: ['doc', '--json', '--private', `${bindingsPath}/mod.ts`],
+  stderr: 'inherit',
+  stdout: 'piped',
+}).output();
+const docJson = JSON.parse(new TextDecoder().decode(doc.stdout));
+await Deno.writeTextFile('./gen/doc-types.json', JSON.stringify(docJson, null, 2));
 
 console.log('[Task] Formatting...');
 await new Deno.Command('cargo', { args: ['fmt'], stderr: 'inherit', stdout: 'inherit' }).output();

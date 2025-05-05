@@ -66,6 +66,7 @@ fn build_low_energy_enums() -> crate::error::Result<()> {
 
         let mut subcategory_enum = vec![
             "#[derive(Debug, Copy, Clone, Eq, PartialEq, FromPrimitive, IntoPrimitive, Serialize, Deserialize, TS)]".to_string(),
+            "#[ts(export_to = \"BLEAppearanceSubCategory.ts\")]".to_string(),
             "#[repr(u16)]".to_string(),
             format!("pub enum {sub_enum_name} {{"),
         ];
