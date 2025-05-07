@@ -426,6 +426,7 @@
           "pinnedItemsVisibility": "Always",
           "position": "Bottom",
           "showInstanceCounter": true,
+          "showWindowTitle": false,
           "size": 40,
           "spaceBetweenItems": 8,
           "temporalItemsVisibility": "All",
@@ -1561,7 +1562,7 @@
           },
           "allOf": [
             {
-              "$ref": "#/definitions/SettingsByWidget"
+              "$ref": "#/definitions/MonitorSettingsByWidget"
             }
           ]
         },
@@ -1620,6 +1621,38 @@
           "items": {
             "$ref": "#/definitions/WorkspaceConfiguration"
           }
+        }
+      }
+    },
+    "MonitorSettingsByWidget": {
+      "type": "object",
+      "anyOf": [
+        {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object",
+            "additionalProperties": true
+          }
+        }
+      ],
+      "required": [
+        "@seelen/fancy-toolbar",
+        "@seelen/wallpaper-manager",
+        "@seelen/weg",
+        "@seelen/window-manager"
+      ],
+      "properties": {
+        "@seelen/fancy-toolbar": {
+          "$ref": "#/definitions/FancyToolbarSettingsByMonitor"
+        },
+        "@seelen/wallpaper-manager": {
+          "$ref": "#/definitions/SeelenWallSettingsByMonitor"
+        },
+        "@seelen/weg": {
+          "$ref": "#/definitions/SeelenWegSettingsByMonitor"
+        },
+        "@seelen/window-manager": {
+          "$ref": "#/definitions/WindowManagerSettingsByMonitor"
         }
       }
     },
@@ -1867,6 +1900,11 @@
           "default": true,
           "type": "boolean"
         },
+        "showWindowTitle": {
+          "description": "enable or disable the window title visibility for opened apps",
+          "default": false,
+          "type": "boolean"
+        },
         "size": {
           "description": "item size in px",
           "default": 40,
@@ -1951,9 +1989,38 @@
     },
     "SettingsByWidget": {
       "type": "object",
-      "additionalProperties": {
-        "type": "object",
-        "additionalProperties": true
+      "anyOf": [
+        {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object",
+            "additionalProperties": true
+          }
+        }
+      ],
+      "required": [
+        "@seelen/fancy-toolbar",
+        "@seelen/launcher",
+        "@seelen/wallpaper-manager",
+        "@seelen/weg",
+        "@seelen/window-manager"
+      ],
+      "properties": {
+        "@seelen/fancy-toolbar": {
+          "$ref": "#/definitions/FancyToolbarSettings"
+        },
+        "@seelen/launcher": {
+          "$ref": "#/definitions/SeelenLauncherSettings"
+        },
+        "@seelen/wallpaper-manager": {
+          "$ref": "#/definitions/SeelenWallSettings"
+        },
+        "@seelen/weg": {
+          "$ref": "#/definitions/SeelenWegSettings"
+        },
+        "@seelen/window-manager": {
+          "$ref": "#/definitions/WindowManagerSettings"
+        }
       }
     },
     "UpdateChannel": {

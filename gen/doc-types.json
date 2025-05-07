@@ -15116,7 +15116,7 @@
         "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/MonitorConfiguration.ts",
         "line": 5,
         "col": 0,
-        "byteIndex": 248
+        "byteIndex": 262
       },
       "declarationKind": "export",
       "kind": "typeAlias",
@@ -15137,17 +15137,17 @@
                   "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/MonitorConfiguration.ts",
                   "line": 9,
                   "col": 0,
-                  "byteIndex": 330
+                  "byteIndex": 344
                 },
                 "params": [],
                 "computed": false,
                 "optional": false,
                 "tsType": {
-                  "repr": "SettingsByWidget",
+                  "repr": "MonitorSettingsByWidget",
                   "kind": "typeRef",
                   "typeRef": {
                     "typeParams": null,
-                    "typeName": "SettingsByWidget"
+                    "typeName": "MonitorSettingsByWidget"
                   }
                 },
                 "typeParams": []
@@ -15161,7 +15161,7 @@
                   "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/MonitorConfiguration.ts",
                   "line": 13,
                   "col": 0,
-                  "byteIndex": 416
+                  "byteIndex": 437
                 },
                 "params": [],
                 "computed": false,
@@ -15189,6 +15189,168 @@
             "callSignatures": [],
             "indexSignatures": []
           }
+        },
+        "typeParams": []
+      }
+    },
+    {
+      "name": "MonitorSettingsByWidget",
+      "isDefault": false,
+      "location": {
+        "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/MonitorSettingsByWidget.ts",
+        "line": 9,
+        "col": 0,
+        "byteIndex": 565
+      },
+      "declarationKind": "export",
+      "kind": "typeAlias",
+      "typeAliasDef": {
+        "tsType": {
+          "repr": "",
+          "kind": "intersection",
+          "intersection": [
+            {
+              "repr": "",
+              "kind": "typeLiteral",
+              "typeLiteral": {
+                "constructors": [],
+                "methods": [],
+                "properties": [
+                  {
+                    "name": "@seelen/weg",
+                    "location": {
+                      "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/MonitorSettingsByWidget.ts",
+                      "line": 9,
+                      "col": 40,
+                      "byteIndex": 605
+                    },
+                    "params": [],
+                    "computed": false,
+                    "optional": false,
+                    "tsType": {
+                      "repr": "SeelenWegSettingsByMonitor",
+                      "kind": "typeRef",
+                      "typeRef": {
+                        "typeParams": null,
+                        "typeName": "SeelenWegSettingsByMonitor"
+                      }
+                    },
+                    "typeParams": []
+                  },
+                  {
+                    "name": "@seelen/fancy-toolbar",
+                    "location": {
+                      "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/MonitorSettingsByWidget.ts",
+                      "line": 9,
+                      "col": 83,
+                      "byteIndex": 648
+                    },
+                    "params": [],
+                    "computed": false,
+                    "optional": false,
+                    "tsType": {
+                      "repr": "FancyToolbarSettingsByMonitor",
+                      "kind": "typeRef",
+                      "typeRef": {
+                        "typeParams": null,
+                        "typeName": "FancyToolbarSettingsByMonitor"
+                      }
+                    },
+                    "typeParams": []
+                  },
+                  {
+                    "name": "@seelen/window-manager",
+                    "location": {
+                      "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/MonitorSettingsByWidget.ts",
+                      "line": 9,
+                      "col": 139,
+                      "byteIndex": 704
+                    },
+                    "params": [],
+                    "computed": false,
+                    "optional": false,
+                    "tsType": {
+                      "repr": "WindowManagerSettingsByMonitor",
+                      "kind": "typeRef",
+                      "typeRef": {
+                        "typeParams": null,
+                        "typeName": "WindowManagerSettingsByMonitor"
+                      }
+                    },
+                    "typeParams": []
+                  },
+                  {
+                    "name": "@seelen/wallpaper-manager",
+                    "location": {
+                      "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/MonitorSettingsByWidget.ts",
+                      "line": 9,
+                      "col": 197,
+                      "byteIndex": 762
+                    },
+                    "params": [],
+                    "computed": false,
+                    "optional": false,
+                    "tsType": {
+                      "repr": "SeelenWallSettingsByMonitor",
+                      "kind": "typeRef",
+                      "typeRef": {
+                        "typeParams": null,
+                        "typeName": "SeelenWallSettingsByMonitor"
+                      }
+                    },
+                    "typeParams": []
+                  }
+                ],
+                "callSignatures": [],
+                "indexSignatures": []
+              }
+            },
+            {
+              "repr": "",
+              "kind": "parenthesized",
+              "parenthesized": {
+                "repr": "",
+                "kind": "mapped",
+                "mappedType": {
+                  "typeParam": {
+                    "name": "key",
+                    "constraint": {
+                      "repr": "WidgetId",
+                      "kind": "typeRef",
+                      "typeRef": {
+                        "typeParams": null,
+                        "typeName": "WidgetId"
+                      }
+                    }
+                  },
+                  "optional": true,
+                  "tsType": {
+                    "repr": "",
+                    "kind": "mapped",
+                    "mappedType": {
+                      "typeParam": {
+                        "name": "key",
+                        "constraint": {
+                          "repr": "string",
+                          "kind": "keyword",
+                          "keyword": "string"
+                        }
+                      },
+                      "optional": true,
+                      "tsType": {
+                        "repr": "JsonValue",
+                        "kind": "typeRef",
+                        "typeRef": {
+                          "typeParams": null,
+                          "typeName": "JsonValue"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          ]
         },
         "typeParams": []
       }
@@ -18627,15 +18789,36 @@
                 "typeParams": []
               },
               {
+                "name": "showWindowTitle",
+                "jsDoc": {
+                  "doc": "enable or disable the window title visibility for opened apps"
+                },
+                "location": {
+                  "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/SeelenWegSettings.ts",
+                  "line": 44,
+                  "col": 0,
+                  "byteIndex": 1317
+                },
+                "params": [],
+                "computed": false,
+                "optional": false,
+                "tsType": {
+                  "repr": "boolean",
+                  "kind": "keyword",
+                  "keyword": "boolean"
+                },
+                "typeParams": []
+              },
+              {
                 "name": "visibleSeparators",
                 "jsDoc": {
                   "doc": "enable or disable separators visibility"
                 },
                 "location": {
                   "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/SeelenWegSettings.ts",
-                  "line": 44,
+                  "line": 48,
                   "col": 0,
-                  "byteIndex": 1295
+                  "byteIndex": 1395
                 },
                 "params": [],
                 "computed": false,
@@ -18654,9 +18837,9 @@
                 },
                 "location": {
                   "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/SeelenWegSettings.ts",
-                  "line": 48,
+                  "line": 52,
                   "col": 0,
-                  "byteIndex": 1351
+                  "byteIndex": 1451
                 },
                 "params": [],
                 "computed": false,
@@ -18675,9 +18858,9 @@
                 },
                 "location": {
                   "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/SeelenWegSettings.ts",
-                  "line": 52,
+                  "line": 56,
                   "col": 0,
-                  "byteIndex": 1400
+                  "byteIndex": 1500
                 },
                 "params": [],
                 "computed": false,
@@ -18696,9 +18879,9 @@
                 },
                 "location": {
                   "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/SeelenWegSettings.ts",
-                  "line": 56,
+                  "line": 60,
                   "col": 0,
-                  "byteIndex": 1456
+                  "byteIndex": 1556
                 },
                 "params": [],
                 "computed": false,
@@ -18717,9 +18900,9 @@
                 },
                 "location": {
                   "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/SeelenWegSettings.ts",
-                  "line": 60,
+                  "line": 64,
                   "col": 0,
-                  "byteIndex": 1511
+                  "byteIndex": 1611
                 },
                 "params": [],
                 "computed": false,
@@ -18738,9 +18921,9 @@
                 },
                 "location": {
                   "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/SeelenWegSettings.ts",
-                  "line": 64,
+                  "line": 68,
                   "col": 0,
-                  "byteIndex": 1566
+                  "byteIndex": 1666
                 },
                 "params": [],
                 "computed": false,
@@ -18759,9 +18942,9 @@
                 },
                 "location": {
                   "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/SeelenWegSettings.ts",
-                  "line": 68,
+                  "line": 72,
                   "col": 0,
-                  "byteIndex": 1662
+                  "byteIndex": 1762
                 },
                 "params": [],
                 "computed": false,
@@ -18780,9 +18963,9 @@
                 },
                 "location": {
                   "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/SeelenWegSettings.ts",
-                  "line": 72,
+                  "line": 76,
                   "col": 0,
-                  "byteIndex": 1752
+                  "byteIndex": 1852
                 },
                 "params": [],
                 "computed": false,
@@ -19286,53 +19469,180 @@
       "isDefault": false,
       "location": {
         "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/SettingsByWidget.ts",
-        "line": 5,
+        "line": 10,
         "col": 0,
-        "byteIndex": 217
+        "byteIndex": 568
       },
       "declarationKind": "export",
       "kind": "typeAlias",
       "typeAliasDef": {
         "tsType": {
           "repr": "",
-          "kind": "mapped",
-          "mappedType": {
-            "typeParam": {
-              "name": "key",
-              "constraint": {
-                "repr": "WidgetId",
-                "kind": "typeRef",
-                "typeRef": {
-                  "typeParams": null,
-                  "typeName": "WidgetId"
-                }
+          "kind": "intersection",
+          "intersection": [
+            {
+              "repr": "",
+              "kind": "typeLiteral",
+              "typeLiteral": {
+                "constructors": [],
+                "methods": [],
+                "properties": [
+                  {
+                    "name": "@seelen/weg",
+                    "location": {
+                      "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/SettingsByWidget.ts",
+                      "line": 10,
+                      "col": 33,
+                      "byteIndex": 601
+                    },
+                    "params": [],
+                    "computed": false,
+                    "optional": false,
+                    "tsType": {
+                      "repr": "SeelenWegSettings",
+                      "kind": "typeRef",
+                      "typeRef": {
+                        "typeParams": null,
+                        "typeName": "SeelenWegSettings"
+                      }
+                    },
+                    "typeParams": []
+                  },
+                  {
+                    "name": "@seelen/fancy-toolbar",
+                    "location": {
+                      "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/SettingsByWidget.ts",
+                      "line": 10,
+                      "col": 67,
+                      "byteIndex": 635
+                    },
+                    "params": [],
+                    "computed": false,
+                    "optional": false,
+                    "tsType": {
+                      "repr": "FancyToolbarSettings",
+                      "kind": "typeRef",
+                      "typeRef": {
+                        "typeParams": null,
+                        "typeName": "FancyToolbarSettings"
+                      }
+                    },
+                    "typeParams": []
+                  },
+                  {
+                    "name": "@seelen/window-manager",
+                    "location": {
+                      "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/SettingsByWidget.ts",
+                      "line": 10,
+                      "col": 114,
+                      "byteIndex": 682
+                    },
+                    "params": [],
+                    "computed": false,
+                    "optional": false,
+                    "tsType": {
+                      "repr": "WindowManagerSettings",
+                      "kind": "typeRef",
+                      "typeRef": {
+                        "typeParams": null,
+                        "typeName": "WindowManagerSettings"
+                      }
+                    },
+                    "typeParams": []
+                  },
+                  {
+                    "name": "@seelen/wallpaper-manager",
+                    "location": {
+                      "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/SettingsByWidget.ts",
+                      "line": 10,
+                      "col": 163,
+                      "byteIndex": 731
+                    },
+                    "params": [],
+                    "computed": false,
+                    "optional": false,
+                    "tsType": {
+                      "repr": "SeelenWallSettings",
+                      "kind": "typeRef",
+                      "typeRef": {
+                        "typeParams": null,
+                        "typeName": "SeelenWallSettings"
+                      }
+                    },
+                    "typeParams": []
+                  },
+                  {
+                    "name": "@seelen/launcher",
+                    "location": {
+                      "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/SettingsByWidget.ts",
+                      "line": 10,
+                      "col": 212,
+                      "byteIndex": 780
+                    },
+                    "params": [],
+                    "computed": false,
+                    "optional": false,
+                    "tsType": {
+                      "repr": "SeelenLauncherSettings",
+                      "kind": "typeRef",
+                      "typeRef": {
+                        "typeParams": null,
+                        "typeName": "SeelenLauncherSettings"
+                      }
+                    },
+                    "typeParams": []
+                  }
+                ],
+                "callSignatures": [],
+                "indexSignatures": []
               }
             },
-            "optional": true,
-            "tsType": {
+            {
               "repr": "",
-              "kind": "mapped",
-              "mappedType": {
-                "typeParam": {
-                  "name": "key",
-                  "constraint": {
-                    "repr": "string",
-                    "kind": "keyword",
-                    "keyword": "string"
-                  }
-                },
-                "optional": true,
-                "tsType": {
-                  "repr": "JsonValue",
-                  "kind": "typeRef",
-                  "typeRef": {
-                    "typeParams": null,
-                    "typeName": "JsonValue"
+              "kind": "parenthesized",
+              "parenthesized": {
+                "repr": "",
+                "kind": "mapped",
+                "mappedType": {
+                  "typeParam": {
+                    "name": "key",
+                    "constraint": {
+                      "repr": "WidgetId",
+                      "kind": "typeRef",
+                      "typeRef": {
+                        "typeParams": null,
+                        "typeName": "WidgetId"
+                      }
+                    }
+                  },
+                  "optional": true,
+                  "tsType": {
+                    "repr": "",
+                    "kind": "mapped",
+                    "mappedType": {
+                      "typeParam": {
+                        "name": "key",
+                        "constraint": {
+                          "repr": "string",
+                          "kind": "keyword",
+                          "keyword": "string"
+                        }
+                      },
+                      "optional": true,
+                      "tsType": {
+                        "repr": "JsonValue",
+                        "kind": "typeRef",
+                        "typeRef": {
+                          "typeParams": null,
+                          "typeName": "JsonValue"
+                        }
+                      }
+                    }
                   }
                 }
               }
             }
-          }
+          ]
         },
         "typeParams": []
       }

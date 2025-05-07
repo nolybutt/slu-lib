@@ -1,13 +1,11 @@
 use schemars::JsonSchema;
 use serde::{Deserialize, Serialize};
+use std::collections::HashMap;
 use ts_rs::TS;
 
-use crate::{error::Result, rect::Rect};
+use crate::{error::Result, rect::Rect, utils::FlatenableMap};
 
-use super::{
-    by_widget::SettingsByWidget, SeelenWallWallpaper, WegPinnedItemsVisibility,
-    WegTemporalItemsVisibility, WidgetId,
-};
+use super::{SeelenWallWallpaper, WegPinnedItemsVisibility, WegTemporalItemsVisibility, WidgetId};
 
 #[derive(Clone, Debug, Serialize, Deserialize, JsonSchema, TS)]
 #[serde(default, rename_all = "camelCase")]
@@ -107,6 +105,20 @@ pub struct WorkspaceConfiguration {
     pub backgrounds: Option<Vec<SeelenWallWallpaper>>,
 }
 
+#[derive(Clone, Debug, Default, Serialize, Deserialize, JsonSchema, TS)]
+pub struct MonitorSettingsByWidget {
+    #[serde(rename = "@seelen/weg")]
+    pub weg: SeelenWegSettingsByMonitor,
+    #[serde(rename = "@seelen/fancy-toolbar")]
+    pub fancy_toolbar: FancyToolbarSettingsByMonitor,
+    #[serde(rename = "@seelen/window-manager")]
+    pub wm: WindowManagerSettingsByMonitor,
+    #[serde(rename = "@seelen/wallpaper-manager")]
+    pub wall: SeelenWallSettingsByMonitor,
+    #[serde(flatten)]
+    pub others: FlatenableMap<WidgetId, HashMap<String, serde_json::Value>>,
+}
+
 #[derive(Clone, Debug, Serialize, Deserialize, JsonSchema, TS)]
 #[serde(default, rename_all = "camelCase")]
 pub struct MonitorConfiguration {
@@ -128,89 +140,44 @@ pub struct MonitorConfiguration {
     wall: Option<SeelenWallSettingsByMonitor>,
     // ---
     /// dictionary of settings by widget
-    pub by_widget: SettingsByWidget,
+    pub by_widget: MonitorSettingsByWidget,
     /// list of settings by workspace on this monitor
     pub workspaces_v2: Vec<WorkspaceConfiguration>,
 }
 
 impl Default for MonitorConfiguration {
     fn default() -> Self {
-        let mut settings_by_widget = SettingsByWidget::default();
-        settings_by_widget
-            .set(
-                WidgetId::known_toolbar(),
-                FancyToolbarSettingsByMonitor::default(),
-            )
-            .unwrap();
-        settings_by_widget
-            .set(WidgetId::known_weg(), SeelenWegSettingsByMonitor::default())
-            .unwrap();
-        settings_by_widget
-            .set(
-                WidgetId::known_wm(),
-                WindowManagerSettingsByMonitor::default(),
-            )
-            .unwrap();
-        settings_by_widget
-            .set(
-                WidgetId::known_wall(),
-                SeelenWallSettingsByMonitor::default(),
-            )
-            .unwrap();
-
         Self {
             tb: None,
             weg: None,
             wm: None,
             wall: None,
-            by_widget: settings_by_widget,
+            by_widget: MonitorSettingsByWidget::default(),
             workspaces_v2: Vec::new(),
         }
     }
 }
 
 impl MonitorConfiguration {
-    pub fn tb(&self) -> FancyToolbarSettingsByMonitor {
-        self.by_widget.get(&WidgetId::known_toolbar())
-    }
-
-    pub fn weg(&self) -> SeelenWegSettingsByMonitor {
-        self.by_widget.get(&WidgetId::known_weg())
-    }
-
-    pub fn wm(&self) -> WindowManagerSettingsByMonitor {
-        self.by_widget.get(&WidgetId::known_wm())
-    }
-
-    pub fn wall(&self) -> SeelenWallSettingsByMonitor {
-        self.by_widget.get(&WidgetId::known_wall())
-    }
-
     /// Migrate old settings (before v2.1.0) (will be removed in v3.0.0)
     pub fn migrate(&mut self) -> Result<()> {
         let dict = &mut self.by_widget;
         if let Some(tb) = self.tb.take() {
-            dict.set(WidgetId::known_toolbar(), tb)?;
+            dict.fancy_toolbar = tb;
         }
         if let Some(weg) = self.weg.take() {
-            dict.set(WidgetId::known_weg(), weg)?;
+            dict.weg = weg;
         }
         if let Some(wm) = self.wm.take() {
-            dict.set(WidgetId::known_wm(), wm)?;
+            dict.wm = wm;
         }
         if let Some(wall) = self.wall.take() {
-            dict.set(WidgetId::known_wall(), wall)?;
+            dict.wall = wall;
         }
         Ok(())
     }
 
     pub fn sanitize(&mut self) -> Result<()> {
-        self.by_widget.set(WidgetId::known_toolbar(), self.tb())?;
-        self.by_widget.set(WidgetId::known_wm(), self.wm())?;
-        self.by_widget.set(WidgetId::known_wall(), self.wall())?;
-        self.by_widget.set(WidgetId::known_weg(), self.weg())?;
-
-        self.by_widget.sanitize();
         Ok(())
     }
 }

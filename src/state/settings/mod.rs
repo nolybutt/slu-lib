@@ -1,9 +1,7 @@
 /* In this file we use #[serde_alias(SnakeCase)] as backward compatibility from versions below v1.9.8 */
-pub mod by_widget;
 pub mod declaration;
 pub mod settings_by_monitor;
 
-use by_widget::SettingsByWidget;
 pub use settings_by_monitor::*;
 
 use std::{
@@ -16,7 +14,7 @@ use serde::{Deserialize, Serialize};
 use serde_alias::serde_alias;
 use ts_rs::TS;
 
-use crate::{error::Result, rect::Rect};
+use crate::{error::Result, rect::Rect, utils::FlatenableMap};
 
 use super::{PluginId, WidgetId};
 
@@ -128,6 +126,8 @@ pub struct SeelenWegSettings {
     pub thumbnail_generation_enabled: bool,
     /// enable or disable the instance counter visibility on weg instance
     pub show_instance_counter: bool,
+    /// enable or disable the window title visibility for opened apps
+    pub show_window_title: bool,
     /// enable or disable separators visibility
     pub visible_separators: bool,
     /// item size in px
@@ -156,6 +156,7 @@ impl Default for SeelenWegSettings {
             thumbnail_generation_enabled: true,
             visible_separators: true,
             show_instance_counter: true,
+            show_window_title: false,
             temporal_items_visibility: WegTemporalItemsVisibility::All,
             pinned_items_visibility: WegPinnedItemsVisibility::Always,
             size: 40,
@@ -586,6 +587,24 @@ impl Default for UpdaterSettings {
     }
 }
 
+// ================================================================================================
+
+#[derive(Clone, Debug, Default, Serialize, Deserialize, JsonSchema, TS)]
+pub struct SettingsByWidget {
+    #[serde(rename = "@seelen/weg")]
+    pub weg: SeelenWegSettings,
+    #[serde(rename = "@seelen/fancy-toolbar")]
+    pub fancy_toolbar: FancyToolbarSettings,
+    #[serde(rename = "@seelen/window-manager")]
+    pub wm: WindowManagerSettings,
+    #[serde(rename = "@seelen/wallpaper-manager")]
+    pub wall: SeelenWallSettings,
+    #[serde(rename = "@seelen/launcher")]
+    pub launcher: SeelenLauncherSettings,
+    #[serde(flatten)]
+    pub others: FlatenableMap<WidgetId, HashMap<String, serde_json::Value>>,
+}
+
 // ======================== Final Settings Struct ===============================
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize, JsonSchema, TS)]
@@ -646,26 +665,6 @@ pub struct Settings {
 
 impl Default for Settings {
     fn default() -> Self {
-        let mut settings_by_widget = SettingsByWidget::default();
-        settings_by_widget
-            .set(WidgetId::known_toolbar(), FancyToolbarSettings::default())
-            .unwrap();
-        settings_by_widget
-            .set(WidgetId::known_weg(), SeelenWegSettings::default())
-            .unwrap();
-        settings_by_widget
-            .set(WidgetId::known_wm(), WindowManagerSettings::default())
-            .unwrap();
-        settings_by_widget
-            .set(WidgetId::known_wall(), SeelenWallSettings::default())
-            .unwrap();
-        settings_by_widget
-            .set(
-                WidgetId::known_launcher(),
-                SeelenLauncherSettings::default(),
-            )
-            .unwrap();
-
         Self {
             fancy_toolbar: None,
             seelenweg: None,
@@ -683,7 +682,7 @@ impl Default for Settings {
             date_format: "ddd D MMM, hh:mm A".to_owned(),
             virtual_desktop_strategy: VirtualDesktopStrategy::Native,
             updater: UpdaterSettings::default(),
-            by_widget: settings_by_widget,
+            by_widget: SettingsByWidget::default(),
         }
     }
 }
@@ -700,82 +699,30 @@ impl Settings {
         }
     }
 
-    pub fn fancy_toolbar(&self) -> FancyToolbarSettings {
-        self.by_widget.get(&WidgetId::known_toolbar())
-    }
-
-    pub fn fancy_toolbar_mut(&mut self) -> &mut serde_json::Map<String, serde_json::Value> {
-        self.by_widget
-            .get_raw_config_mut(&WidgetId::known_toolbar())
-            .unwrap()
-    }
-
-    pub fn seelenweg(&self) -> SeelenWegSettings {
-        self.by_widget.get(&WidgetId::known_weg())
-    }
-
-    pub fn window_manager(&self) -> WindowManagerSettings {
-        self.by_widget.get(&WidgetId::known_wm())
-    }
-
-    pub fn window_manager_mut(&mut self) -> &mut serde_json::Map<String, serde_json::Value> {
-        self.by_widget
-            .get_raw_config_mut(&WidgetId::known_wm())
-            .unwrap()
-    }
-
-    pub fn wall(&self) -> SeelenWallSettings {
-        self.by_widget.get(&WidgetId::known_wall())
-    }
-
-    pub fn launcher(&self) -> SeelenLauncherSettings {
-        self.by_widget.get(&WidgetId::known_launcher())
-    }
-
     /// Migrate old settings (before v2.1.0) (will be removed in v3.0.0)
     pub fn migrate(&mut self) -> Result<()> {
         let dict = &mut self.by_widget;
         if let Some(tb) = self.fancy_toolbar.take() {
-            dict.set(WidgetId::known_toolbar(), tb)?;
+            dict.fancy_toolbar = tb;
         }
         if let Some(weg) = self.seelenweg.take() {
-            dict.set(WidgetId::known_weg(), weg)?;
+            dict.weg = weg;
         }
         if let Some(wm) = self.window_manager.take() {
-            dict.set(WidgetId::known_wm(), wm)?;
+            dict.wm = wm;
         }
         if let Some(wall) = self.wall.take() {
-            dict.set(WidgetId::known_wall(), wall)?;
+            dict.wall = wall;
         }
         if let Some(launcher) = self.launcher.take() {
-            dict.set(WidgetId::known_launcher(), launcher)?;
+            dict.launcher = launcher;
         }
-        Ok(())
-    }
-
-    fn sanitize_widget_settings(&mut self) -> Result<()> {
-        self.by_widget.sanitize();
-
-        let mut wall = self.wall();
-        wall.sanitize();
-        self.by_widget.set(WidgetId::known_wall(), wall)?;
-
-        let mut launcher = self.launcher();
-        launcher.sanitize();
-        self.by_widget.set(WidgetId::known_launcher(), launcher)?;
-
-        self.by_widget
-            .set(WidgetId::known_toolbar(), self.fancy_toolbar())?;
-        self.by_widget
-            .set(WidgetId::known_wm(), self.window_manager())?;
-        self.by_widget
-            .set(WidgetId::known_weg(), self.seelenweg())?;
-
         Ok(())
     }
 
     pub fn sanitize(&mut self) -> Result<()> {
-        self.sanitize_widget_settings()?;
+        self.by_widget.wall.sanitize();
+        self.by_widget.launcher.sanitize();
 
         if self.language.is_none() {
             self.language = Some(Self::get_system_language());
