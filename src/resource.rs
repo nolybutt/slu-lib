@@ -57,7 +57,7 @@ impl ResourceId {
     ///
     /// The string is a valid resource id
     pub fn name(&self) -> String {
-        self.0.split('/').last().unwrap().to_string()
+        self.0.split('/').next_back().unwrap().to_string()
     }
 }
 
@@ -271,7 +271,7 @@ impl SluResourceFile {
             serde_json::to_value(&self.resource.metadata)?,
         );
 
-        let data = self.data.as_object().ok_or_else(|| "invalid data")?;
+        let data = self.data.as_object().ok_or("invalid data")?;
         resource.append(&mut data.clone());
 
         let concrete = match self.resource.kind {

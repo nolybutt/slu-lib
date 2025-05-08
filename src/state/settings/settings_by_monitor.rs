@@ -119,7 +119,7 @@ pub struct MonitorSettingsByWidget {
     pub others: FlatenableMap<WidgetId, HashMap<String, serde_json::Value>>,
 }
 
-#[derive(Clone, Debug, Serialize, Deserialize, JsonSchema, TS)]
+#[derive(Clone, Debug, Default, Serialize, Deserialize, JsonSchema, TS)]
 #[serde(default, rename_all = "camelCase")]
 pub struct MonitorConfiguration {
     /// @deprecated since v2.1.0, will be removed in v3.0.0
@@ -143,19 +143,6 @@ pub struct MonitorConfiguration {
     pub by_widget: MonitorSettingsByWidget,
     /// list of settings by workspace on this monitor
     pub workspaces_v2: Vec<WorkspaceConfiguration>,
-}
-
-impl Default for MonitorConfiguration {
-    fn default() -> Self {
-        Self {
-            tb: None,
-            weg: None,
-            wm: None,
-            wall: None,
-            by_widget: MonitorSettingsByWidget::default(),
-            workspaces_v2: Vec::new(),
-        }
-    }
 }
 
 impl MonitorConfiguration {
