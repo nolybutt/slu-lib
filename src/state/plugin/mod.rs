@@ -36,6 +36,7 @@ impl From<&str> for PluginId {
 #[ts(export)]
 pub struct Plugin {
     pub id: PluginId,
+    #[serde(default)]
     pub metadata: ResourceMetadata,
     /// Optional icon to be used by the target of the plugin as icon.\
     /// This have to be a valid react icon name.\
