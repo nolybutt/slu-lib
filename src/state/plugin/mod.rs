@@ -1,14 +1,13 @@
-pub mod known;
+pub mod value;
 
 use std::ops::{Deref, DerefMut};
 
 use schemars::JsonSchema;
 use serde::{Deserialize, Serialize};
 use ts_rs::TS;
+use value::PluginValue;
 
 use crate::resource::{ResourceId, ResourceMetadata};
-
-use super::WidgetId;
 
 #[derive(Debug, Clone, Hash, Default, PartialEq, Eq, Serialize, Deserialize, JsonSchema, TS)]
 pub struct PluginId(ResourceId);
@@ -32,16 +31,19 @@ impl From<&str> for PluginId {
     }
 }
 
-#[derive(Debug, Clone, Default, Serialize, Deserialize, JsonSchema, TS)]
-#[serde(default, rename_all = "camelCase")]
+#[derive(Debug, Clone, Serialize, Deserialize, JsonSchema, TS)]
+#[serde(rename_all = "camelCase")]
 #[ts(export)]
 pub struct Plugin {
     pub id: PluginId,
     pub metadata: ResourceMetadata,
+    /// Optional icon to be used by the target of the plugin as icon.\
+    /// This have to be a valid react icon name.\
+    /// You can find all icons here: https://react-icons.github.io/react-icons/.
     #[serde(default = "Plugin::default_icon")]
     pub icon: String,
-    pub target: WidgetId,
-    pub plugin: serde_json::Value,
+    #[serde(flatten)]
+    pub plugin: PluginValue,
 }
 
 impl Plugin {

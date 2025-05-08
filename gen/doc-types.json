@@ -14742,6 +14742,135 @@
       }
     },
     {
+      "name": "KnownPlugin",
+      "isDefault": false,
+      "location": {
+        "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/KnownPlugin.ts",
+        "line": 5,
+        "col": 0,
+        "byteIndex": 232
+      },
+      "declarationKind": "export",
+      "kind": "typeAlias",
+      "typeAliasDef": {
+        "tsType": {
+          "repr": "",
+          "kind": "union",
+          "union": [
+            {
+              "repr": "",
+              "kind": "typeLiteral",
+              "typeLiteral": {
+                "constructors": [],
+                "methods": [],
+                "properties": [
+                  {
+                    "name": "target",
+                    "location": {
+                      "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/KnownPlugin.ts",
+                      "line": 5,
+                      "col": 28,
+                      "byteIndex": 260
+                    },
+                    "params": [],
+                    "computed": false,
+                    "optional": false,
+                    "tsType": {
+                      "repr": "@seelen/fancy-toolbar",
+                      "kind": "literal",
+                      "literal": {
+                        "kind": "string",
+                        "string": "@seelen/fancy-toolbar"
+                      }
+                    },
+                    "typeParams": []
+                  },
+                  {
+                    "name": "plugin",
+                    "location": {
+                      "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/KnownPlugin.ts",
+                      "line": 5,
+                      "col": 63,
+                      "byteIndex": 295
+                    },
+                    "params": [],
+                    "computed": false,
+                    "optional": false,
+                    "tsType": {
+                      "repr": "ToolbarItem",
+                      "kind": "typeRef",
+                      "typeRef": {
+                        "typeParams": null,
+                        "typeName": "ToolbarItem"
+                      }
+                    },
+                    "typeParams": []
+                  }
+                ],
+                "callSignatures": [],
+                "indexSignatures": []
+              }
+            },
+            {
+              "repr": "",
+              "kind": "typeLiteral",
+              "typeLiteral": {
+                "constructors": [],
+                "methods": [],
+                "properties": [
+                  {
+                    "name": "target",
+                    "location": {
+                      "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/KnownPlugin.ts",
+                      "line": 5,
+                      "col": 91,
+                      "byteIndex": 323
+                    },
+                    "params": [],
+                    "computed": false,
+                    "optional": false,
+                    "tsType": {
+                      "repr": "@seelen/window-manager",
+                      "kind": "literal",
+                      "literal": {
+                        "kind": "string",
+                        "string": "@seelen/window-manager"
+                      }
+                    },
+                    "typeParams": []
+                  },
+                  {
+                    "name": "plugin",
+                    "location": {
+                      "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/KnownPlugin.ts",
+                      "line": 5,
+                      "col": 127,
+                      "byteIndex": 359
+                    },
+                    "params": [],
+                    "computed": false,
+                    "optional": false,
+                    "tsType": {
+                      "repr": "WindowManagerLayout",
+                      "kind": "typeRef",
+                      "typeRef": {
+                        "typeParams": null,
+                        "typeName": "WindowManagerLayout"
+                      }
+                    },
+                    "typeParams": []
+                  }
+                ],
+                "callSignatures": [],
+                "indexSignatures": []
+              }
+            }
+          ]
+        },
+        "typeParams": []
+      }
+    },
+    {
       "name": "MatchingStrategy",
       "isDefault": false,
       "location": {
@@ -16464,124 +16593,117 @@
         "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/Plugin.ts",
         "line": 7,
         "col": 0,
-        "byteIndex": 327
+        "byteIndex": 336
       },
       "declarationKind": "export",
       "kind": "typeAlias",
       "typeAliasDef": {
         "tsType": {
           "repr": "",
-          "kind": "typeLiteral",
-          "typeLiteral": {
-            "constructors": [],
-            "methods": [],
-            "properties": [
-              {
-                "name": "id",
-                "location": {
-                  "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/Plugin.ts",
-                  "line": 7,
-                  "col": 23,
-                  "byteIndex": 350
-                },
-                "params": [],
-                "computed": false,
-                "optional": false,
-                "tsType": {
-                  "repr": "PluginId",
-                  "kind": "typeRef",
-                  "typeRef": {
-                    "typeParams": null,
-                    "typeName": "PluginId"
+          "kind": "intersection",
+          "intersection": [
+            {
+              "repr": "",
+              "kind": "typeLiteral",
+              "typeLiteral": {
+                "constructors": [],
+                "methods": [],
+                "properties": [
+                  {
+                    "name": "id",
+                    "location": {
+                      "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/Plugin.ts",
+                      "line": 7,
+                      "col": 23,
+                      "byteIndex": 359
+                    },
+                    "params": [],
+                    "computed": false,
+                    "optional": false,
+                    "tsType": {
+                      "repr": "PluginId",
+                      "kind": "typeRef",
+                      "typeRef": {
+                        "typeParams": null,
+                        "typeName": "PluginId"
+                      }
+                    },
+                    "typeParams": []
+                  },
+                  {
+                    "name": "metadata",
+                    "location": {
+                      "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/Plugin.ts",
+                      "line": 7,
+                      "col": 37,
+                      "byteIndex": 373
+                    },
+                    "params": [],
+                    "computed": false,
+                    "optional": false,
+                    "tsType": {
+                      "repr": "ResourceMetadata",
+                      "kind": "typeRef",
+                      "typeRef": {
+                        "typeParams": null,
+                        "typeName": "ResourceMetadata"
+                      }
+                    },
+                    "typeParams": []
+                  },
+                  {
+                    "name": "icon",
+                    "jsDoc": {
+                      "doc": "Optional icon to be used by the target of the plugin as icon.\\\nThis have to be a valid react icon name.\\\nYou can find all icons here: https://react-icons.github.io/react-icons/."
+                    },
+                    "location": {
+                      "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/Plugin.ts",
+                      "line": 13,
+                      "col": 0,
+                      "byteIndex": 597
+                    },
+                    "params": [],
+                    "computed": false,
+                    "optional": false,
+                    "tsType": {
+                      "repr": "string",
+                      "kind": "keyword",
+                      "keyword": "string"
+                    },
+                    "typeParams": []
                   }
-                },
-                "typeParams": []
-              },
-              {
-                "name": "metadata",
-                "location": {
-                  "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/Plugin.ts",
-                  "line": 7,
-                  "col": 37,
-                  "byteIndex": 364
-                },
-                "params": [],
-                "computed": false,
-                "optional": false,
-                "tsType": {
-                  "repr": "ResourceMetadata",
-                  "kind": "typeRef",
-                  "typeRef": {
-                    "typeParams": null,
-                    "typeName": "ResourceMetadata"
-                  }
-                },
-                "typeParams": []
-              },
-              {
-                "name": "icon",
-                "location": {
-                  "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/Plugin.ts",
-                  "line": 7,
-                  "col": 65,
-                  "byteIndex": 392
-                },
-                "params": [],
-                "computed": false,
-                "optional": false,
-                "tsType": {
-                  "repr": "string",
-                  "kind": "keyword",
-                  "keyword": "string"
-                },
-                "typeParams": []
-              },
-              {
-                "name": "target",
-                "location": {
-                  "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/Plugin.ts",
-                  "line": 7,
-                  "col": 79,
-                  "byteIndex": 406
-                },
-                "params": [],
-                "computed": false,
-                "optional": false,
-                "tsType": {
-                  "repr": "WidgetId",
-                  "kind": "typeRef",
-                  "typeRef": {
-                    "typeParams": null,
-                    "typeName": "WidgetId"
-                  }
-                },
-                "typeParams": []
-              },
-              {
-                "name": "plugin",
-                "location": {
-                  "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/Plugin.ts",
-                  "line": 7,
-                  "col": 97,
-                  "byteIndex": 424
-                },
-                "params": [],
-                "computed": false,
-                "optional": false,
-                "tsType": {
-                  "repr": "JsonValue",
-                  "kind": "typeRef",
-                  "typeRef": {
-                    "typeParams": null,
-                    "typeName": "JsonValue"
-                  }
-                },
-                "typeParams": []
+                ],
+                "callSignatures": [],
+                "indexSignatures": []
               }
-            ],
-            "callSignatures": [],
-            "indexSignatures": []
-          }
+            },
+            {
+              "repr": "",
+              "kind": "parenthesized",
+              "parenthesized": {
+                "repr": "",
+                "kind": "union",
+                "union": [
+                  {
+                    "repr": "KnownPlugin",
+                    "kind": "typeRef",
+                    "typeRef": {
+                      "typeParams": null,
+                      "typeName": "KnownPlugin"
+                    }
+                  },
+                  {
+                    "repr": "ThirdPartyPlugin",
+                    "kind": "typeRef",
+                    "typeRef": {
+                      "typeParams": null,
+                      "typeName": "ThirdPartyPlugin"
+                    }
+                  }
+                ]
+              }
+            }
+          ]
         },
         "typeParams": []
       }
@@ -21067,6 +21189,81 @@
           "typeRef": {
             "typeParams": null,
             "typeName": "ResourceId"
+          }
+        },
+        "typeParams": []
+      }
+    },
+    {
+      "name": "ThirdPartyPlugin",
+      "isDefault": false,
+      "location": {
+        "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/ThirdPartyPlugin.ts",
+        "line": 5,
+        "col": 0,
+        "byteIndex": 221
+      },
+      "declarationKind": "export",
+      "kind": "typeAlias",
+      "typeAliasDef": {
+        "tsType": {
+          "repr": "",
+          "kind": "typeLiteral",
+          "typeLiteral": {
+            "constructors": [],
+            "methods": [],
+            "properties": [
+              {
+                "name": "target",
+                "jsDoc": {
+                  "doc": "The friendly id of the widget that will use this plugin\nexample: `@username/widget-name`"
+                },
+                "location": {
+                  "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/ThirdPartyPlugin.ts",
+                  "line": 10,
+                  "col": 0,
+                  "byteIndex": 358
+                },
+                "params": [],
+                "computed": false,
+                "optional": false,
+                "tsType": {
+                  "repr": "ResourceId",
+                  "kind": "typeRef",
+                  "typeRef": {
+                    "typeParams": null,
+                    "typeName": "ResourceId"
+                  }
+                },
+                "typeParams": []
+              },
+              {
+                "name": "plugin",
+                "jsDoc": {
+                  "doc": "The plugin data, this can be anything and depends on the widget using this plugin\nto handle it, parse it and use it."
+                },
+                "location": {
+                  "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/ThirdPartyPlugin.ts",
+                  "line": 15,
+                  "col": 0,
+                  "byteIndex": 510
+                },
+                "params": [],
+                "computed": false,
+                "optional": false,
+                "tsType": {
+                  "repr": "JsonValue",
+                  "kind": "typeRef",
+                  "typeRef": {
+                    "typeParams": null,
+                    "typeName": "JsonValue"
+                  }
+                },
+                "typeParams": []
+              }
+            ],
+            "callSignatures": [],
+            "indexSignatures": []
           }
         },
         "typeParams": []
