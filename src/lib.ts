@@ -3,3 +3,4 @@ export * from './state/mod.ts';
 export * from './system_state/mod.ts';
 export * from './utils/mod.ts';
 export * from './handlers/mod.ts';
+export * from './resource.ts';
