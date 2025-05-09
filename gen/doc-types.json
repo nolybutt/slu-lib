@@ -17944,11 +17944,46 @@
               },
               {
                 "name": "portrait",
+                "jsDoc": {
+                  "doc": "Portrait image with aspect ratio of 1/1"
+                },
                 "location": {
                   "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/ResourceMetadata.ts",
-                  "line": 12,
-                  "col": 27,
-                  "byteIndex": 421
+                  "line": 16,
+                  "col": 0,
+                  "byteIndex": 473
+                },
+                "params": [],
+                "computed": false,
+                "optional": false,
+                "tsType": {
+                  "repr": "",
+                  "kind": "union",
+                  "union": [
+                    {
+                      "repr": "string",
+                      "kind": "keyword",
+                      "keyword": "string"
+                    },
+                    {
+                      "repr": "null",
+                      "kind": "keyword",
+                      "keyword": "null"
+                    }
+                  ]
+                },
+                "typeParams": []
+              },
+              {
+                "name": "banner",
+                "jsDoc": {
+                  "doc": "Banner image with aspect ratio of 21/9, this is used when promoting the resource."
+                },
+                "location": {
+                  "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/ResourceMetadata.ts",
+                  "line": 20,
+                  "col": 0,
+                  "byteIndex": 592
                 },
                 "params": [],
                 "computed": false,
@@ -17973,11 +18008,14 @@
               },
               {
                 "name": "screenshots",
+                "jsDoc": {
+                  "doc": "Screenshots should use aspect ratio of 16/9"
+                },
                 "location": {
                   "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/ResourceMetadata.ts",
-                  "line": 12,
-                  "col": 52,
-                  "byteIndex": 446
+                  "line": 24,
+                  "col": 0,
+                  "byteIndex": 671
                 },
                 "params": [],
                 "computed": false,
@@ -18000,11 +18038,14 @@
               },
               {
                 "name": "tags",
+                "jsDoc": {
+                  "doc": "tags are keywords to be used for searching and indexing"
+                },
                 "location": {
                   "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/ResourceMetadata.ts",
-                  "line": 12,
-                  "col": 80,
-                  "byteIndex": 474
+                  "line": 28,
+                  "col": 0,
+                  "byteIndex": 767
                 },
                 "params": [],
                 "computed": false,
@@ -18026,12 +18067,63 @@
                 "typeParams": []
               },
               {
-                "name": "filename",
+                "name": "appTargetVersion",
+                "jsDoc": {
+                  "doc": "App target version that this resource is compatible with.\\\nDevelopers are responsible to update the resource so when resource does not\nmatch the current app version, the resource will be shown with a warning message"
+                },
                 "location": {
                   "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/ResourceMetadata.ts",
-                  "line": 12,
-                  "col": 101,
-                  "byteIndex": 495
+                  "line": 34,
+                  "col": 0,
+                  "byteIndex": 1022
+                },
+                "params": [],
+                "computed": false,
+                "optional": false,
+                "tsType": {
+                  "repr": "",
+                  "kind": "union",
+                  "union": [
+                    {
+                      "repr": "",
+                      "kind": "tuple",
+                      "tuple": [
+                        {
+                          "repr": "number",
+                          "kind": "keyword",
+                          "keyword": "number"
+                        },
+                        {
+                          "repr": "number",
+                          "kind": "keyword",
+                          "keyword": "number"
+                        },
+                        {
+                          "repr": "number",
+                          "kind": "keyword",
+                          "keyword": "number"
+                        }
+                      ]
+                    },
+                    {
+                      "repr": "null",
+                      "kind": "keyword",
+                      "keyword": "null"
+                    }
+                  ]
+                },
+                "typeParams": []
+              },
+              {
+                "name": "filename",
+                "jsDoc": {
+                  "doc": "internal field used by the app on load of the resource"
+                },
+                "location": {
+                  "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/ResourceMetadata.ts",
+                  "line": 38,
+                  "col": 0,
+                  "byteIndex": 1140
                 },
                 "params": [],
                 "computed": false,
@@ -18045,11 +18137,14 @@
               },
               {
                 "name": "bundled",
+                "jsDoc": {
+                  "doc": "internal field that indicates if the resource is bundled"
+                },
                 "location": {
                   "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/ResourceMetadata.ts",
-                  "line": 12,
-                  "col": 119,
-                  "byteIndex": 513
+                  "line": 42,
+                  "col": 0,
+                  "byteIndex": 1227
                 },
                 "params": [],
                 "computed": false,
@@ -18135,11 +18230,14 @@
       "isDefault": false,
       "location": {
         "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/ResourceText.ts",
-        "line": 3,
+        "line": 6,
         "col": 0,
-        "byteIndex": 110
+        "byteIndex": 206
       },
       "declarationKind": "export",
+      "jsDoc": {
+        "doc": "Map of language code as key an translated values. Could be a string, mapped to `en`."
+      },
       "kind": "typeAlias",
       "typeAliasDef": {
         "tsType": {

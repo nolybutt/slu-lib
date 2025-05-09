@@ -108,6 +108,7 @@ impl std::fmt::Display for ResourceId {
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize, JsonSchema, TS)]
 #[serde(untagged)]
+/// Map of language code as key an translated values. Could be a string, mapped to `en`.
 pub enum ResourceText {
     En(String),
     Localized(HashMap<String, String>),
@@ -120,11 +121,22 @@ pub struct ResourceMetadata {
     pub display_name: ResourceText,
     /// Map of language code to description. Could be a string, mapped to `en`.
     pub description: ResourceText,
+    /// Portrait image with aspect ratio of 1/1
     pub portrait: Option<Url>,
+    /// Banner image with aspect ratio of 21/9, this is used when promoting the resource.
+    pub banner: Option<Url>,
+    /// Screenshots should use aspect ratio of 16/9
     pub screenshots: Vec<Url>,
+    /// tags are keywords to be used for searching and indexing
     pub tags: Vec<String>,
+    /// App target version that this resource is compatible with.\
+    /// Developers are responsible to update the resource so when resource does not
+    /// match the current app version, the resource will be shown with a warning message
+    pub app_target_version: Option<(u32, u32, u32)>,
+    /// internal field used by the app on load of the resource
     #[serde(skip_deserializing)]
     pub filename: String,
+    /// internal field that indicates if the resource is bundled
     #[serde(skip_deserializing)]
     pub bundled: bool,
 }
@@ -135,8 +147,10 @@ impl Default for ResourceMetadata {
             display_name: ResourceText::Localized(HashMap::new()),
             description: ResourceText::Localized(HashMap::new()),
             portrait: None,
+            banner: None,
             screenshots: Vec::new(),
             tags: Vec::new(),
+            app_target_version: None,
             filename: String::new(),
             bundled: false,
         }
@@ -145,7 +159,7 @@ impl Default for ResourceMetadata {
 
 // =============================================================================
 
-#[derive(Debug, Clone, Serialize, Deserialize, JsonSchema, TS)]
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize, JsonSchema, TS)]
 pub enum ResourceKind {
     Theme,
     IconPack,

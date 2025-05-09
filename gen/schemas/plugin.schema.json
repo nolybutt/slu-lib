@@ -11,8 +11,7 @@
     }
   ],
   "required": [
-    "id",
-    "metadata"
+    "id"
   ],
   "properties": {
     "icon": {
@@ -24,7 +23,22 @@
       "$ref": "#/definitions/PluginId"
     },
     "metadata": {
-      "$ref": "#/definitions/ResourceMetadata"
+      "default": {
+        "appTargetVersion": null,
+        "banner": null,
+        "bundled": false,
+        "description": {},
+        "displayName": {},
+        "filename": "",
+        "portrait": null,
+        "screenshots": [],
+        "tags": []
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResourceMetadata"
+        }
+      ]
     }
   },
   "definitions": {
@@ -113,7 +127,44 @@
     "ResourceMetadata": {
       "type": "object",
       "properties": {
+        "appTargetVersion": {
+          "description": "App target version that this resource is compatible with.\\ Developers are responsible to update the resource so when resource does not match the current app version, the resource will be shown with a warning message",
+          "default": null,
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": [
+            {
+              "type": "integer",
+              "format": "uint32",
+              "minimum": 0.0
+            },
+            {
+              "type": "integer",
+              "format": "uint32",
+              "minimum": 0.0
+            },
+            {
+              "type": "integer",
+              "format": "uint32",
+              "minimum": 0.0
+            }
+          ],
+          "maxItems": 3,
+          "minItems": 3
+        },
+        "banner": {
+          "description": "Banner image with aspect ratio of 21/9, this is used when promoting the resource.",
+          "default": null,
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "uri"
+        },
         "bundled": {
+          "description": "internal field that indicates if the resource is bundled",
           "default": false,
           "readOnly": true,
           "type": "boolean"
@@ -137,11 +188,13 @@
           ]
         },
         "filename": {
+          "description": "internal field used by the app on load of the resource",
           "default": "",
           "readOnly": true,
           "type": "string"
         },
         "portrait": {
+          "description": "Portrait image with aspect ratio of 1/1",
           "default": null,
           "type": [
             "string",
@@ -150,6 +203,7 @@
           "format": "uri"
         },
         "screenshots": {
+          "description": "Screenshots should use aspect ratio of 16/9",
           "default": [],
           "type": "array",
           "items": {
@@ -158,6 +212,7 @@
           }
         },
         "tags": {
+          "description": "tags are keywords to be used for searching and indexing",
           "default": [],
           "type": "array",
           "items": {
@@ -167,6 +222,7 @@
       }
     },
     "ResourceText": {
+      "description": "Map of language code as key an translated values. Could be a string, mapped to `en`.",
       "anyOf": [
         {
           "type": "string"
