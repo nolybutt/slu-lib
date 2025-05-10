@@ -52,10 +52,20 @@ impl From<&str> for WidgetId {
 #[serde(default, rename_all = "camelCase")]
 #[ts(export)]
 pub struct Widget {
+    /// Resource id ex: `@seelen/weg`
     pub id: WidgetId,
+    /// Optional icon to be used on settings. This have to be a valid react icon name.\
+    /// You can find all icons here: https://react-icons.github.io/react-icons/.
+    pub icon: Option<String>,
+    /// Widget metadata, as texts, tags, images, etc.
     pub metadata: ResourceMetadata,
+    /// Widget settings declaration, this is esentially a struct to be used by an
+    /// builder to create the widget settings UI on the Settings window.
     pub settings: WidgetSettingsDeclarationList,
+    /// Optional widget js code
     pub js: Option<String>,
+    /// Optional widget css
     pub css: Option<String>,
+    /// Optional widget html
     pub html: Option<String>,
 }

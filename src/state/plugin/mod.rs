@@ -38,8 +38,7 @@ pub struct Plugin {
     pub id: PluginId,
     #[serde(default)]
     pub metadata: ResourceMetadata,
-    /// Optional icon to be used by the target of the plugin as icon.\
-    /// This have to be a valid react icon name.\
+    /// Optional icon to be used on settings. This have to be a valid react icon name.\
     /// You can find all icons here: https://react-icons.github.io/react-icons/.
     #[serde(default = "Plugin::default_icon")]
     pub icon: String,

@@ -16654,13 +16654,13 @@
                   {
                     "name": "icon",
                     "jsDoc": {
-                      "doc": "Optional icon to be used by the target of the plugin as icon.\\\nThis have to be a valid react icon name.\\\nYou can find all icons here: https://react-icons.github.io/react-icons/."
+                      "doc": "Optional icon to be used on settings. This have to be a valid react icon name.\\\nYou can find all icons here: https://react-icons.github.io/react-icons/."
                     },
                     "location": {
                       "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/Plugin.ts",
-                      "line": 13,
+                      "line": 12,
                       "col": 0,
-                      "byteIndex": 597
+                      "byteIndex": 569
                     },
                     "params": [],
                     "computed": false,
@@ -25879,11 +25879,14 @@
             "properties": [
               {
                 "name": "id",
+                "jsDoc": {
+                  "doc": "Resource id ex: `@seelen/weg`"
+                },
                 "location": {
                   "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/Widget.ts",
-                  "line": 6,
-                  "col": 23,
-                  "byteIndex": 332
+                  "line": 10,
+                  "col": 0,
+                  "byteIndex": 374
                 },
                 "params": [],
                 "computed": false,
@@ -25899,12 +25902,47 @@
                 "typeParams": []
               },
               {
-                "name": "metadata",
+                "name": "icon",
+                "jsDoc": {
+                  "doc": "Optional icon to be used on settings. This have to be a valid react icon name.\\\nYou can find all icons here: https://react-icons.github.io/react-icons/."
+                },
                 "location": {
                   "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/Widget.ts",
-                  "line": 6,
-                  "col": 37,
-                  "byteIndex": 346
+                  "line": 15,
+                  "col": 0,
+                  "byteIndex": 556
+                },
+                "params": [],
+                "computed": false,
+                "optional": false,
+                "tsType": {
+                  "repr": "",
+                  "kind": "union",
+                  "union": [
+                    {
+                      "repr": "string",
+                      "kind": "keyword",
+                      "keyword": "string"
+                    },
+                    {
+                      "repr": "null",
+                      "kind": "keyword",
+                      "keyword": "null"
+                    }
+                  ]
+                },
+                "typeParams": []
+              },
+              {
+                "name": "metadata",
+                "jsDoc": {
+                  "doc": "Widget metadata, as texts, tags, images, etc."
+                },
+                "location": {
+                  "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/Widget.ts",
+                  "line": 19,
+                  "col": 0,
+                  "byteIndex": 635
                 },
                 "params": [],
                 "computed": false,
@@ -25921,11 +25959,14 @@
               },
               {
                 "name": "settings",
+                "jsDoc": {
+                  "doc": "Widget settings declaration, this is esentially a struct to be used by an\nbuilder to create the widget settings UI on the Settings window."
+                },
                 "location": {
                   "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/Widget.ts",
-                  "line": 6,
-                  "col": 65,
-                  "byteIndex": 374
+                  "line": 24,
+                  "col": 0,
+                  "byteIndex": 817
                 },
                 "params": [],
                 "computed": false,
@@ -25942,11 +25983,14 @@
               },
               {
                 "name": "js",
+                "jsDoc": {
+                  "doc": "Optional widget js code"
+                },
                 "location": {
                   "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/Widget.ts",
-                  "line": 6,
-                  "col": 106,
-                  "byteIndex": 415
+                  "line": 28,
+                  "col": 0,
+                  "byteIndex": 894
                 },
                 "params": [],
                 "computed": false,
@@ -25971,11 +26015,14 @@
               },
               {
                 "name": "css",
+                "jsDoc": {
+                  "doc": "Optional widget css"
+                },
                 "location": {
                   "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/Widget.ts",
-                  "line": 6,
-                  "col": 125,
-                  "byteIndex": 434
+                  "line": 32,
+                  "col": 0,
+                  "byteIndex": 945
                 },
                 "params": [],
                 "computed": false,
@@ -26000,11 +26047,14 @@
               },
               {
                 "name": "html",
+                "jsDoc": {
+                  "doc": "Optional widget html"
+                },
                 "location": {
                   "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/Widget.ts",
-                  "line": 6,
-                  "col": 145,
-                  "byteIndex": 454
+                  "line": 36,
+                  "col": 0,
+                  "byteIndex": 998
                 },
                 "params": [],
                 "computed": false,

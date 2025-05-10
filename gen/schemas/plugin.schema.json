@@ -15,7 +15,7 @@
   ],
   "properties": {
     "icon": {
-      "description": "Optional icon to be used by the target of the plugin as icon.\\ This have to be a valid react icon name.\\ You can find all icons here: https://react-icons.github.io/react-icons/.",
+      "description": "Optional icon to be used on settings. This have to be a valid react icon name.\\ You can find all icons here: https://react-icons.github.io/react-icons/.",
       "default": "PiPuzzlePieceDuotone",
       "type": "string"
     },

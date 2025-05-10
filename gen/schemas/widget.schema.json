@@ -4,6 +4,7 @@
   "type": "object",
   "properties": {
     "css": {
+      "description": "Optional widget css",
       "default": null,
       "type": [
         "string",
@@ -11,6 +12,15 @@
       ]
     },
     "html": {
+      "description": "Optional widget html",
+      "default": null,
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "icon": {
+      "description": "Optional icon to be used on settings. This have to be a valid react icon name.\\ You can find all icons here: https://react-icons.github.io/react-icons/.",
       "default": null,
       "type": [
         "string",
@@ -18,6 +28,7 @@
       ]
     },
     "id": {
+      "description": "Resource id ex: `@seelen/weg`",
       "default": "@unknown/unknown",
       "allOf": [
         {
@@ -26,6 +37,7 @@
       ]
     },
     "js": {
+      "description": "Optional widget js code",
       "default": null,
       "type": [
         "string",
@@ -33,6 +45,7 @@
       ]
     },
     "metadata": {
+      "description": "Widget metadata, as texts, tags, images, etc.",
       "default": {
         "appTargetVersion": null,
         "banner": null,
@@ -51,6 +64,7 @@
       ]
     },
     "settings": {
+      "description": "Widget settings declaration, this is esentially a struct to be used by an builder to create the widget settings UI on the Settings window.",
       "default": [],
       "allOf": [
         {
