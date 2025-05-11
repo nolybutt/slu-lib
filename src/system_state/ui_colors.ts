@@ -2,8 +2,6 @@ import { SeelenCommand, SeelenEvent } from '../handlers/mod.ts';
 import { createInstanceInvoker, createInstanceOnEvent } from '../utils/State.ts';
 import type { Color as IColor, UIColors as IUIColors } from '@seelen-ui/types';
 
-export type { IColor, IUIColors };
-
 export class UIColors {
   constructor(public inner: IUIColors) {}
 
