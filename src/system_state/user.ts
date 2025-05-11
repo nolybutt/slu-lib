@@ -1,27 +1,9 @@
-import { invoke, SeelenCommand, SeelenEvent } from '../handlers/mod.ts';
+import { invoke, SeelenCommand, SeelenEvent, subscribe } from '../handlers/mod.ts';
 import { createInstanceInvoker, createInstanceOnEvent } from '../utils/State.ts';
 import { List } from '../utils/List.ts';
 import { enumFromUnion } from '../utils/enums.ts';
-import type { File, FolderChangedArgs, FolderType, User } from '@seelen-ui/types';
+import type { File, FolderType, User } from '@seelen-ui/types';
 import type { UnlistenFn } from '@tauri-apps/api/event';
-import { subscribe } from '../handlers/invokers.ts';
-
-declare global {
-  interface ArgsByCommand {
-    [SeelenCommand.GetUser]: null;
-    [SeelenCommand.GetUserFolderContent]: { folderType: FolderType };
-    [SeelenCommand.SetUserFolderLimit]: { folderType: FolderType; amount: number };
-  }
-  interface ReturnByCommand {
-    [SeelenCommand.GetUser]: User;
-    [SeelenCommand.GetUserFolderContent]: File[];
-    [SeelenCommand.SetUserFolderLimit]: void;
-  }
-  interface PayloadByEvent {
-    [SeelenEvent.UserChanged]: User;
-    [SeelenEvent.UserFolderChanged]: FolderChangedArgs;
-  }
-}
 
 const FolderType = enumFromUnion<FolderType>({
   Unknown: 'Unknown',

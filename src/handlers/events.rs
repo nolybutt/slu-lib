@@ -1,7 +1,23 @@
-pub struct SeelenEvent;
+use crate::state::*;
+use crate::system_state::*;
+
+macro_rules! __switch {
+    {
+        if { $($if:tt)+ }
+        do { $($do:tt)* }
+        else { $($else:tt)* }
+    } => { $($do)* };
+    {
+        if { }
+        do { $($do:tt)* }
+        else { $($else:tt)* }
+    } => { $($else)* };
+}
 
 macro_rules! slu_events_declaration {
-    ($($name:ident = $value:literal,)*) => {
+    ($($name:ident$(($payload:ty))? as $value:literal,)*) => {
+        pub struct SeelenEvent;
+
         #[allow(non_upper_case_globals)]
         impl SeelenEvent {
             $(
@@ -21,79 +37,82 @@ macro_rules! slu_events_declaration {
                 std::fs::write(path, content.join("\n")).unwrap();
             }
         }
+
+        #[derive(Serialize, TS)]
+        #[ts(export)]
+        pub enum SeelenEventPayload {
+            $(
+                #[serde(rename = $value)]
+                $name(__switch! {
+                    if { $($payload)? }
+                    do { $($payload)? }
+                    else { () }
+                }),
+            )*
+        }
     };
 }
 
 slu_events_declaration! {
-    WorkspacesChanged = "workspaces-changed",
-    ActiveWorkspaceChanged = "active-workspace-changed",
+    WorkspacesChanged(Vec<DesktopWorkspace>) as "workspaces-changed",
+    ActiveWorkspaceChanged(WorkspaceId) as "active-workspace-changed",
 
-    GlobalFocusChanged = "global-focus-changed",
-    GlobalMouseMove = "global-mouse-move",
+    GlobalFocusChanged(FocusedApp) as "global-focus-changed",
+    GlobalMouseMove([i32; 2]) as "global-mouse-move",
 
-    HandleLayeredHitboxes = "handle-layered",
+    HandleLayeredHitboxes(bool) as "handle-layered",
 
-    SystemMonitorsChanged = "system::monitors-changed",
-    SystemLanguagesChanged = "system::languages-changed",
+    SystemMonitorsChanged(Vec<PhysicalMonitor>) as "system::monitors-changed",
+    SystemLanguagesChanged(Vec<SystemLanguage>) as "system::languages-changed",
 
-    UserChanged = "user-changed",
-    UserFolderChanged = "user-folder-changed",
+    UserChanged(User) as "user-changed",
+    UserFolderChanged(FolderChangedArgs) as "user-folder-changed",
 
-    BluetoothRadioStateChanged = "bluetooth-radio-state-changed",
-    BluetoothDevicesChanged = "bluetooth-devices-changed",
-    BluetoothDiscoveredDevicesChanged = "bluetooth-discovered-devices-changed",
-    BluetoothPairShowPin = "bluetooth-pair-show-pin",
-    BluetoothPairRequestPin = "bluetooth-pair-request-pin",
+    BluetoothDevicesChanged(Vec<BluetoothDevice>) as "bluetooth-devices-changed",
+    BluetoothDiscoveredDevicesChanged(Vec<BluetoothDevice>) as "bluetooth-discovered-devices-changed",
+    BluetoothPairShowPin(BluetoothDevicePairShowPinRequest) as "bluetooth-pair-show-pin",
+    BluetoothPairRequestPin as "bluetooth-pair-request-pin",
 
-    MediaSessions = "media-sessions",
-    MediaInputs = "media-inputs",
-    MediaOutputs = "media-outputs",
+    MediaSessions(Vec<MediaPlayer>) as "media-sessions",
+    MediaInputs(Vec<MediaDevice>) as "media-inputs",
+    MediaOutputs(Vec<MediaDevice>) as "media-outputs",
 
-    NetworkDefaultLocalIp = "network-default-local-ip",
-    NetworkAdapters = "network-adapters",
-    NetworkInternetConnection = "network-internet-connection",
-    NetworkWlanScanned = "wlan-scanned",
+    NetworkDefaultLocalIp(String) as "network-default-local-ip",
+    NetworkAdapters(Vec<NetworkAdapter>) as "network-adapters",
+    NetworkInternetConnection(bool) as "network-internet-connection",
+    NetworkWlanScanned(Vec<WlanBssEntry>) as "wlan-scanned",
 
-    Notifications = "notifications",
+    Notifications(Vec<AppNotification>) as "notifications",
 
-    PowerStatus = "power-status",
-    PowerPlan = "power-plan",
-    BatteriesStatus = "batteries-status",
+    PowerStatus(PowerStatus) as "power-status",
+    PowerMode(PowerMode) as "power-mode",
+    BatteriesStatus(Vec<Battery>) as "batteries-status",
 
-    ColorsChanged = "colors-changed",
+    ColorsChanged(UIColors) as "colors-changed",
 
-    TrayInfo = "tray-info",
+    TrayInfo(Vec<TrayIcon>) as "tray-info",
 
-    ToolbarOverlaped = "set-auto-hide",
+    ToolbarOverlaped(bool) as "set-auto-hide",
 
-    WegOverlaped = "set-auto-hide",
-    WegInstanceChanged = "weg::instance-changed",
+    WegOverlaped(bool) as "set-auto-hide",
+    WegInstanceChanged(WegItems) as "weg::instance-changed",
 
-    WMSetReservation = "set-reservation",
-    WMUpdateHeight = "update-height",
-    WMUpdateWidth = "update-width",
-    WMResetWorkspaceSize = "reset-workspace-size",
-    WMFocus = "focus",
-    WMSetActiveWorkspace = "set-active-workspace",
-    WMAddWindow = "add-window",
-    WMUpdateWindow = "update-window",
-    WMRemoveWindow = "remove-window",
+    WMSetReservation as "set-reservation",
+    WMForceRetiling as "wm-force-retiling",
+    WMSetLayout(Option<WmNode>) as "wm-set-layout",
+    WMSetOverlayVisibility(bool) as "wm-set-overlay-visibility",
+    WMSetActiveWindow(isize) as "wm-set-active-window",
 
-    WMForceRetiling = "wm-force-retiling",
-    WMSetLayout = "wm-set-layout",
-    WMSetOverlayVisibility = "wm-set-overlay-visibility",
-    WMSetActiveWindow = "wm-set-active-window",
+    WallStop(bool) as "wall-stop",
 
-    WallStop = "wall-stop",
-
-    StateSettingsChanged = "settings-changed",
-    StateWegItemsChanged = "weg-items",
-    StateToolbarItemsChanged = "toolbar-items",
-    StateThemesChanged = "themes",
-    StateSettingsByAppChanged = "settings-by-app",
-    StateHistoryChanged = "history",
-    StateIconPacksChanged = "icon-packs",
-    StatePluginsChanged = "plugins-changed",
-    StateWidgetsChanged = "widgets-changed",
-    StateProfilesChanged = "profiles-changed",
+    StateSettingsChanged(Settings) as "settings-changed",
+    StateWegItemsChanged(WegItems) as "weg-items",
+    StateToolbarItemsChanged(Placeholder) as "toolbar-items",
+    StateThemesChanged(Vec<Theme>) as "themes",
+    StateSettingsByAppChanged(Vec<AppConfig>) as "settings-by-app",
+    StateHistoryChanged(LauncherHistory) as "history",
+    StateIconPacksChanged(Vec<IconPack>) as "icon-packs",
+    StatePluginsChanged(Vec<Plugin>) as "plugins-changed",
+    StateWidgetsChanged(Vec<Widget>) as "widgets-changed",
+    StateProfilesChanged(Vec<Profile>) as "profiles-changed",
 }

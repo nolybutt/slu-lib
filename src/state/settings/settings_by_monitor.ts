@@ -4,15 +4,6 @@ import type { MonitorConfiguration as IMonitorConfiguration, WorkspaceIdentifier
 import { createInstanceInvoker } from '../../utils/State.ts';
 import { enumFromUnion } from '../../utils/enums.ts';
 
-declare global {
-  interface ArgsByCommand {
-    [SeelenCommand.StateGetDefaultMonitorSettings]: null;
-  }
-  interface ReturnByCommand {
-    [SeelenCommand.StateGetDefaultMonitorSettings]: IMonitorConfiguration;
-  }
-}
-
 export class MonitorConfiguration {
   constructor(public inner: IMonitorConfiguration) {}
   static readonly default = createInstanceInvoker(

@@ -9,6 +9,7 @@ mod theme;
 mod weg_items;
 mod widget;
 mod wm_layout;
+mod workspaces;
 
 pub use icon_pack::*;
 pub use placeholder::*;
@@ -21,3 +22,4 @@ pub use theme::*;
 pub use weg_items::*;
 pub use widget::*;
 pub use wm_layout::*;
+pub use workspaces::*;

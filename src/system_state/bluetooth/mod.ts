@@ -1,51 +1,11 @@
-import { invoke, SeelenCommand, SeelenEvent } from '../handlers/mod.ts';
-import { List } from '../utils/List.ts';
-import { enumFromUnion } from '../utils/enums.ts';
+import { invoke, SeelenCommand, SeelenEvent } from '../../handlers/mod.ts';
+import { List } from '../../utils/List.ts';
+import { enumFromUnion } from '../../utils/enums.ts';
 import type { BluetoothDevice, BluetoothDevicePairShowPinRequest, BluetoothMajorClass } from '@seelen-ui/types';
 import type { UnlistenFn } from '@tauri-apps/api/event';
-import { subscribe } from '../handlers/invokers.ts';
-import { createInstanceInvoker, createInstanceOnEvent } from '../utils/State.ts';
+import { subscribe } from '../../handlers/mod.ts';
+import { createInstanceInvoker, createInstanceOnEvent } from '../../utils/State.ts';
 
-declare global {
-  interface ArgsByCommand {
-    [SeelenCommand.GetConnectedBluetoothDevices]: null;
-    [SeelenCommand.GetBluetoothRadioState]: null;
-    [SeelenCommand.SetBluetoothRadioState]: { state: boolean };
-    [SeelenCommand.StartBluetoothScanning]: null;
-    [SeelenCommand.StopBluetoothScanning]: null;
-    [SeelenCommand.PairBluetoothDevice]: { address: bigint };
-    [SeelenCommand.ForgetBluetoothDevice]: { id: string };
-    [SeelenCommand.ConfirmBluetoothDevicePair]: { accept: boolean; passphrase: string };
-  }
-  interface ReturnByCommand {
-    [SeelenCommand.GetConnectedBluetoothDevices]: BluetoothDevice[];
-    [SeelenCommand.GetBluetoothRadioState]: boolean;
-    [SeelenCommand.SetBluetoothRadioState]: void;
-    [SeelenCommand.StartBluetoothScanning]: void;
-    [SeelenCommand.StopBluetoothScanning]: void;
-    [SeelenCommand.PairBluetoothDevice]: void;
-    [SeelenCommand.ForgetBluetoothDevice]: void;
-    [SeelenCommand.ConfirmBluetoothDevicePair]: void;
-  }
-
-  interface PayloadByEvent {
-    [SeelenEvent.BluetoothRadioStateChanged]: boolean;
-    [SeelenEvent.BluetoothDevicesChanged]: BluetoothDevice[];
-    [SeelenEvent.BluetoothDiscoveredDevicesChanged]: BluetoothDevice[];
-    [SeelenEvent.BluetoothPairShowPin]: BluetoothDevicePairShowPinRequest;
-    [SeelenEvent.BluetoothPairRequestPin]: void;
-  }
-}
-
-export class BluetoothRadio {
-  constructor(public state: boolean) {}
-
-  static readonly getAsync = createInstanceInvoker(this, SeelenCommand.GetBluetoothRadioState);
-  static readonly onChange = createInstanceOnEvent(this, SeelenEvent.BluetoothRadioStateChanged);
-  static async setState(state: boolean): Promise<void> {
-    return await invoke(SeelenCommand.SetBluetoothRadioState, { state });
-  }
-}
 export class BluetoothDevices extends List<BluetoothDevice> {
   static readonly getAsync = createInstanceInvoker(
     this,
@@ -75,7 +35,7 @@ export class BluetoothDevices extends List<BluetoothDevice> {
   }
 
   static async onPairRequest(
-    cb: (param: BluetoothDevicePairShowPinRequest | void) => void,
+    cb: (param: BluetoothDevicePairShowPinRequest | null) => void,
   ): Promise<UnlistenFn> {
     //TODO(Eythaan): from here the process does not continues
     const unlistenShowPin = await subscribe(SeelenEvent.BluetoothPairShowPin, (param) => cb(param.payload));

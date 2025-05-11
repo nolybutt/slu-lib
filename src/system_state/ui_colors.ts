@@ -4,20 +4,6 @@ import type { Color as IColor, UIColors as IUIColors } from '@seelen-ui/types';
 
 export type { IColor, IUIColors };
 
-declare global {
-  interface ArgsByCommand {
-    [SeelenCommand.SystemGetColors]: null;
-    [SeelenCommand.SystemGetForegroundWindowColor]: null;
-  }
-  interface ReturnByCommand {
-    [SeelenCommand.SystemGetColors]: IUIColors;
-    [SeelenCommand.SystemGetForegroundWindowColor]: IColor;
-  }
-  interface PayloadByEvent {
-    [SeelenEvent.ColorsChanged]: IUIColors;
-  }
-}
-
 export class UIColors {
   constructor(public inner: IUIColors) {}
 

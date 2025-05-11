@@ -5,18 +5,6 @@ import { createInstanceInvoker } from '../utils/State.ts';
 import { createInstanceOnEvent } from '../utils/State.ts';
 import { enumFromUnion } from '../utils/enums.ts';
 
-declare global {
-  interface ArgsByCommand {
-    [SeelenCommand.StateGetSpecificAppsConfigurations]: null;
-  }
-  interface ReturnByCommand {
-    [SeelenCommand.StateGetSpecificAppsConfigurations]: AppConfig[];
-  }
-  interface PayloadByEvent {
-    [SeelenEvent.StateSettingsByAppChanged]: AppConfig[];
-  }
-}
-
 export class AppConfigurationList extends List<AppConfig> {
   static readonly getAsync = createInstanceInvoker(this, SeelenCommand.StateGetSpecificAppsConfigurations);
   static readonly onChange = createInstanceOnEvent(this, SeelenEvent.StateSettingsByAppChanged);

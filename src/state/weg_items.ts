@@ -4,23 +4,6 @@ import { createInstanceInvoker, createInstanceOnEvent } from '../utils/State.ts'
 import { enumFromUnion } from '../utils/enums.ts';
 import { getCurrentWidget } from './widget.ts';
 
-declare global {
-  interface ArgsByCommand {
-    [SeelenCommand.StateGetWegItems]: null;
-    [SeelenCommand.WegGetItemsForWidget]: null;
-    [SeelenCommand.StateWriteWegItems]: { items: IWegItems };
-  }
-  interface ReturnByCommand {
-    [SeelenCommand.StateGetWegItems]: IWegItems;
-    [SeelenCommand.WegGetItemsForWidget]: IWegItems;
-    [SeelenCommand.StateWriteWegItems]: void;
-  }
-  interface PayloadByEvent {
-    [SeelenEvent.StateWegItemsChanged]: IWegItems;
-    [SeelenEvent.WegInstanceChanged]: IWegItems;
-  }
-}
-
 export class WegItems {
   constructor(public inner: IWegItems) {}
 

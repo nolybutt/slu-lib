@@ -275,6 +275,9 @@ pub struct SeelenLauncherRunner {
     pub readonly: bool,
 }
 
+#[derive(Debug, Clone, Default, Serialize, Deserialize, JsonSchema, TS)]
+pub struct LauncherHistory(HashMap<String, Vec<String>>);
+
 #[derive(Debug, Clone, Serialize, Deserialize, JsonSchema, TS)]
 #[serde(default, rename_all = "camelCase")]
 #[ts(export)]

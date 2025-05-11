@@ -5,22 +5,6 @@ import { createInstanceInvoker, createInstanceOnEvent } from '../utils/State.ts'
 import { getCurrentWebviewWindow } from '@tauri-apps/api/webviewWindow';
 import { decodeBase64Url } from '@std/encoding/base64url';
 
-declare global {
-  interface Window {
-    __TAURI_INTERNALS__?: unknown;
-  }
-
-  interface ArgsByCommand {
-    [SeelenCommand.StateGetWidgets]: null;
-  }
-  interface ReturnByCommand {
-    [SeelenCommand.StateGetWidgets]: Widget[];
-  }
-  interface PayloadByEvent {
-    [SeelenEvent.StateWidgetsChanged]: Widget[];
-  }
-}
-
 export const SeelenWegWidgetId: WidgetId = '@seelen/weg';
 export const SeelenToolbarWidgetId: WidgetId = '@seelen/fancy-toolbar';
 export const SeelenWindowManagerWidgetId: WidgetId = '@seelen/window-manager';
@@ -60,7 +44,8 @@ function _getCurrentWidget(): Readonly<WidgetInformation> {
 
 /** If called on backend context, will return an empty structure */
 export function getCurrentWidget(): Readonly<WidgetInformation> {
-  if (!globalThis.window || !globalThis.window.__TAURI_INTERNALS__) {
+  // deno-lint-ignore no-explicit-any
+  if (!globalThis.window || !(globalThis.window as any).__TAURI_INTERNALS__) {
     return {
       id: '',
       label: '',

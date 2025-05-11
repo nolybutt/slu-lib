@@ -1,6 +1,13 @@
 import type { UnlistenFn } from '@tauri-apps/api/event';
-import { invoke, type SeelenCommand, type SeelenEvent, subscribe } from '../handlers/mod.ts';
-import type { Options as ListenerOptions } from '@tauri-apps/api/event';
+import type {
+  AllSeelenCommandArguments,
+  AllSeelenCommandReturns,
+  AllSeelenEventPayloads,
+  SeelenCommand,
+  SeelenEvent,
+} from '../handlers/mod.ts';
+import { listen as tauriListen, type Options as ListenerOptions } from '@tauri-apps/api/event';
+import { invoke as tauriInvoke } from '@tauri-apps/api/core';
 
 // deno-lint-ignore no-explicit-any
 interface ConstructorWithSingleArg<T = any> {
@@ -10,14 +17,14 @@ interface ConstructorWithSingleArg<T = any> {
 
 export function createInstanceInvoker<
   Command extends SeelenCommand,
-  This extends ConstructorWithSingleArg<ReturnByCommand[Command]>,
+  This extends ConstructorWithSingleArg<AllSeelenCommandReturns[Command]>,
 >(
   Class: This,
   command: Command,
-  args?: NonNullable<ArgsByCommand[Command]>,
+  args?: NonNullable<AllSeelenCommandArguments[Command]>,
 ): () => Promise<InstanceType<This>> {
   return async () => {
-    return new Class(await invoke(command, args));
+    return new Class(await tauriInvoke(command, args));
   };
 }
 
@@ -25,13 +32,13 @@ type InstanceOnEvent<Instance> = (cb: (instance: Instance) => void) => Promise<U
 
 export function createInstanceOnEvent<
   Event extends SeelenEvent,
-  This extends ConstructorWithSingleArg<PayloadByEvent[Event]>,
+  This extends ConstructorWithSingleArg<AllSeelenEventPayloads[Event]>,
 >(Class: This, event: Event, options?: ListenerOptions): InstanceOnEvent<InstanceType<This>> {
   return (cb: (instance: InstanceType<This>) => void) => {
-    return subscribe(
+    return tauriListen(
       event,
       (eventData) => {
-        cb(new Class(eventData.payload));
+        cb(new Class(eventData.payload as AllSeelenEventPayloads[Event]));
       },
       options,
     );

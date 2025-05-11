@@ -44,8 +44,6 @@ export enum SeelenCommand {
   GetUserFolderContent = 'get_user_folder_content',
   SetUserFolderLimit = 'set_user_folder_limit',
   GetConnectedBluetoothDevices = 'get_connected_bluetooth_devices',
-  GetBluetoothRadioState = 'get_bluetooth_radio_state',
-  SetBluetoothRadioState = 'set_bluetooth_radio_state',
   StartBluetoothScanning = 'start_bluetooth_scanning',
   StopBluetoothScanning = 'stop_bluetooth_scanning',
   PairBluetoothDevice = 'pair_bluetooth_device',

@@ -4,18 +4,6 @@ import { createInstanceInvoker, createInstanceOnEvent } from '../../utils/State.
 import type { Plugin } from '@seelen-ui/types';
 import { getCurrentWidget } from '../widget.ts';
 
-declare global {
-  interface ArgsByCommand {
-    [SeelenCommand.StateGetPlugins]: null;
-  }
-  interface ReturnByCommand {
-    [SeelenCommand.StateGetPlugins]: Plugin[];
-  }
-  interface PayloadByEvent {
-    [SeelenEvent.StatePluginsChanged]: Plugin[];
-  }
-}
-
 export class PluginList extends List<Plugin> {
   static readonly getAsync = createInstanceInvoker(this, SeelenCommand.StateGetPlugins);
   static readonly onChange = createInstanceOnEvent(this, SeelenEvent.StatePluginsChanged);

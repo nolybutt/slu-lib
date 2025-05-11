@@ -27,22 +27,6 @@ import {
   SeelenWindowManagerWidgetId,
 } from '../widget.ts';
 
-declare global {
-  interface ArgsByCommand {
-    [SeelenCommand.StateGetSettings]: { path?: string };
-    [SeelenCommand.StateWriteSettings]: { settings: ISettings };
-    [SeelenCommand.StateGetDefaultSettings]: null;
-  }
-  interface ReturnByCommand {
-    [SeelenCommand.StateGetSettings]: ISettings;
-    [SeelenCommand.StateWriteSettings]: void;
-    [SeelenCommand.StateGetDefaultSettings]: ISettings;
-  }
-  interface PayloadByEvent {
-    [SeelenEvent.StateSettingsChanged]: ISettings;
-  }
-}
-
 export class Settings {
   constructor(public inner: ISettings) {}
   static readonly default = createInstanceInvoker(this, SeelenCommand.StateGetDefaultSettings);

@@ -1,5 +1,6 @@
 import { SeelenCommand, SeelenEvent } from '../handlers/mod.ts';
 import { createInstanceInvoker, createInstanceOnEvent } from '../utils/State.ts';
+import type { LauncherHistory as ILauncherHistory } from '@seelen-ui/types';
 
 export * from './theme.ts';
 export * from './settings/mod.ts';
@@ -12,22 +13,6 @@ export * from './icon_pack.ts';
 export * from './plugin/mod.ts';
 export * from './widget.ts';
 export * from './profile.ts';
-
-declare global {
-  interface ArgsByCommand {
-    [SeelenCommand.StateGetHistory]: null;
-  }
-  interface ReturnByCommand {
-    [SeelenCommand.StateGetHistory]: ILauncherHistory;
-  }
-  interface PayloadByEvent {
-    [SeelenEvent.StateHistoryChanged]: ILauncherHistory;
-  }
-}
-
-interface ILauncherHistory {
-  [x: string]: string[];
-}
 
 export class LauncherHistory {
   constructor(public inner: ILauncherHistory) {}

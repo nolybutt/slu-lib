@@ -1,25 +1,89 @@
-pub struct SeelenCommand;
+#[cfg(test)]
+use crate::{rect::Rect, state::*, system_state::*};
+#[cfg(test)]
+use std::{collections::HashMap, path::PathBuf};
+
+macro_rules! __switch {
+    {
+        if { $($if:tt)+ }
+        do { $($do:tt)* }
+        else { $($else:tt)* }
+    } => { $($do)* };
+    {
+        if { }
+        do { $($do:tt)* }
+        else { $($else:tt)* }
+    } => { $($else)* };
+}
 
 macro_rules! slu_commands_declaration {
-    ($($key:ident = $value:ident,)*) => {
-        #[allow(non_upper_case_globals)]
-        impl SeelenCommand {
-            $(
-                pub const $key: &'static str = stringify!($value);
-            )*
+    ($($key:ident = $fn_name:ident($($args:tt)*) $(-> $return_type:ty)?,)*) => {
+        #[cfg(test)]
+        pub struct SeelenCommand;
 
-            #[allow(dead_code)]
-            pub(crate) fn generate_ts_file(path: &str) {
-                let content: Vec<String> = vec![
-                    "// This file was generated via rust macros. Don't modify manually.".to_owned(),
-                    "export enum SeelenCommand {".to_owned(),
-                    $(
-                        format!("  {} = '{}',", stringify!($key), Self::$key),
-                    )*
-                    "}\n".to_owned(),
-                ];
+        #[cfg(test)]
+        impl SeelenCommand {
+            pub fn generate_ts_file(path: &str) {
+                let mut content: Vec<String> = std::vec::Vec::new();
+
+                content.push("// This file was generated via rust macros. Don't modify manually.".to_owned());
+                content.push("export enum SeelenCommand {".to_owned());
+                $(
+                    content.push(format!("  {} = '{}',", stringify!($key), stringify!($fn_name)));
+                )*
+                content.push("}\n".to_owned());
+
                 std::fs::write(path, content.join("\n")).unwrap();
             }
+        }
+
+        paste::paste! {
+            $(
+                __switch! {
+                    if { $($args)* }
+                    do {
+                        #[cfg(test)]
+                        #[derive(Deserialize, TS)]
+                        #[serde(rename_all = "camelCase")]
+                        #[allow(dead_code)]
+                        struct [<SeelenCommand $key Args>] {
+                            $($args)*
+                        }
+                    }
+                    else {}
+                }
+            )*
+
+            /// Internal used as mapping of commands to their arguments
+            #[cfg(test)]
+            #[allow(non_camel_case_types, dead_code)]
+            #[derive(Deserialize, TS)]
+            #[ts(export)]
+            enum SeelenCommandArgument {
+                $(
+                    #[allow(non_snake_case)]
+                    $fn_name(__switch! {
+                        if { $($args)* }
+                        do { [<SeelenCommand $key Args>] }
+                        else { () }
+                    }),
+                )*
+            }
+        }
+
+        /// Internal used as mapping of commands to their return types
+        #[derive(Serialize, TS)]
+        #[ts(export)]
+        #[allow(non_camel_case_types, dead_code)]
+        #[cfg(test)]
+        enum SeelenCommandReturn {
+            $(
+                $fn_name(__switch! {
+                    if { $($return_type)? }
+                    do { $($return_type)? }
+                    else { () }
+                }),
+            )*
         }
 
         #[macro_export]
@@ -27,7 +91,7 @@ macro_rules! slu_commands_declaration {
             () => {
                 tauri::generate_handler![
                     $(
-                        $value,
+                        $fn_name,
                     )*
                 ]
             };
@@ -39,123 +103,126 @@ macro_rules! slu_commands_declaration {
 
 slu_commands_declaration! {
     // General
-    Run = run,
-    IsDevMode = is_dev_mode,
-    IsAppxPackage = is_appx_package,
-    OpenFile = open_file,
-    RunAsAdmin = run_as_admin,
-    SelectFileOnExplorer = select_file_on_explorer,
-    IsVirtualDesktopSupported = is_virtual_desktop_supported,
-    GetUserEnvs = get_user_envs,
-    ShowAppSettings = show_app_settings,
-    SwitchWorkspace = switch_workspace,
-    SendKeys = send_keys,
-    GetIcon = get_icon,
-    SimulateFullscreen = simulate_fullscreen,
-    CheckForUpdates = check_for_updates,
-    ShowDesktop = show_desktop,
+    Run = run(program: PathBuf, args: Option<RelaunchArguments>, working_dir: Option<PathBuf>),
+    IsDevMode = is_dev_mode() -> bool,
+    IsAppxPackage = is_appx_package() -> bool,
+    OpenFile = open_file(path: PathBuf),
+    RunAsAdmin = run_as_admin(program: PathBuf, args: Option<RelaunchArguments>),
+    SelectFileOnExplorer = select_file_on_explorer(path: PathBuf),
+    IsVirtualDesktopSupported = is_virtual_desktop_supported() -> bool,
+    GetUserEnvs = get_user_envs() -> HashMap<String, String>,
+    ShowAppSettings = show_app_settings(),
+    SwitchWorkspace = switch_workspace(idx: usize),
+    SendKeys = send_keys(keys: String),
+    GetIcon = get_icon(
+        #[ts(optional = nullable)]
+        path: Option<PathBuf>,
+        #[ts(optional = nullable)]
+        umid: Option<String>
+    ),
+    SimulateFullscreen = simulate_fullscreen(),
+    CheckForUpdates = check_for_updates() -> bool,
+    ShowDesktop = show_desktop(),
     // Restart the app after install the update so it returns a promise resolved with `never`
-    InstallLastAvailableUpdate = install_last_available_update,
+    InstallLastAvailableUpdate = install_last_available_update(),
 
-    SystemGetForegroundWindowColor = get_foreground_window_color,
-    SystemGetMonitors = get_connected_monitors,
-    SystemGetColors = get_system_colors,
-    SystemGetLanguages = get_system_languages,
-    SystemSetKeyboardLayout = set_system_keyboard_layout,
+    SystemGetForegroundWindowColor = get_foreground_window_color() -> Color,
+    SystemGetMonitors = get_connected_monitors() -> Vec<PhysicalMonitor>,
+    SystemGetColors = get_system_colors() -> UIColors,
+    SystemGetLanguages = get_system_languages() -> Vec<SystemLanguage>,
+    SystemSetKeyboardLayout = set_system_keyboard_layout(id: String, handle: String),
 
     // Seelen Settings
-    SetAutoStart = set_auto_start,
-    GetAutoStartStatus = get_auto_start_status,
-    StateGetThemes = state_get_themes,
-    StateGetWegItems = state_get_weg_items,
-    StateWriteWegItems = state_write_weg_items,
-    StateGetToolbarItems = state_get_toolbar_items,
-    StateGetSettings = state_get_settings,
-    StateWriteSettings = state_write_settings,
-    StateGetDefaultSettings = state_get_default_settings,
-    StateGetDefaultMonitorSettings = state_get_default_monitor_settings,
-    StateGetSpecificAppsConfigurations = state_get_specific_apps_configurations,
-    StateGetWallpaper = state_get_wallpaper,
-    StateSetWallpaper = state_set_wallpaper,
-    StateGetHistory = state_get_history,
-    StateGetPlugins = state_get_plugins,
-    StateGetWidgets = state_get_widgets,
-    StateGetIconPacks = state_get_icon_packs,
-    StateGetProfiles = state_get_profiles,
-    StateDeleteCachedIcons = state_delete_cached_icons,
+    SetAutoStart = set_auto_start(enabled: bool),
+    GetAutoStartStatus = get_auto_start_status() -> bool,
+    StateGetThemes = state_get_themes() -> Vec<Theme>,
+    StateGetWegItems = state_get_weg_items() -> WegItems,
+    StateWriteWegItems = state_write_weg_items(items: WegItems),
+    StateGetToolbarItems = state_get_toolbar_items() -> Placeholder,
+    StateGetSettings = state_get_settings(path: Option<PathBuf>) -> Settings,
+    StateWriteSettings = state_write_settings(settings: Settings),
+    StateGetDefaultSettings = state_get_default_settings() -> Settings,
+    StateGetDefaultMonitorSettings = state_get_default_monitor_settings() -> MonitorConfiguration,
+    StateGetSpecificAppsConfigurations = state_get_specific_apps_configurations() -> Vec<AppConfig> ,
+    StateGetWallpaper = state_get_wallpaper() -> PathBuf,
+    StateSetWallpaper = state_set_wallpaper(path: PathBuf),
+    StateGetHistory = state_get_history() -> LauncherHistory,
+    StateGetPlugins = state_get_plugins() -> Vec<Plugin>,
+    StateGetWidgets = state_get_widgets() -> Vec<Widget>,
+    StateGetIconPacks = state_get_icon_packs() -> Vec<IconPack>,
+    StateGetProfiles = state_get_profiles() -> Vec<Profile>,
+    StateDeleteCachedIcons = state_delete_cached_icons(),
 
     // User
-    GetUser = get_user,
-    GetUserFolderContent = get_user_folder_content,
-    SetUserFolderLimit = set_user_folder_limit,
+    GetUser = get_user() -> User,
+    GetUserFolderContent = get_user_folder_content(folder_type: FolderType) -> Vec<File>,
+    SetUserFolderLimit = set_user_folder_limit(folder_type: FolderType, amount: usize),
 
     //Bluetooth
-    GetConnectedBluetoothDevices = get_connected_bluetooth_devices,
-    GetBluetoothRadioState = get_bluetooth_radio_state,
-    SetBluetoothRadioState = set_bluetooth_radio_state,
-    StartBluetoothScanning = start_bluetooth_scanning,
-    StopBluetoothScanning = stop_bluetooth_scanning,
-    PairBluetoothDevice = pair_bluetooth_device,
-    ForgetBluetoothDevice = forget_bluetooth_device,
-    ConfirmBluetoothDevicePair = confirm_bluetooth_device_pair,
+    GetConnectedBluetoothDevices = get_connected_bluetooth_devices() -> Vec<BluetoothDevice>,
+    StartBluetoothScanning = start_bluetooth_scanning(),
+    StopBluetoothScanning = stop_bluetooth_scanning(),
+    PairBluetoothDevice = pair_bluetooth_device(address: u64),
+    ForgetBluetoothDevice = forget_bluetooth_device(id: String),
+    ConfirmBluetoothDevicePair = confirm_bluetooth_device_pair(accept: bool, passphrase: String),
 
     // Media
-    GetMediaDevices = get_media_devices,
-    GetMediaSessions = get_media_sessions,
-    MediaPrev = media_prev,
-    MediaTogglePlayPause = media_toggle_play_pause,
-    MediaNext = media_next,
-    SetVolumeLevel = set_volume_level,
-    MediaToggleMute = media_toggle_mute,
-    MediaSetDefaultDevice = media_set_default_device,
+    GetMediaDevices = get_media_devices() -> [Vec<MediaDevice>; 2],
+    GetMediaSessions = get_media_sessions() -> Vec<MediaPlayer>,
+    MediaPrev = media_prev(id: String),
+    MediaTogglePlayPause = media_toggle_play_pause(id: String),
+    MediaNext = media_next(id: String),
+    SetVolumeLevel = set_volume_level(device_id: String, session_id: Option<String>, level: f32),
+    MediaToggleMute = media_toggle_mute(device_id: String, session_id: Option<String>),
+    MediaSetDefaultDevice = media_set_default_device(id: String, role: String),
 
     // Brightness
-    GetMainMonitorBrightness = get_main_monitor_brightness,
-    SetMainMonitorBrightness = set_main_monitor_brightness,
+    GetMainMonitorBrightness = get_main_monitor_brightness() -> Option<Brightness>,
+    SetMainMonitorBrightness = set_main_monitor_brightness(brightness: u8),
 
     // Power
-    GetPowerStatus = get_power_status,
-    GetPowerMode = get_power_mode,
-    GetBatteries = get_batteries,
-    LogOut = log_out,
-    Suspend = suspend,
-    Hibernate = hibernate,
-    Restart = restart,
-    Shutdown = shutdown,
-    Lock = lock,
+    GetPowerStatus = get_power_status() -> PowerStatus,
+    GetPowerMode = get_power_mode() -> PowerMode,
+    GetBatteries = get_batteries() -> Vec<Battery>,
+    LogOut = log_out(),
+    Suspend = suspend(),
+    Hibernate = hibernate(),
+    Restart = restart(),
+    Shutdown = shutdown(),
+    Lock = lock(),
 
     // SeelenWeg
-    WegGetItemsForWidget = weg_get_items_for_widget,
-    WegCloseApp = weg_close_app,
-    WegKillApp = weg_kill_app,
-    WegToggleWindowState = weg_toggle_window_state,
-    WegRequestUpdatePreviews = weg_request_update_previews,
-    WegPinItem = weg_pin_item,
+    WegGetItemsForWidget = weg_get_items_for_widget() -> WegItems,
+    WegCloseApp = weg_close_app(hwnd: isize),
+    WegKillApp = weg_kill_app(hwnd: isize),
+    WegToggleWindowState = weg_toggle_window_state(hwnd: isize, was_focused: bool),
+    WegRequestUpdatePreviews = weg_request_update_previews(handles: Vec<isize>),
+    WegPinItem = weg_pin_item(path: PathBuf),
 
     // Windows Manager
-    SetWindowPosition = set_window_position,
-    RequestFocus = request_focus,
+    SetWindowPosition = set_window_position(hwnd: isize, rect: Rect),
+    RequestFocus = request_focus(hwnd: isize),
 
     // App Launcher
-    LauncherGetApps = launcher_get_apps,
+    LauncherGetApps = launcher_get_apps() -> Vec<StartMenuItem>,
 
     // Slu Popups
-    GetPopupConfig = get_popup_config,
+    GetPopupConfig = get_popup_config() -> SluPopupConfig,
 
     // Tray Icons
-    GetTrayIcons = get_tray_icons,
-    OnClickTrayIcon = on_click_tray_icon,
-    OnContextMenuTrayIcon = on_context_menu_tray_icon,
+    GetTrayIcons = get_tray_icons() -> Vec<TrayIcon>,
+    OnClickTrayIcon = on_click_tray_icon(key: String),
+    OnContextMenuTrayIcon = on_context_menu_tray_icon(key: String),
 
     // Network
-    WlanGetProfiles = wlan_get_profiles,
-    WlanStartScanning = wlan_start_scanning,
-    WlanStopScanning = wlan_stop_scanning,
-    WlanConnect = wlan_connect,
-    WlanDisconnect = wlan_disconnect,
+    WlanGetProfiles = wlan_get_profiles() -> Vec<WlanProfile>,
+    WlanStartScanning = wlan_start_scanning(),
+    WlanStopScanning = wlan_stop_scanning(),
+    WlanConnect = wlan_connect(ssid: String, password: Option<String>, hidden: bool),
+    WlanDisconnect = wlan_disconnect(),
 
     // Notifications
-    GetNotifications = get_notifications,
-    NotificationsClose = notifications_close,
-    NotificationsCloseAll = notifications_close_all,
+    GetNotifications = get_notifications() -> Vec<AppNotification>,
+    NotificationsClose = notifications_close(id: u32),
+    NotificationsCloseAll = notifications_close_all(),
 }
