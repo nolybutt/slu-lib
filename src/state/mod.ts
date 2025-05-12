@@ -2,7 +2,7 @@ import { SeelenCommand, SeelenEvent } from '../handlers/mod.ts';
 import { createInstanceInvoker, createInstanceOnEvent } from '../utils/State.ts';
 import type { LauncherHistory as ILauncherHistory } from '@seelen-ui/types';
 
-export * from './theme.ts';
+export * from './theme/mod.ts';
 export * from './settings/mod.ts';
 export * from './weg_items.ts';
 export * from './wm_layout.ts';

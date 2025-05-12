@@ -30,6 +30,14 @@
         }
       ]
     },
+    "settings": {
+      "default": [],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ThemeSettingsDefinition"
+        }
+      ]
+    },
     "styles": {
       "description": "Css Styles of the theme",
       "default": {},
@@ -157,6 +165,194 @@
     },
     "ThemeId": {
       "$ref": "#/definitions/ResourceId"
+    },
+    "ThemeSettingsDefinition": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/ThemeVariableDefinition"
+      }
+    },
+    "ThemeVariableDefinition": {
+      "oneOf": [
+        {
+          "description": "This config definition will allow to users write any string.\\ Css syntax: https://developer.mozilla.org/en-US/docs/Web/CSS/string \\ ### example: ```css --var-name: \"user input\" ```",
+          "type": "object",
+          "required": [
+            "initialValue",
+            "label",
+            "name",
+            "syntax"
+          ],
+          "properties": {
+            "initialValue": {
+              "description": "initial variable value, if not manually set by the user.",
+              "type": "string"
+            },
+            "label": {
+              "description": "Label to show to the user on Settings.",
+              "allOf": [
+                {
+                  "$ref": "#/definitions/ResourceText"
+                }
+              ]
+            },
+            "name": {
+              "description": "Css variable name, example: `--my-css-variable`",
+              "type": "string"
+            },
+            "syntax": {
+              "type": "string",
+              "enum": [
+                "String"
+              ]
+            }
+          }
+        },
+        {
+          "description": "This config definition will allow to users select a color and will be stored as a hex value, opacity is always allowed via UI.\\ Css syntax: https://developer.mozilla.org/en-US/docs/Web/CSS/color_value \\ ### example: ```css --var-name: #ff22ee --var-name: #ff22ee ```",
+          "type": "object",
+          "required": [
+            "initialValue",
+            "label",
+            "name",
+            "syntax"
+          ],
+          "properties": {
+            "initialValue": {
+              "description": "initial variable value, if not manually set by the user.",
+              "type": "string"
+            },
+            "label": {
+              "description": "Label to show to the user on Settings.",
+              "allOf": [
+                {
+                  "$ref": "#/definitions/ResourceText"
+                }
+              ]
+            },
+            "name": {
+              "description": "Css variable name, example: `--my-css-variable`",
+              "type": "string"
+            },
+            "syntax": {
+              "type": "string",
+              "enum": [
+                "<color>"
+              ]
+            }
+          }
+        },
+        {
+          "description": "This will allow to the user set any lenght in any unit. (px, %, vw, etc). If you need force a specific unit, use Number instead lenght and on theme code makes the conversion.\\ Css syntax: https://developer.mozilla.org/en-US/docs/Web/CSS/length \\ ### example: ```css --var-name: 10px --var-name: 10% --var-name: 10vw ```",
+          "type": "object",
+          "required": [
+            "initialValue",
+            "initialValueUnit",
+            "label",
+            "name",
+            "syntax"
+          ],
+          "properties": {
+            "initialValue": {
+              "description": "initial variable value, if not manually set by the user.",
+              "type": "number",
+              "format": "double"
+            },
+            "initialValueUnit": {
+              "description": "Css unit, example: `px`",
+              "type": "string"
+            },
+            "label": {
+              "description": "Label to show to the user on Settings.",
+              "allOf": [
+                {
+                  "$ref": "#/definitions/ResourceText"
+                }
+              ]
+            },
+            "name": {
+              "description": "Css variable name, example: `--my-css-variable`",
+              "type": "string"
+            },
+            "syntax": {
+              "type": "string",
+              "enum": [
+                "<length>"
+              ]
+            }
+          }
+        },
+        {
+          "description": "This will allow to users to set any number, without units. Css syntax: https://developer.mozilla.org/en-US/docs/Web/CSS/number \\ ### example: ```css --var-name: 10 ```",
+          "type": "object",
+          "required": [
+            "initialValue",
+            "label",
+            "name",
+            "syntax"
+          ],
+          "properties": {
+            "initialValue": {
+              "description": "initial variable value, if not manually set by the user.",
+              "type": "number",
+              "format": "double"
+            },
+            "label": {
+              "description": "Label to show to the user on Settings.",
+              "allOf": [
+                {
+                  "$ref": "#/definitions/ResourceText"
+                }
+              ]
+            },
+            "name": {
+              "description": "Css variable name, example: `--my-css-variable`",
+              "type": "string"
+            },
+            "syntax": {
+              "type": "string",
+              "enum": [
+                "<number>"
+              ]
+            }
+          }
+        },
+        {
+          "description": "This will allow to users to set any url.\\ Css syntax: https://developer.mozilla.org/en-US/docs/Web/CSS/url_value \\ ### example: ```css --var-name: url(\"https://example.com/image.png\") ```",
+          "type": "object",
+          "required": [
+            "initialValue",
+            "label",
+            "name",
+            "syntax"
+          ],
+          "properties": {
+            "initialValue": {
+              "description": "initial variable value, if not manually set by the user.",
+              "type": "string",
+              "format": "uri"
+            },
+            "label": {
+              "description": "Label to show to the user on Settings.",
+              "allOf": [
+                {
+                  "$ref": "#/definitions/ResourceText"
+                }
+              ]
+            },
+            "name": {
+              "description": "Css variable name, example: `--my-css-variable`",
+              "type": "string"
+            },
+            "syntax": {
+              "type": "string",
+              "enum": [
+                "<url>"
+              ]
+            }
+          }
+        }
+      ]
     }
   }
 }

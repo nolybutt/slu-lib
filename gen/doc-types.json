@@ -33191,9 +33191,9 @@
       "isDefault": false,
       "location": {
         "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/Theme.ts",
-        "line": 6,
+        "line": 7,
         "col": 0,
-        "byteIndex": 265
+        "byteIndex": 342
       },
       "declarationKind": "export",
       "kind": "typeAlias",
@@ -33209,9 +33209,9 @@
                 "name": "id",
                 "location": {
                   "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/Theme.ts",
-                  "line": 6,
+                  "line": 7,
                   "col": 22,
-                  "byteIndex": 287
+                  "byteIndex": 364
                 },
                 "params": [],
                 "computed": false,
@@ -33233,9 +33233,9 @@
                 },
                 "location": {
                   "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/Theme.ts",
-                  "line": 10,
+                  "line": 11,
                   "col": 0,
-                  "byteIndex": 337
+                  "byteIndex": 414
                 },
                 "params": [],
                 "computed": false,
@@ -33251,15 +33251,36 @@
                 "typeParams": []
               },
               {
+                "name": "settings",
+                "location": {
+                  "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/Theme.ts",
+                  "line": 11,
+                  "col": 28,
+                  "byteIndex": 442
+                },
+                "params": [],
+                "computed": false,
+                "optional": false,
+                "tsType": {
+                  "repr": "ThemeSettingsDefinition",
+                  "kind": "typeRef",
+                  "typeRef": {
+                    "typeParams": null,
+                    "typeName": "ThemeSettingsDefinition"
+                  }
+                },
+                "typeParams": []
+              },
+              {
                 "name": "styles",
                 "jsDoc": {
                   "doc": "Css Styles of the theme"
                 },
                 "location": {
                   "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/Theme.ts",
-                  "line": 14,
+                  "line": 15,
                   "col": 0,
-                  "byteIndex": 401
+                  "byteIndex": 513
                 },
                 "params": [],
                 "computed": false,
@@ -33318,6 +33339,545 @@
           }
         },
         "typeParams": []
+      }
+    },
+    {
+      "name": "ThemeSettingsDefinition",
+      "isDefault": false,
+      "location": {
+        "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/ThemeSettingsDefinition.ts",
+        "line": 4,
+        "col": 0,
+        "byteIndex": 187
+      },
+      "declarationKind": "export",
+      "kind": "typeAlias",
+      "typeAliasDef": {
+        "tsType": {
+          "repr": "Array",
+          "kind": "typeRef",
+          "typeRef": {
+            "typeParams": [
+              {
+                "repr": "ThemeVariableDefinition",
+                "kind": "typeRef",
+                "typeRef": {
+                  "typeParams": null,
+                  "typeName": "ThemeVariableDefinition"
+                }
+              }
+            ],
+            "typeName": "Array"
+          }
+        },
+        "typeParams": []
+      }
+    },
+    {
+      "name": "ThemeVariable",
+      "isDefault": false,
+      "location": {
+        "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/ThemeVariable.ts",
+        "line": 4,
+        "col": 0,
+        "byteIndex": 165
+      },
+      "declarationKind": "export",
+      "kind": "typeAlias",
+      "typeAliasDef": {
+        "tsType": {
+          "repr": "",
+          "kind": "typeLiteral",
+          "typeLiteral": {
+            "constructors": [],
+            "methods": [],
+            "properties": [
+              {
+                "name": "label",
+                "jsDoc": {
+                  "doc": "Label to show to the user on Settings."
+                },
+                "location": {
+                  "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/ThemeVariable.ts",
+                  "line": 8,
+                  "col": 0,
+                  "byteIndex": 249
+                },
+                "params": [],
+                "computed": false,
+                "optional": false,
+                "tsType": {
+                  "repr": "ResourceText",
+                  "kind": "typeRef",
+                  "typeRef": {
+                    "typeParams": null,
+                    "typeName": "ResourceText"
+                  }
+                },
+                "typeParams": []
+              },
+              {
+                "name": "name",
+                "jsDoc": {
+                  "doc": "Css variable name, example: `--my-css-variable`"
+                },
+                "location": {
+                  "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/ThemeVariable.ts",
+                  "line": 12,
+                  "col": 0,
+                  "byteIndex": 330
+                },
+                "params": [],
+                "computed": false,
+                "optional": false,
+                "tsType": {
+                  "repr": "string",
+                  "kind": "keyword",
+                  "keyword": "string"
+                },
+                "typeParams": []
+              },
+              {
+                "name": "initialValue",
+                "jsDoc": {
+                  "doc": "initial variable value, if not manually set by the user."
+                },
+                "location": {
+                  "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/ThemeVariable.ts",
+                  "line": 16,
+                  "col": 0,
+                  "byteIndex": 413
+                },
+                "params": [],
+                "computed": false,
+                "optional": false,
+                "tsType": {
+                  "repr": "T",
+                  "kind": "typeRef",
+                  "typeRef": {
+                    "typeParams": null,
+                    "typeName": "T"
+                  }
+                },
+                "typeParams": []
+              }
+            ],
+            "callSignatures": [],
+            "indexSignatures": []
+          }
+        },
+        "typeParams": [
+          {
+            "name": "T"
+          }
+        ]
+      }
+    },
+    {
+      "name": "ThemeVariableDefinition",
+      "isDefault": false,
+      "location": {
+        "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/ThemeVariableDefinition.ts",
+        "line": 5,
+        "col": 0,
+        "byteIndex": 240
+      },
+      "declarationKind": "export",
+      "kind": "typeAlias",
+      "typeAliasDef": {
+        "tsType": {
+          "repr": "",
+          "kind": "union",
+          "union": [
+            {
+              "repr": "",
+              "kind": "intersection",
+              "intersection": [
+                {
+                  "repr": "",
+                  "kind": "typeLiteral",
+                  "typeLiteral": {
+                    "constructors": [],
+                    "methods": [],
+                    "properties": [
+                      {
+                        "name": "syntax",
+                        "location": {
+                          "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/ThemeVariableDefinition.ts",
+                          "line": 5,
+                          "col": 40,
+                          "byteIndex": 280
+                        },
+                        "params": [],
+                        "computed": false,
+                        "optional": false,
+                        "tsType": {
+                          "repr": "String",
+                          "kind": "literal",
+                          "literal": {
+                            "kind": "string",
+                            "string": "String"
+                          }
+                        },
+                        "typeParams": []
+                      }
+                    ],
+                    "callSignatures": [],
+                    "indexSignatures": []
+                  }
+                },
+                {
+                  "repr": "ThemeVariable",
+                  "kind": "typeRef",
+                  "typeRef": {
+                    "typeParams": [
+                      {
+                        "repr": "string",
+                        "kind": "keyword",
+                        "keyword": "string"
+                      }
+                    ],
+                    "typeName": "ThemeVariable"
+                  }
+                }
+              ]
+            },
+            {
+              "repr": "",
+              "kind": "intersection",
+              "intersection": [
+                {
+                  "repr": "",
+                  "kind": "typeLiteral",
+                  "typeLiteral": {
+                    "constructors": [],
+                    "methods": [],
+                    "properties": [
+                      {
+                        "name": "syntax",
+                        "location": {
+                          "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/ThemeVariableDefinition.ts",
+                          "line": 5,
+                          "col": 89,
+                          "byteIndex": 329
+                        },
+                        "params": [],
+                        "computed": false,
+                        "optional": false,
+                        "tsType": {
+                          "repr": "<color>",
+                          "kind": "literal",
+                          "literal": {
+                            "kind": "string",
+                            "string": "<color>"
+                          }
+                        },
+                        "typeParams": []
+                      }
+                    ],
+                    "callSignatures": [],
+                    "indexSignatures": []
+                  }
+                },
+                {
+                  "repr": "ThemeVariable",
+                  "kind": "typeRef",
+                  "typeRef": {
+                    "typeParams": [
+                      {
+                        "repr": "string",
+                        "kind": "keyword",
+                        "keyword": "string"
+                      }
+                    ],
+                    "typeName": "ThemeVariable"
+                  }
+                }
+              ]
+            },
+            {
+              "repr": "",
+              "kind": "intersection",
+              "intersection": [
+                {
+                  "repr": "",
+                  "kind": "typeLiteral",
+                  "typeLiteral": {
+                    "constructors": [],
+                    "methods": [],
+                    "properties": [
+                      {
+                        "name": "syntax",
+                        "location": {
+                          "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/ThemeVariableDefinition.ts",
+                          "line": 5,
+                          "col": 139,
+                          "byteIndex": 379
+                        },
+                        "params": [],
+                        "computed": false,
+                        "optional": false,
+                        "tsType": {
+                          "repr": "<length>",
+                          "kind": "literal",
+                          "literal": {
+                            "kind": "string",
+                            "string": "<length>"
+                          }
+                        },
+                        "typeParams": []
+                      }
+                    ],
+                    "callSignatures": [],
+                    "indexSignatures": []
+                  }
+                },
+                {
+                  "repr": "ThemeVariableWithUnit",
+                  "kind": "typeRef",
+                  "typeRef": {
+                    "typeParams": [
+                      {
+                        "repr": "number",
+                        "kind": "keyword",
+                        "keyword": "number"
+                      }
+                    ],
+                    "typeName": "ThemeVariableWithUnit"
+                  }
+                }
+              ]
+            },
+            {
+              "repr": "",
+              "kind": "intersection",
+              "intersection": [
+                {
+                  "repr": "",
+                  "kind": "typeLiteral",
+                  "typeLiteral": {
+                    "constructors": [],
+                    "methods": [],
+                    "properties": [
+                      {
+                        "name": "syntax",
+                        "location": {
+                          "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/ThemeVariableDefinition.ts",
+                          "line": 5,
+                          "col": 198,
+                          "byteIndex": 438
+                        },
+                        "params": [],
+                        "computed": false,
+                        "optional": false,
+                        "tsType": {
+                          "repr": "<number>",
+                          "kind": "literal",
+                          "literal": {
+                            "kind": "string",
+                            "string": "<number>"
+                          }
+                        },
+                        "typeParams": []
+                      }
+                    ],
+                    "callSignatures": [],
+                    "indexSignatures": []
+                  }
+                },
+                {
+                  "repr": "ThemeVariable",
+                  "kind": "typeRef",
+                  "typeRef": {
+                    "typeParams": [
+                      {
+                        "repr": "number",
+                        "kind": "keyword",
+                        "keyword": "number"
+                      }
+                    ],
+                    "typeName": "ThemeVariable"
+                  }
+                }
+              ]
+            },
+            {
+              "repr": "",
+              "kind": "intersection",
+              "intersection": [
+                {
+                  "repr": "",
+                  "kind": "typeLiteral",
+                  "typeLiteral": {
+                    "constructors": [],
+                    "methods": [],
+                    "properties": [
+                      {
+                        "name": "syntax",
+                        "location": {
+                          "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/ThemeVariableDefinition.ts",
+                          "line": 5,
+                          "col": 249,
+                          "byteIndex": 489
+                        },
+                        "params": [],
+                        "computed": false,
+                        "optional": false,
+                        "tsType": {
+                          "repr": "<url>",
+                          "kind": "literal",
+                          "literal": {
+                            "kind": "string",
+                            "string": "<url>"
+                          }
+                        },
+                        "typeParams": []
+                      }
+                    ],
+                    "callSignatures": [],
+                    "indexSignatures": []
+                  }
+                },
+                {
+                  "repr": "ThemeVariable",
+                  "kind": "typeRef",
+                  "typeRef": {
+                    "typeParams": [
+                      {
+                        "repr": "string",
+                        "kind": "keyword",
+                        "keyword": "string"
+                      }
+                    ],
+                    "typeName": "ThemeVariable"
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        "typeParams": []
+      }
+    },
+    {
+      "name": "ThemeVariableWithUnit",
+      "isDefault": false,
+      "location": {
+        "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/ThemeVariableWithUnit.ts",
+        "line": 4,
+        "col": 0,
+        "byteIndex": 165
+      },
+      "declarationKind": "export",
+      "kind": "typeAlias",
+      "typeAliasDef": {
+        "tsType": {
+          "repr": "",
+          "kind": "typeLiteral",
+          "typeLiteral": {
+            "constructors": [],
+            "methods": [],
+            "properties": [
+              {
+                "name": "label",
+                "jsDoc": {
+                  "doc": "Label to show to the user on Settings."
+                },
+                "location": {
+                  "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/ThemeVariableWithUnit.ts",
+                  "line": 8,
+                  "col": 0,
+                  "byteIndex": 257
+                },
+                "params": [],
+                "computed": false,
+                "optional": false,
+                "tsType": {
+                  "repr": "ResourceText",
+                  "kind": "typeRef",
+                  "typeRef": {
+                    "typeParams": null,
+                    "typeName": "ResourceText"
+                  }
+                },
+                "typeParams": []
+              },
+              {
+                "name": "name",
+                "jsDoc": {
+                  "doc": "Css variable name, example: `--my-css-variable`"
+                },
+                "location": {
+                  "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/ThemeVariableWithUnit.ts",
+                  "line": 12,
+                  "col": 0,
+                  "byteIndex": 338
+                },
+                "params": [],
+                "computed": false,
+                "optional": false,
+                "tsType": {
+                  "repr": "string",
+                  "kind": "keyword",
+                  "keyword": "string"
+                },
+                "typeParams": []
+              },
+              {
+                "name": "initialValue",
+                "jsDoc": {
+                  "doc": "initial variable value, if not manually set by the user."
+                },
+                "location": {
+                  "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/ThemeVariableWithUnit.ts",
+                  "line": 16,
+                  "col": 0,
+                  "byteIndex": 421
+                },
+                "params": [],
+                "computed": false,
+                "optional": false,
+                "tsType": {
+                  "repr": "T",
+                  "kind": "typeRef",
+                  "typeRef": {
+                    "typeParams": null,
+                    "typeName": "T"
+                  }
+                },
+                "typeParams": []
+              },
+              {
+                "name": "initialValueUnit",
+                "jsDoc": {
+                  "doc": "Css unit, example: `px`"
+                },
+                "location": {
+                  "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/ThemeVariableWithUnit.ts",
+                  "line": 20,
+                  "col": 0,
+                  "byteIndex": 474
+                },
+                "params": [],
+                "computed": false,
+                "optional": false,
+                "tsType": {
+                  "repr": "string",
+                  "kind": "keyword",
+                  "keyword": "string"
+                },
+                "typeParams": []
+              }
+            ],
+            "callSignatures": [],
+            "indexSignatures": []
+          }
+        },
+        "typeParams": [
+          {
+            "name": "T"
+          }
+        ]
       }
     },
     {

@@ -1,6 +1,5 @@
-import type { Placeholder, ToolbarItem, WorkspaceToolbarItemMode } from '@seelen-ui/types';
+import type { ToolbarItem, WorkspaceToolbarItemMode } from '@seelen-ui/types';
 import { enumFromUnion } from '../utils/enums.ts';
-import type { SeelenCommand, SeelenEvent } from '../handlers/mod.ts';
 
 // =================================================================================
 //    From here some enums as helpers like @seelen-ui/types only contains types

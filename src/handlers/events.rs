@@ -45,7 +45,7 @@ macro_rules! slu_events_declaration {
                 #[serde(rename = $value)]
                 $name(__switch! {
                     if { $($payload)? }
-                    do { $($payload)? }
+                    do { Box<$($payload)?> }
                     else { () }
                 }),
             )*

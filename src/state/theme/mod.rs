@@ -1,5 +1,8 @@
+pub mod config;
+
 use std::{collections::HashMap, path::Path};
 
+use config::ThemeSettingsDefinition;
 use schemars::JsonSchema;
 use serde::{Deserialize, Serialize};
 use ts_rs::TS;
@@ -41,6 +44,7 @@ pub struct Theme {
     /// Metadata about the theme
     #[serde(alias = "info")]
     pub metadata: ResourceMetadata,
+    pub settings: ThemeSettingsDefinition,
     /// Css Styles of the theme
     pub styles: HashMap<WidgetId, String>,
 }
