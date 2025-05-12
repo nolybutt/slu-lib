@@ -218,7 +218,7 @@ slu_commands_declaration! {
     WlanGetProfiles = wlan_get_profiles() -> Vec<WlanProfile>,
     WlanStartScanning = wlan_start_scanning(),
     WlanStopScanning = wlan_stop_scanning(),
-    WlanConnect = wlan_connect(ssid: String, password: Option<String>, hidden: bool),
+    WlanConnect = wlan_connect(ssid: String, password: Option<String>, hidden: bool) -> bool,
     WlanDisconnect = wlan_disconnect(),
 
     // Notifications

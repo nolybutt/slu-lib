@@ -27023,9 +27023,9 @@
                     "computed": false,
                     "optional": false,
                     "tsType": {
-                      "repr": "null",
+                      "repr": "boolean",
                       "kind": "keyword",
-                      "keyword": "null"
+                      "keyword": "boolean"
                     },
                     "typeParams": []
                   }
@@ -27046,8 +27046,8 @@
                     "location": {
                       "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/SeelenCommandReturn.ts",
                       "line": 35,
-                      "col": 3193,
-                      "byteIndex": 4848
+                      "col": 3196,
+                      "byteIndex": 4851
                     },
                     "params": [],
                     "computed": false,
@@ -27076,8 +27076,8 @@
                     "location": {
                       "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/SeelenCommandReturn.ts",
                       "line": 35,
-                      "col": 3223,
-                      "byteIndex": 4878
+                      "col": 3226,
+                      "byteIndex": 4881
                     },
                     "params": [],
                     "computed": false,
@@ -27118,8 +27118,8 @@
                     "location": {
                       "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/SeelenCommandReturn.ts",
                       "line": 35,
-                      "col": 3273,
-                      "byteIndex": 4928
+                      "col": 3276,
+                      "byteIndex": 4931
                     },
                     "params": [],
                     "computed": false,
@@ -27148,8 +27148,8 @@
                     "location": {
                       "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/SeelenCommandReturn.ts",
                       "line": 35,
-                      "col": 3307,
-                      "byteIndex": 4962
+                      "col": 3310,
+                      "byteIndex": 4965
                     },
                     "params": [],
                     "computed": false,

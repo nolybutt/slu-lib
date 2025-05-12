@@ -210,6 +210,2316 @@
       }
     },
     {
+      "name": "SeelenCommand",
+      "isDefault": false,
+      "location": {
+        "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/handlers/commands.ts",
+        "line": 2,
+        "col": 0,
+        "byteIndex": 67
+      },
+      "declarationKind": "export",
+      "kind": "enum",
+      "enumDef": {
+        "members": [
+          {
+            "name": "Run",
+            "init": {
+              "repr": "run",
+              "kind": "literal",
+              "literal": {
+                "kind": "string",
+                "string": "run"
+              }
+            },
+            "location": {
+              "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/handlers/commands.ts",
+              "line": 3,
+              "col": 2,
+              "byteIndex": 97
+            }
+          },
+          {
+            "name": "IsDevMode",
+            "init": {
+              "repr": "is_dev_mode",
+              "kind": "literal",
+              "literal": {
+                "kind": "string",
+                "string": "is_dev_mode"
+              }
+            },
+            "location": {
+              "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/handlers/commands.ts",
+              "line": 4,
+              "col": 2,
+              "byteIndex": 112
+            }
+          },
+          {
+            "name": "IsAppxPackage",
+            "init": {
+              "repr": "is_appx_package",
+              "kind": "literal",
+              "literal": {
+                "kind": "string",
+                "string": "is_appx_package"
+              }
+            },
+            "location": {
+              "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/handlers/commands.ts",
+              "line": 5,
+              "col": 2,
+              "byteIndex": 141
+            }
+          },
+          {
+            "name": "OpenFile",
+            "init": {
+              "repr": "open_file",
+              "kind": "literal",
+              "literal": {
+                "kind": "string",
+                "string": "open_file"
+              }
+            },
+            "location": {
+              "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/handlers/commands.ts",
+              "line": 6,
+              "col": 2,
+              "byteIndex": 178
+            }
+          },
+          {
+            "name": "RunAsAdmin",
+            "init": {
+              "repr": "run_as_admin",
+              "kind": "literal",
+              "literal": {
+                "kind": "string",
+                "string": "run_as_admin"
+              }
+            },
+            "location": {
+              "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/handlers/commands.ts",
+              "line": 7,
+              "col": 2,
+              "byteIndex": 204
+            }
+          },
+          {
+            "name": "SelectFileOnExplorer",
+            "init": {
+              "repr": "select_file_on_explorer",
+              "kind": "literal",
+              "literal": {
+                "kind": "string",
+                "string": "select_file_on_explorer"
+              }
+            },
+            "location": {
+              "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/handlers/commands.ts",
+              "line": 8,
+              "col": 2,
+              "byteIndex": 235
+            }
+          },
+          {
+            "name": "IsVirtualDesktopSupported",
+            "init": {
+              "repr": "is_virtual_desktop_supported",
+              "kind": "literal",
+              "literal": {
+                "kind": "string",
+                "string": "is_virtual_desktop_supported"
+              }
+            },
+            "location": {
+              "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/handlers/commands.ts",
+              "line": 9,
+              "col": 2,
+              "byteIndex": 287
+            }
+          },
+          {
+            "name": "GetUserEnvs",
+            "init": {
+              "repr": "get_user_envs",
+              "kind": "literal",
+              "literal": {
+                "kind": "string",
+                "string": "get_user_envs"
+              }
+            },
+            "location": {
+              "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/handlers/commands.ts",
+              "line": 10,
+              "col": 2,
+              "byteIndex": 349
+            }
+          },
+          {
+            "name": "ShowAppSettings",
+            "init": {
+              "repr": "show_app_settings",
+              "kind": "literal",
+              "literal": {
+                "kind": "string",
+                "string": "show_app_settings"
+              }
+            },
+            "location": {
+              "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/handlers/commands.ts",
+              "line": 11,
+              "col": 2,
+              "byteIndex": 382
+            }
+          },
+          {
+            "name": "SwitchWorkspace",
+            "init": {
+              "repr": "switch_workspace",
+              "kind": "literal",
+              "literal": {
+                "kind": "string",
+                "string": "switch_workspace"
+              }
+            },
+            "location": {
+              "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/handlers/commands.ts",
+              "line": 12,
+              "col": 2,
+              "byteIndex": 423
+            }
+          },
+          {
+            "name": "SendKeys",
+            "init": {
+              "repr": "send_keys",
+              "kind": "literal",
+              "literal": {
+                "kind": "string",
+                "string": "send_keys"
+              }
+            },
+            "location": {
+              "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/handlers/commands.ts",
+              "line": 13,
+              "col": 2,
+              "byteIndex": 463
+            }
+          },
+          {
+            "name": "GetIcon",
+            "init": {
+              "repr": "get_icon",
+              "kind": "literal",
+              "literal": {
+                "kind": "string",
+                "string": "get_icon"
+              }
+            },
+            "location": {
+              "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/handlers/commands.ts",
+              "line": 14,
+              "col": 2,
+              "byteIndex": 489
+            }
+          },
+          {
+            "name": "SimulateFullscreen",
+            "init": {
+              "repr": "simulate_fullscreen",
+              "kind": "literal",
+              "literal": {
+                "kind": "string",
+                "string": "simulate_fullscreen"
+              }
+            },
+            "location": {
+              "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/handlers/commands.ts",
+              "line": 15,
+              "col": 2,
+              "byteIndex": 513
+            }
+          },
+          {
+            "name": "CheckForUpdates",
+            "init": {
+              "repr": "check_for_updates",
+              "kind": "literal",
+              "literal": {
+                "kind": "string",
+                "string": "check_for_updates"
+              }
+            },
+            "location": {
+              "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/handlers/commands.ts",
+              "line": 16,
+              "col": 2,
+              "byteIndex": 559
+            }
+          },
+          {
+            "name": "ShowDesktop",
+            "init": {
+              "repr": "show_desktop",
+              "kind": "literal",
+              "literal": {
+                "kind": "string",
+                "string": "show_desktop"
+              }
+            },
+            "location": {
+              "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/handlers/commands.ts",
+              "line": 17,
+              "col": 2,
+              "byteIndex": 600
+            }
+          },
+          {
+            "name": "InstallLastAvailableUpdate",
+            "init": {
+              "repr": "install_last_available_update",
+              "kind": "literal",
+              "literal": {
+                "kind": "string",
+                "string": "install_last_available_update"
+              }
+            },
+            "location": {
+              "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/handlers/commands.ts",
+              "line": 18,
+              "col": 2,
+              "byteIndex": 632
+            }
+          },
+          {
+            "name": "SystemGetForegroundWindowColor",
+            "init": {
+              "repr": "get_foreground_window_color",
+              "kind": "literal",
+              "literal": {
+                "kind": "string",
+                "string": "get_foreground_window_color"
+              }
+            },
+            "location": {
+              "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/handlers/commands.ts",
+              "line": 19,
+              "col": 2,
+              "byteIndex": 696
+            }
+          },
+          {
+            "name": "SystemGetMonitors",
+            "init": {
+              "repr": "get_connected_monitors",
+              "kind": "literal",
+              "literal": {
+                "kind": "string",
+                "string": "get_connected_monitors"
+              }
+            },
+            "location": {
+              "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/handlers/commands.ts",
+              "line": 20,
+              "col": 2,
+              "byteIndex": 762
+            }
+          },
+          {
+            "name": "SystemGetColors",
+            "init": {
+              "repr": "get_system_colors",
+              "kind": "literal",
+              "literal": {
+                "kind": "string",
+                "string": "get_system_colors"
+              }
+            },
+            "location": {
+              "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/handlers/commands.ts",
+              "line": 21,
+              "col": 2,
+              "byteIndex": 810
+            }
+          },
+          {
+            "name": "SystemGetLanguages",
+            "init": {
+              "repr": "get_system_languages",
+              "kind": "literal",
+              "literal": {
+                "kind": "string",
+                "string": "get_system_languages"
+              }
+            },
+            "location": {
+              "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/handlers/commands.ts",
+              "line": 22,
+              "col": 2,
+              "byteIndex": 851
+            }
+          },
+          {
+            "name": "SystemSetKeyboardLayout",
+            "init": {
+              "repr": "set_system_keyboard_layout",
+              "kind": "literal",
+              "literal": {
+                "kind": "string",
+                "string": "set_system_keyboard_layout"
+              }
+            },
+            "location": {
+              "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/handlers/commands.ts",
+              "line": 23,
+              "col": 2,
+              "byteIndex": 898
+            }
+          },
+          {
+            "name": "SetAutoStart",
+            "init": {
+              "repr": "set_auto_start",
+              "kind": "literal",
+              "literal": {
+                "kind": "string",
+                "string": "set_auto_start"
+              }
+            },
+            "location": {
+              "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/handlers/commands.ts",
+              "line": 24,
+              "col": 2,
+              "byteIndex": 956
+            }
+          },
+          {
+            "name": "GetAutoStartStatus",
+            "init": {
+              "repr": "get_auto_start_status",
+              "kind": "literal",
+              "literal": {
+                "kind": "string",
+                "string": "get_auto_start_status"
+              }
+            },
+            "location": {
+              "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/handlers/commands.ts",
+              "line": 25,
+              "col": 2,
+              "byteIndex": 991
+            }
+          },
+          {
+            "name": "StateGetThemes",
+            "init": {
+              "repr": "state_get_themes",
+              "kind": "literal",
+              "literal": {
+                "kind": "string",
+                "string": "state_get_themes"
+              }
+            },
+            "location": {
+              "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/handlers/commands.ts",
+              "line": 26,
+              "col": 2,
+              "byteIndex": 1039
+            }
+          },
+          {
+            "name": "StateGetWegItems",
+            "init": {
+              "repr": "state_get_weg_items",
+              "kind": "literal",
+              "literal": {
+                "kind": "string",
+                "string": "state_get_weg_items"
+              }
+            },
+            "location": {
+              "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/handlers/commands.ts",
+              "line": 27,
+              "col": 2,
+              "byteIndex": 1078
+            }
+          },
+          {
+            "name": "StateWriteWegItems",
+            "init": {
+              "repr": "state_write_weg_items",
+              "kind": "literal",
+              "literal": {
+                "kind": "string",
+                "string": "state_write_weg_items"
+              }
+            },
+            "location": {
+              "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/handlers/commands.ts",
+              "line": 28,
+              "col": 2,
+              "byteIndex": 1122
+            }
+          },
+          {
+            "name": "StateGetToolbarItems",
+            "init": {
+              "repr": "state_get_toolbar_items",
+              "kind": "literal",
+              "literal": {
+                "kind": "string",
+                "string": "state_get_toolbar_items"
+              }
+            },
+            "location": {
+              "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/handlers/commands.ts",
+              "line": 29,
+              "col": 2,
+              "byteIndex": 1170
+            }
+          },
+          {
+            "name": "StateGetSettings",
+            "init": {
+              "repr": "state_get_settings",
+              "kind": "literal",
+              "literal": {
+                "kind": "string",
+                "string": "state_get_settings"
+              }
+            },
+            "location": {
+              "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/handlers/commands.ts",
+              "line": 30,
+              "col": 2,
+              "byteIndex": 1222
+            }
+          },
+          {
+            "name": "StateWriteSettings",
+            "init": {
+              "repr": "state_write_settings",
+              "kind": "literal",
+              "literal": {
+                "kind": "string",
+                "string": "state_write_settings"
+              }
+            },
+            "location": {
+              "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/handlers/commands.ts",
+              "line": 31,
+              "col": 2,
+              "byteIndex": 1265
+            }
+          },
+          {
+            "name": "StateGetDefaultSettings",
+            "init": {
+              "repr": "state_get_default_settings",
+              "kind": "literal",
+              "literal": {
+                "kind": "string",
+                "string": "state_get_default_settings"
+              }
+            },
+            "location": {
+              "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/handlers/commands.ts",
+              "line": 32,
+              "col": 2,
+              "byteIndex": 1312
+            }
+          },
+          {
+            "name": "StateGetDefaultMonitorSettings",
+            "init": {
+              "repr": "state_get_default_monitor_settings",
+              "kind": "literal",
+              "literal": {
+                "kind": "string",
+                "string": "state_get_default_monitor_settings"
+              }
+            },
+            "location": {
+              "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/handlers/commands.ts",
+              "line": 33,
+              "col": 2,
+              "byteIndex": 1370
+            }
+          },
+          {
+            "name": "StateGetSpecificAppsConfigurations",
+            "init": {
+              "repr": "state_get_specific_apps_configurations",
+              "kind": "literal",
+              "literal": {
+                "kind": "string",
+                "string": "state_get_specific_apps_configurations"
+              }
+            },
+            "location": {
+              "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/handlers/commands.ts",
+              "line": 34,
+              "col": 2,
+              "byteIndex": 1443
+            }
+          },
+          {
+            "name": "StateGetWallpaper",
+            "init": {
+              "repr": "state_get_wallpaper",
+              "kind": "literal",
+              "literal": {
+                "kind": "string",
+                "string": "state_get_wallpaper"
+              }
+            },
+            "location": {
+              "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/handlers/commands.ts",
+              "line": 35,
+              "col": 2,
+              "byteIndex": 1524
+            }
+          },
+          {
+            "name": "StateSetWallpaper",
+            "init": {
+              "repr": "state_set_wallpaper",
+              "kind": "literal",
+              "literal": {
+                "kind": "string",
+                "string": "state_set_wallpaper"
+              }
+            },
+            "location": {
+              "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/handlers/commands.ts",
+              "line": 36,
+              "col": 2,
+              "byteIndex": 1569
+            }
+          },
+          {
+            "name": "StateGetHistory",
+            "init": {
+              "repr": "state_get_history",
+              "kind": "literal",
+              "literal": {
+                "kind": "string",
+                "string": "state_get_history"
+              }
+            },
+            "location": {
+              "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/handlers/commands.ts",
+              "line": 37,
+              "col": 2,
+              "byteIndex": 1614
+            }
+          },
+          {
+            "name": "StateGetPlugins",
+            "init": {
+              "repr": "state_get_plugins",
+              "kind": "literal",
+              "literal": {
+                "kind": "string",
+                "string": "state_get_plugins"
+              }
+            },
+            "location": {
+              "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/handlers/commands.ts",
+              "line": 38,
+              "col": 2,
+              "byteIndex": 1655
+            }
+          },
+          {
+            "name": "StateGetWidgets",
+            "init": {
+              "repr": "state_get_widgets",
+              "kind": "literal",
+              "literal": {
+                "kind": "string",
+                "string": "state_get_widgets"
+              }
+            },
+            "location": {
+              "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/handlers/commands.ts",
+              "line": 39,
+              "col": 2,
+              "byteIndex": 1696
+            }
+          },
+          {
+            "name": "StateGetIconPacks",
+            "init": {
+              "repr": "state_get_icon_packs",
+              "kind": "literal",
+              "literal": {
+                "kind": "string",
+                "string": "state_get_icon_packs"
+              }
+            },
+            "location": {
+              "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/handlers/commands.ts",
+              "line": 40,
+              "col": 2,
+              "byteIndex": 1737
+            }
+          },
+          {
+            "name": "StateGetProfiles",
+            "init": {
+              "repr": "state_get_profiles",
+              "kind": "literal",
+              "literal": {
+                "kind": "string",
+                "string": "state_get_profiles"
+              }
+            },
+            "location": {
+              "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/handlers/commands.ts",
+              "line": 41,
+              "col": 2,
+              "byteIndex": 1783
+            }
+          },
+          {
+            "name": "StateDeleteCachedIcons",
+            "init": {
+              "repr": "state_delete_cached_icons",
+              "kind": "literal",
+              "literal": {
+                "kind": "string",
+                "string": "state_delete_cached_icons"
+              }
+            },
+            "location": {
+              "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/handlers/commands.ts",
+              "line": 42,
+              "col": 2,
+              "byteIndex": 1826
+            }
+          },
+          {
+            "name": "GetUser",
+            "init": {
+              "repr": "get_user",
+              "kind": "literal",
+              "literal": {
+                "kind": "string",
+                "string": "get_user"
+              }
+            },
+            "location": {
+              "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/handlers/commands.ts",
+              "line": 43,
+              "col": 2,
+              "byteIndex": 1882
+            }
+          },
+          {
+            "name": "GetUserFolderContent",
+            "init": {
+              "repr": "get_user_folder_content",
+              "kind": "literal",
+              "literal": {
+                "kind": "string",
+                "string": "get_user_folder_content"
+              }
+            },
+            "location": {
+              "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/handlers/commands.ts",
+              "line": 44,
+              "col": 2,
+              "byteIndex": 1906
+            }
+          },
+          {
+            "name": "SetUserFolderLimit",
+            "init": {
+              "repr": "set_user_folder_limit",
+              "kind": "literal",
+              "literal": {
+                "kind": "string",
+                "string": "set_user_folder_limit"
+              }
+            },
+            "location": {
+              "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/handlers/commands.ts",
+              "line": 45,
+              "col": 2,
+              "byteIndex": 1958
+            }
+          },
+          {
+            "name": "GetConnectedBluetoothDevices",
+            "init": {
+              "repr": "get_connected_bluetooth_devices",
+              "kind": "literal",
+              "literal": {
+                "kind": "string",
+                "string": "get_connected_bluetooth_devices"
+              }
+            },
+            "location": {
+              "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/handlers/commands.ts",
+              "line": 46,
+              "col": 2,
+              "byteIndex": 2006
+            }
+          },
+          {
+            "name": "StartBluetoothScanning",
+            "init": {
+              "repr": "start_bluetooth_scanning",
+              "kind": "literal",
+              "literal": {
+                "kind": "string",
+                "string": "start_bluetooth_scanning"
+              }
+            },
+            "location": {
+              "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/handlers/commands.ts",
+              "line": 47,
+              "col": 2,
+              "byteIndex": 2074
+            }
+          },
+          {
+            "name": "StopBluetoothScanning",
+            "init": {
+              "repr": "stop_bluetooth_scanning",
+              "kind": "literal",
+              "literal": {
+                "kind": "string",
+                "string": "stop_bluetooth_scanning"
+              }
+            },
+            "location": {
+              "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/handlers/commands.ts",
+              "line": 48,
+              "col": 2,
+              "byteIndex": 2129
+            }
+          },
+          {
+            "name": "PairBluetoothDevice",
+            "init": {
+              "repr": "pair_bluetooth_device",
+              "kind": "literal",
+              "literal": {
+                "kind": "string",
+                "string": "pair_bluetooth_device"
+              }
+            },
+            "location": {
+              "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/handlers/commands.ts",
+              "line": 49,
+              "col": 2,
+              "byteIndex": 2182
+            }
+          },
+          {
+            "name": "ForgetBluetoothDevice",
+            "init": {
+              "repr": "forget_bluetooth_device",
+              "kind": "literal",
+              "literal": {
+                "kind": "string",
+                "string": "forget_bluetooth_device"
+              }
+            },
+            "location": {
+              "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/handlers/commands.ts",
+              "line": 50,
+              "col": 2,
+              "byteIndex": 2231
+            }
+          },
+          {
+            "name": "ConfirmBluetoothDevicePair",
+            "init": {
+              "repr": "confirm_bluetooth_device_pair",
+              "kind": "literal",
+              "literal": {
+                "kind": "string",
+                "string": "confirm_bluetooth_device_pair"
+              }
+            },
+            "location": {
+              "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/handlers/commands.ts",
+              "line": 51,
+              "col": 2,
+              "byteIndex": 2284
+            }
+          },
+          {
+            "name": "GetMediaDevices",
+            "init": {
+              "repr": "get_media_devices",
+              "kind": "literal",
+              "literal": {
+                "kind": "string",
+                "string": "get_media_devices"
+              }
+            },
+            "location": {
+              "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/handlers/commands.ts",
+              "line": 52,
+              "col": 2,
+              "byteIndex": 2348
+            }
+          },
+          {
+            "name": "GetMediaSessions",
+            "init": {
+              "repr": "get_media_sessions",
+              "kind": "literal",
+              "literal": {
+                "kind": "string",
+                "string": "get_media_sessions"
+              }
+            },
+            "location": {
+              "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/handlers/commands.ts",
+              "line": 53,
+              "col": 2,
+              "byteIndex": 2389
+            }
+          },
+          {
+            "name": "MediaPrev",
+            "init": {
+              "repr": "media_prev",
+              "kind": "literal",
+              "literal": {
+                "kind": "string",
+                "string": "media_prev"
+              }
+            },
+            "location": {
+              "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/handlers/commands.ts",
+              "line": 54,
+              "col": 2,
+              "byteIndex": 2432
+            }
+          },
+          {
+            "name": "MediaTogglePlayPause",
+            "init": {
+              "repr": "media_toggle_play_pause",
+              "kind": "literal",
+              "literal": {
+                "kind": "string",
+                "string": "media_toggle_play_pause"
+              }
+            },
+            "location": {
+              "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/handlers/commands.ts",
+              "line": 55,
+              "col": 2,
+              "byteIndex": 2460
+            }
+          },
+          {
+            "name": "MediaNext",
+            "init": {
+              "repr": "media_next",
+              "kind": "literal",
+              "literal": {
+                "kind": "string",
+                "string": "media_next"
+              }
+            },
+            "location": {
+              "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/handlers/commands.ts",
+              "line": 56,
+              "col": 2,
+              "byteIndex": 2512
+            }
+          },
+          {
+            "name": "SetVolumeLevel",
+            "init": {
+              "repr": "set_volume_level",
+              "kind": "literal",
+              "literal": {
+                "kind": "string",
+                "string": "set_volume_level"
+              }
+            },
+            "location": {
+              "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/handlers/commands.ts",
+              "line": 57,
+              "col": 2,
+              "byteIndex": 2540
+            }
+          },
+          {
+            "name": "MediaToggleMute",
+            "init": {
+              "repr": "media_toggle_mute",
+              "kind": "literal",
+              "literal": {
+                "kind": "string",
+                "string": "media_toggle_mute"
+              }
+            },
+            "location": {
+              "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/handlers/commands.ts",
+              "line": 58,
+              "col": 2,
+              "byteIndex": 2579
+            }
+          },
+          {
+            "name": "MediaSetDefaultDevice",
+            "init": {
+              "repr": "media_set_default_device",
+              "kind": "literal",
+              "literal": {
+                "kind": "string",
+                "string": "media_set_default_device"
+              }
+            },
+            "location": {
+              "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/handlers/commands.ts",
+              "line": 59,
+              "col": 2,
+              "byteIndex": 2620
+            }
+          },
+          {
+            "name": "GetMainMonitorBrightness",
+            "init": {
+              "repr": "get_main_monitor_brightness",
+              "kind": "literal",
+              "literal": {
+                "kind": "string",
+                "string": "get_main_monitor_brightness"
+              }
+            },
+            "location": {
+              "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/handlers/commands.ts",
+              "line": 60,
+              "col": 2,
+              "byteIndex": 2674
+            }
+          },
+          {
+            "name": "SetMainMonitorBrightness",
+            "init": {
+              "repr": "set_main_monitor_brightness",
+              "kind": "literal",
+              "literal": {
+                "kind": "string",
+                "string": "set_main_monitor_brightness"
+              }
+            },
+            "location": {
+              "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/handlers/commands.ts",
+              "line": 61,
+              "col": 2,
+              "byteIndex": 2734
+            }
+          },
+          {
+            "name": "GetPowerStatus",
+            "init": {
+              "repr": "get_power_status",
+              "kind": "literal",
+              "literal": {
+                "kind": "string",
+                "string": "get_power_status"
+              }
+            },
+            "location": {
+              "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/handlers/commands.ts",
+              "line": 62,
+              "col": 2,
+              "byteIndex": 2794
+            }
+          },
+          {
+            "name": "GetPowerMode",
+            "init": {
+              "repr": "get_power_mode",
+              "kind": "literal",
+              "literal": {
+                "kind": "string",
+                "string": "get_power_mode"
+              }
+            },
+            "location": {
+              "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/handlers/commands.ts",
+              "line": 63,
+              "col": 2,
+              "byteIndex": 2833
+            }
+          },
+          {
+            "name": "GetBatteries",
+            "init": {
+              "repr": "get_batteries",
+              "kind": "literal",
+              "literal": {
+                "kind": "string",
+                "string": "get_batteries"
+              }
+            },
+            "location": {
+              "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/handlers/commands.ts",
+              "line": 64,
+              "col": 2,
+              "byteIndex": 2868
+            }
+          },
+          {
+            "name": "LogOut",
+            "init": {
+              "repr": "log_out",
+              "kind": "literal",
+              "literal": {
+                "kind": "string",
+                "string": "log_out"
+              }
+            },
+            "location": {
+              "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/handlers/commands.ts",
+              "line": 65,
+              "col": 2,
+              "byteIndex": 2902
+            }
+          },
+          {
+            "name": "Suspend",
+            "init": {
+              "repr": "suspend",
+              "kind": "literal",
+              "literal": {
+                "kind": "string",
+                "string": "suspend"
+              }
+            },
+            "location": {
+              "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/handlers/commands.ts",
+              "line": 66,
+              "col": 2,
+              "byteIndex": 2924
+            }
+          },
+          {
+            "name": "Hibernate",
+            "init": {
+              "repr": "hibernate",
+              "kind": "literal",
+              "literal": {
+                "kind": "string",
+                "string": "hibernate"
+              }
+            },
+            "location": {
+              "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/handlers/commands.ts",
+              "line": 67,
+              "col": 2,
+              "byteIndex": 2947
+            }
+          },
+          {
+            "name": "Restart",
+            "init": {
+              "repr": "restart",
+              "kind": "literal",
+              "literal": {
+                "kind": "string",
+                "string": "restart"
+              }
+            },
+            "location": {
+              "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/handlers/commands.ts",
+              "line": 68,
+              "col": 2,
+              "byteIndex": 2974
+            }
+          },
+          {
+            "name": "Shutdown",
+            "init": {
+              "repr": "shutdown",
+              "kind": "literal",
+              "literal": {
+                "kind": "string",
+                "string": "shutdown"
+              }
+            },
+            "location": {
+              "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/handlers/commands.ts",
+              "line": 69,
+              "col": 2,
+              "byteIndex": 2997
+            }
+          },
+          {
+            "name": "Lock",
+            "init": {
+              "repr": "lock",
+              "kind": "literal",
+              "literal": {
+                "kind": "string",
+                "string": "lock"
+              }
+            },
+            "location": {
+              "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/handlers/commands.ts",
+              "line": 70,
+              "col": 2,
+              "byteIndex": 3022
+            }
+          },
+          {
+            "name": "WegGetItemsForWidget",
+            "init": {
+              "repr": "weg_get_items_for_widget",
+              "kind": "literal",
+              "literal": {
+                "kind": "string",
+                "string": "weg_get_items_for_widget"
+              }
+            },
+            "location": {
+              "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/handlers/commands.ts",
+              "line": 71,
+              "col": 2,
+              "byteIndex": 3039
+            }
+          },
+          {
+            "name": "WegCloseApp",
+            "init": {
+              "repr": "weg_close_app",
+              "kind": "literal",
+              "literal": {
+                "kind": "string",
+                "string": "weg_close_app"
+              }
+            },
+            "location": {
+              "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/handlers/commands.ts",
+              "line": 72,
+              "col": 2,
+              "byteIndex": 3092
+            }
+          },
+          {
+            "name": "WegKillApp",
+            "init": {
+              "repr": "weg_kill_app",
+              "kind": "literal",
+              "literal": {
+                "kind": "string",
+                "string": "weg_kill_app"
+              }
+            },
+            "location": {
+              "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/handlers/commands.ts",
+              "line": 73,
+              "col": 2,
+              "byteIndex": 3125
+            }
+          },
+          {
+            "name": "WegToggleWindowState",
+            "init": {
+              "repr": "weg_toggle_window_state",
+              "kind": "literal",
+              "literal": {
+                "kind": "string",
+                "string": "weg_toggle_window_state"
+              }
+            },
+            "location": {
+              "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/handlers/commands.ts",
+              "line": 74,
+              "col": 2,
+              "byteIndex": 3156
+            }
+          },
+          {
+            "name": "WegRequestUpdatePreviews",
+            "init": {
+              "repr": "weg_request_update_previews",
+              "kind": "literal",
+              "literal": {
+                "kind": "string",
+                "string": "weg_request_update_previews"
+              }
+            },
+            "location": {
+              "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/handlers/commands.ts",
+              "line": 75,
+              "col": 2,
+              "byteIndex": 3208
+            }
+          },
+          {
+            "name": "WegPinItem",
+            "init": {
+              "repr": "weg_pin_item",
+              "kind": "literal",
+              "literal": {
+                "kind": "string",
+                "string": "weg_pin_item"
+              }
+            },
+            "location": {
+              "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/handlers/commands.ts",
+              "line": 76,
+              "col": 2,
+              "byteIndex": 3268
+            }
+          },
+          {
+            "name": "SetWindowPosition",
+            "init": {
+              "repr": "set_window_position",
+              "kind": "literal",
+              "literal": {
+                "kind": "string",
+                "string": "set_window_position"
+              }
+            },
+            "location": {
+              "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/handlers/commands.ts",
+              "line": 77,
+              "col": 2,
+              "byteIndex": 3299
+            }
+          },
+          {
+            "name": "RequestFocus",
+            "init": {
+              "repr": "request_focus",
+              "kind": "literal",
+              "literal": {
+                "kind": "string",
+                "string": "request_focus"
+              }
+            },
+            "location": {
+              "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/handlers/commands.ts",
+              "line": 78,
+              "col": 2,
+              "byteIndex": 3344
+            }
+          },
+          {
+            "name": "LauncherGetApps",
+            "init": {
+              "repr": "launcher_get_apps",
+              "kind": "literal",
+              "literal": {
+                "kind": "string",
+                "string": "launcher_get_apps"
+              }
+            },
+            "location": {
+              "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/handlers/commands.ts",
+              "line": 79,
+              "col": 2,
+              "byteIndex": 3378
+            }
+          },
+          {
+            "name": "GetPopupConfig",
+            "init": {
+              "repr": "get_popup_config",
+              "kind": "literal",
+              "literal": {
+                "kind": "string",
+                "string": "get_popup_config"
+              }
+            },
+            "location": {
+              "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/handlers/commands.ts",
+              "line": 80,
+              "col": 2,
+              "byteIndex": 3419
+            }
+          },
+          {
+            "name": "GetTrayIcons",
+            "init": {
+              "repr": "get_tray_icons",
+              "kind": "literal",
+              "literal": {
+                "kind": "string",
+                "string": "get_tray_icons"
+              }
+            },
+            "location": {
+              "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/handlers/commands.ts",
+              "line": 81,
+              "col": 2,
+              "byteIndex": 3458
+            }
+          },
+          {
+            "name": "OnClickTrayIcon",
+            "init": {
+              "repr": "on_click_tray_icon",
+              "kind": "literal",
+              "literal": {
+                "kind": "string",
+                "string": "on_click_tray_icon"
+              }
+            },
+            "location": {
+              "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/handlers/commands.ts",
+              "line": 82,
+              "col": 2,
+              "byteIndex": 3493
+            }
+          },
+          {
+            "name": "OnContextMenuTrayIcon",
+            "init": {
+              "repr": "on_context_menu_tray_icon",
+              "kind": "literal",
+              "literal": {
+                "kind": "string",
+                "string": "on_context_menu_tray_icon"
+              }
+            },
+            "location": {
+              "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/handlers/commands.ts",
+              "line": 83,
+              "col": 2,
+              "byteIndex": 3535
+            }
+          },
+          {
+            "name": "WlanGetProfiles",
+            "init": {
+              "repr": "wlan_get_profiles",
+              "kind": "literal",
+              "literal": {
+                "kind": "string",
+                "string": "wlan_get_profiles"
+              }
+            },
+            "location": {
+              "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/handlers/commands.ts",
+              "line": 84,
+              "col": 2,
+              "byteIndex": 3590
+            }
+          },
+          {
+            "name": "WlanStartScanning",
+            "init": {
+              "repr": "wlan_start_scanning",
+              "kind": "literal",
+              "literal": {
+                "kind": "string",
+                "string": "wlan_start_scanning"
+              }
+            },
+            "location": {
+              "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/handlers/commands.ts",
+              "line": 85,
+              "col": 2,
+              "byteIndex": 3631
+            }
+          },
+          {
+            "name": "WlanStopScanning",
+            "init": {
+              "repr": "wlan_stop_scanning",
+              "kind": "literal",
+              "literal": {
+                "kind": "string",
+                "string": "wlan_stop_scanning"
+              }
+            },
+            "location": {
+              "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/handlers/commands.ts",
+              "line": 86,
+              "col": 2,
+              "byteIndex": 3676
+            }
+          },
+          {
+            "name": "WlanConnect",
+            "init": {
+              "repr": "wlan_connect",
+              "kind": "literal",
+              "literal": {
+                "kind": "string",
+                "string": "wlan_connect"
+              }
+            },
+            "location": {
+              "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/handlers/commands.ts",
+              "line": 87,
+              "col": 2,
+              "byteIndex": 3719
+            }
+          },
+          {
+            "name": "WlanDisconnect",
+            "init": {
+              "repr": "wlan_disconnect",
+              "kind": "literal",
+              "literal": {
+                "kind": "string",
+                "string": "wlan_disconnect"
+              }
+            },
+            "location": {
+              "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/handlers/commands.ts",
+              "line": 88,
+              "col": 2,
+              "byteIndex": 3751
+            }
+          },
+          {
+            "name": "GetNotifications",
+            "init": {
+              "repr": "get_notifications",
+              "kind": "literal",
+              "literal": {
+                "kind": "string",
+                "string": "get_notifications"
+              }
+            },
+            "location": {
+              "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/handlers/commands.ts",
+              "line": 89,
+              "col": 2,
+              "byteIndex": 3789
+            }
+          },
+          {
+            "name": "NotificationsClose",
+            "init": {
+              "repr": "notifications_close",
+              "kind": "literal",
+              "literal": {
+                "kind": "string",
+                "string": "notifications_close"
+              }
+            },
+            "location": {
+              "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/handlers/commands.ts",
+              "line": 90,
+              "col": 2,
+              "byteIndex": 3831
+            }
+          },
+          {
+            "name": "NotificationsCloseAll",
+            "init": {
+              "repr": "notifications_close_all",
+              "kind": "literal",
+              "literal": {
+                "kind": "string",
+                "string": "notifications_close_all"
+              }
+            },
+            "location": {
+              "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/handlers/commands.ts",
+              "line": 91,
+              "col": 2,
+              "byteIndex": 3877
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "SeelenEvent",
+      "isDefault": false,
+      "location": {
+        "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/handlers/events.ts",
+        "line": 2,
+        "col": 0,
+        "byteIndex": 67
+      },
+      "declarationKind": "export",
+      "kind": "enum",
+      "enumDef": {
+        "members": [
+          {
+            "name": "WorkspacesChanged",
+            "init": {
+              "repr": "workspaces-changed",
+              "kind": "literal",
+              "literal": {
+                "kind": "string",
+                "string": "workspaces-changed"
+              }
+            },
+            "location": {
+              "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/handlers/events.ts",
+              "line": 3,
+              "col": 2,
+              "byteIndex": 95
+            }
+          },
+          {
+            "name": "ActiveWorkspaceChanged",
+            "init": {
+              "repr": "active-workspace-changed",
+              "kind": "literal",
+              "literal": {
+                "kind": "string",
+                "string": "active-workspace-changed"
+              }
+            },
+            "location": {
+              "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/handlers/events.ts",
+              "line": 4,
+              "col": 2,
+              "byteIndex": 139
+            }
+          },
+          {
+            "name": "GlobalFocusChanged",
+            "init": {
+              "repr": "global-focus-changed",
+              "kind": "literal",
+              "literal": {
+                "kind": "string",
+                "string": "global-focus-changed"
+              }
+            },
+            "location": {
+              "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/handlers/events.ts",
+              "line": 5,
+              "col": 2,
+              "byteIndex": 194
+            }
+          },
+          {
+            "name": "GlobalMouseMove",
+            "init": {
+              "repr": "global-mouse-move",
+              "kind": "literal",
+              "literal": {
+                "kind": "string",
+                "string": "global-mouse-move"
+              }
+            },
+            "location": {
+              "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/handlers/events.ts",
+              "line": 6,
+              "col": 2,
+              "byteIndex": 241
+            }
+          },
+          {
+            "name": "HandleLayeredHitboxes",
+            "init": {
+              "repr": "handle-layered",
+              "kind": "literal",
+              "literal": {
+                "kind": "string",
+                "string": "handle-layered"
+              }
+            },
+            "location": {
+              "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/handlers/events.ts",
+              "line": 7,
+              "col": 2,
+              "byteIndex": 282
+            }
+          },
+          {
+            "name": "SystemMonitorsChanged",
+            "init": {
+              "repr": "system::monitors-changed",
+              "kind": "literal",
+              "literal": {
+                "kind": "string",
+                "string": "system::monitors-changed"
+              }
+            },
+            "location": {
+              "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/handlers/events.ts",
+              "line": 8,
+              "col": 2,
+              "byteIndex": 326
+            }
+          },
+          {
+            "name": "SystemLanguagesChanged",
+            "init": {
+              "repr": "system::languages-changed",
+              "kind": "literal",
+              "literal": {
+                "kind": "string",
+                "string": "system::languages-changed"
+              }
+            },
+            "location": {
+              "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/handlers/events.ts",
+              "line": 9,
+              "col": 2,
+              "byteIndex": 380
+            }
+          },
+          {
+            "name": "UserChanged",
+            "init": {
+              "repr": "user-changed",
+              "kind": "literal",
+              "literal": {
+                "kind": "string",
+                "string": "user-changed"
+              }
+            },
+            "location": {
+              "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/handlers/events.ts",
+              "line": 10,
+              "col": 2,
+              "byteIndex": 436
+            }
+          },
+          {
+            "name": "UserFolderChanged",
+            "init": {
+              "repr": "user-folder-changed",
+              "kind": "literal",
+              "literal": {
+                "kind": "string",
+                "string": "user-folder-changed"
+              }
+            },
+            "location": {
+              "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/handlers/events.ts",
+              "line": 11,
+              "col": 2,
+              "byteIndex": 468
+            }
+          },
+          {
+            "name": "BluetoothDevicesChanged",
+            "init": {
+              "repr": "bluetooth-devices-changed",
+              "kind": "literal",
+              "literal": {
+                "kind": "string",
+                "string": "bluetooth-devices-changed"
+              }
+            },
+            "location": {
+              "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/handlers/events.ts",
+              "line": 12,
+              "col": 2,
+              "byteIndex": 513
+            }
+          },
+          {
+            "name": "BluetoothDiscoveredDevicesChanged",
+            "init": {
+              "repr": "bluetooth-discovered-devices-changed",
+              "kind": "literal",
+              "literal": {
+                "kind": "string",
+                "string": "bluetooth-discovered-devices-changed"
+              }
+            },
+            "location": {
+              "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/handlers/events.ts",
+              "line": 13,
+              "col": 2,
+              "byteIndex": 570
+            }
+          },
+          {
+            "name": "BluetoothPairShowPin",
+            "init": {
+              "repr": "bluetooth-pair-show-pin",
+              "kind": "literal",
+              "literal": {
+                "kind": "string",
+                "string": "bluetooth-pair-show-pin"
+              }
+            },
+            "location": {
+              "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/handlers/events.ts",
+              "line": 14,
+              "col": 2,
+              "byteIndex": 648
+            }
+          },
+          {
+            "name": "BluetoothPairRequestPin",
+            "init": {
+              "repr": "bluetooth-pair-request-pin",
+              "kind": "literal",
+              "literal": {
+                "kind": "string",
+                "string": "bluetooth-pair-request-pin"
+              }
+            },
+            "location": {
+              "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/handlers/events.ts",
+              "line": 15,
+              "col": 2,
+              "byteIndex": 700
+            }
+          },
+          {
+            "name": "MediaSessions",
+            "init": {
+              "repr": "media-sessions",
+              "kind": "literal",
+              "literal": {
+                "kind": "string",
+                "string": "media-sessions"
+              }
+            },
+            "location": {
+              "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/handlers/events.ts",
+              "line": 16,
+              "col": 2,
+              "byteIndex": 758
+            }
+          },
+          {
+            "name": "MediaInputs",
+            "init": {
+              "repr": "media-inputs",
+              "kind": "literal",
+              "literal": {
+                "kind": "string",
+                "string": "media-inputs"
+              }
+            },
+            "location": {
+              "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/handlers/events.ts",
+              "line": 17,
+              "col": 2,
+              "byteIndex": 794
+            }
+          },
+          {
+            "name": "MediaOutputs",
+            "init": {
+              "repr": "media-outputs",
+              "kind": "literal",
+              "literal": {
+                "kind": "string",
+                "string": "media-outputs"
+              }
+            },
+            "location": {
+              "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/handlers/events.ts",
+              "line": 18,
+              "col": 2,
+              "byteIndex": 826
+            }
+          },
+          {
+            "name": "NetworkDefaultLocalIp",
+            "init": {
+              "repr": "network-default-local-ip",
+              "kind": "literal",
+              "literal": {
+                "kind": "string",
+                "string": "network-default-local-ip"
+              }
+            },
+            "location": {
+              "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/handlers/events.ts",
+              "line": 19,
+              "col": 2,
+              "byteIndex": 860
+            }
+          },
+          {
+            "name": "NetworkAdapters",
+            "init": {
+              "repr": "network-adapters",
+              "kind": "literal",
+              "literal": {
+                "kind": "string",
+                "string": "network-adapters"
+              }
+            },
+            "location": {
+              "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/handlers/events.ts",
+              "line": 20,
+              "col": 2,
+              "byteIndex": 914
+            }
+          },
+          {
+            "name": "NetworkInternetConnection",
+            "init": {
+              "repr": "network-internet-connection",
+              "kind": "literal",
+              "literal": {
+                "kind": "string",
+                "string": "network-internet-connection"
+              }
+            },
+            "location": {
+              "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/handlers/events.ts",
+              "line": 21,
+              "col": 2,
+              "byteIndex": 954
+            }
+          },
+          {
+            "name": "NetworkWlanScanned",
+            "init": {
+              "repr": "wlan-scanned",
+              "kind": "literal",
+              "literal": {
+                "kind": "string",
+                "string": "wlan-scanned"
+              }
+            },
+            "location": {
+              "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/handlers/events.ts",
+              "line": 22,
+              "col": 2,
+              "byteIndex": 1015
+            }
+          },
+          {
+            "name": "Notifications",
+            "init": {
+              "repr": "notifications",
+              "kind": "literal",
+              "literal": {
+                "kind": "string",
+                "string": "notifications"
+              }
+            },
+            "location": {
+              "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/handlers/events.ts",
+              "line": 23,
+              "col": 2,
+              "byteIndex": 1054
+            }
+          },
+          {
+            "name": "PowerStatus",
+            "init": {
+              "repr": "power-status",
+              "kind": "literal",
+              "literal": {
+                "kind": "string",
+                "string": "power-status"
+              }
+            },
+            "location": {
+              "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/handlers/events.ts",
+              "line": 24,
+              "col": 2,
+              "byteIndex": 1089
+            }
+          },
+          {
+            "name": "PowerMode",
+            "init": {
+              "repr": "power-mode",
+              "kind": "literal",
+              "literal": {
+                "kind": "string",
+                "string": "power-mode"
+              }
+            },
+            "location": {
+              "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/handlers/events.ts",
+              "line": 25,
+              "col": 2,
+              "byteIndex": 1121
+            }
+          },
+          {
+            "name": "BatteriesStatus",
+            "init": {
+              "repr": "batteries-status",
+              "kind": "literal",
+              "literal": {
+                "kind": "string",
+                "string": "batteries-status"
+              }
+            },
+            "location": {
+              "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/handlers/events.ts",
+              "line": 26,
+              "col": 2,
+              "byteIndex": 1149
+            }
+          },
+          {
+            "name": "ColorsChanged",
+            "init": {
+              "repr": "colors-changed",
+              "kind": "literal",
+              "literal": {
+                "kind": "string",
+                "string": "colors-changed"
+              }
+            },
+            "location": {
+              "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/handlers/events.ts",
+              "line": 27,
+              "col": 2,
+              "byteIndex": 1189
+            }
+          },
+          {
+            "name": "TrayInfo",
+            "init": {
+              "repr": "tray-info",
+              "kind": "literal",
+              "literal": {
+                "kind": "string",
+                "string": "tray-info"
+              }
+            },
+            "location": {
+              "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/handlers/events.ts",
+              "line": 28,
+              "col": 2,
+              "byteIndex": 1225
+            }
+          },
+          {
+            "name": "ToolbarOverlaped",
+            "init": {
+              "repr": "set-auto-hide",
+              "kind": "literal",
+              "literal": {
+                "kind": "string",
+                "string": "set-auto-hide"
+              }
+            },
+            "location": {
+              "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/handlers/events.ts",
+              "line": 29,
+              "col": 2,
+              "byteIndex": 1251
+            }
+          },
+          {
+            "name": "WegOverlaped",
+            "init": {
+              "repr": "set-auto-hide",
+              "kind": "literal",
+              "literal": {
+                "kind": "string",
+                "string": "set-auto-hide"
+              }
+            },
+            "location": {
+              "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/handlers/events.ts",
+              "line": 30,
+              "col": 2,
+              "byteIndex": 1289
+            }
+          },
+          {
+            "name": "WegInstanceChanged",
+            "init": {
+              "repr": "weg::instance-changed",
+              "kind": "literal",
+              "literal": {
+                "kind": "string",
+                "string": "weg::instance-changed"
+              }
+            },
+            "location": {
+              "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/handlers/events.ts",
+              "line": 31,
+              "col": 2,
+              "byteIndex": 1323
+            }
+          },
+          {
+            "name": "WMSetReservation",
+            "init": {
+              "repr": "set-reservation",
+              "kind": "literal",
+              "literal": {
+                "kind": "string",
+                "string": "set-reservation"
+              }
+            },
+            "location": {
+              "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/handlers/events.ts",
+              "line": 32,
+              "col": 2,
+              "byteIndex": 1371
+            }
+          },
+          {
+            "name": "WMForceRetiling",
+            "init": {
+              "repr": "wm-force-retiling",
+              "kind": "literal",
+              "literal": {
+                "kind": "string",
+                "string": "wm-force-retiling"
+              }
+            },
+            "location": {
+              "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/handlers/events.ts",
+              "line": 33,
+              "col": 2,
+              "byteIndex": 1411
+            }
+          },
+          {
+            "name": "WMSetLayout",
+            "init": {
+              "repr": "wm-set-layout",
+              "kind": "literal",
+              "literal": {
+                "kind": "string",
+                "string": "wm-set-layout"
+              }
+            },
+            "location": {
+              "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/handlers/events.ts",
+              "line": 34,
+              "col": 2,
+              "byteIndex": 1452
+            }
+          },
+          {
+            "name": "WMSetOverlayVisibility",
+            "init": {
+              "repr": "wm-set-overlay-visibility",
+              "kind": "literal",
+              "literal": {
+                "kind": "string",
+                "string": "wm-set-overlay-visibility"
+              }
+            },
+            "location": {
+              "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/handlers/events.ts",
+              "line": 35,
+              "col": 2,
+              "byteIndex": 1485
+            }
+          },
+          {
+            "name": "WMSetActiveWindow",
+            "init": {
+              "repr": "wm-set-active-window",
+              "kind": "literal",
+              "literal": {
+                "kind": "string",
+                "string": "wm-set-active-window"
+              }
+            },
+            "location": {
+              "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/handlers/events.ts",
+              "line": 36,
+              "col": 2,
+              "byteIndex": 1541
+            }
+          },
+          {
+            "name": "WallStop",
+            "init": {
+              "repr": "wall-stop",
+              "kind": "literal",
+              "literal": {
+                "kind": "string",
+                "string": "wall-stop"
+              }
+            },
+            "location": {
+              "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/handlers/events.ts",
+              "line": 37,
+              "col": 2,
+              "byteIndex": 1587
+            }
+          },
+          {
+            "name": "StateSettingsChanged",
+            "init": {
+              "repr": "settings-changed",
+              "kind": "literal",
+              "literal": {
+                "kind": "string",
+                "string": "settings-changed"
+              }
+            },
+            "location": {
+              "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/handlers/events.ts",
+              "line": 38,
+              "col": 2,
+              "byteIndex": 1613
+            }
+          },
+          {
+            "name": "StateWegItemsChanged",
+            "init": {
+              "repr": "weg-items",
+              "kind": "literal",
+              "literal": {
+                "kind": "string",
+                "string": "weg-items"
+              }
+            },
+            "location": {
+              "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/handlers/events.ts",
+              "line": 39,
+              "col": 2,
+              "byteIndex": 1658
+            }
+          },
+          {
+            "name": "StateToolbarItemsChanged",
+            "init": {
+              "repr": "toolbar-items",
+              "kind": "literal",
+              "literal": {
+                "kind": "string",
+                "string": "toolbar-items"
+              }
+            },
+            "location": {
+              "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/handlers/events.ts",
+              "line": 40,
+              "col": 2,
+              "byteIndex": 1696
+            }
+          },
+          {
+            "name": "StateThemesChanged",
+            "init": {
+              "repr": "themes",
+              "kind": "literal",
+              "literal": {
+                "kind": "string",
+                "string": "themes"
+              }
+            },
+            "location": {
+              "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/handlers/events.ts",
+              "line": 41,
+              "col": 2,
+              "byteIndex": 1742
+            }
+          },
+          {
+            "name": "StateSettingsByAppChanged",
+            "init": {
+              "repr": "settings-by-app",
+              "kind": "literal",
+              "literal": {
+                "kind": "string",
+                "string": "settings-by-app"
+              }
+            },
+            "location": {
+              "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/handlers/events.ts",
+              "line": 42,
+              "col": 2,
+              "byteIndex": 1775
+            }
+          },
+          {
+            "name": "StateHistoryChanged",
+            "init": {
+              "repr": "history",
+              "kind": "literal",
+              "literal": {
+                "kind": "string",
+                "string": "history"
+              }
+            },
+            "location": {
+              "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/handlers/events.ts",
+              "line": 43,
+              "col": 2,
+              "byteIndex": 1824
+            }
+          },
+          {
+            "name": "StateIconPacksChanged",
+            "init": {
+              "repr": "icon-packs",
+              "kind": "literal",
+              "literal": {
+                "kind": "string",
+                "string": "icon-packs"
+              }
+            },
+            "location": {
+              "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/handlers/events.ts",
+              "line": 44,
+              "col": 2,
+              "byteIndex": 1859
+            }
+          },
+          {
+            "name": "StatePluginsChanged",
+            "init": {
+              "repr": "plugins-changed",
+              "kind": "literal",
+              "literal": {
+                "kind": "string",
+                "string": "plugins-changed"
+              }
+            },
+            "location": {
+              "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/handlers/events.ts",
+              "line": 45,
+              "col": 2,
+              "byteIndex": 1899
+            }
+          },
+          {
+            "name": "StateWidgetsChanged",
+            "init": {
+              "repr": "widgets-changed",
+              "kind": "literal",
+              "literal": {
+                "kind": "string",
+                "string": "widgets-changed"
+              }
+            },
+            "location": {
+              "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/handlers/events.ts",
+              "line": 46,
+              "col": 2,
+              "byteIndex": 1942
+            }
+          },
+          {
+            "name": "StateProfilesChanged",
+            "init": {
+              "repr": "profiles-changed",
+              "kind": "literal",
+              "literal": {
+                "kind": "string",
+                "string": "profiles-changed"
+              }
+            },
+            "location": {
+              "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/handlers/events.ts",
+              "line": 47,
+              "col": 2,
+              "byteIndex": 1985
+            }
+          }
+        ]
+      }
+    },
+    {
       "name": "subscribe",
       "isDefault": false,
       "location": {
