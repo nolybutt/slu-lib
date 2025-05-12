@@ -1,3 +1,5 @@
+await Deno.mkdir('./src/types', { recursive: true });
+
 const bindingsPath = await Deno.realPath('./src/types');
 const libPath = await Deno.realPath('./src/lib.ts');
 
