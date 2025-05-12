@@ -62,11 +62,11 @@ macro_rules! slu_commands_declaration {
             enum SeelenCommandArgument {
                 $(
                     #[allow(non_snake_case)]
-                    $fn_name(__switch! {
+                    $fn_name(Box<__switch! {
                         if { $($args)* }
                         do { [<SeelenCommand $key Args>] }
                         else { () }
-                    }),
+                    }>),
                 )*
             }
         }
@@ -78,11 +78,11 @@ macro_rules! slu_commands_declaration {
         #[cfg(test)]
         enum SeelenCommandReturn {
             $(
-                $fn_name(__switch! {
+                $fn_name(Box<__switch! {
                     if { $($return_type)? }
                     do { $($return_type)? }
                     else { () }
-                }),
+                }>),
             )*
         }
 
