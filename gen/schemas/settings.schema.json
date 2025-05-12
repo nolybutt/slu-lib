@@ -384,7 +384,9 @@
       "type": "object",
       "additionalProperties": {
         "type": "object",
-        "additionalProperties": true
+        "additionalProperties": {
+          "type": "string"
+        }
       }
     },
     "byWidget": {

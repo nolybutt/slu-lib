@@ -674,7 +674,7 @@ pub struct Settings {
     ///     }
     /// }
     /// ```
-    pub by_theme: HashMap<ThemeId, HashMap<String, serde_json::Value>>,
+    pub by_theme: HashMap<ThemeId, HashMap<String, String>>,
 }
 
 impl Default for Settings {
