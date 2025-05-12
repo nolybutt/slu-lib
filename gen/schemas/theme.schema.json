@@ -203,7 +203,7 @@
             "syntax": {
               "type": "string",
               "enum": [
-                "String"
+                "<string>"
               ]
             }
           }

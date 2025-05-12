@@ -16,7 +16,7 @@ use ts_rs::TS;
 
 use crate::{error::Result, rect::Rect, utils::FlatenableMap};
 
-use super::{PluginId, WidgetId};
+use super::{PluginId, ThemeId, WidgetId};
 
 // ============== Fancy Toolbar Settings ==============
 
@@ -664,6 +664,17 @@ pub struct Settings {
     pub updater: UpdaterSettings,
     /// Custom settings for widgets
     pub by_widget: SettingsByWidget,
+    /// Custom variables for themes by theme id
+    /// ### example
+    /// ```json
+    /// {
+    ///     "@username/themeName": {
+    ///         "--css-variable-name": "123px",
+    ///         "--css-variable-name2": "#aabbccaa",
+    ///     }
+    /// }
+    /// ```
+    pub by_theme: HashMap<ThemeId, HashMap<String, serde_json::Value>>,
 }
 
 impl Default for Settings {
@@ -686,6 +697,7 @@ impl Default for Settings {
             virtual_desktop_strategy: VirtualDesktopStrategy::Native,
             updater: UpdaterSettings::default(),
             by_widget: SettingsByWidget::default(),
+            by_theme: HashMap::new(),
         }
     }
 }

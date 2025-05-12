@@ -378,6 +378,15 @@
         }
       ]
     },
+    "byTheme": {
+      "description": "Custom variables for themes by theme id ### example ```json { \"@username/themeName\": { \"--css-variable-name\": \"123px\", \"--css-variable-name2\": \"#aabbccaa\", } } ```",
+      "default": {},
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "additionalProperties": true
+      }
+    },
     "byWidget": {
       "description": "Custom settings for widgets",
       "default": {
