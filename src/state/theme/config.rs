@@ -15,6 +15,7 @@ pub enum ThemeVariableDefinition {
     /// ```css
     /// --var-name: "user input"
     /// ```
+    #[serde(rename = "<string>")]
     String(ThemeVariable<String>),
     /// This config definition will allow to users select a color and
     /// will be stored as a hex value, opacity is always allowed via UI.\
