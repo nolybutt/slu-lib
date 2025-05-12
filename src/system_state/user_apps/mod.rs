@@ -3,11 +3,11 @@ use std::path::PathBuf;
 #[derive(Debug, Clone, Serialize, Deserialize, TS)]
 #[serde(rename_all = "camelCase")]
 pub struct FocusedApp {
-    hwnd: isize,
-    title: String,
-    name: String,
-    exe: Option<PathBuf>,
-    umid: Option<String>,
-    is_maximized: bool,
-    is_seelen_overlay: bool,
+    pub hwnd: isize,
+    pub title: String,
+    pub name: String,
+    pub exe: Option<PathBuf>,
+    pub umid: Option<String>,
+    pub is_maximized: bool,
+    pub is_seelen_overlay: bool,
 }

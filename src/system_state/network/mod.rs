@@ -4,12 +4,12 @@ use serde_alias::serde_alias;
 #[derive(Debug, Serialize, Deserialize, TS)]
 #[serde(rename_all = "camelCase")]
 pub struct WlanProfile {
-    profile_name: String,
+    pub profile_name: String,
     #[serde(alias = "SSID")]
-    ssid: String,
-    authentication: String,
-    encryption: String,
-    password: Option<String>,
+    pub ssid: String,
+    pub authentication: String,
+    pub encryption: String,
+    pub password: Option<String>,
 }
 
 #[derive(Debug, Serialize, TS)]
@@ -40,15 +40,15 @@ pub enum AdapterStatus {
 #[serde(rename_all = "camelCase")]
 pub struct NetworkAdapter {
     // General information
-    name: String,
-    description: String,
-    status: AdapterStatus,
-    dns_suffix: String,
+    pub name: String,
+    pub description: String,
+    pub status: AdapterStatus,
+    pub dns_suffix: String,
     #[serde(rename = "type")]
-    interface_type: String,
+    pub interface_type: String,
     // Address information
-    ipv6: Option<String>,
-    ipv4: Option<String>,
-    gateway: Option<String>,
-    mac: String,
+    pub ipv6: Option<String>,
+    pub ipv4: Option<String>,
+    pub gateway: Option<String>,
+    pub mac: String,
 }

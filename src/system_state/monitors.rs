@@ -10,7 +10,7 @@ pub struct PhysicalMonitor {
 
 #[derive(Debug, Serialize, Deserialize, TS)]
 pub struct Brightness {
-    min: u32,
-    max: u32,
-    current: u32,
+    pub min: u32,
+    pub max: u32,
+    pub current: u32,
 }

@@ -28,24 +28,24 @@ pub enum PowerMode {
 #[serde(rename_all = "camelCase")]
 pub struct Battery {
     // static info
-    vendor: Option<String>,
-    model: Option<String>,
-    serial_number: Option<String>,
-    technology: String,
+    pub vendor: Option<String>,
+    pub model: Option<String>,
+    pub serial_number: Option<String>,
+    pub technology: String,
     // common information
-    state: String,
-    capacity: f32,
-    temperature: Option<f32>,
-    percentage: f32,
-    cycle_count: Option<u32>,
-    smart_charging: bool, // this is triggered by windows idk how but this is a simulation of that
+    pub state: String,
+    pub capacity: f32,
+    pub temperature: Option<f32>,
+    pub percentage: f32,
+    pub cycle_count: Option<u32>,
+    pub smart_charging: bool, // this is triggered by windows idk how but this is a simulation of that
     // energy stats
-    energy: f32,
-    energy_full: f32,
-    energy_full_design: f32,
-    energy_rate: f32,
-    voltage: f32,
+    pub energy: f32,
+    pub energy_full: f32,
+    pub energy_full_design: f32,
+    pub energy_rate: f32,
+    pub voltage: f32,
     // charge stats
-    time_to_full: Option<f32>,
-    time_to_empty: Option<f32>,
+    pub time_to_full: Option<f32>,
+    pub time_to_empty: Option<f32>,
 }
