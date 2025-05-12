@@ -1,7 +1,7 @@
 #[derive(Debug, Clone, Serialize, Deserialize, TS)]
 pub struct DesktopWorkspace {
-    id: WorkspaceId,
-    name: Option<String>,
+    pub id: WorkspaceId,
+    pub name: Option<String>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, TS)]
