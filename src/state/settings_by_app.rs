@@ -46,11 +46,16 @@ pub enum MatchingStrategy {
 }
 
 #[serde_alias(SnakeCase)]
-#[derive(Clone, Debug, Serialize, Deserialize, JsonSchema, TS)]
+#[derive(Debug, Clone, Serialize, Deserialize, JsonSchema, TS)]
 #[serde(rename_all = "camelCase")]
 pub struct AppIdentifier {
+    /// Depending of the kind this can be case sensitive or not.
+    /// - `class` and `title` are case sensitive
+    /// - `exe` and `path` are case insensitive
     pub id: String,
+    /// the way to match the application
     pub kind: AppIdentifierType,
+    /// the strategy to use to determine if id matches with the application
     pub matching_strategy: MatchingStrategy,
     #[serde(default)]
     pub negation: bool,
@@ -59,53 +64,70 @@ pub struct AppIdentifier {
     #[serde(default)]
     pub or: Vec<AppIdentifier>,
     #[serde(skip)]
+    pub cache: AppIdentifierCache,
+}
+
+/// this struct is intented to improve performance
+#[derive(Debug, Default, Clone)]
+pub struct AppIdentifierCache {
     pub regex: Option<Regex>,
+    pub uppercased_id: Option<String>,
 }
 
 impl AppIdentifier {
-    pub fn cache_regex(&mut self) {
+    pub fn perform_cache(&mut self) {
         if matches!(self.matching_strategy, MatchingStrategy::Regex) {
             let result = Regex::new(&self.id);
             if let Ok(re) = result {
-                self.regex = Some(re);
+                self.cache.regex = Some(re);
             }
+        }
+        if matches!(self.kind, AppIdentifierType::Path | AppIdentifierType::Exe) {
+            self.cache.uppercased_id = Some(self.id.to_uppercase());
         }
     }
 
+    pub fn uppercased_id(&self) -> &str {
+        self.cache.uppercased_id.as_deref().unwrap()
+    }
+
+    pub fn regex(&self) -> &Regex {
+        self.cache.regex.as_ref().unwrap()
+    }
+
+    /// path and filenames on Windows System should be uppercased before be passed to this function
+    /// Safety: will panic if cache was not performed before
     pub fn validate(&self, title: &str, class: &str, exe: &str, path: &str) -> bool {
         let mut self_result = match self.matching_strategy {
             MatchingStrategy::Equals => match self.kind {
                 AppIdentifierType::Title => title.eq(&self.id),
                 AppIdentifierType::Class => class.eq(&self.id),
-                AppIdentifierType::Exe => exe.eq(&self.id),
-                AppIdentifierType::Path => path.eq(&self.id),
+                AppIdentifierType::Exe => exe.eq(self.uppercased_id()),
+                AppIdentifierType::Path => path.eq(self.uppercased_id()),
             },
             MatchingStrategy::StartsWith => match self.kind {
                 AppIdentifierType::Title => title.starts_with(&self.id),
                 AppIdentifierType::Class => class.starts_with(&self.id),
-                AppIdentifierType::Exe => exe.starts_with(&self.id),
-                AppIdentifierType::Path => path.starts_with(&self.id),
+                AppIdentifierType::Exe => exe.starts_with(self.uppercased_id()),
+                AppIdentifierType::Path => path.starts_with(self.uppercased_id()),
             },
             MatchingStrategy::EndsWith => match self.kind {
                 AppIdentifierType::Title => title.ends_with(&self.id),
                 AppIdentifierType::Class => class.ends_with(&self.id),
-                AppIdentifierType::Exe => exe.ends_with(&self.id),
-                AppIdentifierType::Path => path.ends_with(&self.id),
+                AppIdentifierType::Exe => exe.ends_with(self.uppercased_id()),
+                AppIdentifierType::Path => path.ends_with(self.uppercased_id()),
             },
             MatchingStrategy::Contains => match self.kind {
                 AppIdentifierType::Title => title.contains(&self.id),
                 AppIdentifierType::Class => class.contains(&self.id),
-                AppIdentifierType::Exe => exe.contains(&self.id),
-                AppIdentifierType::Path => path.contains(&self.id),
+                AppIdentifierType::Exe => exe.contains(self.uppercased_id()),
+                AppIdentifierType::Path => path.contains(self.uppercased_id()),
             },
-            MatchingStrategy::Regex => match self.regex.as_ref() {
-                Some(re) => match self.kind {
-                    AppIdentifierType::Title => re.is_match(title),
-                    AppIdentifierType::Class => re.is_match(class),
-                    AppIdentifierType::Exe => re.is_match(exe),
-                    AppIdentifierType::Path => re.is_match(path),
-                },
-                None => false,
+            MatchingStrategy::Regex => match self.kind {
+                AppIdentifierType::Title => self.regex().is_match(title),
+                AppIdentifierType::Class => self.regex().is_match(class),
+                AppIdentifierType::Exe => self.regex().is_match(exe),
+                AppIdentifierType::Path => self.regex().is_match(path),
             },
         };
 
