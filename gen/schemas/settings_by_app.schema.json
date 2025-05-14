@@ -120,13 +120,24 @@
           }
         },
         "id": {
+          "description": "Depending of the kind this can be case sensitive or not. - `class` and `title` are case sensitive - `exe` and `path` are case insensitive",
           "type": "string"
         },
         "kind": {
-          "$ref": "#/definitions/AppIdentifierType"
+          "description": "the way to match the application",
+          "allOf": [
+            {
+              "$ref": "#/definitions/AppIdentifierType"
+            }
+          ]
         },
         "matchingStrategy": {
-          "$ref": "#/definitions/MatchingStrategy"
+          "description": "the strategy to use to determine if id matches with the application",
+          "allOf": [
+            {
+              "$ref": "#/definitions/MatchingStrategy"
+            }
+          ]
         },
         "negation": {
           "default": false,

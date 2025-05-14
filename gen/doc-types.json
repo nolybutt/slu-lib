@@ -1728,11 +1728,14 @@
             "properties": [
               {
                 "name": "id",
+                "jsDoc": {
+                  "doc": "Depending of the kind this can be case sensitive or not.\n- `class` and `title` are case sensitive\n- `exe` and `path` are case insensitive"
+                },
                 "location": {
                   "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/AppIdentifier.ts",
-                  "line": 5,
-                  "col": 30,
-                  "byteIndex": 268
+                  "line": 11,
+                  "col": 0,
+                  "byteIndex": 424
                 },
                 "params": [],
                 "computed": false,
@@ -1746,11 +1749,14 @@
               },
               {
                 "name": "kind",
+                "jsDoc": {
+                  "doc": "the way to match the application"
+                },
                 "location": {
                   "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/AppIdentifier.ts",
-                  "line": 5,
-                  "col": 42,
-                  "byteIndex": 280
+                  "line": 15,
+                  "col": 0,
+                  "byteIndex": 481
                 },
                 "params": [],
                 "computed": false,
@@ -1767,11 +1773,14 @@
               },
               {
                 "name": "matchingStrategy",
+                "jsDoc": {
+                  "doc": "the strategy to use to determine if id matches with the application"
+                },
                 "location": {
                   "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/AppIdentifier.ts",
-                  "line": 5,
-                  "col": 67,
-                  "byteIndex": 305
+                  "line": 19,
+                  "col": 0,
+                  "byteIndex": 586
                 },
                 "params": [],
                 "computed": false,
@@ -1790,9 +1799,9 @@
                 "name": "negation",
                 "location": {
                   "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/AppIdentifier.ts",
-                  "line": 5,
-                  "col": 103,
-                  "byteIndex": 341
+                  "line": 19,
+                  "col": 36,
+                  "byteIndex": 622
                 },
                 "params": [],
                 "computed": false,
@@ -1808,9 +1817,9 @@
                 "name": "and",
                 "location": {
                   "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/AppIdentifier.ts",
-                  "line": 5,
-                  "col": 122,
-                  "byteIndex": 360
+                  "line": 19,
+                  "col": 55,
+                  "byteIndex": 641
                 },
                 "params": [],
                 "computed": false,
@@ -1838,9 +1847,9 @@
                 "name": "or",
                 "location": {
                   "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/AppIdentifier.ts",
-                  "line": 5,
-                  "col": 149,
-                  "byteIndex": 387
+                  "line": 19,
+                  "col": 82,
+                  "byteIndex": 668
                 },
                 "params": [],
                 "computed": false,
@@ -37990,12 +37999,30 @@
             "methods": [],
             "properties": [
               {
-                "name": "title",
+                "name": "handle",
                 "location": {
                   "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/WegAppGroupItem.ts",
                   "line": 3,
                   "col": 32,
                   "byteIndex": 142
+                },
+                "params": [],
+                "computed": false,
+                "optional": false,
+                "tsType": {
+                  "repr": "number",
+                  "kind": "keyword",
+                  "keyword": "number"
+                },
+                "typeParams": []
+              },
+              {
+                "name": "title",
+                "location": {
+                  "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/WegAppGroupItem.ts",
+                  "line": 3,
+                  "col": 48,
+                  "byteIndex": 158
                 },
                 "params": [],
                 "computed": false,
@@ -38008,20 +38035,38 @@
                 "typeParams": []
               },
               {
-                "name": "handle",
+                "name": "is_iconic",
                 "location": {
                   "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/WegAppGroupItem.ts",
                   "line": 3,
-                  "col": 47,
-                  "byteIndex": 157
+                  "col": 63,
+                  "byteIndex": 173
                 },
                 "params": [],
                 "computed": false,
                 "optional": false,
                 "tsType": {
-                  "repr": "number",
+                  "repr": "boolean",
                   "kind": "keyword",
-                  "keyword": "number"
+                  "keyword": "boolean"
+                },
+                "typeParams": []
+              },
+              {
+                "name": "is_zoomed",
+                "location": {
+                  "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/WegAppGroupItem.ts",
+                  "line": 3,
+                  "col": 83,
+                  "byteIndex": 193
+                },
+                "params": [],
+                "computed": false,
+                "optional": false,
+                "tsType": {
+                  "repr": "boolean",
+                  "kind": "keyword",
+                  "keyword": "boolean"
                 },
                 "typeParams": []
               }

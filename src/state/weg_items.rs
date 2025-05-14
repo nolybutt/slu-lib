@@ -6,8 +6,10 @@ use ts_rs::TS;
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize, JsonSchema, TS)]
 pub struct WegAppGroupItem {
-    pub title: String,
     pub handle: isize,
+    pub title: String,
+    pub is_iconic: bool,
+    pub is_zoomed: bool,
 }
 
 #[derive(Debug, Clone, Default, PartialEq, Eq, Serialize, Deserialize, JsonSchema, TS)]

@@ -72,12 +72,20 @@
       "type": "object",
       "required": [
         "handle",
+        "is_iconic",
+        "is_zoomed",
         "title"
       ],
       "properties": {
         "handle": {
           "type": "integer",
           "format": "int"
+        },
+        "is_iconic": {
+          "type": "boolean"
+        },
+        "is_zoomed": {
+          "type": "boolean"
         },
         "title": {
           "type": "string"
