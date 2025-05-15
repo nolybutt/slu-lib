@@ -735,6 +735,16 @@ impl Settings {
         Ok(())
     }
 
+    pub fn dedup_themes(&mut self) {
+        let mut seen = HashSet::new();
+        self.selected_themes.retain(|x| seen.insert(x.clone())); // dedup
+    }
+
+    pub fn dedup_icon_packs(&mut self) {
+        let mut seen = HashSet::new();
+        self.icon_packs.retain(|x| seen.insert(x.clone())); // dedup
+    }
+
     pub fn sanitize(&mut self) -> Result<()> {
         self.by_widget.wall.sanitize();
         self.by_widget.launcher.sanitize();
@@ -743,15 +753,13 @@ impl Settings {
             self.language = Some(Self::get_system_language());
         }
 
-        let default_theme = "default".to_owned();
-        if !self.selected_themes.contains(&default_theme) {
-            self.selected_themes.insert(0, default_theme);
-        }
+        // ensure base is always selected
+        self.selected_themes.insert(0, "default".to_owned());
+        self.dedup_themes();
 
-        let default_icon_pack = "system".to_owned();
-        if !self.icon_packs.contains(&default_icon_pack) {
-            self.icon_packs.insert(0, default_icon_pack);
-        }
+        // ensure base is always selected
+        self.icon_packs.insert(0, "system".to_owned());
+        self.dedup_icon_packs();
 
         for m in self.monitors_v2.values_mut() {
             m.sanitize()?;
