@@ -10,6 +10,9 @@ pub struct WegAppGroupItem {
     pub title: String,
     pub is_iconic: bool,
     pub is_zoomed: bool,
+    /// last time the app was active, timestamp in milliseconds,
+    /// could be 0 if we don't know when the app was actived
+    pub last_active: u64,
 }
 
 #[derive(Debug, Clone, Default, PartialEq, Eq, Serialize, Deserialize, JsonSchema, TS)]
