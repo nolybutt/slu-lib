@@ -70,24 +70,29 @@
     },
     "WegAppGroupItem": {
       "type": "object",
-      "required": [
-        "handle",
-        "is_iconic",
-        "is_zoomed",
-        "title"
-      ],
       "properties": {
         "handle": {
+          "default": 0,
           "type": "integer",
           "format": "int"
         },
-        "is_iconic": {
+        "isIconic": {
+          "default": false,
           "type": "boolean"
         },
-        "is_zoomed": {
+        "isZoomed": {
+          "default": false,
           "type": "boolean"
+        },
+        "lastActive": {
+          "description": "last time the app was active, timestamp in milliseconds, could be 0 if we don't know when the app was actived",
+          "default": 0,
+          "type": "integer",
+          "format": "uint64",
+          "minimum": 0.0
         },
         "title": {
+          "default": "",
           "type": "string"
         }
       }

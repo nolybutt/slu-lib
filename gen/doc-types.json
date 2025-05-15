@@ -38035,7 +38035,7 @@
                 "typeParams": []
               },
               {
-                "name": "is_iconic",
+                "name": "isIconic",
                 "location": {
                   "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/WegAppGroupItem.ts",
                   "line": 3,
@@ -38053,12 +38053,12 @@
                 "typeParams": []
               },
               {
-                "name": "is_zoomed",
+                "name": "isZoomed",
                 "location": {
                   "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/WegAppGroupItem.ts",
                   "line": 3,
-                  "col": 83,
-                  "byteIndex": 193
+                  "col": 82,
+                  "byteIndex": 192
                 },
                 "params": [],
                 "computed": false,
@@ -38067,6 +38067,27 @@
                   "repr": "boolean",
                   "kind": "keyword",
                   "keyword": "boolean"
+                },
+                "typeParams": []
+              },
+              {
+                "name": "lastActive",
+                "jsDoc": {
+                  "doc": "last time the app was active, timestamp in milliseconds,\ncould be 0 if we don't know when the app was actived"
+                },
+                "location": {
+                  "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/WegAppGroupItem.ts",
+                  "line": 8,
+                  "col": 0,
+                  "byteIndex": 336
+                },
+                "params": [],
+                "computed": false,
+                "optional": false,
+                "tsType": {
+                  "repr": "bigint",
+                  "kind": "keyword",
+                  "keyword": "bigint"
                 },
                 "typeParams": []
               }
