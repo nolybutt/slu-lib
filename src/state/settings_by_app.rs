@@ -94,10 +94,6 @@ impl AppIdentifier {
         self.cache.uppercased_id.as_deref().unwrap()
     }
 
-    pub fn regex(&self) -> &Regex {
-        self.cache.regex.as_ref().unwrap()
-    }
-
     /// path and filenames on Windows System should be uppercased before be passed to this function
     /// Safety: will panic if cache was not performed before
     pub fn validate(&self, title: &str, class: &str, exe: &str, path: &str) -> bool {
@@ -126,11 +122,14 @@ impl AppIdentifier {
                 AppIdentifierType::Exe => exe.contains(self.uppercased_id()),
                 AppIdentifierType::Path => path.contains(self.uppercased_id()),
             },
-            MatchingStrategy::Regex => match self.kind {
-                AppIdentifierType::Title => self.regex().is_match(title),
-                AppIdentifierType::Class => self.regex().is_match(class),
-                AppIdentifierType::Exe => self.regex().is_match(exe),
-                AppIdentifierType::Path => self.regex().is_match(path),
+            MatchingStrategy::Regex => match &self.cache.regex {
+                Some(regex) => match self.kind {
+                    AppIdentifierType::Title => regex.is_match(title),
+                    AppIdentifierType::Class => regex.is_match(class),
+                    AppIdentifierType::Exe => regex.is_match(exe),
+                    AppIdentifierType::Path => regex.is_match(path),
+                },
+                None => false,
             },
         };
 
