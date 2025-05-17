@@ -85,6 +85,9 @@ impl AppIdentifier {
         if matches!(self.kind, AppIdentifierType::Path | AppIdentifierType::Exe) {
             self.cache.uppercased_id = Some(self.id.to_uppercase());
         }
+
+        self.and.iter_mut().for_each(|i| i.perform_cache());
+        self.or.iter_mut().for_each(|i| i.perform_cache());
     }
 
     pub fn uppercased_id(&self) -> &str {
