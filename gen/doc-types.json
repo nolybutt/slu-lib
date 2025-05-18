@@ -16884,7 +16884,7 @@
         "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/MonitorSettingsByWidget.ts",
         "line": 9,
         "col": 0,
-        "byteIndex": 565
+        "byteIndex": 584
       },
       "declarationKind": "export",
       "kind": "typeAlias",
@@ -16906,7 +16906,7 @@
                       "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/MonitorSettingsByWidget.ts",
                       "line": 9,
                       "col": 40,
-                      "byteIndex": 605
+                      "byteIndex": 624
                     },
                     "params": [],
                     "computed": false,
@@ -16927,7 +16927,7 @@
                       "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/MonitorSettingsByWidget.ts",
                       "line": 9,
                       "col": 83,
-                      "byteIndex": 648
+                      "byteIndex": 667
                     },
                     "params": [],
                     "computed": false,
@@ -16948,7 +16948,7 @@
                       "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/MonitorSettingsByWidget.ts",
                       "line": 9,
                       "col": 139,
-                      "byteIndex": 704
+                      "byteIndex": 723
                     },
                     "params": [],
                     "computed": false,
@@ -16969,7 +16969,7 @@
                       "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/MonitorSettingsByWidget.ts",
                       "line": 9,
                       "col": 197,
-                      "byteIndex": 762
+                      "byteIndex": 781
                     },
                     "params": [],
                     "computed": false,
@@ -17009,26 +17009,11 @@
                   },
                   "optional": true,
                   "tsType": {
-                    "repr": "",
-                    "kind": "mapped",
-                    "mappedType": {
-                      "typeParam": {
-                        "name": "key",
-                        "constraint": {
-                          "repr": "string",
-                          "kind": "keyword",
-                          "keyword": "string"
-                        }
-                      },
-                      "optional": true,
-                      "tsType": {
-                        "repr": "JsonValue",
-                        "kind": "typeRef",
-                        "typeRef": {
-                          "typeParams": null,
-                          "typeName": "JsonValue"
-                        }
-                      }
+                    "repr": "ThirdPartyWidgetSettings",
+                    "kind": "typeRef",
+                    "typeRef": {
+                      "typeParams": null,
+                      "typeName": "ThirdPartyWidgetSettings"
                     }
                   }
                 }
@@ -31550,7 +31535,7 @@
         "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/SettingsByWidget.ts",
         "line": 10,
         "col": 0,
-        "byteIndex": 568
+        "byteIndex": 587
       },
       "declarationKind": "export",
       "kind": "typeAlias",
@@ -31572,7 +31557,7 @@
                       "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/SettingsByWidget.ts",
                       "line": 10,
                       "col": 33,
-                      "byteIndex": 601
+                      "byteIndex": 620
                     },
                     "params": [],
                     "computed": false,
@@ -31593,7 +31578,7 @@
                       "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/SettingsByWidget.ts",
                       "line": 10,
                       "col": 67,
-                      "byteIndex": 635
+                      "byteIndex": 654
                     },
                     "params": [],
                     "computed": false,
@@ -31614,7 +31599,7 @@
                       "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/SettingsByWidget.ts",
                       "line": 10,
                       "col": 114,
-                      "byteIndex": 682
+                      "byteIndex": 701
                     },
                     "params": [],
                     "computed": false,
@@ -31635,7 +31620,7 @@
                       "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/SettingsByWidget.ts",
                       "line": 10,
                       "col": 163,
-                      "byteIndex": 731
+                      "byteIndex": 750
                     },
                     "params": [],
                     "computed": false,
@@ -31656,7 +31641,7 @@
                       "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/SettingsByWidget.ts",
                       "line": 10,
                       "col": 212,
-                      "byteIndex": 780
+                      "byteIndex": 799
                     },
                     "params": [],
                     "computed": false,
@@ -31696,26 +31681,11 @@
                   },
                   "optional": true,
                   "tsType": {
-                    "repr": "",
-                    "kind": "mapped",
-                    "mappedType": {
-                      "typeParam": {
-                        "name": "key",
-                        "constraint": {
-                          "repr": "string",
-                          "kind": "keyword",
-                          "keyword": "string"
-                        }
-                      },
-                      "optional": true,
-                      "tsType": {
-                        "repr": "JsonValue",
-                        "kind": "typeRef",
-                        "typeRef": {
-                          "typeParams": null,
-                          "typeName": "JsonValue"
-                        }
-                      }
+                    "repr": "ThirdPartyWidgetSettings",
+                    "kind": "typeRef",
+                    "typeRef": {
+                      "typeParams": null,
+                      "typeName": "ThirdPartyWidgetSettings"
                     }
                   }
                 }
@@ -34014,6 +33984,87 @@
             "callSignatures": [],
             "indexSignatures": []
           }
+        },
+        "typeParams": []
+      }
+    },
+    {
+      "name": "ThirdPartyWidgetSettings",
+      "isDefault": false,
+      "location": {
+        "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/ThirdPartyWidgetSettings.ts",
+        "line": 4,
+        "col": 0,
+        "byteIndex": 170
+      },
+      "declarationKind": "export",
+      "kind": "typeAlias",
+      "typeAliasDef": {
+        "tsType": {
+          "repr": "",
+          "kind": "intersection",
+          "intersection": [
+            {
+              "repr": "",
+              "kind": "typeLiteral",
+              "typeLiteral": {
+                "constructors": [],
+                "methods": [],
+                "properties": [
+                  {
+                    "name": "enabled",
+                    "jsDoc": {
+                      "doc": "enable or disable the widget"
+                    },
+                    "location": {
+                      "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/ThirdPartyWidgetSettings.ts",
+                      "line": 8,
+                      "col": 0,
+                      "byteIndex": 252
+                    },
+                    "params": [],
+                    "computed": false,
+                    "optional": false,
+                    "tsType": {
+                      "repr": "boolean",
+                      "kind": "keyword",
+                      "keyword": "boolean"
+                    },
+                    "typeParams": []
+                  }
+                ],
+                "callSignatures": [],
+                "indexSignatures": []
+              }
+            },
+            {
+              "repr": "",
+              "kind": "parenthesized",
+              "parenthesized": {
+                "repr": "",
+                "kind": "mapped",
+                "mappedType": {
+                  "typeParam": {
+                    "name": "key",
+                    "constraint": {
+                      "repr": "string",
+                      "kind": "keyword",
+                      "keyword": "string"
+                    }
+                  },
+                  "optional": true,
+                  "tsType": {
+                    "repr": "JsonValue",
+                    "kind": "typeRef",
+                    "typeRef": {
+                      "typeParams": null,
+                      "typeName": "JsonValue"
+                    }
+                  }
+                }
+              }
+            }
+          ]
         },
         "typeParams": []
       }
@@ -38637,9 +38688,9 @@
       "isDefault": false,
       "location": {
         "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/Widget.ts",
-        "line": 6,
+        "line": 7,
         "col": 0,
-        "byteIndex": 309
+        "byteIndex": 376
       },
       "declarationKind": "export",
       "kind": "typeAlias",
@@ -38658,9 +38709,9 @@
                 },
                 "location": {
                   "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/Widget.ts",
-                  "line": 10,
+                  "line": 11,
                   "col": 0,
-                  "byteIndex": 374
+                  "byteIndex": 441
                 },
                 "params": [],
                 "computed": false,
@@ -38682,9 +38733,9 @@
                 },
                 "location": {
                   "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/Widget.ts",
-                  "line": 15,
+                  "line": 16,
                   "col": 0,
-                  "byteIndex": 556
+                  "byteIndex": 623
                 },
                 "params": [],
                 "computed": false,
@@ -38714,9 +38765,9 @@
                 },
                 "location": {
                   "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/Widget.ts",
-                  "line": 19,
+                  "line": 20,
                   "col": 0,
-                  "byteIndex": 635
+                  "byteIndex": 702
                 },
                 "params": [],
                 "computed": false,
@@ -38732,15 +38783,39 @@
                 "typeParams": []
               },
               {
+                "name": "instances",
+                "jsDoc": {
+                  "doc": "How many instances are allowed of this widget."
+                },
+                "location": {
+                  "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/Widget.ts",
+                  "line": 24,
+                  "col": 0,
+                  "byteIndex": 789
+                },
+                "params": [],
+                "computed": false,
+                "optional": false,
+                "tsType": {
+                  "repr": "WidgetInstanceType",
+                  "kind": "typeRef",
+                  "typeRef": {
+                    "typeParams": null,
+                    "typeName": "WidgetInstanceType"
+                  }
+                },
+                "typeParams": []
+              },
+              {
                 "name": "settings",
                 "jsDoc": {
                   "doc": "Widget settings declaration, this is esentially a struct to be used by an\nbuilder to create the widget settings UI on the Settings window."
                 },
                 "location": {
                   "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/Widget.ts",
-                  "line": 24,
+                  "line": 29,
                   "col": 0,
-                  "byteIndex": 817
+                  "byteIndex": 974
                 },
                 "params": [],
                 "computed": false,
@@ -38762,9 +38837,9 @@
                 },
                 "location": {
                   "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/Widget.ts",
-                  "line": 28,
+                  "line": 33,
                   "col": 0,
-                  "byteIndex": 894
+                  "byteIndex": 1051
                 },
                 "params": [],
                 "computed": false,
@@ -38794,9 +38869,9 @@
                 },
                 "location": {
                   "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/Widget.ts",
-                  "line": 32,
+                  "line": 37,
                   "col": 0,
-                  "byteIndex": 945
+                  "byteIndex": 1102
                 },
                 "params": [],
                 "computed": false,
@@ -38826,9 +38901,9 @@
                 },
                 "location": {
                   "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/Widget.ts",
-                  "line": 36,
+                  "line": 41,
                   "col": 0,
-                  "byteIndex": 998
+                  "byteIndex": 1155
                 },
                 "params": [],
                 "computed": false,
@@ -38878,6 +38953,51 @@
             "typeParams": null,
             "typeName": "ResourceId"
           }
+        },
+        "typeParams": []
+      }
+    },
+    {
+      "name": "WidgetInstanceType",
+      "isDefault": false,
+      "location": {
+        "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/WidgetInstanceType.ts",
+        "line": 3,
+        "col": 0,
+        "byteIndex": 110
+      },
+      "declarationKind": "export",
+      "kind": "typeAlias",
+      "typeAliasDef": {
+        "tsType": {
+          "repr": "",
+          "kind": "union",
+          "union": [
+            {
+              "repr": "Single",
+              "kind": "literal",
+              "literal": {
+                "kind": "string",
+                "string": "Single"
+              }
+            },
+            {
+              "repr": "Multiple",
+              "kind": "literal",
+              "literal": {
+                "kind": "string",
+                "string": "Multiple"
+              }
+            },
+            {
+              "repr": "ReplicaByMonitor",
+              "kind": "literal",
+              "literal": {
+                "kind": "string",
+                "string": "ReplicaByMonitor"
+              }
+            }
+          ]
         },
         "typeParams": []
       }

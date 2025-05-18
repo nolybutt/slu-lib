@@ -36,6 +36,15 @@
         }
       ]
     },
+    "instances": {
+      "description": "How many instances are allowed of this widget.",
+      "default": "Single",
+      "allOf": [
+        {
+          "$ref": "#/definitions/WidgetInstanceType"
+        }
+      ]
+    },
     "js": {
       "description": "Optional widget js code",
       "default": null,
@@ -191,6 +200,31 @@
     },
     "WidgetId": {
       "$ref": "#/definitions/ResourceId"
+    },
+    "WidgetInstanceType": {
+      "oneOf": [
+        {
+          "description": "Default behavior, only one instance of this widget is allowed. This is useful for widgets intended to work as custom config window.",
+          "type": "string",
+          "enum": [
+            "Single"
+          ]
+        },
+        {
+          "description": "The widget is allowed to have multiple instances.\\ This allow to the user manually create more instances of this same widget.",
+          "type": "string",
+          "enum": [
+            "Multiple"
+          ]
+        },
+        {
+          "description": "Seelen UI will create an instance of this widget per each monitor connected.\\ This can be configured by the user using per monitor settings.\\",
+          "type": "string",
+          "enum": [
+            "ReplicaByMonitor"
+          ]
+        }
+      ]
     },
     "WidgetSettingsDeclarationList": {
       "type": "array",

@@ -59,6 +59,8 @@ pub struct Widget {
     pub icon: Option<String>,
     /// Widget metadata, as texts, tags, images, etc.
     pub metadata: ResourceMetadata,
+    /// How many instances are allowed of this widget.
+    pub instances: WidgetInstanceType,
     /// Widget settings declaration, this is esentially a struct to be used by an
     /// builder to create the widget settings UI on the Settings window.
     pub settings: WidgetSettingsDeclarationList,
@@ -68,4 +70,18 @@ pub struct Widget {
     pub css: Option<String>,
     /// Optional widget html
     pub html: Option<String>,
+}
+
+#[derive(Debug, Clone, Copy, Default, Serialize, Deserialize, JsonSchema, TS)]
+pub enum WidgetInstanceType {
+    /// Default behavior, only one instance of this widget is allowed.
+    /// This is useful for widgets intended to work as custom config window.
+    #[default]
+    Single,
+    /// The widget is allowed to have multiple instances.\
+    /// This allow to the user manually create more instances of this same widget.
+    Multiple,
+    /// Seelen UI will create an instance of this widget per each monitor connected.\
+    /// This can be configured by the user using per monitor settings.\
+    ReplicaByMonitor,
 }

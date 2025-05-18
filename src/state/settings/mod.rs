@@ -1,8 +1,10 @@
 /* In this file we use #[serde_alias(SnakeCase)] as backward compatibility from versions below v1.9.8 */
 pub mod declaration;
 pub mod settings_by_monitor;
+pub mod settings_by_widget;
 
 pub use settings_by_monitor::*;
+pub use settings_by_widget::*;
 
 use std::{
     collections::{HashMap, HashSet},
@@ -14,7 +16,7 @@ use serde::{Deserialize, Serialize};
 use serde_alias::serde_alias;
 use ts_rs::TS;
 
-use crate::{error::Result, rect::Rect, utils::FlatenableMap};
+use crate::{error::Result, rect::Rect};
 
 use super::{PluginId, ThemeId, WidgetId};
 
@@ -23,7 +25,6 @@ use super::{PluginId, ThemeId, WidgetId};
 #[serde_alias(SnakeCase)]
 #[derive(Debug, Clone, Serialize, Deserialize, JsonSchema, TS)]
 #[serde(default, rename_all = "camelCase")]
-#[ts(export)]
 pub struct FancyToolbarSettings {
     /// enable or disable the fancy toolbar
     pub enabled: bool,
@@ -108,7 +109,6 @@ pub enum SeelenWegSide {
 #[serde_alias(SnakeCase)]
 #[derive(Debug, Clone, Serialize, Deserialize, JsonSchema, TS)]
 #[serde(default, rename_all = "camelCase")]
-#[ts(export)]
 pub struct SeelenWegSettings {
     /// enable or disable the seelenweg
     pub enabled: bool,
@@ -199,7 +199,6 @@ pub struct FloatingWindowSettings {
 #[serde_alias(SnakeCase)]
 #[derive(Debug, Clone, Serialize, Deserialize, JsonSchema, TS)]
 #[serde(default, rename_all = "camelCase")]
-#[ts(export)]
 pub struct WindowManagerSettings {
     /// enable or disable the window manager
     pub enabled: bool,
@@ -280,7 +279,6 @@ pub struct LauncherHistory(HashMap<String, Vec<String>>);
 
 #[derive(Debug, Clone, Serialize, Deserialize, JsonSchema, TS)]
 #[serde(default, rename_all = "camelCase")]
-#[ts(export)]
 pub struct SeelenLauncherSettings {
     pub enabled: bool,
     pub monitor: SeelenLauncherMonitor,
@@ -334,7 +332,6 @@ pub struct SeelenWallWallpaper {
 
 #[derive(Debug, Clone, Serialize, Deserialize, JsonSchema, TS)]
 #[serde(default, rename_all = "camelCase")]
-#[ts(export)]
 pub struct SeelenWallSettings {
     pub enabled: bool,
     pub backgrounds: Vec<SeelenWallWallpaper>,
@@ -588,24 +585,6 @@ impl Default for UpdaterSettings {
             channel: UpdateChannel::Release,
         }
     }
-}
-
-// ================================================================================================
-
-#[derive(Clone, Debug, Default, Serialize, Deserialize, JsonSchema, TS)]
-pub struct SettingsByWidget {
-    #[serde(rename = "@seelen/weg")]
-    pub weg: SeelenWegSettings,
-    #[serde(rename = "@seelen/fancy-toolbar")]
-    pub fancy_toolbar: FancyToolbarSettings,
-    #[serde(rename = "@seelen/window-manager")]
-    pub wm: WindowManagerSettings,
-    #[serde(rename = "@seelen/wallpaper-manager")]
-    pub wall: SeelenWallSettings,
-    #[serde(rename = "@seelen/launcher")]
-    pub launcher: SeelenLauncherSettings,
-    #[serde(flatten)]
-    pub others: FlatenableMap<WidgetId, HashMap<String, serde_json::Value>>,
 }
 
 // ======================== Final Settings Struct ===============================

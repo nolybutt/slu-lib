@@ -3,9 +3,12 @@ use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 use ts_rs::TS;
 
-use crate::{error::Result, rect::Rect, utils::FlatenableMap};
+use crate::{error::Result, rect::Rect, utils::Flatenable};
 
-use super::{SeelenWallWallpaper, WegPinnedItemsVisibility, WegTemporalItemsVisibility, WidgetId};
+use super::{
+    SeelenWallWallpaper, ThirdPartyWidgetSettings, WegPinnedItemsVisibility,
+    WegTemporalItemsVisibility, WidgetId,
+};
 
 #[derive(Clone, Debug, Serialize, Deserialize, JsonSchema, TS)]
 #[serde(default, rename_all = "camelCase")]
@@ -116,7 +119,7 @@ pub struct MonitorSettingsByWidget {
     #[serde(rename = "@seelen/wallpaper-manager")]
     pub wall: SeelenWallSettingsByMonitor,
     #[serde(flatten)]
-    pub others: FlatenableMap<WidgetId, HashMap<String, serde_json::Value>>,
+    pub others: Flatenable<HashMap<WidgetId, ThirdPartyWidgetSettings>>,
 }
 
 #[derive(Clone, Debug, Default, Serialize, Deserialize, JsonSchema, TS)]

@@ -1636,13 +1636,13 @@
       }
     },
     "MonitorSettingsByWidget": {
+      "description": "This struct is intented to work with ts-rs flattening",
       "type": "object",
       "anyOf": [
         {
           "type": "object",
           "additionalProperties": {
-            "type": "object",
-            "additionalProperties": true
+            "$ref": "#/definitions/ThirdPartyWidgetSettings"
           }
         }
       ],
@@ -1999,38 +1999,144 @@
       ]
     },
     "SettingsByWidget": {
+      "description": "This struct is intented to work with ts-rs flattening",
       "type": "object",
       "anyOf": [
         {
           "type": "object",
           "additionalProperties": {
-            "type": "object",
-            "additionalProperties": true
+            "$ref": "#/definitions/ThirdPartyWidgetSettings"
           }
         }
       ],
-      "required": [
-        "@seelen/fancy-toolbar",
-        "@seelen/launcher",
-        "@seelen/wallpaper-manager",
-        "@seelen/weg",
-        "@seelen/window-manager"
-      ],
       "properties": {
         "@seelen/fancy-toolbar": {
-          "$ref": "#/definitions/FancyToolbarSettings"
+          "default": {
+            "delayToHide": 800,
+            "delayToShow": 100,
+            "dynamicColor": true,
+            "enabled": true,
+            "height": 30,
+            "hideMode": "Never",
+            "position": "Top",
+            "showHibernateButton": false
+          },
+          "allOf": [
+            {
+              "$ref": "#/definitions/FancyToolbarSettings"
+            }
+          ]
         },
         "@seelen/launcher": {
-          "$ref": "#/definitions/SeelenLauncherSettings"
+          "default": {
+            "enabled": false,
+            "monitor": "MouseOver",
+            "runners": [
+              {
+                "id": "RUN",
+                "label": "t:app_launcher.runners.explorer",
+                "program": "explorer.exe",
+                "readonly": true
+              },
+              {
+                "id": "CMD",
+                "label": "t:app_launcher.runners.cmd",
+                "program": "cmd.exe",
+                "readonly": true
+              }
+            ]
+          },
+          "allOf": [
+            {
+              "$ref": "#/definitions/SeelenLauncherSettings"
+            }
+          ]
         },
         "@seelen/wallpaper-manager": {
-          "$ref": "#/definitions/SeelenWallSettings"
+          "default": {
+            "backgrounds": [],
+            "enabled": true,
+            "interval": 60,
+            "randomize": false
+          },
+          "allOf": [
+            {
+              "$ref": "#/definitions/SeelenWallSettings"
+            }
+          ]
         },
         "@seelen/weg": {
-          "$ref": "#/definitions/SeelenWegSettings"
+          "default": {
+            "delayToHide": 800,
+            "delayToShow": 100,
+            "enabled": true,
+            "hideMode": "OnOverlap",
+            "margin": 8,
+            "mode": "MinContent",
+            "padding": 8,
+            "pinnedItemsVisibility": "Always",
+            "position": "Bottom",
+            "showInstanceCounter": true,
+            "showWindowTitle": false,
+            "size": 40,
+            "spaceBetweenItems": 8,
+            "temporalItemsVisibility": "All",
+            "thumbnailGenerationEnabled": true,
+            "visibleSeparators": true,
+            "zoomSize": 70
+          },
+          "allOf": [
+            {
+              "$ref": "#/definitions/SeelenWegSettings"
+            }
+          ]
         },
         "@seelen/window-manager": {
-          "$ref": "#/definitions/WindowManagerSettings"
+          "default": {
+            "autoStackingByCategory": true,
+            "border": {
+              "enabled": true,
+              "offset": 0.0,
+              "width": 3.0
+            },
+            "defaultLayout": "@default/wm-bspwm",
+            "enabled": false,
+            "floating": {
+              "height": 500.0,
+              "width": 800.0
+            },
+            "resizeDelta": 10.0,
+            "workspaceGap": 10,
+            "workspaceMargin": {
+              "bottom": 0,
+              "left": 0,
+              "right": 0,
+              "top": 0
+            },
+            "workspacePadding": 10
+          },
+          "allOf": [
+            {
+              "$ref": "#/definitions/WindowManagerSettings"
+            }
+          ]
+        }
+      }
+    },
+    "ThirdPartyWidgetSettings": {
+      "description": "This struct is intented to work with ts-rs flattening",
+      "type": "object",
+      "anyOf": [
+        {
+          "type": "object",
+          "additionalProperties": true
+        }
+      ],
+      "properties": {
+        "enabled": {
+          "description": "enable or disable the widget",
+          "default": true,
+          "type": "boolean"
         }
       }
     },
