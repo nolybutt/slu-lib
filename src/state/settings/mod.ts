@@ -15,6 +15,7 @@ import type {
   VirtualDesktopStrategy,
   WidgetId,
   WindowManagerSettings,
+  ThirdPartyWidgetSettings,
 } from '@seelen-ui/types';
 import { createInstanceInvoker, createInstanceOnEvent } from '../../utils/State.ts';
 import { enumFromUnion } from '../../utils/enums.ts';
@@ -41,10 +42,10 @@ export class Settings {
     return this.inner.byWidget[id];
   }
 
-  private getBundledWidgetConfig<T extends Record<string, unknown>>(id: WidgetId): T {
+  private getBundledWidgetConfig<T extends ThirdPartyWidgetSettings>(id: WidgetId): T {
     const config = this.inner.byWidget[id];
     if (!config) throw new Error('Bundled widget settings not found');
-    return config! as T;
+    return config as T;
   }
 
   get fancyToolbar(): FancyToolbarSettings {
