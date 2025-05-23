@@ -30,3 +30,7 @@ impl<T> std::ops::DerefMut for Flatenable<T> {
         }
     }
 }
+
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize, JsonSchema, TS)]
+#[ts(type = "unknown")]
+pub struct TsUnknown(pub serde_json::Value);

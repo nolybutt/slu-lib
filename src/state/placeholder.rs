@@ -5,13 +5,15 @@ use serde::{Deserialize, Serialize};
 use ts_rs::TS;
 use url::Url;
 
+use crate::utils::TsUnknown;
+
 use super::PluginId;
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize, JsonSchema, TS)]
 #[serde(rename_all = "camelCase")]
 pub struct RemoteDataDeclaration {
     url: Url,
-    request_init: Option<serde_json::Value>,
+    request_init: Option<TsUnknown>,
     update_interval_seconds: Option<u32>,
 }
 

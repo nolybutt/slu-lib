@@ -3,6 +3,7 @@ use schemars::JsonSchema;
 use crate::{
     resource::ResourceId,
     state::{ToolbarItem, WindowManagerLayout},
+    utils::TsUnknown,
 };
 
 #[derive(Debug, Clone, Serialize, Deserialize, JsonSchema, TS)]
@@ -21,7 +22,7 @@ pub struct ThirdPartyPlugin {
     target: ResourceId,
     /// The plugin data, this can be anything and depends on the widget using this plugin
     /// to handle it, parse it and use it.
-    plugin: serde_json::Value,
+    plugin: TsUnknown,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, JsonSchema, TS)]

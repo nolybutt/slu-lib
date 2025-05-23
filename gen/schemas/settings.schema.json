@@ -2129,17 +2129,33 @@
       "anyOf": [
         {
           "type": "object",
-          "additionalProperties": true
+          "additionalProperties": {
+            "$ref": "#/definitions/TsUnknown"
+          }
         }
       ],
       "properties": {
+        "$instances": {
+          "description": "By intance will be used to store settings in case of multiple intances allowed on widget.\\ The map values will be merged with the root object and default values on settings declaration.",
+          "type": [
+            "object",
+            "null"
+          ],
+          "additionalProperties": {
+            "type": "object",
+            "additionalProperties": {
+              "$ref": "#/definitions/TsUnknown"
+            }
+          }
+        },
         "enabled": {
-          "description": "enable or disable the widget",
+          "description": "Enable or disable the widget",
           "default": true,
           "type": "boolean"
         }
       }
     },
+    "TsUnknown": true,
     "UpdateChannel": {
       "type": "string",
       "enum": [

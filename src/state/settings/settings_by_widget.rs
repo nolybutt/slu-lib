@@ -1,8 +1,12 @@
 use std::collections::HashMap;
 
 use schemars::JsonSchema;
+use uuid::Uuid;
 
-use crate::{state::WidgetId, utils::Flatenable};
+use crate::{
+    state::WidgetId,
+    utils::{Flatenable, TsUnknown},
+};
 
 use super::{
     FancyToolbarSettings, SeelenLauncherSettings, SeelenWallSettings, SeelenWegSettings,
@@ -27,18 +31,25 @@ pub struct SettingsByWidget {
 }
 
 #[derive(Clone, Debug, Serialize, Deserialize, JsonSchema, TS)]
-#[serde(default, rename_all = "camelCase")]
+#[serde(default)]
 pub struct ThirdPartyWidgetSettings {
-    /// enable or disable the widget
+    /// Enable or disable the widget
     pub enabled: bool,
+    /// By intance will be used to store settings in case of multiple intances allowed on widget.\
+    /// The map values will be merged with the root object and default values on settings declaration.
+    #[serde(rename = "$instances")]
+    #[serde(skip_serializing_if = "Option::is_none")]
+    #[ts(optional = nullable)]
+    pub instances: Option<HashMap<Uuid, HashMap<String, TsUnknown>>>,
     #[serde(flatten)]
-    pub rest: Flatenable<HashMap<String, serde_json::Value>>,
+    pub rest: Flatenable<HashMap<String, TsUnknown>>,
 }
 
 impl Default for ThirdPartyWidgetSettings {
     fn default() -> Self {
         Self {
             enabled: true, // new widgets are enabled by default
+            instances: None,
             rest: Default::default(),
         }
     }

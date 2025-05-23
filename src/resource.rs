@@ -18,6 +18,7 @@ use uuid::Uuid;
 use crate::{
     error::Result,
     state::{IconPack, Plugin, Theme, Widget},
+    utils::TsUnknown,
 };
 
 #[derive(
@@ -239,7 +240,7 @@ impl Resource {
 pub struct SluResourceFile {
     pub version: u32,
     pub resource: Resource,
-    pub data: serde_json::Value,
+    pub data: TsUnknown,
 }
 
 pub enum ConcreteResource {
@@ -285,7 +286,7 @@ impl SluResourceFile {
             serde_json::to_value(&self.resource.metadata)?,
         );
 
-        let data = self.data.as_object().ok_or("invalid data")?;
+        let data = self.data.0.as_object().ok_or("invalid data")?;
         resource.append(&mut data.clone());
 
         let concrete = match self.resource.kind {

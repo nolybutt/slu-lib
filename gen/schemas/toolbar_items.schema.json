@@ -43,7 +43,16 @@
         "url"
       ],
       "properties": {
-        "requestInit": true,
+        "requestInit": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/TsUnknown"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
         "updateIntervalSeconds": {
           "type": [
             "integer",
@@ -1220,6 +1229,7 @@
         }
       ]
     },
+    "TsUnknown": true,
     "WorkspaceToolbarItemMode": {
       "type": "string",
       "enum": [

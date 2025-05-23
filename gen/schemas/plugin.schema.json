@@ -105,7 +105,16 @@
         "url"
       ],
       "properties": {
-        "requestInit": true,
+        "requestInit": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/TsUnknown"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
         "updateIntervalSeconds": {
           "type": [
             "integer",
@@ -253,7 +262,12 @@
       ],
       "properties": {
         "plugin": {
-          "description": "The plugin data, this can be anything and depends on the widget using this plugin to handle it, parse it and use it."
+          "description": "The plugin data, this can be anything and depends on the widget using this plugin to handle it, parse it and use it.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/TsUnknown"
+            }
+          ]
         },
         "target": {
           "description": "The friendly id of the widget that will use this plugin example: `@username/widget-name`",
@@ -1403,6 +1417,7 @@
         }
       ]
     },
+    "TsUnknown": true,
     "WindowManagerLayout": {
       "type": "object",
       "properties": {

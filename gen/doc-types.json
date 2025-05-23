@@ -19621,7 +19621,7 @@
         "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/RemoteDataDeclaration.ts",
         "line": 4,
         "col": 0,
-        "byteIndex": 170
+        "byteIndex": 159
       },
       "declarationKind": "export",
       "kind": "typeAlias",
@@ -19639,7 +19639,7 @@
                   "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/RemoteDataDeclaration.ts",
                   "line": 4,
                   "col": 38,
-                  "byteIndex": 208
+                  "byteIndex": 197
                 },
                 "params": [],
                 "computed": false,
@@ -19657,7 +19657,7 @@
                   "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/RemoteDataDeclaration.ts",
                   "line": 4,
                   "col": 51,
-                  "byteIndex": 221
+                  "byteIndex": 210
                 },
                 "params": [],
                 "computed": false,
@@ -19667,11 +19667,11 @@
                   "kind": "union",
                   "union": [
                     {
-                      "repr": "JsonValue",
+                      "repr": "TsUnknown",
                       "kind": "typeRef",
                       "typeRef": {
                         "typeParams": null,
-                        "typeName": "JsonValue"
+                        "typeName": "TsUnknown"
                       }
                     },
                     {
@@ -19689,7 +19689,7 @@
                   "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/RemoteDataDeclaration.ts",
                   "line": 4,
                   "col": 82,
-                  "byteIndex": 252
+                  "byteIndex": 241
                 },
                 "params": [],
                 "computed": false,
@@ -32590,7 +32590,7 @@
         "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/SluResourceFile.ts",
         "line": 5,
         "col": 0,
-        "byteIndex": 217
+        "byteIndex": 206
       },
       "declarationKind": "export",
       "kind": "typeAlias",
@@ -32608,7 +32608,7 @@
                   "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/SluResourceFile.ts",
                   "line": 5,
                   "col": 32,
-                  "byteIndex": 249
+                  "byteIndex": 238
                 },
                 "params": [],
                 "computed": false,
@@ -32626,7 +32626,7 @@
                   "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/SluResourceFile.ts",
                   "line": 5,
                   "col": 49,
-                  "byteIndex": 266
+                  "byteIndex": 255
                 },
                 "params": [],
                 "computed": false,
@@ -32647,17 +32647,17 @@
                   "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/SluResourceFile.ts",
                   "line": 5,
                   "col": 69,
-                  "byteIndex": 286
+                  "byteIndex": 275
                 },
                 "params": [],
                 "computed": false,
                 "optional": false,
                 "tsType": {
-                  "repr": "JsonValue",
+                  "repr": "TsUnknown",
                   "kind": "typeRef",
                   "typeRef": {
                     "typeParams": null,
-                    "typeName": "JsonValue"
+                    "typeName": "TsUnknown"
                   }
                 },
                 "typeParams": []
@@ -33920,7 +33920,7 @@
         "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/ThirdPartyPlugin.ts",
         "line": 5,
         "col": 0,
-        "byteIndex": 221
+        "byteIndex": 210
       },
       "declarationKind": "export",
       "kind": "typeAlias",
@@ -33941,7 +33941,7 @@
                   "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/ThirdPartyPlugin.ts",
                   "line": 10,
                   "col": 0,
-                  "byteIndex": 358
+                  "byteIndex": 347
                 },
                 "params": [],
                 "computed": false,
@@ -33965,17 +33965,17 @@
                   "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/ThirdPartyPlugin.ts",
                   "line": 15,
                   "col": 0,
-                  "byteIndex": 510
+                  "byteIndex": 499
                 },
                 "params": [],
                 "computed": false,
                 "optional": false,
                 "tsType": {
-                  "repr": "JsonValue",
+                  "repr": "TsUnknown",
                   "kind": "typeRef",
                   "typeRef": {
                     "typeParams": null,
-                    "typeName": "JsonValue"
+                    "typeName": "TsUnknown"
                   }
                 },
                 "typeParams": []
@@ -33995,7 +33995,7 @@
         "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/ThirdPartyWidgetSettings.ts",
         "line": 4,
         "col": 0,
-        "byteIndex": 170
+        "byteIndex": 159
       },
       "declarationKind": "export",
       "kind": "typeAlias",
@@ -34014,13 +34014,13 @@
                   {
                     "name": "enabled",
                     "jsDoc": {
-                      "doc": "enable or disable the widget"
+                      "doc": "Enable or disable the widget"
                     },
                     "location": {
                       "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/ThirdPartyWidgetSettings.ts",
                       "line": 8,
                       "col": 0,
-                      "byteIndex": 252
+                      "byteIndex": 241
                     },
                     "params": [],
                     "computed": false,
@@ -34029,6 +34029,71 @@
                       "repr": "boolean",
                       "kind": "keyword",
                       "keyword": "boolean"
+                    },
+                    "typeParams": []
+                  },
+                  {
+                    "name": "$instances",
+                    "jsDoc": {
+                      "doc": "By intance will be used to store settings in case of multiple intances allowed on widget.\\\nThe map values will be merged with the root object and default values on settings declaration."
+                    },
+                    "location": {
+                      "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/ThirdPartyWidgetSettings.ts",
+                      "line": 13,
+                      "col": 0,
+                      "byteIndex": 460
+                    },
+                    "params": [],
+                    "computed": false,
+                    "optional": true,
+                    "tsType": {
+                      "repr": "",
+                      "kind": "union",
+                      "union": [
+                        {
+                          "repr": "",
+                          "kind": "mapped",
+                          "mappedType": {
+                            "typeParam": {
+                              "name": "key",
+                              "constraint": {
+                                "repr": "string",
+                                "kind": "keyword",
+                                "keyword": "string"
+                              }
+                            },
+                            "optional": true,
+                            "tsType": {
+                              "repr": "",
+                              "kind": "mapped",
+                              "mappedType": {
+                                "typeParam": {
+                                  "name": "key",
+                                  "constraint": {
+                                    "repr": "string",
+                                    "kind": "keyword",
+                                    "keyword": "string"
+                                  }
+                                },
+                                "optional": true,
+                                "tsType": {
+                                  "repr": "TsUnknown",
+                                  "kind": "typeRef",
+                                  "typeRef": {
+                                    "typeParams": null,
+                                    "typeName": "TsUnknown"
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        },
+                        {
+                          "repr": "null",
+                          "kind": "keyword",
+                          "keyword": "null"
+                        }
+                      ]
                     },
                     "typeParams": []
                   }
@@ -34054,11 +34119,11 @@
                   },
                   "optional": true,
                   "tsType": {
-                    "repr": "JsonValue",
+                    "repr": "TsUnknown",
                     "kind": "typeRef",
                     "typeRef": {
                       "typeParams": null,
-                      "typeName": "JsonValue"
+                      "typeName": "TsUnknown"
                     }
                   }
                 }
@@ -37200,6 +37265,26 @@
             "callSignatures": [],
             "indexSignatures": []
           }
+        },
+        "typeParams": []
+      }
+    },
+    {
+      "name": "TsUnknown",
+      "isDefault": false,
+      "location": {
+        "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/TsUnknown.ts",
+        "line": 3,
+        "col": 0,
+        "byteIndex": 110
+      },
+      "declarationKind": "export",
+      "kind": "typeAlias",
+      "typeAliasDef": {
+        "tsType": {
+          "repr": "unknown",
+          "kind": "keyword",
+          "keyword": "unknown"
         },
         "typeParams": []
       }
