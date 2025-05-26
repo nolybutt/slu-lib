@@ -138,7 +138,7 @@ wsd_item! {
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, JsonSchema, TS)]
-#[serde(rename_all = "camelCase")]
+#[serde(rename_all = "lowercase")]
 pub enum WsdGroupEntry {
     /// A group is a list of items and that can have more subgroups
     SubGroup(WsdSubGroup),
@@ -152,14 +152,14 @@ pub struct WsdSubGroup {
     /// Header configuration. As example could be a switch to enable or disable the entire group or a selector.
     header: Option<WsdItem>,
     /// List of items in this subgroup
-    children: Vec<WsdGroupEntry>,
+    content: Vec<WsdGroupEntry>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, JsonSchema, TS)]
 #[serde(rename_all = "camelCase")]
 pub struct WsdGroup {
     /// List of items in this group
-    children: Vec<WsdGroupEntry>,
+    group: Vec<WsdGroupEntry>,
 }
 
 /// The Widget Settings Declaration is a list of groups

@@ -236,10 +236,10 @@
     "WsdGroup": {
       "type": "object",
       "required": [
-        "children"
+        "group"
       ],
       "properties": {
-        "children": {
+        "group": {
           "description": "List of items in this group",
           "type": "array",
           "items": {
@@ -254,10 +254,10 @@
           "description": "A group is a list of items and that can have more subgroups",
           "type": "object",
           "required": [
-            "subGroup"
+            "subgroup"
           ],
           "properties": {
-            "subGroup": {
+            "subgroup": {
               "$ref": "#/definitions/WsdSubGroup"
             }
           },
@@ -638,10 +638,10 @@
     "WsdSubGroup": {
       "type": "object",
       "required": [
-        "children"
+        "content"
       ],
       "properties": {
-        "children": {
+        "content": {
           "description": "List of items in this subgroup",
           "type": "array",
           "items": {

@@ -41600,7 +41600,7 @@
             "methods": [],
             "properties": [
               {
-                "name": "children",
+                "name": "group",
                 "jsDoc": {
                   "doc": "List of items in this group"
                 },
@@ -41664,7 +41664,7 @@
                 "methods": [],
                 "properties": [
                   {
-                    "name": "subGroup",
+                    "name": "subgroup",
                     "location": {
                       "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/WsdGroupEntry.ts",
                       "line": 5,
@@ -43264,7 +43264,7 @@
                 "typeParams": []
               },
               {
-                "name": "children",
+                "name": "content",
                 "jsDoc": {
                   "doc": "List of items in this subgroup"
                 },
