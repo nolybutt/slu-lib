@@ -2565,9 +2565,9 @@
       "isDefault": false,
       "location": {
         "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/BLEAppearance.ts",
-        "line": 57,
+        "line": 4,
         "col": 0,
-        "byteIndex": 5019
+        "byteIndex": 2210
       },
       "declarationKind": "export",
       "kind": "typeAlias",
@@ -2587,9 +2587,9 @@
                     "name": "category",
                     "location": {
                       "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/BLEAppearance.ts",
-                      "line": 57,
+                      "line": 4,
                       "col": 30,
-                      "byteIndex": 5049
+                      "byteIndex": 2240
                     },
                     "params": [],
                     "computed": false,
@@ -2608,9 +2608,9 @@
                     "name": "subcategory",
                     "location": {
                       "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/BLEAppearance.ts",
-                      "line": 57,
+                      "line": 4,
                       "col": 53,
-                      "byteIndex": 5072
+                      "byteIndex": 2263
                     },
                     "params": [],
                     "computed": false,
@@ -2641,9 +2641,9 @@
                     "name": "category",
                     "location": {
                       "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/BLEAppearance.ts",
-                      "line": 57,
+                      "line": 4,
                       "col": 106,
-                      "byteIndex": 5125
+                      "byteIndex": 2316
                     },
                     "params": [],
                     "computed": false,
@@ -2662,9 +2662,9 @@
                     "name": "subcategory",
                     "location": {
                       "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/BLEAppearance.ts",
-                      "line": 57,
+                      "line": 4,
                       "col": 127,
-                      "byteIndex": 5146
+                      "byteIndex": 2337
                     },
                     "params": [],
                     "computed": false,
@@ -2695,9 +2695,9 @@
                     "name": "category",
                     "location": {
                       "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/BLEAppearance.ts",
-                      "line": 57,
+                      "line": 4,
                       "col": 178,
-                      "byteIndex": 5197
+                      "byteIndex": 2388
                     },
                     "params": [],
                     "computed": false,
@@ -2716,9 +2716,9 @@
                     "name": "subcategory",
                     "location": {
                       "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/BLEAppearance.ts",
-                      "line": 57,
+                      "line": 4,
                       "col": 202,
-                      "byteIndex": 5221
+                      "byteIndex": 2412
                     },
                     "params": [],
                     "computed": false,
@@ -2749,9 +2749,9 @@
                     "name": "category",
                     "location": {
                       "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/BLEAppearance.ts",
-                      "line": 57,
+                      "line": 4,
                       "col": 256,
-                      "byteIndex": 5275
+                      "byteIndex": 2466
                     },
                     "params": [],
                     "computed": false,
@@ -2770,9 +2770,9 @@
                     "name": "subcategory",
                     "location": {
                       "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/BLEAppearance.ts",
-                      "line": 57,
+                      "line": 4,
                       "col": 277,
-                      "byteIndex": 5296
+                      "byteIndex": 2487
                     },
                     "params": [],
                     "computed": false,
@@ -2803,9 +2803,9 @@
                     "name": "category",
                     "location": {
                       "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/BLEAppearance.ts",
-                      "line": 57,
+                      "line": 4,
                       "col": 328,
-                      "byteIndex": 5347
+                      "byteIndex": 2538
                     },
                     "params": [],
                     "computed": false,
@@ -2824,9 +2824,9 @@
                     "name": "subcategory",
                     "location": {
                       "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/BLEAppearance.ts",
-                      "line": 57,
+                      "line": 4,
                       "col": 349,
-                      "byteIndex": 5368
+                      "byteIndex": 2559
                     },
                     "params": [],
                     "computed": false,
@@ -2857,9 +2857,9 @@
                     "name": "category",
                     "location": {
                       "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/BLEAppearance.ts",
-                      "line": 57,
+                      "line": 4,
                       "col": 400,
-                      "byteIndex": 5419
+                      "byteIndex": 2610
                     },
                     "params": [],
                     "computed": false,
@@ -2878,9 +2878,9 @@
                     "name": "subcategory",
                     "location": {
                       "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/BLEAppearance.ts",
-                      "line": 57,
+                      "line": 4,
                       "col": 423,
-                      "byteIndex": 5442
+                      "byteIndex": 2633
                     },
                     "params": [],
                     "computed": false,
@@ -2911,9 +2911,9 @@
                     "name": "category",
                     "location": {
                       "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/BLEAppearance.ts",
-                      "line": 57,
+                      "line": 4,
                       "col": 476,
-                      "byteIndex": 5495
+                      "byteIndex": 2686
                     },
                     "params": [],
                     "computed": false,
@@ -2932,9 +2932,9 @@
                     "name": "subcategory",
                     "location": {
                       "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/BLEAppearance.ts",
-                      "line": 57,
+                      "line": 4,
                       "col": 505,
-                      "byteIndex": 5524
+                      "byteIndex": 2715
                     },
                     "params": [],
                     "computed": false,
@@ -2965,9 +2965,9 @@
                     "name": "category",
                     "location": {
                       "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/BLEAppearance.ts",
-                      "line": 57,
+                      "line": 4,
                       "col": 564,
-                      "byteIndex": 5583
+                      "byteIndex": 2774
                     },
                     "params": [],
                     "computed": false,
@@ -2986,9 +2986,9 @@
                     "name": "subcategory",
                     "location": {
                       "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/BLEAppearance.ts",
-                      "line": 57,
+                      "line": 4,
                       "col": 590,
-                      "byteIndex": 5609
+                      "byteIndex": 2800
                     },
                     "params": [],
                     "computed": false,
@@ -3019,9 +3019,9 @@
                     "name": "category",
                     "location": {
                       "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/BLEAppearance.ts",
-                      "line": 57,
+                      "line": 4,
                       "col": 646,
-                      "byteIndex": 5665
+                      "byteIndex": 2856
                     },
                     "params": [],
                     "computed": false,
@@ -3040,9 +3040,9 @@
                     "name": "subcategory",
                     "location": {
                       "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/BLEAppearance.ts",
-                      "line": 57,
+                      "line": 4,
                       "col": 665,
-                      "byteIndex": 5684
+                      "byteIndex": 2875
                     },
                     "params": [],
                     "computed": false,
@@ -3073,9 +3073,9 @@
                     "name": "category",
                     "location": {
                       "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/BLEAppearance.ts",
-                      "line": 57,
+                      "line": 4,
                       "col": 714,
-                      "byteIndex": 5733
+                      "byteIndex": 2924
                     },
                     "params": [],
                     "computed": false,
@@ -3094,9 +3094,9 @@
                     "name": "subcategory",
                     "location": {
                       "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/BLEAppearance.ts",
-                      "line": 57,
+                      "line": 4,
                       "col": 737,
-                      "byteIndex": 5756
+                      "byteIndex": 2947
                     },
                     "params": [],
                     "computed": false,
@@ -3127,9 +3127,9 @@
                     "name": "category",
                     "location": {
                       "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/BLEAppearance.ts",
-                      "line": 57,
+                      "line": 4,
                       "col": 790,
-                      "byteIndex": 5809
+                      "byteIndex": 3000
                     },
                     "params": [],
                     "computed": false,
@@ -3148,9 +3148,9 @@
                     "name": "subcategory",
                     "location": {
                       "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/BLEAppearance.ts",
-                      "line": 57,
+                      "line": 4,
                       "col": 817,
-                      "byteIndex": 5836
+                      "byteIndex": 3027
                     },
                     "params": [],
                     "computed": false,
@@ -3181,9 +3181,9 @@
                     "name": "category",
                     "location": {
                       "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/BLEAppearance.ts",
-                      "line": 57,
+                      "line": 4,
                       "col": 874,
-                      "byteIndex": 5893
+                      "byteIndex": 3084
                     },
                     "params": [],
                     "computed": false,
@@ -3202,9 +3202,9 @@
                     "name": "subcategory",
                     "location": {
                       "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/BLEAppearance.ts",
-                      "line": 57,
+                      "line": 4,
                       "col": 904,
-                      "byteIndex": 5923
+                      "byteIndex": 3114
                     },
                     "params": [],
                     "computed": false,
@@ -3235,9 +3235,9 @@
                     "name": "category",
                     "location": {
                       "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/BLEAppearance.ts",
-                      "line": 57,
+                      "line": 4,
                       "col": 964,
-                      "byteIndex": 5983
+                      "byteIndex": 3174
                     },
                     "params": [],
                     "computed": false,
@@ -3256,9 +3256,9 @@
                     "name": "subcategory",
                     "location": {
                       "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/BLEAppearance.ts",
-                      "line": 57,
+                      "line": 4,
                       "col": 991,
-                      "byteIndex": 6010
+                      "byteIndex": 3201
                     },
                     "params": [],
                     "computed": false,
@@ -3289,9 +3289,9 @@
                     "name": "category",
                     "location": {
                       "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/BLEAppearance.ts",
-                      "line": 57,
+                      "line": 4,
                       "col": 1048,
-                      "byteIndex": 6067
+                      "byteIndex": 3258
                     },
                     "params": [],
                     "computed": false,
@@ -3310,9 +3310,9 @@
                     "name": "subcategory",
                     "location": {
                       "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/BLEAppearance.ts",
-                      "line": 57,
+                      "line": 4,
                       "col": 1079,
-                      "byteIndex": 6098
+                      "byteIndex": 3289
                     },
                     "params": [],
                     "computed": false,
@@ -3343,9 +3343,9 @@
                     "name": "category",
                     "location": {
                       "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/BLEAppearance.ts",
-                      "line": 57,
+                      "line": 4,
                       "col": 1140,
-                      "byteIndex": 6159
+                      "byteIndex": 3350
                     },
                     "params": [],
                     "computed": false,
@@ -3364,9 +3364,9 @@
                     "name": "subcategory",
                     "location": {
                       "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/BLEAppearance.ts",
-                      "line": 57,
+                      "line": 4,
                       "col": 1169,
-                      "byteIndex": 6188
+                      "byteIndex": 3379
                     },
                     "params": [],
                     "computed": false,
@@ -3397,9 +3397,9 @@
                     "name": "category",
                     "location": {
                       "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/BLEAppearance.ts",
-                      "line": 57,
+                      "line": 4,
                       "col": 1228,
-                      "byteIndex": 6247
+                      "byteIndex": 3438
                     },
                     "params": [],
                     "computed": false,
@@ -3418,9 +3418,9 @@
                     "name": "subcategory",
                     "location": {
                       "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/BLEAppearance.ts",
-                      "line": 57,
+                      "line": 4,
                       "col": 1264,
-                      "byteIndex": 6283
+                      "byteIndex": 3474
                     },
                     "params": [],
                     "computed": false,
@@ -3451,9 +3451,9 @@
                     "name": "category",
                     "location": {
                       "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/BLEAppearance.ts",
-                      "line": 57,
+                      "line": 4,
                       "col": 1330,
-                      "byteIndex": 6349
+                      "byteIndex": 3540
                     },
                     "params": [],
                     "computed": false,
@@ -3472,9 +3472,9 @@
                     "name": "subcategory",
                     "location": {
                       "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/BLEAppearance.ts",
-                      "line": 57,
+                      "line": 4,
                       "col": 1358,
-                      "byteIndex": 6377
+                      "byteIndex": 3568
                     },
                     "params": [],
                     "computed": false,
@@ -3505,9 +3505,9 @@
                     "name": "category",
                     "location": {
                       "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/BLEAppearance.ts",
-                      "line": 57,
+                      "line": 4,
                       "col": 1416,
-                      "byteIndex": 6435
+                      "byteIndex": 3626
                     },
                     "params": [],
                     "computed": false,
@@ -3526,9 +3526,9 @@
                     "name": "subcategory",
                     "location": {
                       "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/BLEAppearance.ts",
-                      "line": 57,
+                      "line": 4,
                       "col": 1452,
-                      "byteIndex": 6471
+                      "byteIndex": 3662
                     },
                     "params": [],
                     "computed": false,
@@ -3559,9 +3559,9 @@
                     "name": "category",
                     "location": {
                       "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/BLEAppearance.ts",
-                      "line": 57,
+                      "line": 4,
                       "col": 1518,
-                      "byteIndex": 6537
+                      "byteIndex": 3728
                     },
                     "params": [],
                     "computed": false,
@@ -3580,9 +3580,9 @@
                     "name": "subcategory",
                     "location": {
                       "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/BLEAppearance.ts",
-                      "line": 57,
+                      "line": 4,
                       "col": 1541,
-                      "byteIndex": 6560
+                      "byteIndex": 3751
                     },
                     "params": [],
                     "computed": false,
@@ -3613,9 +3613,9 @@
                     "name": "category",
                     "location": {
                       "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/BLEAppearance.ts",
-                      "line": 57,
+                      "line": 4,
                       "col": 1594,
-                      "byteIndex": 6613
+                      "byteIndex": 3804
                     },
                     "params": [],
                     "computed": false,
@@ -3634,9 +3634,9 @@
                     "name": "subcategory",
                     "location": {
                       "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/BLEAppearance.ts",
-                      "line": 57,
+                      "line": 4,
                       "col": 1623,
-                      "byteIndex": 6642
+                      "byteIndex": 3833
                     },
                     "params": [],
                     "computed": false,
@@ -3667,9 +3667,9 @@
                     "name": "category",
                     "location": {
                       "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/BLEAppearance.ts",
-                      "line": 57,
+                      "line": 4,
                       "col": 1682,
-                      "byteIndex": 6701
+                      "byteIndex": 3892
                     },
                     "params": [],
                     "computed": false,
@@ -3688,9 +3688,9 @@
                     "name": "subcategory",
                     "location": {
                       "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/BLEAppearance.ts",
-                      "line": 57,
+                      "line": 4,
                       "col": 1711,
-                      "byteIndex": 6730
+                      "byteIndex": 3921
                     },
                     "params": [],
                     "computed": false,
@@ -3721,9 +3721,9 @@
                     "name": "category",
                     "location": {
                       "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/BLEAppearance.ts",
-                      "line": 57,
+                      "line": 4,
                       "col": 1770,
-                      "byteIndex": 6789
+                      "byteIndex": 3980
                     },
                     "params": [],
                     "computed": false,
@@ -3742,9 +3742,9 @@
                     "name": "subcategory",
                     "location": {
                       "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/BLEAppearance.ts",
-                      "line": 57,
+                      "line": 4,
                       "col": 1792,
-                      "byteIndex": 6811
+                      "byteIndex": 4002
                     },
                     "params": [],
                     "computed": false,
@@ -3775,9 +3775,9 @@
                     "name": "category",
                     "location": {
                       "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/BLEAppearance.ts",
-                      "line": 57,
+                      "line": 4,
                       "col": 1844,
-                      "byteIndex": 6863
+                      "byteIndex": 4054
                     },
                     "params": [],
                     "computed": false,
@@ -3796,9 +3796,9 @@
                     "name": "subcategory",
                     "location": {
                       "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/BLEAppearance.ts",
-                      "line": 57,
+                      "line": 4,
                       "col": 1873,
-                      "byteIndex": 6892
+                      "byteIndex": 4083
                     },
                     "params": [],
                     "computed": false,
@@ -3829,9 +3829,9 @@
                     "name": "category",
                     "location": {
                       "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/BLEAppearance.ts",
-                      "line": 57,
+                      "line": 4,
                       "col": 1932,
-                      "byteIndex": 6951
+                      "byteIndex": 4142
                     },
                     "params": [],
                     "computed": false,
@@ -3850,9 +3850,9 @@
                     "name": "subcategory",
                     "location": {
                       "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/BLEAppearance.ts",
-                      "line": 57,
+                      "line": 4,
                       "col": 1951,
-                      "byteIndex": 6970
+                      "byteIndex": 4161
                     },
                     "params": [],
                     "computed": false,
@@ -3883,9 +3883,9 @@
                     "name": "category",
                     "location": {
                       "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/BLEAppearance.ts",
-                      "line": 57,
+                      "line": 4,
                       "col": 2000,
-                      "byteIndex": 7019
+                      "byteIndex": 4210
                     },
                     "params": [],
                     "computed": false,
@@ -3904,9 +3904,9 @@
                     "name": "subcategory",
                     "location": {
                       "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/BLEAppearance.ts",
-                      "line": 57,
+                      "line": 4,
                       "col": 2020,
-                      "byteIndex": 7039
+                      "byteIndex": 4230
                     },
                     "params": [],
                     "computed": false,
@@ -3937,9 +3937,9 @@
                     "name": "category",
                     "location": {
                       "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/BLEAppearance.ts",
-                      "line": 57,
+                      "line": 4,
                       "col": 2070,
-                      "byteIndex": 7089
+                      "byteIndex": 4280
                     },
                     "params": [],
                     "computed": false,
@@ -3958,9 +3958,9 @@
                     "name": "subcategory",
                     "location": {
                       "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/BLEAppearance.ts",
-                      "line": 57,
+                      "line": 4,
                       "col": 2101,
-                      "byteIndex": 7120
+                      "byteIndex": 4311
                     },
                     "params": [],
                     "computed": false,
@@ -3991,9 +3991,9 @@
                     "name": "category",
                     "location": {
                       "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/BLEAppearance.ts",
-                      "line": 57,
+                      "line": 4,
                       "col": 2162,
-                      "byteIndex": 7181
+                      "byteIndex": 4372
                     },
                     "params": [],
                     "computed": false,
@@ -4012,9 +4012,9 @@
                     "name": "subcategory",
                     "location": {
                       "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/BLEAppearance.ts",
-                      "line": 57,
+                      "line": 4,
                       "col": 2188,
-                      "byteIndex": 7207
+                      "byteIndex": 4398
                     },
                     "params": [],
                     "computed": false,
@@ -4045,9 +4045,9 @@
                     "name": "category",
                     "location": {
                       "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/BLEAppearance.ts",
-                      "line": 57,
+                      "line": 4,
                       "col": 2244,
-                      "byteIndex": 7263
+                      "byteIndex": 4454
                     },
                     "params": [],
                     "computed": false,
@@ -4066,9 +4066,9 @@
                     "name": "subcategory",
                     "location": {
                       "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/BLEAppearance.ts",
-                      "line": 57,
+                      "line": 4,
                       "col": 2267,
-                      "byteIndex": 7286
+                      "byteIndex": 4477
                     },
                     "params": [],
                     "computed": false,
@@ -4099,9 +4099,9 @@
                     "name": "category",
                     "location": {
                       "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/BLEAppearance.ts",
-                      "line": 57,
+                      "line": 4,
                       "col": 2320,
-                      "byteIndex": 7339
+                      "byteIndex": 4530
                     },
                     "params": [],
                     "computed": false,
@@ -4120,9 +4120,9 @@
                     "name": "subcategory",
                     "location": {
                       "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/BLEAppearance.ts",
-                      "line": 57,
+                      "line": 4,
                       "col": 2349,
-                      "byteIndex": 7368
+                      "byteIndex": 4559
                     },
                     "params": [],
                     "computed": false,
@@ -4153,9 +4153,9 @@
                     "name": "category",
                     "location": {
                       "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/BLEAppearance.ts",
-                      "line": 57,
+                      "line": 4,
                       "col": 2408,
-                      "byteIndex": 7427
+                      "byteIndex": 4618
                     },
                     "params": [],
                     "computed": false,
@@ -4174,9 +4174,9 @@
                     "name": "subcategory",
                     "location": {
                       "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/BLEAppearance.ts",
-                      "line": 57,
+                      "line": 4,
                       "col": 2439,
-                      "byteIndex": 7458
+                      "byteIndex": 4649
                     },
                     "params": [],
                     "computed": false,
@@ -4207,9 +4207,9 @@
                     "name": "category",
                     "location": {
                       "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/BLEAppearance.ts",
-                      "line": 57,
+                      "line": 4,
                       "col": 2500,
-                      "byteIndex": 7519
+                      "byteIndex": 4710
                     },
                     "params": [],
                     "computed": false,
@@ -4228,9 +4228,9 @@
                     "name": "subcategory",
                     "location": {
                       "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/BLEAppearance.ts",
-                      "line": 57,
+                      "line": 4,
                       "col": 2527,
-                      "byteIndex": 7546
+                      "byteIndex": 4737
                     },
                     "params": [],
                     "computed": false,
@@ -4261,9 +4261,9 @@
                     "name": "category",
                     "location": {
                       "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/BLEAppearance.ts",
-                      "line": 57,
+                      "line": 4,
                       "col": 2584,
-                      "byteIndex": 7603
+                      "byteIndex": 4794
                     },
                     "params": [],
                     "computed": false,
@@ -4282,9 +4282,9 @@
                     "name": "subcategory",
                     "location": {
                       "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/BLEAppearance.ts",
-                      "line": 57,
+                      "line": 4,
                       "col": 2611,
-                      "byteIndex": 7630
+                      "byteIndex": 4821
                     },
                     "params": [],
                     "computed": false,
@@ -4315,9 +4315,9 @@
                     "name": "category",
                     "location": {
                       "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/BLEAppearance.ts",
-                      "line": 57,
+                      "line": 4,
                       "col": 2668,
-                      "byteIndex": 7687
+                      "byteIndex": 4878
                     },
                     "params": [],
                     "computed": false,
@@ -4336,9 +4336,9 @@
                     "name": "subcategory",
                     "location": {
                       "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/BLEAppearance.ts",
-                      "line": 57,
+                      "line": 4,
                       "col": 2698,
-                      "byteIndex": 7717
+                      "byteIndex": 4908
                     },
                     "params": [],
                     "computed": false,
@@ -4369,9 +4369,9 @@
                     "name": "category",
                     "location": {
                       "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/BLEAppearance.ts",
-                      "line": 57,
+                      "line": 4,
                       "col": 2758,
-                      "byteIndex": 7777
+                      "byteIndex": 4968
                     },
                     "params": [],
                     "computed": false,
@@ -4390,9 +4390,9 @@
                     "name": "subcategory",
                     "location": {
                       "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/BLEAppearance.ts",
-                      "line": 57,
+                      "line": 4,
                       "col": 2783,
-                      "byteIndex": 7802
+                      "byteIndex": 4993
                     },
                     "params": [],
                     "computed": false,
@@ -4423,9 +4423,9 @@
                     "name": "category",
                     "location": {
                       "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/BLEAppearance.ts",
-                      "line": 57,
+                      "line": 4,
                       "col": 2838,
-                      "byteIndex": 7857
+                      "byteIndex": 5048
                     },
                     "params": [],
                     "computed": false,
@@ -4444,9 +4444,9 @@
                     "name": "subcategory",
                     "location": {
                       "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/BLEAppearance.ts",
-                      "line": 57,
+                      "line": 4,
                       "col": 2865,
-                      "byteIndex": 7884
+                      "byteIndex": 5075
                     },
                     "params": [],
                     "computed": false,
@@ -4477,9 +4477,9 @@
                     "name": "category",
                     "location": {
                       "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/BLEAppearance.ts",
-                      "line": 57,
+                      "line": 4,
                       "col": 2922,
-                      "byteIndex": 7941
+                      "byteIndex": 5132
                     },
                     "params": [],
                     "computed": false,
@@ -4498,9 +4498,9 @@
                     "name": "subcategory",
                     "location": {
                       "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/BLEAppearance.ts",
-                      "line": 57,
+                      "line": 4,
                       "col": 2954,
-                      "byteIndex": 7973
+                      "byteIndex": 5164
                     },
                     "params": [],
                     "computed": false,
@@ -4531,9 +4531,9 @@
                     "name": "category",
                     "location": {
                       "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/BLEAppearance.ts",
-                      "line": 57,
+                      "line": 4,
                       "col": 3016,
-                      "byteIndex": 8035
+                      "byteIndex": 5226
                     },
                     "params": [],
                     "computed": false,
@@ -4552,9 +4552,9 @@
                     "name": "subcategory",
                     "location": {
                       "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/BLEAppearance.ts",
-                      "line": 57,
+                      "line": 4,
                       "col": 3049,
-                      "byteIndex": 8068
+                      "byteIndex": 5259
                     },
                     "params": [],
                     "computed": false,
@@ -4585,9 +4585,9 @@
                     "name": "category",
                     "location": {
                       "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/BLEAppearance.ts",
-                      "line": 57,
+                      "line": 4,
                       "col": 3112,
-                      "byteIndex": 8131
+                      "byteIndex": 5322
                     },
                     "params": [],
                     "computed": false,
@@ -4606,9 +4606,9 @@
                     "name": "subcategory",
                     "location": {
                       "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/BLEAppearance.ts",
-                      "line": 57,
+                      "line": 4,
                       "col": 3147,
-                      "byteIndex": 8166
+                      "byteIndex": 5357
                     },
                     "params": [],
                     "computed": false,
@@ -4639,9 +4639,9 @@
                     "name": "category",
                     "location": {
                       "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/BLEAppearance.ts",
-                      "line": 57,
+                      "line": 4,
                       "col": 3212,
-                      "byteIndex": 8231
+                      "byteIndex": 5422
                     },
                     "params": [],
                     "computed": false,
@@ -4660,9 +4660,9 @@
                     "name": "subcategory",
                     "location": {
                       "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/BLEAppearance.ts",
-                      "line": 57,
+                      "line": 4,
                       "col": 3236,
-                      "byteIndex": 8255
+                      "byteIndex": 5446
                     },
                     "params": [],
                     "computed": false,
@@ -4693,9 +4693,9 @@
                     "name": "category",
                     "location": {
                       "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/BLEAppearance.ts",
-                      "line": 57,
+                      "line": 4,
                       "col": 3290,
-                      "byteIndex": 8309
+                      "byteIndex": 5500
                     },
                     "params": [],
                     "computed": false,
@@ -4714,9 +4714,9 @@
                     "name": "subcategory",
                     "location": {
                       "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/BLEAppearance.ts",
-                      "line": 57,
+                      "line": 4,
                       "col": 3317,
-                      "byteIndex": 8336
+                      "byteIndex": 5527
                     },
                     "params": [],
                     "computed": false,
@@ -4747,9 +4747,9 @@
                     "name": "category",
                     "location": {
                       "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/BLEAppearance.ts",
-                      "line": 57,
+                      "line": 4,
                       "col": 3374,
-                      "byteIndex": 8393
+                      "byteIndex": 5584
                     },
                     "params": [],
                     "computed": false,
@@ -4768,9 +4768,9 @@
                     "name": "subcategory",
                     "location": {
                       "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/BLEAppearance.ts",
-                      "line": 57,
+                      "line": 4,
                       "col": 3406,
-                      "byteIndex": 8425
+                      "byteIndex": 5616
                     },
                     "params": [],
                     "computed": false,
@@ -4801,9 +4801,9 @@
                     "name": "category",
                     "location": {
                       "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/BLEAppearance.ts",
-                      "line": 57,
+                      "line": 4,
                       "col": 3468,
-                      "byteIndex": 8487
+                      "byteIndex": 5678
                     },
                     "params": [],
                     "computed": false,
@@ -4822,9 +4822,9 @@
                     "name": "subcategory",
                     "location": {
                       "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/BLEAppearance.ts",
-                      "line": 57,
+                      "line": 4,
                       "col": 3494,
-                      "byteIndex": 8513
+                      "byteIndex": 5704
                     },
                     "params": [],
                     "computed": false,
@@ -4855,9 +4855,9 @@
                     "name": "category",
                     "location": {
                       "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/BLEAppearance.ts",
-                      "line": 57,
+                      "line": 4,
                       "col": 3550,
-                      "byteIndex": 8569
+                      "byteIndex": 5760
                     },
                     "params": [],
                     "computed": false,
@@ -4876,9 +4876,9 @@
                     "name": "subcategory",
                     "location": {
                       "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/BLEAppearance.ts",
-                      "line": 57,
+                      "line": 4,
                       "col": 3572,
-                      "byteIndex": 8591
+                      "byteIndex": 5782
                     },
                     "params": [],
                     "computed": false,
@@ -4909,9 +4909,9 @@
                     "name": "category",
                     "location": {
                       "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/BLEAppearance.ts",
-                      "line": 57,
+                      "line": 4,
                       "col": 3624,
-                      "byteIndex": 8643
+                      "byteIndex": 5834
                     },
                     "params": [],
                     "computed": false,
@@ -4930,9 +4930,9 @@
                     "name": "subcategory",
                     "location": {
                       "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/BLEAppearance.ts",
-                      "line": 57,
+                      "line": 4,
                       "col": 3647,
-                      "byteIndex": 8666
+                      "byteIndex": 5857
                     },
                     "params": [],
                     "computed": false,
@@ -4963,9 +4963,9 @@
                     "name": "category",
                     "location": {
                       "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/BLEAppearance.ts",
-                      "line": 57,
+                      "line": 4,
                       "col": 3700,
-                      "byteIndex": 8719
+                      "byteIndex": 5910
                     },
                     "params": [],
                     "computed": false,
@@ -4984,9 +4984,9 @@
                     "name": "subcategory",
                     "location": {
                       "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/BLEAppearance.ts",
-                      "line": 57,
+                      "line": 4,
                       "col": 3729,
-                      "byteIndex": 8748
+                      "byteIndex": 5939
                     },
                     "params": [],
                     "computed": false,
@@ -5017,9 +5017,9 @@
                     "name": "category",
                     "location": {
                       "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/BLEAppearance.ts",
-                      "line": 57,
+                      "line": 4,
                       "col": 3788,
-                      "byteIndex": 8807
+                      "byteIndex": 5998
                     },
                     "params": [],
                     "computed": false,
@@ -5038,9 +5038,9 @@
                     "name": "subcategory",
                     "location": {
                       "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/BLEAppearance.ts",
-                      "line": 57,
+                      "line": 4,
                       "col": 3815,
-                      "byteIndex": 8834
+                      "byteIndex": 6025
                     },
                     "params": [],
                     "computed": false,
@@ -5071,9 +5071,9 @@
                     "name": "category",
                     "location": {
                       "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/BLEAppearance.ts",
-                      "line": 57,
+                      "line": 4,
                       "col": 3872,
-                      "byteIndex": 8891
+                      "byteIndex": 6082
                     },
                     "params": [],
                     "computed": false,
@@ -5092,9 +5092,9 @@
                     "name": "subcategory",
                     "location": {
                       "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/BLEAppearance.ts",
-                      "line": 57,
+                      "line": 4,
                       "col": 3910,
-                      "byteIndex": 8929
+                      "byteIndex": 6120
                     },
                     "params": [],
                     "computed": false,
@@ -5125,9 +5125,9 @@
                     "name": "category",
                     "location": {
                       "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/BLEAppearance.ts",
-                      "line": 57,
+                      "line": 4,
                       "col": 3978,
-                      "byteIndex": 8997
+                      "byteIndex": 6188
                     },
                     "params": [],
                     "computed": false,
@@ -5146,9 +5146,9 @@
                     "name": "subcategory",
                     "location": {
                       "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/BLEAppearance.ts",
-                      "line": 57,
+                      "line": 4,
                       "col": 4018,
-                      "byteIndex": 9037
+                      "byteIndex": 6228
                     },
                     "params": [],
                     "computed": false,
@@ -5179,9 +5179,9 @@
                     "name": "category",
                     "location": {
                       "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/BLEAppearance.ts",
-                      "line": 57,
+                      "line": 4,
                       "col": 4088,
-                      "byteIndex": 9107
+                      "byteIndex": 6298
                     },
                     "params": [],
                     "computed": false,
@@ -5200,9 +5200,9 @@
                     "name": "subcategory",
                     "location": {
                       "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/BLEAppearance.ts",
-                      "line": 57,
+                      "line": 4,
                       "col": 4115,
-                      "byteIndex": 9134
+                      "byteIndex": 6325
                     },
                     "params": [],
                     "computed": false,
@@ -5233,9 +5233,9 @@
                     "name": "category",
                     "location": {
                       "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/BLEAppearance.ts",
-                      "line": 57,
+                      "line": 4,
                       "col": 4172,
-                      "byteIndex": 9191
+                      "byteIndex": 6382
                     },
                     "params": [],
                     "computed": false,
@@ -5254,9 +5254,9 @@
                     "name": "subcategory",
                     "location": {
                       "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/BLEAppearance.ts",
-                      "line": 57,
+                      "line": 4,
                       "col": 4206,
-                      "byteIndex": 9225
+                      "byteIndex": 6416
                     },
                     "params": [],
                     "computed": false,
@@ -5287,9 +5287,9 @@
                     "name": "category",
                     "location": {
                       "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/BLEAppearance.ts",
-                      "line": 57,
+                      "line": 4,
                       "col": 4270,
-                      "byteIndex": 9289
+                      "byteIndex": 6480
                     },
                     "params": [],
                     "computed": false,
@@ -5308,9 +5308,9 @@
                     "name": "subcategory",
                     "location": {
                       "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/BLEAppearance.ts",
-                      "line": 57,
+                      "line": 4,
                       "col": 4296,
-                      "byteIndex": 9315
+                      "byteIndex": 6506
                     },
                     "params": [],
                     "computed": false,
@@ -5341,9 +5341,9 @@
                     "name": "category",
                     "location": {
                       "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/BLEAppearance.ts",
-                      "line": 57,
+                      "line": 4,
                       "col": 4352,
-                      "byteIndex": 9371
+                      "byteIndex": 6562
                     },
                     "params": [],
                     "computed": false,
@@ -5362,9 +5362,9 @@
                     "name": "subcategory",
                     "location": {
                       "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/BLEAppearance.ts",
-                      "line": 57,
+                      "line": 4,
                       "col": 4389,
-                      "byteIndex": 9408
+                      "byteIndex": 6599
                     },
                     "params": [],
                     "computed": false,
@@ -5395,9 +5395,9 @@
                     "name": "category",
                     "location": {
                       "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/BLEAppearance.ts",
-                      "line": 57,
+                      "line": 4,
                       "col": 4456,
-                      "byteIndex": 9475
+                      "byteIndex": 6666
                     },
                     "params": [],
                     "computed": false,
@@ -5416,9 +5416,9 @@
                     "name": "subcategory",
                     "location": {
                       "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/BLEAppearance.ts",
-                      "line": 57,
+                      "line": 4,
                       "col": 4499,
-                      "byteIndex": 9518
+                      "byteIndex": 6709
                     },
                     "params": [],
                     "computed": false,
@@ -5449,9 +5449,9 @@
                     "name": "category",
                     "location": {
                       "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/BLEAppearance.ts",
-                      "line": 57,
+                      "line": 4,
                       "col": 4572,
-                      "byteIndex": 9591
+                      "byteIndex": 6782
                     },
                     "params": [],
                     "computed": false,
@@ -5470,9 +5470,9 @@
                     "name": "subcategory",
                     "location": {
                       "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/BLEAppearance.ts",
-                      "line": 57,
+                      "line": 4,
                       "col": 4603,
-                      "byteIndex": 9622
+                      "byteIndex": 6813
                     },
                     "params": [],
                     "computed": false,
@@ -39092,11 +39092,14 @@
       "isDefault": false,
       "location": {
         "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/WidgetSettingsDeclarationList.ts",
-        "line": 4,
+        "line": 13,
         "col": 0,
-        "byteIndex": 157
+        "byteIndex": 551
       },
       "declarationKind": "export",
+      "jsDoc": {
+        "doc": "The Widget Settings Declaration is a list of groups\neach group is a list of items and can have subgroups with headers.\n\nThis declarations will be used to render and store the settings of the widget on a\nfriendy way for the users, also will match the styles of the settings window.\n\nWith this, custom windows or widgets to configure an specific widget are not needed."
+      },
       "kind": "typeAlias",
       "typeAliasDef": {
         "tsType": {
@@ -41582,9 +41585,9 @@
       "isDefault": false,
       "location": {
         "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/WsdGroup.ts",
-        "line": 5,
+        "line": 4,
         "col": 0,
-        "byteIndex": 212
+        "byteIndex": 167
       },
       "declarationKind": "export",
       "kind": "typeAlias",
@@ -41597,47 +41600,15 @@
             "methods": [],
             "properties": [
               {
-                "name": "header",
+                "name": "children",
                 "jsDoc": {
-                  "doc": "Header configuration normally is a switch to enable or disable the group.\n\n**Note**: This property is ignored if the group is the root. Should be used on SubGroups."
+                  "doc": "List of items in this group"
                 },
                 "location": {
                   "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/WsdGroup.ts",
-                  "line": 11,
+                  "line": 8,
                   "col": 0,
-                  "byteIndex": 419
-                },
-                "params": [],
-                "computed": false,
-                "optional": false,
-                "tsType": {
-                  "repr": "",
-                  "kind": "union",
-                  "union": [
-                    {
-                      "repr": "WsdItem",
-                      "kind": "typeRef",
-                      "typeRef": {
-                        "typeParams": null,
-                        "typeName": "WsdItem"
-                      }
-                    },
-                    {
-                      "repr": "null",
-                      "kind": "keyword",
-                      "keyword": "null"
-                    }
-                  ]
-                },
-                "typeParams": []
-              },
-              {
-                "name": "settings",
-                "location": {
-                  "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/WsdGroup.ts",
-                  "line": 11,
-                  "col": 24,
-                  "byteIndex": 443
+                  "byteIndex": 232
                 },
                 "params": [],
                 "computed": false,
@@ -41676,7 +41647,7 @@
         "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/WsdGroupEntry.ts",
         "line": 5,
         "col": 0,
-        "byteIndex": 202
+        "byteIndex": 208
       },
       "declarationKind": "export",
       "kind": "typeAlias",
@@ -41698,17 +41669,17 @@
                       "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/WsdGroupEntry.ts",
                       "line": 5,
                       "col": 30,
-                      "byteIndex": 232
+                      "byteIndex": 238
                     },
                     "params": [],
                     "computed": false,
                     "optional": false,
                     "tsType": {
-                      "repr": "WsdGroup",
+                      "repr": "WsdSubGroup",
                       "kind": "typeRef",
                       "typeRef": {
                         "typeParams": null,
-                        "typeName": "WsdGroup"
+                        "typeName": "WsdSubGroup"
                       }
                     },
                     "typeParams": []
@@ -41730,8 +41701,8 @@
                     "location": {
                       "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/WsdGroupEntry.ts",
                       "line": 5,
-                      "col": 57,
-                      "byteIndex": 259
+                      "col": 60,
+                      "byteIndex": 268
                     },
                     "params": [],
                     "computed": false,
@@ -41761,9 +41732,9 @@
       "isDefault": false,
       "location": {
         "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/WsdItem.ts",
-        "line": 7,
+        "line": 9,
         "col": 0,
-        "byteIndex": 354
+        "byteIndex": 464
       },
       "declarationKind": "export",
       "kind": "typeAlias",
@@ -41787,9 +41758,9 @@
                         "name": "type",
                         "location": {
                           "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/WsdItem.ts",
-                          "line": 7,
+                          "line": 9,
                           "col": 24,
-                          "byteIndex": 378
+                          "byteIndex": 488
                         },
                         "params": [],
                         "computed": false,
@@ -41834,9 +41805,9 @@
                         "name": "type",
                         "location": {
                           "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/WsdItem.ts",
-                          "line": 7,
+                          "line": 9,
                           "col": 63,
-                          "byteIndex": 417
+                          "byteIndex": 527
                         },
                         "params": [],
                         "computed": false,
@@ -41881,9 +41852,9 @@
                         "name": "type",
                         "location": {
                           "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/WsdItem.ts",
-                          "line": 7,
+                          "line": 9,
                           "col": 102,
-                          "byteIndex": 456
+                          "byteIndex": 566
                         },
                         "params": [],
                         "computed": false,
@@ -41928,9 +41899,9 @@
                         "name": "type",
                         "location": {
                           "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/WsdItem.ts",
-                          "line": 7,
+                          "line": 9,
                           "col": 148,
-                          "byteIndex": 502
+                          "byteIndex": 612
                         },
                         "params": [],
                         "computed": false,
@@ -41959,6 +41930,100 @@
                   }
                 }
               ]
+            },
+            {
+              "repr": "",
+              "kind": "intersection",
+              "intersection": [
+                {
+                  "repr": "",
+                  "kind": "typeLiteral",
+                  "typeLiteral": {
+                    "constructors": [],
+                    "methods": [],
+                    "properties": [
+                      {
+                        "name": "type",
+                        "location": {
+                          "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/WsdItem.ts",
+                          "line": 9,
+                          "col": 198,
+                          "byteIndex": 662
+                        },
+                        "params": [],
+                        "computed": false,
+                        "optional": false,
+                        "tsType": {
+                          "repr": "range",
+                          "kind": "literal",
+                          "literal": {
+                            "kind": "string",
+                            "string": "range"
+                          }
+                        },
+                        "typeParams": []
+                      }
+                    ],
+                    "callSignatures": [],
+                    "indexSignatures": []
+                  }
+                },
+                {
+                  "repr": "WsdItemRange",
+                  "kind": "typeRef",
+                  "typeRef": {
+                    "typeParams": null,
+                    "typeName": "WsdItemRange"
+                  }
+                }
+              ]
+            },
+            {
+              "repr": "",
+              "kind": "intersection",
+              "intersection": [
+                {
+                  "repr": "",
+                  "kind": "typeLiteral",
+                  "typeLiteral": {
+                    "constructors": [],
+                    "methods": [],
+                    "properties": [
+                      {
+                        "name": "type",
+                        "location": {
+                          "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/WsdItem.ts",
+                          "line": 9,
+                          "col": 235,
+                          "byteIndex": 699
+                        },
+                        "params": [],
+                        "computed": false,
+                        "optional": false,
+                        "tsType": {
+                          "repr": "color",
+                          "kind": "literal",
+                          "literal": {
+                            "kind": "string",
+                            "string": "color"
+                          }
+                        },
+                        "typeParams": []
+                      }
+                    ],
+                    "callSignatures": [],
+                    "indexSignatures": []
+                  }
+                },
+                {
+                  "repr": "WsdItemColor",
+                  "kind": "typeRef",
+                  "typeRef": {
+                    "typeParams": null,
+                    "typeName": "WsdItemColor"
+                  }
+                }
+              ]
             }
           ]
         },
@@ -41966,13 +42031,13 @@
       }
     },
     {
-      "name": "WsdItemInputNumber",
+      "name": "WsdItemColor",
       "isDefault": false,
       "location": {
-        "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/WsdItemInputNumber.ts",
-        "line": 3,
+        "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/WsdItemColor.ts",
+        "line": 4,
         "col": 0,
-        "byteIndex": 110
+        "byteIndex": 165
       },
       "declarationKind": "export",
       "kind": "typeAlias",
@@ -41987,13 +42052,13 @@
               {
                 "name": "key",
                 "jsDoc": {
-                  "doc": "Unique key for this item, used to identify it in the settings"
+                  "doc": "Unique key for this item, used to identify it in the settings, should be unique.\\\nIf duplicated, duplicated items will be ignored."
                 },
                 "location": {
-                  "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/WsdItemInputNumber.ts",
-                  "line": 7,
+                  "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/WsdItemColor.ts",
+                  "line": 9,
                   "col": 0,
-                  "byteIndex": 219
+                  "byteIndex": 340
                 },
                 "params": [],
                 "computed": false,
@@ -42008,21 +42073,24 @@
               {
                 "name": "label",
                 "jsDoc": {
-                  "doc": "Label for this item could start with the prefix `t::` for translation\n\nexample: `t::obj.inner.translation_key`"
+                  "doc": "Label for this item could start with the prefix `t::` for translation"
                 },
                 "location": {
-                  "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/WsdItemInputNumber.ts",
+                  "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/WsdItemColor.ts",
                   "line": 13,
                   "col": 0,
-                  "byteIndex": 360
+                  "byteIndex": 435
                 },
                 "params": [],
                 "computed": false,
                 "optional": false,
                 "tsType": {
-                  "repr": "string",
-                  "kind": "keyword",
-                  "keyword": "string"
+                  "repr": "ResourceText",
+                  "kind": "typeRef",
+                  "typeRef": {
+                    "typeParams": null,
+                    "typeName": "ResourceText"
+                  }
                 },
                 "typeParams": []
               },
@@ -42032,10 +42100,10 @@
                   "doc": "This setting could be set by monitor on the settings by monitor section."
                 },
                 "location": {
-                  "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/WsdItemInputNumber.ts",
+                  "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/WsdItemColor.ts",
                   "line": 17,
                   "col": 0,
-                  "byteIndex": 460
+                  "byteIndex": 541
                 },
                 "params": [],
                 "computed": false,
@@ -42053,10 +42121,10 @@
                   "doc": "Keys of items to be set in order to enable this item.\n\nit uses js logic (!!value) to determine if the item is enabled"
                 },
                 "location": {
-                  "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/WsdItemInputNumber.ts",
+                  "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/WsdItemColor.ts",
                   "line": 23,
                   "col": 0,
-                  "byteIndex": 623
+                  "byteIndex": 704
                 },
                 "params": [],
                 "computed": false,
@@ -42078,31 +42146,179 @@
                 "typeParams": []
               },
               {
-                "name": "default",
+                "name": "defaultValue",
                 "location": {
-                  "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/WsdItemInputNumber.ts",
+                  "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/WsdItemColor.ts",
                   "line": 23,
                   "col": 29,
-                  "byteIndex": 652
+                  "byteIndex": 733
                 },
                 "params": [],
                 "computed": false,
                 "optional": false,
                 "tsType": {
-                  "repr": "",
-                  "kind": "union",
-                  "union": [
-                    {
-                      "repr": "number",
-                      "kind": "keyword",
-                      "keyword": "number"
-                    },
-                    {
-                      "repr": "null",
-                      "kind": "keyword",
-                      "keyword": "null"
-                    }
-                  ]
+                  "repr": "string",
+                  "kind": "keyword",
+                  "keyword": "string"
+                },
+                "typeParams": []
+              },
+              {
+                "name": "allowAlpha",
+                "location": {
+                  "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/WsdItemColor.ts",
+                  "line": 23,
+                  "col": 51,
+                  "byteIndex": 755
+                },
+                "params": [],
+                "computed": false,
+                "optional": false,
+                "tsType": {
+                  "repr": "boolean",
+                  "kind": "keyword",
+                  "keyword": "boolean"
+                },
+                "typeParams": []
+              }
+            ],
+            "callSignatures": [],
+            "indexSignatures": []
+          }
+        },
+        "typeParams": []
+      }
+    },
+    {
+      "name": "WsdItemInputNumber",
+      "isDefault": false,
+      "location": {
+        "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/WsdItemInputNumber.ts",
+        "line": 4,
+        "col": 0,
+        "byteIndex": 165
+      },
+      "declarationKind": "export",
+      "kind": "typeAlias",
+      "typeAliasDef": {
+        "tsType": {
+          "repr": "",
+          "kind": "typeLiteral",
+          "typeLiteral": {
+            "constructors": [],
+            "methods": [],
+            "properties": [
+              {
+                "name": "key",
+                "jsDoc": {
+                  "doc": "Unique key for this item, used to identify it in the settings, should be unique.\\\nIf duplicated, duplicated items will be ignored."
+                },
+                "location": {
+                  "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/WsdItemInputNumber.ts",
+                  "line": 9,
+                  "col": 0,
+                  "byteIndex": 346
+                },
+                "params": [],
+                "computed": false,
+                "optional": false,
+                "tsType": {
+                  "repr": "string",
+                  "kind": "keyword",
+                  "keyword": "string"
+                },
+                "typeParams": []
+              },
+              {
+                "name": "label",
+                "jsDoc": {
+                  "doc": "Label for this item could start with the prefix `t::` for translation"
+                },
+                "location": {
+                  "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/WsdItemInputNumber.ts",
+                  "line": 13,
+                  "col": 0,
+                  "byteIndex": 441
+                },
+                "params": [],
+                "computed": false,
+                "optional": false,
+                "tsType": {
+                  "repr": "ResourceText",
+                  "kind": "typeRef",
+                  "typeRef": {
+                    "typeParams": null,
+                    "typeName": "ResourceText"
+                  }
+                },
+                "typeParams": []
+              },
+              {
+                "name": "allowSetByMonitor",
+                "jsDoc": {
+                  "doc": "This setting could be set by monitor on the settings by monitor section."
+                },
+                "location": {
+                  "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/WsdItemInputNumber.ts",
+                  "line": 17,
+                  "col": 0,
+                  "byteIndex": 547
+                },
+                "params": [],
+                "computed": false,
+                "optional": false,
+                "tsType": {
+                  "repr": "boolean",
+                  "kind": "keyword",
+                  "keyword": "boolean"
+                },
+                "typeParams": []
+              },
+              {
+                "name": "dependencies",
+                "jsDoc": {
+                  "doc": "Keys of items to be set in order to enable this item.\n\nit uses js logic (!!value) to determine if the item is enabled"
+                },
+                "location": {
+                  "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/WsdItemInputNumber.ts",
+                  "line": 23,
+                  "col": 0,
+                  "byteIndex": 710
+                },
+                "params": [],
+                "computed": false,
+                "optional": false,
+                "tsType": {
+                  "repr": "Array",
+                  "kind": "typeRef",
+                  "typeRef": {
+                    "typeParams": [
+                      {
+                        "repr": "string",
+                        "kind": "keyword",
+                        "keyword": "string"
+                      }
+                    ],
+                    "typeName": "Array"
+                  }
+                },
+                "typeParams": []
+              },
+              {
+                "name": "defaultValue",
+                "location": {
+                  "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/WsdItemInputNumber.ts",
+                  "line": 23,
+                  "col": 29,
+                  "byteIndex": 739
+                },
+                "params": [],
+                "computed": false,
+                "optional": false,
+                "tsType": {
+                  "repr": "number",
+                  "kind": "keyword",
+                  "keyword": "number"
                 },
                 "typeParams": []
               },
@@ -42111,8 +42327,8 @@
                 "location": {
                   "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/WsdItemInputNumber.ts",
                   "line": 23,
-                  "col": 53,
-                  "byteIndex": 676
+                  "col": 51,
+                  "byteIndex": 761
                 },
                 "params": [],
                 "computed": false,
@@ -42140,8 +42356,8 @@
                 "location": {
                   "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/WsdItemInputNumber.ts",
                   "line": 23,
-                  "col": 73,
-                  "byteIndex": 696
+                  "col": 71,
+                  "byteIndex": 781
                 },
                 "params": [],
                 "computed": false,
@@ -42177,9 +42393,9 @@
       "isDefault": false,
       "location": {
         "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/WsdItemInputText.ts",
-        "line": 3,
+        "line": 4,
         "col": 0,
-        "byteIndex": 110
+        "byteIndex": 165
       },
       "declarationKind": "export",
       "kind": "typeAlias",
@@ -42194,13 +42410,13 @@
               {
                 "name": "key",
                 "jsDoc": {
-                  "doc": "Unique key for this item, used to identify it in the settings"
+                  "doc": "Unique key for this item, used to identify it in the settings, should be unique.\\\nIf duplicated, duplicated items will be ignored."
                 },
                 "location": {
                   "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/WsdItemInputText.ts",
-                  "line": 7,
+                  "line": 9,
                   "col": 0,
-                  "byteIndex": 217
+                  "byteIndex": 344
                 },
                 "params": [],
                 "computed": false,
@@ -42215,21 +42431,24 @@
               {
                 "name": "label",
                 "jsDoc": {
-                  "doc": "Label for this item could start with the prefix `t::` for translation\n\nexample: `t::obj.inner.translation_key`"
+                  "doc": "Label for this item could start with the prefix `t::` for translation"
                 },
                 "location": {
                   "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/WsdItemInputText.ts",
                   "line": 13,
                   "col": 0,
-                  "byteIndex": 358
+                  "byteIndex": 439
                 },
                 "params": [],
                 "computed": false,
                 "optional": false,
                 "tsType": {
-                  "repr": "string",
-                  "kind": "keyword",
-                  "keyword": "string"
+                  "repr": "ResourceText",
+                  "kind": "typeRef",
+                  "typeRef": {
+                    "typeParams": null,
+                    "typeName": "ResourceText"
+                  }
                 },
                 "typeParams": []
               },
@@ -42242,7 +42461,7 @@
                   "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/WsdItemInputText.ts",
                   "line": 17,
                   "col": 0,
-                  "byteIndex": 458
+                  "byteIndex": 545
                 },
                 "params": [],
                 "computed": false,
@@ -42263,7 +42482,7 @@
                   "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/WsdItemInputText.ts",
                   "line": 23,
                   "col": 0,
-                  "byteIndex": 621
+                  "byteIndex": 708
                 },
                 "params": [],
                 "computed": false,
@@ -42285,12 +42504,207 @@
                 "typeParams": []
               },
               {
-                "name": "default",
+                "name": "defaultValue",
                 "location": {
                   "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/WsdItemInputText.ts",
                   "line": 23,
                   "col": 29,
-                  "byteIndex": 650
+                  "byteIndex": 737
+                },
+                "params": [],
+                "computed": false,
+                "optional": false,
+                "tsType": {
+                  "repr": "string",
+                  "kind": "keyword",
+                  "keyword": "string"
+                },
+                "typeParams": []
+              }
+            ],
+            "callSignatures": [],
+            "indexSignatures": []
+          }
+        },
+        "typeParams": []
+      }
+    },
+    {
+      "name": "WsdItemRange",
+      "isDefault": false,
+      "location": {
+        "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/WsdItemRange.ts",
+        "line": 4,
+        "col": 0,
+        "byteIndex": 165
+      },
+      "declarationKind": "export",
+      "kind": "typeAlias",
+      "typeAliasDef": {
+        "tsType": {
+          "repr": "",
+          "kind": "typeLiteral",
+          "typeLiteral": {
+            "constructors": [],
+            "methods": [],
+            "properties": [
+              {
+                "name": "key",
+                "jsDoc": {
+                  "doc": "Unique key for this item, used to identify it in the settings, should be unique.\\\nIf duplicated, duplicated items will be ignored."
+                },
+                "location": {
+                  "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/WsdItemRange.ts",
+                  "line": 9,
+                  "col": 0,
+                  "byteIndex": 340
+                },
+                "params": [],
+                "computed": false,
+                "optional": false,
+                "tsType": {
+                  "repr": "string",
+                  "kind": "keyword",
+                  "keyword": "string"
+                },
+                "typeParams": []
+              },
+              {
+                "name": "label",
+                "jsDoc": {
+                  "doc": "Label for this item could start with the prefix `t::` for translation"
+                },
+                "location": {
+                  "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/WsdItemRange.ts",
+                  "line": 13,
+                  "col": 0,
+                  "byteIndex": 435
+                },
+                "params": [],
+                "computed": false,
+                "optional": false,
+                "tsType": {
+                  "repr": "ResourceText",
+                  "kind": "typeRef",
+                  "typeRef": {
+                    "typeParams": null,
+                    "typeName": "ResourceText"
+                  }
+                },
+                "typeParams": []
+              },
+              {
+                "name": "allowSetByMonitor",
+                "jsDoc": {
+                  "doc": "This setting could be set by monitor on the settings by monitor section."
+                },
+                "location": {
+                  "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/WsdItemRange.ts",
+                  "line": 17,
+                  "col": 0,
+                  "byteIndex": 541
+                },
+                "params": [],
+                "computed": false,
+                "optional": false,
+                "tsType": {
+                  "repr": "boolean",
+                  "kind": "keyword",
+                  "keyword": "boolean"
+                },
+                "typeParams": []
+              },
+              {
+                "name": "dependencies",
+                "jsDoc": {
+                  "doc": "Keys of items to be set in order to enable this item.\n\nit uses js logic (!!value) to determine if the item is enabled"
+                },
+                "location": {
+                  "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/WsdItemRange.ts",
+                  "line": 23,
+                  "col": 0,
+                  "byteIndex": 704
+                },
+                "params": [],
+                "computed": false,
+                "optional": false,
+                "tsType": {
+                  "repr": "Array",
+                  "kind": "typeRef",
+                  "typeRef": {
+                    "typeParams": [
+                      {
+                        "repr": "string",
+                        "kind": "keyword",
+                        "keyword": "string"
+                      }
+                    ],
+                    "typeName": "Array"
+                  }
+                },
+                "typeParams": []
+              },
+              {
+                "name": "defaultValue",
+                "location": {
+                  "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/WsdItemRange.ts",
+                  "line": 23,
+                  "col": 29,
+                  "byteIndex": 733
+                },
+                "params": [],
+                "computed": false,
+                "optional": false,
+                "tsType": {
+                  "repr": "number",
+                  "kind": "keyword",
+                  "keyword": "number"
+                },
+                "typeParams": []
+              },
+              {
+                "name": "from",
+                "location": {
+                  "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/WsdItemRange.ts",
+                  "line": 23,
+                  "col": 51,
+                  "byteIndex": 755
+                },
+                "params": [],
+                "computed": false,
+                "optional": false,
+                "tsType": {
+                  "repr": "number",
+                  "kind": "keyword",
+                  "keyword": "number"
+                },
+                "typeParams": []
+              },
+              {
+                "name": "to",
+                "location": {
+                  "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/WsdItemRange.ts",
+                  "line": 23,
+                  "col": 65,
+                  "byteIndex": 769
+                },
+                "params": [],
+                "computed": false,
+                "optional": false,
+                "tsType": {
+                  "repr": "number",
+                  "kind": "keyword",
+                  "keyword": "number"
+                },
+                "typeParams": []
+              },
+              {
+                "name": "step",
+                "location": {
+                  "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/WsdItemRange.ts",
+                  "line": 23,
+                  "col": 77,
+                  "byteIndex": 781
                 },
                 "params": [],
                 "computed": false,
@@ -42300,9 +42714,9 @@
                   "kind": "union",
                   "union": [
                     {
-                      "repr": "string",
+                      "repr": "number",
                       "kind": "keyword",
-                      "keyword": "string"
+                      "keyword": "number"
                     },
                     {
                       "repr": "null",
@@ -42326,9 +42740,9 @@
       "isDefault": false,
       "location": {
         "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/WsdItemSelect.ts",
-        "line": 5,
+        "line": 6,
         "col": 0,
-        "byteIndex": 250
+        "byteIndex": 305
       },
       "declarationKind": "export",
       "kind": "typeAlias",
@@ -42343,13 +42757,13 @@
               {
                 "name": "key",
                 "jsDoc": {
-                  "doc": "Unique key for this item, used to identify it in the settings"
+                  "doc": "Unique key for this item, used to identify it in the settings, should be unique.\\\nIf duplicated, duplicated items will be ignored."
                 },
                 "location": {
                   "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/WsdItemSelect.ts",
-                  "line": 9,
+                  "line": 11,
                   "col": 0,
-                  "byteIndex": 354
+                  "byteIndex": 481
                 },
                 "params": [],
                 "computed": false,
@@ -42364,21 +42778,24 @@
               {
                 "name": "label",
                 "jsDoc": {
-                  "doc": "Label for this item could start with the prefix `t::` for translation\n\nexample: `t::obj.inner.translation_key`"
+                  "doc": "Label for this item could start with the prefix `t::` for translation"
                 },
                 "location": {
                   "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/WsdItemSelect.ts",
                   "line": 15,
                   "col": 0,
-                  "byteIndex": 495
+                  "byteIndex": 576
                 },
                 "params": [],
                 "computed": false,
                 "optional": false,
                 "tsType": {
-                  "repr": "string",
-                  "kind": "keyword",
-                  "keyword": "string"
+                  "repr": "ResourceText",
+                  "kind": "typeRef",
+                  "typeRef": {
+                    "typeParams": null,
+                    "typeName": "ResourceText"
+                  }
                 },
                 "typeParams": []
               },
@@ -42391,7 +42808,7 @@
                   "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/WsdItemSelect.ts",
                   "line": 19,
                   "col": 0,
-                  "byteIndex": 595
+                  "byteIndex": 682
                 },
                 "params": [],
                 "computed": false,
@@ -42412,7 +42829,7 @@
                   "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/WsdItemSelect.ts",
                   "line": 25,
                   "col": 0,
-                  "byteIndex": 758
+                  "byteIndex": 845
                 },
                 "params": [],
                 "computed": false,
@@ -42434,41 +42851,12 @@
                 "typeParams": []
               },
               {
-                "name": "default",
-                "location": {
-                  "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/WsdItemSelect.ts",
-                  "line": 25,
-                  "col": 29,
-                  "byteIndex": 787
-                },
-                "params": [],
-                "computed": false,
-                "optional": false,
-                "tsType": {
-                  "repr": "",
-                  "kind": "union",
-                  "union": [
-                    {
-                      "repr": "string",
-                      "kind": "keyword",
-                      "keyword": "string"
-                    },
-                    {
-                      "repr": "null",
-                      "kind": "keyword",
-                      "keyword": "null"
-                    }
-                  ]
-                },
-                "typeParams": []
-              },
-              {
                 "name": "subtype",
                 "location": {
                   "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/WsdItemSelect.ts",
                   "line": 25,
-                  "col": 53,
-                  "byteIndex": 811
+                  "col": 29,
+                  "byteIndex": 874
                 },
                 "params": [],
                 "computed": false,
@@ -42484,12 +42872,30 @@
                 "typeParams": []
               },
               {
+                "name": "defaultValue",
+                "location": {
+                  "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/WsdItemSelect.ts",
+                  "line": 25,
+                  "col": 60,
+                  "byteIndex": 905
+                },
+                "params": [],
+                "computed": false,
+                "optional": false,
+                "tsType": {
+                  "repr": "string",
+                  "kind": "keyword",
+                  "keyword": "string"
+                },
+                "typeParams": []
+              },
+              {
                 "name": "options",
                 "location": {
                   "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/WsdItemSelect.ts",
                   "line": 25,
-                  "col": 84,
-                  "byteIndex": 842
+                  "col": 82,
+                  "byteIndex": 927
                 },
                 "params": [],
                 "computed": false,
@@ -42526,9 +42932,9 @@
       "isDefault": false,
       "location": {
         "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/WsdItemSelectOption.ts",
-        "line": 3,
+        "line": 4,
         "col": 0,
-        "byteIndex": 110
+        "byteIndex": 165
       },
       "declarationKind": "export",
       "kind": "typeAlias",
@@ -42541,20 +42947,58 @@
             "methods": [],
             "properties": [
               {
-                "name": "label",
+                "name": "icon",
+                "jsDoc": {
+                  "doc": "react icon name"
+                },
                 "location": {
                   "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/WsdItemSelectOption.ts",
-                  "line": 3,
-                  "col": 36,
-                  "byteIndex": 146
+                  "line": 8,
+                  "col": 0,
+                  "byteIndex": 229
                 },
                 "params": [],
                 "computed": false,
                 "optional": false,
                 "tsType": {
-                  "repr": "string",
-                  "kind": "keyword",
-                  "keyword": "string"
+                  "repr": "",
+                  "kind": "union",
+                  "union": [
+                    {
+                      "repr": "string",
+                      "kind": "keyword",
+                      "keyword": "string"
+                    },
+                    {
+                      "repr": "null",
+                      "kind": "keyword",
+                      "keyword": "null"
+                    }
+                  ]
+                },
+                "typeParams": []
+              },
+              {
+                "name": "label",
+                "jsDoc": {
+                  "doc": "The label to be displayed"
+                },
+                "location": {
+                  "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/WsdItemSelectOption.ts",
+                  "line": 12,
+                  "col": 0,
+                  "byteIndex": 288
+                },
+                "params": [],
+                "computed": false,
+                "optional": false,
+                "tsType": {
+                  "repr": "ResourceText",
+                  "kind": "typeRef",
+                  "typeRef": {
+                    "typeParams": null,
+                    "typeName": "ResourceText"
+                  }
                 },
                 "typeParams": []
               },
@@ -42565,9 +43009,9 @@
                 },
                 "location": {
                   "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/WsdItemSelectOption.ts",
-                  "line": 7,
+                  "line": 16,
                   "col": 0,
-                  "byteIndex": 240
+                  "byteIndex": 388
                 },
                 "params": [],
                 "computed": false,
@@ -42629,9 +43073,9 @@
       "isDefault": false,
       "location": {
         "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/WsdItemSwitch.ts",
-        "line": 3,
+        "line": 4,
         "col": 0,
-        "byteIndex": 110
+        "byteIndex": 165
       },
       "declarationKind": "export",
       "kind": "typeAlias",
@@ -42646,13 +43090,13 @@
               {
                 "name": "key",
                 "jsDoc": {
-                  "doc": "Unique key for this item, used to identify it in the settings"
+                  "doc": "Unique key for this item, used to identify it in the settings, should be unique.\\\nIf duplicated, duplicated items will be ignored."
                 },
                 "location": {
                   "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/WsdItemSwitch.ts",
-                  "line": 7,
+                  "line": 9,
                   "col": 0,
-                  "byteIndex": 214
+                  "byteIndex": 341
                 },
                 "params": [],
                 "computed": false,
@@ -42667,21 +43111,24 @@
               {
                 "name": "label",
                 "jsDoc": {
-                  "doc": "Label for this item could start with the prefix `t::` for translation\n\nexample: `t::obj.inner.translation_key`"
+                  "doc": "Label for this item could start with the prefix `t::` for translation"
                 },
                 "location": {
                   "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/WsdItemSwitch.ts",
                   "line": 13,
                   "col": 0,
-                  "byteIndex": 355
+                  "byteIndex": 436
                 },
                 "params": [],
                 "computed": false,
                 "optional": false,
                 "tsType": {
-                  "repr": "string",
-                  "kind": "keyword",
-                  "keyword": "string"
+                  "repr": "ResourceText",
+                  "kind": "typeRef",
+                  "typeRef": {
+                    "typeParams": null,
+                    "typeName": "ResourceText"
+                  }
                 },
                 "typeParams": []
               },
@@ -42694,7 +43141,7 @@
                   "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/WsdItemSwitch.ts",
                   "line": 17,
                   "col": 0,
-                  "byteIndex": 455
+                  "byteIndex": 542
                 },
                 "params": [],
                 "computed": false,
@@ -42715,7 +43162,7 @@
                   "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/WsdItemSwitch.ts",
                   "line": 23,
                   "col": 0,
-                  "byteIndex": 618
+                  "byteIndex": 705
                 },
                 "params": [],
                 "computed": false,
@@ -42737,12 +43184,60 @@
                 "typeParams": []
               },
               {
-                "name": "default",
+                "name": "defaultValue",
                 "location": {
                   "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/WsdItemSwitch.ts",
                   "line": 23,
                   "col": 29,
-                  "byteIndex": 647
+                  "byteIndex": 734
+                },
+                "params": [],
+                "computed": false,
+                "optional": false,
+                "tsType": {
+                  "repr": "boolean",
+                  "kind": "keyword",
+                  "keyword": "boolean"
+                },
+                "typeParams": []
+              }
+            ],
+            "callSignatures": [],
+            "indexSignatures": []
+          }
+        },
+        "typeParams": []
+      }
+    },
+    {
+      "name": "WsdSubGroup",
+      "isDefault": false,
+      "location": {
+        "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/WsdSubGroup.ts",
+        "line": 5,
+        "col": 0,
+        "byteIndex": 212
+      },
+      "declarationKind": "export",
+      "kind": "typeAlias",
+      "typeAliasDef": {
+        "tsType": {
+          "repr": "",
+          "kind": "typeLiteral",
+          "typeLiteral": {
+            "constructors": [],
+            "methods": [],
+            "properties": [
+              {
+                "name": "header",
+                "jsDoc": {
+                  "doc": "Header configuration. As example could be a switch to enable or disable the entire group or a selector."
+                },
+                "location": {
+                  "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/WsdSubGroup.ts",
+                  "line": 9,
+                  "col": 0,
+                  "byteIndex": 356
                 },
                 "params": [],
                 "computed": false,
@@ -42752,9 +43247,12 @@
                   "kind": "union",
                   "union": [
                     {
-                      "repr": "boolean",
-                      "kind": "keyword",
-                      "keyword": "boolean"
+                      "repr": "WsdItem",
+                      "kind": "typeRef",
+                      "typeRef": {
+                        "typeParams": null,
+                        "typeName": "WsdItem"
+                      }
                     },
                     {
                       "repr": "null",
@@ -42762,6 +43260,39 @@
                       "keyword": "null"
                     }
                   ]
+                },
+                "typeParams": []
+              },
+              {
+                "name": "children",
+                "jsDoc": {
+                  "doc": "List of items in this subgroup"
+                },
+                "location": {
+                  "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/WsdSubGroup.ts",
+                  "line": 13,
+                  "col": 0,
+                  "byteIndex": 423
+                },
+                "params": [],
+                "computed": false,
+                "optional": false,
+                "tsType": {
+                  "repr": "Array",
+                  "kind": "typeRef",
+                  "typeRef": {
+                    "typeParams": [
+                      {
+                        "repr": "WsdGroupEntry",
+                        "kind": "typeRef",
+                        "typeRef": {
+                          "typeParams": null,
+                          "typeName": "WsdGroupEntry"
+                        }
+                      }
+                    ],
+                    "typeName": "Array"
+                  }
                 },
                 "typeParams": []
               }

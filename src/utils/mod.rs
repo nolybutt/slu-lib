@@ -1,5 +1,19 @@
 use schemars::JsonSchema;
 
+#[macro_export(local_inner_macros)]
+macro_rules! __switch {
+    {
+        if { $($if:tt)+ }
+        do { $($do:tt)* }
+        else { $($else:tt)* }
+    } => { $($do)* };
+    {
+        if { }
+        do { $($do:tt)* }
+        else { $($else:tt)* }
+    } => { $($else)* };
+}
+
 /// This struct is intented to work with ts-rs flattening
 #[derive(Clone, Debug, Serialize, Deserialize, JsonSchema, TS)]
 #[serde(untagged)]

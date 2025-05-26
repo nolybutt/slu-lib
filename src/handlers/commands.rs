@@ -3,19 +3,6 @@ use crate::{rect::Rect, state::*, system_state::*};
 #[cfg(test)]
 use std::{collections::HashMap, path::PathBuf};
 
-macro_rules! __switch {
-    {
-        if { $($if:tt)+ }
-        do { $($do:tt)* }
-        else { $($else:tt)* }
-    } => { $($do)* };
-    {
-        if { }
-        do { $($do:tt)* }
-        else { $($else:tt)* }
-    } => { $($else)* };
-}
-
 macro_rules! slu_commands_declaration {
     ($($key:ident = $fn_name:ident($($args:tt)*) $(-> $return_type:ty)?,)*) => {
         #[cfg(test)]
@@ -39,7 +26,7 @@ macro_rules! slu_commands_declaration {
 
         paste::paste! {
             $(
-                __switch! {
+                $crate::__switch! {
                     if { $($args)* }
                     do {
                         #[cfg(test)]
@@ -62,7 +49,7 @@ macro_rules! slu_commands_declaration {
             enum SeelenCommandArgument {
                 $(
                     #[allow(non_snake_case)]
-                    $fn_name(Box<__switch! {
+                    $fn_name(Box<$crate::__switch! {
                         if { $($args)* }
                         do { [<SeelenCommand $key Args>] }
                         else { () }
@@ -78,7 +65,7 @@ macro_rules! slu_commands_declaration {
         #[cfg(test)]
         enum SeelenCommandReturn {
             $(
-                $fn_name(Box<__switch! {
+                $fn_name(Box<$crate::__switch! {
                     if { $($return_type)? }
                     do { $($return_type)? }
                     else { () }

@@ -394,12 +394,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "lazy_static"
-version = "1.5.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "bbd2bcb4c963f2ddae06a2efc7e9f3591312473c50c6685e1f298068316e66fe"
-
-[[package]]
 name = "libc"
 version = "0.2.158"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -886,10 +880,9 @@ dependencies = [
 [[package]]
 name = "ts-rs"
 version = "10.1.0"
-source = "git+https://github.com/eythaann/ts-rs.git#30ba9d104ccf64fd7a425de2ec231da0a2510b00"
+source = "git+https://github.com/eythaann/ts-rs.git#e09e6894d5520a61333121e2b0c5093edee3904e"
 dependencies = [
  "chrono",
- "lazy_static",
  "serde_json",
  "thiserror",
  "ts-rs-macros",
@@ -900,7 +893,7 @@ dependencies = [
 [[package]]
 name = "ts-rs-macros"
 version = "10.1.0"
-source = "git+https://github.com/eythaann/ts-rs.git#30ba9d104ccf64fd7a425de2ec231da0a2510b00"
+source = "git+https://github.com/eythaann/ts-rs.git#e09e6894d5520a61333121e2b0c5093edee3904e"
 dependencies = [
  "proc-macro2",
  "quote",

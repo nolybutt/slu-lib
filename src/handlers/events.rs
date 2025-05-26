@@ -1,19 +1,6 @@
 use crate::state::*;
 use crate::system_state::*;
 
-macro_rules! __switch {
-    {
-        if { $($if:tt)+ }
-        do { $($do:tt)* }
-        else { $($else:tt)* }
-    } => { $($do)* };
-    {
-        if { }
-        do { $($do:tt)* }
-        else { $($else:tt)* }
-    } => { $($else)* };
-}
-
 macro_rules! slu_events_declaration {
     ($($name:ident$(($payload:ty))? as $value:literal,)*) => {
         pub struct SeelenEvent;
@@ -43,7 +30,7 @@ macro_rules! slu_events_declaration {
         pub enum SeelenEventPayload {
             $(
                 #[serde(rename = $value)]
-                $name(__switch! {
+                $name($crate::__switch! {
                     if { $($payload)? }
                     do { Box<$($payload)?> }
                     else { () }

@@ -2,103 +2,173 @@ use schemars::JsonSchema;
 use serde::{Deserialize, Serialize};
 use ts_rs::TS;
 
+use crate::resource::ResourceText;
+
 /// Wsd = Widget Settings Declaration
 macro_rules! wsd_item {
     (
+        @struct
+        #[subtypes($($subtype:ident),*)]
+        struct $name:ident {
+            $($rest:tt)*
+        }
+    ) => {
+        paste::paste! {
+            wsd_item! {
+                @struct
+                struct $name {
+                    subtype: [<WsdItem $name Subtype>],
+                    $($rest)*
+                }
+            }
+
+            #[derive(Debug, Clone, Serialize, Deserialize, JsonSchema, TS)]
+            pub enum [<WsdItem $name Subtype>] {
+                $(
+                    $subtype,
+                )*
+            }
+        }
+    };
+    (
+        @struct
+        struct $name:ident {
+            $($rest:tt)*
+        }
+    ) => {
+        paste::paste! {
+            #[derive(Debug, Clone, Serialize, Deserialize, JsonSchema, TS)]
+            #[serde(rename_all = "camelCase")]
+            pub struct [<WsdItem $name>] {
+                /// Unique key for this item, used to identify it in the settings, should be unique.\
+                /// If duplicated, duplicated items will be ignored.
+                key: String,
+                /// Label for this item could start with the prefix `t::` for translation
+                label: ResourceText,
+                /// This setting could be set by monitor on the settings by monitor section.
+                #[serde(default)]
+                allow_set_by_monitor: bool,
+                /// Keys of items to be set in order to enable this item.
+                ///
+                /// it uses js logic (!!value) to determine if the item is enabled
+                #[serde(default)]
+                dependencies: Vec<String>,
+                $($rest)*
+            }
+        }
+    };
+    (
         $(
-            $(#[$scope:meta])*
+            $(#[subtypes($($subtype:ident),*)])?
             struct $name:ident {
-                type: $item:ident,
                 $($rest:tt)*
             }
         )*
     ) => {
         $(
-            #[derive(Debug, Clone, Serialize, Deserialize, JsonSchema, TS)]
-            #[serde(rename_all = "camelCase")]
-            pub struct $name {
-                /// Unique key for this item, used to identify it in the settings
-                key: String,
-                /// Label for this item could start with the prefix `t::` for translation
-                ///
-                /// example: `t::obj.inner.translation_key`
-                label: String,
-                /// This setting could be set by monitor on the settings by monitor section.
-                allow_set_by_monitor: bool,
-                /// Keys of items to be set in order to enable this item.
-                ///
-                /// it uses js logic (!!value) to determine if the item is enabled
-                dependencies: Vec<String>,
-                $($rest)*
+            wsd_item! {
+                @struct
+                $(#[subtypes($($subtype),*)])?
+                struct $name {
+                    $($rest)*
+                }
             }
         )*
 
-        #[derive(Debug, Clone, Serialize, Deserialize, JsonSchema, TS)]
-        #[serde(tag = "type", rename_all = "kebab-case")]
-        pub enum WsdItem {
-            $(
-                $item($name),
-            )*
+        paste::paste! {
+            #[derive(Debug, Clone, Serialize, Deserialize, JsonSchema, TS)]
+            #[serde(tag = "type", rename_all = "kebab-case")]
+            pub enum WsdItem {
+                $(
+                    $name([<WsdItem $name>]),
+                )*
+            }
         }
     };
 }
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize, JsonSchema, TS)]
-pub enum WsdItemSelectSubtype {
-    List,
-    Inline,
-}
-
 #[derive(Debug, Clone, Serialize, Deserialize, JsonSchema, TS)]
 pub struct WsdItemSelectOption {
-    label: String,
+    /// react icon name
+    icon: Option<String>,
+    /// The label to be displayed
+    label: ResourceText,
     /// The value to be set when this option is selected, should be unique
     value: String,
 }
 
 wsd_item! {
-    struct WsdItemSwitch {
-        type: Switch,
-        default: Option<bool>,
+    struct Switch {
+        #[serde(default)]
+        default_value: bool,
     }
 
-    struct WsdItemSelect {
-        type: Select,
-        default: Option<String>,
-        subtype: WsdItemSelectSubtype,
-        options: Vec<WsdItemSelectOption>
+    #[subtypes(List, Inline)]
+    struct Select {
+        #[serde(default)]
+        default_value: String,
+        options: Vec<WsdItemSelectOption>,
     }
 
-    struct WsdItemInputText {
-        type: InputText,
-        default: Option<String>,
+    struct InputText {
+        #[serde(default)]
+        default_value: String,
     }
 
-    struct WsdItemInputNumber {
-        type: InputNumber,
-        default: Option<i32>,
-        min: Option<i32>,
-        max: Option<i32>,
+    struct InputNumber {
+        #[serde(default)]
+        default_value: f64,
+        min: Option<f64>,
+        max: Option<f64>,
+    }
+
+    struct Range {
+        #[serde(default)]
+        default_value: f64,
+        from: f64,
+        to: f64,
+        step: Option<f64>,
+    }
+
+    struct Color {
+        #[serde(default)]
+        default_value: String,
+        allow_alpha: bool,
     }
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, JsonSchema, TS)]
 #[serde(rename_all = "camelCase")]
 pub enum WsdGroupEntry {
-    SubGroup(WsdGroup),
+    /// A group is a list of items and that can have more subgroups
+    SubGroup(WsdSubGroup),
+    /// Declaration of key and value to be used as configuration
     Config(WsdItem),
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, JsonSchema, TS)]
 #[serde(rename_all = "camelCase")]
-pub struct WsdGroup {
-    /// Header configuration normally is a switch to enable or disable the group.
-    ///
-    /// **Note**: This property is ignored if the group is the root. Should be used on SubGroups.
+pub struct WsdSubGroup {
+    /// Header configuration. As example could be a switch to enable or disable the entire group or a selector.
     header: Option<WsdItem>,
-    settings: Vec<WsdGroupEntry>,
+    /// List of items in this subgroup
+    children: Vec<WsdGroupEntry>,
 }
 
+#[derive(Debug, Clone, Serialize, Deserialize, JsonSchema, TS)]
+#[serde(rename_all = "camelCase")]
+pub struct WsdGroup {
+    /// List of items in this group
+    children: Vec<WsdGroupEntry>,
+}
+
+/// The Widget Settings Declaration is a list of groups
+/// each group is a list of items and can have subgroups with headers.
+///
+/// This declarations will be used to render and store the settings of the widget on a
+/// friendy way for the users, also will match the styles of the settings window.
+///
+/// With this, custom windows or widgets to configure an specific widget are not needed.
 #[derive(Debug, Clone, Default, Serialize, Deserialize, JsonSchema, TS)]
 #[ts(export)]
 pub struct WidgetSettingsDeclarationList(Vec<WsdGroup>);

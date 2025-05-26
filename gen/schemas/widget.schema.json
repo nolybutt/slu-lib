@@ -227,6 +227,7 @@
       ]
     },
     "WidgetSettingsDeclarationList": {
+      "description": "The Widget Settings Declaration is a list of groups each group is a list of items and can have subgroups with headers.\n\nThis declarations will be used to render and store the settings of the widget on a friendy way for the users, also will match the styles of the settings window.\n\nWith this, custom windows or widgets to configure an specific widget are not needed.",
       "type": "array",
       "items": {
         "$ref": "#/definitions/WsdGroup"
@@ -235,21 +236,11 @@
     "WsdGroup": {
       "type": "object",
       "required": [
-        "settings"
+        "children"
       ],
       "properties": {
-        "header": {
-          "description": "Header configuration normally is a switch to enable or disable the group.\n\n**Note**: This property is ignored if the group is the root. Should be used on SubGroups.",
-          "anyOf": [
-            {
-              "$ref": "#/definitions/WsdItem"
-            },
-            {
-              "type": "null"
-            }
-          ]
-        },
-        "settings": {
+        "children": {
+          "description": "List of items in this group",
           "type": "array",
           "items": {
             "$ref": "#/definitions/WsdGroupEntry"
@@ -260,18 +251,20 @@
     "WsdGroupEntry": {
       "oneOf": [
         {
+          "description": "A group is a list of items and that can have more subgroups",
           "type": "object",
           "required": [
             "subGroup"
           ],
           "properties": {
             "subGroup": {
-              "$ref": "#/definitions/WsdGroup"
+              "$ref": "#/definitions/WsdSubGroup"
             }
           },
           "additionalProperties": false
         },
         {
+          "description": "Declaration of key and value to be used as configuration",
           "type": "object",
           "required": [
             "config"
@@ -290,8 +283,6 @@
         {
           "type": "object",
           "required": [
-            "allowSetByMonitor",
-            "dependencies",
             "key",
             "label",
             "type"
@@ -299,28 +290,32 @@
           "properties": {
             "allowSetByMonitor": {
               "description": "This setting could be set by monitor on the settings by monitor section.",
+              "default": false,
               "type": "boolean"
             },
-            "default": {
-              "type": [
-                "boolean",
-                "null"
-              ]
+            "defaultValue": {
+              "default": false,
+              "type": "boolean"
             },
             "dependencies": {
               "description": "Keys of items to be set in order to enable this item.\n\nit uses js logic (!!value) to determine if the item is enabled",
+              "default": [],
               "type": "array",
               "items": {
                 "type": "string"
               }
             },
             "key": {
-              "description": "Unique key for this item, used to identify it in the settings",
+              "description": "Unique key for this item, used to identify it in the settings, should be unique.\\ If duplicated, duplicated items will be ignored.",
               "type": "string"
             },
             "label": {
-              "description": "Label for this item could start with the prefix `t::` for translation\n\nexample: `t::obj.inner.translation_key`",
-              "type": "string"
+              "description": "Label for this item could start with the prefix `t::` for translation",
+              "allOf": [
+                {
+                  "$ref": "#/definitions/ResourceText"
+                }
+              ]
             },
             "type": {
               "type": "string",
@@ -333,8 +328,6 @@
         {
           "type": "object",
           "required": [
-            "allowSetByMonitor",
-            "dependencies",
             "key",
             "label",
             "options",
@@ -344,28 +337,32 @@
           "properties": {
             "allowSetByMonitor": {
               "description": "This setting could be set by monitor on the settings by monitor section.",
+              "default": false,
               "type": "boolean"
             },
-            "default": {
-              "type": [
-                "string",
-                "null"
-              ]
+            "defaultValue": {
+              "default": "",
+              "type": "string"
             },
             "dependencies": {
               "description": "Keys of items to be set in order to enable this item.\n\nit uses js logic (!!value) to determine if the item is enabled",
+              "default": [],
               "type": "array",
               "items": {
                 "type": "string"
               }
             },
             "key": {
-              "description": "Unique key for this item, used to identify it in the settings",
+              "description": "Unique key for this item, used to identify it in the settings, should be unique.\\ If duplicated, duplicated items will be ignored.",
               "type": "string"
             },
             "label": {
-              "description": "Label for this item could start with the prefix `t::` for translation\n\nexample: `t::obj.inner.translation_key`",
-              "type": "string"
+              "description": "Label for this item could start with the prefix `t::` for translation",
+              "allOf": [
+                {
+                  "$ref": "#/definitions/ResourceText"
+                }
+              ]
             },
             "options": {
               "type": "array",
@@ -387,8 +384,6 @@
         {
           "type": "object",
           "required": [
-            "allowSetByMonitor",
-            "dependencies",
             "key",
             "label",
             "type"
@@ -396,28 +391,32 @@
           "properties": {
             "allowSetByMonitor": {
               "description": "This setting could be set by monitor on the settings by monitor section.",
+              "default": false,
               "type": "boolean"
             },
-            "default": {
-              "type": [
-                "string",
-                "null"
-              ]
+            "defaultValue": {
+              "default": "",
+              "type": "string"
             },
             "dependencies": {
               "description": "Keys of items to be set in order to enable this item.\n\nit uses js logic (!!value) to determine if the item is enabled",
+              "default": [],
               "type": "array",
               "items": {
                 "type": "string"
               }
             },
             "key": {
-              "description": "Unique key for this item, used to identify it in the settings",
+              "description": "Unique key for this item, used to identify it in the settings, should be unique.\\ If duplicated, duplicated items will be ignored.",
               "type": "string"
             },
             "label": {
-              "description": "Label for this item could start with the prefix `t::` for translation\n\nexample: `t::obj.inner.translation_key`",
-              "type": "string"
+              "description": "Label for this item could start with the prefix `t::` for translation",
+              "allOf": [
+                {
+                  "$ref": "#/definitions/ResourceText"
+                }
+              ]
             },
             "type": {
               "type": "string",
@@ -430,8 +429,6 @@
         {
           "type": "object",
           "required": [
-            "allowSetByMonitor",
-            "dependencies",
             "key",
             "label",
             "type"
@@ -439,48 +436,164 @@
           "properties": {
             "allowSetByMonitor": {
               "description": "This setting could be set by monitor on the settings by monitor section.",
+              "default": false,
               "type": "boolean"
             },
-            "default": {
-              "type": [
-                "integer",
-                "null"
-              ],
-              "format": "int32"
+            "defaultValue": {
+              "default": 0.0,
+              "type": "number",
+              "format": "double"
             },
             "dependencies": {
               "description": "Keys of items to be set in order to enable this item.\n\nit uses js logic (!!value) to determine if the item is enabled",
+              "default": [],
               "type": "array",
               "items": {
                 "type": "string"
               }
             },
             "key": {
-              "description": "Unique key for this item, used to identify it in the settings",
+              "description": "Unique key for this item, used to identify it in the settings, should be unique.\\ If duplicated, duplicated items will be ignored.",
               "type": "string"
             },
             "label": {
-              "description": "Label for this item could start with the prefix `t::` for translation\n\nexample: `t::obj.inner.translation_key`",
-              "type": "string"
+              "description": "Label for this item could start with the prefix `t::` for translation",
+              "allOf": [
+                {
+                  "$ref": "#/definitions/ResourceText"
+                }
+              ]
             },
             "max": {
               "type": [
-                "integer",
+                "number",
                 "null"
               ],
-              "format": "int32"
+              "format": "double"
             },
             "min": {
               "type": [
-                "integer",
+                "number",
                 "null"
               ],
-              "format": "int32"
+              "format": "double"
             },
             "type": {
               "type": "string",
               "enum": [
                 "input-number"
+              ]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": [
+            "from",
+            "key",
+            "label",
+            "to",
+            "type"
+          ],
+          "properties": {
+            "allowSetByMonitor": {
+              "description": "This setting could be set by monitor on the settings by monitor section.",
+              "default": false,
+              "type": "boolean"
+            },
+            "defaultValue": {
+              "default": 0.0,
+              "type": "number",
+              "format": "double"
+            },
+            "dependencies": {
+              "description": "Keys of items to be set in order to enable this item.\n\nit uses js logic (!!value) to determine if the item is enabled",
+              "default": [],
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "from": {
+              "type": "number",
+              "format": "double"
+            },
+            "key": {
+              "description": "Unique key for this item, used to identify it in the settings, should be unique.\\ If duplicated, duplicated items will be ignored.",
+              "type": "string"
+            },
+            "label": {
+              "description": "Label for this item could start with the prefix `t::` for translation",
+              "allOf": [
+                {
+                  "$ref": "#/definitions/ResourceText"
+                }
+              ]
+            },
+            "step": {
+              "type": [
+                "number",
+                "null"
+              ],
+              "format": "double"
+            },
+            "to": {
+              "type": "number",
+              "format": "double"
+            },
+            "type": {
+              "type": "string",
+              "enum": [
+                "range"
+              ]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": [
+            "allowAlpha",
+            "key",
+            "label",
+            "type"
+          ],
+          "properties": {
+            "allowAlpha": {
+              "type": "boolean"
+            },
+            "allowSetByMonitor": {
+              "description": "This setting could be set by monitor on the settings by monitor section.",
+              "default": false,
+              "type": "boolean"
+            },
+            "defaultValue": {
+              "default": "",
+              "type": "string"
+            },
+            "dependencies": {
+              "description": "Keys of items to be set in order to enable this item.\n\nit uses js logic (!!value) to determine if the item is enabled",
+              "default": [],
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "key": {
+              "description": "Unique key for this item, used to identify it in the settings, should be unique.\\ If duplicated, duplicated items will be ignored.",
+              "type": "string"
+            },
+            "label": {
+              "description": "Label for this item could start with the prefix `t::` for translation",
+              "allOf": [
+                {
+                  "$ref": "#/definitions/ResourceText"
+                }
+              ]
+            },
+            "type": {
+              "type": "string",
+              "enum": [
+                "color"
               ]
             }
           }
@@ -494,8 +607,20 @@
         "value"
       ],
       "properties": {
+        "icon": {
+          "description": "react icon name",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
         "label": {
-          "type": "string"
+          "description": "The label to be displayed",
+          "allOf": [
+            {
+              "$ref": "#/definitions/ResourceText"
+            }
+          ]
         },
         "value": {
           "description": "The value to be set when this option is selected, should be unique",
@@ -509,6 +634,32 @@
         "List",
         "Inline"
       ]
+    },
+    "WsdSubGroup": {
+      "type": "object",
+      "required": [
+        "children"
+      ],
+      "properties": {
+        "children": {
+          "description": "List of items in this subgroup",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/WsdGroupEntry"
+          }
+        },
+        "header": {
+          "description": "Header configuration. As example could be a switch to enable or disable the entire group or a selector.",
+          "anyOf": [
+            {
+              "$ref": "#/definitions/WsdItem"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      }
     }
   }
 }
