@@ -1,17 +1,13 @@
 {
-  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
   "title": "Array_of_AppConfig",
   "type": "array",
   "items": {
-    "$ref": "#/definitions/AppConfig"
+    "$ref": "#/$defs/AppConfig"
   },
-  "definitions": {
+  "$defs": {
     "AppConfig": {
       "type": "object",
-      "required": [
-        "identifier",
-        "name"
-      ],
       "properties": {
         "boundMonitor": {
           "description": "monitor index that the app should be bound to",
@@ -20,7 +16,7 @@
             "null"
           ],
           "format": "uint",
-          "minimum": 0.0
+          "minimum": 0
         },
         "boundWorkspace": {
           "description": "workspace index that the app should be bound to",
@@ -29,7 +25,7 @@
             "null"
           ],
           "format": "uint",
-          "minimum": 0.0
+          "minimum": 0
         },
         "category": {
           "description": "category to group the app under",
@@ -40,16 +36,12 @@
         },
         "identifier": {
           "description": "app identifier",
-          "allOf": [
-            {
-              "$ref": "#/definitions/AppIdentifier"
-            }
-          ]
+          "$ref": "#/$defs/AppIdentifier"
         },
         "isBundled": {
           "description": "is this config bundled with seelen ui.",
-          "default": false,
-          "type": "boolean"
+          "type": "boolean",
+          "default": false
         },
         "name": {
           "description": "name of the app",
@@ -57,100 +49,86 @@
         },
         "options": {
           "description": "extra specific options/settings for the app",
-          "default": [],
           "type": "array",
+          "default": [],
           "items": {
-            "$ref": "#/definitions/AppExtraFlag"
+            "$ref": "#/$defs/AppExtraFlag"
           }
         }
-      }
+      },
+      "required": [
+        "name",
+        "identifier"
+      ]
     },
     "AppExtraFlag": {
       "oneOf": [
         {
           "description": "Start the app in the center of the screen as floating in the wm.",
           "type": "string",
-          "enum": [
-            "float"
-          ]
+          "const": "float"
         },
         {
           "description": "Force manage this app in the wm.",
           "type": "string",
-          "enum": [
-            "force"
-          ]
+          "const": "force"
         },
         {
           "description": "Unmanage this app in the wm.",
           "type": "string",
-          "enum": [
-            "unmanage"
-          ]
+          "const": "unmanage"
         },
         {
           "description": "Pin this app in all the virtual desktops in the wm.",
           "type": "string",
-          "enum": [
-            "pinned"
-          ]
+          "const": "pinned"
         },
         {
           "description": "Hide this app on the dock/taskbar.",
           "type": "string",
-          "enum": [
-            "hidden"
-          ]
+          "const": "hidden"
         }
       ]
     },
     "AppIdentifier": {
       "type": "object",
-      "required": [
-        "id",
-        "kind",
-        "matchingStrategy"
-      ],
       "properties": {
         "and": {
-          "default": [],
           "type": "array",
+          "default": [],
           "items": {
-            "$ref": "#/definitions/AppIdentifier"
+            "$ref": "#/$defs/AppIdentifier"
           }
         },
         "id": {
-          "description": "Depending of the kind this can be case sensitive or not. - `class` and `title` are case sensitive - `exe` and `path` are case insensitive",
+          "description": "Depending of the kind this can be case sensitive or not.\n - `class` and `title` are case sensitive\n - `exe` and `path` are case insensitive",
           "type": "string"
         },
         "kind": {
           "description": "the way to match the application",
-          "allOf": [
-            {
-              "$ref": "#/definitions/AppIdentifierType"
-            }
-          ]
+          "$ref": "#/$defs/AppIdentifierType"
         },
         "matchingStrategy": {
           "description": "the strategy to use to determine if id matches with the application",
-          "allOf": [
-            {
-              "$ref": "#/definitions/MatchingStrategy"
-            }
-          ]
+          "$ref": "#/$defs/MatchingStrategy"
         },
         "negation": {
-          "default": false,
-          "type": "boolean"
+          "type": "boolean",
+          "default": false
         },
         "or": {
-          "default": [],
           "type": "array",
+          "default": [],
           "items": {
-            "$ref": "#/definitions/AppIdentifier"
+            "$ref": "#/$defs/AppIdentifier"
           }
         }
-      }
+      },
+      "required": [
+        "id",
+        "kind",
+        "matchingStrategy"
+      ]
     },
     "AppIdentifierType": {
       "type": "string",

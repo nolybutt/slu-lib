@@ -21,6 +21,7 @@ import { createInstanceInvoker, createInstanceOnEvent } from '../../utils/State.
 import { enumFromUnion } from '../../utils/enums.ts';
 import { invoke } from '../../handlers/mod.ts';
 import {
+  getCurrentWidgetInfo,
   SeelenLauncherWidgetId,
   SeelenToolbarWidgetId,
   SeelenWallWidgetId,
@@ -28,7 +29,6 @@ import {
   SeelenWindowManagerWidgetId,
   Widget,
 } from '../widget.ts';
-import { getCurrentWidgetInfo } from '../mod.ts';
 
 export class Settings {
   constructor(public inner: ISettings) {}

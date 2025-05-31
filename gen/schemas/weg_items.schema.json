@@ -1,11 +1,13 @@
 {
-  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
   "title": "WegItems",
   "type": "object",
   "properties": {
     "center": {
+      "type": "array",
       "default": [
         {
+          "type": "Pinned",
           "displayName": "Explorer",
           "id": "",
           "path": "C:\\Windows\\explorer.exe",
@@ -14,47 +16,118 @@
           "relaunchIn": null,
           "relaunchProgram": "C:\\Windows\\explorer.exe",
           "subtype": "App",
-          "type": "Pinned",
           "umid": null,
           "windows": []
         }
       ],
-      "type": "array",
       "items": {
-        "$ref": "#/definitions/WegItem"
+        "$ref": "#/$defs/WegItem"
       }
     },
     "isReorderDisabled": {
       "description": "Whether the reordering possible on the weg",
-      "default": false,
-      "type": "boolean"
+      "type": "boolean",
+      "default": false
     },
     "left": {
+      "type": "array",
       "default": [
         {
-          "id": "",
-          "type": "StartMenu"
+          "type": "StartMenu",
+          "id": ""
         }
       ],
-      "type": "array",
       "items": {
-        "$ref": "#/definitions/WegItem"
+        "$ref": "#/$defs/WegItem"
       }
     },
     "right": {
+      "type": "array",
       "default": [
         {
-          "id": "",
-          "type": "Media"
+          "type": "Media",
+          "id": ""
         }
       ],
-      "type": "array",
       "items": {
-        "$ref": "#/definitions/WegItem"
+        "$ref": "#/$defs/WegItem"
       }
     }
   },
-  "definitions": {
+  "$defs": {
+    "PinnedWegItemData": {
+      "type": "object",
+      "properties": {
+        "displayName": {
+          "description": "display name of the item",
+          "type": "string",
+          "default": ""
+        },
+        "id": {
+          "description": "internal UUID to differentiate items",
+          "type": "string",
+          "default": ""
+        },
+        "isDir": {
+          "description": "@deprecaed will be removed in v3, use subtype `Folder` instead.",
+          "type": "boolean",
+          "deprecated": true,
+          "writeOnly": true
+        },
+        "path": {
+          "description": "path to file, forder or program.",
+          "type": "string",
+          "default": ""
+        },
+        "relaunchArgs": {
+          "description": "arguments to be passed to the relaunch program",
+          "anyOf": [
+            {
+              "$ref": "#/$defs/RelaunchArguments"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "relaunchCommand": {
+          "description": "@deprecaed will be removed in v3, use relaunch_program instead.",
+          "type": [
+            "string",
+            "null"
+          ],
+          "deprecated": true,
+          "writeOnly": true
+        },
+        "relaunchIn": {
+          "description": "path where ejecute the relaunch command",
+          "type": [
+            "string",
+            "null"
+          ],
+          "default": null
+        },
+        "relaunchProgram": {
+          "description": "program to be executed",
+          "type": "string",
+          "default": ""
+        },
+        "subtype": {
+          "description": "Subtype of the item (mandatory, but is optional for backward compatibility)",
+          "$ref": "#/$defs/WegItemSubtype",
+          "default": "UnknownV2_1_6"
+        },
+        "umid": {
+          "description": "Application user model id.",
+          "type": [
+            "string",
+            "null"
+          ],
+          "default": null
+        }
+      }
+    },
     "RelaunchArguments": {
       "anyOf": [
         {
@@ -68,294 +141,81 @@
         }
       ]
     },
-    "WegAppGroupItem": {
-      "type": "object",
-      "properties": {
-        "handle": {
-          "default": 0,
-          "type": "integer",
-          "format": "int"
-        },
-        "isIconic": {
-          "default": false,
-          "type": "boolean"
-        },
-        "isZoomed": {
-          "default": false,
-          "type": "boolean"
-        },
-        "lastActive": {
-          "description": "last time the app was active, timestamp in milliseconds, could be 0 if we don't know when the app was actived",
-          "default": 0,
-          "type": "integer",
-          "format": "uint64",
-          "minimum": 0.0
-        },
-        "title": {
-          "default": "",
-          "type": "string"
-        }
-      }
-    },
     "WegItem": {
       "oneOf": [
         {
           "type": "object",
-          "required": [
-            "isDir",
-            "type"
-          ],
           "properties": {
-            "displayName": {
-              "description": "display name of the item",
-              "default": "",
-              "type": "string"
-            },
-            "id": {
-              "description": "internal UUID to differentiate items",
-              "default": "",
-              "type": "string"
-            },
-            "isDir": {
-              "description": "@deprecaed will be removed in v3, use subtype `Folder` instead.",
-              "deprecated": true,
-              "writeOnly": true,
-              "type": "boolean"
-            },
-            "path": {
-              "description": "path to file, forder or program.",
-              "default": "",
-              "type": "string"
-            },
-            "pinDisabled": {
-              "description": "This intention is to prevent pinned state change, when this is neccesary",
-              "default": false,
-              "readOnly": true,
-              "type": "boolean"
-            },
-            "relaunchArgs": {
-              "description": "arguments to be passed to the relaunch program",
-              "default": null,
-              "anyOf": [
-                {
-                  "$ref": "#/definitions/RelaunchArguments"
-                },
-                {
-                  "type": "null"
-                }
-              ]
-            },
-            "relaunchCommand": {
-              "description": "@deprecaed will be removed in v3, use relaunch_program instead.",
-              "deprecated": true,
-              "writeOnly": true,
-              "type": [
-                "string",
-                "null"
-              ]
-            },
-            "relaunchIn": {
-              "description": "path where ejecute the relaunch command",
-              "default": null,
-              "type": [
-                "string",
-                "null"
-              ]
-            },
-            "relaunchProgram": {
-              "description": "program to be executed",
-              "default": "",
-              "type": "string"
-            },
-            "subtype": {
-              "description": "Subtype of the item (mandatory, but is optional for backward compatibility)",
-              "default": "UnknownV2_1_6",
-              "allOf": [
-                {
-                  "$ref": "#/definitions/WegItemSubtype"
-                }
-              ]
-            },
             "type": {
               "type": "string",
-              "enum": [
-                "Pinned"
-              ]
-            },
-            "umid": {
-              "description": "Application user model id.",
-              "default": null,
-              "type": [
-                "string",
-                "null"
-              ]
-            },
-            "windows": {
-              "description": "Window handles in the app group, in case of pinned file/dir always will be empty",
-              "default": [],
-              "readOnly": true,
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/WegAppGroupItem"
-              }
+              "const": "Pinned"
             }
-          }
+          },
+          "$ref": "#/$defs/PinnedWegItemData",
+          "required": [
+            "type"
+          ]
         },
         {
           "type": "object",
-          "required": [
-            "isDir",
-            "type"
-          ],
           "properties": {
-            "displayName": {
-              "description": "display name of the item",
-              "default": "",
-              "type": "string"
-            },
-            "id": {
-              "description": "internal UUID to differentiate items",
-              "default": "",
-              "type": "string"
-            },
-            "isDir": {
-              "description": "@deprecaed will be removed in v3, use subtype `Folder` instead.",
-              "deprecated": true,
-              "writeOnly": true,
-              "type": "boolean"
-            },
-            "path": {
-              "description": "path to file, forder or program.",
-              "default": "",
-              "type": "string"
-            },
-            "pinDisabled": {
-              "description": "This intention is to prevent pinned state change, when this is neccesary",
-              "default": false,
-              "readOnly": true,
-              "type": "boolean"
-            },
-            "relaunchArgs": {
-              "description": "arguments to be passed to the relaunch program",
-              "default": null,
-              "anyOf": [
-                {
-                  "$ref": "#/definitions/RelaunchArguments"
-                },
-                {
-                  "type": "null"
-                }
-              ]
-            },
-            "relaunchCommand": {
-              "description": "@deprecaed will be removed in v3, use relaunch_program instead.",
-              "deprecated": true,
-              "writeOnly": true,
-              "type": [
-                "string",
-                "null"
-              ]
-            },
-            "relaunchIn": {
-              "description": "path where ejecute the relaunch command",
-              "default": null,
-              "type": [
-                "string",
-                "null"
-              ]
-            },
-            "relaunchProgram": {
-              "description": "program to be executed",
-              "default": "",
-              "type": "string"
-            },
-            "subtype": {
-              "description": "Subtype of the item (mandatory, but is optional for backward compatibility)",
-              "default": "UnknownV2_1_6",
-              "allOf": [
-                {
-                  "$ref": "#/definitions/WegItemSubtype"
-                }
-              ]
-            },
             "type": {
               "type": "string",
-              "enum": [
-                "Temporal"
-              ]
-            },
-            "umid": {
-              "description": "Application user model id.",
-              "default": null,
-              "type": [
-                "string",
-                "null"
-              ]
-            },
-            "windows": {
-              "description": "Window handles in the app group, in case of pinned file/dir always will be empty",
-              "default": [],
-              "readOnly": true,
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/WegAppGroupItem"
-              }
+              "const": "Temporal"
             }
-          }
+          },
+          "$ref": "#/$defs/PinnedWegItemData",
+          "required": [
+            "type"
+          ]
         },
         {
           "type": "object",
-          "required": [
-            "id",
-            "type"
-          ],
           "properties": {
-            "id": {
-              "type": "string"
-            },
             "type": {
               "type": "string",
-              "enum": [
-                "Separator"
-              ]
+              "const": "Separator"
+            },
+            "id": {
+              "type": "string"
             }
-          }
+          },
+          "required": [
+            "type",
+            "id"
+          ]
         },
         {
           "type": "object",
-          "required": [
-            "id",
-            "type"
-          ],
           "properties": {
-            "id": {
-              "type": "string"
-            },
             "type": {
               "type": "string",
-              "enum": [
-                "Media"
-              ]
+              "const": "Media"
+            },
+            "id": {
+              "type": "string"
             }
-          }
+          },
+          "required": [
+            "type",
+            "id"
+          ]
         },
         {
           "type": "object",
-          "required": [
-            "id",
-            "type"
-          ],
           "properties": {
-            "id": {
-              "type": "string"
-            },
             "type": {
               "type": "string",
-              "enum": [
-                "StartMenu"
-              ]
+              "const": "StartMenu"
+            },
+            "id": {
+              "type": "string"
             }
-          }
+          },
+          "required": [
+            "type",
+            "id"
+          ]
         }
       ]
     },
@@ -372,9 +232,7 @@
         {
           "description": "this is used for backward compatibility, will be removed in v3",
           "type": "string",
-          "enum": [
-            "UnknownV2_1_6"
-          ]
+          "const": "UnknownV2_1_6"
         }
       ]
     }

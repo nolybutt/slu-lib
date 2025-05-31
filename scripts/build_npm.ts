@@ -1,6 +1,6 @@
 /// <reference lib="deno.ns" />
 
-import { build, type BuildOptions, emptyDir } from '@deno/dnt';
+import { build, type BuildOptions, emptyDir } from 'jsr:@deno/dnt@0.41.3';
 
 import denoJson from '../deno.json' with { type: 'json' };
 

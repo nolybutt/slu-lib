@@ -1,88 +1,72 @@
 {
-  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
   "title": "Widget",
   "type": "object",
   "properties": {
     "css": {
       "description": "Optional widget css",
-      "default": null,
       "type": [
         "string",
         "null"
-      ]
+      ],
+      "default": null
     },
     "html": {
       "description": "Optional widget html",
-      "default": null,
       "type": [
         "string",
         "null"
-      ]
+      ],
+      "default": null
     },
     "icon": {
-      "description": "Optional icon to be used on settings. This have to be a valid react icon name.\\ You can find all icons here: https://react-icons.github.io/react-icons/.",
-      "default": null,
+      "description": "Optional icon to be used on settings. This have to be a valid react icon name.\\\n You can find all icons here: https://react-icons.github.io/react-icons/.",
       "type": [
         "string",
         "null"
-      ]
+      ],
+      "default": null
     },
     "id": {
       "description": "Resource id ex: `@seelen/weg`",
-      "default": "@unknown/unknown",
-      "allOf": [
-        {
-          "$ref": "#/definitions/WidgetId"
-        }
-      ]
+      "$ref": "#/$defs/WidgetId",
+      "default": "@unknown/unknown"
     },
     "instances": {
       "description": "How many instances are allowed of this widget.",
-      "default": "Single",
-      "allOf": [
-        {
-          "$ref": "#/definitions/WidgetInstanceType"
-        }
-      ]
+      "$ref": "#/$defs/WidgetInstanceType",
+      "default": "Single"
     },
     "js": {
       "description": "Optional widget js code",
-      "default": null,
       "type": [
         "string",
         "null"
-      ]
+      ],
+      "default": null
     },
     "metadata": {
       "description": "Widget metadata, as texts, tags, images, etc.",
+      "$ref": "#/$defs/ResourceMetadata",
       "default": {
+        "description": {},
         "appTargetVersion": null,
         "banner": null,
         "bundled": false,
-        "description": {},
         "displayName": {},
         "filename": "",
         "portrait": null,
         "screenshots": [],
         "tags": []
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/ResourceMetadata"
-        }
-      ]
+      }
     },
     "settings": {
-      "description": "Widget settings declaration, this is esentially a struct to be used by an builder to create the widget settings UI on the Settings window.",
-      "default": [],
-      "allOf": [
-        {
-          "$ref": "#/definitions/WidgetSettingsDeclarationList"
-        }
-      ]
+      "description": "Widget settings declaration, this is esentially a struct to be used by an\n builder to create the widget settings UI on the Settings window.",
+      "$ref": "#/$defs/WidgetSettingsDeclarationList",
+      "default": []
     }
   },
-  "definitions": {
+  "$defs": {
     "ResourceId": {
       "description": "visual id composed of the creator username and the resource name",
       "type": "string"
@@ -90,85 +74,65 @@
     "ResourceMetadata": {
       "type": "object",
       "properties": {
+        "description": {
+          "description": "Map of language code to description. Could be a string, mapped to `en`.",
+          "$ref": "#/$defs/ResourceText",
+          "default": {}
+        },
         "appTargetVersion": {
-          "description": "App target version that this resource is compatible with.\\ Developers are responsible to update the resource so when resource does not match the current app version, the resource will be shown with a warning message",
-          "default": null,
+          "description": "App target version that this resource is compatible with.\\\n Developers are responsible to update the resource so when resource does not\n match the current app version, the resource will be shown with a warning message",
           "type": [
             "array",
             "null"
           ],
-          "items": [
-            {
-              "type": "integer",
-              "format": "uint32",
-              "minimum": 0.0
-            },
-            {
-              "type": "integer",
-              "format": "uint32",
-              "minimum": 0.0
-            },
-            {
-              "type": "integer",
-              "format": "uint32",
-              "minimum": 0.0
-            }
-          ],
+          "default": null,
           "maxItems": 3,
-          "minItems": 3
+          "minItems": 3,
+          "prefixItems": [
+            {
+              "type": "integer",
+              "format": "uint32",
+              "minimum": 0
+            },
+            {
+              "type": "integer",
+              "format": "uint32",
+              "minimum": 0
+            },
+            {
+              "type": "integer",
+              "format": "uint32",
+              "minimum": 0
+            }
+          ]
         },
         "banner": {
           "description": "Banner image with aspect ratio of 21/9, this is used when promoting the resource.",
-          "default": null,
           "type": [
             "string",
             "null"
           ],
-          "format": "uri"
-        },
-        "bundled": {
-          "description": "internal field that indicates if the resource is bundled",
-          "default": false,
-          "readOnly": true,
-          "type": "boolean"
-        },
-        "description": {
-          "description": "Map of language code to description. Could be a string, mapped to `en`.",
-          "default": {},
-          "allOf": [
-            {
-              "$ref": "#/definitions/ResourceText"
-            }
-          ]
+          "format": "uri",
+          "default": null
         },
         "displayName": {
           "description": "Map of language code to display name. Could be a string, mapped to `en`.",
-          "default": {},
-          "allOf": [
-            {
-              "$ref": "#/definitions/ResourceText"
-            }
-          ]
-        },
-        "filename": {
-          "description": "internal field used by the app on load of the resource",
-          "default": "",
-          "readOnly": true,
-          "type": "string"
+          "$ref": "#/$defs/ResourceText",
+          "default": {}
         },
         "portrait": {
           "description": "Portrait image with aspect ratio of 1/1",
-          "default": null,
           "type": [
             "string",
             "null"
           ],
-          "format": "uri"
+          "format": "uri",
+          "default": null
         },
         "screenshots": {
           "description": "Screenshots should use aspect ratio of 16/9",
-          "default": [],
           "type": "array",
+          "default": [],
           "items": {
             "type": "string",
             "format": "uri"
@@ -176,8 +140,8 @@
         },
         "tags": {
           "description": "tags are keywords to be used for searching and indexing",
-          "default": [],
           "type": "array",
+          "default": [],
           "items": {
             "type": "string"
           }
@@ -199,82 +163,76 @@
       ]
     },
     "WidgetId": {
-      "$ref": "#/definitions/ResourceId"
+      "$ref": "#/$defs/ResourceId"
     },
     "WidgetInstanceType": {
       "oneOf": [
         {
-          "description": "Default behavior, only one instance of this widget is allowed. This is useful for widgets intended to work as custom config window.",
+          "description": "Default behavior, only one instance of this widget is allowed.\n This is useful for widgets intended to work as custom config window.",
           "type": "string",
-          "enum": [
-            "Single"
-          ]
+          "const": "Single"
         },
         {
-          "description": "The widget is allowed to have multiple instances.\\ This allow to the user manually create more instances of this same widget.",
+          "description": "The widget is allowed to have multiple instances.\\\n This allow to the user manually create more instances of this same widget.",
           "type": "string",
-          "enum": [
-            "Multiple"
-          ]
+          "const": "Multiple"
         },
         {
-          "description": "Seelen UI will create an instance of this widget per each monitor connected.\\ This can be configured by the user using per monitor settings.\\",
+          "description": "Seelen UI will create an instance of this widget per each monitor connected.\\\n This can be configured by the user using per monitor settings.\\",
           "type": "string",
-          "enum": [
-            "ReplicaByMonitor"
-          ]
+          "const": "ReplicaByMonitor"
         }
       ]
     },
     "WidgetSettingsDeclarationList": {
-      "description": "The Widget Settings Declaration is a list of groups each group is a list of items and can have subgroups with headers.\n\nThis declarations will be used to render and store the settings of the widget on a friendy way for the users, also will match the styles of the settings window.\n\nWith this, custom windows or widgets to configure an specific widget are not needed.",
+      "description": "The Widget Settings Declaration is a list of groups\n each group is a list of items and can have subgroups with headers.\n\n This declarations will be used to render and store the settings of the widget on a\n friendy way for the users, also will match the styles of the settings window.\n\n With this, custom windows or widgets to configure an specific widget are not needed.",
       "type": "array",
       "items": {
-        "$ref": "#/definitions/WsdGroup"
+        "$ref": "#/$defs/WsdGroup"
       }
     },
     "WsdGroup": {
       "type": "object",
-      "required": [
-        "group"
-      ],
       "properties": {
         "group": {
           "description": "List of items in this group",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/WsdGroupEntry"
+            "$ref": "#/$defs/WsdGroupEntry"
           }
         }
-      }
+      },
+      "required": [
+        "group"
+      ]
     },
     "WsdGroupEntry": {
       "oneOf": [
         {
           "description": "A group is a list of items and that can have more subgroups",
           "type": "object",
-          "required": [
-            "subgroup"
-          ],
           "properties": {
             "subgroup": {
-              "$ref": "#/definitions/WsdSubGroup"
+              "$ref": "#/$defs/WsdSubGroup"
             }
           },
-          "additionalProperties": false
+          "additionalProperties": false,
+          "required": [
+            "subgroup"
+          ]
         },
         {
           "description": "Declaration of key and value to be used as configuration",
           "type": "object",
-          "required": [
-            "config"
-          ],
           "properties": {
             "config": {
-              "$ref": "#/definitions/WsdItem"
+              "$ref": "#/$defs/WsdItem"
             }
           },
-          "additionalProperties": false
+          "additionalProperties": false,
+          "required": [
+            "config"
+          ]
         }
       ]
     },
@@ -282,330 +240,304 @@
       "oneOf": [
         {
           "type": "object",
-          "required": [
-            "key",
-            "label",
-            "type"
-          ],
           "properties": {
-            "allowSetByMonitor": {
-              "description": "This setting could be set by monitor on the settings by monitor section.",
-              "default": false,
-              "type": "boolean"
-            },
-            "defaultValue": {
-              "default": false,
-              "type": "boolean"
-            },
-            "dependencies": {
-              "description": "Keys of items to be set in order to enable this item.\n\nit uses js logic (!!value) to determine if the item is enabled",
-              "default": [],
-              "type": "array",
-              "items": {
-                "type": "string"
-              }
-            },
-            "key": {
-              "description": "Unique key for this item, used to identify it in the settings, should be unique.\\ If duplicated, duplicated items will be ignored.",
-              "type": "string"
-            },
-            "label": {
-              "description": "Label for this item could start with the prefix `t::` for translation",
-              "allOf": [
-                {
-                  "$ref": "#/definitions/ResourceText"
-                }
-              ]
-            },
             "type": {
               "type": "string",
-              "enum": [
-                "switch"
-              ]
+              "const": "switch"
             }
-          }
+          },
+          "$ref": "#/$defs/WsdItemSwitch",
+          "required": [
+            "type"
+          ]
         },
         {
           "type": "object",
-          "required": [
-            "key",
-            "label",
-            "options",
-            "subtype",
-            "type"
-          ],
           "properties": {
-            "allowSetByMonitor": {
-              "description": "This setting could be set by monitor on the settings by monitor section.",
-              "default": false,
-              "type": "boolean"
-            },
-            "defaultValue": {
-              "default": "",
-              "type": "string"
-            },
-            "dependencies": {
-              "description": "Keys of items to be set in order to enable this item.\n\nit uses js logic (!!value) to determine if the item is enabled",
-              "default": [],
-              "type": "array",
-              "items": {
-                "type": "string"
-              }
-            },
-            "key": {
-              "description": "Unique key for this item, used to identify it in the settings, should be unique.\\ If duplicated, duplicated items will be ignored.",
-              "type": "string"
-            },
-            "label": {
-              "description": "Label for this item could start with the prefix `t::` for translation",
-              "allOf": [
-                {
-                  "$ref": "#/definitions/ResourceText"
-                }
-              ]
-            },
-            "options": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/WsdItemSelectOption"
-              }
-            },
-            "subtype": {
-              "$ref": "#/definitions/WsdItemSelectSubtype"
-            },
             "type": {
               "type": "string",
-              "enum": [
-                "select"
-              ]
+              "const": "select"
             }
-          }
+          },
+          "$ref": "#/$defs/WsdItemSelect",
+          "required": [
+            "type"
+          ]
         },
         {
           "type": "object",
-          "required": [
-            "key",
-            "label",
-            "type"
-          ],
           "properties": {
-            "allowSetByMonitor": {
-              "description": "This setting could be set by monitor on the settings by monitor section.",
-              "default": false,
-              "type": "boolean"
-            },
-            "defaultValue": {
-              "default": "",
-              "type": "string"
-            },
-            "dependencies": {
-              "description": "Keys of items to be set in order to enable this item.\n\nit uses js logic (!!value) to determine if the item is enabled",
-              "default": [],
-              "type": "array",
-              "items": {
-                "type": "string"
-              }
-            },
-            "key": {
-              "description": "Unique key for this item, used to identify it in the settings, should be unique.\\ If duplicated, duplicated items will be ignored.",
-              "type": "string"
-            },
-            "label": {
-              "description": "Label for this item could start with the prefix `t::` for translation",
-              "allOf": [
-                {
-                  "$ref": "#/definitions/ResourceText"
-                }
-              ]
-            },
             "type": {
               "type": "string",
-              "enum": [
-                "input-text"
-              ]
+              "const": "input-text"
             }
-          }
+          },
+          "$ref": "#/$defs/WsdItemInputText",
+          "required": [
+            "type"
+          ]
         },
         {
           "type": "object",
-          "required": [
-            "key",
-            "label",
-            "type"
-          ],
           "properties": {
-            "allowSetByMonitor": {
-              "description": "This setting could be set by monitor on the settings by monitor section.",
-              "default": false,
-              "type": "boolean"
-            },
-            "defaultValue": {
-              "default": 0.0,
-              "type": "number",
-              "format": "double"
-            },
-            "dependencies": {
-              "description": "Keys of items to be set in order to enable this item.\n\nit uses js logic (!!value) to determine if the item is enabled",
-              "default": [],
-              "type": "array",
-              "items": {
-                "type": "string"
-              }
-            },
-            "key": {
-              "description": "Unique key for this item, used to identify it in the settings, should be unique.\\ If duplicated, duplicated items will be ignored.",
-              "type": "string"
-            },
-            "label": {
-              "description": "Label for this item could start with the prefix `t::` for translation",
-              "allOf": [
-                {
-                  "$ref": "#/definitions/ResourceText"
-                }
-              ]
-            },
-            "max": {
-              "type": [
-                "number",
-                "null"
-              ],
-              "format": "double"
-            },
-            "min": {
-              "type": [
-                "number",
-                "null"
-              ],
-              "format": "double"
-            },
             "type": {
               "type": "string",
-              "enum": [
-                "input-number"
-              ]
+              "const": "input-number"
             }
-          }
+          },
+          "$ref": "#/$defs/WsdItemInputNumber",
+          "required": [
+            "type"
+          ]
         },
         {
           "type": "object",
-          "required": [
-            "from",
-            "key",
-            "label",
-            "to",
-            "type"
-          ],
           "properties": {
-            "allowSetByMonitor": {
-              "description": "This setting could be set by monitor on the settings by monitor section.",
-              "default": false,
-              "type": "boolean"
-            },
-            "defaultValue": {
-              "default": 0.0,
-              "type": "number",
-              "format": "double"
-            },
-            "dependencies": {
-              "description": "Keys of items to be set in order to enable this item.\n\nit uses js logic (!!value) to determine if the item is enabled",
-              "default": [],
-              "type": "array",
-              "items": {
-                "type": "string"
-              }
-            },
-            "from": {
-              "type": "number",
-              "format": "double"
-            },
-            "key": {
-              "description": "Unique key for this item, used to identify it in the settings, should be unique.\\ If duplicated, duplicated items will be ignored.",
-              "type": "string"
-            },
-            "label": {
-              "description": "Label for this item could start with the prefix `t::` for translation",
-              "allOf": [
-                {
-                  "$ref": "#/definitions/ResourceText"
-                }
-              ]
-            },
-            "step": {
-              "type": [
-                "number",
-                "null"
-              ],
-              "format": "double"
-            },
-            "to": {
-              "type": "number",
-              "format": "double"
-            },
             "type": {
               "type": "string",
-              "enum": [
-                "range"
-              ]
+              "const": "range"
             }
-          }
+          },
+          "$ref": "#/$defs/WsdItemRange",
+          "required": [
+            "type"
+          ]
         },
         {
           "type": "object",
-          "required": [
-            "allowAlpha",
-            "key",
-            "label",
-            "type"
-          ],
           "properties": {
-            "allowAlpha": {
-              "type": "boolean"
-            },
-            "allowSetByMonitor": {
-              "description": "This setting could be set by monitor on the settings by monitor section.",
-              "default": false,
-              "type": "boolean"
-            },
-            "defaultValue": {
-              "default": "",
-              "type": "string"
-            },
-            "dependencies": {
-              "description": "Keys of items to be set in order to enable this item.\n\nit uses js logic (!!value) to determine if the item is enabled",
-              "default": [],
-              "type": "array",
-              "items": {
-                "type": "string"
-              }
-            },
-            "key": {
-              "description": "Unique key for this item, used to identify it in the settings, should be unique.\\ If duplicated, duplicated items will be ignored.",
-              "type": "string"
-            },
-            "label": {
-              "description": "Label for this item could start with the prefix `t::` for translation",
-              "allOf": [
-                {
-                  "$ref": "#/definitions/ResourceText"
-                }
-              ]
-            },
             "type": {
               "type": "string",
-              "enum": [
-                "color"
-              ]
+              "const": "color"
             }
-          }
+          },
+          "$ref": "#/$defs/WsdItemColor",
+          "required": [
+            "type"
+          ]
         }
+      ]
+    },
+    "WsdItemColor": {
+      "type": "object",
+      "properties": {
+        "allowAlpha": {
+          "type": "boolean"
+        },
+        "allowSetByMonitor": {
+          "description": "This setting could be set by monitor on the settings by monitor section.",
+          "type": "boolean",
+          "default": false
+        },
+        "defaultValue": {
+          "type": "string",
+          "default": ""
+        },
+        "dependencies": {
+          "description": "Keys of items to be set in order to enable this item.\n\n it uses js logic (!!value) to determine if the item is enabled",
+          "type": "array",
+          "default": [],
+          "items": {
+            "type": "string"
+          }
+        },
+        "key": {
+          "description": "Unique key for this item, used to identify it in the settings, should be unique.\\\n If duplicated, duplicated items will be ignored.",
+          "type": "string"
+        },
+        "label": {
+          "description": "Label for this item could start with the prefix `t::` for translation",
+          "$ref": "#/$defs/ResourceText"
+        }
+      },
+      "required": [
+        "key",
+        "label",
+        "allowAlpha"
+      ]
+    },
+    "WsdItemInputNumber": {
+      "type": "object",
+      "properties": {
+        "allowSetByMonitor": {
+          "description": "This setting could be set by monitor on the settings by monitor section.",
+          "type": "boolean",
+          "default": false
+        },
+        "defaultValue": {
+          "type": "number",
+          "format": "double",
+          "default": 0.0
+        },
+        "dependencies": {
+          "description": "Keys of items to be set in order to enable this item.\n\n it uses js logic (!!value) to determine if the item is enabled",
+          "type": "array",
+          "default": [],
+          "items": {
+            "type": "string"
+          }
+        },
+        "key": {
+          "description": "Unique key for this item, used to identify it in the settings, should be unique.\\\n If duplicated, duplicated items will be ignored.",
+          "type": "string"
+        },
+        "label": {
+          "description": "Label for this item could start with the prefix `t::` for translation",
+          "$ref": "#/$defs/ResourceText"
+        },
+        "max": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "format": "double"
+        },
+        "min": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "format": "double"
+        }
+      },
+      "required": [
+        "key",
+        "label"
+      ]
+    },
+    "WsdItemInputText": {
+      "type": "object",
+      "properties": {
+        "allowSetByMonitor": {
+          "description": "This setting could be set by monitor on the settings by monitor section.",
+          "type": "boolean",
+          "default": false
+        },
+        "defaultValue": {
+          "type": "string",
+          "default": ""
+        },
+        "dependencies": {
+          "description": "Keys of items to be set in order to enable this item.\n\n it uses js logic (!!value) to determine if the item is enabled",
+          "type": "array",
+          "default": [],
+          "items": {
+            "type": "string"
+          }
+        },
+        "key": {
+          "description": "Unique key for this item, used to identify it in the settings, should be unique.\\\n If duplicated, duplicated items will be ignored.",
+          "type": "string"
+        },
+        "label": {
+          "description": "Label for this item could start with the prefix `t::` for translation",
+          "$ref": "#/$defs/ResourceText"
+        }
+      },
+      "required": [
+        "key",
+        "label"
+      ]
+    },
+    "WsdItemRange": {
+      "type": "object",
+      "properties": {
+        "allowSetByMonitor": {
+          "description": "This setting could be set by monitor on the settings by monitor section.",
+          "type": "boolean",
+          "default": false
+        },
+        "defaultValue": {
+          "type": "number",
+          "format": "double",
+          "default": 0.0
+        },
+        "dependencies": {
+          "description": "Keys of items to be set in order to enable this item.\n\n it uses js logic (!!value) to determine if the item is enabled",
+          "type": "array",
+          "default": [],
+          "items": {
+            "type": "string"
+          }
+        },
+        "from": {
+          "type": "number",
+          "format": "double"
+        },
+        "key": {
+          "description": "Unique key for this item, used to identify it in the settings, should be unique.\\\n If duplicated, duplicated items will be ignored.",
+          "type": "string"
+        },
+        "label": {
+          "description": "Label for this item could start with the prefix `t::` for translation",
+          "$ref": "#/$defs/ResourceText"
+        },
+        "step": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "format": "double"
+        },
+        "to": {
+          "type": "number",
+          "format": "double"
+        }
+      },
+      "required": [
+        "key",
+        "label",
+        "from",
+        "to"
+      ]
+    },
+    "WsdItemSelect": {
+      "type": "object",
+      "properties": {
+        "allowSetByMonitor": {
+          "description": "This setting could be set by monitor on the settings by monitor section.",
+          "type": "boolean",
+          "default": false
+        },
+        "defaultValue": {
+          "type": "string",
+          "default": ""
+        },
+        "dependencies": {
+          "description": "Keys of items to be set in order to enable this item.\n\n it uses js logic (!!value) to determine if the item is enabled",
+          "type": "array",
+          "default": [],
+          "items": {
+            "type": "string"
+          }
+        },
+        "key": {
+          "description": "Unique key for this item, used to identify it in the settings, should be unique.\\\n If duplicated, duplicated items will be ignored.",
+          "type": "string"
+        },
+        "label": {
+          "description": "Label for this item could start with the prefix `t::` for translation",
+          "$ref": "#/$defs/ResourceText"
+        },
+        "options": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/WsdItemSelectOption"
+          }
+        },
+        "subtype": {
+          "$ref": "#/$defs/WsdItemSelectSubtype"
+        }
+      },
+      "required": [
+        "key",
+        "label",
+        "subtype",
+        "options"
       ]
     },
     "WsdItemSelectOption": {
       "type": "object",
-      "required": [
-        "label",
-        "value"
-      ],
       "properties": {
         "icon": {
           "description": "react icon name",
@@ -616,17 +548,17 @@
         },
         "label": {
           "description": "The label to be displayed",
-          "allOf": [
-            {
-              "$ref": "#/definitions/ResourceText"
-            }
-          ]
+          "$ref": "#/$defs/ResourceText"
         },
         "value": {
           "description": "The value to be set when this option is selected, should be unique",
           "type": "string"
         }
-      }
+      },
+      "required": [
+        "label",
+        "value"
+      ]
     },
     "WsdItemSelectSubtype": {
       "type": "string",
@@ -635,31 +567,65 @@
         "Inline"
       ]
     },
+    "WsdItemSwitch": {
+      "type": "object",
+      "properties": {
+        "allowSetByMonitor": {
+          "description": "This setting could be set by monitor on the settings by monitor section.",
+          "type": "boolean",
+          "default": false
+        },
+        "defaultValue": {
+          "type": "boolean",
+          "default": false
+        },
+        "dependencies": {
+          "description": "Keys of items to be set in order to enable this item.\n\n it uses js logic (!!value) to determine if the item is enabled",
+          "type": "array",
+          "default": [],
+          "items": {
+            "type": "string"
+          }
+        },
+        "key": {
+          "description": "Unique key for this item, used to identify it in the settings, should be unique.\\\n If duplicated, duplicated items will be ignored.",
+          "type": "string"
+        },
+        "label": {
+          "description": "Label for this item could start with the prefix `t::` for translation",
+          "$ref": "#/$defs/ResourceText"
+        }
+      },
+      "required": [
+        "key",
+        "label"
+      ]
+    },
     "WsdSubGroup": {
       "type": "object",
-      "required": [
-        "content"
-      ],
       "properties": {
         "content": {
           "description": "List of items in this subgroup",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/WsdGroupEntry"
+            "$ref": "#/$defs/WsdGroupEntry"
           }
         },
         "header": {
           "description": "Header configuration. As example could be a switch to enable or disable the entire group or a selector.",
           "anyOf": [
             {
-              "$ref": "#/definitions/WsdItem"
+              "$ref": "#/$defs/WsdItem"
             },
             {
               "type": "null"
             }
           ]
         }
-      }
+      },
+      "required": [
+        "content"
+      ]
     }
   }
 }

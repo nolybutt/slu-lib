@@ -1,53 +1,41 @@
 {
-  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
   "title": "Theme",
   "type": "object",
   "properties": {
     "id": {
-      "default": "@unknown/unknown",
-      "allOf": [
-        {
-          "$ref": "#/definitions/ThemeId"
-        }
-      ]
+      "$ref": "#/$defs/ThemeId",
+      "default": "@unknown/unknown"
     },
     "metadata": {
       "description": "Metadata about the theme",
+      "$ref": "#/$defs/ResourceMetadata",
       "default": {
+        "description": {},
         "appTargetVersion": null,
         "banner": null,
         "bundled": false,
-        "description": {},
         "displayName": {},
         "filename": "",
         "portrait": null,
         "screenshots": [],
         "tags": []
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/ResourceMetadata"
-        }
-      ]
+      }
     },
     "settings": {
-      "default": [],
-      "allOf": [
-        {
-          "$ref": "#/definitions/ThemeSettingsDefinition"
-        }
-      ]
+      "$ref": "#/$defs/ThemeSettingsDefinition",
+      "default": []
     },
     "styles": {
       "description": "Css Styles of the theme",
-      "default": {},
       "type": "object",
       "additionalProperties": {
         "type": "string"
-      }
+      },
+      "default": {}
     }
   },
-  "definitions": {
+  "$defs": {
     "ResourceId": {
       "description": "visual id composed of the creator username and the resource name",
       "type": "string"
@@ -55,85 +43,65 @@
     "ResourceMetadata": {
       "type": "object",
       "properties": {
+        "description": {
+          "description": "Map of language code to description. Could be a string, mapped to `en`.",
+          "$ref": "#/$defs/ResourceText",
+          "default": {}
+        },
         "appTargetVersion": {
-          "description": "App target version that this resource is compatible with.\\ Developers are responsible to update the resource so when resource does not match the current app version, the resource will be shown with a warning message",
-          "default": null,
+          "description": "App target version that this resource is compatible with.\\\n Developers are responsible to update the resource so when resource does not\n match the current app version, the resource will be shown with a warning message",
           "type": [
             "array",
             "null"
           ],
-          "items": [
-            {
-              "type": "integer",
-              "format": "uint32",
-              "minimum": 0.0
-            },
-            {
-              "type": "integer",
-              "format": "uint32",
-              "minimum": 0.0
-            },
-            {
-              "type": "integer",
-              "format": "uint32",
-              "minimum": 0.0
-            }
-          ],
+          "default": null,
           "maxItems": 3,
-          "minItems": 3
+          "minItems": 3,
+          "prefixItems": [
+            {
+              "type": "integer",
+              "format": "uint32",
+              "minimum": 0
+            },
+            {
+              "type": "integer",
+              "format": "uint32",
+              "minimum": 0
+            },
+            {
+              "type": "integer",
+              "format": "uint32",
+              "minimum": 0
+            }
+          ]
         },
         "banner": {
           "description": "Banner image with aspect ratio of 21/9, this is used when promoting the resource.",
-          "default": null,
           "type": [
             "string",
             "null"
           ],
-          "format": "uri"
-        },
-        "bundled": {
-          "description": "internal field that indicates if the resource is bundled",
-          "default": false,
-          "readOnly": true,
-          "type": "boolean"
-        },
-        "description": {
-          "description": "Map of language code to description. Could be a string, mapped to `en`.",
-          "default": {},
-          "allOf": [
-            {
-              "$ref": "#/definitions/ResourceText"
-            }
-          ]
+          "format": "uri",
+          "default": null
         },
         "displayName": {
           "description": "Map of language code to display name. Could be a string, mapped to `en`.",
-          "default": {},
-          "allOf": [
-            {
-              "$ref": "#/definitions/ResourceText"
-            }
-          ]
-        },
-        "filename": {
-          "description": "internal field used by the app on load of the resource",
-          "default": "",
-          "readOnly": true,
-          "type": "string"
+          "$ref": "#/$defs/ResourceText",
+          "default": {}
         },
         "portrait": {
           "description": "Portrait image with aspect ratio of 1/1",
-          "default": null,
           "type": [
             "string",
             "null"
           ],
-          "format": "uri"
+          "format": "uri",
+          "default": null
         },
         "screenshots": {
           "description": "Screenshots should use aspect ratio of 16/9",
-          "default": [],
           "type": "array",
+          "default": [],
           "items": {
             "type": "string",
             "format": "uri"
@@ -141,8 +109,8 @@
         },
         "tags": {
           "description": "tags are keywords to be used for searching and indexing",
-          "default": [],
           "type": "array",
+          "default": [],
           "items": {
             "type": "string"
           }
@@ -164,194 +132,182 @@
       ]
     },
     "ThemeId": {
-      "$ref": "#/definitions/ResourceId"
+      "$ref": "#/$defs/ResourceId"
     },
     "ThemeSettingsDefinition": {
       "type": "array",
       "items": {
-        "$ref": "#/definitions/ThemeVariableDefinition"
+        "$ref": "#/$defs/ThemeVariableDefinition"
       }
     },
     "ThemeVariableDefinition": {
       "oneOf": [
         {
-          "description": "This config definition will allow to users write any string.\\ Css syntax: https://developer.mozilla.org/en-US/docs/Web/CSS/string \\ ### example: ```css --var-name: \"user input\" ```",
+          "description": "This config definition will allow to users write any string.\\\n Css syntax: https://developer.mozilla.org/en-US/docs/Web/CSS/string \\\n ### example:\n ```css\n --var-name: \"user input\"\n ```",
           "type": "object",
-          "required": [
-            "initialValue",
-            "label",
-            "name",
-            "syntax"
-          ],
           "properties": {
-            "initialValue": {
-              "description": "initial variable value, if not manually set by the user.",
-              "type": "string"
-            },
-            "label": {
-              "description": "Label to show to the user on Settings.",
-              "allOf": [
-                {
-                  "$ref": "#/definitions/ResourceText"
-                }
-              ]
-            },
-            "name": {
-              "description": "Css variable name, example: `--my-css-variable`",
-              "type": "string"
-            },
             "syntax": {
               "type": "string",
-              "enum": [
-                "<string>"
-              ]
+              "const": "<string>"
             }
-          }
+          },
+          "$ref": "#/$defs/ThemeVariable_for_string",
+          "required": [
+            "syntax"
+          ]
         },
         {
-          "description": "This config definition will allow to users select a color and will be stored as a hex value, opacity is always allowed via UI.\\ Css syntax: https://developer.mozilla.org/en-US/docs/Web/CSS/color_value \\ ### example: ```css --var-name: #ff22ee --var-name: #ff22ee ```",
+          "description": "This config definition will allow to users select a color and\n will be stored as a hex value, opacity is always allowed via UI.\\\n Css syntax: https://developer.mozilla.org/en-US/docs/Web/CSS/color_value \\\n ### example:\n ```css\n --var-name: #ff22ee\n --var-name: #ff22ee\n ```",
           "type": "object",
-          "required": [
-            "initialValue",
-            "label",
-            "name",
-            "syntax"
-          ],
           "properties": {
-            "initialValue": {
-              "description": "initial variable value, if not manually set by the user.",
-              "type": "string"
-            },
-            "label": {
-              "description": "Label to show to the user on Settings.",
-              "allOf": [
-                {
-                  "$ref": "#/definitions/ResourceText"
-                }
-              ]
-            },
-            "name": {
-              "description": "Css variable name, example: `--my-css-variable`",
-              "type": "string"
-            },
             "syntax": {
               "type": "string",
-              "enum": [
-                "<color>"
-              ]
+              "const": "<color>"
             }
-          }
+          },
+          "$ref": "#/$defs/ThemeVariable_for_string",
+          "required": [
+            "syntax"
+          ]
         },
         {
-          "description": "This will allow to the user set any lenght in any unit. (px, %, vw, etc). If you need force a specific unit, use Number instead lenght and on theme code makes the conversion.\\ Css syntax: https://developer.mozilla.org/en-US/docs/Web/CSS/length \\ ### example: ```css --var-name: 10px --var-name: 10% --var-name: 10vw ```",
+          "description": "This will allow to the user set any lenght in any unit. (px, %, vw, etc).\n If you need force a specific unit, use Number instead lenght and on theme code makes the conversion.\\\n Css syntax: https://developer.mozilla.org/en-US/docs/Web/CSS/length \\\n ### example:\n ```css\n --var-name: 10px\n --var-name: 10%\n --var-name: 10vw\n ```",
           "type": "object",
-          "required": [
-            "initialValue",
-            "initialValueUnit",
-            "label",
-            "name",
-            "syntax"
-          ],
           "properties": {
-            "initialValue": {
-              "description": "initial variable value, if not manually set by the user.",
-              "type": "number",
-              "format": "double"
-            },
-            "initialValueUnit": {
-              "description": "Css unit, example: `px`",
-              "type": "string"
-            },
-            "label": {
-              "description": "Label to show to the user on Settings.",
-              "allOf": [
-                {
-                  "$ref": "#/definitions/ResourceText"
-                }
-              ]
-            },
-            "name": {
-              "description": "Css variable name, example: `--my-css-variable`",
-              "type": "string"
-            },
             "syntax": {
               "type": "string",
-              "enum": [
-                "<length>"
-              ]
+              "const": "<length>"
             }
-          }
+          },
+          "$ref": "#/$defs/ThemeVariableWithUnit_for_double",
+          "required": [
+            "syntax"
+          ]
         },
         {
-          "description": "This will allow to users to set any number, without units. Css syntax: https://developer.mozilla.org/en-US/docs/Web/CSS/number \\ ### example: ```css --var-name: 10 ```",
+          "description": "This will allow to users to set any number, without units.\n Css syntax: https://developer.mozilla.org/en-US/docs/Web/CSS/number \\\n ### example:\n ```css\n --var-name: 10\n ```",
           "type": "object",
-          "required": [
-            "initialValue",
-            "label",
-            "name",
-            "syntax"
-          ],
           "properties": {
-            "initialValue": {
-              "description": "initial variable value, if not manually set by the user.",
-              "type": "number",
-              "format": "double"
-            },
-            "label": {
-              "description": "Label to show to the user on Settings.",
-              "allOf": [
-                {
-                  "$ref": "#/definitions/ResourceText"
-                }
-              ]
-            },
-            "name": {
-              "description": "Css variable name, example: `--my-css-variable`",
-              "type": "string"
-            },
             "syntax": {
               "type": "string",
-              "enum": [
-                "<number>"
-              ]
+              "const": "<number>"
             }
-          }
+          },
+          "$ref": "#/$defs/ThemeVariable_for_double",
+          "required": [
+            "syntax"
+          ]
         },
         {
-          "description": "This will allow to users to set any url.\\ Css syntax: https://developer.mozilla.org/en-US/docs/Web/CSS/url_value \\ ### example: ```css --var-name: url(\"https://example.com/image.png\") ```",
+          "description": "This will allow to users to set any url.\\\n Css syntax: https://developer.mozilla.org/en-US/docs/Web/CSS/url_value \\\n ### example:\n ```css\n --var-name: url(\"https://example.com/image.png\")\n ```",
           "type": "object",
-          "required": [
-            "initialValue",
-            "label",
-            "name",
-            "syntax"
-          ],
           "properties": {
-            "initialValue": {
-              "description": "initial variable value, if not manually set by the user.",
-              "type": "string",
-              "format": "uri"
-            },
-            "label": {
-              "description": "Label to show to the user on Settings.",
-              "allOf": [
-                {
-                  "$ref": "#/definitions/ResourceText"
-                }
-              ]
-            },
-            "name": {
-              "description": "Css variable name, example: `--my-css-variable`",
-              "type": "string"
-            },
             "syntax": {
               "type": "string",
-              "enum": [
-                "<url>"
-              ]
+              "const": "<url>"
             }
-          }
+          },
+          "$ref": "#/$defs/ThemeVariable_for_Url",
+          "required": [
+            "syntax"
+          ]
         }
+      ]
+    },
+    "ThemeVariableWithUnit_for_double": {
+      "type": "object",
+      "properties": {
+        "initialValue": {
+          "description": "initial variable value, if not manually set by the user.",
+          "type": "number",
+          "format": "double"
+        },
+        "initialValueUnit": {
+          "description": "Css unit, example: `px`",
+          "type": "string"
+        },
+        "label": {
+          "description": "Label to show to the user on Settings.",
+          "$ref": "#/$defs/ResourceText"
+        },
+        "name": {
+          "description": "Css variable name, example: `--my-css-variable`",
+          "type": "string"
+        }
+      },
+      "required": [
+        "label",
+        "name",
+        "initialValue",
+        "initialValueUnit"
+      ]
+    },
+    "ThemeVariable_for_Url": {
+      "type": "object",
+      "properties": {
+        "initialValue": {
+          "description": "initial variable value, if not manually set by the user.",
+          "type": "string",
+          "format": "uri"
+        },
+        "label": {
+          "description": "Label to show to the user on Settings.",
+          "$ref": "#/$defs/ResourceText"
+        },
+        "name": {
+          "description": "Css variable name, example: `--my-css-variable`",
+          "type": "string"
+        }
+      },
+      "required": [
+        "label",
+        "name",
+        "initialValue"
+      ]
+    },
+    "ThemeVariable_for_double": {
+      "type": "object",
+      "properties": {
+        "initialValue": {
+          "description": "initial variable value, if not manually set by the user.",
+          "type": "number",
+          "format": "double"
+        },
+        "label": {
+          "description": "Label to show to the user on Settings.",
+          "$ref": "#/$defs/ResourceText"
+        },
+        "name": {
+          "description": "Css variable name, example: `--my-css-variable`",
+          "type": "string"
+        }
+      },
+      "required": [
+        "label",
+        "name",
+        "initialValue"
+      ]
+    },
+    "ThemeVariable_for_string": {
+      "type": "object",
+      "properties": {
+        "initialValue": {
+          "description": "initial variable value, if not manually set by the user.",
+          "type": "string"
+        },
+        "label": {
+          "description": "Label to show to the user on Settings.",
+          "$ref": "#/$defs/ResourceText"
+        },
+        "name": {
+          "description": "Css variable name, example: `--my-css-variable`",
+          "type": "string"
+        }
+      },
+      "required": [
+        "label",
+        "name",
+        "initialValue"
       ]
     }
   }

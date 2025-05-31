@@ -1,15 +1,16 @@
 {
-  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
   "title": "Settings",
   "type": "object",
   "properties": {
     "ahkEnabled": {
       "description": "enable or disable ahk",
-      "default": true,
-      "type": "boolean"
+      "type": "boolean",
+      "default": true
     },
     "ahkVariables": {
       "description": "ahk variables",
+      "$ref": "#/$defs/AhkVarList",
       "default": {
         "decreaseHeight": {
           "ahk": "^#!-",
@@ -371,26 +372,22 @@
           "fancy": "Win + S",
           "readonly": true
         }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/AhkVarList"
-        }
-      ]
+      }
     },
     "byTheme": {
-      "description": "Custom variables for themes by theme id ### example ```json { \"@username/themeName\": { \"--css-variable-name\": \"123px\", \"--css-variable-name2\": \"#aabbccaa\", } } ```",
-      "default": {},
+      "description": "Custom variables for themes by theme id\n ### example\n ```json\n {\n     \"@username/themeName\": {\n         \"--css-variable-name\": \"123px\",\n         \"--css-variable-name2\": \"#aabbccaa\",\n     }\n }\n ```",
       "type": "object",
       "additionalProperties": {
         "type": "object",
         "additionalProperties": {
           "type": "string"
         }
-      }
+      },
+      "default": {}
     },
     "byWidget": {
       "description": "Custom settings for widgets",
+      "$ref": "#/$defs/SettingsByWidget",
       "default": {
         "@seelen/fancy-toolbar": {
           "delayToHide": 800,
@@ -468,946 +465,693 @@
           },
           "workspacePadding": 10
         }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/SettingsByWidget"
-        }
-      ]
+      }
     },
     "dateFormat": {
       "description": "MomentJS date format",
-      "default": "ddd D MMM, hh:mm A",
-      "type": "string"
+      "type": "string",
+      "default": "ddd D MMM, hh:mm A"
     },
     "devTools": {
       "description": "enable or disable dev tools tab in settings",
-      "default": false,
-      "type": "boolean"
+      "type": "boolean",
+      "default": false
     },
     "fancyToolbar": {
       "description": "@deprecated since v2.1.0, will be removed in v3.0.0",
-      "writeOnly": true,
       "anyOf": [
         {
-          "$ref": "#/definitions/FancyToolbarSettings"
+          "$ref": "#/$defs/FancyToolbarSettings"
         },
         {
           "type": "null"
         }
-      ]
+      ],
+      "writeOnly": true
     },
     "iconPacks": {
       "description": "list of selected icon packs",
+      "type": "array",
       "default": [
         "system"
       ],
-      "type": "array",
       "items": {
         "type": "string"
       }
     },
     "language": {
       "description": "language to use, if null the system locale is used",
-      "default": "en",
       "type": [
         "string",
         "null"
-      ]
+      ],
+      "default": "en"
     },
     "launcher": {
       "description": "@deprecated since v2.1.0, will be removed in v3.0.0",
-      "writeOnly": true,
       "anyOf": [
         {
-          "$ref": "#/definitions/SeelenLauncherSettings"
+          "$ref": "#/$defs/SeelenLauncherSettings"
         },
         {
           "type": "null"
         }
-      ]
+      ],
+      "writeOnly": true
     },
     "monitorsV2": {
       "description": "list of monitors and their configurations",
-      "default": {},
       "type": "object",
       "additionalProperties": {
-        "$ref": "#/definitions/MonitorConfiguration"
-      }
+        "$ref": "#/$defs/MonitorConfiguration"
+      },
+      "default": {}
     },
     "seelenweg": {
       "description": "@deprecated since v2.1.0, will be removed in v3.0.0",
-      "writeOnly": true,
       "anyOf": [
         {
-          "$ref": "#/definitions/SeelenWegSettings"
+          "$ref": "#/$defs/SeelenWegSettings"
         },
         {
           "type": "null"
         }
-      ]
+      ],
+      "writeOnly": true
     },
     "selectedThemes": {
       "description": "list of selected themes",
+      "type": "array",
       "default": [
         "default"
       ],
-      "type": "array",
       "items": {
         "type": "string"
       }
     },
     "updater": {
       "description": "Updater Settings",
+      "$ref": "#/$defs/UpdaterSettings",
       "default": {
         "channel": "Release"
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/UpdaterSettings"
-        }
-      ]
+      }
     },
     "virtualDesktopStrategy": {
       "description": "what virtual desktop implementation will be used, in case Native is not available we use Seelen",
-      "default": "Native",
-      "allOf": [
-        {
-          "$ref": "#/definitions/VirtualDesktopStrategy"
-        }
-      ]
+      "$ref": "#/$defs/VirtualDesktopStrategy",
+      "default": "Native"
     },
     "wall": {
       "description": "@deprecated since v2.1.0, will be removed in v3.0.0",
-      "writeOnly": true,
       "anyOf": [
         {
-          "$ref": "#/definitions/SeelenWallSettings"
+          "$ref": "#/$defs/SeelenWallSettings"
         },
         {
           "type": "null"
         }
-      ]
+      ],
+      "writeOnly": true
     },
     "windowManager": {
       "description": "@deprecated since v2.1.0, will be removed in v3.0.0",
-      "writeOnly": true,
       "anyOf": [
         {
-          "$ref": "#/definitions/WindowManagerSettings"
+          "$ref": "#/$defs/WindowManagerSettings"
         },
         {
           "type": "null"
         }
-      ]
+      ],
+      "writeOnly": true
     }
   },
-  "definitions": {
+  "$defs": {
     "AhkVar": {
       "type": "object",
-      "required": [
-        "ahk",
-        "fancy"
-      ],
       "properties": {
         "ahk": {
           "type": "string"
         },
         "devonly": {
-          "default": false,
-          "type": "boolean"
+          "type": "boolean",
+          "default": false
         },
         "fancy": {
           "type": "string"
         },
         "readonly": {
-          "default": false,
-          "type": "boolean"
+          "type": "boolean",
+          "default": false
         }
-      }
+      },
+      "required": [
+        "fancy",
+        "ahk"
+      ]
     },
     "AhkVarList": {
       "type": "object",
       "properties": {
         "decreaseHeight": {
+          "$ref": "#/$defs/AhkVar",
           "default": {
             "ahk": "^#!-",
             "devonly": false,
             "fancy": "Ctrl + Win + Alt + -",
             "readonly": false
-          },
-          "allOf": [
-            {
-              "$ref": "#/definitions/AhkVar"
-            }
-          ]
+          }
         },
         "decreaseWidth": {
+          "$ref": "#/$defs/AhkVar",
           "default": {
             "ahk": "#!-",
             "devonly": false,
             "fancy": "Win + Alt + -",
             "readonly": false
-          },
-          "allOf": [
-            {
-              "$ref": "#/definitions/AhkVar"
-            }
-          ]
+          }
         },
         "focusBottom": {
+          "$ref": "#/$defs/AhkVar",
           "default": {
             "ahk": "#!k",
             "devonly": false,
             "fancy": "Win + Alt + K",
             "readonly": false
-          },
-          "allOf": [
-            {
-              "$ref": "#/definitions/AhkVar"
-            }
-          ]
+          }
         },
         "focusLatest": {
+          "$ref": "#/$defs/AhkVar",
           "default": {
             "ahk": "#!u",
             "devonly": false,
             "fancy": "Win + Alt + U",
             "readonly": false
-          },
-          "allOf": [
-            {
-              "$ref": "#/definitions/AhkVar"
-            }
-          ]
+          }
         },
         "focusLeft": {
+          "$ref": "#/$defs/AhkVar",
           "default": {
             "ahk": "#!j",
             "devonly": false,
             "fancy": "Win + Alt + J",
             "readonly": false
-          },
-          "allOf": [
-            {
-              "$ref": "#/definitions/AhkVar"
-            }
-          ]
+          }
         },
         "focusRight": {
+          "$ref": "#/$defs/AhkVar",
           "default": {
             "ahk": "#!l",
             "devonly": false,
             "fancy": "Win + Alt + L",
             "readonly": false
-          },
-          "allOf": [
-            {
-              "$ref": "#/definitions/AhkVar"
-            }
-          ]
+          }
         },
         "focusTop": {
+          "$ref": "#/$defs/AhkVar",
           "default": {
             "ahk": "#!i",
             "devonly": false,
             "fancy": "Win + Alt + I",
             "readonly": false
-          },
-          "allOf": [
-            {
-              "$ref": "#/definitions/AhkVar"
-            }
-          ]
+          }
         },
         "increaseHeight": {
+          "$ref": "#/$defs/AhkVar",
           "default": {
             "ahk": "^#!=",
             "devonly": false,
             "fancy": "Ctrl + Win + Alt + =",
             "readonly": false
-          },
-          "allOf": [
-            {
-              "$ref": "#/definitions/AhkVar"
-            }
-          ]
+          }
         },
         "increaseWidth": {
+          "$ref": "#/$defs/AhkVar",
           "default": {
             "ahk": "#!=",
             "devonly": false,
             "fancy": "Win + Alt + =",
             "readonly": false
-          },
-          "allOf": [
-            {
-              "$ref": "#/definitions/AhkVar"
-            }
-          ]
+          }
         },
         "miscOpenSettings": {
+          "$ref": "#/$defs/AhkVar",
           "default": {
             "ahk": "^#i",
             "devonly": false,
             "fancy": "Ctrl + Win + I",
             "readonly": true
-          },
-          "allOf": [
-            {
-              "$ref": "#/definitions/AhkVar"
-            }
-          ]
+          }
         },
         "miscToggleLockTracing": {
+          "$ref": "#/$defs/AhkVar",
           "default": {
             "ahk": "^#!t",
             "devonly": true,
             "fancy": "Ctrl + Win + Alt + T",
             "readonly": true
-          },
-          "allOf": [
-            {
-              "$ref": "#/definitions/AhkVar"
-            }
-          ]
+          }
         },
         "miscToggleWinEventTracing": {
+          "$ref": "#/$defs/AhkVar",
           "default": {
             "ahk": "^#!l",
             "devonly": true,
             "fancy": "Ctrl + Win + Alt + L",
             "readonly": true
-          },
-          "allOf": [
-            {
-              "$ref": "#/definitions/AhkVar"
-            }
-          ]
+          }
         },
         "moveToWorkspace0": {
+          "$ref": "#/$defs/AhkVar",
           "default": {
             "ahk": "!+1",
             "devonly": false,
             "fancy": "Alt + Shift + 1",
             "readonly": false
-          },
-          "allOf": [
-            {
-              "$ref": "#/definitions/AhkVar"
-            }
-          ]
+          }
         },
         "moveToWorkspace1": {
+          "$ref": "#/$defs/AhkVar",
           "default": {
             "ahk": "!+2",
             "devonly": false,
             "fancy": "Alt + Shift + 2",
             "readonly": false
-          },
-          "allOf": [
-            {
-              "$ref": "#/definitions/AhkVar"
-            }
-          ]
+          }
         },
         "moveToWorkspace2": {
+          "$ref": "#/$defs/AhkVar",
           "default": {
             "ahk": "!+3",
             "devonly": false,
             "fancy": "Alt + Shift + 3",
             "readonly": false
-          },
-          "allOf": [
-            {
-              "$ref": "#/definitions/AhkVar"
-            }
-          ]
+          }
         },
         "moveToWorkspace3": {
+          "$ref": "#/$defs/AhkVar",
           "default": {
             "ahk": "!+4",
             "devonly": false,
             "fancy": "Alt + Shift + 4",
             "readonly": false
-          },
-          "allOf": [
-            {
-              "$ref": "#/definitions/AhkVar"
-            }
-          ]
+          }
         },
         "moveToWorkspace4": {
+          "$ref": "#/$defs/AhkVar",
           "default": {
             "ahk": "!+5",
             "devonly": false,
             "fancy": "Alt + Shift + 5",
             "readonly": false
-          },
-          "allOf": [
-            {
-              "$ref": "#/definitions/AhkVar"
-            }
-          ]
+          }
         },
         "moveToWorkspace5": {
+          "$ref": "#/$defs/AhkVar",
           "default": {
             "ahk": "!+6",
             "devonly": false,
             "fancy": "Alt + Shift + 6",
             "readonly": false
-          },
-          "allOf": [
-            {
-              "$ref": "#/definitions/AhkVar"
-            }
-          ]
+          }
         },
         "moveToWorkspace6": {
+          "$ref": "#/$defs/AhkVar",
           "default": {
             "ahk": "!+7",
             "devonly": false,
             "fancy": "Alt + Shift + 7",
             "readonly": false
-          },
-          "allOf": [
-            {
-              "$ref": "#/definitions/AhkVar"
-            }
-          ]
+          }
         },
         "moveToWorkspace7": {
+          "$ref": "#/$defs/AhkVar",
           "default": {
             "ahk": "!+8",
             "devonly": false,
             "fancy": "Alt + Shift + 8",
             "readonly": false
-          },
-          "allOf": [
-            {
-              "$ref": "#/definitions/AhkVar"
-            }
-          ]
+          }
         },
         "moveToWorkspace8": {
+          "$ref": "#/$defs/AhkVar",
           "default": {
             "ahk": "!+9",
             "devonly": false,
             "fancy": "Alt + Shift + 9",
             "readonly": false
-          },
-          "allOf": [
-            {
-              "$ref": "#/definitions/AhkVar"
-            }
-          ]
+          }
         },
         "moveToWorkspace9": {
+          "$ref": "#/$defs/AhkVar",
           "default": {
             "ahk": "!+0",
             "devonly": false,
             "fancy": "Alt + Shift + 0",
             "readonly": false
-          },
-          "allOf": [
-            {
-              "$ref": "#/definitions/AhkVar"
-            }
-          ]
+          }
         },
         "reserveBottom": {
+          "$ref": "#/$defs/AhkVar",
           "default": {
             "ahk": "#+k",
             "devonly": false,
             "fancy": "Win + Shift + K",
             "readonly": false
-          },
-          "allOf": [
-            {
-              "$ref": "#/definitions/AhkVar"
-            }
-          ]
+          }
         },
         "reserveFloat": {
+          "$ref": "#/$defs/AhkVar",
           "default": {
             "ahk": "#+u",
             "devonly": false,
             "fancy": "Win + Shift + U",
             "readonly": false
-          },
-          "allOf": [
-            {
-              "$ref": "#/definitions/AhkVar"
-            }
-          ]
+          }
         },
         "reserveLeft": {
+          "$ref": "#/$defs/AhkVar",
           "default": {
             "ahk": "#+j",
             "devonly": false,
             "fancy": "Win + Shift + J",
             "readonly": false
-          },
-          "allOf": [
-            {
-              "$ref": "#/definitions/AhkVar"
-            }
-          ]
+          }
         },
         "reserveRight": {
+          "$ref": "#/$defs/AhkVar",
           "default": {
             "ahk": "#+l",
             "devonly": false,
             "fancy": "Win + Shift + L",
             "readonly": false
-          },
-          "allOf": [
-            {
-              "$ref": "#/definitions/AhkVar"
-            }
-          ]
+          }
         },
         "reserveStack": {
+          "$ref": "#/$defs/AhkVar",
           "default": {
             "ahk": "#+o",
             "devonly": false,
             "fancy": "Win + Shift + O",
             "readonly": false
-          },
-          "allOf": [
-            {
-              "$ref": "#/definitions/AhkVar"
-            }
-          ]
+          }
         },
         "reserveTop": {
+          "$ref": "#/$defs/AhkVar",
           "default": {
             "ahk": "#+i",
             "devonly": false,
             "fancy": "Win + Shift + I",
             "readonly": false
-          },
-          "allOf": [
-            {
-              "$ref": "#/definitions/AhkVar"
-            }
-          ]
+          }
         },
         "restoreSizes": {
+          "$ref": "#/$defs/AhkVar",
           "default": {
             "ahk": "#!0",
             "devonly": false,
             "fancy": "Win + Alt + 0",
             "readonly": false
-          },
-          "allOf": [
-            {
-              "$ref": "#/definitions/AhkVar"
-            }
-          ]
+          }
         },
         "sendToWorkspace0": {
+          "$ref": "#/$defs/AhkVar",
           "default": {
             "ahk": "#+1",
             "devonly": false,
             "fancy": "Win + Shift + 1",
             "readonly": false
-          },
-          "allOf": [
-            {
-              "$ref": "#/definitions/AhkVar"
-            }
-          ]
+          }
         },
         "sendToWorkspace1": {
+          "$ref": "#/$defs/AhkVar",
           "default": {
             "ahk": "#+2",
             "devonly": false,
             "fancy": "Win + Shift + 2",
             "readonly": false
-          },
-          "allOf": [
-            {
-              "$ref": "#/definitions/AhkVar"
-            }
-          ]
+          }
         },
         "sendToWorkspace2": {
+          "$ref": "#/$defs/AhkVar",
           "default": {
             "ahk": "#+3",
             "devonly": false,
             "fancy": "Win + Shift + 3",
             "readonly": false
-          },
-          "allOf": [
-            {
-              "$ref": "#/definitions/AhkVar"
-            }
-          ]
+          }
         },
         "sendToWorkspace3": {
+          "$ref": "#/$defs/AhkVar",
           "default": {
             "ahk": "#+4",
             "devonly": false,
             "fancy": "Win + Shift + 4",
             "readonly": false
-          },
-          "allOf": [
-            {
-              "$ref": "#/definitions/AhkVar"
-            }
-          ]
+          }
         },
         "sendToWorkspace4": {
+          "$ref": "#/$defs/AhkVar",
           "default": {
             "ahk": "#+5",
             "devonly": false,
             "fancy": "Win + Shift + 5",
             "readonly": false
-          },
-          "allOf": [
-            {
-              "$ref": "#/definitions/AhkVar"
-            }
-          ]
+          }
         },
         "sendToWorkspace5": {
+          "$ref": "#/$defs/AhkVar",
           "default": {
             "ahk": "#+6",
             "devonly": false,
             "fancy": "Win + Shift + 6",
             "readonly": false
-          },
-          "allOf": [
-            {
-              "$ref": "#/definitions/AhkVar"
-            }
-          ]
+          }
         },
         "sendToWorkspace6": {
+          "$ref": "#/$defs/AhkVar",
           "default": {
             "ahk": "#+7",
             "devonly": false,
             "fancy": "Win + Shift + 7",
             "readonly": false
-          },
-          "allOf": [
-            {
-              "$ref": "#/definitions/AhkVar"
-            }
-          ]
+          }
         },
         "sendToWorkspace7": {
+          "$ref": "#/$defs/AhkVar",
           "default": {
             "ahk": "#+8",
             "devonly": false,
             "fancy": "Win + Shift + 8",
             "readonly": false
-          },
-          "allOf": [
-            {
-              "$ref": "#/definitions/AhkVar"
-            }
-          ]
+          }
         },
         "sendToWorkspace8": {
+          "$ref": "#/$defs/AhkVar",
           "default": {
             "ahk": "#+9",
             "devonly": false,
             "fancy": "Win + Shift + 9",
             "readonly": false
-          },
-          "allOf": [
-            {
-              "$ref": "#/definitions/AhkVar"
-            }
-          ]
+          }
         },
         "sendToWorkspace9": {
+          "$ref": "#/$defs/AhkVar",
           "default": {
             "ahk": "#+0",
             "devonly": false,
             "fancy": "Win + Shift + 0",
             "readonly": false
-          },
-          "allOf": [
-            {
-              "$ref": "#/definitions/AhkVar"
-            }
-          ]
+          }
         },
         "startWegApp0": {
+          "$ref": "#/$defs/AhkVar",
           "default": {
             "ahk": "#1",
             "devonly": false,
             "fancy": "Win + 1",
             "readonly": false
-          },
-          "allOf": [
-            {
-              "$ref": "#/definitions/AhkVar"
-            }
-          ]
+          }
         },
         "startWegApp1": {
+          "$ref": "#/$defs/AhkVar",
           "default": {
             "ahk": "#2",
             "devonly": false,
             "fancy": "Win + 2",
             "readonly": false
-          },
-          "allOf": [
-            {
-              "$ref": "#/definitions/AhkVar"
-            }
-          ]
+          }
         },
         "startWegApp2": {
+          "$ref": "#/$defs/AhkVar",
           "default": {
             "ahk": "#3",
             "devonly": false,
             "fancy": "Win + 3",
             "readonly": false
-          },
-          "allOf": [
-            {
-              "$ref": "#/definitions/AhkVar"
-            }
-          ]
+          }
         },
         "startWegApp3": {
+          "$ref": "#/$defs/AhkVar",
           "default": {
             "ahk": "#4",
             "devonly": false,
             "fancy": "Win + 4",
             "readonly": false
-          },
-          "allOf": [
-            {
-              "$ref": "#/definitions/AhkVar"
-            }
-          ]
+          }
         },
         "startWegApp4": {
+          "$ref": "#/$defs/AhkVar",
           "default": {
             "ahk": "#5",
             "devonly": false,
             "fancy": "Win + 5",
             "readonly": false
-          },
-          "allOf": [
-            {
-              "$ref": "#/definitions/AhkVar"
-            }
-          ]
+          }
         },
         "startWegApp5": {
+          "$ref": "#/$defs/AhkVar",
           "default": {
             "ahk": "#6",
             "devonly": false,
             "fancy": "Win + 6",
             "readonly": false
-          },
-          "allOf": [
-            {
-              "$ref": "#/definitions/AhkVar"
-            }
-          ]
+          }
         },
         "startWegApp6": {
+          "$ref": "#/$defs/AhkVar",
           "default": {
             "ahk": "#7",
             "devonly": false,
             "fancy": "Win + 7",
             "readonly": false
-          },
-          "allOf": [
-            {
-              "$ref": "#/definitions/AhkVar"
-            }
-          ]
+          }
         },
         "startWegApp7": {
+          "$ref": "#/$defs/AhkVar",
           "default": {
             "ahk": "#8",
             "devonly": false,
             "fancy": "Win + 8",
             "readonly": false
-          },
-          "allOf": [
-            {
-              "$ref": "#/definitions/AhkVar"
-            }
-          ]
+          }
         },
         "startWegApp8": {
+          "$ref": "#/$defs/AhkVar",
           "default": {
             "ahk": "#9",
             "devonly": false,
             "fancy": "Win + 9",
             "readonly": false
-          },
-          "allOf": [
-            {
-              "$ref": "#/definitions/AhkVar"
-            }
-          ]
+          }
         },
         "startWegApp9": {
+          "$ref": "#/$defs/AhkVar",
           "default": {
             "ahk": "#0",
             "devonly": false,
             "fancy": "Win + 0",
             "readonly": false
-          },
-          "allOf": [
-            {
-              "$ref": "#/definitions/AhkVar"
-            }
-          ]
+          }
         },
         "switchWorkspace0": {
+          "$ref": "#/$defs/AhkVar",
           "default": {
             "ahk": "!1",
             "devonly": false,
             "fancy": "Alt + 1",
             "readonly": false
-          },
-          "allOf": [
-            {
-              "$ref": "#/definitions/AhkVar"
-            }
-          ]
+          }
         },
         "switchWorkspace1": {
+          "$ref": "#/$defs/AhkVar",
           "default": {
             "ahk": "!2",
             "devonly": false,
             "fancy": "Alt + 2",
             "readonly": false
-          },
-          "allOf": [
-            {
-              "$ref": "#/definitions/AhkVar"
-            }
-          ]
+          }
         },
         "switchWorkspace2": {
+          "$ref": "#/$defs/AhkVar",
           "default": {
             "ahk": "!3",
             "devonly": false,
             "fancy": "Alt + 3",
             "readonly": false
-          },
-          "allOf": [
-            {
-              "$ref": "#/definitions/AhkVar"
-            }
-          ]
+          }
         },
         "switchWorkspace3": {
+          "$ref": "#/$defs/AhkVar",
           "default": {
             "ahk": "!4",
             "devonly": false,
             "fancy": "Alt + 4",
             "readonly": false
-          },
-          "allOf": [
-            {
-              "$ref": "#/definitions/AhkVar"
-            }
-          ]
+          }
         },
         "switchWorkspace4": {
+          "$ref": "#/$defs/AhkVar",
           "default": {
             "ahk": "!5",
             "devonly": false,
             "fancy": "Alt + 5",
             "readonly": false
-          },
-          "allOf": [
-            {
-              "$ref": "#/definitions/AhkVar"
-            }
-          ]
+          }
         },
         "switchWorkspace5": {
+          "$ref": "#/$defs/AhkVar",
           "default": {
             "ahk": "!6",
             "devonly": false,
             "fancy": "Alt + 6",
             "readonly": false
-          },
-          "allOf": [
-            {
-              "$ref": "#/definitions/AhkVar"
-            }
-          ]
+          }
         },
         "switchWorkspace6": {
+          "$ref": "#/$defs/AhkVar",
           "default": {
             "ahk": "!7",
             "devonly": false,
             "fancy": "Alt + 7",
             "readonly": false
-          },
-          "allOf": [
-            {
-              "$ref": "#/definitions/AhkVar"
-            }
-          ]
+          }
         },
         "switchWorkspace7": {
+          "$ref": "#/$defs/AhkVar",
           "default": {
             "ahk": "!8",
             "devonly": false,
             "fancy": "Alt + 8",
             "readonly": false
-          },
-          "allOf": [
-            {
-              "$ref": "#/definitions/AhkVar"
-            }
-          ]
+          }
         },
         "switchWorkspace8": {
+          "$ref": "#/$defs/AhkVar",
           "default": {
             "ahk": "!9",
             "devonly": false,
             "fancy": "Alt + 9",
             "readonly": false
-          },
-          "allOf": [
-            {
-              "$ref": "#/definitions/AhkVar"
-            }
-          ]
+          }
         },
         "switchWorkspace9": {
+          "$ref": "#/$defs/AhkVar",
           "default": {
             "ahk": "!0",
             "devonly": false,
             "fancy": "Alt + 0",
             "readonly": false
-          },
-          "allOf": [
-            {
-              "$ref": "#/definitions/AhkVar"
-            }
-          ]
+          }
         },
         "toggleLauncher": {
+          "$ref": "#/$defs/AhkVar",
           "default": {
             "ahk": "#s",
             "devonly": false,
             "fancy": "Win + S",
             "readonly": true
-          },
-          "allOf": [
-            {
-              "$ref": "#/definitions/AhkVar"
-            }
-          ]
+          }
         }
       }
     },
@@ -1415,18 +1159,18 @@
       "type": "object",
       "properties": {
         "enabled": {
-          "default": true,
-          "type": "boolean"
+          "type": "boolean",
+          "default": true
         },
         "offset": {
-          "default": 0.0,
           "type": "number",
-          "format": "double"
+          "format": "double",
+          "default": 0.0
         },
         "width": {
-          "default": 3.0,
           "type": "number",
-          "format": "double"
+          "format": "double",
+          "default": 3.0
         }
       }
     },
@@ -1435,57 +1179,49 @@
       "properties": {
         "delayToHide": {
           "description": "delay to hide the toolbar on Mouse Leave in milliseconds",
-          "default": 800,
           "type": "integer",
           "format": "uint32",
-          "minimum": 0.0
+          "default": 800,
+          "minimum": 0
         },
         "delayToShow": {
           "description": "delay to show the toolbar on Mouse Hover in milliseconds",
-          "default": 100,
           "type": "integer",
           "format": "uint32",
-          "minimum": 0.0
+          "default": 100,
+          "minimum": 0
         },
         "dynamicColor": {
           "description": "enable or disable dynamic color based on maximized focused window (themes can override this)",
-          "default": true,
-          "type": "boolean"
+          "type": "boolean",
+          "default": true
         },
         "enabled": {
           "description": "enable or disable the fancy toolbar",
-          "default": true,
-          "type": "boolean"
+          "type": "boolean",
+          "default": true
         },
         "height": {
           "description": "height of the fancy toolbar",
-          "default": 30,
           "type": "integer",
           "format": "uint32",
-          "minimum": 0.0
+          "default": 30,
+          "minimum": 0
         },
         "hideMode": {
           "description": "hide mode",
-          "default": "Never",
-          "allOf": [
-            {
-              "$ref": "#/definitions/HideMode"
-            }
-          ]
+          "$ref": "#/$defs/HideMode",
+          "default": "Never"
         },
         "position": {
           "description": "position of the toolbar",
-          "default": "Top",
-          "allOf": [
-            {
-              "$ref": "#/definitions/FancyToolbarSide"
-            }
-          ]
+          "$ref": "#/$defs/FancyToolbarSide",
+          "default": "Top"
         },
         "showHibernateButton": {
           "description": "show the hibernate button on power menu",
-          "default": false,
-          "type": "boolean"
+          "type": "boolean",
+          "default": false
         }
       }
     },
@@ -1493,8 +1229,8 @@
       "type": "object",
       "properties": {
         "enabled": {
-          "default": true,
-          "type": "boolean"
+          "type": "boolean",
+          "default": true
         }
       }
     },
@@ -1509,14 +1245,14 @@
       "type": "object",
       "properties": {
         "height": {
-          "default": 500.0,
           "type": "number",
-          "format": "double"
+          "format": "double",
+          "default": 500.0
         },
         "width": {
-          "default": 800.0,
           "type": "number",
-          "format": "double"
+          "format": "double",
+          "default": 800.0
         }
       }
     },
@@ -1525,23 +1261,17 @@
         {
           "description": "never hide",
           "type": "string",
-          "enum": [
-            "Never"
-          ]
+          "const": "Never"
         },
         {
           "description": "auto-hide always on",
           "type": "string",
-          "enum": [
-            "Always"
-          ]
+          "const": "Always"
         },
         {
           "description": "auto-hide only if is overlaped by the focused window",
           "type": "string",
-          "enum": [
-            "OnOverlap"
-          ]
+          "const": "OnOverlap"
         }
       ]
     },
@@ -1550,6 +1280,7 @@
       "properties": {
         "byWidget": {
           "description": "dictionary of settings by widget",
+          "$ref": "#/$defs/MonitorSettingsByWidget",
           "default": {
             "@seelen/fancy-toolbar": {
               "enabled": true
@@ -1570,67 +1301,62 @@
               "margin": null,
               "padding": null
             }
-          },
-          "allOf": [
-            {
-              "$ref": "#/definitions/MonitorSettingsByWidget"
-            }
-          ]
+          }
         },
         "tb": {
           "description": "@deprecated since v2.1.0, will be removed in v3.0.0",
-          "writeOnly": true,
           "anyOf": [
             {
-              "$ref": "#/definitions/FancyToolbarSettingsByMonitor"
+              "$ref": "#/$defs/FancyToolbarSettingsByMonitor"
             },
             {
               "type": "null"
             }
-          ]
+          ],
+          "writeOnly": true
         },
         "wall": {
           "description": "@deprecated since v2.1.0, will be removed in v3.0.0",
-          "writeOnly": true,
           "anyOf": [
             {
-              "$ref": "#/definitions/SeelenWallSettingsByMonitor"
+              "$ref": "#/$defs/SeelenWallSettingsByMonitor"
             },
             {
               "type": "null"
             }
-          ]
+          ],
+          "writeOnly": true
         },
         "weg": {
           "description": "@deprecated since v2.1.0, will be removed in v3.0.0",
-          "writeOnly": true,
           "anyOf": [
             {
-              "$ref": "#/definitions/SeelenWegSettingsByMonitor"
+              "$ref": "#/$defs/SeelenWegSettingsByMonitor"
             },
             {
               "type": "null"
             }
-          ]
+          ],
+          "writeOnly": true
         },
         "wm": {
           "description": "@deprecated since v2.1.0, will be removed in v3.0.0",
-          "writeOnly": true,
           "anyOf": [
             {
-              "$ref": "#/definitions/WindowManagerSettingsByMonitor"
+              "$ref": "#/$defs/WindowManagerSettingsByMonitor"
             },
             {
               "type": "null"
             }
-          ]
+          ],
+          "writeOnly": true
         },
         "workspacesV2": {
           "description": "list of settings by workspace on this monitor",
-          "default": [],
           "type": "array",
+          "default": [],
           "items": {
-            "$ref": "#/definitions/WorkspaceConfiguration"
+            "$ref": "#/$defs/WorkspaceConfiguration"
           }
         }
       }
@@ -1638,46 +1364,40 @@
     "MonitorSettingsByWidget": {
       "description": "This struct is intented to work with ts-rs flattening",
       "type": "object",
+      "properties": {
+        "@seelen/fancy-toolbar": {
+          "$ref": "#/$defs/FancyToolbarSettingsByMonitor"
+        },
+        "@seelen/wallpaper-manager": {
+          "$ref": "#/$defs/SeelenWallSettingsByMonitor"
+        },
+        "@seelen/weg": {
+          "$ref": "#/$defs/SeelenWegSettingsByMonitor"
+        },
+        "@seelen/window-manager": {
+          "$ref": "#/$defs/WindowManagerSettingsByMonitor"
+        }
+      },
       "anyOf": [
         {
           "type": "object",
           "additionalProperties": {
-            "$ref": "#/definitions/ThirdPartyWidgetSettings"
+            "$ref": "#/$defs/ThirdPartyWidgetSettings"
           }
         }
       ],
       "required": [
-        "@seelen/fancy-toolbar",
-        "@seelen/wallpaper-manager",
         "@seelen/weg",
-        "@seelen/window-manager"
-      ],
-      "properties": {
-        "@seelen/fancy-toolbar": {
-          "$ref": "#/definitions/FancyToolbarSettingsByMonitor"
-        },
-        "@seelen/wallpaper-manager": {
-          "$ref": "#/definitions/SeelenWallSettingsByMonitor"
-        },
-        "@seelen/weg": {
-          "$ref": "#/definitions/SeelenWegSettingsByMonitor"
-        },
-        "@seelen/window-manager": {
-          "$ref": "#/definitions/WindowManagerSettingsByMonitor"
-        }
-      }
+        "@seelen/fancy-toolbar",
+        "@seelen/window-manager",
+        "@seelen/wallpaper-manager"
+      ]
     },
     "PluginId": {
-      "$ref": "#/definitions/ResourceId"
+      "$ref": "#/$defs/ResourceId"
     },
     "Rect": {
       "type": "object",
-      "required": [
-        "bottom",
-        "left",
-        "right",
-        "top"
-      ],
       "properties": {
         "bottom": {
           "type": "integer",
@@ -1695,7 +1415,13 @@
           "type": "integer",
           "format": "int32"
         }
-      }
+      },
+      "required": [
+        "left",
+        "top",
+        "right",
+        "bottom"
+      ]
     },
     "ResourceId": {
       "description": "visual id composed of the creator username and the resource name",
@@ -1712,20 +1438,20 @@
       "type": "object",
       "properties": {
         "id": {
-          "default": "",
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "label": {
-          "default": "",
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "program": {
-          "default": "",
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "readonly": {
-          "default": false,
-          "type": "boolean"
+          "type": "boolean",
+          "default": false
         }
       }
     },
@@ -1733,18 +1459,15 @@
       "type": "object",
       "properties": {
         "enabled": {
-          "default": false,
-          "type": "boolean"
+          "type": "boolean",
+          "default": false
         },
         "monitor": {
-          "default": "MouseOver",
-          "allOf": [
-            {
-              "$ref": "#/definitions/SeelenLauncherMonitor"
-            }
-          ]
+          "$ref": "#/$defs/SeelenLauncherMonitor",
+          "default": "MouseOver"
         },
         "runners": {
+          "type": "array",
           "default": [
             {
               "id": "RUN",
@@ -1759,9 +1482,8 @@
               "readonly": true
             }
           ],
-          "type": "array",
           "items": {
-            "$ref": "#/definitions/SeelenLauncherRunner"
+            "$ref": "#/$defs/SeelenLauncherRunner"
           }
         }
       }
@@ -1770,26 +1492,26 @@
       "type": "object",
       "properties": {
         "backgrounds": {
-          "default": [],
           "type": "array",
+          "default": [],
           "items": {
-            "$ref": "#/definitions/SeelenWallWallpaper"
+            "$ref": "#/$defs/SeelenWallWallpaper"
           }
         },
         "enabled": {
-          "default": true,
-          "type": "boolean"
+          "type": "boolean",
+          "default": true
         },
         "interval": {
           "description": "update interval in seconds",
-          "default": 60,
           "type": "integer",
           "format": "uint32",
-          "minimum": 0.0
+          "default": 60,
+          "minimum": 0
         },
         "randomize": {
-          "default": false,
-          "type": "boolean"
+          "type": "boolean",
+          "default": false
         }
       }
     },
@@ -1797,27 +1519,23 @@
       "type": "object",
       "properties": {
         "backgrounds": {
-          "default": null,
           "type": [
             "array",
             "null"
           ],
+          "default": null,
           "items": {
-            "$ref": "#/definitions/SeelenWallWallpaper"
+            "$ref": "#/$defs/SeelenWallWallpaper"
           }
         },
         "enabled": {
-          "default": true,
-          "type": "boolean"
+          "type": "boolean",
+          "default": true
         }
       }
     },
     "SeelenWallWallpaper": {
       "type": "object",
-      "required": [
-        "id",
-        "path"
-      ],
       "properties": {
         "id": {
           "type": "string"
@@ -1825,7 +1543,11 @@
         "path": {
           "type": "string"
         }
-      }
+      },
+      "required": [
+        "id",
+        "path"
+      ]
     },
     "SeelenWegMode": {
       "type": "string",
@@ -1839,122 +1561,102 @@
       "properties": {
         "delayToHide": {
           "description": "delay to hide the toolbar on Mouse Leave in milliseconds",
-          "default": 800,
           "type": "integer",
           "format": "uint32",
-          "minimum": 0.0
+          "default": 800,
+          "minimum": 0
         },
         "delayToShow": {
           "description": "delay to show the toolbar on Mouse Hover in milliseconds",
-          "default": 100,
           "type": "integer",
           "format": "uint32",
-          "minimum": 0.0
+          "default": 100,
+          "minimum": 0
         },
         "enabled": {
           "description": "enable or disable the seelenweg",
-          "default": true,
-          "type": "boolean"
+          "type": "boolean",
+          "default": true
         },
         "hideMode": {
           "description": "When to hide the dock",
-          "default": "OnOverlap",
-          "allOf": [
-            {
-              "$ref": "#/definitions/HideMode"
-            }
-          ]
+          "$ref": "#/$defs/HideMode",
+          "default": "OnOverlap"
         },
         "margin": {
           "description": "Dock/Taskbar margin in px",
-          "default": 8,
           "type": "integer",
           "format": "uint32",
-          "minimum": 0.0
+          "default": 8,
+          "minimum": 0
         },
         "mode": {
           "description": "Dock/Taskbar mode",
-          "default": "MinContent",
-          "allOf": [
-            {
-              "$ref": "#/definitions/SeelenWegMode"
-            }
-          ]
+          "$ref": "#/$defs/SeelenWegMode",
+          "default": "MinContent"
         },
         "padding": {
           "description": "Dock/Taskbar padding in px",
-          "default": 8,
           "type": "integer",
           "format": "uint32",
-          "minimum": 0.0
+          "default": 8,
+          "minimum": 0
         },
         "pinnedItemsVisibility": {
           "description": "Determines is the pinned item should be shown or not (this can be overridden per monitor).",
-          "default": "Always",
-          "allOf": [
-            {
-              "$ref": "#/definitions/WegPinnedItemsVisibility"
-            }
-          ]
+          "$ref": "#/$defs/WegPinnedItemsVisibility",
+          "default": "Always"
         },
         "position": {
           "description": "Dock position",
-          "default": "Bottom",
-          "allOf": [
-            {
-              "$ref": "#/definitions/SeelenWegSide"
-            }
-          ]
+          "$ref": "#/$defs/SeelenWegSide",
+          "default": "Bottom"
         },
         "showInstanceCounter": {
           "description": "enable or disable the instance counter visibility on weg instance",
-          "default": true,
-          "type": "boolean"
+          "type": "boolean",
+          "default": true
         },
         "showWindowTitle": {
           "description": "enable or disable the window title visibility for opened apps",
-          "default": false,
-          "type": "boolean"
+          "type": "boolean",
+          "default": false
         },
         "size": {
           "description": "item size in px",
-          "default": 40,
           "type": "integer",
           "format": "uint32",
-          "minimum": 0.0
+          "default": 40,
+          "minimum": 0
         },
         "spaceBetweenItems": {
           "description": "space between items in px",
-          "default": 8,
           "type": "integer",
           "format": "uint32",
-          "minimum": 0.0
+          "default": 8,
+          "minimum": 0
         },
         "temporalItemsVisibility": {
           "description": "Which temporal items to show on the dock instance (this can be overridden per monitor)",
-          "default": "All",
-          "allOf": [
-            {
-              "$ref": "#/definitions/WegTemporalItemsVisibility"
-            }
-          ]
+          "$ref": "#/$defs/WegTemporalItemsVisibility",
+          "default": "All"
         },
         "thumbnailGenerationEnabled": {
           "description": "Decides whether the application hoover should generate thumbnails or just list the names instead",
-          "default": true,
-          "type": "boolean"
+          "type": "boolean",
+          "default": true
         },
         "visibleSeparators": {
           "description": "enable or disable separators visibility",
-          "default": true,
-          "type": "boolean"
+          "type": "boolean",
+          "default": true
         },
         "zoomSize": {
           "description": "zoomed item size in px",
-          "default": 70,
           "type": "integer",
           "format": "uint32",
-          "minimum": 0.0
+          "default": 70,
+          "minimum": 0
         }
       }
     },
@@ -1962,30 +1664,30 @@
       "type": "object",
       "properties": {
         "enabled": {
-          "default": true,
-          "type": "boolean"
+          "type": "boolean",
+          "default": true
         },
         "pinnedItemsVisibility": {
-          "default": null,
           "anyOf": [
             {
-              "$ref": "#/definitions/WegPinnedItemsVisibility"
+              "$ref": "#/$defs/WegPinnedItemsVisibility"
             },
             {
               "type": "null"
             }
-          ]
+          ],
+          "default": null
         },
         "temporalItemsVisibility": {
-          "default": null,
           "anyOf": [
             {
-              "$ref": "#/definitions/WegTemporalItemsVisibility"
+              "$ref": "#/$defs/WegTemporalItemsVisibility"
             },
             {
               "type": "null"
             }
-          ]
+          ],
+          "default": null
         }
       }
     },
@@ -2001,16 +1703,9 @@
     "SettingsByWidget": {
       "description": "This struct is intented to work with ts-rs flattening",
       "type": "object",
-      "anyOf": [
-        {
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/ThirdPartyWidgetSettings"
-          }
-        }
-      ],
       "properties": {
         "@seelen/fancy-toolbar": {
+          "$ref": "#/$defs/FancyToolbarSettings",
           "default": {
             "delayToHide": 800,
             "delayToShow": 100,
@@ -2020,14 +1715,10 @@
             "hideMode": "Never",
             "position": "Top",
             "showHibernateButton": false
-          },
-          "allOf": [
-            {
-              "$ref": "#/definitions/FancyToolbarSettings"
-            }
-          ]
+          }
         },
         "@seelen/launcher": {
+          "$ref": "#/$defs/SeelenLauncherSettings",
           "default": {
             "enabled": false,
             "monitor": "MouseOver",
@@ -2045,27 +1736,19 @@
                 "readonly": true
               }
             ]
-          },
-          "allOf": [
-            {
-              "$ref": "#/definitions/SeelenLauncherSettings"
-            }
-          ]
+          }
         },
         "@seelen/wallpaper-manager": {
+          "$ref": "#/$defs/SeelenWallSettings",
           "default": {
             "backgrounds": [],
             "enabled": true,
             "interval": 60,
             "randomize": false
-          },
-          "allOf": [
-            {
-              "$ref": "#/definitions/SeelenWallSettings"
-            }
-          ]
+          }
         },
         "@seelen/weg": {
+          "$ref": "#/$defs/SeelenWegSettings",
           "default": {
             "delayToHide": 800,
             "delayToShow": 100,
@@ -2084,14 +1767,10 @@
             "thumbnailGenerationEnabled": true,
             "visibleSeparators": true,
             "zoomSize": 70
-          },
-          "allOf": [
-            {
-              "$ref": "#/definitions/SeelenWegSettings"
-            }
-          ]
+          }
         },
         "@seelen/window-manager": {
+          "$ref": "#/$defs/WindowManagerSettings",
           "default": {
             "autoStackingByCategory": true,
             "border": {
@@ -2114,29 +1793,24 @@
               "top": 0
             },
             "workspacePadding": 10
-          },
-          "allOf": [
-            {
-              "$ref": "#/definitions/WindowManagerSettings"
-            }
-          ]
+          }
         }
-      }
-    },
-    "ThirdPartyWidgetSettings": {
-      "description": "This struct is intented to work with ts-rs flattening",
-      "type": "object",
+      },
       "anyOf": [
         {
           "type": "object",
           "additionalProperties": {
-            "$ref": "#/definitions/TsUnknown"
+            "$ref": "#/$defs/ThirdPartyWidgetSettings"
           }
         }
-      ],
+      ]
+    },
+    "ThirdPartyWidgetSettings": {
+      "description": "This struct is intented to work with ts-rs flattening",
+      "type": "object",
       "properties": {
         "$instances": {
-          "description": "By intance will be used to store settings in case of multiple intances allowed on widget.\\ The map values will be merged with the root object and default values on settings declaration.",
+          "description": "By intance will be used to store settings in case of multiple intances allowed on widget.\\\n The map values will be merged with the root object and default values on settings declaration.",
           "type": [
             "object",
             "null"
@@ -2144,16 +1818,24 @@
           "additionalProperties": {
             "type": "object",
             "additionalProperties": {
-              "$ref": "#/definitions/TsUnknown"
+              "$ref": "#/$defs/TsUnknown"
             }
           }
         },
         "enabled": {
           "description": "Enable or disable the widget",
-          "default": true,
-          "type": "boolean"
+          "type": "boolean",
+          "default": true
         }
-      }
+      },
+      "anyOf": [
+        {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/$defs/TsUnknown"
+          }
+        }
+      ]
     },
     "TsUnknown": true,
     "UpdateChannel": {
@@ -2166,14 +1848,14 @@
     },
     "UpdaterSettings": {
       "type": "object",
-      "required": [
-        "channel"
-      ],
       "properties": {
         "channel": {
-          "$ref": "#/definitions/UpdateChannel"
+          "$ref": "#/$defs/UpdateChannel"
         }
-      }
+      },
+      "required": [
+        "channel"
+      ]
     },
     "VirtualDesktopStrategy": {
       "type": "string",
@@ -2201,81 +1883,65 @@
       "properties": {
         "autoStackingByCategory": {
           "description": "enable or disable auto stacking by category",
-          "default": true,
-          "type": "boolean"
+          "type": "boolean",
+          "default": true
         },
         "border": {
           "description": "window manager border",
+          "$ref": "#/$defs/Border",
           "default": {
             "enabled": true,
             "offset": 0.0,
             "width": 3.0
-          },
-          "allOf": [
-            {
-              "$ref": "#/definitions/Border"
-            }
-          ]
+          }
         },
         "defaultLayout": {
           "description": "default layout",
-          "default": "@default/wm-bspwm",
-          "allOf": [
-            {
-              "$ref": "#/definitions/PluginId"
-            }
-          ]
+          "$ref": "#/$defs/PluginId",
+          "default": "@default/wm-bspwm"
         },
         "enabled": {
           "description": "enable or disable the window manager",
-          "default": false,
-          "type": "boolean"
+          "type": "boolean",
+          "default": false
         },
         "floating": {
           "description": "floating window settings",
+          "$ref": "#/$defs/FloatingWindowSettings",
           "default": {
             "height": 500.0,
             "width": 800.0
-          },
-          "allOf": [
-            {
-              "$ref": "#/definitions/FloatingWindowSettings"
-            }
-          ]
+          }
         },
         "resizeDelta": {
           "description": "the resize size in % to be used when resizing via cli",
-          "default": 10.0,
           "type": "number",
-          "format": "float"
+          "format": "float",
+          "default": 10.0
         },
         "workspaceGap": {
           "description": "default gap between containers",
-          "default": 10,
           "type": "integer",
           "format": "uint32",
-          "minimum": 0.0
+          "default": 10,
+          "minimum": 0
         },
         "workspaceMargin": {
           "description": "default workspace margin",
+          "$ref": "#/$defs/Rect",
           "default": {
             "bottom": 0,
             "left": 0,
             "right": 0,
             "top": 0
-          },
-          "allOf": [
-            {
-              "$ref": "#/definitions/Rect"
-            }
-          ]
+          }
         },
         "workspacePadding": {
           "description": "default workspace padding",
-          "default": 10,
           "type": "integer",
           "format": "uint32",
-          "minimum": 0.0
+          "default": 10,
+          "minimum": 0
         }
       }
     },
@@ -2283,52 +1949,49 @@
       "type": "object",
       "properties": {
         "enabled": {
-          "default": true,
-          "type": "boolean"
+          "type": "boolean",
+          "default": true
         },
         "gap": {
-          "default": null,
           "type": [
             "integer",
             "null"
           ],
           "format": "uint32",
-          "minimum": 0.0
+          "default": null,
+          "minimum": 0
         },
         "layout": {
-          "default": null,
           "type": [
             "string",
             "null"
-          ]
+          ],
+          "default": null
         },
         "margin": {
-          "default": null,
           "anyOf": [
             {
-              "$ref": "#/definitions/Rect"
+              "$ref": "#/$defs/Rect"
             },
             {
               "type": "null"
             }
-          ]
+          ],
+          "default": null
         },
         "padding": {
-          "default": null,
           "type": [
             "integer",
             "null"
           ],
           "format": "uint32",
-          "minimum": 0.0
+          "default": null,
+          "minimum": 0
         }
       }
     },
     "WorkspaceConfiguration": {
       "type": "object",
-      "required": [
-        "identifier"
-      ],
       "properties": {
         "backgrounds": {
           "type": [
@@ -2336,11 +1999,11 @@
             "null"
           ],
           "items": {
-            "$ref": "#/definitions/SeelenWallWallpaper"
+            "$ref": "#/$defs/SeelenWallWallpaper"
           }
         },
         "identifier": {
-          "$ref": "#/definitions/WorkspaceIdentifier"
+          "$ref": "#/$defs/WorkspaceIdentifier"
         },
         "layout": {
           "type": [
@@ -2348,22 +2011,25 @@
             "null"
           ]
         }
-      }
+      },
+      "required": [
+        "identifier"
+      ]
     },
     "WorkspaceIdentifier": {
       "type": "object",
-      "required": [
-        "id",
-        "kind"
-      ],
       "properties": {
         "id": {
           "type": "string"
         },
         "kind": {
-          "$ref": "#/definitions/WorkspaceIdentifierType"
+          "$ref": "#/$defs/WorkspaceIdentifierType"
         }
-      }
+      },
+      "required": [
+        "id",
+        "kind"
+      ]
     },
     "WorkspaceIdentifierType": {
       "type": "string",
