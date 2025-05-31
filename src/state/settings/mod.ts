@@ -26,7 +26,9 @@ import {
   SeelenWallWidgetId,
   SeelenWegWidgetId,
   SeelenWindowManagerWidgetId,
+  Widget,
 } from '../widget.ts';
+import { getCurrentWidgetInfo } from '../mod.ts';
 
 export class Settings {
   constructor(public inner: ISettings) {}
@@ -38,8 +40,29 @@ export class Settings {
     return new this(await invoke(SeelenCommand.StateGetSettings, { path }));
   }
 
-  getWidgetConfig(id: WidgetId): Record<string, unknown> | undefined {
-    return this.inner.byWidget[id];
+  /**
+   * Returns the settings for the current widget, taking in care of the replicas
+   * the returned object will be a merge of:
+   * - the default settings set on the widget definition
+   * - the stored user settings
+   * - the instance patch settings (if apply)
+   * - the monitor patch settings (if apply)
+   */
+  async getCurrentWidgetConfig(): Promise<ThirdPartyWidgetSettings> {
+    const currentWidget = await Widget.getCurrentAsync();
+
+    const { monitorId, instanceId, id } = getCurrentWidgetInfo();
+
+    const root = this.inner.byWidget[id];
+    const instance = instanceId ? root?.$instances?.[instanceId] : undefined;
+    const monitor = monitorId ? this.inner.monitorsV2[monitorId]?.byWidget[id] : undefined;
+
+    return {
+      ...currentWidget.getDefaultConfig(),
+      ...(root || {}),
+      ...(instance || {}),
+      ...(monitor || {}),
+    };
   }
 
   private getBundledWidgetConfig<T extends ThirdPartyWidgetSettings>(id: WidgetId): T {

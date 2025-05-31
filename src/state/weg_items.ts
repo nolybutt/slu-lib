@@ -2,7 +2,7 @@ import type { WegItem, WegItems as IWegItems } from '@seelen-ui/types';
 import { invoke, SeelenCommand, SeelenEvent } from '../handlers/mod.ts';
 import { createInstanceInvoker, createInstanceOnEvent } from '../utils/State.ts';
 import { enumFromUnion } from '../utils/enums.ts';
-import { getCurrentWidget } from './widget.ts';
+import { getCurrentWidgetInfo } from './widget.ts';
 
 export class WegItems {
   constructor(public inner: IWegItems) {}
@@ -21,7 +21,7 @@ export class WegItems {
 
   /** Event triggered when the weg items for the current widget are changed */
   static readonly forCurrentWidgetChange = createInstanceOnEvent(this, SeelenEvent.WegInstanceChanged, {
-    target: { kind: 'Webview', label: getCurrentWidget().rawLabel },
+    target: { kind: 'Webview', label: getCurrentWidgetInfo().rawLabel },
   });
 
   /** Will store the weg items placeoments on disk */
