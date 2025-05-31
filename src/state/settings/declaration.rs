@@ -1,3 +1,5 @@
+use std::collections::HashSet;
+
 use schemars::JsonSchema;
 use serde::{Deserialize, Serialize};
 use ts_rs::TS;
@@ -83,6 +85,16 @@ macro_rules! wsd_item {
                     $name([<WsdItem $name>]),
                 )*
             }
+
+            impl WsdItem {
+                pub fn get_key(&self) -> &str {
+                    match self {
+                        $(
+                            WsdItem::$name(item) => &item.key,
+                        )*
+                    }
+                }
+            }
         }
     };
 }
@@ -141,9 +153,18 @@ wsd_item! {
 #[serde(rename_all = "lowercase")]
 pub enum WsdGroupEntry {
     /// A group is a list of items and that can have more subgroups
-    SubGroup(WsdSubGroup),
+    Subgroup(WsdSubGroup),
     /// Declaration of key and value to be used as configuration
     Config(WsdItem),
+}
+
+impl WsdGroupEntry {
+    fn get_keys(&self) -> Vec<String> {
+        match self {
+            WsdGroupEntry::Subgroup(subgroup) => subgroup.get_keys(),
+            WsdGroupEntry::Config(item) => vec![item.get_key().to_string()],
+        }
+    }
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, JsonSchema, TS)]
@@ -155,11 +176,34 @@ pub struct WsdSubGroup {
     content: Vec<WsdGroupEntry>,
 }
 
+impl WsdSubGroup {
+    fn get_keys(&self) -> Vec<String> {
+        let mut keys = Vec::new();
+        if let Some(header) = &self.header {
+            keys.push(header.get_key().to_string());
+        }
+        for entry in &self.content {
+            keys.append(&mut entry.get_keys());
+        }
+        keys
+    }
+}
+
 #[derive(Debug, Clone, Serialize, Deserialize, JsonSchema, TS)]
 #[serde(rename_all = "camelCase")]
 pub struct WsdGroup {
     /// List of items in this group
     group: Vec<WsdGroupEntry>,
+}
+
+impl WsdGroup {
+    fn get_keys(&self) -> Vec<String> {
+        let mut keys = Vec::new();
+        for entry in &self.group {
+            keys.append(&mut entry.get_keys());
+        }
+        keys
+    }
 }
 
 /// The Widget Settings Declaration is a list of groups
@@ -172,3 +216,23 @@ pub struct WsdGroup {
 #[derive(Debug, Clone, Default, Serialize, Deserialize, JsonSchema, TS)]
 #[ts(export)]
 pub struct WidgetSettingsDeclarationList(Vec<WsdGroup>);
+
+impl WidgetSettingsDeclarationList {
+    pub fn there_are_duplicates(&self) -> bool {
+        let mut seen = HashSet::new();
+
+        // reserved keys
+        seen.insert("enabled".to_string());
+        seen.insert("$instances".to_string());
+
+        for group in &self.0 {
+            for key in group.get_keys() {
+                if seen.contains(&key) {
+                    return true;
+                }
+                seen.insert(key);
+            }
+        }
+        false
+    }
+}

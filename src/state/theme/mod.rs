@@ -50,7 +50,7 @@ pub struct Theme {
 }
 
 impl Theme {
-    pub fn load_from_file(path: &Path) -> Result<Theme> {
+    fn load_from_file(path: &Path) -> Result<Theme> {
         let extension = path
             .extension()
             .ok_or("Invalid theme path extension")?
@@ -111,7 +111,7 @@ impl Theme {
         Ok(theme)
     }
 
-    pub fn load_from_folder(path: &Path) -> Result<Theme> {
+    fn load_from_folder(path: &Path) -> Result<Theme> {
         let mut theme = Self::load_old_folder_schema(path)?;
 
         for entry in path.read_dir()?.flatten() {
