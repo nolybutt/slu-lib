@@ -89,7 +89,7 @@ export class Color {
     sheet.textContent = lines.join('\n');
   }
 
-  asHex(): string {
+  toHexString(): string {
     return (
       '#' +
       this.inner.r.toString(16).padStart(2, '0') +
@@ -114,7 +114,7 @@ export class Color {
       .toLowerCase();
 
     this.insertIntoStyleSheet({
-      [`--color-${parsedName}`]: this.asHex(),
+      [`--color-${parsedName}`]: this.toHexString(),
       [`--color-${parsedName}-rgb`]: `${this.inner.r}, ${this.inner.g}, ${this.inner.b}`,
       [`--color-${parsedName}-rgba`]: `${this.inner.r}, ${this.inner.g}, ${this.inner.b}, ${this.inner.a}`,
     });
