@@ -49,8 +49,18 @@ export class UIColors {
 export class Color {
   constructor(public inner: IColor) {}
 
-  private getDynamicStyleSheet(): HTMLStyleElement {
-    const styleId = 'sl-lib-dynamic-color-variables';
+  /** generates a random solid color */
+  random(): Color {
+    return new Color({
+      r: Math.floor(Math.random() * 255),
+      g: Math.floor(Math.random() * 255),
+      b: Math.floor(Math.random() * 255),
+      a: 255,
+    });
+  }
+
+  private getRuntimeStyleSheet(): HTMLStyleElement {
+    const styleId = 'slu-lib-runtime-color-variables';
     let styleElement = document.getElementById(styleId) as HTMLStyleElement;
     if (!styleElement) {
       styleElement = document.createElement('style');
@@ -62,7 +72,7 @@ export class Color {
   }
 
   private insertIntoStyleSheet(obj: Record<string, string>): void {
-    const sheet = this.getDynamicStyleSheet();
+    const sheet = this.getRuntimeStyleSheet();
     const lines = sheet.textContent!.split('\n');
     lines.pop(); // remove the closing brace
 
@@ -119,11 +129,13 @@ export class Color {
   calcLuminance(accuracy?: boolean): number {
     const { r, g, b } = this.inner;
     if (accuracy) {
+      // gamma correction
       const gR = r ** 2.2;
       const gG = g ** 2.2;
       const gB = b ** 2.2;
       return (0.299 * gR + 0.587 * gG + 0.114 * gB) ** (1 / 2.2);
     }
+    // standard algorithm
     return 0.2126 * r + 0.7152 * g + 0.0722 * b;
   }
 }
