@@ -6683,7 +6683,7 @@
         "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/state/widget.ts",
         "line": 8,
         "col": 13,
-        "byteIndex": 444
+        "byteIndex": 464
       },
       "declarationKind": "export",
       "kind": "variable",
@@ -6706,7 +6706,7 @@
         "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/state/widget.ts",
         "line": 9,
         "col": 13,
-        "byteIndex": 502
+        "byteIndex": 522
       },
       "declarationKind": "export",
       "kind": "variable",
@@ -6729,7 +6729,7 @@
         "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/state/widget.ts",
         "line": 10,
         "col": 13,
-        "byteIndex": 574
+        "byteIndex": 594
       },
       "declarationKind": "export",
       "kind": "variable",
@@ -6752,7 +6752,7 @@
         "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/state/widget.ts",
         "line": 11,
         "col": 13,
-        "byteIndex": 653
+        "byteIndex": 673
       },
       "declarationKind": "export",
       "kind": "variable",
@@ -6775,7 +6775,7 @@
         "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/state/widget.ts",
         "line": 12,
         "col": 13,
-        "byteIndex": 721
+        "byteIndex": 741
       },
       "declarationKind": "export",
       "kind": "variable",
@@ -6798,7 +6798,7 @@
         "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/state/widget.ts",
         "line": 14,
         "col": 0,
-        "byteIndex": 782
+        "byteIndex": 802
       },
       "declarationKind": "export",
       "kind": "class",
@@ -6843,7 +6843,7 @@
               "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/state/widget.ts",
               "line": 15,
               "col": 2,
-              "byteIndex": 832
+              "byteIndex": 852
             }
           },
           {
@@ -6915,7 +6915,7 @@
               "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/state/widget.ts",
               "line": 19,
               "col": 2,
-              "byteIndex": 943
+              "byteIndex": 963
             }
           }
         ],
@@ -6939,41 +6939,14 @@
       "isDefault": false,
       "location": {
         "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/state/widget.ts",
-        "line": 24,
+        "line": 38,
         "col": 0,
-        "byteIndex": 1089
+        "byteIndex": 1538
       },
       "declarationKind": "export",
-      "kind": "interface",
-      "interfaceDef": {
-        "extends": [
-          {
-            "repr": "IWidget",
-            "kind": "typeRef",
-            "typeRef": {
-              "typeParams": null,
-              "typeName": "IWidget"
-            }
-          }
-        ],
-        "constructors": [],
-        "methods": [],
-        "properties": [],
-        "callSignatures": [],
-        "indexSignatures": [],
-        "typeParams": []
-      }
-    },
-    {
-      "name": "Widget",
-      "isDefault": false,
-      "location": {
-        "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/state/widget.ts",
-        "line": 26,
-        "col": 0,
-        "byteIndex": 1133
+      "jsDoc": {
+        "doc": "Represents the widget instance running in the current webview"
       },
-      "declarationKind": "export",
       "kind": "class",
       "classDef": {
         "isAbstract": false,
@@ -6985,7 +6958,7 @@
             "params": [
               {
                 "kind": "identifier",
-                "name": "plain",
+                "name": "widget",
                 "optional": false,
                 "tsType": {
                   "repr": "IWidget",
@@ -6999,15 +6972,120 @@
             ],
             "location": {
               "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/state/widget.ts",
-              "line": 27,
+              "line": 46,
               "col": 2,
-              "byteIndex": 1157
+              "byteIndex": 1792
             }
           }
         ],
-        "properties": [],
+        "properties": [
+          {
+            "jsDoc": {
+              "doc": "widget definition"
+            },
+            "tsType": {
+              "repr": "IWidget",
+              "kind": "typeRef",
+              "typeRef": {
+                "typeParams": null,
+                "typeName": "IWidget"
+              }
+            },
+            "readonly": true,
+            "accessibility": "public",
+            "optional": false,
+            "isAbstract": false,
+            "isStatic": false,
+            "name": "declaration",
+            "location": {
+              "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/state/widget.ts",
+              "line": 40,
+              "col": 2,
+              "byteIndex": 1589
+            }
+          },
+          {
+            "jsDoc": {
+              "doc": "decoded widget instance information"
+            },
+            "tsType": {
+              "repr": "WidgetInformation",
+              "kind": "typeRef",
+              "typeRef": {
+                "typeParams": null,
+                "typeName": "WidgetInformation"
+              }
+            },
+            "readonly": true,
+            "accessibility": "public",
+            "optional": false,
+            "isAbstract": false,
+            "isStatic": false,
+            "name": "info",
+            "location": {
+              "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/state/widget.ts",
+              "line": 42,
+              "col": 2,
+              "byteIndex": 1674
+            }
+          },
+          {
+            "jsDoc": {
+              "doc": "current webview window"
+            },
+            "tsType": {
+              "repr": "WebviewWindow",
+              "kind": "typeRef",
+              "typeRef": {
+                "typeParams": null,
+                "typeName": "WebviewWindow"
+              }
+            },
+            "readonly": true,
+            "accessibility": "public",
+            "optional": false,
+            "isAbstract": false,
+            "isStatic": false,
+            "name": "webview",
+            "location": {
+              "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/state/widget.ts",
+              "line": 44,
+              "col": 2,
+              "byteIndex": 1749
+            }
+          }
+        ],
         "indexSignatures": [],
         "methods": [
+          {
+            "accessibility": null,
+            "optional": false,
+            "isAbstract": false,
+            "isStatic": true,
+            "name": "decodeWidgetIdFromLabel",
+            "kind": "method",
+            "functionDef": {
+              "params": [],
+              "returnType": {
+                "repr": "WidgetId",
+                "kind": "typeRef",
+                "typeRef": {
+                  "typeParams": null,
+                  "typeName": "WidgetId"
+                }
+              },
+              "hasBody": true,
+              "isAsync": false,
+              "isGenerator": false,
+              "typeParams": []
+            },
+            "location": {
+              "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/state/widget.ts",
+              "line": 66,
+              "col": 2,
+              "byteIndex": 2439
+            }
+          },
           {
             "accessibility": null,
             "optional": false,
@@ -7041,9 +7119,9 @@
             },
             "location": {
               "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/state/widget.ts",
-              "line": 31,
+              "line": 76,
               "col": 2,
-              "byteIndex": 1234
+              "byteIndex": 2784
             }
           },
           {
@@ -7095,9 +7173,9 @@
             },
             "location": {
               "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/state/widget.ts",
-              "line": 38,
+              "line": 86,
               "col": 2,
-              "byteIndex": 1523
+              "byteIndex": 3137
             }
           },
           {
@@ -7127,9 +7205,9 @@
             },
             "location": {
               "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/state/widget.ts",
-              "line": 59,
+              "line": 107,
               "col": 2,
-              "byteIndex": 2133
+              "byteIndex": 3747
             }
           }
         ],
@@ -7137,45 +7215,6 @@
         "implements": [],
         "typeParams": [],
         "superTypeParams": []
-      }
-    },
-    {
-      "name": "getCurrentWidgetInfo",
-      "isDefault": false,
-      "location": {
-        "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/state/widget.ts",
-        "line": 106,
-        "col": 0,
-        "byteIndex": 3608
-      },
-      "declarationKind": "export",
-      "jsDoc": {
-        "doc": "If called on backend context, will return an empty structure"
-      },
-      "kind": "function",
-      "functionDef": {
-        "params": [],
-        "returnType": {
-          "repr": "Readonly",
-          "kind": "typeRef",
-          "typeRef": {
-            "typeParams": [
-              {
-                "repr": "WidgetInformation",
-                "kind": "typeRef",
-                "typeRef": {
-                  "typeParams": null,
-                  "typeName": "WidgetInformation"
-                }
-              }
-            ],
-            "typeName": "Readonly"
-          }
-        },
-        "hasBody": true,
-        "isAsync": false,
-        "isGenerator": false,
-        "typeParams": []
       }
     },
     {
