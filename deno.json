@@ -37,6 +37,7 @@
   "fmt": {
     "include": [
       "src",
+      "src/types",
       "scripts",
       "gen"
     ],
