@@ -34,6 +34,9 @@ await build({
   }, {
     name: './types',
     path: './src/types/mod.ts',
+  }, {
+    name: './tauri',
+    path: './src/re-exports/tauri.ts',
   }],
   outDir: './npm',
   shims: {},

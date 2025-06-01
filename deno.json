@@ -5,8 +5,8 @@
   "license": "Apache-2.0",
   "exports": {
     ".": "./src/lib.ts",
-    "./api": "./src/lib.ts",
-    "./types": "./src/types/mod.ts"
+    "./types": "./src/types/mod.ts",
+    "./tauri": "./src/re-exports/tauri.ts"
   },
   "tasks": {
     "build:npm": "deno run -A ./scripts/build_npm.ts",

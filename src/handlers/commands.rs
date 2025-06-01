@@ -194,7 +194,7 @@ slu_commands_declaration! {
     LauncherGetApps = launcher_get_apps() -> Vec<StartMenuItem>,
 
     // Slu Popups
-    GetPopupConfig = get_popup_config() -> SluPopupConfig,
+    GetPopupConfig = get_popup_config(instance_id: String) -> SluPopupConfig,
 
     // Tray Icons
     GetTrayIcons = get_tray_icons() -> Vec<TrayIcon>,
