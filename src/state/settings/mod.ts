@@ -1,4 +1,4 @@
-import { SeelenCommand, SeelenEvent } from '../../handlers/mod.ts';
+import { SeelenCommand, SeelenEvent, type UnSubscriber } from '../../handlers/mod.ts';
 
 import type {
   FancyToolbarSettings,
@@ -17,8 +17,8 @@ import type {
   WidgetId,
   WindowManagerSettings,
 } from '@seelen-ui/types';
-import { createInstanceInvoker, createInstanceOnEvent } from '../../utils/State.ts';
-import { enumFromUnion } from '../../utils/enums.ts';
+import { newFromInvoke, newOnEvent } from '../../utils/State.ts';
+import type { Enum } from '../../utils/enums.ts';
 import { invoke } from '../../handlers/mod.ts';
 import {
   getCurrentWidgetInfo,
@@ -32,12 +32,21 @@ import {
 
 export class Settings {
   constructor(public inner: ISettings) {}
-  static readonly default = createInstanceInvoker(this, SeelenCommand.StateGetDefaultSettings);
-  static readonly getAsync = createInstanceInvoker(this, SeelenCommand.StateGetSettings);
-  static readonly onChange = createInstanceOnEvent(this, SeelenEvent.StateSettingsChanged);
 
-  static async loadCustom(path: string): Promise<Settings> {
-    return new this(await invoke(SeelenCommand.StateGetSettings, { path }));
+  static default(): Promise<Settings> {
+    return newFromInvoke(this, SeelenCommand.StateGetDefaultSettings);
+  }
+
+  static getAsync(): Promise<Settings> {
+    return newFromInvoke(this, SeelenCommand.StateGetSettings);
+  }
+
+  static onChange(cb: (user: Settings) => void): Promise<UnSubscriber> {
+    return newOnEvent(cb, this, SeelenEvent.StateSettingsChanged);
+  }
+
+  static loadCustom(path: string): Promise<Settings> {
+    return newFromInvoke(this, SeelenCommand.StateGetSettings, { path });
   }
 
   /**
@@ -101,44 +110,44 @@ export class Settings {
 //    From here some enums as helpers like @seelen-ui/types only contains types
 // =================================================================================
 
-const FancyToolbarSide = enumFromUnion<FancyToolbarSide>({
+const FancyToolbarSide: Enum<FancyToolbarSide> = {
   Top: 'Top',
   Bottom: 'Bottom',
-});
+};
 
-const VirtualDesktopStrategy = enumFromUnion<VirtualDesktopStrategy>({
+const VirtualDesktopStrategy: Enum<VirtualDesktopStrategy> = {
   Native: 'Native',
   Seelen: 'Seelen',
-});
+};
 
-const SeelenWegMode = enumFromUnion<SeelenWegMode>({
+const SeelenWegMode: Enum<SeelenWegMode> = {
   FullWidth: 'FullWidth',
   MinContent: 'MinContent',
-});
+};
 
-const HideMode = enumFromUnion<HideMode>({
+const HideMode: Enum<HideMode> = {
   Never: 'Never',
   Always: 'Always',
   OnOverlap: 'OnOverlap',
-});
+};
 
-const SeelenWegSide = enumFromUnion<SeelenWegSide>({
+const SeelenWegSide: Enum<SeelenWegSide> = {
   Left: 'Left',
   Right: 'Right',
   Top: 'Top',
   Bottom: 'Bottom',
-});
+};
 
-const SeelenLauncherMonitor = enumFromUnion<SeelenLauncherMonitor>({
+const SeelenLauncherMonitor: Enum<SeelenLauncherMonitor> = {
   Primary: 'Primary',
   MouseOver: 'MouseOver',
-});
+};
 
-const UpdateChannel = enumFromUnion<UpdateChannel>({
+const UpdateChannel: Enum<UpdateChannel> = {
   Release: 'Release',
   Beta: 'Beta',
   Nightly: 'Nightly',
-});
+};
 
 export {
   FancyToolbarSide,

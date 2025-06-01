@@ -1,12 +1,17 @@
-import { SeelenCommand, SeelenEvent } from '../../handlers/mod.ts';
+import { SeelenCommand, SeelenEvent, type UnSubscriber } from '../../handlers/mod.ts';
 import { List } from '../../utils/List.ts';
-import { createInstanceInvoker, createInstanceOnEvent } from '../../utils/State.ts';
+import { newFromInvoke, newOnEvent } from '../../utils/State.ts';
 import type { Plugin } from '@seelen-ui/types';
 import { getCurrentWidgetInfo } from '../widget.ts';
 
 export class PluginList extends List<Plugin> {
-  static readonly getAsync = createInstanceInvoker(this, SeelenCommand.StateGetPlugins);
-  static readonly onChange = createInstanceOnEvent(this, SeelenEvent.StatePluginsChanged);
+  static getAsync(): Promise<PluginList> {
+    return newFromInvoke(this, SeelenCommand.StateGetPlugins);
+  }
+
+  static onChange(cb: (user: PluginList) => void): Promise<UnSubscriber> {
+    return newOnEvent(cb, this, SeelenEvent.StatePluginsChanged);
+  }
 
   forCurrentWidget(): Plugin[] {
     const target = getCurrentWidgetInfo().id;

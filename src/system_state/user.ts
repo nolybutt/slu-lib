@@ -1,11 +1,10 @@
-import { invoke, SeelenCommand, SeelenEvent, subscribe } from '../handlers/mod.ts';
-import { createInstanceInvoker, createInstanceOnEvent } from '../utils/State.ts';
+import { invoke, SeelenCommand, SeelenEvent, subscribe, type UnSubscriber } from '../handlers/mod.ts';
+import { newFromInvoke, newOnEvent } from '../utils/State.ts';
 import { List } from '../utils/List.ts';
-import { enumFromUnion } from '../utils/enums.ts';
+import type { Enum } from '../utils/enums.ts';
 import type { File, FolderType, User } from '@seelen-ui/types';
-import type { UnlistenFn } from '@tauri-apps/api/event';
 
-const FolderType = enumFromUnion<FolderType>({
+const FolderType: Enum<FolderType> = {
   Unknown: 'Unknown',
   Recent: 'Recent',
   Desktop: 'Desktop',
@@ -14,13 +13,18 @@ const FolderType = enumFromUnion<FolderType>({
   Pictures: 'Pictures',
   Videos: 'Videos',
   Music: 'Music',
-});
+};
 
 export class UserDetails {
   constructor(public user: User) {}
 
-  static readonly getAsync = createInstanceInvoker(this, SeelenCommand.GetUser);
-  static readonly onChange = createInstanceOnEvent(this, SeelenEvent.UserChanged);
+  static getAsync(): Promise<UserDetails> {
+    return newFromInvoke(this, SeelenCommand.GetUser);
+  }
+
+  static onChange(cb: (user: UserDetails) => void): Promise<UnSubscriber> {
+    return newOnEvent(cb, this, SeelenEvent.UserChanged);
+  }
 }
 
 export class UserDirectory extends List<File> {
@@ -36,7 +40,7 @@ export class UserDirectory extends List<File> {
     return invoke(SeelenCommand.SetUserFolderLimit, { folderType: this.folderType, amount });
   }
 
-  static onChange(cb: (instance: RecentFolder) => void): Promise<UnlistenFn> {
+  static onChange(cb: (instance: RecentFolder) => void): Promise<UnSubscriber> {
     return subscribe(SeelenEvent.UserFolderChanged, (data) => {
       if (data.payload.ofFolder == this.folderType && data.payload.content) {
         cb(new this(data.payload.content));

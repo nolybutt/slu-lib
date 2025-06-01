@@ -1,40 +1,45 @@
 import type { AppConfig, AppExtraFlag, AppIdentifierType, MatchingStrategy } from '@seelen-ui/types';
 import { List } from '../utils/List.ts';
-import { SeelenCommand, SeelenEvent } from '../handlers/mod.ts';
-import { createInstanceInvoker } from '../utils/State.ts';
-import { createInstanceOnEvent } from '../utils/State.ts';
-import { enumFromUnion } from '../utils/enums.ts';
+import { SeelenCommand, SeelenEvent, type UnSubscriber } from '../handlers/mod.ts';
+import { newFromInvoke } from '../utils/State.ts';
+import { newOnEvent } from '../utils/State.ts';
+import type { Enum } from '../utils/enums.ts';
 
 export class AppConfigurationList extends List<AppConfig> {
-  static readonly getAsync = createInstanceInvoker(this, SeelenCommand.StateGetSpecificAppsConfigurations);
-  static readonly onChange = createInstanceOnEvent(this, SeelenEvent.StateSettingsByAppChanged);
+  static getAsync(): Promise<AppConfigurationList> {
+    return newFromInvoke(this, SeelenCommand.StateGetSpecificAppsConfigurations);
+  }
+
+  static onChange(cb: (user: AppConfigurationList) => void): Promise<UnSubscriber> {
+    return newOnEvent(cb, this, SeelenEvent.StateSettingsByAppChanged);
+  }
 }
 
 // =================================================================================
 //    From here some enums as helpers like @seelen-ui/types only contains types
 // =================================================================================
 
-const AppExtraFlag = enumFromUnion<AppExtraFlag>({
+const AppExtraFlag: Enum<AppExtraFlag> = {
   Float: 'float',
   Force: 'force',
   Unmanage: 'unmanage',
   Pinned: 'pinned',
   Hidden: 'hidden',
-});
+};
 
-const AppIdentifierType = enumFromUnion<AppIdentifierType>({
+const AppIdentifierType: Enum<AppIdentifierType> = {
   Exe: 'Exe',
   Class: 'Class',
   Title: 'Title',
   Path: 'Path',
-});
+};
 
-const MatchingStrategy = enumFromUnion<MatchingStrategy>({
+const MatchingStrategy: Enum<MatchingStrategy> = {
   Equals: 'Equals',
   StartsWith: 'StartsWith',
   EndsWith: 'EndsWith',
   Contains: 'Contains',
   Regex: 'Regex',
-});
+};
 
 export { AppExtraFlag, AppIdentifierType, MatchingStrategy };

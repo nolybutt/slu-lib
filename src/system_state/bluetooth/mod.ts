@@ -1,21 +1,23 @@
-import { invoke, SeelenCommand, SeelenEvent } from '../../handlers/mod.ts';
+import { invoke, SeelenCommand, SeelenEvent, type UnSubscriber } from '../../handlers/mod.ts';
 import { List } from '../../utils/List.ts';
-import { enumFromUnion } from '../../utils/enums.ts';
+import type { Enum } from '../../utils/enums.ts';
 import type { BluetoothDevice, BluetoothDevicePairShowPinRequest, BluetoothMajorClass } from '@seelen-ui/types';
 import type { UnlistenFn } from '@tauri-apps/api/event';
 import { subscribe } from '../../handlers/mod.ts';
-import { createInstanceInvoker, createInstanceOnEvent } from '../../utils/State.ts';
+import { newFromInvoke, newOnEvent } from '../../utils/State.ts';
 
 export class BluetoothDevices extends List<BluetoothDevice> {
-  static readonly getAsync = createInstanceInvoker(
-    this,
-    SeelenCommand.GetConnectedBluetoothDevices,
-  );
-  static readonly onChange = createInstanceOnEvent(this, SeelenEvent.BluetoothDevicesChanged);
-  static readonly onDiscoveredDevicesChange = createInstanceOnEvent(
-    this,
-    SeelenEvent.BluetoothDiscoveredDevicesChanged,
-  );
+  static getAsync(): Promise<BluetoothDevices> {
+    return newFromInvoke(this, SeelenCommand.GetConnectedBluetoothDevices);
+  }
+
+  static onChange(cb: (user: BluetoothDevices) => void): Promise<UnSubscriber> {
+    return newOnEvent(cb, this, SeelenEvent.BluetoothDevicesChanged);
+  }
+
+  static onDiscoveredDevicesChange(cb: (user: BluetoothDevices) => void): Promise<UnSubscriber> {
+    return newOnEvent(cb, this, SeelenEvent.BluetoothDiscoveredDevicesChanged);
+  }
 
   static async discover(): Promise<void> {
     return await invoke(SeelenCommand.StartBluetoothScanning);
@@ -52,7 +54,7 @@ export class BluetoothDevices extends List<BluetoothDevice> {
   }
 }
 
-const BluetoothMajor = enumFromUnion<BluetoothMajorClass>({
+const BluetoothMajor: Enum<BluetoothMajorClass> = {
   Miscellaneous: 'Miscellaneous',
   Computer: 'Computer',
   Phone: 'Phone',
@@ -64,6 +66,6 @@ const BluetoothMajor = enumFromUnion<BluetoothMajorClass>({
   Toy: 'Toy',
   Health: 'Health',
   Uncategorized: 'Uncategorized',
-});
+};
 
 export { BluetoothMajor };

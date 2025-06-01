@@ -1,9 +1,14 @@
-import { SeelenCommand, SeelenEvent } from '../handlers/mod.ts';
+import { SeelenCommand, SeelenEvent, type UnSubscriber } from '../handlers/mod.ts';
 import type { PhysicalMonitor } from '@seelen-ui/types';
 import { List } from '../utils/List.ts';
-import { createInstanceInvoker, createInstanceOnEvent } from '../utils/State.ts';
+import { newFromInvoke, newOnEvent } from '../utils/State.ts';
 
 export class ConnectedMonitorList extends List<PhysicalMonitor> {
-  static readonly getAsync = createInstanceInvoker(this, SeelenCommand.SystemGetMonitors);
-  static readonly onChange = createInstanceOnEvent(this, SeelenEvent.SystemMonitorsChanged);
+  static getAsync(): Promise<ConnectedMonitorList> {
+    return newFromInvoke(this, SeelenCommand.SystemGetMonitors);
+  }
+
+  static onChange(cb: (user: ConnectedMonitorList) => void): Promise<UnSubscriber> {
+    return newOnEvent(cb, this, SeelenEvent.SystemMonitorsChanged);
+  }
 }

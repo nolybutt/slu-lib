@@ -1,5 +1,5 @@
 import { invoke as tauriInvoke, type InvokeOptions } from '@tauri-apps/api/core';
-import { type EventCallback, listen, type Options as ListenerOptions, type UnlistenFn } from '@tauri-apps/api/event';
+import { type EventCallback, listen, type Options as ListenerOptions } from '@tauri-apps/api/event';
 import type { SeelenCommandArgument, SeelenCommandReturn, SeelenEventPayload } from '@seelen-ui/types';
 import type { SeelenCommand } from './commands.ts';
 import type { SeelenEvent } from './events.ts';
@@ -50,11 +50,13 @@ export function invoke<T extends SeelenCommand>(
   return tauriInvoke(command, commandArgs, options);
 }
 
+export type UnSubscriber = () => void;
+
 export function subscribe<T extends SeelenEvent>(
   event: T,
   cb: EventCallback<AllSeelenEventPayloads[T]>,
   options?: ListenerOptions,
-): Promise<UnlistenFn> {
+): Promise<UnSubscriber> {
   return listen(event, cb, options);
 }
 

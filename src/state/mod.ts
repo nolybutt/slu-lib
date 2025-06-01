@@ -1,5 +1,5 @@
-import { SeelenCommand, SeelenEvent } from '../handlers/mod.ts';
-import { createInstanceInvoker, createInstanceOnEvent } from '../utils/State.ts';
+import { SeelenCommand, SeelenEvent, type UnSubscriber } from '../handlers/mod.ts';
+import { newFromInvoke, newOnEvent } from '../utils/State.ts';
 import type { LauncherHistory as ILauncherHistory } from '@seelen-ui/types';
 
 export * from './theme/mod.ts';
@@ -16,6 +16,12 @@ export * from './profile.ts';
 
 export class LauncherHistory {
   constructor(public inner: ILauncherHistory) {}
-  static readonly getAsync = createInstanceInvoker(this, SeelenCommand.StateGetHistory);
-  static readonly onChange = createInstanceOnEvent(this, SeelenEvent.StateHistoryChanged);
+
+  static getAsync(): Promise<LauncherHistory> {
+    return newFromInvoke(this, SeelenCommand.StateGetHistory);
+  }
+
+  static onChange(cb: (user: LauncherHistory) => void): Promise<UnSubscriber> {
+    return newOnEvent(cb, this, SeelenEvent.StateHistoryChanged);
+  }
 }

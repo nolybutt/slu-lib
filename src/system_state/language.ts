@@ -1,6 +1,6 @@
-import { SeelenCommand, SeelenEvent } from '../handlers/mod.ts';
+import { SeelenCommand, SeelenEvent, type UnSubscriber } from '../handlers/mod.ts';
 import { List } from '../utils/List.ts';
-import { createInstanceInvoker, createInstanceOnEvent } from '../utils/State.ts';
+import { newFromInvoke, newOnEvent } from '../utils/State.ts';
 
 export interface KeyboardLayout {
   id: string;
@@ -18,6 +18,11 @@ export interface SystemLanguage {
 }
 
 export class LanguageList extends List<SystemLanguage> {
-  static readonly getAsync = createInstanceInvoker(this, SeelenCommand.SystemGetLanguages);
-  static readonly onChange = createInstanceOnEvent(this, SeelenEvent.SystemLanguagesChanged);
+  static getAsync(): Promise<LanguageList> {
+    return newFromInvoke(this, SeelenCommand.SystemGetLanguages);
+  }
+
+  static onChange(cb: (user: LanguageList) => void): Promise<UnSubscriber> {
+    return newOnEvent(cb, this, SeelenEvent.SystemLanguagesChanged);
+  }
 }

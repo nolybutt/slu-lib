@@ -1,12 +1,17 @@
-import { SeelenCommand, SeelenEvent } from '../handlers/mod.ts';
-import { createInstanceInvoker, createInstanceOnEvent } from '../utils/State.ts';
+import { SeelenCommand, SeelenEvent, type UnSubscriber } from '../handlers/mod.ts';
+import { newFromInvoke, newOnEvent } from '../utils/State.ts';
 import type { Color as IColor, UIColors as IUIColors } from '@seelen-ui/types';
 
 export class UIColors {
   constructor(public inner: IUIColors) {}
 
-  static readonly getAsync = createInstanceInvoker(this, SeelenCommand.SystemGetColors);
-  static readonly onChange = createInstanceOnEvent(this, SeelenEvent.ColorsChanged);
+  static getAsync(): Promise<UIColors> {
+    return newFromInvoke(this, SeelenCommand.SystemGetColors);
+  }
+
+  static onChange(cb: (user: UIColors) => void): Promise<UnSubscriber> {
+    return newOnEvent(cb, this, SeelenEvent.ColorsChanged);
+  }
 
   static default(): UIColors {
     return new this({

@@ -1,15 +1,20 @@
 import type { Icon as IIcon, IconPack as IIconPack, SeelenCommandGetIconArgs } from '@seelen-ui/types';
 import { List } from '../utils/List.ts';
-import { createInstanceInvoker, createInstanceOnEvent } from '../utils/State.ts';
-import { invoke, SeelenCommand, SeelenEvent } from '../handlers/mod.ts';
+import { newFromInvoke, newOnEvent } from '../utils/State.ts';
+import { invoke, SeelenCommand, SeelenEvent, type UnSubscriber } from '../handlers/mod.ts';
 import { path } from '@tauri-apps/api';
 import { Settings } from './settings/mod.ts';
 import { convertFileSrc } from '@tauri-apps/api/core';
 import type { UnlistenFn } from '@tauri-apps/api/event';
 
 export class IconPackList extends List<IIconPack> {
-  static readonly getAsync = createInstanceInvoker(this, SeelenCommand.StateGetIconPacks);
-  static readonly onChange = createInstanceOnEvent(this, SeelenEvent.StateIconPacksChanged);
+  static getAsync(): Promise<IconPackList> {
+    return newFromInvoke(this, SeelenCommand.StateGetIconPacks);
+  }
+
+  static onChange(cb: (user: IconPackList) => void): Promise<UnSubscriber> {
+    return newOnEvent(cb, this, SeelenEvent.StateIconPacksChanged);
+  }
 }
 
 /**

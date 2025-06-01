@@ -1,7 +1,7 @@
 import type { ThirdPartyWidgetSettings, Widget as IWidget, WidgetId, WsdGroupEntry } from '@seelen-ui/types';
-import { SeelenCommand, SeelenEvent } from '../handlers/mod.ts';
+import { SeelenCommand, SeelenEvent, type UnSubscriber } from '../handlers/mod.ts';
 import { List } from '../utils/List.ts';
-import { createInstanceInvoker, createInstanceOnEvent } from '../utils/State.ts';
+import { newFromInvoke, newOnEvent } from '../utils/State.ts';
 import { getCurrentWebviewWindow } from '@tauri-apps/api/webviewWindow';
 import { decodeBase64Url } from '@std/encoding/base64url';
 
@@ -12,8 +12,13 @@ export const SeelenLauncherWidgetId: WidgetId = '@seelen/launcher';
 export const SeelenWallWidgetId: WidgetId = '@seelen/wallpaper-manager';
 
 export class WidgetList extends List<IWidget> {
-  static readonly getAsync = createInstanceInvoker(this, SeelenCommand.StateGetWidgets);
-  static readonly onChange = createInstanceOnEvent(this, SeelenEvent.StateWidgetsChanged);
+  static getAsync(): Promise<WidgetList> {
+    return newFromInvoke(this, SeelenCommand.StateGetWidgets);
+  }
+
+  static onChange(cb: (user: WidgetList) => void): Promise<UnSubscriber> {
+    return newOnEvent(cb, this, SeelenEvent.StateWidgetsChanged);
+  }
 }
 
 export interface Widget extends IWidget {}
