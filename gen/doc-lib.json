@@ -8,7 +8,7 @@
         "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/handlers/mod.ts",
         "line": 37,
         "col": 0,
-        "byteIndex": 1251
+        "byteIndex": 1234
       },
       "declarationKind": "export",
       "jsDoc": {
@@ -2524,9 +2524,9 @@
       "isDefault": false,
       "location": {
         "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/handlers/mod.ts",
-        "line": 53,
+        "line": 55,
         "col": 0,
-        "byteIndex": 1695
+        "byteIndex": 1718
       },
       "declarationKind": "export",
       "kind": "function",
@@ -2602,11 +2602,11 @@
           "typeRef": {
             "typeParams": [
               {
-                "repr": "UnlistenFn",
+                "repr": "UnSubscriber",
                 "kind": "typeRef",
                 "typeRef": {
                   "typeParams": null,
-                  "typeName": "UnlistenFn"
+                  "typeName": "UnSubscriber"
                 }
               }
             ],
@@ -2830,40 +2830,120 @@
             }
           }
         ],
-        "properties": [
+        "properties": [],
+        "indexSignatures": [],
+        "methods": [
           {
-            "tsType": null,
-            "readonly": true,
             "accessibility": null,
             "optional": false,
             "isAbstract": false,
             "isStatic": true,
             "name": "getAsync",
+            "kind": "method",
+            "functionDef": {
+              "params": [],
+              "returnType": {
+                "repr": "Promise",
+                "kind": "typeRef",
+                "typeRef": {
+                  "typeParams": [
+                    {
+                      "repr": "LauncherHistory",
+                      "kind": "typeRef",
+                      "typeRef": {
+                        "typeParams": null,
+                        "typeName": "LauncherHistory"
+                      }
+                    }
+                  ],
+                  "typeName": "Promise"
+                }
+              },
+              "hasBody": true,
+              "isAsync": false,
+              "isGenerator": false,
+              "typeParams": []
+            },
             "location": {
               "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/state/mod.ts",
-              "line": 19,
+              "line": 20,
               "col": 2,
-              "byteIndex": 686
+              "byteIndex": 687
             }
           },
           {
-            "tsType": null,
-            "readonly": true,
             "accessibility": null,
             "optional": false,
             "isAbstract": false,
             "isStatic": true,
             "name": "onChange",
+            "kind": "method",
+            "functionDef": {
+              "params": [
+                {
+                  "kind": "identifier",
+                  "name": "cb",
+                  "optional": false,
+                  "tsType": {
+                    "repr": "",
+                    "kind": "fnOrConstructor",
+                    "fnOrConstructor": {
+                      "constructor": false,
+                      "tsType": {
+                        "repr": "void",
+                        "kind": "keyword",
+                        "keyword": "void"
+                      },
+                      "params": [
+                        {
+                          "kind": "identifier",
+                          "name": "user",
+                          "optional": false,
+                          "tsType": {
+                            "repr": "LauncherHistory",
+                            "kind": "typeRef",
+                            "typeRef": {
+                              "typeParams": null,
+                              "typeName": "LauncherHistory"
+                            }
+                          }
+                        }
+                      ],
+                      "typeParams": []
+                    }
+                  }
+                }
+              ],
+              "returnType": {
+                "repr": "Promise",
+                "kind": "typeRef",
+                "typeRef": {
+                  "typeParams": [
+                    {
+                      "repr": "UnSubscriber",
+                      "kind": "typeRef",
+                      "typeRef": {
+                        "typeParams": null,
+                        "typeName": "UnSubscriber"
+                      }
+                    }
+                  ],
+                  "typeName": "Promise"
+                }
+              },
+              "hasBody": true,
+              "isAsync": false,
+              "isGenerator": false,
+              "typeParams": []
+            },
             "location": {
               "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/state/mod.ts",
-              "line": 20,
+              "line": 24,
               "col": 2,
-              "byteIndex": 775
+              "byteIndex": 803
             }
           }
         ],
-        "indexSignatures": [],
-        "methods": [],
         "extends": null,
         "implements": [],
         "typeParams": [],
@@ -2884,15 +2964,40 @@
       "classDef": {
         "isAbstract": false,
         "constructors": [],
-        "properties": [
+        "properties": [],
+        "indexSignatures": [],
+        "methods": [
           {
-            "tsType": null,
-            "readonly": true,
             "accessibility": null,
             "optional": false,
             "isAbstract": false,
             "isStatic": true,
             "name": "getAsync",
+            "kind": "method",
+            "functionDef": {
+              "params": [],
+              "returnType": {
+                "repr": "Promise",
+                "kind": "typeRef",
+                "typeRef": {
+                  "typeParams": [
+                    {
+                      "repr": "ThemeList",
+                      "kind": "typeRef",
+                      "typeRef": {
+                        "typeParams": null,
+                        "typeName": "ThemeList"
+                      }
+                    }
+                  ],
+                  "typeName": "Promise"
+                }
+              },
+              "hasBody": true,
+              "isAsync": false,
+              "isGenerator": false,
+              "typeParams": []
+            },
             "location": {
               "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/state/theme/mod.ts",
               "line": 7,
@@ -2901,23 +3006,78 @@
             }
           },
           {
-            "tsType": null,
-            "readonly": true,
             "accessibility": null,
             "optional": false,
             "isAbstract": false,
             "isStatic": true,
             "name": "onChange",
+            "kind": "method",
+            "functionDef": {
+              "params": [
+                {
+                  "kind": "identifier",
+                  "name": "cb",
+                  "optional": false,
+                  "tsType": {
+                    "repr": "",
+                    "kind": "fnOrConstructor",
+                    "fnOrConstructor": {
+                      "constructor": false,
+                      "tsType": {
+                        "repr": "void",
+                        "kind": "keyword",
+                        "keyword": "void"
+                      },
+                      "params": [
+                        {
+                          "kind": "identifier",
+                          "name": "user",
+                          "optional": false,
+                          "tsType": {
+                            "repr": "ThemeList",
+                            "kind": "typeRef",
+                            "typeRef": {
+                              "typeParams": null,
+                              "typeName": "ThemeList"
+                            }
+                          }
+                        }
+                      ],
+                      "typeParams": []
+                    }
+                  }
+                }
+              ],
+              "returnType": {
+                "repr": "Promise",
+                "kind": "typeRef",
+                "typeRef": {
+                  "typeParams": [
+                    {
+                      "repr": "UnSubscriber",
+                      "kind": "typeRef",
+                      "typeRef": {
+                        "typeParams": null,
+                        "typeName": "UnSubscriber"
+                      }
+                    }
+                  ],
+                  "typeName": "Promise"
+                }
+              },
+              "hasBody": true,
+              "isAsync": false,
+              "isGenerator": false,
+              "typeParams": []
+            },
             "location": {
               "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/state/theme/mod.ts",
-              "line": 8,
+              "line": 11,
               "col": 2,
-              "byteIndex": 380
+              "byteIndex": 401
             }
           }
         ],
-        "indexSignatures": [],
-        "methods": [],
         "extends": "List",
         "implements": [],
         "typeParams": [],
@@ -2940,7 +3100,7 @@
         "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/state/settings/mod.ts",
         "line": 33,
         "col": 0,
-        "byteIndex": 806
+        "byteIndex": 802
       },
       "declarationKind": "export",
       "kind": "class",
@@ -2971,59 +3131,161 @@
               "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/state/settings/mod.ts",
               "line": 34,
               "col": 2,
-              "byteIndex": 832
+              "byteIndex": 828
             }
           }
         ],
-        "properties": [
+        "properties": [],
+        "indexSignatures": [],
+        "methods": [
           {
-            "tsType": null,
-            "readonly": true,
             "accessibility": null,
             "optional": false,
             "isAbstract": false,
             "isStatic": true,
             "name": "default",
+            "kind": "method",
+            "functionDef": {
+              "params": [],
+              "returnType": {
+                "repr": "Promise",
+                "kind": "typeRef",
+                "typeRef": {
+                  "typeParams": [
+                    {
+                      "repr": "Settings",
+                      "kind": "typeRef",
+                      "typeRef": {
+                        "typeParams": null,
+                        "typeName": "Settings"
+                      }
+                    }
+                  ],
+                  "typeName": "Promise"
+                }
+              },
+              "hasBody": true,
+              "isAsync": false,
+              "isGenerator": false,
+              "typeParams": []
+            },
             "location": {
               "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/state/settings/mod.ts",
-              "line": 35,
+              "line": 36,
               "col": 2,
-              "byteIndex": 874
+              "byteIndex": 871
             }
           },
           {
-            "tsType": null,
-            "readonly": true,
             "accessibility": null,
             "optional": false,
             "isAbstract": false,
             "isStatic": true,
             "name": "getAsync",
+            "kind": "method",
+            "functionDef": {
+              "params": [],
+              "returnType": {
+                "repr": "Promise",
+                "kind": "typeRef",
+                "typeRef": {
+                  "typeParams": [
+                    {
+                      "repr": "Settings",
+                      "kind": "typeRef",
+                      "typeRef": {
+                        "typeParams": null,
+                        "typeName": "Settings"
+                      }
+                    }
+                  ],
+                  "typeName": "Promise"
+                }
+              },
+              "hasBody": true,
+              "isAsync": false,
+              "isGenerator": false,
+              "typeParams": []
+            },
             "location": {
               "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/state/settings/mod.ts",
-              "line": 36,
+              "line": 40,
               "col": 2,
-              "byteIndex": 970
+              "byteIndex": 987
             }
           },
           {
-            "tsType": null,
-            "readonly": true,
             "accessibility": null,
             "optional": false,
             "isAbstract": false,
             "isStatic": true,
             "name": "onChange",
+            "kind": "method",
+            "functionDef": {
+              "params": [
+                {
+                  "kind": "identifier",
+                  "name": "cb",
+                  "optional": false,
+                  "tsType": {
+                    "repr": "",
+                    "kind": "fnOrConstructor",
+                    "fnOrConstructor": {
+                      "constructor": false,
+                      "tsType": {
+                        "repr": "void",
+                        "kind": "keyword",
+                        "keyword": "void"
+                      },
+                      "params": [
+                        {
+                          "kind": "identifier",
+                          "name": "user",
+                          "optional": false,
+                          "tsType": {
+                            "repr": "Settings",
+                            "kind": "typeRef",
+                            "typeRef": {
+                              "typeParams": null,
+                              "typeName": "Settings"
+                            }
+                          }
+                        }
+                      ],
+                      "typeParams": []
+                    }
+                  }
+                }
+              ],
+              "returnType": {
+                "repr": "Promise",
+                "kind": "typeRef",
+                "typeRef": {
+                  "typeParams": [
+                    {
+                      "repr": "UnSubscriber",
+                      "kind": "typeRef",
+                      "typeRef": {
+                        "typeParams": null,
+                        "typeName": "UnSubscriber"
+                      }
+                    }
+                  ],
+                  "typeName": "Promise"
+                }
+              },
+              "hasBody": true,
+              "isAsync": false,
+              "isGenerator": false,
+              "typeParams": []
+            },
             "location": {
               "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/state/settings/mod.ts",
-              "line": 37,
+              "line": 44,
               "col": 2,
-              "byteIndex": 1060
+              "byteIndex": 1097
             }
-          }
-        ],
-        "indexSignatures": [],
-        "methods": [
+          },
           {
             "accessibility": null,
             "optional": false,
@@ -3062,15 +3324,15 @@
                 }
               },
               "hasBody": true,
-              "isAsync": true,
+              "isAsync": false,
               "isGenerator": false,
               "typeParams": []
             },
             "location": {
               "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/state/settings/mod.ts",
-              "line": 39,
+              "line": 48,
               "col": 2,
-              "byteIndex": 1153
+              "byteIndex": 1242
             }
           },
           {
@@ -3109,9 +3371,9 @@
             },
             "location": {
               "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/state/settings/mod.ts",
-              "line": 51,
+              "line": 60,
               "col": 2,
-              "byteIndex": 1614
+              "byteIndex": 1694
             }
           },
           {
@@ -3164,9 +3426,9 @@
             },
             "location": {
               "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/state/settings/mod.ts",
-              "line": 68,
+              "line": 77,
               "col": 2,
-              "byteIndex": 2167
+              "byteIndex": 2247
             }
           },
           {
@@ -3193,9 +3455,9 @@
             },
             "location": {
               "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/state/settings/mod.ts",
-              "line": 74,
+              "line": 83,
               "col": 2,
-              "byteIndex": 2399
+              "byteIndex": 2479
             }
           },
           {
@@ -3222,9 +3484,9 @@
             },
             "location": {
               "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/state/settings/mod.ts",
-              "line": 78,
+              "line": 87,
               "col": 2,
-              "byteIndex": 2512
+              "byteIndex": 2592
             }
           },
           {
@@ -3251,9 +3513,9 @@
             },
             "location": {
               "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/state/settings/mod.ts",
-              "line": 82,
+              "line": 91,
               "col": 2,
-              "byteIndex": 2615
+              "byteIndex": 2695
             }
           },
           {
@@ -3280,9 +3542,9 @@
             },
             "location": {
               "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/state/settings/mod.ts",
-              "line": 86,
+              "line": 95,
               "col": 2,
-              "byteIndex": 2736
+              "byteIndex": 2816
             }
           },
           {
@@ -3309,9 +3571,9 @@
             },
             "location": {
               "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/state/settings/mod.ts",
-              "line": 90,
+              "line": 99,
               "col": 2,
-              "byteIndex": 2848
+              "byteIndex": 2928
             }
           },
           {
@@ -3347,9 +3609,9 @@
             },
             "location": {
               "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/state/settings/mod.ts",
-              "line": 95,
+              "line": 104,
               "col": 2,
-              "byteIndex": 2989
+              "byteIndex": 3069
             }
           }
         ],
@@ -3401,14 +3663,30 @@
       "isDefault": false,
       "location": {
         "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/state/settings/mod.ts",
-        "line": 104,
+        "line": 113,
         "col": 6,
-        "byteIndex": 3356
+        "byteIndex": 3436
       },
       "declarationKind": "export",
       "kind": "variable",
       "variableDef": {
-        "tsType": null,
+        "tsType": {
+          "repr": "Enum",
+          "kind": "typeRef",
+          "typeRef": {
+            "typeParams": [
+              {
+                "repr": "FancyToolbarSide",
+                "kind": "typeRef",
+                "typeRef": {
+                  "typeParams": null,
+                  "typeName": "FancyToolbarSide"
+                }
+              }
+            ],
+            "typeName": "Enum"
+          }
+        },
         "kind": "const"
       }
     },
@@ -3462,14 +3740,30 @@
       "isDefault": false,
       "location": {
         "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/state/settings/mod.ts",
-        "line": 119,
+        "line": 128,
         "col": 6,
-        "byteIndex": 3682
+        "byteIndex": 3735
       },
       "declarationKind": "export",
       "kind": "variable",
       "variableDef": {
-        "tsType": null,
+        "tsType": {
+          "repr": "Enum",
+          "kind": "typeRef",
+          "typeRef": {
+            "typeParams": [
+              {
+                "repr": "HideMode",
+                "kind": "typeRef",
+                "typeRef": {
+                  "typeParams": null,
+                  "typeName": "HideMode"
+                }
+              }
+            ],
+            "typeName": "Enum"
+          }
+        },
         "kind": "const"
       }
     },
@@ -3515,14 +3809,30 @@
       "isDefault": false,
       "location": {
         "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/state/settings/mod.ts",
-        "line": 132,
+        "line": 141,
         "col": 6,
-        "byteIndex": 3920
+        "byteIndex": 3955
       },
       "declarationKind": "export",
       "kind": "variable",
       "variableDef": {
-        "tsType": null,
+        "tsType": {
+          "repr": "Enum",
+          "kind": "typeRef",
+          "typeRef": {
+            "typeParams": [
+              {
+                "repr": "SeelenLauncherMonitor",
+                "kind": "typeRef",
+                "typeRef": {
+                  "typeParams": null,
+                  "typeName": "SeelenLauncherMonitor"
+                }
+              }
+            ],
+            "typeName": "Enum"
+          }
+        },
         "kind": "const"
       }
     },
@@ -3568,14 +3878,30 @@
       "isDefault": false,
       "location": {
         "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/state/settings/mod.ts",
-        "line": 114,
+        "line": 123,
         "col": 6,
-        "byteIndex": 3570
+        "byteIndex": 3632
       },
       "declarationKind": "export",
       "kind": "variable",
       "variableDef": {
-        "tsType": null,
+        "tsType": {
+          "repr": "Enum",
+          "kind": "typeRef",
+          "typeRef": {
+            "typeParams": [
+              {
+                "repr": "SeelenWegMode",
+                "kind": "typeRef",
+                "typeRef": {
+                  "typeParams": null,
+                  "typeName": "SeelenWegMode"
+                }
+              }
+            ],
+            "typeName": "Enum"
+          }
+        },
         "kind": "const"
       }
     },
@@ -3637,14 +3963,30 @@
       "isDefault": false,
       "location": {
         "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/state/settings/mod.ts",
-        "line": 125,
+        "line": 134,
         "col": 6,
-        "byteIndex": 3794
+        "byteIndex": 3838
       },
       "declarationKind": "export",
       "kind": "variable",
       "variableDef": {
-        "tsType": null,
+        "tsType": {
+          "repr": "Enum",
+          "kind": "typeRef",
+          "typeRef": {
+            "typeParams": [
+              {
+                "repr": "SeelenWegSide",
+                "kind": "typeRef",
+                "typeRef": {
+                  "typeParams": null,
+                  "typeName": "SeelenWegSide"
+                }
+              }
+            ],
+            "typeName": "Enum"
+          }
+        },
         "kind": "const"
       }
     },
@@ -3698,14 +4040,30 @@
       "isDefault": false,
       "location": {
         "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/state/settings/mod.ts",
-        "line": 137,
+        "line": 146,
         "col": 6,
-        "byteIndex": 4042
+        "byteIndex": 4068
       },
       "declarationKind": "export",
       "kind": "variable",
       "variableDef": {
-        "tsType": null,
+        "tsType": {
+          "repr": "Enum",
+          "kind": "typeRef",
+          "typeRef": {
+            "typeParams": [
+              {
+                "repr": "UpdateChannel",
+                "kind": "typeRef",
+                "typeRef": {
+                  "typeParams": null,
+                  "typeName": "UpdateChannel"
+                }
+              }
+            ],
+            "typeName": "Enum"
+          }
+        },
         "kind": "const"
       }
     },
@@ -3751,14 +4109,30 @@
       "isDefault": false,
       "location": {
         "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/state/settings/mod.ts",
-        "line": 109,
+        "line": 118,
         "col": 6,
-        "byteIndex": 3454
+        "byteIndex": 3525
       },
       "declarationKind": "export",
       "kind": "variable",
       "variableDef": {
-        "tsType": null,
+        "tsType": {
+          "repr": "Enum",
+          "kind": "typeRef",
+          "typeRef": {
+            "typeParams": [
+              {
+                "repr": "VirtualDesktopStrategy",
+                "kind": "typeRef",
+                "typeRef": {
+                  "typeParams": null,
+                  "typeName": "VirtualDesktopStrategy"
+                }
+              }
+            ],
+            "typeName": "Enum"
+          }
+        },
         "kind": "const"
       }
     },
@@ -3769,7 +4143,7 @@
         "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/state/settings/settings_by_monitor.ts",
         "line": 7,
         "col": 0,
-        "byteIndex": 285
+        "byteIndex": 273
       },
       "declarationKind": "export",
       "kind": "class",
@@ -3800,29 +4174,52 @@
               "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/state/settings/settings_by_monitor.ts",
               "line": 8,
               "col": 2,
-              "byteIndex": 323
+              "byteIndex": 311
             }
           }
         ],
-        "properties": [
+        "properties": [],
+        "indexSignatures": [],
+        "methods": [
           {
-            "tsType": null,
-            "readonly": true,
             "accessibility": null,
             "optional": false,
             "isAbstract": false,
             "isStatic": true,
             "name": "default",
+            "kind": "method",
+            "functionDef": {
+              "params": [],
+              "returnType": {
+                "repr": "Promise",
+                "kind": "typeRef",
+                "typeRef": {
+                  "typeParams": [
+                    {
+                      "repr": "MonitorConfiguration",
+                      "kind": "typeRef",
+                      "typeRef": {
+                        "typeParams": null,
+                        "typeName": "MonitorConfiguration"
+                      }
+                    }
+                  ],
+                  "typeName": "Promise"
+                }
+              },
+              "hasBody": true,
+              "isAsync": false,
+              "isGenerator": false,
+              "typeParams": []
+            },
             "location": {
               "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/state/settings/settings_by_monitor.ts",
-              "line": 9,
+              "line": 10,
               "col": 2,
-              "byteIndex": 377
+              "byteIndex": 366
             }
           }
         ],
-        "indexSignatures": [],
-        "methods": [],
         "extends": null,
         "implements": [],
         "typeParams": [],
@@ -3873,12 +4270,28 @@
         "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/state/settings/settings_by_monitor.ts",
         "line": 19,
         "col": 6,
-        "byteIndex": 751
+        "byteIndex": 758
       },
       "declarationKind": "export",
       "kind": "variable",
       "variableDef": {
-        "tsType": null,
+        "tsType": {
+          "repr": "Enum",
+          "kind": "typeRef",
+          "typeRef": {
+            "typeParams": [
+              {
+                "repr": "WorkspaceIdentifierType",
+                "kind": "typeRef",
+                "typeRef": {
+                  "typeParams": null,
+                  "typeName": "WorkspaceIdentifierType"
+                }
+              }
+            ],
+            "typeName": "Enum"
+          }
+        },
         "kind": "const"
       }
     },
@@ -3889,7 +4302,7 @@
         "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/state/weg_items.ts",
         "line": 7,
         "col": 0,
-        "byteIndex": 331
+        "byteIndex": 327
       },
       "declarationKind": "export",
       "kind": "class",
@@ -3920,86 +4333,245 @@
               "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/state/weg_items.ts",
               "line": 8,
               "col": 2,
-              "byteIndex": 357
+              "byteIndex": 353
             }
           }
         ],
-        "properties": [
+        "properties": [],
+        "indexSignatures": [],
+        "methods": [
           {
             "jsDoc": {
               "doc": "Will return the stored/saved weg items"
             },
-            "tsType": null,
-            "readonly": true,
             "accessibility": null,
             "optional": false,
             "isAbstract": false,
             "isStatic": true,
             "name": "getStored",
+            "kind": "method",
+            "functionDef": {
+              "params": [],
+              "returnType": {
+                "repr": "Promise",
+                "kind": "typeRef",
+                "typeRef": {
+                  "typeParams": [
+                    {
+                      "repr": "WegItems",
+                      "kind": "typeRef",
+                      "typeRef": {
+                        "typeParams": null,
+                        "typeName": "WegItems"
+                      }
+                    }
+                  ],
+                  "typeName": "Promise"
+                }
+              },
+              "hasBody": true,
+              "isAsync": false,
+              "isGenerator": false,
+              "typeParams": []
+            },
             "location": {
               "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/state/weg_items.ts",
               "line": 11,
               "col": 2,
-              "byteIndex": 448
+              "byteIndex": 444
             }
           },
           {
             "jsDoc": {
               "doc": "Event triggered when the file where the weg items are stored is changed"
             },
-            "tsType": null,
-            "readonly": true,
             "accessibility": null,
             "optional": false,
             "isAbstract": false,
             "isStatic": true,
             "name": "onStoredChange",
+            "kind": "method",
+            "functionDef": {
+              "params": [
+                {
+                  "kind": "identifier",
+                  "name": "cb",
+                  "optional": false,
+                  "tsType": {
+                    "repr": "",
+                    "kind": "fnOrConstructor",
+                    "fnOrConstructor": {
+                      "constructor": false,
+                      "tsType": {
+                        "repr": "void",
+                        "kind": "keyword",
+                        "keyword": "void"
+                      },
+                      "params": [
+                        {
+                          "kind": "identifier",
+                          "name": "user",
+                          "optional": false,
+                          "tsType": {
+                            "repr": "WegItems",
+                            "kind": "typeRef",
+                            "typeRef": {
+                              "typeParams": null,
+                              "typeName": "WegItems"
+                            }
+                          }
+                        }
+                      ],
+                      "typeParams": []
+                    }
+                  }
+                }
+              ],
+              "returnType": {
+                "repr": "Promise",
+                "kind": "typeRef",
+                "typeRef": {
+                  "typeParams": [
+                    {
+                      "repr": "UnSubscriber",
+                      "kind": "typeRef",
+                      "typeRef": {
+                        "typeParams": null,
+                        "typeName": "UnSubscriber"
+                      }
+                    }
+                  ],
+                  "typeName": "Promise"
+                }
+              },
+              "hasBody": true,
+              "isAsync": false,
+              "isGenerator": false,
+              "typeParams": []
+            },
             "location": {
               "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/state/weg_items.ts",
-              "line": 14,
+              "line": 16,
               "col": 2,
-              "byteIndex": 621
+              "byteIndex": 636
             }
           },
           {
             "jsDoc": {
               "doc": "Will return the weg items intance for the current widget"
             },
-            "tsType": null,
-            "readonly": true,
             "accessibility": null,
             "optional": false,
             "isAbstract": false,
             "isStatic": true,
             "name": "forCurrentWidget",
+            "kind": "method",
+            "functionDef": {
+              "params": [],
+              "returnType": {
+                "repr": "Promise",
+                "kind": "typeRef",
+                "typeRef": {
+                  "typeParams": [
+                    {
+                      "repr": "WegItems",
+                      "kind": "typeRef",
+                      "typeRef": {
+                        "typeParams": null,
+                        "typeName": "WegItems"
+                      }
+                    }
+                  ],
+                  "typeName": "Promise"
+                }
+              },
+              "hasBody": true,
+              "isAsync": false,
+              "isGenerator": false,
+              "typeParams": []
+            },
             "location": {
               "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/state/weg_items.ts",
-              "line": 17,
+              "line": 21,
               "col": 2,
-              "byteIndex": 786
+              "byteIndex": 853
             }
           },
           {
             "jsDoc": {
               "doc": "Event triggered when the weg items for the current widget are changed"
             },
-            "tsType": null,
-            "readonly": true,
             "accessibility": null,
             "optional": false,
             "isAbstract": false,
             "isStatic": true,
             "name": "forCurrentWidgetChange",
+            "kind": "method",
+            "functionDef": {
+              "params": [
+                {
+                  "kind": "identifier",
+                  "name": "cb",
+                  "optional": false,
+                  "tsType": {
+                    "repr": "",
+                    "kind": "fnOrConstructor",
+                    "fnOrConstructor": {
+                      "constructor": false,
+                      "tsType": {
+                        "repr": "void",
+                        "kind": "keyword",
+                        "keyword": "void"
+                      },
+                      "params": [
+                        {
+                          "kind": "identifier",
+                          "name": "user",
+                          "optional": false,
+                          "tsType": {
+                            "repr": "WegItems",
+                            "kind": "typeRef",
+                            "typeRef": {
+                              "typeParams": null,
+                              "typeName": "WegItems"
+                            }
+                          }
+                        }
+                      ],
+                      "typeParams": []
+                    }
+                  }
+                }
+              ],
+              "returnType": {
+                "repr": "Promise",
+                "kind": "typeRef",
+                "typeRef": {
+                  "typeParams": [
+                    {
+                      "repr": "UnSubscriber",
+                      "kind": "typeRef",
+                      "typeRef": {
+                        "typeParams": null,
+                        "typeName": "UnSubscriber"
+                      }
+                    }
+                  ],
+                  "typeName": "Promise"
+                }
+              },
+              "hasBody": true,
+              "isAsync": false,
+              "isGenerator": false,
+              "typeParams": []
+            },
             "location": {
               "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/state/weg_items.ts",
-              "line": 23,
+              "line": 26,
               "col": 2,
-              "byteIndex": 981
+              "byteIndex": 1054
             }
-          }
-        ],
-        "indexSignatures": [],
-        "methods": [
+          },
           {
             "jsDoc": {
               "doc": "Will store the weg items placeoments on disk"
@@ -4033,9 +4605,9 @@
             },
             "location": {
               "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/state/weg_items.ts",
-              "line": 28,
+              "line": 33,
               "col": 2,
-              "byteIndex": 1220
+              "byteIndex": 1349
             }
           }
         ],
@@ -4050,14 +4622,45 @@
       "isDefault": false,
       "location": {
         "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/state/weg_items.ts",
-        "line": 37,
+        "line": 42,
         "col": 6,
-        "byteIndex": 1584
+        "byteIndex": 1713
       },
       "declarationKind": "export",
       "kind": "variable",
       "variableDef": {
-        "tsType": null,
+        "tsType": {
+          "repr": "Enum",
+          "kind": "typeRef",
+          "typeRef": {
+            "typeParams": [
+              {
+                "repr": "",
+                "kind": "indexedAccess",
+                "indexedAccess": {
+                  "readonly": false,
+                  "objType": {
+                    "repr": "WegItem",
+                    "kind": "typeRef",
+                    "typeRef": {
+                      "typeParams": null,
+                      "typeName": "WegItem"
+                    }
+                  },
+                  "indexType": {
+                    "repr": "type",
+                    "kind": "literal",
+                    "literal": {
+                      "kind": "string",
+                      "string": "type"
+                    }
+                  }
+                }
+              }
+            ],
+            "typeName": "Enum"
+          }
+        },
         "kind": "const"
       }
     },
@@ -4105,12 +4708,28 @@
         "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/state/wm_layout.ts",
         "line": 16,
         "col": 6,
-        "byteIndex": 554
+        "byteIndex": 541
       },
       "declarationKind": "export",
       "kind": "variable",
       "variableDef": {
-        "tsType": null,
+        "tsType": {
+          "repr": "Enum",
+          "kind": "typeRef",
+          "typeRef": {
+            "typeParams": [
+              {
+                "repr": "NodeSubtype",
+                "kind": "typeRef",
+                "typeRef": {
+                  "typeParams": null,
+                  "typeName": "NodeSubtype"
+                }
+              }
+            ],
+            "typeName": "Enum"
+          }
+        },
         "kind": "const"
       }
     },
@@ -4121,12 +4740,43 @@
         "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/state/wm_layout.ts",
         "line": 8,
         "col": 6,
-        "byteIndex": 390
+        "byteIndex": 386
       },
       "declarationKind": "export",
       "kind": "variable",
       "variableDef": {
-        "tsType": null,
+        "tsType": {
+          "repr": "Enum",
+          "kind": "typeRef",
+          "typeRef": {
+            "typeParams": [
+              {
+                "repr": "",
+                "kind": "indexedAccess",
+                "indexedAccess": {
+                  "readonly": false,
+                  "objType": {
+                    "repr": "WmNode",
+                    "kind": "typeRef",
+                    "typeRef": {
+                      "typeParams": null,
+                      "typeName": "WmNode"
+                    }
+                  },
+                  "indexType": {
+                    "repr": "type",
+                    "kind": "literal",
+                    "literal": {
+                      "kind": "string",
+                      "string": "type"
+                    }
+                  }
+                }
+              }
+            ],
+            "typeName": "Enum"
+          }
+        },
         "kind": "const"
       }
     },
@@ -4174,12 +4824,28 @@
         "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/state/wm_layout.ts",
         "line": 21,
         "col": 6,
-        "byteIndex": 658
+        "byteIndex": 636
       },
       "declarationKind": "export",
       "kind": "variable",
       "variableDef": {
-        "tsType": null,
+        "tsType": {
+          "repr": "Enum",
+          "kind": "typeRef",
+          "typeRef": {
+            "typeParams": [
+              {
+                "repr": "NoFallbackBehavior",
+                "kind": "typeRef",
+                "typeRef": {
+                  "typeParams": null,
+                  "typeName": "NoFallbackBehavior"
+                }
+              }
+            ],
+            "typeName": "Enum"
+          }
+        },
         "kind": "const"
       }
     },
@@ -4190,12 +4856,43 @@
         "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/state/placeholder.ts",
         "line": 8,
         "col": 6,
-        "byteIndex": 388
+        "byteIndex": 384
       },
       "declarationKind": "export",
       "kind": "variable",
       "variableDef": {
-        "tsType": null,
+        "tsType": {
+          "repr": "Enum",
+          "kind": "typeRef",
+          "typeRef": {
+            "typeParams": [
+              {
+                "repr": "",
+                "kind": "indexedAccess",
+                "indexedAccess": {
+                  "readonly": false,
+                  "objType": {
+                    "repr": "ToolbarItem",
+                    "kind": "typeRef",
+                    "typeRef": {
+                      "typeParams": null,
+                      "typeName": "ToolbarItem"
+                    }
+                  },
+                  "indexType": {
+                    "repr": "type",
+                    "kind": "literal",
+                    "literal": {
+                      "kind": "string",
+                      "string": "type"
+                    }
+                  }
+                }
+              }
+            ],
+            "typeName": "Enum"
+          }
+        },
         "kind": "const"
       }
     },
@@ -4251,12 +4948,28 @@
         "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/state/placeholder.ts",
         "line": 25,
         "col": 6,
-        "byteIndex": 756
+        "byteIndex": 743
       },
       "declarationKind": "export",
       "kind": "variable",
       "variableDef": {
-        "tsType": null,
+        "tsType": {
+          "repr": "Enum",
+          "kind": "typeRef",
+          "typeRef": {
+            "typeParams": [
+              {
+                "repr": "WorkspaceToolbarItemMode",
+                "kind": "typeRef",
+                "typeRef": {
+                  "typeParams": null,
+                  "typeName": "WorkspaceToolbarItemMode"
+                }
+              }
+            ],
+            "typeName": "Enum"
+          }
+        },
         "kind": "const"
       }
     },
@@ -4267,47 +4980,127 @@
         "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/state/settings_by_app.ts",
         "line": 8,
         "col": 0,
-        "byteIndex": 378
+        "byteIndex": 374
       },
       "declarationKind": "export",
       "kind": "class",
       "classDef": {
         "isAbstract": false,
         "constructors": [],
-        "properties": [
+        "properties": [],
+        "indexSignatures": [],
+        "methods": [
           {
-            "tsType": null,
-            "readonly": true,
             "accessibility": null,
             "optional": false,
             "isAbstract": false,
             "isStatic": true,
             "name": "getAsync",
+            "kind": "method",
+            "functionDef": {
+              "params": [],
+              "returnType": {
+                "repr": "Promise",
+                "kind": "typeRef",
+                "typeRef": {
+                  "typeParams": [
+                    {
+                      "repr": "AppConfigurationList",
+                      "kind": "typeRef",
+                      "typeRef": {
+                        "typeParams": null,
+                        "typeName": "AppConfigurationList"
+                      }
+                    }
+                  ],
+                  "typeName": "Promise"
+                }
+              },
+              "hasBody": true,
+              "isAsync": false,
+              "isGenerator": false,
+              "typeParams": []
+            },
             "location": {
               "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/state/settings_by_app.ts",
               "line": 9,
               "col": 2,
-              "byteIndex": 440
+              "byteIndex": 436
             }
           },
           {
-            "tsType": null,
-            "readonly": true,
             "accessibility": null,
             "optional": false,
             "isAbstract": false,
             "isStatic": true,
             "name": "onChange",
+            "kind": "method",
+            "functionDef": {
+              "params": [
+                {
+                  "kind": "identifier",
+                  "name": "cb",
+                  "optional": false,
+                  "tsType": {
+                    "repr": "",
+                    "kind": "fnOrConstructor",
+                    "fnOrConstructor": {
+                      "constructor": false,
+                      "tsType": {
+                        "repr": "void",
+                        "kind": "keyword",
+                        "keyword": "void"
+                      },
+                      "params": [
+                        {
+                          "kind": "identifier",
+                          "name": "user",
+                          "optional": false,
+                          "tsType": {
+                            "repr": "AppConfigurationList",
+                            "kind": "typeRef",
+                            "typeRef": {
+                              "typeParams": null,
+                              "typeName": "AppConfigurationList"
+                            }
+                          }
+                        }
+                      ],
+                      "typeParams": []
+                    }
+                  }
+                }
+              ],
+              "returnType": {
+                "repr": "Promise",
+                "kind": "typeRef",
+                "typeRef": {
+                  "typeParams": [
+                    {
+                      "repr": "UnSubscriber",
+                      "kind": "typeRef",
+                      "typeRef": {
+                        "typeParams": null,
+                        "typeName": "UnSubscriber"
+                      }
+                    }
+                  ],
+                  "typeName": "Promise"
+                }
+              },
+              "hasBody": true,
+              "isAsync": false,
+              "isGenerator": false,
+              "typeParams": []
+            },
             "location": {
               "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/state/settings_by_app.ts",
-              "line": 10,
+              "line": 13,
               "col": 2,
-              "byteIndex": 548
+              "byteIndex": 576
             }
           }
         ],
-        "indexSignatures": [],
-        "methods": [],
         "extends": "List",
         "implements": [],
         "typeParams": [],
@@ -4389,14 +5182,30 @@
       "isDefault": false,
       "location": {
         "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/state/settings_by_app.ts",
-        "line": 17,
+        "line": 22,
         "col": 6,
-        "byteIndex": 903
+        "byteIndex": 995
       },
       "declarationKind": "export",
       "kind": "variable",
       "variableDef": {
-        "tsType": null,
+        "tsType": {
+          "repr": "Enum",
+          "kind": "typeRef",
+          "typeRef": {
+            "typeParams": [
+              {
+                "repr": "AppExtraFlag",
+                "kind": "typeRef",
+                "typeRef": {
+                  "typeParams": null,
+                  "typeName": "AppExtraFlag"
+                }
+              }
+            ],
+            "typeName": "Enum"
+          }
+        },
         "kind": "const"
       }
     },
@@ -4458,14 +5267,30 @@
       "isDefault": false,
       "location": {
         "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/state/settings_by_app.ts",
-        "line": 25,
+        "line": 30,
         "col": 6,
-        "byteIndex": 1059
+        "byteIndex": 1142
       },
       "declarationKind": "export",
       "kind": "variable",
       "variableDef": {
-        "tsType": null,
+        "tsType": {
+          "repr": "Enum",
+          "kind": "typeRef",
+          "typeRef": {
+            "typeParams": [
+              {
+                "repr": "AppIdentifierType",
+                "kind": "typeRef",
+                "typeRef": {
+                  "typeParams": null,
+                  "typeName": "AppIdentifierType"
+                }
+              }
+            ],
+            "typeName": "Enum"
+          }
+        },
         "kind": "const"
       }
     },
@@ -4535,14 +5360,30 @@
       "isDefault": false,
       "location": {
         "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/state/settings_by_app.ts",
-        "line": 32,
+        "line": 37,
         "col": 6,
-        "byteIndex": 1191
+        "byteIndex": 1265
       },
       "declarationKind": "export",
       "kind": "variable",
       "variableDef": {
-        "tsType": null,
+        "tsType": {
+          "repr": "Enum",
+          "kind": "typeRef",
+          "typeRef": {
+            "typeParams": [
+              {
+                "repr": "MatchingStrategy",
+                "kind": "typeRef",
+                "typeRef": {
+                  "typeParams": null,
+                  "typeName": "MatchingStrategy"
+                }
+              }
+            ],
+            "typeName": "Enum"
+          }
+        },
         "kind": "const"
       }
     },
@@ -4560,15 +5401,40 @@
       "classDef": {
         "isAbstract": false,
         "constructors": [],
-        "properties": [
+        "properties": [],
+        "indexSignatures": [],
+        "methods": [
           {
-            "tsType": null,
-            "readonly": true,
             "accessibility": null,
             "optional": false,
             "isAbstract": false,
             "isStatic": true,
             "name": "getAsync",
+            "kind": "method",
+            "functionDef": {
+              "params": [],
+              "returnType": {
+                "repr": "Promise",
+                "kind": "typeRef",
+                "typeRef": {
+                  "typeParams": [
+                    {
+                      "repr": "IconPackList",
+                      "kind": "typeRef",
+                      "typeRef": {
+                        "typeParams": null,
+                        "typeName": "IconPackList"
+                      }
+                    }
+                  ],
+                  "typeName": "Promise"
+                }
+              },
+              "hasBody": true,
+              "isAsync": false,
+              "isGenerator": false,
+              "typeParams": []
+            },
             "location": {
               "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/state/icon_pack.ts",
               "line": 11,
@@ -4577,23 +5443,78 @@
             }
           },
           {
-            "tsType": null,
-            "readonly": true,
             "accessibility": null,
             "optional": false,
             "isAbstract": false,
             "isStatic": true,
             "name": "onChange",
+            "kind": "method",
+            "functionDef": {
+              "params": [
+                {
+                  "kind": "identifier",
+                  "name": "cb",
+                  "optional": false,
+                  "tsType": {
+                    "repr": "",
+                    "kind": "fnOrConstructor",
+                    "fnOrConstructor": {
+                      "constructor": false,
+                      "tsType": {
+                        "repr": "void",
+                        "kind": "keyword",
+                        "keyword": "void"
+                      },
+                      "params": [
+                        {
+                          "kind": "identifier",
+                          "name": "user",
+                          "optional": false,
+                          "tsType": {
+                            "repr": "IconPackList",
+                            "kind": "typeRef",
+                            "typeRef": {
+                              "typeParams": null,
+                              "typeName": "IconPackList"
+                            }
+                          }
+                        }
+                      ],
+                      "typeParams": []
+                    }
+                  }
+                }
+              ],
+              "returnType": {
+                "repr": "Promise",
+                "kind": "typeRef",
+                "typeRef": {
+                  "typeParams": [
+                    {
+                      "repr": "UnSubscriber",
+                      "kind": "typeRef",
+                      "typeRef": {
+                        "typeParams": null,
+                        "typeName": "UnSubscriber"
+                      }
+                    }
+                  ],
+                  "typeName": "Promise"
+                }
+              },
+              "hasBody": true,
+              "isAsync": false,
+              "isGenerator": false,
+              "typeParams": []
+            },
             "location": {
               "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/state/icon_pack.ts",
-              "line": 12,
+              "line": 15,
               "col": 2,
-              "byteIndex": 644
+              "byteIndex": 668
             }
           }
         ],
-        "indexSignatures": [],
-        "methods": [],
         "extends": "List",
         "implements": [],
         "typeParams": [],
@@ -4614,9 +5535,9 @@
       "isDefault": false,
       "location": {
         "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/state/icon_pack.ts",
-        "line": 18,
+        "line": 23,
         "col": 0,
-        "byteIndex": 794
+        "byteIndex": 874
       },
       "declarationKind": "export",
       "jsDoc": {
@@ -4674,9 +5595,9 @@
             ],
             "location": {
               "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/state/icon_pack.ts",
-              "line": 45,
+              "line": 50,
               "col": 2,
-              "byteIndex": 1590
+              "byteIndex": 1670
             }
           }
         ],
@@ -4713,9 +5634,9 @@
             "name": "callbacks",
             "location": {
               "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/state/icon_pack.ts",
-              "line": 19,
+              "line": 24,
               "col": 2,
-              "byteIndex": 827
+              "byteIndex": 907
             }
           },
           {
@@ -4746,9 +5667,9 @@
             "name": "unlistenerSettings",
             "location": {
               "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/state/icon_pack.ts",
-              "line": 20,
+              "line": 25,
               "col": 2,
-              "byteIndex": 877
+              "byteIndex": 957
             }
           },
           {
@@ -4779,9 +5700,9 @@
             "name": "unlistenerIcons",
             "location": {
               "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/state/icon_pack.ts",
-              "line": 21,
+              "line": 26,
               "col": 2,
-              "byteIndex": 933
+              "byteIndex": 1013
             }
           }
         ],
@@ -4835,9 +5756,9 @@
             },
             "location": {
               "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/state/icon_pack.ts",
-              "line": 23,
+              "line": 28,
               "col": 2,
-              "byteIndex": 987
+              "byteIndex": 1067
             }
           },
           {
@@ -4878,9 +5799,9 @@
             },
             "location": {
               "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/state/icon_pack.ts",
-              "line": 34,
+              "line": 39,
               "col": 2,
-              "byteIndex": 1294
+              "byteIndex": 1374
             }
           },
           {
@@ -4907,9 +5828,9 @@
             },
             "location": {
               "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/state/icon_pack.ts",
-              "line": 51,
+              "line": 56,
               "col": 2,
-              "byteIndex": 1733
+              "byteIndex": 1813
             }
           },
           {
@@ -4937,9 +5858,9 @@
             },
             "location": {
               "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/state/icon_pack.ts",
-              "line": 55,
+              "line": 60,
               "col": 2,
-              "byteIndex": 1807
+              "byteIndex": 1887
             }
           },
           {
@@ -4984,9 +5905,9 @@
             },
             "location": {
               "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/state/icon_pack.ts",
-              "line": 65,
+              "line": 70,
               "col": 2,
-              "byteIndex": 2116
+              "byteIndex": 2196
             }
           },
           {
@@ -5074,9 +5995,9 @@
             },
             "location": {
               "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/state/icon_pack.ts",
-              "line": 106,
+              "line": 111,
               "col": 2,
-              "byteIndex": 4160
+              "byteIndex": 4240
             }
           },
           {
@@ -5173,9 +6094,9 @@
             },
             "location": {
               "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/state/icon_pack.ts",
-              "line": 156,
+              "line": 161,
               "col": 2,
-              "byteIndex": 5970
+              "byteIndex": 6050
             }
           },
           {
@@ -5272,9 +6193,9 @@
             },
             "location": {
               "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/state/icon_pack.ts",
-              "line": 254,
+              "line": 259,
               "col": 2,
-              "byteIndex": 9119
+              "byteIndex": 9199
             }
           },
           {
@@ -5315,9 +6236,9 @@
             },
             "location": {
               "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/state/icon_pack.ts",
-              "line": 263,
+              "line": 268,
               "col": 2,
-              "byteIndex": 9484
+              "byteIndex": 9564
             }
           },
           {
@@ -5358,9 +6279,9 @@
             },
             "location": {
               "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/state/icon_pack.ts",
-              "line": 280,
+              "line": 285,
               "col": 2,
-              "byteIndex": 10039
+              "byteIndex": 10119
             }
           },
           {
@@ -5412,9 +6333,9 @@
             },
             "location": {
               "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/state/icon_pack.ts",
-              "line": 289,
+              "line": 294,
               "col": 2,
-              "byteIndex": 10360
+              "byteIndex": 10440
             }
           },
           {
@@ -5466,9 +6387,9 @@
             },
             "location": {
               "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/state/icon_pack.ts",
-              "line": 304,
+              "line": 309,
               "col": 2,
-              "byteIndex": 10910
+              "byteIndex": 10990
             }
           },
           {
@@ -5529,9 +6450,9 @@
             },
             "location": {
               "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/state/icon_pack.ts",
-              "line": 322,
+              "line": 327,
               "col": 2,
-              "byteIndex": 11606
+              "byteIndex": 11686
             }
           },
           {
@@ -5567,9 +6488,9 @@
             },
             "location": {
               "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/state/icon_pack.ts",
-              "line": 330,
+              "line": 335,
               "col": 2,
-              "byteIndex": 11875
+              "byteIndex": 11955
             }
           }
         ],
@@ -5593,15 +6514,40 @@
       "classDef": {
         "isAbstract": false,
         "constructors": [],
-        "properties": [
+        "properties": [],
+        "indexSignatures": [],
+        "methods": [
           {
-            "tsType": null,
-            "readonly": true,
             "accessibility": null,
             "optional": false,
             "isAbstract": false,
             "isStatic": true,
             "name": "getAsync",
+            "kind": "method",
+            "functionDef": {
+              "params": [],
+              "returnType": {
+                "repr": "Promise",
+                "kind": "typeRef",
+                "typeRef": {
+                  "typeParams": [
+                    {
+                      "repr": "PluginList",
+                      "kind": "typeRef",
+                      "typeRef": {
+                        "typeParams": null,
+                        "typeName": "PluginList"
+                      }
+                    }
+                  ],
+                  "typeName": "Promise"
+                }
+              },
+              "hasBody": true,
+              "isAsync": false,
+              "isGenerator": false,
+              "typeParams": []
+            },
             "location": {
               "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/state/plugin/mod.ts",
               "line": 8,
@@ -5610,23 +6556,77 @@
             }
           },
           {
-            "tsType": null,
-            "readonly": true,
             "accessibility": null,
             "optional": false,
             "isAbstract": false,
             "isStatic": true,
             "name": "onChange",
+            "kind": "method",
+            "functionDef": {
+              "params": [
+                {
+                  "kind": "identifier",
+                  "name": "cb",
+                  "optional": false,
+                  "tsType": {
+                    "repr": "",
+                    "kind": "fnOrConstructor",
+                    "fnOrConstructor": {
+                      "constructor": false,
+                      "tsType": {
+                        "repr": "void",
+                        "kind": "keyword",
+                        "keyword": "void"
+                      },
+                      "params": [
+                        {
+                          "kind": "identifier",
+                          "name": "user",
+                          "optional": false,
+                          "tsType": {
+                            "repr": "PluginList",
+                            "kind": "typeRef",
+                            "typeRef": {
+                              "typeParams": null,
+                              "typeName": "PluginList"
+                            }
+                          }
+                        }
+                      ],
+                      "typeParams": []
+                    }
+                  }
+                }
+              ],
+              "returnType": {
+                "repr": "Promise",
+                "kind": "typeRef",
+                "typeRef": {
+                  "typeParams": [
+                    {
+                      "repr": "UnSubscriber",
+                      "kind": "typeRef",
+                      "typeRef": {
+                        "typeParams": null,
+                        "typeName": "UnSubscriber"
+                      }
+                    }
+                  ],
+                  "typeName": "Promise"
+                }
+              },
+              "hasBody": true,
+              "isAsync": false,
+              "isGenerator": false,
+              "typeParams": []
+            },
             "location": {
               "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/state/plugin/mod.ts",
-              "line": 9,
+              "line": 12,
               "col": 2,
-              "byteIndex": 437
+              "byteIndex": 459
             }
-          }
-        ],
-        "indexSignatures": [],
-        "methods": [
+          },
           {
             "accessibility": null,
             "optional": false,
@@ -5655,9 +6655,9 @@
             },
             "location": {
               "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/state/plugin/mod.ts",
-              "line": 11,
+              "line": 16,
               "col": 2,
-              "byteIndex": 529
+              "byteIndex": 605
             }
           }
         ],
@@ -5805,15 +6805,40 @@
       "classDef": {
         "isAbstract": false,
         "constructors": [],
-        "properties": [
+        "properties": [],
+        "indexSignatures": [],
+        "methods": [
           {
-            "tsType": null,
-            "readonly": true,
             "accessibility": null,
             "optional": false,
             "isAbstract": false,
             "isStatic": true,
             "name": "getAsync",
+            "kind": "method",
+            "functionDef": {
+              "params": [],
+              "returnType": {
+                "repr": "Promise",
+                "kind": "typeRef",
+                "typeRef": {
+                  "typeParams": [
+                    {
+                      "repr": "WidgetList",
+                      "kind": "typeRef",
+                      "typeRef": {
+                        "typeParams": null,
+                        "typeName": "WidgetList"
+                      }
+                    }
+                  ],
+                  "typeName": "Promise"
+                }
+              },
+              "hasBody": true,
+              "isAsync": false,
+              "isGenerator": false,
+              "typeParams": []
+            },
             "location": {
               "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/state/widget.ts",
               "line": 15,
@@ -5822,23 +6847,78 @@
             }
           },
           {
-            "tsType": null,
-            "readonly": true,
             "accessibility": null,
             "optional": false,
             "isAbstract": false,
             "isStatic": true,
             "name": "onChange",
+            "kind": "method",
+            "functionDef": {
+              "params": [
+                {
+                  "kind": "identifier",
+                  "name": "cb",
+                  "optional": false,
+                  "tsType": {
+                    "repr": "",
+                    "kind": "fnOrConstructor",
+                    "fnOrConstructor": {
+                      "constructor": false,
+                      "tsType": {
+                        "repr": "void",
+                        "kind": "keyword",
+                        "keyword": "void"
+                      },
+                      "params": [
+                        {
+                          "kind": "identifier",
+                          "name": "user",
+                          "optional": false,
+                          "tsType": {
+                            "repr": "WidgetList",
+                            "kind": "typeRef",
+                            "typeRef": {
+                              "typeParams": null,
+                              "typeName": "WidgetList"
+                            }
+                          }
+                        }
+                      ],
+                      "typeParams": []
+                    }
+                  }
+                }
+              ],
+              "returnType": {
+                "repr": "Promise",
+                "kind": "typeRef",
+                "typeRef": {
+                  "typeParams": [
+                    {
+                      "repr": "UnSubscriber",
+                      "kind": "typeRef",
+                      "typeRef": {
+                        "typeParams": null,
+                        "typeName": "UnSubscriber"
+                      }
+                    }
+                  ],
+                  "typeName": "Promise"
+                }
+              },
+              "hasBody": true,
+              "isAsync": false,
+              "isGenerator": false,
+              "typeParams": []
+            },
             "location": {
               "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/state/widget.ts",
-              "line": 16,
+              "line": 19,
               "col": 2,
-              "byteIndex": 921
+              "byteIndex": 943
             }
           }
         ],
-        "indexSignatures": [],
-        "methods": [],
         "extends": "List",
         "implements": [],
         "typeParams": [],
@@ -5859,9 +6939,9 @@
       "isDefault": false,
       "location": {
         "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/state/widget.ts",
-        "line": 19,
+        "line": 24,
         "col": 0,
-        "byteIndex": 1013
+        "byteIndex": 1089
       },
       "declarationKind": "export",
       "kind": "interface",
@@ -5889,9 +6969,9 @@
       "isDefault": false,
       "location": {
         "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/state/widget.ts",
-        "line": 21,
+        "line": 26,
         "col": 0,
-        "byteIndex": 1057
+        "byteIndex": 1133
       },
       "declarationKind": "export",
       "kind": "class",
@@ -5919,9 +6999,9 @@
             ],
             "location": {
               "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/state/widget.ts",
-              "line": 22,
+              "line": 27,
               "col": 2,
-              "byteIndex": 1081
+              "byteIndex": 1157
             }
           }
         ],
@@ -5961,9 +7041,9 @@
             },
             "location": {
               "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/state/widget.ts",
-              "line": 26,
+              "line": 31,
               "col": 2,
-              "byteIndex": 1158
+              "byteIndex": 1234
             }
           },
           {
@@ -6015,9 +7095,9 @@
             },
             "location": {
               "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/state/widget.ts",
-              "line": 33,
+              "line": 38,
               "col": 2,
-              "byteIndex": 1447
+              "byteIndex": 1523
             }
           },
           {
@@ -6047,9 +7127,9 @@
             },
             "location": {
               "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/state/widget.ts",
-              "line": 54,
+              "line": 59,
               "col": 2,
-              "byteIndex": 2057
+              "byteIndex": 2133
             }
           }
         ],
@@ -6064,9 +7144,9 @@
       "isDefault": false,
       "location": {
         "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/state/widget.ts",
-        "line": 101,
+        "line": 106,
         "col": 0,
-        "byteIndex": 3532
+        "byteIndex": 3608
       },
       "declarationKind": "export",
       "jsDoc": {
@@ -6105,32 +7185,55 @@
         "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/state/profile.ts",
         "line": 6,
         "col": 0,
-        "byteIndex": 202
+        "byteIndex": 194
       },
       "declarationKind": "export",
       "kind": "class",
       "classDef": {
         "isAbstract": false,
         "constructors": [],
-        "properties": [
+        "properties": [],
+        "indexSignatures": [],
+        "methods": [
           {
-            "tsType": null,
-            "readonly": true,
             "accessibility": null,
             "optional": false,
             "isAbstract": false,
             "isStatic": true,
             "name": "getAsync",
+            "kind": "method",
+            "functionDef": {
+              "params": [],
+              "returnType": {
+                "repr": "Promise",
+                "kind": "typeRef",
+                "typeRef": {
+                  "typeParams": [
+                    {
+                      "repr": "ProfileList",
+                      "kind": "typeRef",
+                      "typeRef": {
+                        "typeParams": null,
+                        "typeName": "ProfileList"
+                      }
+                    }
+                  ],
+                  "typeName": "Promise"
+                }
+              },
+              "hasBody": true,
+              "isAsync": false,
+              "isGenerator": false,
+              "typeParams": []
+            },
             "location": {
               "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/state/profile.ts",
               "line": 7,
               "col": 2,
-              "byteIndex": 253
+              "byteIndex": 245
             }
           }
         ],
-        "indexSignatures": [],
-        "methods": [],
         "extends": "List",
         "implements": [],
         "typeParams": [],
@@ -6160,15 +7263,40 @@
       "classDef": {
         "isAbstract": false,
         "constructors": [],
-        "properties": [
+        "properties": [],
+        "indexSignatures": [],
+        "methods": [
           {
-            "tsType": null,
-            "readonly": true,
             "accessibility": null,
             "optional": false,
             "isAbstract": false,
             "isStatic": true,
             "name": "getAsync",
+            "kind": "method",
+            "functionDef": {
+              "params": [],
+              "returnType": {
+                "repr": "Promise",
+                "kind": "typeRef",
+                "typeRef": {
+                  "typeParams": [
+                    {
+                      "repr": "ConnectedMonitorList",
+                      "kind": "typeRef",
+                      "typeRef": {
+                        "typeParams": null,
+                        "typeName": "ConnectedMonitorList"
+                      }
+                    }
+                  ],
+                  "typeName": "Promise"
+                }
+              },
+              "hasBody": true,
+              "isAsync": false,
+              "isGenerator": false,
+              "typeParams": []
+            },
             "location": {
               "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/system_state/monitors.ts",
               "line": 7,
@@ -6177,23 +7305,78 @@
             }
           },
           {
-            "tsType": null,
-            "readonly": true,
             "accessibility": null,
             "optional": false,
             "isAbstract": false,
             "isStatic": true,
             "name": "onChange",
+            "kind": "method",
+            "functionDef": {
+              "params": [
+                {
+                  "kind": "identifier",
+                  "name": "cb",
+                  "optional": false,
+                  "tsType": {
+                    "repr": "",
+                    "kind": "fnOrConstructor",
+                    "fnOrConstructor": {
+                      "constructor": false,
+                      "tsType": {
+                        "repr": "void",
+                        "kind": "keyword",
+                        "keyword": "void"
+                      },
+                      "params": [
+                        {
+                          "kind": "identifier",
+                          "name": "user",
+                          "optional": false,
+                          "tsType": {
+                            "repr": "ConnectedMonitorList",
+                            "kind": "typeRef",
+                            "typeRef": {
+                              "typeParams": null,
+                              "typeName": "ConnectedMonitorList"
+                            }
+                          }
+                        }
+                      ],
+                      "typeParams": []
+                    }
+                  }
+                }
+              ],
+              "returnType": {
+                "repr": "Promise",
+                "kind": "typeRef",
+                "typeRef": {
+                  "typeParams": [
+                    {
+                      "repr": "UnSubscriber",
+                      "kind": "typeRef",
+                      "typeRef": {
+                        "typeParams": null,
+                        "typeName": "UnSubscriber"
+                      }
+                    }
+                  ],
+                  "typeName": "Promise"
+                }
+              },
+              "hasBody": true,
+              "isAsync": false,
+              "isGenerator": false,
+              "typeParams": []
+            },
             "location": {
               "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/system_state/monitors.ts",
-              "line": 8,
+              "line": 11,
               "col": 2,
-              "byteIndex": 405
+              "byteIndex": 437
             }
           }
         ],
-        "indexSignatures": [],
-        "methods": [],
         "extends": "List",
         "implements": [],
         "typeParams": [],
@@ -6251,15 +7434,40 @@
             }
           }
         ],
-        "properties": [
+        "properties": [],
+        "indexSignatures": [],
+        "methods": [
           {
-            "tsType": null,
-            "readonly": true,
             "accessibility": null,
             "optional": false,
             "isAbstract": false,
             "isStatic": true,
             "name": "getAsync",
+            "kind": "method",
+            "functionDef": {
+              "params": [],
+              "returnType": {
+                "repr": "Promise",
+                "kind": "typeRef",
+                "typeRef": {
+                  "typeParams": [
+                    {
+                      "repr": "UIColors",
+                      "kind": "typeRef",
+                      "typeRef": {
+                        "typeParams": null,
+                        "typeName": "UIColors"
+                      }
+                    }
+                  ],
+                  "typeName": "Promise"
+                }
+              },
+              "hasBody": true,
+              "isAsync": false,
+              "isGenerator": false,
+              "typeParams": []
+            },
             "location": {
               "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/system_state/ui_colors.ts",
               "line": 8,
@@ -6268,23 +7476,77 @@
             }
           },
           {
-            "tsType": null,
-            "readonly": true,
             "accessibility": null,
             "optional": false,
             "isAbstract": false,
             "isStatic": true,
             "name": "onChange",
+            "kind": "method",
+            "functionDef": {
+              "params": [
+                {
+                  "kind": "identifier",
+                  "name": "cb",
+                  "optional": false,
+                  "tsType": {
+                    "repr": "",
+                    "kind": "fnOrConstructor",
+                    "fnOrConstructor": {
+                      "constructor": false,
+                      "tsType": {
+                        "repr": "void",
+                        "kind": "keyword",
+                        "keyword": "void"
+                      },
+                      "params": [
+                        {
+                          "kind": "identifier",
+                          "name": "user",
+                          "optional": false,
+                          "tsType": {
+                            "repr": "UIColors",
+                            "kind": "typeRef",
+                            "typeRef": {
+                              "typeParams": null,
+                              "typeName": "UIColors"
+                            }
+                          }
+                        }
+                      ],
+                      "typeParams": []
+                    }
+                  }
+                }
+              ],
+              "returnType": {
+                "repr": "Promise",
+                "kind": "typeRef",
+                "typeRef": {
+                  "typeParams": [
+                    {
+                      "repr": "UnSubscriber",
+                      "kind": "typeRef",
+                      "typeRef": {
+                        "typeParams": null,
+                        "typeName": "UnSubscriber"
+                      }
+                    }
+                  ],
+                  "typeName": "Promise"
+                }
+              },
+              "hasBody": true,
+              "isAsync": false,
+              "isGenerator": false,
+              "typeParams": []
+            },
             "location": {
               "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/system_state/ui_colors.ts",
-              "line": 9,
+              "line": 12,
               "col": 2,
-              "byteIndex": 386
+              "byteIndex": 406
             }
-          }
-        ],
-        "indexSignatures": [],
-        "methods": [
+          },
           {
             "accessibility": null,
             "optional": false,
@@ -6309,9 +7571,9 @@
             },
             "location": {
               "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/system_state/ui_colors.ts",
-              "line": 11,
+              "line": 16,
               "col": 2,
-              "byteIndex": 472
+              "byteIndex": 544
             }
           },
           {
@@ -6335,9 +7597,9 @@
             },
             "location": {
               "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/system_state/ui_colors.ts",
-              "line": 26,
+              "line": 31,
               "col": 2,
-              "byteIndex": 838
+              "byteIndex": 910
             }
           }
         ],
@@ -6352,9 +7614,9 @@
       "isDefault": false,
       "location": {
         "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/system_state/ui_colors.ts",
-        "line": 44,
+        "line": 49,
         "col": 0,
-        "byteIndex": 1486
+        "byteIndex": 1558
       },
       "declarationKind": "export",
       "kind": "class",
@@ -6383,9 +7645,9 @@
             ],
             "location": {
               "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/system_state/ui_colors.ts",
-              "line": 45,
+              "line": 50,
               "col": 2,
-              "byteIndex": 1509
+              "byteIndex": 1581
             }
           }
         ],
@@ -6416,9 +7678,9 @@
             },
             "location": {
               "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/system_state/ui_colors.ts",
-              "line": 47,
+              "line": 52,
               "col": 2,
-              "byteIndex": 1549
+              "byteIndex": 1621
             }
           },
           {
@@ -6467,9 +7729,9 @@
             },
             "location": {
               "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/system_state/ui_colors.ts",
-              "line": 59,
+              "line": 64,
               "col": 2,
-              "byteIndex": 1975
+              "byteIndex": 2047
             }
           },
           {
@@ -6493,9 +7755,9 @@
             },
             "location": {
               "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/system_state/ui_colors.ts",
-              "line": 77,
+              "line": 82,
               "col": 2,
-              "byteIndex": 2512
+              "byteIndex": 2584
             }
           },
           {
@@ -6539,9 +7801,9 @@
             },
             "location": {
               "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/system_state/ui_colors.ts",
-              "line": 95,
+              "line": 100,
               "col": 2,
-              "byteIndex": 3070
+              "byteIndex": 3142
             }
           },
           {
@@ -6590,9 +7852,9 @@
             },
             "location": {
               "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/system_state/ui_colors.ts",
-              "line": 114,
+              "line": 119,
               "col": 2,
-              "byteIndex": 3755
+              "byteIndex": 3827
             }
           }
         ],
@@ -6829,15 +8091,40 @@
       "classDef": {
         "isAbstract": false,
         "constructors": [],
-        "properties": [
+        "properties": [],
+        "indexSignatures": [],
+        "methods": [
           {
-            "tsType": null,
-            "readonly": true,
             "accessibility": null,
             "optional": false,
             "isAbstract": false,
             "isStatic": true,
             "name": "getAsync",
+            "kind": "method",
+            "functionDef": {
+              "params": [],
+              "returnType": {
+                "repr": "Promise",
+                "kind": "typeRef",
+                "typeRef": {
+                  "typeParams": [
+                    {
+                      "repr": "LanguageList",
+                      "kind": "typeRef",
+                      "typeRef": {
+                        "typeParams": null,
+                        "typeName": "LanguageList"
+                      }
+                    }
+                  ],
+                  "typeName": "Promise"
+                }
+              },
+              "hasBody": true,
+              "isAsync": false,
+              "isGenerator": false,
+              "typeParams": []
+            },
             "location": {
               "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/system_state/language.ts",
               "line": 21,
@@ -6846,23 +8133,78 @@
             }
           },
           {
-            "tsType": null,
-            "readonly": true,
             "accessibility": null,
             "optional": false,
             "isAbstract": false,
             "isStatic": true,
             "name": "onChange",
+            "kind": "method",
+            "functionDef": {
+              "params": [
+                {
+                  "kind": "identifier",
+                  "name": "cb",
+                  "optional": false,
+                  "tsType": {
+                    "repr": "",
+                    "kind": "fnOrConstructor",
+                    "fnOrConstructor": {
+                      "constructor": false,
+                      "tsType": {
+                        "repr": "void",
+                        "kind": "keyword",
+                        "keyword": "void"
+                      },
+                      "params": [
+                        {
+                          "kind": "identifier",
+                          "name": "user",
+                          "optional": false,
+                          "tsType": {
+                            "repr": "LanguageList",
+                            "kind": "typeRef",
+                            "typeRef": {
+                              "typeParams": null,
+                              "typeName": "LanguageList"
+                            }
+                          }
+                        }
+                      ],
+                      "typeParams": []
+                    }
+                  }
+                }
+              ],
+              "returnType": {
+                "repr": "Promise",
+                "kind": "typeRef",
+                "typeRef": {
+                  "typeParams": [
+                    {
+                      "repr": "UnSubscriber",
+                      "kind": "typeRef",
+                      "typeRef": {
+                        "typeParams": null,
+                        "typeName": "UnSubscriber"
+                      }
+                    }
+                  ],
+                  "typeName": "Promise"
+                }
+              },
+              "hasBody": true,
+              "isAsync": false,
+              "isGenerator": false,
+              "typeParams": []
+            },
             "location": {
               "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/system_state/language.ts",
-              "line": 22,
+              "line": 25,
               "col": 2,
-              "byteIndex": 590
+              "byteIndex": 614
             }
           }
         ],
-        "indexSignatures": [],
-        "methods": [],
         "extends": "List",
         "implements": [],
         "typeParams": [],
@@ -6883,9 +8225,9 @@
       "isDefault": false,
       "location": {
         "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/system_state/user.ts",
-        "line": 19,
+        "line": 18,
         "col": 0,
-        "byteIndex": 610
+        "byteIndex": 540
       },
       "declarationKind": "export",
       "kind": "class",
@@ -6914,46 +8256,126 @@
             ],
             "location": {
               "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/system_state/user.ts",
-              "line": 20,
+              "line": 19,
               "col": 2,
-              "byteIndex": 639
+              "byteIndex": 569
             }
           }
         ],
-        "properties": [
+        "properties": [],
+        "indexSignatures": [],
+        "methods": [
           {
-            "tsType": null,
-            "readonly": true,
             "accessibility": null,
             "optional": false,
             "isAbstract": false,
             "isStatic": true,
             "name": "getAsync",
+            "kind": "method",
+            "functionDef": {
+              "params": [],
+              "returnType": {
+                "repr": "Promise",
+                "kind": "typeRef",
+                "typeRef": {
+                  "typeParams": [
+                    {
+                      "repr": "UserDetails",
+                      "kind": "typeRef",
+                      "typeRef": {
+                        "typeParams": null,
+                        "typeName": "UserDetails"
+                      }
+                    }
+                  ],
+                  "typeName": "Promise"
+                }
+              },
+              "hasBody": true,
+              "isAsync": false,
+              "isGenerator": false,
+              "typeParams": []
+            },
             "location": {
               "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/system_state/user.ts",
-              "line": 22,
+              "line": 21,
               "col": 2,
-              "byteIndex": 676
+              "byteIndex": 606
             }
           },
           {
-            "tsType": null,
-            "readonly": true,
             "accessibility": null,
             "optional": false,
             "isAbstract": false,
             "isStatic": true,
             "name": "onChange",
+            "kind": "method",
+            "functionDef": {
+              "params": [
+                {
+                  "kind": "identifier",
+                  "name": "cb",
+                  "optional": false,
+                  "tsType": {
+                    "repr": "",
+                    "kind": "fnOrConstructor",
+                    "fnOrConstructor": {
+                      "constructor": false,
+                      "tsType": {
+                        "repr": "void",
+                        "kind": "keyword",
+                        "keyword": "void"
+                      },
+                      "params": [
+                        {
+                          "kind": "identifier",
+                          "name": "user",
+                          "optional": false,
+                          "tsType": {
+                            "repr": "UserDetails",
+                            "kind": "typeRef",
+                            "typeRef": {
+                              "typeParams": null,
+                              "typeName": "UserDetails"
+                            }
+                          }
+                        }
+                      ],
+                      "typeParams": []
+                    }
+                  }
+                }
+              ],
+              "returnType": {
+                "repr": "Promise",
+                "kind": "typeRef",
+                "typeRef": {
+                  "typeParams": [
+                    {
+                      "repr": "UnSubscriber",
+                      "kind": "typeRef",
+                      "typeRef": {
+                        "typeParams": null,
+                        "typeName": "UnSubscriber"
+                      }
+                    }
+                  ],
+                  "typeName": "Promise"
+                }
+              },
+              "hasBody": true,
+              "isAsync": false,
+              "isGenerator": false,
+              "typeParams": []
+            },
             "location": {
               "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/system_state/user.ts",
-              "line": 23,
+              "line": 25,
               "col": 2,
-              "byteIndex": 757
+              "byteIndex": 710
             }
           }
         ],
-        "indexSignatures": [],
-        "methods": [],
         "extends": null,
         "implements": [],
         "typeParams": [],
@@ -6965,9 +8387,9 @@
       "isDefault": false,
       "location": {
         "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/system_state/user.ts",
-        "line": 26,
+        "line": 30,
         "col": 0,
-        "byteIndex": 841
+        "byteIndex": 849
       },
       "declarationKind": "export",
       "kind": "class",
@@ -6992,9 +8414,9 @@
             "name": "folderType",
             "location": {
               "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/system_state/user.ts",
-              "line": 27,
+              "line": 31,
               "col": 2,
-              "byteIndex": 891
+              "byteIndex": 899
             }
           }
         ],
@@ -7033,9 +8455,9 @@
             },
             "location": {
               "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/system_state/user.ts",
-              "line": 29,
+              "line": 33,
               "col": 2,
-              "byteIndex": 955
+              "byteIndex": 963
             }
           },
           {
@@ -7079,9 +8501,9 @@
             },
             "location": {
               "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/system_state/user.ts",
-              "line": 35,
+              "line": 39,
               "col": 2,
-              "byteIndex": 1129
+              "byteIndex": 1137
             }
           },
           {
@@ -7133,11 +8555,11 @@
                 "typeRef": {
                   "typeParams": [
                     {
-                      "repr": "UnlistenFn",
+                      "repr": "UnSubscriber",
                       "kind": "typeRef",
                       "typeRef": {
                         "typeParams": null,
-                        "typeName": "UnlistenFn"
+                        "typeName": "UnSubscriber"
                       }
                     }
                   ],
@@ -7151,9 +8573,9 @@
             },
             "location": {
               "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/system_state/user.ts",
-              "line": 39,
+              "line": 43,
               "col": 2,
-              "byteIndex": 1288
+              "byteIndex": 1296
             }
           },
           {
@@ -7180,9 +8602,9 @@
             },
             "location": {
               "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/system_state/user.ts",
-              "line": 47,
+              "line": 51,
               "col": 2,
-              "byteIndex": 1574
+              "byteIndex": 1584
             }
           }
         ],
@@ -7206,49 +8628,9 @@
       "isDefault": false,
       "location": {
         "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/system_state/user.ts",
-        "line": 52,
-        "col": 0,
-        "byteIndex": 1640
-      },
-      "declarationKind": "export",
-      "kind": "class",
-      "classDef": {
-        "isAbstract": false,
-        "constructors": [],
-        "properties": [
-          {
-            "tsType": null,
-            "readonly": true,
-            "accessibility": null,
-            "optional": false,
-            "isAbstract": false,
-            "isStatic": true,
-            "isOverride": true,
-            "name": "folderType",
-            "location": {
-              "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/system_state/user.ts",
-              "line": 53,
-              "col": 2,
-              "byteIndex": 1692
-            }
-          }
-        ],
-        "indexSignatures": [],
-        "methods": [],
-        "extends": "UserDirectory",
-        "implements": [],
-        "typeParams": [],
-        "superTypeParams": []
-      }
-    },
-    {
-      "name": "DesktopFolder",
-      "isDefault": false,
-      "location": {
-        "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/system_state/user.ts",
         "line": 56,
         "col": 0,
-        "byteIndex": 1752
+        "byteIndex": 1650
       },
       "declarationKind": "export",
       "kind": "class",
@@ -7269,7 +8651,7 @@
               "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/system_state/user.ts",
               "line": 57,
               "col": 2,
-              "byteIndex": 1805
+              "byteIndex": 1702
             }
           }
         ],
@@ -7282,13 +8664,13 @@
       }
     },
     {
-      "name": "DownloadsFolder",
+      "name": "DesktopFolder",
       "isDefault": false,
       "location": {
         "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/system_state/user.ts",
         "line": 60,
         "col": 0,
-        "byteIndex": 1866
+        "byteIndex": 1762
       },
       "declarationKind": "export",
       "kind": "class",
@@ -7309,7 +8691,7 @@
               "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/system_state/user.ts",
               "line": 61,
               "col": 2,
-              "byteIndex": 1921
+              "byteIndex": 1815
             }
           }
         ],
@@ -7322,13 +8704,13 @@
       }
     },
     {
-      "name": "DocumentsFolder",
+      "name": "DownloadsFolder",
       "isDefault": false,
       "location": {
         "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/system_state/user.ts",
         "line": 64,
         "col": 0,
-        "byteIndex": 1984
+        "byteIndex": 1876
       },
       "declarationKind": "export",
       "kind": "class",
@@ -7349,7 +8731,7 @@
               "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/system_state/user.ts",
               "line": 65,
               "col": 2,
-              "byteIndex": 2039
+              "byteIndex": 1931
             }
           }
         ],
@@ -7362,13 +8744,13 @@
       }
     },
     {
-      "name": "PicturesFolder",
+      "name": "DocumentsFolder",
       "isDefault": false,
       "location": {
         "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/system_state/user.ts",
         "line": 68,
         "col": 0,
-        "byteIndex": 2102
+        "byteIndex": 1994
       },
       "declarationKind": "export",
       "kind": "class",
@@ -7389,7 +8771,7 @@
               "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/system_state/user.ts",
               "line": 69,
               "col": 2,
-              "byteIndex": 2156
+              "byteIndex": 2049
             }
           }
         ],
@@ -7402,13 +8784,13 @@
       }
     },
     {
-      "name": "VideosFolder",
+      "name": "PicturesFolder",
       "isDefault": false,
       "location": {
         "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/system_state/user.ts",
         "line": 72,
         "col": 0,
-        "byteIndex": 2218
+        "byteIndex": 2112
       },
       "declarationKind": "export",
       "kind": "class",
@@ -7429,7 +8811,7 @@
               "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/system_state/user.ts",
               "line": 73,
               "col": 2,
-              "byteIndex": 2270
+              "byteIndex": 2166
             }
           }
         ],
@@ -7442,13 +8824,13 @@
       }
     },
     {
-      "name": "MusicFolder",
+      "name": "VideosFolder",
       "isDefault": false,
       "location": {
         "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/system_state/user.ts",
         "line": 76,
         "col": 0,
-        "byteIndex": 2330
+        "byteIndex": 2228
       },
       "declarationKind": "export",
       "kind": "class",
@@ -7469,7 +8851,47 @@
               "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/system_state/user.ts",
               "line": 77,
               "col": 2,
-              "byteIndex": 2381
+              "byteIndex": 2280
+            }
+          }
+        ],
+        "indexSignatures": [],
+        "methods": [],
+        "extends": "UserDirectory",
+        "implements": [],
+        "typeParams": [],
+        "superTypeParams": []
+      }
+    },
+    {
+      "name": "MusicFolder",
+      "isDefault": false,
+      "location": {
+        "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/system_state/user.ts",
+        "line": 80,
+        "col": 0,
+        "byteIndex": 2340
+      },
+      "declarationKind": "export",
+      "kind": "class",
+      "classDef": {
+        "isAbstract": false,
+        "constructors": [],
+        "properties": [
+          {
+            "tsType": null,
+            "readonly": true,
+            "accessibility": null,
+            "optional": false,
+            "isAbstract": false,
+            "isStatic": true,
+            "isOverride": true,
+            "name": "folderType",
+            "location": {
+              "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/system_state/user.ts",
+              "line": 81,
+              "col": 2,
+              "byteIndex": 2391
             }
           }
         ],
@@ -7571,14 +8993,30 @@
       "isDefault": false,
       "location": {
         "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/system_state/user.ts",
-        "line": 8,
+        "line": 7,
         "col": 6,
-        "byteIndex": 386
+        "byteIndex": 325
       },
       "declarationKind": "export",
       "kind": "variable",
       "variableDef": {
-        "tsType": null,
+        "tsType": {
+          "repr": "Enum",
+          "kind": "typeRef",
+          "typeRef": {
+            "typeParams": [
+              {
+                "repr": "FolderType",
+                "kind": "typeRef",
+                "typeRef": {
+                  "typeParams": null,
+                  "typeName": "FolderType"
+                }
+              }
+            ],
+            "typeName": "Enum"
+          }
+        },
         "kind": "const"
       }
     },
@@ -7589,62 +9027,198 @@
         "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/system_state/bluetooth/mod.ts",
         "line": 9,
         "col": 0,
-        "byteIndex": 481
+        "byteIndex": 477
       },
       "declarationKind": "export",
       "kind": "class",
       "classDef": {
         "isAbstract": false,
         "constructors": [],
-        "properties": [
+        "properties": [],
+        "indexSignatures": [],
+        "methods": [
           {
-            "tsType": null,
-            "readonly": true,
             "accessibility": null,
             "optional": false,
             "isAbstract": false,
             "isStatic": true,
             "name": "getAsync",
+            "kind": "method",
+            "functionDef": {
+              "params": [],
+              "returnType": {
+                "repr": "Promise",
+                "kind": "typeRef",
+                "typeRef": {
+                  "typeParams": [
+                    {
+                      "repr": "BluetoothDevices",
+                      "kind": "typeRef",
+                      "typeRef": {
+                        "typeParams": null,
+                        "typeName": "BluetoothDevices"
+                      }
+                    }
+                  ],
+                  "typeName": "Promise"
+                }
+              },
+              "hasBody": true,
+              "isAsync": false,
+              "isGenerator": false,
+              "typeParams": []
+            },
             "location": {
               "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/system_state/bluetooth/mod.ts",
               "line": 10,
               "col": 2,
-              "byteIndex": 545
+              "byteIndex": 541
             }
           },
           {
-            "tsType": null,
-            "readonly": true,
             "accessibility": null,
             "optional": false,
             "isAbstract": false,
             "isStatic": true,
             "name": "onChange",
+            "kind": "method",
+            "functionDef": {
+              "params": [
+                {
+                  "kind": "identifier",
+                  "name": "cb",
+                  "optional": false,
+                  "tsType": {
+                    "repr": "",
+                    "kind": "fnOrConstructor",
+                    "fnOrConstructor": {
+                      "constructor": false,
+                      "tsType": {
+                        "repr": "void",
+                        "kind": "keyword",
+                        "keyword": "void"
+                      },
+                      "params": [
+                        {
+                          "kind": "identifier",
+                          "name": "user",
+                          "optional": false,
+                          "tsType": {
+                            "repr": "BluetoothDevices",
+                            "kind": "typeRef",
+                            "typeRef": {
+                              "typeParams": null,
+                              "typeName": "BluetoothDevices"
+                            }
+                          }
+                        }
+                      ],
+                      "typeParams": []
+                    }
+                  }
+                }
+              ],
+              "returnType": {
+                "repr": "Promise",
+                "kind": "typeRef",
+                "typeRef": {
+                  "typeParams": [
+                    {
+                      "repr": "UnSubscriber",
+                      "kind": "typeRef",
+                      "typeRef": {
+                        "typeParams": null,
+                        "typeName": "UnSubscriber"
+                      }
+                    }
+                  ],
+                  "typeName": "Promise"
+                }
+              },
+              "hasBody": true,
+              "isAsync": false,
+              "isGenerator": false,
+              "typeParams": []
+            },
             "location": {
               "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/system_state/bluetooth/mod.ts",
               "line": 14,
               "col": 2,
-              "byteIndex": 660
+              "byteIndex": 671
             }
           },
           {
-            "tsType": null,
-            "readonly": true,
             "accessibility": null,
             "optional": false,
             "isAbstract": false,
             "isStatic": true,
             "name": "onDiscoveredDevicesChange",
+            "kind": "method",
+            "functionDef": {
+              "params": [
+                {
+                  "kind": "identifier",
+                  "name": "cb",
+                  "optional": false,
+                  "tsType": {
+                    "repr": "",
+                    "kind": "fnOrConstructor",
+                    "fnOrConstructor": {
+                      "constructor": false,
+                      "tsType": {
+                        "repr": "void",
+                        "kind": "keyword",
+                        "keyword": "void"
+                      },
+                      "params": [
+                        {
+                          "kind": "identifier",
+                          "name": "user",
+                          "optional": false,
+                          "tsType": {
+                            "repr": "BluetoothDevices",
+                            "kind": "typeRef",
+                            "typeRef": {
+                              "typeParams": null,
+                              "typeName": "BluetoothDevices"
+                            }
+                          }
+                        }
+                      ],
+                      "typeParams": []
+                    }
+                  }
+                }
+              ],
+              "returnType": {
+                "repr": "Promise",
+                "kind": "typeRef",
+                "typeRef": {
+                  "typeParams": [
+                    {
+                      "repr": "UnSubscriber",
+                      "kind": "typeRef",
+                      "typeRef": {
+                        "typeParams": null,
+                        "typeName": "UnSubscriber"
+                      }
+                    }
+                  ],
+                  "typeName": "Promise"
+                }
+              },
+              "hasBody": true,
+              "isAsync": false,
+              "isGenerator": false,
+              "typeParams": []
+            },
             "location": {
               "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/system_state/bluetooth/mod.ts",
-              "line": 15,
+              "line": 18,
               "col": 2,
-              "byteIndex": 755
+              "byteIndex": 827
             }
-          }
-        ],
-        "indexSignatures": [],
-        "methods": [
+          },
           {
             "accessibility": null,
             "optional": false,
@@ -7675,9 +9249,9 @@
             },
             "location": {
               "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/system_state/bluetooth/mod.ts",
-              "line": 20,
+              "line": 22,
               "col": 2,
-              "byteIndex": 891
+              "byteIndex": 1010
             }
           },
           {
@@ -7710,9 +9284,9 @@
             },
             "location": {
               "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/system_state/bluetooth/mod.ts",
-              "line": 23,
+              "line": 25,
               "col": 2,
-              "byteIndex": 1001
+              "byteIndex": 1120
             }
           },
           {
@@ -7756,9 +9330,9 @@
             },
             "location": {
               "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/system_state/bluetooth/mod.ts",
-              "line": 27,
+              "line": 29,
               "col": 2,
-              "byteIndex": 1116
+              "byteIndex": 1235
             }
           },
           {
@@ -7802,9 +9376,9 @@
             },
             "location": {
               "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/system_state/bluetooth/mod.ts",
-              "line": 30,
+              "line": 32,
               "col": 2,
-              "byteIndex": 1253
+              "byteIndex": 1372
             }
           },
           {
@@ -7858,9 +9432,9 @@
             },
             "location": {
               "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/system_state/bluetooth/mod.ts",
-              "line": 33,
+              "line": 35,
               "col": 2,
-              "byteIndex": 1384
+              "byteIndex": 1503
             }
           },
           {
@@ -7941,9 +9515,9 @@
             },
             "location": {
               "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/system_state/bluetooth/mod.ts",
-              "line": 37,
+              "line": 39,
               "col": 2,
-              "byteIndex": 1561
+              "byteIndex": 1680
             }
           },
           {
@@ -7970,9 +9544,9 @@
             },
             "location": {
               "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/system_state/bluetooth/mod.ts",
-              "line": 50,
+              "line": 52,
               "col": 2,
-              "byteIndex": 2056
+              "byteIndex": 2175
             }
           }
         ],
@@ -7996,14 +9570,30 @@
       "isDefault": false,
       "location": {
         "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/system_state/bluetooth/mod.ts",
-        "line": 55,
+        "line": 57,
         "col": 6,
-        "byteIndex": 2131
+        "byteIndex": 2250
       },
       "declarationKind": "export",
       "kind": "variable",
       "variableDef": {
-        "tsType": null,
+        "tsType": {
+          "repr": "Enum",
+          "kind": "typeRef",
+          "typeRef": {
+            "typeParams": [
+              {
+                "repr": "BluetoothMajorClass",
+                "kind": "typeRef",
+                "typeRef": {
+                  "typeParams": null,
+                  "typeName": "BluetoothMajorClass"
+                }
+              }
+            ],
+            "typeName": "Enum"
+          }
+        },
         "kind": "const"
       }
     },
@@ -8183,12 +9773,28 @@
         "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/resource.ts",
         "line": 4,
         "col": 6,
-        "byteIndex": 127
+        "byteIndex": 123
       },
       "declarationKind": "export",
       "kind": "variable",
       "variableDef": {
-        "tsType": null,
+        "tsType": {
+          "repr": "Enum",
+          "kind": "typeRef",
+          "typeRef": {
+            "typeParams": [
+              {
+                "repr": "ResourceKind",
+                "kind": "typeRef",
+                "typeRef": {
+                  "typeParams": null,
+                  "typeName": "ResourceKind"
+                }
+              }
+            ],
+            "typeName": "Enum"
+          }
+        },
         "kind": "const"
       }
     },
@@ -8260,12 +9866,28 @@
         "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/resource.ts",
         "line": 13,
         "col": 6,
-        "byteIndex": 317
+        "byteIndex": 304
       },
       "declarationKind": "export",
       "kind": "variable",
       "variableDef": {
-        "tsType": null,
+        "tsType": {
+          "repr": "Enum",
+          "kind": "typeRef",
+          "typeRef": {
+            "typeParams": [
+              {
+                "repr": "ResourceStatus",
+                "kind": "typeRef",
+                "typeRef": {
+                  "typeParams": null,
+                  "typeName": "ResourceStatus"
+                }
+              }
+            ],
+            "typeName": "Enum"
+          }
+        },
         "kind": "const"
       }
     }

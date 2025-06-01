@@ -46,6 +46,7 @@
   "lint": {
     "include": [
       "src",
+      "src/types",
       "scripts",
       "gen"
     ],
