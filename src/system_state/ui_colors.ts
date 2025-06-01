@@ -50,7 +50,7 @@ export class Color {
   constructor(public inner: IColor) {}
 
   /** generates a random solid color */
-  random(): Color {
+  static random(): Color {
     return new Color({
       r: Math.floor(Math.random() * 255),
       g: Math.floor(Math.random() * 255),
