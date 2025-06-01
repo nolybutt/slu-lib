@@ -2,7 +2,7 @@ import type { WegItem, WegItems as IWegItems } from '@seelen-ui/types';
 import { invoke, SeelenCommand, SeelenEvent, type UnSubscriber } from '../handlers/mod.ts';
 import { newFromInvoke, newOnEvent } from '../utils/State.ts';
 import type { Enum } from '../utils/enums.ts';
-import { getCurrentWidgetInfo } from './widget.ts';
+import { getCurrentWindow } from '@tauri-apps/api/window';
 
 export class WegItems {
   constructor(public inner: IWegItems) {}
@@ -25,7 +25,7 @@ export class WegItems {
   /** Event triggered when the weg items for the current widget are changed */
   static forCurrentWidgetChange(cb: (user: WegItems) => void): Promise<UnSubscriber> {
     return newOnEvent(cb, this, SeelenEvent.WegInstanceChanged, {
-      target: { kind: 'Webview', label: getCurrentWidgetInfo().rawLabel },
+      target: { kind: 'Webview', label: getCurrentWindow().label },
     });
   }
 

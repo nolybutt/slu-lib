@@ -36,25 +36,28 @@ interface WidgetInformation {
  * Represents the widget instance running in the current webview
  */
 export class Widget {
+  /** widget id */
+  public readonly id: WidgetId;
   /** widget definition */
-  public readonly declaration: IWidget;
+  public readonly def: IWidget;
   /** decoded widget instance information */
-  public readonly info: WidgetInformation;
+  public readonly decoded: WidgetInformation;
   /** current webview window */
   public readonly webview: WebviewWindow;
 
   private constructor(widget: IWidget) {
-    this.declaration = widget;
+    this.def = widget;
     this.webview = getCurrentWebviewWindow();
 
     const encodedLabel = this.webview.label;
     const decodedLabel = new TextDecoder().decode(decodeBase64Url(encodedLabel));
-    const [_id, query] = decodedLabel.split('?');
+    const [id, query] = decodedLabel.split('?');
 
     const params = new URLSearchParams(query);
     const paramsObj = Object.freeze(Object.fromEntries(params));
 
-    this.info = Object.freeze({
+    this.id = id as WidgetId;
+    this.decoded = Object.freeze({
       label: decodedLabel,
       rawLabel: encodedLabel,
       monitorId: paramsObj.monitorId,
@@ -63,7 +66,7 @@ export class Widget {
     });
   }
 
-  static decodeWidgetIdFromLabel(): WidgetId {
+  static getCurrentWidgetId(): WidgetId {
     const encondedLabel = getCurrentWebviewWindow().label;
     const decodedLabel = new TextDecoder().decode(decodeBase64Url(encondedLabel));
     const [id] = decodedLabel.split('?');
@@ -74,7 +77,7 @@ export class Widget {
   }
 
   static async getCurrentAsync(): Promise<Widget> {
-    const currentWidgetId = this.decodeWidgetIdFromLabel();
+    const currentWidgetId = this.getCurrentWidgetId();
     const list = await WidgetList.getAsync();
     const widget = list.asArray().find((widget) => widget.id === currentWidgetId);
     if (!widget) {
@@ -106,7 +109,7 @@ export class Widget {
   /** Returns the default config of the widget, declared on the widget definition */
   getDefaultConfig(): ThirdPartyWidgetSettings {
     const config: ThirdPartyWidgetSettings = { enabled: true };
-    for (const { group } of this.declaration.settings) {
+    for (const { group } of this.def.settings) {
       for (const entry of group) {
         Object.assign(config, Widget.getEntryDefaultValues(entry));
       }

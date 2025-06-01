@@ -2,7 +2,7 @@ import { SeelenCommand, SeelenEvent, type UnSubscriber } from '../../handlers/mo
 import { List } from '../../utils/List.ts';
 import { newFromInvoke, newOnEvent } from '../../utils/State.ts';
 import type { Plugin } from '@seelen-ui/types';
-import { getCurrentWidgetInfo } from '../widget.ts';
+import { Widget } from '../widget.ts';
 
 export class PluginList extends List<Plugin> {
   static getAsync(): Promise<PluginList> {
@@ -14,7 +14,7 @@ export class PluginList extends List<Plugin> {
   }
 
   forCurrentWidget(): Plugin[] {
-    const target = getCurrentWidgetInfo().id;
+    const target = Widget.getCurrentWidgetId();
     return this.inner.filter((plugin) => plugin.target === target);
   }
 }

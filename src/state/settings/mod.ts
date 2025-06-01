@@ -21,7 +21,6 @@ import { newFromInvoke, newOnEvent } from '../../utils/State.ts';
 import type { Enum } from '../../utils/enums.ts';
 import { invoke } from '../../handlers/mod.ts';
 import {
-  getCurrentWidgetInfo,
   SeelenLauncherWidgetId,
   SeelenToolbarWidgetId,
   SeelenWallWidgetId,
@@ -60,11 +59,12 @@ export class Settings {
   async getCurrentWidgetConfig(): Promise<ThirdPartyWidgetSettings> {
     const currentWidget = await Widget.getCurrentAsync();
 
-    const { monitorId, instanceId, id } = getCurrentWidgetInfo();
+    const widgetId = currentWidget.id;
+    const { monitorId, instanceId } = currentWidget.decoded;
 
-    const root = this.inner.byWidget[id];
+    const root = this.inner.byWidget[widgetId];
     const instance = instanceId ? root?.$instances?.[instanceId] : undefined;
-    const monitor = monitorId ? this.inner.monitorsV2[monitorId]?.byWidget[id] : undefined;
+    const monitor = monitorId ? this.inner.monitorsV2[monitorId]?.byWidget[widgetId] : undefined;
 
     return {
       ...currentWidget.getDefaultConfig(),
