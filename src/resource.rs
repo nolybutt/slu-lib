@@ -115,6 +115,26 @@ pub enum ResourceText {
     Localized(HashMap<String, String>),
 }
 
+impl ResourceText {
+    const MISSING_TEXT: &'static str = "!?";
+
+    /// Returns the text by lang, uses `en` as fallback.
+    /// If no text fallback found will return `!?`
+    pub fn get(&self, lang: &str) -> &str {
+        match self {
+            ResourceText::En(value) => value,
+            ResourceText::Localized(map) => match map.get(lang) {
+                Some(value) => value,
+                None => match map.get("en") {
+                    Some(value) => value,
+                    None => Self::MISSING_TEXT,
+                },
+            },
+        }
+    }
+}
+
+// =============================================================================
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize, JsonSchema, TS)]
 #[serde(default, rename_all = "camelCase")]
 pub struct ResourceMetadata {
