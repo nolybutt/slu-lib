@@ -207,33 +207,23 @@
       ]
     },
     "WsdGroupEntry": {
-      "oneOf": [
-        {
-          "description": "A group is a list of items and that can have more subgroups",
-          "type": "object",
-          "properties": {
-            "subgroup": {
-              "$ref": "#/$defs/WsdSubGroup"
-            }
-          },
-          "additionalProperties": false,
-          "required": [
-            "subgroup"
-          ]
+      "type": "object",
+      "properties": {
+        "children": {
+          "description": "List of items in this subgroup",
+          "type": "array",
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/WsdGroupEntry"
+          }
         },
-        {
-          "description": "Declaration of key and value to be used as configuration",
-          "type": "object",
-          "properties": {
-            "config": {
-              "$ref": "#/$defs/WsdItem"
-            }
-          },
-          "additionalProperties": false,
-          "required": [
-            "config"
-          ]
+        "config": {
+          "description": "Declaration of key and value to be used as configuration.\n If children is not empty, this will beused as header of the subgroup.",
+          "$ref": "#/$defs/WsdItem"
         }
+      },
+      "required": [
+        "config"
       ]
     },
     "WsdItem": {
@@ -599,32 +589,6 @@
       "required": [
         "key",
         "label"
-      ]
-    },
-    "WsdSubGroup": {
-      "type": "object",
-      "properties": {
-        "content": {
-          "description": "List of items in this subgroup",
-          "type": "array",
-          "items": {
-            "$ref": "#/$defs/WsdGroupEntry"
-          }
-        },
-        "header": {
-          "description": "Header configuration. As example could be a switch to enable or disable the entire group or a selector.",
-          "anyOf": [
-            {
-              "$ref": "#/$defs/WsdItem"
-            },
-            {
-              "type": "null"
-            }
-          ]
-        }
-      },
-      "required": [
-        "content"
       ]
     }
   }

@@ -41693,84 +41693,81 @@
       "isDefault": false,
       "location": {
         "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/WsdGroupEntry.ts",
-        "line": 5,
+        "line": 4,
         "col": 0,
-        "byteIndex": 208
+        "byteIndex": 155
       },
       "declarationKind": "export",
       "kind": "typeAlias",
       "typeAliasDef": {
         "tsType": {
           "repr": "",
-          "kind": "union",
-          "union": [
-            {
-              "repr": "",
-              "kind": "typeLiteral",
-              "typeLiteral": {
-                "constructors": [],
-                "methods": [],
-                "properties": [
-                  {
-                    "name": "subgroup",
-                    "location": {
-                      "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/WsdGroupEntry.ts",
-                      "line": 5,
-                      "col": 30,
-                      "byteIndex": 238
-                    },
-                    "params": [],
-                    "computed": false,
-                    "optional": false,
-                    "tsType": {
-                      "repr": "WsdSubGroup",
-                      "kind": "typeRef",
-                      "typeRef": {
-                        "typeParams": null,
-                        "typeName": "WsdSubGroup"
-                      }
-                    },
-                    "typeParams": []
+          "kind": "typeLiteral",
+          "typeLiteral": {
+            "constructors": [],
+            "methods": [],
+            "properties": [
+              {
+                "name": "config",
+                "jsDoc": {
+                  "doc": "Declaration of key and value to be used as configuration.\nIf children is not empty, this will beused as header of the subgroup."
+                },
+                "location": {
+                  "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/WsdGroupEntry.ts",
+                  "line": 9,
+                  "col": 0,
+                  "byteIndex": 328
+                },
+                "params": [],
+                "computed": false,
+                "optional": false,
+                "tsType": {
+                  "repr": "WsdItem",
+                  "kind": "typeRef",
+                  "typeRef": {
+                    "typeParams": null,
+                    "typeName": "WsdItem"
                   }
-                ],
-                "callSignatures": [],
-                "indexSignatures": []
-              }
-            },
-            {
-              "repr": "",
-              "kind": "typeLiteral",
-              "typeLiteral": {
-                "constructors": [],
-                "methods": [],
-                "properties": [
-                  {
-                    "name": "config",
-                    "location": {
-                      "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/WsdGroupEntry.ts",
-                      "line": 5,
-                      "col": 60,
-                      "byteIndex": 268
-                    },
-                    "params": [],
-                    "computed": false,
-                    "optional": false,
-                    "tsType": {
-                      "repr": "WsdItem",
-                      "kind": "typeRef",
-                      "typeRef": {
-                        "typeParams": null,
-                        "typeName": "WsdItem"
+                },
+                "typeParams": []
+              },
+              {
+                "name": "children",
+                "jsDoc": {
+                  "doc": "List of items in this subgroup"
+                },
+                "location": {
+                  "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/WsdGroupEntry.ts",
+                  "line": 13,
+                  "col": 0,
+                  "byteIndex": 388
+                },
+                "params": [],
+                "computed": false,
+                "optional": false,
+                "tsType": {
+                  "repr": "Array",
+                  "kind": "typeRef",
+                  "typeRef": {
+                    "typeParams": [
+                      {
+                        "repr": "WsdGroupEntry",
+                        "kind": "typeRef",
+                        "typeRef": {
+                          "typeParams": null,
+                          "typeName": "WsdGroupEntry"
+                        }
                       }
-                    },
-                    "typeParams": []
+                    ],
+                    "typeName": "Array"
                   }
-                ],
-                "callSignatures": [],
-                "indexSignatures": []
+                },
+                "typeParams": []
               }
-            }
-          ]
+            ],
+            "callSignatures": [],
+            "indexSignatures": []
+          }
         },
         "typeParams": []
       }
@@ -43246,101 +43243,6 @@
                   "repr": "boolean",
                   "kind": "keyword",
                   "keyword": "boolean"
-                },
-                "typeParams": []
-              }
-            ],
-            "callSignatures": [],
-            "indexSignatures": []
-          }
-        },
-        "typeParams": []
-      }
-    },
-    {
-      "name": "WsdSubGroup",
-      "isDefault": false,
-      "location": {
-        "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/WsdSubGroup.ts",
-        "line": 5,
-        "col": 0,
-        "byteIndex": 212
-      },
-      "declarationKind": "export",
-      "kind": "typeAlias",
-      "typeAliasDef": {
-        "tsType": {
-          "repr": "",
-          "kind": "typeLiteral",
-          "typeLiteral": {
-            "constructors": [],
-            "methods": [],
-            "properties": [
-              {
-                "name": "header",
-                "jsDoc": {
-                  "doc": "Header configuration. As example could be a switch to enable or disable the entire group or a selector."
-                },
-                "location": {
-                  "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/WsdSubGroup.ts",
-                  "line": 9,
-                  "col": 0,
-                  "byteIndex": 356
-                },
-                "params": [],
-                "computed": false,
-                "optional": false,
-                "tsType": {
-                  "repr": "",
-                  "kind": "union",
-                  "union": [
-                    {
-                      "repr": "WsdItem",
-                      "kind": "typeRef",
-                      "typeRef": {
-                        "typeParams": null,
-                        "typeName": "WsdItem"
-                      }
-                    },
-                    {
-                      "repr": "null",
-                      "kind": "keyword",
-                      "keyword": "null"
-                    }
-                  ]
-                },
-                "typeParams": []
-              },
-              {
-                "name": "content",
-                "jsDoc": {
-                  "doc": "List of items in this subgroup"
-                },
-                "location": {
-                  "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/WsdSubGroup.ts",
-                  "line": 13,
-                  "col": 0,
-                  "byteIndex": 423
-                },
-                "params": [],
-                "computed": false,
-                "optional": false,
-                "tsType": {
-                  "repr": "Array",
-                  "kind": "typeRef",
-                  "typeRef": {
-                    "typeParams": [
-                      {
-                        "repr": "WsdGroupEntry",
-                        "kind": "typeRef",
-                        "typeRef": {
-                          "typeParams": null,
-                          "typeName": "WsdGroupEntry"
-                        }
-                      }
-                    ],
-                    "typeName": "Array"
-                  }
                 },
                 "typeParams": []
               }

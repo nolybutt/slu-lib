@@ -150,39 +150,21 @@ wsd_item! {
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, JsonSchema, TS)]
-#[serde(rename_all = "lowercase")]
-pub enum WsdGroupEntry {
-    /// A group is a list of items and that can have more subgroups
-    Subgroup(WsdSubGroup),
-    /// Declaration of key and value to be used as configuration
-    Config(WsdItem),
+#[serde(rename_all = "camelCase")]
+pub struct WsdGroupEntry {
+    /// Declaration of key and value to be used as configuration.
+    /// If children is not empty, this will beused as header of the subgroup.
+    config: WsdItem,
+    /// List of items in this subgroup
+    #[serde(default)]
+    children: Vec<WsdGroupEntry>,
 }
 
 impl WsdGroupEntry {
-    fn get_keys(&self) -> Vec<String> {
-        match self {
-            WsdGroupEntry::Subgroup(subgroup) => subgroup.get_keys(),
-            WsdGroupEntry::Config(item) => vec![item.get_key().to_string()],
-        }
-    }
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, JsonSchema, TS)]
-#[serde(rename_all = "camelCase")]
-pub struct WsdSubGroup {
-    /// Header configuration. As example could be a switch to enable or disable the entire group or a selector.
-    header: Option<WsdItem>,
-    /// List of items in this subgroup
-    content: Vec<WsdGroupEntry>,
-}
-
-impl WsdSubGroup {
-    fn get_keys(&self) -> Vec<String> {
+    fn get_keys(&self) -> Vec<&str> {
         let mut keys = Vec::new();
-        if let Some(header) = &self.header {
-            keys.push(header.get_key().to_string());
-        }
-        for entry in &self.content {
+        keys.push(self.config.get_key());
+        for entry in &self.children {
             keys.append(&mut entry.get_keys());
         }
         keys
@@ -197,7 +179,7 @@ pub struct WsdGroup {
 }
 
 impl WsdGroup {
-    fn get_keys(&self) -> Vec<String> {
+    fn get_keys(&self) -> Vec<&str> {
         let mut keys = Vec::new();
         for entry in &self.group {
             keys.append(&mut entry.get_keys());
@@ -219,15 +201,15 @@ pub struct WidgetSettingsDeclarationList(Vec<WsdGroup>);
 
 impl WidgetSettingsDeclarationList {
     pub fn there_are_duplicates(&self) -> bool {
-        let mut seen = HashSet::new();
+        let mut seen: HashSet<&str> = HashSet::new();
 
         // reserved keys
-        seen.insert("enabled".to_string());
-        seen.insert("$instances".to_string());
+        seen.insert("enabled");
+        seen.insert("$instances");
 
         for group in &self.0 {
             for key in group.get_keys() {
-                if seen.contains(&key) {
+                if seen.contains(key) {
                     return true;
                 }
                 seen.insert(key);

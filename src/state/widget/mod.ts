@@ -89,23 +89,13 @@ export class Widget {
   }
 
   private static getEntryDefaultValues(entry: WsdGroupEntry): Record<string, unknown> {
-    if ('subgroup' in entry) {
-      const config: Record<string, unknown> = {};
-      const header = entry.subgroup.header;
-      if (header) {
-        config[header.key] = header.defaultValue;
-      }
-
-      for (const item of entry.subgroup.content) {
-        Object.assign(config, Widget.getEntryDefaultValues(item));
-      }
-
-      return config;
-    }
-
-    return {
+    const config: Record<string, unknown> = {
       [entry.config.key]: entry.config.defaultValue,
     };
+    for (const item of entry.children) {
+      Object.assign(config, Widget.getEntryDefaultValues(item));
+    }
+    return config;
   }
 
   /** Returns the default config of the widget, declared on the widget definition */
