@@ -4,6 +4,9 @@ import { List } from '../../utils/List.ts';
 import { newFromInvoke, newOnEvent } from '../../utils/State.ts';
 import { getCurrentWebviewWindow, type WebviewWindow } from '@tauri-apps/api/webviewWindow';
 import { decodeBase64Url } from '@std/encoding/base64url';
+import { PhysicalPosition, PhysicalSize } from '@tauri-apps/api/dpi';
+import { monitorFromPoint } from '@tauri-apps/api/window';
+import { debounce } from '../../utils/async.ts';
 
 export const SeelenSettingsWidgetId: WidgetId = '@seelen/settings';
 export const SeelenPopupWidgetId: WidgetId = '@seelen/popup';
@@ -107,5 +110,44 @@ export class Widget {
       }
     }
     return config;
+  }
+
+  /**
+   * Will restore the saved position and size of the widget after that
+   * will store the position and size of the widget on change.
+   */
+  async persistPositionAndSize(): Promise<void> {
+    const storage = globalThis.window.localStorage;
+    const width = storage.getItem('width');
+    const height = storage.getItem('height');
+
+    const x = storage.getItem('x');
+    const y = storage.getItem('y');
+
+    if (x && y) {
+      const pos = new PhysicalPosition(Number(x), Number(y));
+      // check if the stored position is still valid
+      const monitor = await monitorFromPoint(pos.x, pos.y);
+      if (monitor) {
+        await this.webview.setPosition(pos);
+      }
+    }
+
+    if (width && height) {
+      const size = new PhysicalSize(Number(width), Number(height));
+      await this.webview.setSize(size);
+    }
+
+    this.webview.onMoved(debounce((e) => {
+      storage.setItem('x', e.payload.x.toString());
+      storage.setItem('y', e.payload.y.toString());
+      console.info(`Widget position saved: ${e.payload.x} ${e.payload.y}`);
+    }, 500));
+
+    this.webview.onResized(debounce((e) => {
+      storage.setItem('width', e.payload.width.toString());
+      storage.setItem('height', e.payload.height.toString());
+      console.info(`Widget size saved: ${e.payload.width} ${e.payload.height}`);
+    }, 500));
   }
 }
