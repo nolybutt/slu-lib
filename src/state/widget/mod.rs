@@ -1,8 +1,11 @@
+pub mod declaration;
+
 use std::{
     ops::{Deref, DerefMut},
     path::Path,
 };
 
+use declaration::WidgetSettingsDeclarationList;
 use schemars::JsonSchema;
 use serde::{Deserialize, Serialize};
 use ts_rs::TS;
@@ -12,12 +15,13 @@ use crate::{
     resource::{ConcreteResource, ResourceId, ResourceMetadata, SluResourceFile},
 };
 
-use super::declaration::WidgetSettingsDeclarationList;
-
 #[derive(Debug, Clone, Default, Hash, PartialEq, Eq, Serialize, Deserialize, JsonSchema, TS)]
 pub struct WidgetId(ResourceId);
 
 impl WidgetId {
+    pub fn known_settings() -> Self {
+        "@seelen/settings".into()
+    }
     pub fn known_weg() -> Self {
         "@seelen/weg".into()
     }
@@ -32,6 +36,9 @@ impl WidgetId {
     }
     pub fn known_wall() -> Self {
         "@seelen/wallpaper-manager".into()
+    }
+    pub fn known_popup() -> Self {
+        "@seelen/popup".into()
     }
 }
 

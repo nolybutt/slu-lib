@@ -11,7 +11,7 @@ export * from './settings_by_app.ts';
 export * from './settings/settings_by_monitor.ts';
 export * from './icon_pack.ts';
 export * from './plugin/mod.ts';
-export * from './widget.ts';
+export * from './widget/mod.ts';
 export * from './profile.ts';
 
 export class LauncherHistory {

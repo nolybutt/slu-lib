@@ -1,10 +1,12 @@
 import type { ThirdPartyWidgetSettings, Widget as IWidget, WidgetId, WsdGroupEntry } from '@seelen-ui/types';
-import { SeelenCommand, SeelenEvent, type UnSubscriber } from '../handlers/mod.ts';
-import { List } from '../utils/List.ts';
-import { newFromInvoke, newOnEvent } from '../utils/State.ts';
+import { SeelenCommand, SeelenEvent, type UnSubscriber } from '../../handlers/mod.ts';
+import { List } from '../../utils/List.ts';
+import { newFromInvoke, newOnEvent } from '../../utils/State.ts';
 import { getCurrentWebviewWindow, type WebviewWindow } from '@tauri-apps/api/webviewWindow';
 import { decodeBase64Url } from '@std/encoding/base64url';
 
+export const SeelenSettingsWidgetId: WidgetId = '@seelen/settings';
+export const SeelenPopupWidgetId: WidgetId = '@seelen/popup';
 export const SeelenWegWidgetId: WidgetId = '@seelen/weg';
 export const SeelenToolbarWidgetId: WidgetId = '@seelen/fancy-toolbar';
 export const SeelenWindowManagerWidgetId: WidgetId = '@seelen/window-manager';

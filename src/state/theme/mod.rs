@@ -50,6 +50,28 @@ pub struct Theme {
 }
 
 impl Theme {
+    fn migrate_old_keys(&mut self) {
+        if let Some(css) = self.styles.remove(&"toolbar".into()) {
+            self.styles.insert(WidgetId::known_toolbar(), css);
+        }
+
+        if let Some(css) = self.styles.remove(&"weg".into()) {
+            self.styles.insert(WidgetId::known_weg(), css);
+        }
+
+        if let Some(css) = self.styles.remove(&"wm".into()) {
+            self.styles.insert(WidgetId::known_wm(), css);
+        }
+
+        if let Some(css) = self.styles.remove(&"launcher".into()) {
+            self.styles.insert(WidgetId::known_launcher(), css);
+        }
+
+        if let Some(css) = self.styles.remove(&"wall".into()) {
+            self.styles.insert(WidgetId::known_wall(), css);
+        }
+    }
+
     fn load_from_file(path: &Path) -> Result<Theme> {
         let extension = path
             .extension()
@@ -157,9 +179,12 @@ impl Theme {
     }
 
     pub fn load(path: &Path) -> Result<Theme> {
-        if path.is_dir() {
-            return Self::load_from_folder(path);
-        }
-        Self::load_from_file(path)
+        let mut theme = if path.is_dir() {
+            Self::load_from_folder(path)
+        } else {
+            Self::load_from_file(path)
+        }?;
+        theme.migrate_old_keys();
+        Ok(theme)
     }
 }

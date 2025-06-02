@@ -1,5 +1,4 @@
 /* In this file we use #[serde_alias(SnakeCase)] as backward compatibility from versions below v1.9.8 */
-pub mod declaration;
 pub mod settings_by_monitor;
 pub mod settings_by_widget;
 

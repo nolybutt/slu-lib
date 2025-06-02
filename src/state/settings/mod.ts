@@ -27,7 +27,7 @@ import {
   SeelenWegWidgetId,
   SeelenWindowManagerWidgetId,
   Widget,
-} from '../widget.ts';
+} from '../widget/mod.ts';
 
 export class Settings {
   constructor(public inner: ISettings) {}
@@ -160,4 +160,3 @@ export {
 };
 
 export * from './settings_by_monitor.ts';
-export * from './declaration.ts';

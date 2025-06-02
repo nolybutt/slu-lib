@@ -2,7 +2,7 @@ import { SeelenCommand, SeelenEvent, type UnSubscriber } from '../../handlers/mo
 import { List } from '../../utils/List.ts';
 import { newFromInvoke, newOnEvent } from '../../utils/State.ts';
 import type { Plugin } from '@seelen-ui/types';
-import { Widget } from '../widget.ts';
+import { Widget } from '../widget/mod.ts';
 
 export class PluginList extends List<Plugin> {
   static getAsync(): Promise<PluginList> {
