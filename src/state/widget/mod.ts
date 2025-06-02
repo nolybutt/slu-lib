@@ -118,11 +118,9 @@ export class Widget {
    */
   async persistPositionAndSize(): Promise<void> {
     const storage = globalThis.window.localStorage;
-    const width = storage.getItem('width');
-    const height = storage.getItem('height');
+    const { label } = this.webview;
 
-    const x = storage.getItem('x');
-    const y = storage.getItem('y');
+    const [x, y, width, height] = [`x`, `y`, `width`, `height`].map((k) => storage.getItem(`${label}::${k}`));
 
     if (x && y) {
       const pos = new PhysicalPosition(Number(x), Number(y));
@@ -139,15 +137,17 @@ export class Widget {
     }
 
     this.webview.onMoved(debounce((e) => {
-      storage.setItem('x', e.payload.x.toString());
-      storage.setItem('y', e.payload.y.toString());
-      console.info(`Widget position saved: ${e.payload.x} ${e.payload.y}`);
+      const { x, y } = e.payload;
+      storage.setItem(`${label}::x`, x.toString());
+      storage.setItem(`${label}::y`, y.toString());
+      console.info(`Widget position saved: ${x} ${y}`);
     }, 500));
 
     this.webview.onResized(debounce((e) => {
-      storage.setItem('width', e.payload.width.toString());
-      storage.setItem('height', e.payload.height.toString());
-      console.info(`Widget size saved: ${e.payload.width} ${e.payload.height}`);
+      const { width, height } = e.payload;
+      storage.setItem(`${label}::width`, width.toString());
+      storage.setItem(`${label}::height`, height.toString());
+      console.info(`Widget size saved: ${width} ${height}`);
     }, 500));
   }
 }
