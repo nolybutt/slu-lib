@@ -7283,6 +7283,44 @@
           },
           {
             "jsDoc": {
+              "doc": "Will set this instance as a desktop widget"
+            },
+            "accessibility": null,
+            "optional": false,
+            "isAbstract": false,
+            "isStatic": false,
+            "name": "setAsDesktopWidget",
+            "kind": "method",
+            "functionDef": {
+              "params": [],
+              "returnType": {
+                "repr": "Promise",
+                "kind": "typeRef",
+                "typeRef": {
+                  "typeParams": [
+                    {
+                      "repr": "void",
+                      "kind": "keyword",
+                      "keyword": "void"
+                    }
+                  ],
+                  "typeName": "Promise"
+                }
+              },
+              "hasBody": true,
+              "isAsync": true,
+              "isGenerator": false,
+              "typeParams": []
+            },
+            "location": {
+              "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/state/widget/mod.ts",
+              "line": 116,
+              "col": 2,
+              "byteIndex": 4284
+            }
+          },
+          {
+            "jsDoc": {
               "doc": "Will restore the saved position and size of the widget after that\nwill store the position and size of the widget on change."
             },
             "accessibility": null,
@@ -7314,9 +7352,9 @@
             },
             "location": {
               "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/state/widget/mod.ts",
-              "line": 119,
+              "line": 135,
               "col": 2,
-              "byteIndex": 4378
+              "byteIndex": 5004
             }
           }
         ],

@@ -112,6 +112,22 @@ export class Widget {
     return config;
   }
 
+  /** Will set this instance as a desktop widget */
+  async setAsDesktopWidget(): Promise<void> {
+    const promises = [
+      this.webview.setDecorations(false), // no title bar
+      this.webview.setShadow(false), // no shadows
+      this.webview.setSkipTaskbar(true), // hide from native shell
+      // as a desktop background we don't wanna allow nothing of these
+      this.webview.setMinimizable(false),
+      this.webview.setMaximizable(false),
+      this.webview.setClosable(false),
+      // desktop widgets are always on bottom
+      this.webview.setAlwaysOnBottom(true),
+    ];
+    await Promise.all(promises);
+  }
+
   /**
    * Will restore the saved position and size of the widget after that
    * will store the position and size of the widget on change.
