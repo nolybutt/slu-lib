@@ -112,20 +112,39 @@ export class Widget {
     return config;
   }
 
-  /** Will set this instance as a desktop widget */
-  async setAsDesktopWidget(): Promise<void> {
-    const promises = [
+  private commonConfig(): Array<Promise<void>> {
+    return [
       this.webview.setDecorations(false), // no title bar
       this.webview.setShadow(false), // no shadows
-      this.webview.setSkipTaskbar(true), // hide from native shell
-      // as a desktop background we don't wanna allow nothing of these
+      // hide from native shell
+      this.webview.setSkipTaskbar(true),
+      // set as hidden (no manage) window on seelen ui
+      this.webview.title().then((title) => {
+        this.webview.setTitle(`.${title}`);
+      }),
+      // as a (desktop/overlay) widget we don't wanna allow nothing of these
       this.webview.setMinimizable(false),
       this.webview.setMaximizable(false),
       this.webview.setClosable(false),
-      // desktop widgets are always on bottom
-      this.webview.setAlwaysOnBottom(true),
     ];
-    await Promise.all(promises);
+  }
+
+  /** Will set this instance as a desktop widget */
+  async setAsDesktopWidget(): Promise<void> {
+    await Promise.all([
+      ...this.commonConfig(),
+      // Desktop widgets are always on bottom
+      this.webview.setAlwaysOnBottom(true),
+    ]);
+  }
+
+  /** Will set this instance as an overlay widget */
+  async setAsOverlayWidget(): Promise<void> {
+    await Promise.all([
+      ...this.commonConfig(),
+      // Overlay widgets are always on top
+      this.webview.setAlwaysOnTop(true),
+    ]);
   }
 
   /**
