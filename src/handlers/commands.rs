@@ -108,10 +108,14 @@ slu_commands_declaration! {
         umid: Option<String>
     ),
     SimulateFullscreen = simulate_fullscreen(),
-    CheckForUpdates = check_for_updates() -> bool,
     ShowDesktop = show_desktop(),
+
+    CheckForUpdates = check_for_updates() -> bool,
     // Restart the app after install the update so it returns a promise resolved with `never`
     InstallLastAvailableUpdate = install_last_available_update(),
+
+    // miscellaneous
+    TranslateText = translate_text(text: String) -> String,
 
     SystemGetForegroundWindowColor = get_foreground_window_color() -> Color,
     SystemGetMonitors = get_connected_monitors() -> Vec<PhysicalMonitor>,
