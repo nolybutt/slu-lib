@@ -115,7 +115,7 @@ slu_commands_declaration! {
     InstallLastAvailableUpdate = install_last_available_update(),
 
     // miscellaneous
-    TranslateText = translate_text(text: String) -> String,
+    TranslateText = translate_text(source: String, source_lang: String, target_lang: String) -> String,
 
     SystemGetForegroundWindowColor = get_foreground_window_color() -> Color,
     SystemGetMonitors = get_connected_monitors() -> Vec<PhysicalMonitor>,

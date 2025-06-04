@@ -28188,12 +28188,48 @@
             "methods": [],
             "properties": [
               {
-                "name": "text",
+                "name": "source",
                 "location": {
                   "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/SeelenCommandTranslateTextArgs.ts",
                   "line": 3,
                   "col": 47,
                   "byteIndex": 157
+                },
+                "params": [],
+                "computed": false,
+                "optional": false,
+                "tsType": {
+                  "repr": "string",
+                  "kind": "keyword",
+                  "keyword": "string"
+                },
+                "typeParams": []
+              },
+              {
+                "name": "sourceLang",
+                "location": {
+                  "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/SeelenCommandTranslateTextArgs.ts",
+                  "line": 3,
+                  "col": 63,
+                  "byteIndex": 173
+                },
+                "params": [],
+                "computed": false,
+                "optional": false,
+                "tsType": {
+                  "repr": "string",
+                  "kind": "keyword",
+                  "keyword": "string"
+                },
+                "typeParams": []
+              },
+              {
+                "name": "targetLang",
+                "location": {
+                  "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/SeelenCommandTranslateTextArgs.ts",
+                  "line": 3,
+                  "col": 83,
+                  "byteIndex": 193
                 },
                 "params": [],
                 "computed": false,
