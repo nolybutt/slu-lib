@@ -35,7 +35,7 @@ pub struct SettingsByWidget {
 pub struct ThirdPartyWidgetSettings {
     /// Enable or disable the widget
     pub enabled: bool,
-    /// By intance will be used to store settings in case of multiple intances allowed on widget.\
+    /// By intance will be used to store settings in case of multiple instances allowed on widget.\
     /// The map values will be merged with the root object and default values on settings declaration.
     #[serde(rename = "$instances")]
     #[serde(skip_serializing_if = "Option::is_none")]
