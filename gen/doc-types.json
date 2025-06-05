@@ -16279,9 +16279,9 @@
       "isDefault": false,
       "location": {
         "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/MediaPlayer.ts",
-        "line": 4,
+        "line": 5,
         "col": 0,
-        "byteIndex": 173
+        "byteIndex": 242
       },
       "declarationKind": "export",
       "kind": "typeAlias",
@@ -16297,9 +16297,9 @@
                 "name": "umid",
                 "location": {
                   "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/MediaPlayer.ts",
-                  "line": 4,
+                  "line": 5,
                   "col": 28,
-                  "byteIndex": 201
+                  "byteIndex": 270
                 },
                 "params": [],
                 "computed": false,
@@ -16315,9 +16315,9 @@
                 "name": "title",
                 "location": {
                   "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/MediaPlayer.ts",
-                  "line": 4,
+                  "line": 5,
                   "col": 42,
-                  "byteIndex": 215
+                  "byteIndex": 284
                 },
                 "params": [],
                 "computed": false,
@@ -16333,9 +16333,9 @@
                 "name": "author",
                 "location": {
                   "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/MediaPlayer.ts",
-                  "line": 4,
+                  "line": 5,
                   "col": 57,
-                  "byteIndex": 230
+                  "byteIndex": 299
                 },
                 "params": [],
                 "computed": false,
@@ -16351,9 +16351,9 @@
                 "name": "thumbnail",
                 "location": {
                   "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/MediaPlayer.ts",
-                  "line": 4,
+                  "line": 5,
                   "col": 73,
-                  "byteIndex": 246
+                  "byteIndex": 315
                 },
                 "params": [],
                 "computed": false,
@@ -16380,9 +16380,9 @@
                 "name": "owner",
                 "location": {
                   "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/MediaPlayer.ts",
-                  "line": 4,
+                  "line": 5,
                   "col": 99,
-                  "byteIndex": 272
+                  "byteIndex": 341
                 },
                 "params": [],
                 "computed": false,
@@ -16398,12 +16398,33 @@
                 "typeParams": []
               },
               {
+                "name": "timeline",
+                "location": {
+                  "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/MediaPlayer.ts",
+                  "line": 5,
+                  "col": 124,
+                  "byteIndex": 366
+                },
+                "params": [],
+                "computed": false,
+                "optional": false,
+                "tsType": {
+                  "repr": "MediaPlayerTimeline",
+                  "kind": "typeRef",
+                  "typeRef": {
+                    "typeParams": null,
+                    "typeName": "MediaPlayerTimeline"
+                  }
+                },
+                "typeParams": []
+              },
+              {
                 "name": "playing",
                 "location": {
                   "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/MediaPlayer.ts",
-                  "line": 4,
-                  "col": 124,
-                  "byteIndex": 297
+                  "line": 5,
+                  "col": 155,
+                  "byteIndex": 397
                 },
                 "params": [],
                 "computed": false,
@@ -16419,9 +16440,9 @@
                 "name": "default",
                 "location": {
                   "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/MediaPlayer.ts",
-                  "line": 4,
-                  "col": 142,
-                  "byteIndex": 315
+                  "line": 5,
+                  "col": 173,
+                  "byteIndex": 415
                 },
                 "params": [],
                 "computed": false,
@@ -16475,6 +16496,156 @@
                   "repr": "string",
                   "kind": "keyword",
                   "keyword": "string"
+                },
+                "typeParams": []
+              }
+            ],
+            "callSignatures": [],
+            "indexSignatures": []
+          }
+        },
+        "typeParams": []
+      }
+    },
+    {
+      "name": "MediaPlayerTimeline",
+      "isDefault": false,
+      "location": {
+        "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/MediaPlayerTimeline.ts",
+        "line": 3,
+        "col": 0,
+        "byteIndex": 110
+      },
+      "declarationKind": "export",
+      "kind": "typeAlias",
+      "typeAliasDef": {
+        "tsType": {
+          "repr": "",
+          "kind": "typeLiteral",
+          "typeLiteral": {
+            "constructors": [],
+            "methods": [],
+            "properties": [
+              {
+                "name": "start",
+                "jsDoc": {
+                  "doc": "The starting timestamp in nanoseconds (aparently it's always 0)"
+                },
+                "location": {
+                  "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/MediaPlayerTimeline.ts",
+                  "line": 7,
+                  "col": 0,
+                  "byteIndex": 222
+                },
+                "params": [],
+                "computed": false,
+                "optional": false,
+                "tsType": {
+                  "repr": "bigint",
+                  "kind": "keyword",
+                  "keyword": "bigint"
+                },
+                "typeParams": []
+              },
+              {
+                "name": "end",
+                "jsDoc": {
+                  "doc": "The total duration of the media item in nanoseconds"
+                },
+                "location": {
+                  "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/MediaPlayerTimeline.ts",
+                  "line": 11,
+                  "col": 0,
+                  "byteIndex": 301
+                },
+                "params": [],
+                "computed": false,
+                "optional": false,
+                "tsType": {
+                  "repr": "bigint",
+                  "kind": "keyword",
+                  "keyword": "bigint"
+                },
+                "typeParams": []
+              },
+              {
+                "name": "position",
+                "jsDoc": {
+                  "doc": "Current playback position in nanoseconds"
+                },
+                "location": {
+                  "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/MediaPlayerTimeline.ts",
+                  "line": 15,
+                  "col": 0,
+                  "byteIndex": 367
+                },
+                "params": [],
+                "computed": false,
+                "optional": false,
+                "tsType": {
+                  "repr": "bigint",
+                  "kind": "keyword",
+                  "keyword": "bigint"
+                },
+                "typeParams": []
+              },
+              {
+                "name": "minSeek",
+                "jsDoc": {
+                  "doc": "The earliest timestamp at which the current media item can currently seek to. (in nanoseconds)"
+                },
+                "location": {
+                  "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/MediaPlayerTimeline.ts",
+                  "line": 19,
+                  "col": 0,
+                  "byteIndex": 492
+                },
+                "params": [],
+                "computed": false,
+                "optional": false,
+                "tsType": {
+                  "repr": "bigint",
+                  "kind": "keyword",
+                  "keyword": "bigint"
+                },
+                "typeParams": []
+              },
+              {
+                "name": "maxSeek",
+                "jsDoc": {
+                  "doc": "The furthest timestamp at which the content can currently seek to. (in nanoseconds)"
+                },
+                "location": {
+                  "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/MediaPlayerTimeline.ts",
+                  "line": 23,
+                  "col": 0,
+                  "byteIndex": 605
+                },
+                "params": [],
+                "computed": false,
+                "optional": false,
+                "tsType": {
+                  "repr": "bigint",
+                  "kind": "keyword",
+                  "keyword": "bigint"
+                },
+                "typeParams": []
+              },
+              {
+                "name": "lastUpdatedTime",
+                "location": {
+                  "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/MediaPlayerTimeline.ts",
+                  "line": 23,
+                  "col": 17,
+                  "byteIndex": 622
+                },
+                "params": [],
+                "computed": false,
+                "optional": false,
+                "tsType": {
+                  "repr": "bigint",
+                  "kind": "keyword",
+                  "keyword": "bigint"
                 },
                 "typeParams": []
               }
@@ -34227,13 +34398,13 @@
                   {
                     "name": "$instances",
                     "jsDoc": {
-                      "doc": "By intance will be used to store settings in case of multiple intances allowed on widget.\\\nThe map values will be merged with the root object and default values on settings declaration."
+                      "doc": "By intance will be used to store settings in case of multiple instances allowed on widget.\\\nThe map values will be merged with the root object and default values on settings declaration."
                     },
                     "location": {
                       "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/ThirdPartyWidgetSettings.ts",
                       "line": 13,
                       "col": 0,
-                      "byteIndex": 460
+                      "byteIndex": 461
                     },
                     "params": [],
                     "computed": false,

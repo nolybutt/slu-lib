@@ -1810,7 +1810,7 @@
       "type": "object",
       "properties": {
         "$instances": {
-          "description": "By intance will be used to store settings in case of multiple intances allowed on widget.\\\n The map values will be merged with the root object and default values on settings declaration.",
+          "description": "By intance will be used to store settings in case of multiple instances allowed on widget.\\\n The map values will be merged with the root object and default values on settings declaration.",
           "type": [
             "object",
             "null"

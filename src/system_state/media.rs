@@ -8,12 +8,29 @@ pub struct MediaPlayerOwner {
 
 #[derive(Debug, Clone, Serialize, TS)]
 #[serde(rename_all = "camelCase")]
+pub struct MediaPlayerTimeline {
+    /// The starting timestamp in nanoseconds (aparently it's always 0)
+    pub start: i64,
+    /// The total duration of the media item in nanoseconds
+    pub end: i64,
+    /// Current playback position in nanoseconds
+    pub position: i64,
+    /// The earliest timestamp at which the current media item can currently seek to. (in nanoseconds)
+    pub min_seek: i64,
+    /// The furthest timestamp at which the content can currently seek to. (in nanoseconds)
+    pub max_seek: i64,
+    pub last_updated_time: i64,
+}
+
+#[derive(Debug, Clone, Serialize, TS)]
+#[serde(rename_all = "camelCase")]
 pub struct MediaPlayer {
     pub umid: String,
     pub title: String,
     pub author: String,
     pub thumbnail: Option<PathBuf>,
     pub owner: MediaPlayerOwner,
+    pub timeline: MediaPlayerTimeline,
     pub playing: bool,
     pub default: bool,
 }
