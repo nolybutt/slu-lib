@@ -4,7 +4,7 @@ pub mod rect;
 pub mod resource;
 pub mod state;
 pub mod system_state;
-mod utils;
+pub mod utils;
 
 pub use error::SeelenLibError;
 
