@@ -1708,6 +1708,107 @@
       }
     },
     {
+      "name": "AppIconPackEntry",
+      "isDefault": false,
+      "location": {
+        "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/AppIconPackEntry.ts",
+        "line": 4,
+        "col": 0,
+        "byteIndex": 149
+      },
+      "declarationKind": "export",
+      "kind": "typeAlias",
+      "typeAliasDef": {
+        "tsType": {
+          "repr": "",
+          "kind": "typeLiteral",
+          "typeLiteral": {
+            "constructors": [],
+            "methods": [],
+            "properties": [
+              {
+                "name": "umid",
+                "jsDoc": {
+                  "doc": "Application user model id"
+                },
+                "location": {
+                  "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/AppIconPackEntry.ts",
+                  "line": 8,
+                  "col": 0,
+                  "byteIndex": 220
+                },
+                "params": [],
+                "computed": false,
+                "optional": false,
+                "tsType": {
+                  "repr": "",
+                  "kind": "union",
+                  "union": [
+                    {
+                      "repr": "string",
+                      "kind": "keyword",
+                      "keyword": "string"
+                    },
+                    {
+                      "repr": "null",
+                      "kind": "keyword",
+                      "keyword": "null"
+                    }
+                  ]
+                },
+                "typeParams": []
+              },
+              {
+                "name": "path",
+                "jsDoc": {
+                  "doc": "Path or filename of the application"
+                },
+                "location": {
+                  "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/AppIconPackEntry.ts",
+                  "line": 12,
+                  "col": 0,
+                  "byteIndex": 289
+                },
+                "params": [],
+                "computed": false,
+                "optional": false,
+                "tsType": {
+                  "repr": "string",
+                  "kind": "keyword",
+                  "keyword": "string"
+                },
+                "typeParams": []
+              },
+              {
+                "name": "icon",
+                "location": {
+                  "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/AppIconPackEntry.ts",
+                  "line": 12,
+                  "col": 14,
+                  "byteIndex": 303
+                },
+                "params": [],
+                "computed": false,
+                "optional": false,
+                "tsType": {
+                  "repr": "Icon",
+                  "kind": "typeRef",
+                  "typeRef": {
+                    "typeParams": null,
+                    "typeName": "Icon"
+                  }
+                },
+                "typeParams": []
+              }
+            ],
+            "callSignatures": [],
+            "indexSignatures": []
+          }
+        },
+        "typeParams": []
+      }
+    },
+    {
       "name": "AppIdentifier",
       "isDefault": false,
       "location": {
@@ -13151,6 +13252,72 @@
       }
     },
     {
+      "name": "CustomIconPackEntry",
+      "isDefault": false,
+      "location": {
+        "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/CustomIconPackEntry.ts",
+        "line": 4,
+        "col": 0,
+        "byteIndex": 149
+      },
+      "declarationKind": "export",
+      "kind": "typeAlias",
+      "typeAliasDef": {
+        "tsType": {
+          "repr": "",
+          "kind": "typeLiteral",
+          "typeLiteral": {
+            "constructors": [],
+            "methods": [],
+            "properties": [
+              {
+                "name": "key",
+                "location": {
+                  "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/CustomIconPackEntry.ts",
+                  "line": 4,
+                  "col": 36,
+                  "byteIndex": 185
+                },
+                "params": [],
+                "computed": false,
+                "optional": false,
+                "tsType": {
+                  "repr": "string",
+                  "kind": "keyword",
+                  "keyword": "string"
+                },
+                "typeParams": []
+              },
+              {
+                "name": "icon",
+                "location": {
+                  "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/CustomIconPackEntry.ts",
+                  "line": 4,
+                  "col": 49,
+                  "byteIndex": 198
+                },
+                "params": [],
+                "computed": false,
+                "optional": false,
+                "tsType": {
+                  "repr": "Icon",
+                  "kind": "typeRef",
+                  "typeRef": {
+                    "typeParams": null,
+                    "typeName": "Icon"
+                  }
+                },
+                "typeParams": []
+              }
+            ],
+            "callSignatures": [],
+            "indexSignatures": []
+          }
+        },
+        "typeParams": []
+      }
+    },
+    {
       "name": "DateToolbarItem",
       "isDefault": false,
       "location": {
@@ -13800,6 +13967,107 @@
       }
     },
     {
+      "name": "DynamicIcon",
+      "isDefault": false,
+      "location": {
+        "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/DynamicIcon.ts",
+        "line": 3,
+        "col": 0,
+        "byteIndex": 110
+      },
+      "declarationKind": "export",
+      "kind": "typeAlias",
+      "typeAliasDef": {
+        "tsType": {
+          "repr": "",
+          "kind": "typeLiteral",
+          "typeLiteral": {
+            "constructors": [],
+            "methods": [],
+            "properties": [
+              {
+                "name": "light",
+                "jsDoc": {
+                  "doc": "Icon to use when system theme is light\\\nValue is the path to the icon relative to the icon pack folder."
+                },
+                "location": {
+                  "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/DynamicIcon.ts",
+                  "line": 8,
+                  "col": 0,
+                  "byteIndex": 257
+                },
+                "params": [],
+                "computed": false,
+                "optional": false,
+                "tsType": {
+                  "repr": "string",
+                  "kind": "keyword",
+                  "keyword": "string"
+                },
+                "typeParams": []
+              },
+              {
+                "name": "dark",
+                "jsDoc": {
+                  "doc": "Icon to use when system theme is dark\\\nValue is the path to the icon relative to the icon pack folder."
+                },
+                "location": {
+                  "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/DynamicIcon.ts",
+                  "line": 13,
+                  "col": 0,
+                  "byteIndex": 390
+                },
+                "params": [],
+                "computed": false,
+                "optional": false,
+                "tsType": {
+                  "repr": "string",
+                  "kind": "keyword",
+                  "keyword": "string"
+                },
+                "typeParams": []
+              },
+              {
+                "name": "mask",
+                "jsDoc": {
+                  "doc": "Mask to be applied over the icon, themes can use this to apply custom colors over the icon.\\\nSet it to `null` to disable masking. \\\nValue is the path to the icon relative to the icon pack folder."
+                },
+                "location": {
+                  "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/DynamicIcon.ts",
+                  "line": 19,
+                  "col": 0,
+                  "byteIndex": 618
+                },
+                "params": [],
+                "computed": false,
+                "optional": false,
+                "tsType": {
+                  "repr": "",
+                  "kind": "union",
+                  "union": [
+                    {
+                      "repr": "string",
+                      "kind": "keyword",
+                      "keyword": "string"
+                    },
+                    {
+                      "repr": "null",
+                      "kind": "keyword",
+                      "keyword": "null"
+                    }
+                  ]
+                },
+                "typeParams": []
+              }
+            ],
+            "callSignatures": [],
+            "indexSignatures": []
+          }
+        },
+        "typeParams": []
+      }
+    },
+    {
       "name": "FancyToolbarSettings",
       "isDefault": false,
       "location": {
@@ -14134,6 +14402,72 @@
                   "repr": "bigint",
                   "kind": "keyword",
                   "keyword": "bigint"
+                },
+                "typeParams": []
+              }
+            ],
+            "callSignatures": [],
+            "indexSignatures": []
+          }
+        },
+        "typeParams": []
+      }
+    },
+    {
+      "name": "FileIconPackEntry",
+      "isDefault": false,
+      "location": {
+        "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/FileIconPackEntry.ts",
+        "line": 4,
+        "col": 0,
+        "byteIndex": 149
+      },
+      "declarationKind": "export",
+      "kind": "typeAlias",
+      "typeAliasDef": {
+        "tsType": {
+          "repr": "",
+          "kind": "typeLiteral",
+          "typeLiteral": {
+            "constructors": [],
+            "methods": [],
+            "properties": [
+              {
+                "name": "extension",
+                "location": {
+                  "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/FileIconPackEntry.ts",
+                  "line": 4,
+                  "col": 34,
+                  "byteIndex": 183
+                },
+                "params": [],
+                "computed": false,
+                "optional": false,
+                "tsType": {
+                  "repr": "string",
+                  "kind": "keyword",
+                  "keyword": "string"
+                },
+                "typeParams": []
+              },
+              {
+                "name": "icon",
+                "location": {
+                  "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/FileIconPackEntry.ts",
+                  "line": 4,
+                  "col": 53,
+                  "byteIndex": 202
+                },
+                "params": [],
+                "computed": false,
+                "optional": false,
+                "tsType": {
+                  "repr": "Icon",
+                  "kind": "typeRef",
+                  "typeRef": {
+                    "typeParams": null,
+                    "typeName": "Icon"
+                  }
                 },
                 "typeParams": []
               }
@@ -14893,9 +15227,9 @@
       "isDefault": false,
       "location": {
         "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/Icon.ts",
-        "line": 3,
+        "line": 4,
         "col": 0,
-        "byteIndex": 110
+        "byteIndex": 163
       },
       "declarationKind": "export",
       "kind": "typeAlias",
@@ -14905,11 +15239,6 @@
           "kind": "union",
           "union": [
             {
-              "repr": "string",
-              "kind": "keyword",
-              "keyword": "string"
-            },
-            {
               "repr": "",
               "kind": "typeLiteral",
               "typeLiteral": {
@@ -14917,15 +15246,12 @@
                 "methods": [],
                 "properties": [
                   {
-                    "name": "light",
-                    "jsDoc": {
-                      "doc": "Icon to use when system theme is light\\\nValue is the path to the icon relative to the icon pack folder."
-                    },
+                    "name": "Redirect",
                     "location": {
                       "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/Icon.ts",
-                      "line": 8,
-                      "col": 0,
-                      "byteIndex": 259
+                      "line": 4,
+                      "col": 21,
+                      "byteIndex": 184
                     },
                     "params": [],
                     "computed": false,
@@ -14934,65 +15260,25 @@
                       "repr": "string",
                       "kind": "keyword",
                       "keyword": "string"
-                    },
-                    "typeParams": []
-                  },
-                  {
-                    "name": "dark",
-                    "jsDoc": {
-                      "doc": "Icon to use when system theme is dark\\\nValue is the path to the icon relative to the icon pack folder."
-                    },
-                    "location": {
-                      "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/Icon.ts",
-                      "line": 13,
-                      "col": 0,
-                      "byteIndex": 392
-                    },
-                    "params": [],
-                    "computed": false,
-                    "optional": false,
-                    "tsType": {
-                      "repr": "string",
-                      "kind": "keyword",
-                      "keyword": "string"
-                    },
-                    "typeParams": []
-                  },
-                  {
-                    "name": "mask",
-                    "jsDoc": {
-                      "doc": "Mask to be applied over the icon, themes can use this to apply custom colors over the icon.\\\nSet it to `null` to disable masking. \\\nValue is the path to the icon relative to the icon pack folder."
-                    },
-                    "location": {
-                      "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/Icon.ts",
-                      "line": 19,
-                      "col": 0,
-                      "byteIndex": 620
-                    },
-                    "params": [],
-                    "computed": false,
-                    "optional": false,
-                    "tsType": {
-                      "repr": "",
-                      "kind": "union",
-                      "union": [
-                        {
-                          "repr": "string",
-                          "kind": "keyword",
-                          "keyword": "string"
-                        },
-                        {
-                          "repr": "null",
-                          "kind": "keyword",
-                          "keyword": "null"
-                        }
-                      ]
                     },
                     "typeParams": []
                   }
                 ],
                 "callSignatures": [],
                 "indexSignatures": []
+              }
+            },
+            {
+              "repr": "string",
+              "kind": "keyword",
+              "keyword": "string"
+            },
+            {
+              "repr": "DynamicIcon",
+              "kind": "typeRef",
+              "typeRef": {
+                "typeParams": null,
+                "typeName": "DynamicIcon"
               }
             }
           ]
@@ -15005,9 +15291,9 @@
       "isDefault": false,
       "location": {
         "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/IconPack.ts",
-        "line": 6,
+        "line": 9,
         "col": 0,
-        "byteIndex": 263
+        "byteIndex": 460
       },
       "declarationKind": "export",
       "kind": "typeAlias",
@@ -15023,9 +15309,9 @@
                 "name": "id",
                 "location": {
                   "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/IconPack.ts",
-                  "line": 6,
+                  "line": 9,
                   "col": 25,
-                  "byteIndex": 288
+                  "byteIndex": 485
                 },
                 "params": [],
                 "computed": false,
@@ -15044,9 +15330,9 @@
                 "name": "metadata",
                 "location": {
                   "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/IconPack.ts",
-                  "line": 6,
+                  "line": 9,
                   "col": 41,
-                  "byteIndex": 304
+                  "byteIndex": 501
                 },
                 "params": [],
                 "computed": false,
@@ -15068,9 +15354,9 @@
                 },
                 "location": {
                   "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/IconPack.ts",
-                  "line": 10,
+                  "line": 13,
                   "col": 0,
-                  "byteIndex": 396
+                  "byteIndex": 593
                 },
                 "params": [],
                 "computed": false,
@@ -15097,118 +15383,100 @@
                 "typeParams": []
               },
               {
-                "name": "apps",
+                "name": "appEntries",
                 "jsDoc": {
                   "doc": "Key can be user model id, filename or a full path.\nIn case of path this should be an executable or a lnk file, otherwise use `files`.\n\nValue is the path to the icon relative to the icon pack folder."
                 },
                 "location": {
                   "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/IconPack.ts",
-                  "line": 17,
+                  "line": 20,
                   "col": 0,
-                  "byteIndex": 637
+                  "byteIndex": 834
                 },
                 "params": [],
                 "computed": false,
                 "optional": false,
                 "tsType": {
-                  "repr": "",
-                  "kind": "mapped",
-                  "mappedType": {
-                    "typeParam": {
-                      "name": "key",
-                      "constraint": {
-                        "repr": "string",
-                        "kind": "keyword",
-                        "keyword": "string"
+                  "repr": "Array",
+                  "kind": "typeRef",
+                  "typeRef": {
+                    "typeParams": [
+                      {
+                        "repr": "AppIconPackEntry",
+                        "kind": "typeRef",
+                        "typeRef": {
+                          "typeParams": null,
+                          "typeName": "AppIconPackEntry"
+                        }
                       }
-                    },
-                    "optional": true,
-                    "tsType": {
-                      "repr": "Icon",
-                      "kind": "typeRef",
-                      "typeRef": {
-                        "typeParams": null,
-                        "typeName": "Icon"
-                      }
-                    }
+                    ],
+                    "typeName": "Array"
                   }
                 },
                 "typeParams": []
               },
               {
-                "name": "files",
+                "name": "fileEntries",
                 "jsDoc": {
-                  "doc": "Intended to store file icons by extension\n\nKey is the extension, value is the relative path to the icon"
+                  "doc": "Intended to store file icons by extension"
                 },
                 "location": {
                   "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/IconPack.ts",
-                  "line": 23,
+                  "line": 24,
                   "col": 0,
-                  "byteIndex": 792
+                  "byteIndex": 925
                 },
                 "params": [],
                 "computed": false,
                 "optional": false,
                 "tsType": {
-                  "repr": "",
-                  "kind": "mapped",
-                  "mappedType": {
-                    "typeParam": {
-                      "name": "key",
-                      "constraint": {
-                        "repr": "string",
-                        "kind": "keyword",
-                        "keyword": "string"
+                  "repr": "Array",
+                  "kind": "typeRef",
+                  "typeRef": {
+                    "typeParams": [
+                      {
+                        "repr": "FileIconPackEntry",
+                        "kind": "typeRef",
+                        "typeRef": {
+                          "typeParams": null,
+                          "typeName": "FileIconPackEntry"
+                        }
                       }
-                    },
-                    "optional": true,
-                    "tsType": {
-                      "repr": "Icon",
-                      "kind": "typeRef",
-                      "typeRef": {
-                        "typeParams": null,
-                        "typeName": "Icon"
-                      }
-                    }
+                    ],
+                    "typeName": "Array"
                   }
                 },
                 "typeParams": []
               },
               {
-                "name": "specific",
+                "name": "customEntries",
                 "jsDoc": {
-                  "doc": "Here specific icons for widgets can be stored.\nwe recomend following the widget id + icon name to avoid collisions\ne.g. \"@username/widgetid::iconname\" but you can use whatever you want"
+                  "doc": "Here specific/custom icons for widgets can be stored.\nwe recomend following the widget id + icon name to avoid collisions\ne.g. \"@username/widgetid::iconname\" but you can use whatever you want"
                 },
                 "location": {
                   "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/IconPack.ts",
-                  "line": 29,
+                  "line": 30,
                   "col": 0,
-                  "byteIndex": 1030
+                  "byteIndex": 1174
                 },
                 "params": [],
                 "computed": false,
                 "optional": false,
                 "tsType": {
-                  "repr": "",
-                  "kind": "mapped",
-                  "mappedType": {
-                    "typeParam": {
-                      "name": "key",
-                      "constraint": {
-                        "repr": "string",
-                        "kind": "keyword",
-                        "keyword": "string"
+                  "repr": "Array",
+                  "kind": "typeRef",
+                  "typeRef": {
+                    "typeParams": [
+                      {
+                        "repr": "CustomIconPackEntry",
+                        "kind": "typeRef",
+                        "typeRef": {
+                          "typeParams": null,
+                          "typeName": "CustomIconPackEntry"
+                        }
                       }
-                    },
-                    "optional": true,
-                    "tsType": {
-                      "repr": "Icon",
-                      "kind": "typeRef",
-                      "typeRef": {
-                        "typeParams": null,
-                        "typeName": "Icon"
-                      }
-                    }
+                    ],
+                    "typeName": "Array"
                   }
                 },
                 "typeParams": []

@@ -3,21 +3,29 @@
   "title": "IconPack",
   "type": "object",
   "properties": {
-    "apps": {
+    "appEntries": {
       "description": "Key can be user model id, filename or a full path.\n In case of path this should be an executable or a lnk file, otherwise use `files`.\n\n Value is the path to the icon relative to the icon pack folder.",
-      "type": "object",
-      "additionalProperties": {
-        "$ref": "#/$defs/Icon"
-      },
-      "default": {}
+      "type": "array",
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/AppIconPackEntry"
+      }
     },
-    "files": {
-      "description": "Intended to store file icons by extension\n\n Key is the extension, value is the relative path to the icon",
-      "type": "object",
-      "additionalProperties": {
-        "$ref": "#/$defs/Icon"
-      },
-      "default": {}
+    "customEntries": {
+      "description": "Here specific/custom icons for widgets can be stored.\n we recomend following the widget id + icon name to avoid collisions\n e.g. \"@username/widgetid::iconname\" but you can use whatever you want",
+      "type": "array",
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/CustomIconPackEntry"
+      }
+    },
+    "fileEntries": {
+      "description": "Intended to store file icons by extension",
+      "type": "array",
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/FileIconPackEntry"
+      }
     },
     "id": {
       "$ref": "#/$defs/IconPackId",
@@ -49,44 +57,147 @@
       ],
       "default": null
     },
-    "specific": {
-      "description": "Here specific icons for widgets can be stored.\n we recomend following the widget id + icon name to avoid collisions\n e.g. \"@username/widgetid::iconname\" but you can use whatever you want",
+    "oldApps": {
       "type": "object",
       "additionalProperties": {
         "$ref": "#/$defs/Icon"
       },
-      "default": {}
+      "deprecated": true,
+      "writeOnly": true
+    },
+    "oldCustom": {
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/$defs/Icon"
+      },
+      "deprecated": true,
+      "writeOnly": true
+    },
+    "oldFiles": {
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/$defs/Icon"
+      },
+      "deprecated": true,
+      "writeOnly": true
     }
   },
   "$defs": {
+    "AppIconPackEntry": {
+      "type": "object",
+      "properties": {
+        "icon": {
+          "$ref": "#/$defs/Icon"
+        },
+        "path": {
+          "description": "Path or filename of the application",
+          "type": "string"
+        },
+        "umid": {
+          "description": "Application user model id",
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "required": [
+        "path",
+        "icon"
+      ]
+    },
+    "CustomIconPackEntry": {
+      "type": "object",
+      "properties": {
+        "icon": {
+          "$ref": "#/$defs/Icon"
+        },
+        "key": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "key",
+        "icon"
+      ]
+    },
+    "DynamicIcon": {
+      "type": "object",
+      "properties": {
+        "dark": {
+          "description": "Icon to use when system theme is dark\\\n Value is the path to the icon relative to the icon pack folder.",
+          "type": "string"
+        },
+        "light": {
+          "description": "Icon to use when system theme is light\\\n Value is the path to the icon relative to the icon pack folder.",
+          "type": "string"
+        },
+        "mask": {
+          "description": "Mask to be applied over the icon, themes can use this to apply custom colors over the icon.\\\n Set it to `null` to disable masking. \\\n Value is the path to the icon relative to the icon pack folder.",
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "required": [
+        "light",
+        "dark"
+      ]
+    },
+    "FileIconPackEntry": {
+      "type": "object",
+      "properties": {
+        "extension": {
+          "type": "string"
+        },
+        "icon": {
+          "$ref": "#/$defs/Icon"
+        }
+      },
+      "required": [
+        "extension",
+        "icon"
+      ]
+    },
     "Icon": {
-      "anyOf": [
+      "oneOf": [
+        {
+          "description": "In case of path be a lnk file this can be set to a different location to use the icon from.",
+          "type": "object",
+          "properties": {
+            "Redirect": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "Redirect"
+          ]
+        },
         {
           "description": "Value is the path to the icon relative to the icon pack folder.",
-          "type": "string"
+          "type": "object",
+          "properties": {
+            "Static": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "Static"
+          ]
         },
         {
           "type": "object",
           "properties": {
-            "dark": {
-              "description": "Icon to use when system theme is dark\\\n Value is the path to the icon relative to the icon pack folder.",
-              "type": "string"
-            },
-            "light": {
-              "description": "Icon to use when system theme is light\\\n Value is the path to the icon relative to the icon pack folder.",
-              "type": "string"
-            },
-            "mask": {
-              "description": "Mask to be applied over the icon, themes can use this to apply custom colors over the icon.\\\n Set it to `null` to disable masking. \\\n Value is the path to the icon relative to the icon pack folder.",
-              "type": [
-                "string",
-                "null"
-              ]
+            "Dynamic": {
+              "$ref": "#/$defs/DynamicIcon"
             }
           },
+          "additionalProperties": false,
           "required": [
-            "light",
-            "dark"
+            "Dynamic"
           ]
         }
       ]
