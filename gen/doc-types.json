@@ -31623,6 +31623,27 @@
                   "keyword": "number"
                 },
                 "typeParams": []
+              },
+              {
+                "name": "showEndTask",
+                "jsDoc": {
+                  "doc": "show end task button on context menu (needs developer mode enabled)"
+                },
+                "location": {
+                  "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/SeelenWegSettings.ts",
+                  "line": 80,
+                  "col": 0,
+                  "byteIndex": 1953
+                },
+                "params": [],
+                "computed": false,
+                "optional": false,
+                "tsType": {
+                  "repr": "boolean",
+                  "kind": "keyword",
+                  "keyword": "boolean"
+                },
+                "typeParams": []
               }
             ],
             "callSignatures": [],

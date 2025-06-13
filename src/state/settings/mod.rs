@@ -143,6 +143,8 @@ pub struct SeelenWegSettings {
     pub delay_to_show: u32,
     /// delay to hide the toolbar on Mouse Leave in milliseconds
     pub delay_to_hide: u32,
+    /// show end task button on context menu (needs developer mode enabled)
+    pub show_end_task: bool,
 }
 
 impl Default for SeelenWegSettings {
@@ -165,6 +167,7 @@ impl Default for SeelenWegSettings {
             space_between_items: 8,
             delay_to_show: 100,
             delay_to_hide: 800,
+            show_end_task: false,
         }
     }
 }

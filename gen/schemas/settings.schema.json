@@ -433,6 +433,7 @@
           "padding": 8,
           "pinnedItemsVisibility": "Always",
           "position": "Bottom",
+          "showEndTask": false,
           "showInstanceCounter": true,
           "showWindowTitle": false,
           "size": 40,
@@ -1612,6 +1613,11 @@
           "$ref": "#/$defs/SeelenWegSide",
           "default": "Bottom"
         },
+        "showEndTask": {
+          "description": "show end task button on context menu (needs developer mode enabled)",
+          "type": "boolean",
+          "default": false
+        },
         "showInstanceCounter": {
           "description": "enable or disable the instance counter visibility on weg instance",
           "type": "boolean",
@@ -1759,6 +1765,7 @@
             "padding": 8,
             "pinnedItemsVisibility": "Always",
             "position": "Bottom",
+            "showEndTask": false,
             "showInstanceCounter": true,
             "showWindowTitle": false,
             "size": 40,
