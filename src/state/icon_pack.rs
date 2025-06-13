@@ -131,13 +131,13 @@ pub enum Icon {
 pub struct DynamicIcon {
     /// Icon to use when system theme is light\
     /// Value is the path to the icon relative to the icon pack folder.
-    light: PathBuf,
+    pub light: PathBuf,
     /// Icon to use when system theme is dark\
     /// Value is the path to the icon relative to the icon pack folder.
-    dark: PathBuf,
+    pub dark: PathBuf,
     /// Mask to be applied over the icon, themes can use this to apply custom colors over the icon.\
     /// Set it to `null` to disable masking. \
     /// Value is the path to the icon relative to the icon pack folder.
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    mask: Option<PathBuf>,
+    pub mask: Option<PathBuf>,
 }
