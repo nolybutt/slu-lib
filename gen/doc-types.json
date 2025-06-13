@@ -13272,11 +13272,14 @@
             "properties": [
               {
                 "name": "key",
+                "jsDoc": {
+                  "doc": "we recomend following the widget id + icon name to avoid collisions\ne.g. \"@username/widgetid::iconname\" but you can use whatever you want"
+                },
                 "location": {
                   "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/CustomIconPackEntry.ts",
-                  "line": 4,
-                  "col": 36,
-                  "byteIndex": 185
+                  "line": 9,
+                  "col": 0,
+                  "byteIndex": 338
                 },
                 "params": [],
                 "computed": false,
@@ -13292,9 +13295,9 @@
                 "name": "icon",
                 "location": {
                   "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/CustomIconPackEntry.ts",
-                  "line": 4,
-                  "col": 49,
-                  "byteIndex": 198
+                  "line": 9,
+                  "col": 13,
+                  "byteIndex": 351
                 },
                 "params": [],
                 "computed": false,
@@ -14434,11 +14437,14 @@
             "properties": [
               {
                 "name": "extension",
+                "jsDoc": {
+                  "doc": "File extension without the dot, e.g. \"txt\""
+                },
                 "location": {
                   "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/FileIconPackEntry.ts",
-                  "line": 4,
-                  "col": 34,
-                  "byteIndex": 183
+                  "line": 8,
+                  "col": 0,
+                  "byteIndex": 238
                 },
                 "params": [],
                 "computed": false,
@@ -14454,9 +14460,9 @@
                 "name": "icon",
                 "location": {
                   "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/FileIconPackEntry.ts",
-                  "line": 4,
-                  "col": 53,
-                  "byteIndex": 202
+                  "line": 8,
+                  "col": 19,
+                  "byteIndex": 257
                 },
                 "params": [],
                 "computed": false,
@@ -15451,13 +15457,13 @@
               {
                 "name": "customEntries",
                 "jsDoc": {
-                  "doc": "Here specific/custom icons for widgets can be stored.\nwe recomend following the widget id + icon name to avoid collisions\ne.g. \"@username/widgetid::iconname\" but you can use whatever you want"
+                  "doc": "Here specific/custom icons for widgets can be stored."
                 },
                 "location": {
                   "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/IconPack.ts",
-                  "line": 30,
+                  "line": 28,
                   "col": 0,
-                  "byteIndex": 1174
+                  "byteIndex": 1030
                 },
                 "params": [],
                 "computed": false,

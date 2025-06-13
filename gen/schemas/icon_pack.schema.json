@@ -12,7 +12,7 @@
       }
     },
     "customEntries": {
-      "description": "Here specific/custom icons for widgets can be stored.\n we recomend following the widget id + icon name to avoid collisions\n e.g. \"@username/widgetid::iconname\" but you can use whatever you want",
+      "description": "Here specific/custom icons for widgets can be stored.",
       "type": "array",
       "default": [],
       "items": {
@@ -56,30 +56,6 @@
         }
       ],
       "default": null
-    },
-    "oldApps": {
-      "type": "object",
-      "additionalProperties": {
-        "$ref": "#/$defs/Icon"
-      },
-      "deprecated": true,
-      "writeOnly": true
-    },
-    "oldCustom": {
-      "type": "object",
-      "additionalProperties": {
-        "$ref": "#/$defs/Icon"
-      },
-      "deprecated": true,
-      "writeOnly": true
-    },
-    "oldFiles": {
-      "type": "object",
-      "additionalProperties": {
-        "$ref": "#/$defs/Icon"
-      },
-      "deprecated": true,
-      "writeOnly": true
     }
   },
   "$defs": {
@@ -113,6 +89,7 @@
           "$ref": "#/$defs/Icon"
         },
         "key": {
+          "description": "we recomend following the widget id + icon name to avoid collisions\n e.g. \"@username/widgetid::iconname\" but you can use whatever you want",
           "type": "string"
         }
       },
@@ -149,6 +126,7 @@
       "type": "object",
       "properties": {
         "extension": {
+          "description": "File extension without the dot, e.g. \"txt\"",
           "type": "string"
         },
         "icon": {

@@ -1,11 +1,11 @@
-import type { Icon as IIcon, IconPack as IIconPack, SeelenCommandGetIconArgs } from '@seelen-ui/types';
+import type { Icon as IIcon, IconPack, IconPack as IIconPack, SeelenCommandGetIconArgs } from '@seelen-ui/types';
 import { List } from '../utils/List.ts';
 import { newFromInvoke, newOnEvent } from '../utils/State.ts';
 import { invoke, SeelenCommand, SeelenEvent, type UnSubscriber } from '../handlers/mod.ts';
 import { path } from '@tauri-apps/api';
 import { Settings } from './settings/mod.ts';
-import { convertFileSrc } from '@tauri-apps/api/core';
 import type { UnlistenFn } from '@tauri-apps/api/event';
+import { convertFileSrc } from '@tauri-apps/api/core';
 
 export class IconPackList extends List<IIconPack> {
   static getAsync(): Promise<IconPackList> {
@@ -25,40 +25,53 @@ export class IconPackManager {
   private unlistenerSettings: UnlistenFn | null = null;
   private unlistenerIcons: UnlistenFn | null = null;
 
-  private static resolveIcon(parent: string, icon: IIcon): IIcon {
-    if (typeof icon === 'string') {
-      return `${parent}\\${icon}`;
-    }
-    return {
-      light: `${parent}\\${icon.light}`,
-      dark: `${parent}\\${icon.dark}`,
-      mask: icon.mask ? `${parent}\\${icon.mask}` : null,
-    };
-  }
-
-  private static resolveIconAsSrc(icon: IIcon): IIcon {
-    if (typeof icon === 'string') {
-      return convertFileSrc(icon);
-    }
-    return {
-      light: convertFileSrc(icon.light),
-      dark: convertFileSrc(icon.dark),
-      mask: icon.mask ? convertFileSrc(icon.mask) : null,
-    };
-  }
+  /// list of active icon packs and fully resolved paths
+  private activeIconPacks: IconPack[] = [];
 
   protected constructor(
     protected iconPackPath: string,
-    protected _iconPacks: IconPackList,
-    protected _actives: string[],
+    protected _availableIconPacks: IconPackList,
+    protected _activeKeys: string[],
   ) {}
 
   public get iconPacks(): IconPackList {
-    return this._iconPacks;
+    return this._availableIconPacks;
   }
 
   public get actives(): string[] {
-    return this._actives;
+    return this._activeKeys;
+  }
+
+  protected resolveAvailableIcons(): void {
+    for (const pack of this._availableIconPacks.asArray()) {
+      const path = `${this.iconPackPath}\\${pack.metadata.filename}`;
+
+      if (pack.missing) {
+        pack.missing = resolveIcon(path, pack.missing);
+      }
+
+      pack.appEntries.forEach((e) => {
+        e.path = e.path.toLowerCase();
+        e.icon = resolveIcon(path, e.icon);
+      });
+      pack.fileEntries.forEach((e) => {
+        e.extension = e.extension.toLowerCase();
+        e.icon = resolveIcon(path, e.icon);
+      });
+      pack.customEntries.forEach((e) => {
+        e.icon = resolveIcon(path, e.icon);
+      });
+    }
+  }
+
+  protected cacheActiveIconPacks(): void {
+    this.activeIconPacks = [];
+    for (const key of this._activeKeys.toReversed()) {
+      const pack = this.iconPacks.asArray().find((p) => p.metadata.filename === key);
+      if (pack) {
+        this.activeIconPacks.push(pack);
+      }
+    }
   }
 
   /**
@@ -69,11 +82,12 @@ export class IconPackManager {
    */
   public static async create(): Promise<IconPackManager> {
     const instance = new IconPackManager(
-      await path.resolve(await path.appDataDir(), 'icons'),
+      await path.resolve(await path.appDataDir(), 'iconpacks'),
       await IconPackList.getAsync(),
       (await Settings.getAsync()).inner.iconPacks,
     );
-
+    instance.resolveAvailableIcons();
+    instance.cacheActiveIconPacks();
     return instance;
   }
 
@@ -113,11 +127,14 @@ export class IconPackManager {
 
     if (!this.unlistenerIcons && !this.unlistenerSettings) {
       this.unlistenerIcons = await IconPackList.onChange((list) => {
-        this._iconPacks = list;
+        this._availableIconPacks = list;
+        this.resolveAvailableIcons();
+        this.cacheActiveIconPacks();
         this.callbacks.forEach((cb) => cb());
       });
       this.unlistenerSettings = await Settings.onChange((settings) => {
-        this._actives = settings.inner.iconPacks;
+        this._activeKeys = settings.inner.iconPacks;
+        this.cacheActiveIconPacks();
         this.callbacks.forEach((cb) => cb());
       });
     }
@@ -136,11 +153,9 @@ export class IconPackManager {
    *
    * The search for icons follows this priority order:
    * 1. UMID (App User Model Id)
-   * 2. Full path or filename (for executable files like .exe or .lnk)
-   * 3. File extension (for non-executable files like .png, .jpg, .txt)
-   *
-   * Icon packs are searched in the order of their priority. An icon from a higher-priority pack
-   * will override an icon from a lower-priority pack, even if the latter matches the search criteria.
+   * 2. Full path
+   * 3. Filename (this is only used to match executable files like .exe)
+   * 4. Extension
    *
    * @param {Object} args - Arguments for retrieving the icon path.
    * @param {string} [args.path] - The full path to the app or file.
@@ -164,64 +179,47 @@ export class IconPackManager {
       return null;
     }
 
-    // Create an ordered list of icon packs based on their priority
-    const orderedPacks: IIconPack[] = [];
-    for (const active of this.actives.toReversed()) {
-      const pack = this._iconPacks.asArray().find((p) => p.metadata.filename === active);
-      if (pack) {
-        orderedPacks.push(pack);
-      }
-    }
+    const lowerPath = path?.toLowerCase();
+    const extension = lowerPath?.split('.').pop();
 
-    // Search by UMID first (highest priority)
-    if (umid) {
-      for (const pack of orderedPacks) {
-        const icon = pack.apps[umid];
-        if (icon) {
-          return IconPackManager.resolveIcon(
-            `${this.iconPackPath}\\${pack.metadata.filename}`,
-            icon,
-          );
+    for (const pack of this.activeIconPacks) {
+      const icon = pack.appEntries.find((e) => {
+        if (umid && e.umid && e.umid === umid) {
+          return true;
         }
-      }
-    }
 
-    // If no UMID is provided, search by path
-    if (!path) {
-      return null;
-    }
+        if (lowerPath) {
+          if (e.path === lowerPath) {
+            return true;
+          }
 
-    const lowercasedPath = path.toLowerCase();
-    const isExecutable = lowercasedPath.endsWith('.exe') || lowercasedPath.endsWith('.lnk');
-
-    // For non-executable files, search by file extension
-    if (!isExecutable) {
-      const extension = lowercasedPath.split('.').pop();
-      if (!extension) {
-        return null;
-      }
-      for (const pack of orderedPacks) {
-        const icon = pack.files[extension];
-        if (icon) {
-          return IconPackManager.resolveIcon(
-            `${this.iconPackPath}\\${pack.metadata.filename}`,
-            icon,
-          );
+          // only search for filename in case of executable files
+          if (extension === 'exe') {
+            const filename = lowerPath.split('\\').pop();
+            if (filename && e.path.endsWith(filename)) {
+              return true;
+            }
+          }
         }
-      }
-      return null;
-    }
+      });
 
-    // For executable files, search by full path or filename
-    const filename = path.split(/[/\\]/g).pop();
-    if (!filename) {
-      return null;
-    }
-
-    for (const pack of orderedPacks) {
-      const icon = pack.apps[path] || pack.apps[filename];
       if (icon) {
-        return IconPackManager.resolveIcon(`${this.iconPackPath}\\${pack.metadata.filename}`, icon);
+        return icon.icon;
+      }
+    }
+
+    // search by file extension
+    if (!extension) {
+      return null;
+    }
+
+    for (const pack of this.activeIconPacks) {
+      const icon = pack.fileEntries.find((e) => {
+        return e.extension === extension;
+      });
+
+      if (icon) {
+        return icon.icon;
       }
     }
 
@@ -229,36 +227,9 @@ export class IconPackManager {
     return null;
   }
 
-  /**
-   * Returns the icon Url/Src for an app or file. If no icon is available, returns `null`.
-   *
-   * The search for icons follows this priority order:
-   * 1. UMID (App User Model Id)
-   * 2. Full path or filename (for executable files like .exe or .lnk)
-   * 3. File extension (for non-executable files like .png, .jpg, .txt)
-   *
-   * Icon packs are searched in the order of their priority. An icon from a higher-priority pack
-   * will override an icon from a lower-priority pack, even if the latter matches the search criteria.
-   *
-   * @param {Object} args - Arguments for retrieving the icon path.
-   * @param {string} [args.path] - The full path to the app or file.
-   * @param {string} [args.umid] - The UMID of the app.
-   * @returns {string | null} - The path to the icon, or `null` if no icon is found.
-   *
-   * @example
-   * // Example 1: Get icon by full path
-   * const iconSrc = instance.getIconPath({
-   *   path: "C:\\Program Files\\Steam\\steam.exe"
-   * });
-   *
-   * // Example 2: Get icon by UMID
-   * const iconSrc = instance.getIconPath({
-   *   umid: "Seelen.SeelenUI_p6yyn03m1894e!App"
-   * });
-   */
   public getIcon({ path, umid }: SeelenCommandGetIconArgs): IIcon | null {
     const iconPath = this.getIconPath({ path, umid });
-    return iconPath ? IconPackManager.resolveIconAsSrc(iconPath) : null;
+    return iconPath ? resolveAsSrc(iconPath) : null;
   }
 
   /**
@@ -266,13 +237,9 @@ export class IconPackManager {
    * If no icon pack haves a missing icon, will return null.
    */
   public getMissingIconPath(): IIcon | null {
-    for (const active of this.actives.toReversed()) {
-      const pack = this.iconPacks.asArray().find((p) => p.metadata.filename === active);
-      if (pack && pack.missing) {
-        return IconPackManager.resolveIcon(
-          `${this.iconPackPath}\\${pack.metadata.filename}`,
-          pack.missing,
-        );
+    for (const pack of this.activeIconPacks) {
+      if (pack.missing) {
+        return pack.missing;
       }
     }
     return null;
@@ -284,36 +251,35 @@ export class IconPackManager {
    */
   public getMissingIcon(): IIcon | null {
     const iconPath = this.getMissingIconPath();
-    return iconPath ? IconPackManager.resolveIconAsSrc(iconPath) : null;
+    return iconPath ? resolveAsSrc(iconPath) : null;
   }
 
   /**
-   * Will return the specifit icon path from the highest priority icon pack.
+   * Will return the specific icon path from the highest priority icon pack.
    * If no icon pack haves the searched icon, will return null.
    */
-  public getSpecificIconPath(name: string): IIcon | null {
-    for (const active of this.actives.toReversed()) {
-      const pack = this.iconPacks.asArray().find((p) => p.metadata.filename === active);
-      const icon = pack?.specific[name];
-      if (icon) {
-        return IconPackManager.resolveIcon(`${this.iconPackPath}\\${pack.metadata.filename}`, icon);
+  public getCustomIconPath(name: string): IIcon | null {
+    for (const pack of this.activeIconPacks) {
+      const entry = pack.customEntries.find((e) => e.key === name);
+      if (entry) {
+        return entry.icon;
       }
     }
     return null;
   }
 
   /**
-   * Will return the specifit icon SRC from the highest priority icon pack.
+   * Will return the specific icon SRC from the highest priority icon pack.
    * If no icon pack haves the searched icon, will return null.
    */
-  public getSpecificIcon(name: string): IIcon | null {
-    const iconPath = this.getSpecificIconPath(name);
-    return iconPath ? IconPackManager.resolveIconAsSrc(iconPath) : null;
+  public getCustomIcon(name: string): IIcon | null {
+    const iconPath = this.getCustomIconPath(name);
+    return iconPath ? resolveAsSrc(iconPath) : null;
   }
 
   /**
-   * Return the icon Path for an app or file, in case of no icon available will return `null`.\
-   * This method doesn't take in care icon packs, just extracts the inherited icon into system's icon pack.
+   * This method doesn't take in care icon packs, just extracts the inherited icon into system's icon pack
+   * if it's not already there.
    *
    * @param filePath The path to the app could be umid o full path
    * @example
@@ -324,7 +290,7 @@ export class IconPackManager {
    *   umid: "Seelen.SeelenUI_p6yyn03m1894e!App"
    * });
    */
-  public static extractIcon(obj: SeelenCommandGetIconArgs): Promise<void> {
+  public static requestIconExtraction(obj: SeelenCommandGetIconArgs): Promise<void> {
     return invoke(SeelenCommand.GetIcon, obj);
   }
 
@@ -335,4 +301,36 @@ export class IconPackManager {
   public static clearCachedIcons(): Promise<void> {
     return invoke(SeelenCommand.StateDeleteCachedIcons);
   }
+}
+
+function resolveIcon(parent: string, icon: IIcon): IIcon {
+  if (typeof icon === 'string') {
+    return `${parent}\\${icon}`;
+  }
+
+  if ('Redirect' in icon) {
+    return icon;
+  }
+
+  return {
+    light: `${parent}\\${icon.light}`,
+    dark: `${parent}\\${icon.dark}`,
+    mask: icon.mask ? `${parent}\\${icon.mask}` : null,
+  };
+}
+
+function resolveAsSrc(icon: IIcon): IIcon {
+  if (typeof icon === 'string') {
+    return convertFileSrc(icon);
+  }
+
+  if ('Redirect' in icon) {
+    return icon;
+  }
+
+  return {
+    light: convertFileSrc(icon.light),
+    dark: convertFileSrc(icon.dark),
+    mask: icon.mask ? convertFileSrc(icon.mask) : null,
+  };
 }

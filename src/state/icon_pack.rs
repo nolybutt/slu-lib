@@ -1,7 +1,4 @@
-use std::{
-    collections::HashMap,
-    path::{Path, PathBuf},
-};
+use std::path::{Path, PathBuf};
 
 use schemars::JsonSchema;
 use serde::{Deserialize, Serialize};
@@ -43,18 +40,6 @@ pub struct IconPack {
     pub metadata: ResourceMetadata,
     /// Special icon used when some other icon is not found
     pub missing: Option<Icon>,
-    #[deprecated = "Will be removed on v3.0.0"]
-    #[serde(alias = "apps", skip_serializing)]
-    #[ts(skip)]
-    pub old_apps: HashMap<String, Icon>,
-    #[deprecated = "Will be removed on v3.0.0"]
-    #[serde(alias = "files", skip_serializing)]
-    #[ts(skip)]
-    pub old_files: HashMap<String, Icon>,
-    #[deprecated = "Will be removed on v3.0.0"]
-    #[serde(alias = "specific", skip_serializing)]
-    #[ts(skip)]
-    pub old_custom: HashMap<String, Icon>,
     /// Key can be user model id, filename or a full path.
     /// In case of path this should be an executable or a lnk file, otherwise use `files`.
     ///
@@ -63,49 +48,10 @@ pub struct IconPack {
     /// Intended to store file icons by extension
     pub file_entries: Vec<FileIconPackEntry>,
     /// Here specific/custom icons for widgets can be stored.
-    /// we recomend following the widget id + icon name to avoid collisions
-    /// e.g. "@username/widgetid::iconname" but you can use whatever you want
     pub custom_entries: Vec<CustomIconPackEntry>,
 }
 
 impl IconPack {
-    /// Migrates deprecated fields to the new structure
-    #[allow(deprecated)]
-    pub fn migrate(&mut self) {
-        for (key, icon) in self.old_apps.drain() {
-            let entry = AppIconPackEntry {
-                umid: if Self::is_umid(&key) {
-                    Some(key.clone())
-                } else {
-                    None
-                },
-                path: PathBuf::from(&key),
-                icon,
-            };
-            self.app_entries.push(entry);
-        }
-
-        for (extension, icon) in self.old_files.drain() {
-            let entry = FileIconPackEntry { extension, icon };
-            self.file_entries.push(entry);
-        }
-
-        for (key, icon) in self.old_custom.drain() {
-            let entry = CustomIconPackEntry { key, icon };
-            self.custom_entries.push(entry);
-        }
-    }
-
-    /// Helper function to check if a key looks like a UMID
-    fn is_umid(key: &str) -> bool {
-        // UMIDs typically follow patterns like:
-        // - com.example.app
-        // - org.organization.app
-        // - Microsoft.Windows.App_8wekyb3d8bbwe!App
-        (key.contains('.') || (key.contains('_') && key.contains('!')))
-            && !key.contains(std::path::MAIN_SEPARATOR)
-    }
-
     fn load_from_file(path: &Path) -> Result<Self> {
         let extension = path
             .extension()
@@ -155,6 +101,7 @@ pub struct AppIconPackEntry {
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize, JsonSchema, TS)]
 #[serde(rename_all = "camelCase")]
 pub struct FileIconPackEntry {
+    /// File extension without the dot, e.g. "txt"
     pub extension: String,
     pub icon: Icon,
 }
@@ -162,6 +109,8 @@ pub struct FileIconPackEntry {
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize, JsonSchema, TS)]
 #[serde(rename_all = "camelCase")]
 pub struct CustomIconPackEntry {
+    /// we recomend following the widget id + icon name to avoid collisions
+    /// e.g. "@username/widgetid::iconname" but you can use whatever you want
     pub key: String,
     pub icon: Icon,
 }

@@ -1,177 +1,220 @@
 import type { IconPack, ResourceMetadata } from '@seelen-ui/types';
 import { IconPackList } from './icon_pack.ts';
 import { IconPackManager } from './icon_pack.ts';
-import { assert, assertEquals } from '@std/assert';
+import { assertEquals } from '@std/assert';
 
+// Custom assertion for null values
+function assertNull(value: unknown): void {
+  return assertEquals(value, null);
+}
+
+// Constants for test icons
 const GOT_BY_PATH = 'GOT_BY_PATH';
 const GOT_BY_FILENAME = 'GOT_BY_FILENAME';
 const GOT_BY_EXTENSION = 'GOT_BY_EXTENSION';
 const GOT_BY_UMID = 'GOT_BY_UMID';
 
-const mockedIconPackA: IconPack = {
-  id: 'mockedIconPackA',
-  metadata: {
-    filename: 'a',
-  } as ResourceMetadata,
-  missing: 'MissingIconA.png',
-  apps: {
-    MSEdge: GOT_BY_UMID,
-    'C:\\Program Files (x86)\\Microsoft\\Edge\\msedge.exe': GOT_BY_PATH,
-    'C:\\Windows\\explorer.exe': GOT_BY_PATH,
-    'C:\\Program Files (x86)\\Some\\App\\filenameApp.exe': GOT_BY_PATH,
-  },
-  files: {
-    png: GOT_BY_EXTENSION,
-    jpg: GOT_BY_EXTENSION,
-    txt: GOT_BY_EXTENSION,
-  },
-  specific: {
-    'my-custom-icon': 'CustomA.png',
-  },
-};
+// Deep clone helper to ensure test isolation
+const cloneIconPack = (pack: IconPack): IconPack => JSON.parse(JSON.stringify(pack));
 
-const mockedIconPackB: IconPack = {
-  id: 'mockedIconPackB',
-  metadata: {
-    filename: 'b',
-  } as ResourceMetadata,
-  apps: {
-    'C:\\Windows\\explorer.exe': GOT_BY_PATH,
-    'filenameApp.exe': GOT_BY_FILENAME,
+// Factory function for mock icon packs
+const createMockIconPacks = () => ({
+  packA: {
+    id: 'mockedIconPackA',
+    metadata: { filename: 'a' } as ResourceMetadata,
+    missing: 'MissingIconA.png',
+    appEntries: [
+      { umid: 'MSEdge', path: 'C:\\Program Files (x86)\\Microsoft\\Edge\\msedge.exe', icon: GOT_BY_UMID },
+      { umid: null, path: 'C:\\Windows\\explorer.exe', icon: GOT_BY_PATH },
+      { umid: null, path: 'C:\\Program Files (x86)\\Some\\App\\filenameApp.exe', icon: GOT_BY_PATH },
+    ],
+    fileEntries: [
+      { extension: 'txt', icon: GOT_BY_EXTENSION },
+      { extension: 'png', icon: GOT_BY_EXTENSION },
+      { extension: 'jpg', icon: GOT_BY_EXTENSION },
+    ],
+    customEntries: [
+      { key: 'my-custom-icon', icon: 'CustomA.png' },
+    ],
   },
-  files: {
-    txt: GOT_BY_EXTENSION,
+  packB: {
+    id: 'mockedIconPackB',
+    metadata: { filename: 'b' } as ResourceMetadata,
+    missing: 'MissingIconB.png',
+    appEntries: [
+      { umid: null, path: 'C:\\Windows\\explorer.exe', icon: GOT_BY_PATH },
+      { umid: null, path: 'filenameApp.exe', icon: GOT_BY_FILENAME },
+    ],
+    fileEntries: [
+      { extension: 'txt', icon: GOT_BY_EXTENSION },
+    ],
+    customEntries: [
+      { key: 'my-custom-icon', icon: 'CustomB.png' },
+    ],
   },
-  missing: 'MissingIconB.png',
-  specific: {
-    'my-custom-icon': 'CustomB.png',
+  packC: {
+    id: 'mockedIconPackC',
+    metadata: { filename: 'c' } as ResourceMetadata,
+    missing: null,
+    appEntries: [
+      { umid: null, path: 'C:\\folder\\app1.exe', icon: GOT_BY_PATH },
+    ],
+    fileEntries: [],
+    customEntries: [],
   },
-};
+});
 
-const mockedIconPackC: IconPack = {
-  id: 'mockedIconPackC',
-  metadata: {
-    filename: 'c',
-  } as ResourceMetadata,
-  apps: {
-    'C:\\folder\\app1.exe': GOT_BY_PATH,
-  },
-  missing: null,
-  files: {},
-  specific: {},
-};
+// Test context manager for cleaner test setup
+class IconPackManagerTestContext {
+  private manager: IconPackManagerMock;
 
-class IconPackManagerMock extends IconPackManager {
-  public constructor() {
-    super('', new IconPackList([mockedIconPackB, mockedIconPackA, mockedIconPackC]), ['a', 'b']);
+  // Default active packs: ['b', 'a'] (note 'a' has higher priority as it's last)
+  constructor(initialActives: string[] = ['b', 'a']) {
+    const mocks = createMockIconPacks();
+    this.manager = new IconPackManagerMock(
+      [cloneIconPack(mocks.packA), cloneIconPack(mocks.packB), cloneIconPack(mocks.packC)],
+      initialActives,
+    );
   }
 
-  public setActives(actives: string[]): void {
-    this._actives = actives;
+  get instance(): IconPackManagerMock {
+    return this.manager;
+  }
+
+  // Fluent interface for changing active packs
+  withActives(actives: string[]): this {
+    this.manager.setActives(actives);
+    return this;
   }
 }
 
-Deno.test('IconPackManager > getIconPath', async (t) => {
-  const manager = new IconPackManagerMock();
+// Mock implementation of IconPackManager for testing
+class IconPackManagerMock extends IconPackManager {
+  constructor(packs: IconPack[], activeKeys: string[]) {
+    super('', new IconPackList(packs), activeKeys);
+    this.resolveAvailableIcons();
+    this.cacheActiveIconPacks();
+  }
 
-  await t.step({
-    name: 'should return null if no icon pack matches the umid or path',
-    fn: () => {
-      assert(manager.getIconPath({ path: 'C:\\nonexistent\\path.exe' }) === null);
-      assert(manager.getIconPath({ umid: 'NonexistentUMID' }) === null);
-    },
-  });
+  public setActives(actives: string[]): void {
+    this._activeKeys = actives;
+    this.cacheActiveIconPacks();
+  }
+}
 
-  await t.step({
-    name: 'should ignore no used icon packs',
-    fn: () => {
-      assert(manager.getIconPath({ path: 'C:\\folder\\app1.exe' }) === null);
-    },
-  });
+Deno.test('IconPackManager', async (t) => {
+  await t.step('Icon lookup functionality', async (t) => {
+    await t.step('should return null for non-existent paths or UMIDs', () => {
+      const ctx = new IconPackManagerTestContext();
+      // Non-existent path
+      assertNull(ctx.instance.getIconPath({ path: 'C:\\nonexistent\\path.exe' }));
+      // Non-existent UMID
+      assertNull(ctx.instance.getIconPath({ umid: 'NonexistentUMID' }));
+    });
 
-  await t.step({
-    name: 'should follow cascade order set by active icon packs',
-    fn: () => {
-      assert(
-        manager.getIconPath({
-          path: 'C:\\Windows\\explorer.exe',
-        }) === `\\b\\${GOT_BY_PATH}`,
+    await t.step('should ignore inactive icon packs', () => {
+      // Only 'a' and 'b' are active by default
+      const ctx = new IconPackManagerTestContext();
+      // This path only exists in packC which is inactive
+      assertNull(ctx.instance.getIconPath({ path: 'C:\\folder\\app1.exe' }));
+    });
+
+    await t.step('should respect cascading priority order (last has highest priority)', () => {
+      // Default order is ['b', 'a'] so 'a' has higher priority
+      const ctx = new IconPackManagerTestContext(['b', 'a']);
+
+      // 'a' should take priority for explorer.exe (last in active list)
+      assertEquals(
+        ctx.instance.getIconPath({ path: 'C:\\Windows\\explorer.exe' }),
+        `\\a\\${GOT_BY_PATH}`,
       );
-      const old = manager.actives;
-      manager.setActives(['b', 'a']);
-      assert(
-        manager.getIconPath({
-          path: 'C:\\Windows\\explorer.exe',
-        }) === `\\a\\${GOT_BY_PATH}`,
-      );
-      manager.setActives(old);
-    },
-  });
 
-  await t.step({
-    name: 'should priorize umid over path',
-    fn: () => {
-      assert(
-        manager.getIconPath({
+      // After changing priority to ['a', 'b'], 'b' should now have priority
+      assertEquals(
+        ctx.withActives(['a', 'b']).instance.getIconPath({ path: 'C:\\Windows\\explorer.exe' }),
+        `\\b\\${GOT_BY_PATH}`,
+      );
+    });
+
+    await t.step('should prioritize UMID over path matching', () => {
+      const ctx = new IconPackManagerTestContext(['b', 'a']); // 'a' has priority
+      // Should match UMID in packA even though path exists in both packs
+      assertEquals(
+        ctx.instance.getIconPath({
           path: 'C:\\Program Files (x86)\\Microsoft\\Edge\\msedge.exe',
           umid: 'MSEdge',
-        }) === `\\a\\${GOT_BY_UMID}`,
+        }),
+        `\\a\\${GOT_BY_UMID}`,
       );
-    },
+    });
+
+    await t.step('should match by filename when higher priority pack has filename match', () => {
+      // With ['b', 'a'] order, packB has filename match that should take priority
+      const ctx = new IconPackManagerTestContext(['a', 'b']);
+      assertEquals(
+        ctx.instance.getIconPath({ path: 'C:\\Program Files (x86)\\Some\\App\\filenameApp.exe' }),
+        `\\b\\${GOT_BY_FILENAME}`,
+      );
+    });
+
+    await t.step('should match files by extension with priority order', () => {
+      const ctx = new IconPackManagerTestContext(['b', 'a']); // 'a' has priority
+
+      // .txt exists in both packs - should use 'a' (higher priority)
+      assertEquals(
+        ctx.instance.getIconPath({ path: 'C:\\Some\\App\\someFile.txt' }),
+        `\\a\\${GOT_BY_EXTENSION}`,
+      );
+
+      // .png only exists in packA
+      assertEquals(
+        ctx.instance.getIconPath({ path: 'C:\\Some\\App\\someFile.png' }),
+        `\\a\\${GOT_BY_EXTENSION}`,
+      );
+
+      // When we change priority to ['a', 'b'], 'b' should have priority for .txt
+      assertEquals(
+        ctx.withActives(['a', 'b']).instance.getIconPath({ path: 'C:\\Some\\App\\someFile.txt' }),
+        `\\b\\${GOT_BY_EXTENSION}`,
+      );
+    });
   });
 
-  // we priotizite the path over the filename but the icon pack order is most important than this
-  // so in this test the icon should be get from B that have filename key, over A that have a full path key
-  await t.step({
-    name: 'should get by filename over path when active pack has priority',
-    fn: () => {
-      assert(
-        manager.getIconPath({
-          path: 'C:\\Program Files (x86)\\Some\\App\\filenameApp.exe',
-        }) === `\\b\\${GOT_BY_FILENAME}`,
-      );
-    },
+  await t.step('Missing icon functionality', async (t) => {
+    await t.step('should return missing icon from highest priority pack (last in active list)', () => {
+      // With ['b', 'a'], 'a' has priority
+      const ctx = new IconPackManagerTestContext(['b', 'a']);
+      assertEquals(ctx.instance.getMissingIconPath(), `\\a\\MissingIconA.png`);
+    });
+
+    await t.step('should fallback when higher priority pack has no missing icon', () => {
+      // packC has no missing icon, should fallback to packB
+      const ctx = new IconPackManagerTestContext(['c', 'b']);
+      assertEquals(ctx.instance.getMissingIconPath(), `\\b\\MissingIconB.png`);
+    });
+
+    await t.step('should return null when no active packs have missing icons', () => {
+      const ctx = new IconPackManagerTestContext(['c']); // packC has no missing icon
+      assertNull(ctx.instance.getMissingIconPath());
+    });
   });
 
-  await t.step({
-    name: 'should get by extension',
-    fn: () => {
-      assert(
-        manager.getIconPath({
-          path: 'C:\\Program Files (x86)\\Some\\App\\someFile.txt',
-        }) === `\\b\\${GOT_BY_EXTENSION}`,
-      );
-      assert(
-        manager.getIconPath({
-          path: 'C:\\Program Files (x86)\\Some\\App\\someFile.png',
-        }) === `\\a\\${GOT_BY_EXTENSION}`,
-      );
-    },
-  });
-});
+  await t.step('Custom icon functionality', async (t) => {
+    await t.step('should return custom icon from highest priority pack', () => {
+      // With ['b', 'a'], 'a' has priority
+      const ctx = new IconPackManagerTestContext(['b', 'a']);
+      assertEquals(ctx.instance.getCustomIconPath('my-custom-icon'), `\\a\\CustomA.png`);
+    });
 
-Deno.test('IconPackManager > getMissingIconPath', async (t) => {
-  const manager = new IconPackManagerMock();
+    await t.step('should fallback when custom icon not found in higher priority pack', () => {
+      // packC has no custom icons, should fallback to packA
+      const ctx = new IconPackManagerTestContext(['c', 'a']);
+      assertEquals(ctx.instance.getCustomIconPath('my-custom-icon'), `\\a\\CustomA.png`);
+    });
 
-  await t.step({
-    name: 'should get the missing icon',
-    fn: () => {
-      assertEquals(manager.getMissingIconPath(), `\\b\\MissingIconB.png`);
-      manager.setActives(['b', 'a']);
-      assertEquals(manager.getMissingIconPath(), `\\a\\MissingIconA.png`);
-    },
-  });
-});
-
-Deno.test('IconPackManager > getSpecificIconPath', async (t) => {
-  const manager = new IconPackManagerMock();
-
-  await t.step({
-    name: 'should get the specific icon',
-    fn: () => {
-      assertEquals(manager.getSpecificIconPath('my-custom-icon'), `\\b\\CustomB.png`);
-      manager.setActives(['b', 'a']);
-      assertEquals(manager.getSpecificIconPath('my-custom-icon'), `\\a\\CustomA.png`);
-    },
+    await t.step('should return null when custom icon not found in any active pack', () => {
+      const ctx = new IconPackManagerTestContext(['c']);
+      assertNull(ctx.instance.getCustomIconPath('non-existent-icon'));
+    });
   });
 });
