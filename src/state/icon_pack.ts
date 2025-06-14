@@ -27,24 +27,25 @@ export class IconPackManager {
 
   /// list of active icon packs and fully resolved paths
   private activeIconPacks: IconPack[] = [];
+  private resolved: boolean = false;
 
   protected constructor(
-    protected iconPackPath: string,
-    protected _availableIconPacks: IconPackList,
-    protected _activeKeys: string[],
+    protected iconPacksPath: string,
+    protected _availableIconPacks: IconPack[],
+    protected _activeIconPackFilenames: string[],
   ) {}
 
-  public get iconPacks(): IconPackList {
+  get iconPacks(): IconPack[] {
     return this._availableIconPacks;
   }
 
-  public get actives(): string[] {
-    return this._activeKeys;
-  }
-
   protected resolveAvailableIcons(): void {
-    for (const pack of this._availableIconPacks.asArray()) {
-      const path = `${this.iconPackPath}\\${pack.metadata.filename}`;
+    if (this.resolved) {
+      return;
+    }
+
+    for (const pack of this._availableIconPacks) {
+      const path = `${this.iconPacksPath}\\${pack.metadata.filename}`;
 
       if (pack.missing) {
         pack.missing = resolveIcon(path, pack.missing);
@@ -64,12 +65,14 @@ export class IconPackManager {
         e.icon = resolveIcon(path, e.icon);
       });
     }
+
+    this.resolved = true;
   }
 
   protected cacheActiveIconPacks(): void {
     this.activeIconPacks = [];
-    for (const key of this._activeKeys.toReversed()) {
-      const pack = this.iconPacks.asArray().find((p) => p.metadata.filename === key);
+    for (const key of this._activeIconPackFilenames.toReversed()) {
+      const pack = this._availableIconPacks.find((p) => p.metadata.filename === key);
       if (pack) {
         this.activeIconPacks.push(pack);
       }
@@ -85,7 +88,7 @@ export class IconPackManager {
   public static async create(): Promise<IconPackManager> {
     const instance = new IconPackManager(
       await path.resolve(await path.appDataDir(), 'iconpacks'),
-      await IconPackList.getAsync(),
+      (await IconPackList.getAsync()).asArray(),
       (await Settings.getAsync()).inner.iconPacks,
     );
     instance.resolveAvailableIcons();
@@ -129,13 +132,14 @@ export class IconPackManager {
 
     if (!this.unlistenerIcons && !this.unlistenerSettings) {
       this.unlistenerIcons = await IconPackList.onChange((list) => {
-        this._availableIconPacks = list;
+        this._availableIconPacks = list.asArray();
+        this.resolved = false;
         this.resolveAvailableIcons();
         this.cacheActiveIconPacks();
         this.callbacks.forEach((cb) => cb());
       });
       this.unlistenerSettings = await Settings.onChange((settings) => {
-        this._activeKeys = settings.inner.iconPacks;
+        this._activeIconPackFilenames = settings.inner.iconPacks;
         this.cacheActiveIconPacks();
         this.callbacks.forEach((cb) => cb());
       });
@@ -322,10 +326,6 @@ function resolveIcon(parent: string, icon: IIcon): IIcon {
     return `${parent}\\${icon}`;
   }
 
-  if ('Redirect' in icon) {
-    return icon;
-  }
-
   return {
     light: `${parent}\\${icon.light}`,
     dark: `${parent}\\${icon.dark}`,
@@ -336,10 +336,6 @@ function resolveIcon(parent: string, icon: IIcon): IIcon {
 function resolveAsSrc(icon: IIcon): IIcon {
   if (typeof icon === 'string') {
     return convertFileSrc(icon);
-  }
-
-  if ('Redirect' in icon) {
-    return icon;
   }
 
   return {
