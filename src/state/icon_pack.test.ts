@@ -18,15 +18,20 @@ const GOT_BY_UMID = 'GOT_BY_UMID';
 const cloneIconPack = (pack: IconPack): IconPack => JSON.parse(JSON.stringify(pack));
 
 // Factory function for mock icon packs
-const createMockIconPacks = () => ({
+const createMockIconPacks = (): { packA: IconPack; packB: IconPack; packC: IconPack } => ({
   packA: {
     id: 'mockedIconPackA',
     metadata: { filename: 'a' } as ResourceMetadata,
     missing: 'MissingIconA.png',
     appEntries: [
-      { umid: 'MSEdge', path: 'C:\\Program Files (x86)\\Microsoft\\Edge\\msedge.exe', icon: GOT_BY_UMID },
-      { umid: null, path: 'C:\\Windows\\explorer.exe', icon: GOT_BY_PATH },
-      { umid: null, path: 'C:\\Program Files (x86)\\Some\\App\\filenameApp.exe', icon: GOT_BY_PATH },
+      {
+        umid: 'MSEdge',
+        redirect: null,
+        path: 'C:\\Program Files (x86)\\Microsoft\\Edge\\msedge.exe',
+        icon: GOT_BY_UMID,
+      },
+      { umid: null, redirect: null, path: 'C:\\Windows\\explorer.exe', icon: GOT_BY_PATH },
+      { umid: null, redirect: null, path: 'C:\\Program Files (x86)\\Some\\App\\filenameApp.exe', icon: GOT_BY_PATH },
     ],
     fileEntries: [
       { extension: 'txt', icon: GOT_BY_EXTENSION },
@@ -42,8 +47,8 @@ const createMockIconPacks = () => ({
     metadata: { filename: 'b' } as ResourceMetadata,
     missing: 'MissingIconB.png',
     appEntries: [
-      { umid: null, path: 'C:\\Windows\\explorer.exe', icon: GOT_BY_PATH },
-      { umid: null, path: 'filenameApp.exe', icon: GOT_BY_FILENAME },
+      { umid: null, redirect: null, path: 'C:\\Windows\\explorer.exe', icon: GOT_BY_PATH },
+      { umid: null, redirect: null, path: 'filenameApp.exe', icon: GOT_BY_FILENAME },
     ],
     fileEntries: [
       { extension: 'txt', icon: GOT_BY_EXTENSION },
@@ -57,7 +62,7 @@ const createMockIconPacks = () => ({
     metadata: { filename: 'c' } as ResourceMetadata,
     missing: null,
     appEntries: [
-      { umid: null, path: 'C:\\folder\\app1.exe', icon: GOT_BY_PATH },
+      { umid: null, path: 'C:\\folder\\app1.exe', icon: GOT_BY_PATH, redirect: null },
     ],
     fileEntries: [],
     customEntries: [],
@@ -216,5 +221,167 @@ Deno.test('IconPackManager', async (t) => {
       const ctx = new IconPackManagerTestContext(['c']);
       assertNull(ctx.instance.getCustomIconPath('non-existent-icon'));
     });
+  });
+
+  await t.step('Redirect functionality', async (t) => {
+    await t.step('should follow redirect and ignore icon when redirect is present', () => {
+      const ctx = new IconPackManagerTestContext(['a', 'b']);
+      // Add entry with both redirect and icon (icon should be ignored)
+      ctx.instance.iconPacks.asArray()[0].appEntries.push({
+        umid: 'RedirectTest',
+        path: 'C:\\redirect\\source.exe',
+        redirect: 'C:\\redirect\\target.exe',
+        icon: '\\a\\ThisShouldBeIgnored.png',
+      });
+      // Add target entry to packB
+      ctx.instance.iconPacks.asArray()[1].appEntries.push({
+        umid: null,
+        path: 'C:\\redirect\\target.exe',
+        redirect: null,
+        icon: '\\b\\RedirectTargetIcon.png',
+      });
+
+      assertEquals(
+        ctx.instance.getIconPath({ umid: 'RedirectTest' }),
+        '\\b\\RedirectTargetIcon.png',
+      );
+    });
+
+    await t.step('should not use icon when redirect points to non-existent path', () => {
+      const ctx = new IconPackManagerTestContext(['a']);
+      // Add entry with redirect to non-existent path and icon
+      ctx.instance.iconPacks.asArray()[0].appEntries.push({
+        umid: 'BadRedirect',
+        path: 'C:\\redirect\\source.exe',
+        redirect: 'C:\\nonexistent\\path.exe',
+        icon: '\\a\\ShouldNotUseThis.png', // <-- should be ignored inclusively if redirect points to non-existent path
+      });
+
+      assertNull(ctx.instance.getIconPath({ umid: 'BadRedirect' }));
+    });
+
+    await t.step('should follow redirect chain until icon is found or no more redirects', () => {
+      const ctx = new IconPackManagerTestContext(['a', 'b', 'c']);
+      // First redirect (icon should be ignored)
+      ctx.instance.iconPacks.asArray()[0].appEntries.push({
+        umid: 'ChainRedirect',
+        path: 'C:\\redirect\\start.exe',
+        redirect: 'C:\\redirect\\middle.exe',
+        icon: '\\a\\IgnoreThis.png',
+      });
+      // Second redirect (no icon)
+      ctx.instance.iconPacks.asArray()[1].appEntries.push({
+        umid: null,
+        path: 'C:\\redirect\\middle.exe',
+        redirect: 'C:\\redirect\\final.exe',
+        icon: null,
+      });
+      // Final target with icon
+      ctx.instance.iconPacks.asArray()[2].appEntries.push({
+        umid: null,
+        path: 'C:\\redirect\\final.exe',
+        redirect: null,
+        icon: '\\c\\FinalIcon.png',
+      });
+
+      assertEquals(
+        ctx.instance.getIconPath({ umid: 'ChainRedirect' }),
+        '\\c\\FinalIcon.png',
+      );
+    });
+
+    await t.step('should return null if redirect chain ends without finding an icon', () => {
+      const ctx = new IconPackManagerTestContext(['a', 'b']);
+      // First redirect
+      ctx.instance.iconPacks.asArray()[0].appEntries.push({
+        umid: 'BrokenChain',
+        path: 'C:\\redirect\\start.exe',
+        redirect: 'C:\\redirect\\missing.exe',
+        icon: '\\a\\IgnoreMe.png',
+      });
+
+      // No matching entry for the redirect target
+      assertNull(ctx.instance.getIconPath({ umid: 'BrokenChain' }));
+    });
+
+    await t.step('should handle redirect to extension match', () => {
+      const ctx = new IconPackManagerTestContext(['a', 'b']);
+      // Redirect to a file with specific extension
+      ctx.instance.iconPacks.asArray()[0].appEntries.push({
+        umid: 'RedirectToExtension',
+        path: 'C:\\some\\app.exe',
+        redirect: 'C:\\some\\file.txt', // <-- redirect to txt file
+        icon: '\\a\\WrongIcon.png', // <-- should be ignored
+      });
+
+      assertEquals(
+        ctx.instance.getIconPath({ umid: 'RedirectToExtension' }),
+        '\\b\\GOT_BY_EXTENSION',
+      );
+    });
+  });
+
+  await t.step('should handle circular references and return null', () => {
+    const ctx = new IconPackManagerTestContext(['a', 'b']);
+
+    ctx.instance.iconPacks.asArray()[0].appEntries.push({
+      umid: 'CircularRef1',
+      path: 'C:\\circle\\app1.exe',
+      redirect: 'C:\\circle\\app2.exe',
+      icon: 'IgnoredIcon1.png',
+    });
+
+    ctx.instance.iconPacks.asArray()[1].appEntries.push({
+      umid: 'CircularRef2',
+      path: 'C:\\circle\\app2.exe',
+      redirect: 'C:\\circle\\app1.exe',
+      icon: 'IgnoredIcon2.png',
+    });
+
+    assertNull(ctx.instance.getIconPath({ umid: 'CircularRef1' }));
+    assertNull(ctx.instance.getIconPath({ path: 'C:\\circle\\app1.exe' }));
+    assertNull(ctx.instance.getIconPath({ path: 'C:\\circle\\app2.exe' }));
+  });
+
+  await t.step('should detect self-references and return null', () => {
+    const ctx = new IconPackManagerTestContext(['a']);
+
+    // Configurar autorreferencia
+    ctx.instance.iconPacks.asArray()[0].appEntries.push({
+      umid: 'SelfRef',
+      path: 'C:\\circle\\self.exe',
+      redirect: 'C:\\circle\\self.exe', // Se redirige a sí mismo
+      icon: 'IgnoredIcon.png',
+    });
+
+    assertNull(ctx.instance.getIconPath({ umid: 'SelfRef' }));
+  });
+
+  await t.step('should detect longer circular references and return null', () => {
+    const ctx = new IconPackManagerTestContext(['a', 'b', 'c']);
+
+    // Configurar referencia circular más larga (A -> B -> C -> A)
+    ctx.instance.iconPacks.asArray()[0].appEntries.push({
+      umid: null,
+      path: 'C:\\circle\\a.exe',
+      redirect: 'C:\\circle\\b.exe',
+      icon: 'IgnoredA.png',
+    });
+
+    ctx.instance.iconPacks.asArray()[1].appEntries.push({
+      umid: null,
+      path: 'C:\\circle\\b.exe',
+      redirect: 'C:\\circle\\c.exe',
+      icon: 'IgnoredB.png',
+    });
+
+    ctx.instance.iconPacks.asArray()[2].appEntries.push({
+      umid: null,
+      path: 'C:\\circle\\c.exe',
+      redirect: 'C:\\circle\\a.exe',
+      icon: 'IgnoredC.png',
+    });
+
+    assertNull(ctx.instance.getIconPath({ path: 'C:\\circle\\a.exe' }));
   });
 });

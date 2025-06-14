@@ -52,7 +52,9 @@ export class IconPackManager {
 
       pack.appEntries.forEach((e) => {
         e.path = e.path.toLowerCase();
-        e.icon = resolveIcon(path, e.icon);
+        if (e.icon) {
+          e.icon = resolveIcon(path, e.icon);
+        }
       });
       pack.fileEntries.forEach((e) => {
         e.extension = e.extension.toLowerCase();
@@ -173,7 +175,8 @@ export class IconPackManager {
    *   umid: "Seelen.SeelenUI_p6yyn03m1894e!App"
    * });
    */
-  public getIconPath({ path, umid }: SeelenCommandGetIconArgs): IIcon | null {
+  public getIconPath(args: SeelenCommandGetIconArgs): IIcon | null {
+    const { path, umid, __seen = new Set<string>() } = args as SeelenCommandGetIconArgs & { __seen?: Set<string> };
     // If neither path nor UMID is provided, return null
     if (!path && !umid) {
       return null;
@@ -183,7 +186,7 @@ export class IconPackManager {
     const extension = lowerPath?.split('.').pop();
 
     for (const pack of this.activeIconPacks) {
-      const icon = pack.appEntries.find((e) => {
+      const entry = pack.appEntries.find((e) => {
         if (umid && e.umid && e.umid === umid) {
           return true;
         }
@@ -203,8 +206,19 @@ export class IconPackManager {
         }
       });
 
-      if (icon) {
-        return icon.icon;
+      if (entry) {
+        if (entry.redirect) {
+          // break circular references
+          if (__seen.has(entry.redirect)) {
+            return null;
+          }
+          __seen.add(entry.redirect);
+          return this.getIconPath({ path: entry.redirect, __seen } as SeelenCommandGetIconArgs);
+        }
+
+        if (entry.icon) {
+          return entry.icon;
+        }
       }
     }
 

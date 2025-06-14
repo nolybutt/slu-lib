@@ -95,7 +95,12 @@ pub struct AppIconPackEntry {
     pub umid: Option<String>,
     /// Path or filename of the application
     pub path: PathBuf,
-    pub icon: Icon,
+    /// In case of path be a lnk file this can be set to a different location to use the icon from.
+    /// If present, icon on this entry will be ignored
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub redirect: Option<PathBuf>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub icon: Option<Icon>,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize, JsonSchema, TS)]
@@ -112,17 +117,14 @@ pub struct CustomIconPackEntry {
     /// we recomend following the widget id + icon name to avoid collisions
     /// e.g. "@username/widgetid::iconname" but you can use whatever you want
     pub key: String,
+    /// Value is the path to the icon relative to the icon pack folder.
     pub icon: Icon,
 }
 
 #[derive(Debug, PartialEq, Eq, Clone, Serialize, Deserialize, JsonSchema, TS)]
+#[serde(untagged)]
 pub enum Icon {
-    /// In case of path be a lnk file this can be set to a different location to use the icon from.
-    Redirect(PathBuf),
-    /// Value is the path to the icon relative to the icon pack folder.
-    #[serde(untagged)]
     Static(PathBuf),
-    #[serde(untagged)]
     Dynamic(DynamicIcon),
 }
 

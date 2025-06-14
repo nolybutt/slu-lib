@@ -63,11 +63,25 @@
       "type": "object",
       "properties": {
         "icon": {
-          "$ref": "#/$defs/Icon"
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Icon"
+            },
+            {
+              "type": "null"
+            }
+          ]
         },
         "path": {
           "description": "Path or filename of the application",
           "type": "string"
+        },
+        "redirect": {
+          "description": "In case of path be a lnk file this can be set to a different location to use the icon from.\n If present, icon on this entry will be ignored",
+          "type": [
+            "string",
+            "null"
+          ]
         },
         "umid": {
           "description": "Application user model id",
@@ -78,14 +92,14 @@
         }
       },
       "required": [
-        "path",
-        "icon"
+        "path"
       ]
     },
     "CustomIconPackEntry": {
       "type": "object",
       "properties": {
         "icon": {
+          "description": "Value is the path to the icon relative to the icon pack folder.",
           "$ref": "#/$defs/Icon"
         },
         "key": {
@@ -139,44 +153,12 @@
       ]
     },
     "Icon": {
-      "oneOf": [
+      "anyOf": [
         {
-          "description": "In case of path be a lnk file this can be set to a different location to use the icon from.",
-          "type": "object",
-          "properties": {
-            "Redirect": {
-              "type": "string"
-            }
-          },
-          "additionalProperties": false,
-          "required": [
-            "Redirect"
-          ]
+          "type": "string"
         },
         {
-          "description": "Value is the path to the icon relative to the icon pack folder.",
-          "type": "object",
-          "properties": {
-            "Static": {
-              "type": "string"
-            }
-          },
-          "additionalProperties": false,
-          "required": [
-            "Static"
-          ]
-        },
-        {
-          "type": "object",
-          "properties": {
-            "Dynamic": {
-              "$ref": "#/$defs/DynamicIcon"
-            }
-          },
-          "additionalProperties": false,
-          "required": [
-            "Dynamic"
-          ]
+          "$ref": "#/$defs/DynamicIcon"
         }
       ]
     },

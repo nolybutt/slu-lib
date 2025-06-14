@@ -1780,23 +1780,66 @@
                 "typeParams": []
               },
               {
-                "name": "icon",
+                "name": "redirect",
+                "jsDoc": {
+                  "doc": "In case of path be a lnk file this can be set to a different location to use the icon from.\nIf present, icon on this entry will be ignored"
+                },
                 "location": {
                   "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/AppIconPackEntry.ts",
-                  "line": 12,
-                  "col": 14,
-                  "byteIndex": 303
+                  "line": 17,
+                  "col": 0,
+                  "byteIndex": 457
                 },
                 "params": [],
                 "computed": false,
                 "optional": false,
                 "tsType": {
-                  "repr": "Icon",
-                  "kind": "typeRef",
-                  "typeRef": {
-                    "typeParams": null,
-                    "typeName": "Icon"
-                  }
+                  "repr": "",
+                  "kind": "union",
+                  "union": [
+                    {
+                      "repr": "string",
+                      "kind": "keyword",
+                      "keyword": "string"
+                    },
+                    {
+                      "repr": "null",
+                      "kind": "keyword",
+                      "keyword": "null"
+                    }
+                  ]
+                },
+                "typeParams": []
+              },
+              {
+                "name": "icon",
+                "location": {
+                  "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/AppIconPackEntry.ts",
+                  "line": 17,
+                  "col": 25,
+                  "byteIndex": 482
+                },
+                "params": [],
+                "computed": false,
+                "optional": false,
+                "tsType": {
+                  "repr": "",
+                  "kind": "union",
+                  "union": [
+                    {
+                      "repr": "Icon",
+                      "kind": "typeRef",
+                      "typeRef": {
+                        "typeParams": null,
+                        "typeName": "Icon"
+                      }
+                    },
+                    {
+                      "repr": "null",
+                      "kind": "keyword",
+                      "keyword": "null"
+                    }
+                  ]
                 },
                 "typeParams": []
               }
@@ -13293,11 +13336,14 @@
               },
               {
                 "name": "icon",
+                "jsDoc": {
+                  "doc": "Value is the path to the icon relative to the icon pack folder."
+                },
                 "location": {
                   "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/CustomIconPackEntry.ts",
-                  "line": 9,
-                  "col": 13,
-                  "byteIndex": 351
+                  "line": 13,
+                  "col": 0,
+                  "byteIndex": 427
                 },
                 "params": [],
                 "computed": false,
@@ -15244,36 +15290,6 @@
           "repr": "",
           "kind": "union",
           "union": [
-            {
-              "repr": "",
-              "kind": "typeLiteral",
-              "typeLiteral": {
-                "constructors": [],
-                "methods": [],
-                "properties": [
-                  {
-                    "name": "Redirect",
-                    "location": {
-                      "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/Icon.ts",
-                      "line": 4,
-                      "col": 21,
-                      "byteIndex": 184
-                    },
-                    "params": [],
-                    "computed": false,
-                    "optional": false,
-                    "tsType": {
-                      "repr": "string",
-                      "kind": "keyword",
-                      "keyword": "string"
-                    },
-                    "typeParams": []
-                  }
-                ],
-                "callSignatures": [],
-                "indexSignatures": []
-              }
-            },
             {
               "repr": "string",
               "kind": "keyword",

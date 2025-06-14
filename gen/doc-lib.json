@@ -5857,9 +5857,9 @@
             },
             "location": {
               "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/state/icon_pack.ts",
-              "line": 67,
+              "line": 69,
               "col": 2,
-              "byteIndex": 2135
+              "byteIndex": 2169
             }
           },
           {
@@ -5904,9 +5904,9 @@
             },
             "location": {
               "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/state/icon_pack.ts",
-              "line": 83,
+              "line": 85,
               "col": 2,
-              "byteIndex": 2671
+              "byteIndex": 2705
             }
           },
           {
@@ -5994,9 +5994,9 @@
             },
             "location": {
               "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/state/icon_pack.ts",
-              "line": 125,
+              "line": 127,
               "col": 2,
-              "byteIndex": 4793
+              "byteIndex": 4827
             }
           },
           {
@@ -6043,19 +6043,8 @@
             "functionDef": {
               "params": [
                 {
-                  "kind": "object",
-                  "props": [
-                    {
-                      "kind": "assign",
-                      "key": "path",
-                      "value": null
-                    },
-                    {
-                      "kind": "assign",
-                      "key": "umid",
-                      "value": null
-                    }
-                  ],
+                  "kind": "identifier",
+                  "name": "args",
                   "optional": false,
                   "tsType": {
                     "repr": "SeelenCommandGetIconArgs",
@@ -6093,9 +6082,9 @@
             },
             "location": {
               "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/state/icon_pack.ts",
-              "line": 176,
+              "line": 178,
               "col": 2,
-              "byteIndex": 6488
+              "byteIndex": 6522
             }
           },
           {
@@ -6158,9 +6147,9 @@
             },
             "location": {
               "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/state/icon_pack.ts",
-              "line": 230,
+              "line": 244,
               "col": 2,
-              "byteIndex": 7770
+              "byteIndex": 8247
             }
           },
           {
@@ -6201,9 +6190,9 @@
             },
             "location": {
               "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/state/icon_pack.ts",
-              "line": 239,
+              "line": 253,
               "col": 2,
-              "byteIndex": 8115
+              "byteIndex": 8592
             }
           },
           {
@@ -6244,9 +6233,9 @@
             },
             "location": {
               "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/state/icon_pack.ts",
-              "line": 252,
+              "line": 266,
               "col": 2,
-              "byteIndex": 8455
+              "byteIndex": 8932
             }
           },
           {
@@ -6298,9 +6287,9 @@
             },
             "location": {
               "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/state/icon_pack.ts",
-              "line": 261,
+              "line": 275,
               "col": 2,
-              "byteIndex": 8756
+              "byteIndex": 9233
             }
           },
           {
@@ -6352,9 +6341,9 @@
             },
             "location": {
               "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/state/icon_pack.ts",
-              "line": 275,
+              "line": 289,
               "col": 2,
-              "byteIndex": 9162
+              "byteIndex": 9639
             }
           },
           {
@@ -6415,9 +6404,9 @@
             },
             "location": {
               "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/state/icon_pack.ts",
-              "line": 293,
+              "line": 307,
               "col": 2,
-              "byteIndex": 9769
+              "byteIndex": 10246
             }
           },
           {
@@ -6453,9 +6442,9 @@
             },
             "location": {
               "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/state/icon_pack.ts",
-              "line": 301,
+              "line": 315,
               "col": 2,
-              "byteIndex": 10048
+              "byteIndex": 10525
             }
           }
         ],
