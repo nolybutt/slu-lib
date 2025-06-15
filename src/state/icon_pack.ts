@@ -22,12 +22,11 @@ export class IconPackList extends List<IIconPack> {
  */
 export class IconPackManager {
   private callbacks: Set<() => void> = new Set();
-  private unlistenerSettings: UnlistenFn | null = null;
-  private unlistenerIcons: UnlistenFn | null = null;
+  private unlisteners: UnlistenFn[] = [];
+  private isListeningForChanges = false;
 
   /// list of active icon packs and fully resolved paths
   private activeIconPacks: IconPack[] = [];
-  private resolved: boolean = false;
 
   protected constructor(
     protected iconPacksPath: string,
@@ -40,10 +39,6 @@ export class IconPackManager {
   }
 
   protected resolveAvailableIcons(): void {
-    if (this.resolved) {
-      return;
-    }
-
     for (const pack of this._availableIconPacks) {
       const path = `${this.iconPacksPath}\\${pack.metadata.filename}`;
 
@@ -52,7 +47,7 @@ export class IconPackManager {
       }
 
       pack.appEntries.forEach((e) => {
-        e.path = e.path.toLowerCase();
+        e.path = e.path?.toLowerCase() || null;
         if (e.icon) {
           e.icon = resolveIcon(path, e.icon);
         }
@@ -65,8 +60,6 @@ export class IconPackManager {
         e.icon = resolveIcon(path, e.icon);
       });
     }
-
-    this.resolved = true;
   }
 
   protected cacheActiveIconPacks(): void {
@@ -130,26 +123,28 @@ export class IconPackManager {
   public async onChange(cb: () => void): Promise<UnlistenFn> {
     this.callbacks.add(cb);
 
-    if (!this.unlistenerIcons && !this.unlistenerSettings) {
-      this.unlistenerIcons = await IconPackList.onChange((list) => {
-        this._availableIconPacks = list.asArray();
-        this.resolved = false;
+    if (!this.isListeningForChanges) {
+      this.isListeningForChanges = true;
+      const unlistenerIcons = await IconPackList.onChange((list) => {
+        this._availableIconPacks = JSON.parse(JSON.stringify(list.all()));
         this.resolveAvailableIcons();
         this.cacheActiveIconPacks();
         this.callbacks.forEach((cb) => cb());
       });
-      this.unlistenerSettings = await Settings.onChange((settings) => {
+      const unlistenerSettings = await Settings.onChange((settings) => {
         this._activeIconPackFilenames = settings.inner.iconPacks;
         this.cacheActiveIconPacks();
         this.callbacks.forEach((cb) => cb());
       });
+      this.unlisteners = [unlistenerIcons, unlistenerSettings];
     }
 
     return () => {
       this.callbacks.delete(cb);
       if (this.callbacks.size === 0) {
-        this.unlistenerIcons?.();
-        this.unlistenerSettings?.();
+        this.unlisteners.forEach((unlisten) => unlisten());
+        this.unlisteners = [];
+        this.isListeningForChanges = false;
       }
     };
   }
@@ -195,7 +190,7 @@ export class IconPackManager {
           return true;
         }
 
-        if (lowerPath) {
+        if (lowerPath && e.path) {
           if (e.path === lowerPath) {
             return true;
           }

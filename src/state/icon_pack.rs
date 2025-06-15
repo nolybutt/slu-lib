@@ -93,8 +93,9 @@ pub struct AppIconPackEntry {
     /// Application user model id
     #[serde(skip_serializing_if = "Option::is_none")]
     pub umid: Option<String>,
-    /// Path or filename of the application
-    pub path: PathBuf,
+    /// Path or filename of the application, mostly this should be present,
+    /// but cases like PWAs on Edge can have no path and be only an UMID.
+    pub path: Option<PathBuf>,
     /// In case of path be a lnk file this can be set to a different location to use the icon from.
     /// If present, icon on this entry will be ignored
     #[serde(skip_serializing_if = "Option::is_none")]

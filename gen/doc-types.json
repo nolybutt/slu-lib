@@ -1761,21 +1761,32 @@
               {
                 "name": "path",
                 "jsDoc": {
-                  "doc": "Path or filename of the application"
+                  "doc": "Path or filename of the application, mostly this should be present,\nbut cases like PWAs on Edge can have no path and be only an UMID."
                 },
                 "location": {
                   "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/AppIconPackEntry.ts",
-                  "line": 12,
+                  "line": 13,
                   "col": 0,
-                  "byteIndex": 289
+                  "byteIndex": 390
                 },
                 "params": [],
                 "computed": false,
                 "optional": false,
                 "tsType": {
-                  "repr": "string",
-                  "kind": "keyword",
-                  "keyword": "string"
+                  "repr": "",
+                  "kind": "union",
+                  "union": [
+                    {
+                      "repr": "string",
+                      "kind": "keyword",
+                      "keyword": "string"
+                    },
+                    {
+                      "repr": "null",
+                      "kind": "keyword",
+                      "keyword": "null"
+                    }
+                  ]
                 },
                 "typeParams": []
               },
@@ -1786,9 +1797,9 @@
                 },
                 "location": {
                   "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/AppIconPackEntry.ts",
-                  "line": 17,
+                  "line": 18,
                   "col": 0,
-                  "byteIndex": 457
+                  "byteIndex": 565
                 },
                 "params": [],
                 "computed": false,
@@ -1815,9 +1826,9 @@
                 "name": "icon",
                 "location": {
                   "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/AppIconPackEntry.ts",
-                  "line": 17,
+                  "line": 18,
                   "col": 25,
-                  "byteIndex": 482
+                  "byteIndex": 590
                 },
                 "params": [],
                 "computed": false,

@@ -73,8 +73,11 @@
           ]
         },
         "path": {
-          "description": "Path or filename of the application",
-          "type": "string"
+          "description": "Path or filename of the application, mostly this should be present,\n but cases like PWAs on Edge can have no path and be only an UMID.",
+          "type": [
+            "string",
+            "null"
+          ]
         },
         "redirect": {
           "description": "In case of path be a lnk file this can be set to a different location to use the icon from.\n If present, icon on this entry will be ignored",
@@ -90,10 +93,7 @@
             "null"
           ]
         }
-      },
-      "required": [
-        "path"
-      ]
+      }
     },
     "CustomIconPackEntry": {
       "type": "object",
