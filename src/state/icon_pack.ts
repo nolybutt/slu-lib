@@ -1,4 +1,10 @@
-import type { Icon as IIcon, IconPack, IconPack as IIconPack, SeelenCommandGetIconArgs } from '@seelen-ui/types';
+import type {
+  AppIconPackEntry,
+  Icon as IIcon,
+  IconPack,
+  IconPack as IIconPack,
+  SeelenCommandGetIconArgs,
+} from '@seelen-ui/types';
 import { List } from '../utils/List.ts';
 import { newFromInvoke, newOnEvent } from '../utils/State.ts';
 import { invoke, SeelenCommand, SeelenEvent, type UnSubscriber } from '../handlers/mod.ts';
@@ -185,12 +191,18 @@ export class IconPackManager {
     const extension = lowerPath?.split('.').pop();
 
     for (const pack of this.activeIconPacks) {
-      const entry = pack.appEntries.find((e) => {
-        if (umid && e.umid && e.umid === umid) {
-          return true;
-        }
+      let entry: AppIconPackEntry | undefined;
 
-        if (lowerPath && e.path) {
+      if (umid) {
+        entry = pack.appEntries.find((e) => !!e.umid && e.umid === umid);
+      }
+
+      if (!entry && lowerPath) {
+        entry = pack.appEntries.find((e) => {
+          if (!e.path) {
+            return false;
+          }
+
           if (e.path === lowerPath) {
             return true;
           }
@@ -202,8 +214,9 @@ export class IconPackManager {
               return true;
             }
           }
-        }
-      });
+          return false;
+        });
+      }
 
       if (entry) {
         if (entry.redirect) {
