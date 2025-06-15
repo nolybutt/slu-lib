@@ -138,19 +138,19 @@ pub struct CustomIconPackEntry {
 pub struct Icon {
     /// Icon to use if no light or dark icon is specified, if both light and dark are specified this can be omitted
     #[serde(skip_serializing_if = "Option::is_none")]
-    base: Option<PathBuf>,
+    pub base: Option<PathBuf>,
     /// Alternative icon to use when system theme is light
     #[serde(skip_serializing_if = "Option::is_none")]
-    light: Option<PathBuf>,
+    pub light: Option<PathBuf>,
     /// Alternative icon to use when system theme is dark
     #[serde(skip_serializing_if = "Option::is_none")]
-    dark: Option<PathBuf>,
+    pub dark: Option<PathBuf>,
     /// Mask to be applied over the icon, themes can use this to apply custom colors over the icon.
     #[serde(skip_serializing_if = "Option::is_none")]
-    mask: Option<PathBuf>,
+    pub mask: Option<PathBuf>,
     /// Whether the icon is a square or not
     #[serde(skip_serializing_if = "is_false")]
-    is_aproximately_square: bool,
+    pub is_aproximately_square: bool,
 }
 
 impl Icon {
