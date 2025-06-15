@@ -4,7 +4,7 @@
   "type": "object",
   "properties": {
     "appEntries": {
-      "description": "Key can be user model id, filename or a full path.\n In case of path this should be an executable or a lnk file, otherwise use `files`.\n\n Value is the path to the icon relative to the icon pack folder.",
+      "description": "Key can be user model id, filename or a full path.\n In case of path this should be an executable or a lnk file, otherwise use `files`.",
       "type": "array",
       "default": [],
       "items": {
@@ -112,30 +112,6 @@
         "icon"
       ]
     },
-    "DynamicIcon": {
-      "type": "object",
-      "properties": {
-        "dark": {
-          "description": "Icon to use when system theme is dark\\\n Value is the path to the icon relative to the icon pack folder.",
-          "type": "string"
-        },
-        "light": {
-          "description": "Icon to use when system theme is light\\\n Value is the path to the icon relative to the icon pack folder.",
-          "type": "string"
-        },
-        "mask": {
-          "description": "Mask to be applied over the icon, themes can use this to apply custom colors over the icon.\\\n Set it to `null` to disable masking. \\\n Value is the path to the icon relative to the icon pack folder.",
-          "type": [
-            "string",
-            "null"
-          ]
-        }
-      },
-      "required": [
-        "light",
-        "dark"
-      ]
-    },
     "FileIconPackEntry": {
       "type": "object",
       "properties": {
@@ -153,14 +129,42 @@
       ]
     },
     "Icon": {
-      "anyOf": [
-        {
-          "type": "string"
+      "description": "The icon paths in this structure are relative to the icon pack folder.",
+      "type": "object",
+      "properties": {
+        "base": {
+          "description": "Icon to use if no light or dark icon is specified, if both light and dark are specified this can be omitted",
+          "type": [
+            "string",
+            "null"
+          ]
         },
-        {
-          "$ref": "#/$defs/DynamicIcon"
+        "dark": {
+          "description": "Alternative icon to use when system theme is dark",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "isAproximatelySquare": {
+          "description": "Whether the icon is a square or not",
+          "type": "boolean"
+        },
+        "light": {
+          "description": "Alternative icon to use when system theme is light",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "mask": {
+          "description": "Mask to be applied over the icon, themes can use this to apply custom colors over the icon.",
+          "type": [
+            "string",
+            "null"
+          ]
         }
-      ]
+      }
     },
     "IconPackId": {
       "$ref": "#/$defs/ResourceId"

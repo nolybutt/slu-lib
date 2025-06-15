@@ -42,8 +42,6 @@ pub struct IconPack {
     pub missing: Option<Icon>,
     /// Key can be user model id, filename or a full path.
     /// In case of path this should be an executable or a lnk file, otherwise use `files`.
-    ///
-    /// Value is the path to the icon relative to the icon pack folder.
     pub app_entries: Vec<AppIconPackEntry>,
     /// Intended to store file icons by extension
     pub file_entries: Vec<FileIconPackEntry>,
@@ -52,6 +50,17 @@ pub struct IconPack {
 }
 
 impl IconPack {
+    /// remove invalid icons
+    fn sanitize(&mut self) {
+        self.missing = self.missing.take().filter(|e| e.is_valid());
+        self.app_entries.retain(|e| match &e.icon {
+            Some(icon) => icon.is_valid(),
+            None => e.redirect.is_some(),
+        });
+        self.file_entries.retain(|e| e.icon.is_valid());
+        self.custom_entries.retain(|e| e.icon.is_valid());
+    }
+
     fn load_from_file(path: &Path) -> Result<Self> {
         let extension = path
             .extension()
@@ -77,12 +86,13 @@ impl IconPack {
         Ok(resource)
     }
 
-    pub fn load(&self, path: &Path) -> Result<Self> {
-        let icon_pack = if path.is_dir() {
+    pub fn load(path: &Path) -> Result<Self> {
+        let mut icon_pack = if path.is_dir() {
             Self::load_from_folder(path)
         } else {
             Self::load_from_file(path)
         }?;
+        icon_pack.sanitize();
         Ok(icon_pack)
     }
 }
@@ -122,25 +132,33 @@ pub struct CustomIconPackEntry {
     pub icon: Icon,
 }
 
-#[derive(Debug, PartialEq, Eq, Clone, Serialize, Deserialize, JsonSchema, TS)]
-#[serde(untagged)]
-pub enum Icon {
-    Static(PathBuf),
-    Dynamic(DynamicIcon),
+/// The icon paths in this structure are relative to the icon pack folder.
+#[derive(Debug, Default, PartialEq, Eq, Clone, Serialize, Deserialize, JsonSchema, TS)]
+#[serde(default, rename_all = "camelCase")]
+pub struct Icon {
+    /// Icon to use if no light or dark icon is specified, if both light and dark are specified this can be omitted
+    #[serde(skip_serializing_if = "Option::is_none")]
+    base: Option<PathBuf>,
+    /// Alternative icon to use when system theme is light
+    #[serde(skip_serializing_if = "Option::is_none")]
+    light: Option<PathBuf>,
+    /// Alternative icon to use when system theme is dark
+    #[serde(skip_serializing_if = "Option::is_none")]
+    dark: Option<PathBuf>,
+    /// Mask to be applied over the icon, themes can use this to apply custom colors over the icon.
+    #[serde(skip_serializing_if = "Option::is_none")]
+    mask: Option<PathBuf>,
+    /// Whether the icon is a square or not
+    #[serde(skip_serializing_if = "is_false")]
+    is_aproximately_square: bool,
 }
 
-#[derive(Debug, Default, PartialEq, Eq, Clone, Serialize, Deserialize, JsonSchema, TS)]
-#[serde(rename_all = "camelCase")]
-pub struct DynamicIcon {
-    /// Icon to use when system theme is light\
-    /// Value is the path to the icon relative to the icon pack folder.
-    pub light: PathBuf,
-    /// Icon to use when system theme is dark\
-    /// Value is the path to the icon relative to the icon pack folder.
-    pub dark: PathBuf,
-    /// Mask to be applied over the icon, themes can use this to apply custom colors over the icon.\
-    /// Set it to `null` to disable masking. \
-    /// Value is the path to the icon relative to the icon pack folder.
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub mask: Option<PathBuf>,
+impl Icon {
+    pub fn is_valid(&self) -> bool {
+        self.base.is_some() || (self.light.is_some() && self.dark.is_some())
+    }
+}
+
+fn is_false(b: &bool) -> bool {
+    !b
 }

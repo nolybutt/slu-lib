@@ -14027,107 +14027,6 @@
       }
     },
     {
-      "name": "DynamicIcon",
-      "isDefault": false,
-      "location": {
-        "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/DynamicIcon.ts",
-        "line": 3,
-        "col": 0,
-        "byteIndex": 110
-      },
-      "declarationKind": "export",
-      "kind": "typeAlias",
-      "typeAliasDef": {
-        "tsType": {
-          "repr": "",
-          "kind": "typeLiteral",
-          "typeLiteral": {
-            "constructors": [],
-            "methods": [],
-            "properties": [
-              {
-                "name": "light",
-                "jsDoc": {
-                  "doc": "Icon to use when system theme is light\\\nValue is the path to the icon relative to the icon pack folder."
-                },
-                "location": {
-                  "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/DynamicIcon.ts",
-                  "line": 8,
-                  "col": 0,
-                  "byteIndex": 257
-                },
-                "params": [],
-                "computed": false,
-                "optional": false,
-                "tsType": {
-                  "repr": "string",
-                  "kind": "keyword",
-                  "keyword": "string"
-                },
-                "typeParams": []
-              },
-              {
-                "name": "dark",
-                "jsDoc": {
-                  "doc": "Icon to use when system theme is dark\\\nValue is the path to the icon relative to the icon pack folder."
-                },
-                "location": {
-                  "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/DynamicIcon.ts",
-                  "line": 13,
-                  "col": 0,
-                  "byteIndex": 390
-                },
-                "params": [],
-                "computed": false,
-                "optional": false,
-                "tsType": {
-                  "repr": "string",
-                  "kind": "keyword",
-                  "keyword": "string"
-                },
-                "typeParams": []
-              },
-              {
-                "name": "mask",
-                "jsDoc": {
-                  "doc": "Mask to be applied over the icon, themes can use this to apply custom colors over the icon.\\\nSet it to `null` to disable masking. \\\nValue is the path to the icon relative to the icon pack folder."
-                },
-                "location": {
-                  "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/DynamicIcon.ts",
-                  "line": 19,
-                  "col": 0,
-                  "byteIndex": 618
-                },
-                "params": [],
-                "computed": false,
-                "optional": false,
-                "tsType": {
-                  "repr": "",
-                  "kind": "union",
-                  "union": [
-                    {
-                      "repr": "string",
-                      "kind": "keyword",
-                      "keyword": "string"
-                    },
-                    {
-                      "repr": "null",
-                      "kind": "keyword",
-                      "keyword": "null"
-                    }
-                  ]
-                },
-                "typeParams": []
-              }
-            ],
-            "callSignatures": [],
-            "indexSignatures": []
-          }
-        },
-        "typeParams": []
-      }
-    },
-    {
       "name": "FancyToolbarSettings",
       "isDefault": false,
       "location": {
@@ -15290,31 +15189,176 @@
       "isDefault": false,
       "location": {
         "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/Icon.ts",
-        "line": 4,
+        "line": 6,
         "col": 0,
-        "byteIndex": 163
+        "byteIndex": 192
       },
       "declarationKind": "export",
+      "jsDoc": {
+        "doc": "The icon paths in this structure are relative to the icon pack folder."
+      },
       "kind": "typeAlias",
       "typeAliasDef": {
         "tsType": {
           "repr": "",
-          "kind": "union",
-          "union": [
-            {
-              "repr": "string",
-              "kind": "keyword",
-              "keyword": "string"
-            },
-            {
-              "repr": "DynamicIcon",
-              "kind": "typeRef",
-              "typeRef": {
-                "typeParams": null,
-                "typeName": "DynamicIcon"
+          "kind": "typeLiteral",
+          "typeLiteral": {
+            "constructors": [],
+            "methods": [],
+            "properties": [
+              {
+                "name": "base",
+                "jsDoc": {
+                  "doc": "Icon to use if no light or dark icon is specified, if both light and dark are specified this can be omitted"
+                },
+                "location": {
+                  "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/Icon.ts",
+                  "line": 10,
+                  "col": 0,
+                  "byteIndex": 333
+                },
+                "params": [],
+                "computed": false,
+                "optional": false,
+                "tsType": {
+                  "repr": "",
+                  "kind": "union",
+                  "union": [
+                    {
+                      "repr": "string",
+                      "kind": "keyword",
+                      "keyword": "string"
+                    },
+                    {
+                      "repr": "null",
+                      "kind": "keyword",
+                      "keyword": "null"
+                    }
+                  ]
+                },
+                "typeParams": []
+              },
+              {
+                "name": "light",
+                "jsDoc": {
+                  "doc": "Alternative icon to use when system theme is light"
+                },
+                "location": {
+                  "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/Icon.ts",
+                  "line": 14,
+                  "col": 0,
+                  "byteIndex": 417
+                },
+                "params": [],
+                "computed": false,
+                "optional": false,
+                "tsType": {
+                  "repr": "",
+                  "kind": "union",
+                  "union": [
+                    {
+                      "repr": "string",
+                      "kind": "keyword",
+                      "keyword": "string"
+                    },
+                    {
+                      "repr": "null",
+                      "kind": "keyword",
+                      "keyword": "null"
+                    }
+                  ]
+                },
+                "typeParams": []
+              },
+              {
+                "name": "dark",
+                "jsDoc": {
+                  "doc": "Alternative icon to use when system theme is dark"
+                },
+                "location": {
+                  "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/Icon.ts",
+                  "line": 18,
+                  "col": 0,
+                  "byteIndex": 501
+                },
+                "params": [],
+                "computed": false,
+                "optional": false,
+                "tsType": {
+                  "repr": "",
+                  "kind": "union",
+                  "union": [
+                    {
+                      "repr": "string",
+                      "kind": "keyword",
+                      "keyword": "string"
+                    },
+                    {
+                      "repr": "null",
+                      "kind": "keyword",
+                      "keyword": "null"
+                    }
+                  ]
+                },
+                "typeParams": []
+              },
+              {
+                "name": "mask",
+                "jsDoc": {
+                  "doc": "Mask to be applied over the icon, themes can use this to apply custom colors over the icon."
+                },
+                "location": {
+                  "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/Icon.ts",
+                  "line": 22,
+                  "col": 0,
+                  "byteIndex": 626
+                },
+                "params": [],
+                "computed": false,
+                "optional": false,
+                "tsType": {
+                  "repr": "",
+                  "kind": "union",
+                  "union": [
+                    {
+                      "repr": "string",
+                      "kind": "keyword",
+                      "keyword": "string"
+                    },
+                    {
+                      "repr": "null",
+                      "kind": "keyword",
+                      "keyword": "null"
+                    }
+                  ]
+                },
+                "typeParams": []
+              },
+              {
+                "name": "isAproximatelySquare",
+                "jsDoc": {
+                  "doc": "Whether the icon is a square or not"
+                },
+                "location": {
+                  "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/Icon.ts",
+                  "line": 26,
+                  "col": 0,
+                  "byteIndex": 695
+                },
+                "params": [],
+                "computed": false,
+                "optional": false,
+                "tsType": {
+                  "repr": "boolean",
+                  "kind": "keyword",
+                  "keyword": "boolean"
+                },
+                "typeParams": []
               }
-            }
-          ]
+            ],
+            "callSignatures": [],
+            "indexSignatures": []
+          }
         },
         "typeParams": []
       }
@@ -15418,13 +15462,13 @@
               {
                 "name": "appEntries",
                 "jsDoc": {
-                  "doc": "Key can be user model id, filename or a full path.\nIn case of path this should be an executable or a lnk file, otherwise use `files`.\n\nValue is the path to the icon relative to the icon pack folder."
+                  "doc": "Key can be user model id, filename or a full path.\nIn case of path this should be an executable or a lnk file, otherwise use `files`."
                 },
                 "location": {
                   "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/IconPack.ts",
-                  "line": 20,
+                  "line": 18,
                   "col": 0,
-                  "byteIndex": 834
+                  "byteIndex": 764
                 },
                 "params": [],
                 "computed": false,
@@ -15455,9 +15499,9 @@
                 },
                 "location": {
                   "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/IconPack.ts",
-                  "line": 24,
+                  "line": 22,
                   "col": 0,
-                  "byteIndex": 925
+                  "byteIndex": 855
                 },
                 "params": [],
                 "computed": false,
@@ -15488,9 +15532,9 @@
                 },
                 "location": {
                   "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/IconPack.ts",
-                  "line": 28,
+                  "line": 26,
                   "col": 0,
-                  "byteIndex": 1030
+                  "byteIndex": 960
                 },
                 "params": [],
                 "computed": false,

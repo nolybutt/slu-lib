@@ -317,25 +317,21 @@ export class IconPackManager {
 }
 
 function resolveIcon(parent: string, icon: IIcon): IIcon {
-  if (typeof icon === 'string') {
-    return `${parent}\\${icon}`;
-  }
-
   return {
-    light: `${parent}\\${icon.light}`,
-    dark: `${parent}\\${icon.dark}`,
+    base: icon.base ? `${parent}\\${icon.base}` : null,
+    light: icon.light ? `${parent}\\${icon.light}` : null,
+    dark: icon.dark ? `${parent}\\${icon.dark}` : null,
     mask: icon.mask ? `${parent}\\${icon.mask}` : null,
+    isAproximatelySquare: icon.isAproximatelySquare,
   };
 }
 
 function resolveAsSrc(icon: IIcon): IIcon {
-  if (typeof icon === 'string') {
-    return convertFileSrc(icon);
-  }
-
   return {
-    light: convertFileSrc(icon.light),
-    dark: convertFileSrc(icon.dark),
+    base: icon.base ? convertFileSrc(icon.base) : null,
+    light: icon.light ? convertFileSrc(icon.light) : null,
+    dark: icon.dark ? convertFileSrc(icon.dark) : null,
     mask: icon.mask ? convertFileSrc(icon.mask) : null,
+    isAproximatelySquare: icon.isAproximatelySquare,
   };
 }

@@ -1,10 +1,20 @@
-import type { IconPack, ResourceMetadata } from '@seelen-ui/types';
+import type { Icon, IconPack, ResourceMetadata } from '@seelen-ui/types';
 import { IconPackManager } from './icon_pack.ts';
 import { assertEquals } from '@std/assert';
 
 // Custom assertion for null values
 function assertNull(value: unknown): void {
   return assertEquals(value, null);
+}
+
+function onlyBase(x: string): Icon {
+  return {
+    base: x,
+    light: null,
+    dark: null,
+    mask: null,
+    isAproximatelySquare: false,
+  };
 }
 
 // Constants for test icons
@@ -21,39 +31,44 @@ const createMockIconPacks = (): { packA: IconPack; packB: IconPack; packC: IconP
   packA: {
     id: 'mockedIconPackA',
     metadata: { filename: 'a' } as ResourceMetadata,
-    missing: 'MissingIconA.png',
+    missing: onlyBase('MissingIconA.png'),
     appEntries: [
       {
         umid: 'MSEdge',
         redirect: null,
         path: 'C:\\Program Files (x86)\\Microsoft\\Edge\\msedge.exe',
-        icon: GOT_BY_UMID,
+        icon: onlyBase(GOT_BY_UMID),
       },
-      { umid: null, redirect: null, path: 'C:\\Windows\\explorer.exe', icon: GOT_BY_PATH },
-      { umid: null, redirect: null, path: 'C:\\Program Files (x86)\\Some\\App\\filenameApp.exe', icon: GOT_BY_PATH },
+      { umid: null, redirect: null, path: 'C:\\Windows\\explorer.exe', icon: onlyBase(GOT_BY_PATH) },
+      {
+        umid: null,
+        redirect: null,
+        path: 'C:\\Program Files (x86)\\Some\\App\\filenameApp.exe',
+        icon: onlyBase(GOT_BY_PATH),
+      },
     ],
     fileEntries: [
-      { extension: 'txt', icon: GOT_BY_EXTENSION },
-      { extension: 'png', icon: GOT_BY_EXTENSION },
-      { extension: 'jpg', icon: GOT_BY_EXTENSION },
+      { extension: 'txt', icon: onlyBase(GOT_BY_EXTENSION) },
+      { extension: 'png', icon: onlyBase(GOT_BY_EXTENSION) },
+      { extension: 'jpg', icon: onlyBase(GOT_BY_EXTENSION) },
     ],
     customEntries: [
-      { key: 'my-custom-icon', icon: 'CustomA.png' },
+      { key: 'my-custom-icon', icon: onlyBase('CustomA.png') },
     ],
   },
   packB: {
     id: 'mockedIconPackB',
     metadata: { filename: 'b' } as ResourceMetadata,
-    missing: 'MissingIconB.png',
+    missing: onlyBase('MissingIconB.png'),
     appEntries: [
-      { umid: null, redirect: null, path: 'C:\\Windows\\explorer.exe', icon: GOT_BY_PATH },
-      { umid: null, redirect: null, path: 'filenameApp.exe', icon: GOT_BY_FILENAME },
+      { umid: null, redirect: null, path: 'C:\\Windows\\explorer.exe', icon: onlyBase(GOT_BY_PATH) },
+      { umid: null, redirect: null, path: 'filenameApp.exe', icon: onlyBase(GOT_BY_FILENAME) },
     ],
     fileEntries: [
-      { extension: 'txt', icon: GOT_BY_EXTENSION },
+      { extension: 'txt', icon: onlyBase(GOT_BY_EXTENSION) },
     ],
     customEntries: [
-      { key: 'my-custom-icon', icon: 'CustomB.png' },
+      { key: 'my-custom-icon', icon: onlyBase('CustomB.png') },
     ],
   },
   packC: {
@@ -61,7 +76,7 @@ const createMockIconPacks = (): { packA: IconPack; packB: IconPack; packC: IconP
     metadata: { filename: 'c' } as ResourceMetadata,
     missing: null,
     appEntries: [
-      { umid: null, path: 'C:\\folder\\app1.exe', icon: GOT_BY_PATH, redirect: null },
+      { umid: null, path: 'C:\\folder\\app1.exe', icon: onlyBase(GOT_BY_PATH), redirect: null },
     ],
     fileEntries: [],
     customEntries: [],
@@ -130,13 +145,13 @@ Deno.test('IconPackManager', async (t) => {
       // 'a' should take priority for explorer.exe (last in active list)
       assertEquals(
         ctx.instance.getIconPath({ path: 'C:\\Windows\\explorer.exe' }),
-        `\\a\\${GOT_BY_PATH}`,
+        onlyBase(`\\a\\${GOT_BY_PATH}`),
       );
 
       // After changing priority to ['a', 'b'], 'b' should now have priority
       assertEquals(
         ctx.withActives(['a', 'b']).instance.getIconPath({ path: 'C:\\Windows\\explorer.exe' }),
-        `\\b\\${GOT_BY_PATH}`,
+        onlyBase(`\\b\\${GOT_BY_PATH}`),
       );
     });
 
@@ -148,7 +163,7 @@ Deno.test('IconPackManager', async (t) => {
           path: 'C:\\Program Files (x86)\\Microsoft\\Edge\\msedge.exe',
           umid: 'MSEdge',
         }),
-        `\\a\\${GOT_BY_UMID}`,
+        onlyBase(`\\a\\${GOT_BY_UMID}`),
       );
     });
 
@@ -157,7 +172,7 @@ Deno.test('IconPackManager', async (t) => {
       const ctx = new IconPackManagerTestContext(['a', 'b']);
       assertEquals(
         ctx.instance.getIconPath({ path: 'C:\\Program Files (x86)\\Some\\App\\filenameApp.exe' }),
-        `\\b\\${GOT_BY_FILENAME}`,
+        onlyBase(`\\b\\${GOT_BY_FILENAME}`),
       );
     });
 
@@ -167,19 +182,19 @@ Deno.test('IconPackManager', async (t) => {
       // .txt exists in both packs - should use 'a' (higher priority)
       assertEquals(
         ctx.instance.getIconPath({ path: 'C:\\Some\\App\\someFile.txt' }),
-        `\\a\\${GOT_BY_EXTENSION}`,
+        onlyBase(`\\a\\${GOT_BY_EXTENSION}`),
       );
 
       // .png only exists in packA
       assertEquals(
         ctx.instance.getIconPath({ path: 'C:\\Some\\App\\someFile.png' }),
-        `\\a\\${GOT_BY_EXTENSION}`,
+        onlyBase(`\\a\\${GOT_BY_EXTENSION}`),
       );
 
       // When we change priority to ['a', 'b'], 'b' should have priority for .txt
       assertEquals(
         ctx.withActives(['a', 'b']).instance.getIconPath({ path: 'C:\\Some\\App\\someFile.txt' }),
-        `\\b\\${GOT_BY_EXTENSION}`,
+        onlyBase(`\\b\\${GOT_BY_EXTENSION}`),
       );
     });
   });
@@ -188,13 +203,13 @@ Deno.test('IconPackManager', async (t) => {
     await t.step('should return missing icon from highest priority pack (last in active list)', () => {
       // With ['b', 'a'], 'a' has priority
       const ctx = new IconPackManagerTestContext(['b', 'a']);
-      assertEquals(ctx.instance.getMissingIconPath(), `\\a\\MissingIconA.png`);
+      assertEquals(ctx.instance.getMissingIconPath(), onlyBase(`\\a\\MissingIconA.png`));
     });
 
     await t.step('should fallback when higher priority pack has no missing icon', () => {
       // packC has no missing icon, should fallback to packB
       const ctx = new IconPackManagerTestContext(['c', 'b']);
-      assertEquals(ctx.instance.getMissingIconPath(), `\\b\\MissingIconB.png`);
+      assertEquals(ctx.instance.getMissingIconPath(), onlyBase(`\\b\\MissingIconB.png`));
     });
 
     await t.step('should return null when no active packs have missing icons', () => {
@@ -207,13 +222,13 @@ Deno.test('IconPackManager', async (t) => {
     await t.step('should return custom icon from highest priority pack', () => {
       // With ['b', 'a'], 'a' has priority
       const ctx = new IconPackManagerTestContext(['b', 'a']);
-      assertEquals(ctx.instance.getCustomIconPath('my-custom-icon'), `\\a\\CustomA.png`);
+      assertEquals(ctx.instance.getCustomIconPath('my-custom-icon'), onlyBase(`\\a\\CustomA.png`));
     });
 
     await t.step('should fallback when custom icon not found in higher priority pack', () => {
       // packC has no custom icons, should fallback to packA
       const ctx = new IconPackManagerTestContext(['c', 'a']);
-      assertEquals(ctx.instance.getCustomIconPath('my-custom-icon'), `\\a\\CustomA.png`);
+      assertEquals(ctx.instance.getCustomIconPath('my-custom-icon'), onlyBase(`\\a\\CustomA.png`));
     });
 
     await t.step('should return null when custom icon not found in any active pack', () => {
@@ -230,19 +245,19 @@ Deno.test('IconPackManager', async (t) => {
         umid: 'RedirectTest',
         path: 'C:\\redirect\\source.exe',
         redirect: 'C:\\redirect\\target.exe',
-        icon: '\\a\\ThisShouldBeIgnored.png',
+        icon: onlyBase('\\a\\ThisShouldBeIgnored.png'),
       });
       // Add target entry to packB
       ctx.instance.iconPacks[1].appEntries.push({
         umid: null,
         path: 'C:\\redirect\\target.exe',
         redirect: null,
-        icon: '\\b\\RedirectTargetIcon.png',
+        icon: onlyBase('\\b\\RedirectTargetIcon.png'),
       });
 
       assertEquals(
         ctx.instance.getIconPath({ umid: 'RedirectTest' }),
-        '\\b\\RedirectTargetIcon.png',
+        onlyBase('\\b\\RedirectTargetIcon.png'),
       );
     });
 
@@ -253,7 +268,7 @@ Deno.test('IconPackManager', async (t) => {
         umid: 'BadRedirect',
         path: 'C:\\redirect\\source.exe',
         redirect: 'C:\\nonexistent\\path.exe',
-        icon: '\\a\\ShouldNotUseThis.png', // <-- should be ignored inclusively if redirect points to non-existent path
+        icon: onlyBase('\\a\\ShouldNotUseThis.png'), // <-- should be ignored inclusively if redirect points to non-existent path
       });
 
       assertNull(ctx.instance.getIconPath({ umid: 'BadRedirect' }));
@@ -266,7 +281,7 @@ Deno.test('IconPackManager', async (t) => {
         umid: 'ChainRedirect',
         path: 'C:\\redirect\\start.exe',
         redirect: 'C:\\redirect\\middle.exe',
-        icon: '\\a\\IgnoreThis.png',
+        icon: onlyBase('\\a\\IgnoreThis.png'),
       });
       // Second redirect (no icon)
       ctx.instance.iconPacks[1].appEntries.push({
@@ -280,12 +295,12 @@ Deno.test('IconPackManager', async (t) => {
         umid: null,
         path: 'C:\\redirect\\final.exe',
         redirect: null,
-        icon: '\\c\\FinalIcon.png',
+        icon: onlyBase('\\c\\FinalIcon.png'),
       });
 
       assertEquals(
         ctx.instance.getIconPath({ umid: 'ChainRedirect' }),
-        '\\c\\FinalIcon.png',
+        onlyBase('\\c\\FinalIcon.png'),
       );
     });
 
@@ -296,7 +311,7 @@ Deno.test('IconPackManager', async (t) => {
         umid: 'BrokenChain',
         path: 'C:\\redirect\\start.exe',
         redirect: 'C:\\redirect\\missing.exe',
-        icon: '\\a\\IgnoreMe.png',
+        icon: onlyBase('\\a\\IgnoreMe.png'),
       });
 
       // No matching entry for the redirect target
@@ -310,12 +325,12 @@ Deno.test('IconPackManager', async (t) => {
         umid: 'RedirectToExtension',
         path: 'C:\\some\\app.exe',
         redirect: 'C:\\some\\file.txt', // <-- redirect to txt file
-        icon: '\\a\\WrongIcon.png', // <-- should be ignored
+        icon: onlyBase('\\a\\WrongIcon.png'), // <-- should be ignored
       });
 
       assertEquals(
         ctx.instance.getIconPath({ umid: 'RedirectToExtension' }),
-        '\\b\\GOT_BY_EXTENSION',
+        onlyBase('\\b\\GOT_BY_EXTENSION'),
       );
     });
   });
@@ -327,14 +342,14 @@ Deno.test('IconPackManager', async (t) => {
       umid: 'CircularRef1',
       path: 'C:\\circle\\app1.exe',
       redirect: 'C:\\circle\\app2.exe',
-      icon: 'IgnoredIcon1.png',
+      icon: onlyBase('IgnoredIcon1.png'),
     });
 
     ctx.instance.iconPacks[1].appEntries.push({
       umid: 'CircularRef2',
       path: 'C:\\circle\\app2.exe',
       redirect: 'C:\\circle\\app1.exe',
-      icon: 'IgnoredIcon2.png',
+      icon: onlyBase('IgnoredIcon2.png'),
     });
 
     assertNull(ctx.instance.getIconPath({ umid: 'CircularRef1' }));
@@ -350,7 +365,7 @@ Deno.test('IconPackManager', async (t) => {
       umid: 'SelfRef',
       path: 'C:\\circle\\self.exe',
       redirect: 'C:\\circle\\self.exe', // Se redirige a sí mismo
-      icon: 'IgnoredIcon.png',
+      icon: onlyBase('IgnoredIcon.png'),
     });
 
     assertNull(ctx.instance.getIconPath({ umid: 'SelfRef' }));
@@ -364,21 +379,21 @@ Deno.test('IconPackManager', async (t) => {
       umid: null,
       path: 'C:\\circle\\a.exe',
       redirect: 'C:\\circle\\b.exe',
-      icon: 'IgnoredA.png',
+      icon: onlyBase('IgnoredA.png'),
     });
 
     ctx.instance.iconPacks[1].appEntries.push({
       umid: null,
       path: 'C:\\circle\\b.exe',
       redirect: 'C:\\circle\\c.exe',
-      icon: 'IgnoredB.png',
+      icon: onlyBase('IgnoredB.png'),
     });
 
     ctx.instance.iconPacks[2].appEntries.push({
       umid: null,
       path: 'C:\\circle\\c.exe',
       redirect: 'C:\\circle\\a.exe',
-      icon: 'IgnoredC.png',
+      icon: onlyBase('IgnoredC.png'),
     });
 
     assertNull(ctx.instance.getIconPath({ path: 'C:\\circle\\a.exe' }));
