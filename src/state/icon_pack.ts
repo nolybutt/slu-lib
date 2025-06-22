@@ -1,9 +1,9 @@
 import type {
-  AppIconPackEntry,
   Icon as IIcon,
   IconPack,
   IconPack as IIconPack,
   SeelenCommandGetIconArgs,
+  UniqueIconPackEntry,
 } from '@seelen-ui/types';
 import { List } from '../utils/List.ts';
 import { newFromInvoke, newOnEvent } from '../utils/State.ts';
@@ -52,19 +52,19 @@ export class IconPackManager {
         pack.missing = resolveIcon(path, pack.missing);
       }
 
-      pack.appEntries.forEach((e) => {
-        e.path = e.path?.toLowerCase() || null;
-        if (e.icon) {
-          e.icon = resolveIcon(path, e.icon);
+      for (const entry of pack.entries) {
+        if (entry.type === 'unique') {
+          entry.path = entry.path?.toLowerCase() || null;
         }
-      });
-      pack.fileEntries.forEach((e) => {
-        e.extension = e.extension.toLowerCase();
-        e.icon = resolveIcon(path, e.icon);
-      });
-      pack.customEntries.forEach((e) => {
-        e.icon = resolveIcon(path, e.icon);
-      });
+
+        if (entry.type === 'shared') {
+          entry.extension = entry.extension.toLowerCase();
+        }
+
+        if (entry.icon) {
+          entry.icon = resolveIcon(path, entry.icon);
+        }
+      }
     }
   }
 
@@ -191,15 +191,15 @@ export class IconPackManager {
     const extension = lowerPath?.split('.').pop();
 
     for (const pack of this.activeIconPacks) {
-      let entry: AppIconPackEntry | undefined;
+      let entry: UniqueIconPackEntry | undefined;
 
       if (umid) {
-        entry = pack.appEntries.find((e) => !!e.umid && e.umid === umid);
+        entry = pack.entries.find((e) => e.type === 'unique' && !!e.umid && e.umid === umid) as UniqueIconPackEntry;
       }
 
       if (!entry && lowerPath) {
-        entry = pack.appEntries.find((e) => {
-          if (!e.path) {
+        entry = pack.entries.find((e) => {
+          if (e.type !== 'unique' || !e.path) {
             return false;
           }
 
@@ -215,7 +215,7 @@ export class IconPackManager {
             }
           }
           return false;
-        });
+        }) as UniqueIconPackEntry;
       }
 
       if (entry) {
@@ -240,8 +240,8 @@ export class IconPackManager {
     }
 
     for (const pack of this.activeIconPacks) {
-      const icon = pack.fileEntries.find((e) => {
-        return e.extension === extension;
+      const icon = pack.entries.find((e) => {
+        return e.type === 'shared' && e.extension === extension;
       });
 
       if (icon) {
@@ -286,7 +286,7 @@ export class IconPackManager {
    */
   public getCustomIconPath(name: string): IIcon | null {
     for (const pack of this.activeIconPacks) {
-      const entry = pack.customEntries.find((e) => e.key === name);
+      const entry = pack.entries.find((e) => e.type === 'custom' && e.key === name);
       if (entry) {
         return entry.icon;
       }

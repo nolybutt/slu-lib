@@ -32,54 +32,101 @@ const createMockIconPacks = (): { packA: IconPack; packB: IconPack; packC: IconP
     id: 'mockedIconPackA',
     metadata: { filename: 'a' } as ResourceMetadata,
     missing: onlyBase('MissingIconA.png'),
-    appEntries: [
+    entries: [
+      // Unique entries (apps)
       {
+        type: 'unique',
         umid: 'MSEdge',
         redirect: null,
         path: 'C:\\Program Files (x86)\\Microsoft\\Edge\\msedge.exe',
         icon: onlyBase(GOT_BY_UMID),
       },
-      { umid: null, redirect: null, path: 'C:\\Windows\\explorer.exe', icon: onlyBase(GOT_BY_PATH) },
       {
+        type: 'unique',
+        umid: null,
+        redirect: null,
+        path: 'C:\\Windows\\explorer.exe',
+        icon: onlyBase(GOT_BY_PATH),
+      },
+      {
+        type: 'unique',
         umid: null,
         redirect: null,
         path: 'C:\\Program Files (x86)\\Some\\App\\filenameApp.exe',
         icon: onlyBase(GOT_BY_PATH),
       },
-    ],
-    fileEntries: [
-      { extension: 'txt', icon: onlyBase(GOT_BY_EXTENSION) },
-      { extension: 'png', icon: onlyBase(GOT_BY_EXTENSION) },
-      { extension: 'jpg', icon: onlyBase(GOT_BY_EXTENSION) },
-    ],
-    customEntries: [
-      { key: 'my-custom-icon', icon: onlyBase('CustomA.png') },
+      // Shared entries (file extensions)
+      {
+        type: 'shared',
+        extension: 'txt',
+        icon: onlyBase(GOT_BY_EXTENSION),
+      },
+      {
+        type: 'shared',
+        extension: 'png',
+        icon: onlyBase(GOT_BY_EXTENSION),
+      },
+      {
+        type: 'shared',
+        extension: 'jpg',
+        icon: onlyBase(GOT_BY_EXTENSION),
+      },
+      // Custom entries
+      {
+        type: 'custom',
+        key: 'my-custom-icon',
+        icon: onlyBase('CustomA.png'),
+      },
     ],
   },
   packB: {
     id: 'mockedIconPackB',
     metadata: { filename: 'b' } as ResourceMetadata,
     missing: onlyBase('MissingIconB.png'),
-    appEntries: [
-      { umid: null, redirect: null, path: 'C:\\Windows\\explorer.exe', icon: onlyBase(GOT_BY_PATH) },
-      { umid: null, redirect: null, path: 'filenameApp.exe', icon: onlyBase(GOT_BY_FILENAME) },
-    ],
-    fileEntries: [
-      { extension: 'txt', icon: onlyBase(GOT_BY_EXTENSION) },
-    ],
-    customEntries: [
-      { key: 'my-custom-icon', icon: onlyBase('CustomB.png') },
+    entries: [
+      // Unique entries (apps)
+      {
+        type: 'unique',
+        umid: null,
+        redirect: null,
+        path: 'C:\\Windows\\explorer.exe',
+        icon: onlyBase(GOT_BY_PATH),
+      },
+      {
+        type: 'unique',
+        umid: null,
+        redirect: null,
+        path: 'filenameApp.exe',
+        icon: onlyBase(GOT_BY_FILENAME),
+      },
+      // Shared entries (file extensions)
+      {
+        type: 'shared',
+        extension: 'txt',
+        icon: onlyBase(GOT_BY_EXTENSION),
+      },
+      // Custom entries
+      {
+        type: 'custom',
+        key: 'my-custom-icon',
+        icon: onlyBase('CustomB.png'),
+      },
     ],
   },
   packC: {
     id: 'mockedIconPackC',
     metadata: { filename: 'c' } as ResourceMetadata,
     missing: null,
-    appEntries: [
-      { umid: null, path: 'C:\\folder\\app1.exe', icon: onlyBase(GOT_BY_PATH), redirect: null },
+    entries: [
+      // Unique entries (apps)
+      {
+        type: 'unique',
+        umid: null,
+        path: 'C:\\folder\\app1.exe',
+        icon: onlyBase(GOT_BY_PATH),
+        redirect: null,
+      },
     ],
-    fileEntries: [],
-    customEntries: [],
   },
 });
 
@@ -241,14 +288,16 @@ Deno.test('IconPackManager', async (t) => {
     await t.step('should follow redirect and ignore icon when redirect is present', () => {
       const ctx = new IconPackManagerTestContext(['a', 'b']);
       // Add entry with both redirect and icon (icon should be ignored)
-      ctx.instance.iconPacks[0].appEntries.push({
+      ctx.instance.iconPacks[0].entries.push({
+        type: 'unique',
         umid: 'RedirectTest',
         path: 'C:\\redirect\\source.exe',
         redirect: 'C:\\redirect\\target.exe',
         icon: onlyBase('\\a\\ThisShouldBeIgnored.png'),
       });
       // Add target entry to packB
-      ctx.instance.iconPacks[1].appEntries.push({
+      ctx.instance.iconPacks[1].entries.push({
+        type: 'unique',
         umid: null,
         path: 'C:\\redirect\\target.exe',
         redirect: null,
@@ -264,7 +313,8 @@ Deno.test('IconPackManager', async (t) => {
     await t.step('should not use icon when redirect points to non-existent path', () => {
       const ctx = new IconPackManagerTestContext(['a']);
       // Add entry with redirect to non-existent path and icon
-      ctx.instance.iconPacks[0].appEntries.push({
+      ctx.instance.iconPacks[0].entries.push({
+        type: 'unique',
         umid: 'BadRedirect',
         path: 'C:\\redirect\\source.exe',
         redirect: 'C:\\nonexistent\\path.exe',
@@ -277,21 +327,24 @@ Deno.test('IconPackManager', async (t) => {
     await t.step('should follow redirect chain until icon is found or no more redirects', () => {
       const ctx = new IconPackManagerTestContext(['a', 'b', 'c']);
       // First redirect (icon should be ignored)
-      ctx.instance.iconPacks[0].appEntries.push({
+      ctx.instance.iconPacks[0].entries.push({
+        type: 'unique',
         umid: 'ChainRedirect',
         path: 'C:\\redirect\\start.exe',
         redirect: 'C:\\redirect\\middle.exe',
         icon: onlyBase('\\a\\IgnoreThis.png'),
       });
       // Second redirect (no icon)
-      ctx.instance.iconPacks[1].appEntries.push({
+      ctx.instance.iconPacks[1].entries.push({
+        type: 'unique',
         umid: null,
         path: 'C:\\redirect\\middle.exe',
         redirect: 'C:\\redirect\\final.exe',
         icon: null,
       });
       // Final target with icon
-      ctx.instance.iconPacks[2].appEntries.push({
+      ctx.instance.iconPacks[2].entries.push({
+        type: 'unique',
         umid: null,
         path: 'C:\\redirect\\final.exe',
         redirect: null,
@@ -307,7 +360,8 @@ Deno.test('IconPackManager', async (t) => {
     await t.step('should return null if redirect chain ends without finding an icon', () => {
       const ctx = new IconPackManagerTestContext(['a', 'b']);
       // First redirect
-      ctx.instance.iconPacks[0].appEntries.push({
+      ctx.instance.iconPacks[0].entries.push({
+        type: 'unique',
         umid: 'BrokenChain',
         path: 'C:\\redirect\\start.exe',
         redirect: 'C:\\redirect\\missing.exe',
@@ -321,7 +375,8 @@ Deno.test('IconPackManager', async (t) => {
     await t.step('should handle redirect to extension match', () => {
       const ctx = new IconPackManagerTestContext(['a', 'b']);
       // Redirect to a file with specific extension
-      ctx.instance.iconPacks[0].appEntries.push({
+      ctx.instance.iconPacks[0].entries.push({
+        type: 'unique',
         umid: 'RedirectToExtension',
         path: 'C:\\some\\app.exe',
         redirect: 'C:\\some\\file.txt', // <-- redirect to txt file
@@ -338,14 +393,16 @@ Deno.test('IconPackManager', async (t) => {
   await t.step('should handle circular references and return null', () => {
     const ctx = new IconPackManagerTestContext(['a', 'b']);
 
-    ctx.instance.iconPacks[0].appEntries.push({
+    ctx.instance.iconPacks[0].entries.push({
+      type: 'unique',
       umid: 'CircularRef1',
       path: 'C:\\circle\\app1.exe',
       redirect: 'C:\\circle\\app2.exe',
       icon: onlyBase('IgnoredIcon1.png'),
     });
 
-    ctx.instance.iconPacks[1].appEntries.push({
+    ctx.instance.iconPacks[1].entries.push({
+      type: 'unique',
       umid: 'CircularRef2',
       path: 'C:\\circle\\app2.exe',
       redirect: 'C:\\circle\\app1.exe',
@@ -361,7 +418,8 @@ Deno.test('IconPackManager', async (t) => {
     const ctx = new IconPackManagerTestContext(['a']);
 
     // Configurar autorreferencia
-    ctx.instance.iconPacks[0].appEntries.push({
+    ctx.instance.iconPacks[0].entries.push({
+      type: 'unique',
       umid: 'SelfRef',
       path: 'C:\\circle\\self.exe',
       redirect: 'C:\\circle\\self.exe', // Se redirige a sí mismo
@@ -375,21 +433,24 @@ Deno.test('IconPackManager', async (t) => {
     const ctx = new IconPackManagerTestContext(['a', 'b', 'c']);
 
     // Configurar referencia circular más larga (A -> B -> C -> A)
-    ctx.instance.iconPacks[0].appEntries.push({
+    ctx.instance.iconPacks[0].entries.push({
+      type: 'unique',
       umid: null,
       path: 'C:\\circle\\a.exe',
       redirect: 'C:\\circle\\b.exe',
       icon: onlyBase('IgnoredA.png'),
     });
 
-    ctx.instance.iconPacks[1].appEntries.push({
+    ctx.instance.iconPacks[1].entries.push({
+      type: 'unique',
       umid: null,
       path: 'C:\\circle\\b.exe',
       redirect: 'C:\\circle\\c.exe',
       icon: onlyBase('IgnoredB.png'),
     });
 
-    ctx.instance.iconPacks[2].appEntries.push({
+    ctx.instance.iconPacks[2].entries.push({
+      type: 'unique',
       umid: null,
       path: 'C:\\circle\\c.exe',
       redirect: 'C:\\circle\\a.exe',

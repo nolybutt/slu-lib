@@ -39,6 +39,7 @@ export enum SeelenCommand {
   StateGetPlugins = 'state_get_plugins',
   StateGetWidgets = 'state_get_widgets',
   StateGetIconPacks = 'state_get_icon_packs',
+  StateSetCustomIconPack = 'state_add_icon_to_custom_icon_pack',
   StateGetProfiles = 'state_get_profiles',
   StateDeleteCachedIcons = 'state_delete_cached_icons',
   GetUser = 'get_user',

@@ -141,6 +141,7 @@ slu_commands_declaration! {
     StateGetPlugins = state_get_plugins() -> Vec<Plugin>,
     StateGetWidgets = state_get_widgets() -> Vec<Widget>,
     StateGetIconPacks = state_get_icon_packs() -> Vec<IconPack>,
+    StateSetCustomIconPack = state_add_icon_to_custom_icon_pack(icon: IconPackEntry),
     StateGetProfiles = state_get_profiles() -> Vec<Profile>,
     StateDeleteCachedIcons = state_delete_cached_icons(),
 
