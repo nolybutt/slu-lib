@@ -15270,6 +15270,60 @@
                   }
                 },
                 "typeParams": []
+              },
+              {
+                "name": "remoteEntries",
+                "jsDoc": {
+                  "doc": "This lists will be downloaded and stored locally"
+                },
+                "location": {
+                  "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/IconPack.ts",
+                  "line": 19,
+                  "col": 0,
+                  "byteIndex": 611
+                },
+                "params": [],
+                "computed": false,
+                "optional": false,
+                "tsType": {
+                  "repr": "Array",
+                  "kind": "typeRef",
+                  "typeRef": {
+                    "typeParams": [
+                      {
+                        "repr": "IconPackEntry",
+                        "kind": "typeRef",
+                        "typeRef": {
+                          "typeParams": null,
+                          "typeName": "IconPackEntry"
+                        }
+                      }
+                    ],
+                    "typeName": "Array"
+                  }
+                },
+                "typeParams": []
+              },
+              {
+                "name": "downloaded",
+                "jsDoc": {
+                  "doc": "Indicates if the icon pack icons was downloaded from `remote_entries`"
+                },
+                "location": {
+                  "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/IconPack.ts",
+                  "line": 23,
+                  "col": 0,
+                  "byteIndex": 730
+                },
+                "params": [],
+                "computed": false,
+                "optional": false,
+                "tsType": {
+                  "repr": "boolean",
+                  "kind": "keyword",
+                  "keyword": "boolean"
+                },
+                "typeParams": []
               }
             ],
             "callSignatures": [],

@@ -42,6 +42,10 @@ pub struct IconPack {
     pub missing: Option<Icon>,
     /// Icons defined in this icon pack
     pub entries: Vec<IconPackEntry>,
+    /// This lists will be downloaded and stored locally
+    pub remote_entries: Vec<IconPackEntry>,
+    /// Indicates if the icon pack icons was downloaded from `remote_entries`
+    pub downloaded: bool,
 }
 
 impl IconPack {
@@ -193,16 +197,16 @@ impl IconPackEntry {
 pub struct Icon {
     /// Icon to use if no light or dark icon is specified, if both light and dark are specified this can be omitted
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub base: Option<PathBuf>,
+    pub base: Option<String>,
     /// Alternative icon to use when system theme is light
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub light: Option<PathBuf>,
+    pub light: Option<String>,
     /// Alternative icon to use when system theme is dark
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub dark: Option<PathBuf>,
+    pub dark: Option<String>,
     /// Mask to be applied over the icon, themes can use this to apply custom colors over the icon.
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub mask: Option<PathBuf>,
+    pub mask: Option<String>,
     /// Whether the icon is a square or not
     #[serde(skip_serializing_if = "is_false")]
     pub is_aproximately_square: bool,

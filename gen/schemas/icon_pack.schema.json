@@ -3,6 +3,11 @@
   "title": "IconPack",
   "type": "object",
   "properties": {
+    "downloaded": {
+      "description": "Indicates if the icon pack icons was downloaded from `remote_entries`",
+      "type": "boolean",
+      "default": false
+    },
     "entries": {
       "description": "Icons defined in this icon pack",
       "type": "array",
@@ -40,6 +45,14 @@
         }
       ],
       "default": null
+    },
+    "remoteEntries": {
+      "description": "This lists will be downloaded and stored locally",
+      "type": "array",
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/IconPackEntry"
+      }
     }
   },
   "$defs": {
