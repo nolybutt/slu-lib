@@ -40,4 +40,4 @@ impl std::fmt::Display for SeelenLibError {
     }
 }
 
-pub type Result<T> = std::result::Result<T, SeelenLibError>;
+pub type Result<T, E = SeelenLibError> = std::result::Result<T, E>;

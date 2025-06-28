@@ -3,11 +3,11 @@ use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 use ts_rs::TS;
 
-use crate::{error::Result, rect::Rect, utils::Flatenable};
+use crate::{error::Result, rect::Rect, resource::WidgetId, utils::Flatenable};
 
 use super::{
     SeelenWallWallpaper, ThirdPartyWidgetSettings, WegPinnedItemsVisibility,
-    WegTemporalItemsVisibility, WidgetId,
+    WegTemporalItemsVisibility,
 };
 
 #[derive(Clone, Debug, Serialize, Deserialize, JsonSchema, TS)]

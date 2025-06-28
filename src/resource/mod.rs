@@ -1,10 +1,11 @@
+mod resource_id;
+pub use resource_id::{IconPackId, PluginId, ResourceId, ThemeId, WidgetId};
+
 use std::{
     collections::HashMap,
     fs::File,
-    hash::Hash,
-    io::{Read, Write},
-    path::Path,
-    sync::OnceLock,
+    io::{Read, Seek, SeekFrom, Write},
+    path::{Path, PathBuf},
 };
 
 use base64::Engine;
@@ -20,90 +21,6 @@ use crate::{
     state::{IconPack, Plugin, Theme, Widget},
     utils::TsUnknown,
 };
-
-#[derive(
-    Debug, Clone, Hash, PartialEq, Eq, PartialOrd, Ord, Serialize, Deserialize, JsonSchema, TS,
-)]
-/// visual id composed of the creator username and the resource name
-pub struct ResourceId(String);
-
-static REGEX: OnceLock<regex::Regex> = OnceLock::new();
-
-impl ResourceId {
-    fn regex() -> &'static regex::Regex {
-        REGEX.get_or_init(|| regex::Regex::new("^@[\\w\\-]{3,32}\\/[\\w\\-]+\\w$").unwrap())
-    }
-
-    pub fn is_valid(&self) -> bool {
-        Self::regex().is_match(&self.0)
-    }
-
-    /// Creator username of the resource
-    ///
-    /// # Safety
-    ///
-    /// The string is a valid resource id
-    pub fn creator(&self) -> String {
-        self.0
-            .split('/')
-            .next()
-            .unwrap()
-            .trim_start_matches('@')
-            .to_string()
-    }
-
-    /// Name of the resource
-    ///
-    /// # Safety
-    ///
-    /// The string is a valid resource id
-    pub fn name(&self) -> String {
-        self.0.split('/').next_back().unwrap().to_string()
-    }
-}
-
-impl Default for ResourceId {
-    fn default() -> Self {
-        Self("@unknown/unknown".to_owned())
-    }
-}
-
-impl std::ops::Deref for ResourceId {
-    type Target = String;
-    fn deref(&self) -> &Self::Target {
-        &self.0
-    }
-}
-
-impl std::ops::DerefMut for ResourceId {
-    fn deref_mut(&mut self) -> &mut Self::Target {
-        &mut self.0
-    }
-}
-
-impl From<String> for ResourceId {
-    fn from(value: String) -> Self {
-        Self(value)
-    }
-}
-
-impl From<&String> for ResourceId {
-    fn from(value: &String) -> Self {
-        Self(value.clone())
-    }
-}
-
-impl From<&str> for ResourceId {
-    fn from(value: &str) -> Self {
-        Self(value.to_owned())
-    }
-}
-
-impl std::fmt::Display for ResourceId {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        write!(f, "{}", self.0)
-    }
-}
 
 // =============================================================================
 
@@ -156,6 +73,9 @@ pub struct ResourceMetadata {
     pub app_target_version: Option<(u32, u32, u32)>,
     /// internal field used by the app on load of the resource
     #[serde(skip_deserializing)]
+    pub path: PathBuf,
+    /// internal field used by the app on load of the resource
+    #[serde(skip_deserializing)]
     pub filename: String,
     /// internal field that indicates if the resource is bundled
     #[serde(skip_deserializing)]
@@ -172,6 +92,7 @@ impl Default for ResourceMetadata {
             screenshots: Vec::new(),
             tags: Vec::new(),
             app_target_version: None,
+            path: PathBuf::new(),
             filename: String::new(),
             bundled: false,
         }
@@ -271,28 +192,48 @@ pub enum ConcreteResource {
 }
 
 impl SluResourceFile {
-    pub fn load(path: &Path) -> Result<Self> {
-        let mut file = File::open(path)?;
+    pub fn decode<R: Read + Seek>(mut reader: R) -> Result<Self> {
+        let mut version = [0u8; 1];
+        reader.read_exact(&mut version)?;
 
-        let mut header = [0u8; 4];
-        file.read_exact(&mut header)?;
+        match version[0] {
+            1 => {
+                reader.seek(SeekFrom::Current(3))?; // SLU mime type
+            }
+            2 => {
+                reader.seek(SeekFrom::Current(3))?; // SLU mime type
+                reader.seek(SeekFrom::Current(4))?; // 32 bits reserved
+            }
+            _ => {
+                return Err("unsupported slu file version".into());
+            }
+        }
 
-        let [_version, _reserved1, _reserved2, _reserved3] = header;
-
+        // read the rest of the body as content
         let mut buffer = Vec::new();
-        file.read_to_end(&mut buffer)?;
+        reader.read_to_end(&mut buffer)?;
         let decoded = base64::engine::general_purpose::STANDARD.decode(&buffer)?;
         Ok(serde_yaml::from_slice(&decoded)?)
     }
 
-    pub fn store(&self, path: &Path) -> Result<()> {
-        let mut file = File::create(path)?;
+    pub fn encode<W: Write>(&self, mut writer: W) -> Result<()> {
         let data = serde_yaml::to_string(self)?;
         let encoded = base64::engine::general_purpose::STANDARD.encode(data);
 
-        file.write_all(&[1, 0, 0, 0])?;
-        file.write_all(encoded.as_bytes())?;
+        writer.write_all(&[2])?; // version
+        writer.write_all("SLU".as_bytes())?; // SLU mime type
+        writer.write_all(&vec![0u8; 4])?; // 32 bits reserved
+        writer.write_all(encoded.as_bytes())?;
         Ok(())
+    }
+
+    pub fn load(path: &Path) -> Result<Self> {
+        Self::decode(&File::open(path)?)
+    }
+
+    pub fn store(&self, path: &Path) -> Result<()> {
+        let mut file = File::create(path)?;
+        self.encode(&mut file)
     }
 
     pub fn concrete(&self) -> Result<ConcreteResource> {
@@ -326,5 +267,72 @@ impl SluResourceFile {
         };
 
         Ok(concrete)
+    }
+}
+
+pub trait SluResource: Sized + Serialize {
+    fn metadata(&self) -> &ResourceMetadata;
+    fn metadata_mut(&mut self) -> &mut ResourceMetadata;
+
+    fn load_from_file(path: &Path) -> Result<Self>;
+
+    fn load_from_folder(path: &Path) -> Result<Self>;
+
+    fn sanitize(&mut self) {}
+    fn validate(&self) -> Result<()> {
+        Ok(())
+    }
+
+    fn load(path: &Path) -> Result<Self> {
+        let mut resource = if path.is_dir() {
+            Self::load_from_folder(path)?
+        } else {
+            Self::load_from_file(path)?
+        };
+
+        let meta = resource.metadata_mut();
+        meta.path = path.to_path_buf();
+        meta.filename = path
+            .file_name()
+            .unwrap_or_default()
+            .to_string_lossy()
+            .to_string();
+
+        resource.sanitize();
+        resource.validate()?;
+        Ok(resource)
+    }
+
+    fn save(&self) -> Result<()> {
+        let mut path = self.metadata().path.clone();
+        if path.is_dir() {
+            path.push("metadata.yml");
+        }
+
+        let extension = path
+            .extension()
+            .ok_or("Invalid path extension")?
+            .to_string_lossy()
+            .to_lowercase();
+
+        match extension.as_str() {
+            "slu" => {
+                let mut slu_file = SluResourceFile::load(&self.metadata().path)?;
+                slu_file.data = serde_json::to_value(self)?.into();
+                slu_file.store(&self.metadata().path)?;
+            }
+            "yml" | "yaml" => {
+                let file = File::create(path)?;
+                serde_yaml::to_writer(file, self)?;
+            }
+            "json" | "jsonc" => {
+                let file = File::create(path)?;
+                serde_json::to_writer_pretty(file, self)?;
+            }
+            _ => {
+                return Err("Unsupported path extension".into());
+            }
+        }
+        Ok(())
     }
 }

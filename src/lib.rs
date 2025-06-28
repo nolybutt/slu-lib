@@ -11,6 +11,9 @@ pub use error::SeelenLibError;
 #[macro_use(Serialize, Deserialize)]
 extern crate serde;
 
+#[macro_use(JsonSchema)]
+extern crate schemars;
+
 #[macro_use(TS)]
 extern crate ts_rs;
 

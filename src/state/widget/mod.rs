@@ -1,9 +1,6 @@
 pub mod declaration;
 
-use std::{
-    ops::{Deref, DerefMut},
-    path::Path,
-};
+use std::{fs::File, path::Path};
 
 use declaration::WidgetSettingsDeclarationList;
 use schemars::JsonSchema;
@@ -12,54 +9,8 @@ use ts_rs::TS;
 
 use crate::{
     error::Result,
-    resource::{ConcreteResource, ResourceId, ResourceMetadata, SluResourceFile},
+    resource::{ConcreteResource, ResourceMetadata, SluResource, SluResourceFile, WidgetId},
 };
-
-#[derive(Debug, Clone, Default, Hash, PartialEq, Eq, Serialize, Deserialize, JsonSchema, TS)]
-pub struct WidgetId(ResourceId);
-
-impl WidgetId {
-    pub fn known_settings() -> Self {
-        "@seelen/settings".into()
-    }
-    pub fn known_weg() -> Self {
-        "@seelen/weg".into()
-    }
-    pub fn known_toolbar() -> Self {
-        "@seelen/fancy-toolbar".into()
-    }
-    pub fn known_wm() -> Self {
-        "@seelen/window-manager".into()
-    }
-    pub fn known_launcher() -> Self {
-        "@seelen/launcher".into()
-    }
-    pub fn known_wall() -> Self {
-        "@seelen/wallpaper-manager".into()
-    }
-    pub fn known_popup() -> Self {
-        "@seelen/popup".into()
-    }
-}
-
-impl Deref for WidgetId {
-    type Target = ResourceId;
-    fn deref(&self) -> &Self::Target {
-        &self.0
-    }
-}
-
-impl DerefMut for WidgetId {
-    fn deref_mut(&mut self) -> &mut Self::Target {
-        &mut self.0
-    }
-}
-
-impl From<&str> for WidgetId {
-    fn from(value: &str) -> Self {
-        Self(ResourceId::from(value))
-    }
-}
 
 #[derive(Debug, Clone, Default, Serialize, Deserialize, JsonSchema, TS)]
 #[serde(default, rename_all = "camelCase")]
@@ -85,12 +36,13 @@ pub struct Widget {
     pub html: Option<String>,
 }
 
-impl Widget {
-    pub fn verify(&self) -> Result<()> {
-        if self.settings.there_are_duplicates() {
-            return Err("Widget settings declaration have duplicated keys".into());
-        }
-        Ok(())
+impl SluResource for Widget {
+    fn metadata(&self) -> &ResourceMetadata {
+        &self.metadata
+    }
+
+    fn metadata_mut(&mut self) -> &mut ResourceMetadata {
+        &mut self.metadata
     }
 
     fn load_from_file(path: &Path) -> Result<Self> {
@@ -100,7 +52,8 @@ impl Widget {
             .to_string_lossy();
 
         let resource = match extension.as_ref() {
-            "yml" | "yaml" => serde_yaml::from_reader(std::fs::File::open(path)?)?,
+            "yml" | "yaml" => serde_yaml::from_reader(File::open(path)?)?,
+            "json" | "jsonc" => serde_json::from_reader(File::open(path)?)?,
             "slu" => match SluResourceFile::load(path)?.concrete()? {
                 ConcreteResource::Widget(widget) => widget,
                 _ => return Err("Resource file is not a widget".into()),
@@ -139,14 +92,11 @@ impl Widget {
         Ok(widget)
     }
 
-    pub fn load(path: &Path) -> Result<Self> {
-        let widget = if path.is_dir() {
-            Self::load_from_folder(path)
-        } else {
-            Self::load_from_file(path)
-        }?;
-        widget.verify()?;
-        Ok(widget)
+    fn validate(&self) -> Result<()> {
+        if self.settings.there_are_duplicates() {
+            return Err("Widget settings declaration have duplicated keys".into());
+        }
+        Ok(())
     }
 }
 

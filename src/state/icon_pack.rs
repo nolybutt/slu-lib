@@ -1,4 +1,4 @@
-use std::path::{Path, PathBuf};
+use std::{fs::File, path::{Path, PathBuf}};
 
 use schemars::JsonSchema;
 use serde::{Deserialize, Serialize};
@@ -6,30 +6,8 @@ use ts_rs::TS;
 
 use crate::{
     error::Result,
-    resource::{ConcreteResource, ResourceId, ResourceMetadata, SluResourceFile},
+    resource::{ConcreteResource, IconPackId, ResourceMetadata, SluResource, SluResourceFile},
 };
-
-#[derive(Debug, Clone, Default, Hash, PartialEq, Eq, Serialize, Deserialize, JsonSchema, TS)]
-pub struct IconPackId(ResourceId);
-
-impl std::ops::Deref for IconPackId {
-    type Target = ResourceId;
-    fn deref(&self) -> &Self::Target {
-        &self.0
-    }
-}
-
-impl std::ops::DerefMut for IconPackId {
-    fn deref_mut(&mut self) -> &mut Self::Target {
-        &mut self.0
-    }
-}
-
-impl From<&str> for IconPackId {
-    fn from(value: &str) -> Self {
-        Self(ResourceId::from(value))
-    }
-}
 
 #[derive(Debug, Default, PartialEq, Eq, Clone, Serialize, Deserialize, JsonSchema, TS)]
 #[serde(default, rename_all = "camelCase")]
@@ -48,8 +26,15 @@ pub struct IconPack {
     pub downloaded: bool,
 }
 
-impl IconPack {
-    /// remove invalid icons
+impl SluResource for IconPack {
+    fn metadata(&self) -> &ResourceMetadata {
+        &self.metadata
+    }
+
+    fn metadata_mut(&mut self) -> &mut ResourceMetadata {
+        &mut self.metadata
+    }
+
     fn sanitize(&mut self) {
         self.missing = self.missing.take().filter(|e| e.is_valid());
         self.entries.retain(|e| match e {
@@ -69,7 +54,8 @@ impl IconPack {
             .to_string_lossy();
 
         let icon_pack = match extension.as_ref() {
-            "yml" | "yaml" => serde_yaml::from_reader(std::fs::File::open(path)?)?,
+            "yml" | "yaml" => serde_yaml::from_reader(File::open(path)?)?,
+            "json" | "jsonc" => serde_json::from_reader(File::open(path)?)?,
             "slu" => match SluResourceFile::load(path)?.concrete()? {
                 ConcreteResource::IconPack(resource) => resource,
                 _ => return Err("Resource file is not a icon pack".into()),
@@ -82,21 +68,11 @@ impl IconPack {
     }
 
     fn load_from_folder(path: &Path) -> Result<Self> {
-        let mut resource = Self::load_from_file(&path.join("metadata.yml"))?;
-        resource.metadata.filename = path.file_name().unwrap().to_string_lossy().to_string();
-        Ok(resource)
+        Ok(Self::load_from_file(&path.join("metadata.yml"))?)
     }
+}
 
-    pub fn load(path: &Path) -> Result<Self> {
-        let mut icon_pack = if path.is_dir() {
-            Self::load_from_folder(path)
-        } else {
-            Self::load_from_file(path)
-        }?;
-        icon_pack.sanitize();
-        Ok(icon_pack)
-    }
-
+impl IconPack {
     /// replace existing entry if found, otherwise add it.
     pub fn add_entry(&mut self, entry: IconPackEntry) {
         if let Some(found) = self.find_similar_mut(&entry) {

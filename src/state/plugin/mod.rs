@@ -1,35 +1,16 @@
 pub mod value;
 
-use std::ops::{Deref, DerefMut};
+use std::{fs::File, path::Path};
 
 use schemars::JsonSchema;
 use serde::{Deserialize, Serialize};
 use ts_rs::TS;
 use value::PluginValue;
 
-use crate::resource::{ResourceId, ResourceMetadata};
-
-#[derive(Debug, Clone, Hash, Default, PartialEq, Eq, Serialize, Deserialize, JsonSchema, TS)]
-pub struct PluginId(ResourceId);
-
-impl Deref for PluginId {
-    type Target = ResourceId;
-    fn deref(&self) -> &Self::Target {
-        &self.0
-    }
-}
-
-impl DerefMut for PluginId {
-    fn deref_mut(&mut self) -> &mut Self::Target {
-        &mut self.0
-    }
-}
-
-impl From<&str> for PluginId {
-    fn from(value: &str) -> Self {
-        Self(ResourceId::from(value))
-    }
-}
+use crate::{
+    error::Result,
+    resource::{ConcreteResource, PluginId, ResourceMetadata, SluResource, SluResourceFile},
+};
 
 #[derive(Debug, Clone, Serialize, Deserialize, JsonSchema, TS)]
 #[serde(rename_all = "camelCase")]
@@ -44,6 +25,42 @@ pub struct Plugin {
     pub icon: String,
     #[serde(flatten)]
     pub plugin: PluginValue,
+}
+
+impl SluResource for Plugin {
+    fn metadata(&self) -> &ResourceMetadata {
+        &self.metadata
+    }
+
+    fn metadata_mut(&mut self) -> &mut ResourceMetadata {
+        &mut self.metadata
+    }
+
+    fn load_from_file(path: &Path) -> Result<Self> {
+        let ext = path
+            .extension()
+            .ok_or("Invalid file extension")?
+            .to_string_lossy();
+
+        let plugin = match ext.as_ref() {
+            "yml" | "yaml" => serde_yaml::from_reader(File::open(path)?)?,
+            "json" | "jsonc" => serde_json::from_reader(File::open(path)?)?,
+            "slu" => {
+                let file = SluResourceFile::load(path)?;
+                match file.concrete()? {
+                    ConcreteResource::Plugin(plugin) => plugin,
+                    _ => return Err("Resource file is not a plugin".into()),
+                }
+            }
+            _ => return Err("Invalid file extension".into()),
+        };
+
+        Ok(plugin)
+    }
+
+    fn load_from_folder(path: &Path) -> Result<Self> {
+        Ok(Self::load_from_file(&path.join("metadata.yml"))?)
+    }
 }
 
 impl Plugin {

@@ -5,9 +5,7 @@ use serde::{Deserialize, Serialize};
 use ts_rs::TS;
 use url::Url;
 
-use crate::utils::TsUnknown;
-
-use super::PluginId;
+use crate::{resource::PluginId, utils::TsUnknown};
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize, JsonSchema, TS)]
 #[serde(rename_all = "camelCase")]

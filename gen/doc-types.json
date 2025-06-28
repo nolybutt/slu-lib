@@ -15500,11 +15500,14 @@
       "isDefault": false,
       "location": {
         "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/IconPackId.ts",
-        "line": 4,
+        "line": 7,
         "col": 0,
-        "byteIndex": 161
+        "byteIndex": 269
       },
       "declarationKind": "export",
+      "jsDoc": {
+        "doc": "Visual id composed of the creator username and the resource name. e.g. `@username/resource-name`"
+      },
       "kind": "typeAlias",
       "typeAliasDef": {
         "tsType": {
@@ -19025,11 +19028,14 @@
       "isDefault": false,
       "location": {
         "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/PluginId.ts",
-        "line": 4,
+        "line": 7,
         "col": 0,
-        "byteIndex": 161
+        "byteIndex": 269
       },
       "declarationKind": "export",
+      "jsDoc": {
+        "doc": "Visual id composed of the creator username and the resource name. e.g. `@username/resource-name`"
+      },
       "kind": "typeAlias",
       "typeAliasDef": {
         "tsType": {
@@ -20552,11 +20558,11 @@
         "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/ResourceId.ts",
         "line": 6,
         "col": 0,
-        "byteIndex": 186
+        "byteIndex": 218
       },
       "declarationKind": "export",
       "jsDoc": {
-        "doc": "visual id composed of the creator username and the resource name"
+        "doc": "Visual id composed of the creator username and the resource name. e.g. `@username/resource-name`"
       },
       "kind": "typeAlias",
       "typeAliasDef": {
@@ -20877,7 +20883,7 @@
                 "typeParams": []
               },
               {
-                "name": "filename",
+                "name": "path",
                 "jsDoc": {
                   "doc": "internal field used by the app on load of the resource"
                 },
@@ -20898,15 +20904,36 @@
                 "typeParams": []
               },
               {
+                "name": "filename",
+                "jsDoc": {
+                  "doc": "internal field used by the app on load of the resource"
+                },
+                "location": {
+                  "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/ResourceMetadata.ts",
+                  "line": 42,
+                  "col": 0,
+                  "byteIndex": 1221
+                },
+                "params": [],
+                "computed": false,
+                "optional": false,
+                "tsType": {
+                  "repr": "string",
+                  "kind": "keyword",
+                  "keyword": "string"
+                },
+                "typeParams": []
+              },
+              {
                 "name": "bundled",
                 "jsDoc": {
                   "doc": "internal field that indicates if the resource is bundled"
                 },
                 "location": {
                   "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/ResourceMetadata.ts",
-                  "line": 42,
+                  "line": 46,
                   "col": 0,
-                  "byteIndex": 1227
+                  "byteIndex": 1308
                 },
                 "params": [],
                 "computed": false,
@@ -34197,11 +34224,14 @@
       "isDefault": false,
       "location": {
         "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/ThemeId.ts",
-        "line": 4,
+        "line": 7,
         "col": 0,
-        "byteIndex": 161
+        "byteIndex": 269
       },
       "declarationKind": "export",
+      "jsDoc": {
+        "doc": "Visual id composed of the creator username and the resource name. e.g. `@username/resource-name`"
+      },
       "kind": "typeAlias",
       "typeAliasDef": {
         "tsType": {
@@ -40023,11 +40053,14 @@
       "isDefault": false,
       "location": {
         "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/WidgetId.ts",
-        "line": 4,
+        "line": 7,
         "col": 0,
-        "byteIndex": 161
+        "byteIndex": 269
       },
       "declarationKind": "export",
+      "jsDoc": {
+        "doc": "Visual id composed of the creator username and the resource name. e.g. `@username/resource-name`"
+      },
       "kind": "typeAlias",
       "typeAliasDef": {
         "tsType": {

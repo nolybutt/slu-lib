@@ -15,9 +15,11 @@ use serde::{Deserialize, Serialize};
 use serde_alias::serde_alias;
 use ts_rs::TS;
 
-use crate::{error::Result, rect::Rect};
-
-use super::{PluginId, ThemeId, WidgetId};
+use crate::{
+    error::Result,
+    rect::Rect,
+    resource::{PluginId, ThemeId},
+};
 
 // ============== Fancy Toolbar Settings ==============
 

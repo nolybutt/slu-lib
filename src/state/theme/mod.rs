@@ -1,6 +1,6 @@
 pub mod config;
 
-use std::{collections::HashMap, path::Path};
+use std::{collections::HashMap, fs::File, path::Path};
 
 use config::ThemeSettingsDefinition;
 use schemars::JsonSchema;
@@ -9,32 +9,10 @@ use ts_rs::TS;
 
 use crate::{
     error::Result,
-    resource::{ConcreteResource, ResourceId, ResourceMetadata, SluResourceFile},
+    resource::{
+        ConcreteResource, ResourceMetadata, SluResource, SluResourceFile, ThemeId, WidgetId,
+    },
 };
-
-use super::WidgetId;
-
-#[derive(Debug, Clone, Default, Hash, PartialEq, Eq, Serialize, Deserialize, JsonSchema, TS)]
-pub struct ThemeId(ResourceId);
-
-impl std::ops::Deref for ThemeId {
-    type Target = ResourceId;
-    fn deref(&self) -> &Self::Target {
-        &self.0
-    }
-}
-
-impl std::ops::DerefMut for ThemeId {
-    fn deref_mut(&mut self) -> &mut Self::Target {
-        &mut self.0
-    }
-}
-
-impl From<&str> for ThemeId {
-    fn from(value: &str) -> Self {
-        Self(ResourceId::from(value))
-    }
-}
 
 #[derive(Debug, Clone, Default, Serialize, Deserialize, JsonSchema, TS)]
 #[serde(default, rename_all = "camelCase")]
@@ -49,27 +27,13 @@ pub struct Theme {
     pub styles: HashMap<WidgetId, String>,
 }
 
-impl Theme {
-    fn migrate_old_keys(&mut self) {
-        if let Some(css) = self.styles.remove(&"toolbar".into()) {
-            self.styles.insert(WidgetId::known_toolbar(), css);
-        }
+impl SluResource for Theme {
+    fn metadata(&self) -> &ResourceMetadata {
+        &self.metadata
+    }
 
-        if let Some(css) = self.styles.remove(&"weg".into()) {
-            self.styles.insert(WidgetId::known_weg(), css);
-        }
-
-        if let Some(css) = self.styles.remove(&"wm".into()) {
-            self.styles.insert(WidgetId::known_wm(), css);
-        }
-
-        if let Some(css) = self.styles.remove(&"launcher".into()) {
-            self.styles.insert(WidgetId::known_launcher(), css);
-        }
-
-        if let Some(css) = self.styles.remove(&"wall".into()) {
-            self.styles.insert(WidgetId::known_wall(), css);
-        }
+    fn metadata_mut(&mut self) -> &mut ResourceMetadata {
+        &mut self.metadata
     }
 
     fn load_from_file(path: &Path) -> Result<Theme> {
@@ -79,7 +43,8 @@ impl Theme {
             .to_string_lossy();
 
         let theme = match extension.as_ref() {
-            "yml" | "yaml" => serde_yaml::from_reader(std::fs::File::open(path)?)?,
+            "yml" | "yaml" => serde_yaml::from_reader(File::open(path)?)?,
+            "json" | "jsonc" => serde_json::from_reader(File::open(path)?)?,
             "slu" => match SluResourceFile::load(path)?.concrete()? {
                 ConcreteResource::Theme(theme) => theme,
                 _ => return Err("Resource file is not a theme".into()),
@@ -87,48 +52,6 @@ impl Theme {
             _ => {
                 return Err("Invalid theme path extension".into());
             }
-        };
-        Ok(theme)
-    }
-
-    /// Load theme from a folder using old deprecated paths since v2.1.0 will be removed in v3
-    fn load_old_folder_schema(path: &Path) -> Result<Theme> {
-        if !path.is_dir() {
-            return Err("Invalid theme path".into());
-        }
-
-        let mut theme = Self::load_from_file(&path.join("theme.yml"))?;
-        theme.metadata.filename = path.file_name().unwrap().to_string_lossy().to_string();
-
-        if path.join("theme.weg.css").exists() {
-            theme.styles.insert(
-                WidgetId::known_weg(),
-                std::fs::read_to_string(path.join("theme.weg.css"))?,
-            );
-        }
-        if path.join("theme.toolbar.css").exists() {
-            theme.styles.insert(
-                WidgetId::known_toolbar(),
-                std::fs::read_to_string(path.join("theme.toolbar.css"))?,
-            );
-        }
-        if path.join("theme.wm.css").exists() {
-            theme.styles.insert(
-                WidgetId::known_wm(),
-                std::fs::read_to_string(path.join("theme.wm.css"))?,
-            );
-        }
-        if path.join("theme.launcher.css").exists() {
-            theme.styles.insert(
-                WidgetId::known_launcher(),
-                std::fs::read_to_string(path.join("theme.launcher.css"))?,
-            );
-        }
-        if path.join("theme.wall.css").exists() {
-            theme.styles.insert(
-                WidgetId::known_wall(),
-                std::fs::read_to_string(path.join("theme.wall.css"))?,
-            );
         };
         Ok(theme)
     }
@@ -178,13 +101,72 @@ impl Theme {
         Ok(theme)
     }
 
-    pub fn load(path: &Path) -> Result<Theme> {
-        let mut theme = if path.is_dir() {
-            Self::load_from_folder(path)
-        } else {
-            Self::load_from_file(path)
-        }?;
-        theme.migrate_old_keys();
+    fn sanitize(&mut self) {
+        self.migrate_old_keys();
+    }
+}
+
+impl Theme {
+    fn migrate_old_keys(&mut self) {
+        if let Some(css) = self.styles.remove(&"toolbar".into()) {
+            self.styles.insert(WidgetId::known_toolbar(), css);
+        }
+
+        if let Some(css) = self.styles.remove(&"weg".into()) {
+            self.styles.insert(WidgetId::known_weg(), css);
+        }
+
+        if let Some(css) = self.styles.remove(&"wm".into()) {
+            self.styles.insert(WidgetId::known_wm(), css);
+        }
+
+        if let Some(css) = self.styles.remove(&"launcher".into()) {
+            self.styles.insert(WidgetId::known_launcher(), css);
+        }
+
+        if let Some(css) = self.styles.remove(&"wall".into()) {
+            self.styles.insert(WidgetId::known_wall(), css);
+        }
+    }
+
+    /// Load theme from a folder using old deprecated paths since v2.1.0 will be removed in v3
+    fn load_old_folder_schema(path: &Path) -> Result<Theme> {
+        if !path.is_dir() {
+            return Err("Invalid theme path".into());
+        }
+
+        let mut theme = Self::load_from_file(&path.join("theme.yml"))?;
+
+        if path.join("theme.weg.css").exists() {
+            theme.styles.insert(
+                WidgetId::known_weg(),
+                std::fs::read_to_string(path.join("theme.weg.css"))?,
+            );
+        }
+        if path.join("theme.toolbar.css").exists() {
+            theme.styles.insert(
+                WidgetId::known_toolbar(),
+                std::fs::read_to_string(path.join("theme.toolbar.css"))?,
+            );
+        }
+        if path.join("theme.wm.css").exists() {
+            theme.styles.insert(
+                WidgetId::known_wm(),
+                std::fs::read_to_string(path.join("theme.wm.css"))?,
+            );
+        }
+        if path.join("theme.launcher.css").exists() {
+            theme.styles.insert(
+                WidgetId::known_launcher(),
+                std::fs::read_to_string(path.join("theme.launcher.css"))?,
+            );
+        }
+        if path.join("theme.wall.css").exists() {
+            theme.styles.insert(
+                WidgetId::known_wall(),
+                std::fs::read_to_string(path.join("theme.wall.css"))?,
+            );
+        };
         Ok(theme)
     }
 }

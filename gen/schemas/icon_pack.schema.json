@@ -29,6 +29,7 @@
         "bundled": false,
         "displayName": {},
         "filename": "",
+        "path": "",
         "portrait": null,
         "screenshots": [],
         "tags": []
@@ -156,10 +157,11 @@
       ]
     },
     "IconPackId": {
+      "description": "Visual id composed of the creator username and the resource name. e.g. `@username/resource-name`",
       "$ref": "#/$defs/ResourceId"
     },
     "ResourceId": {
-      "description": "visual id composed of the creator username and the resource name",
+      "description": "Visual id composed of the creator username and the resource name. e.g. `@username/resource-name`",
       "type": "string"
     },
     "ResourceMetadata": {

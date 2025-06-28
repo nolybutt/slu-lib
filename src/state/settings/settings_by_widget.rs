@@ -4,7 +4,7 @@ use schemars::JsonSchema;
 use uuid::Uuid;
 
 use crate::{
-    state::WidgetId,
+    resource::WidgetId,
     utils::{Flatenable, TsUnknown},
 };
 
