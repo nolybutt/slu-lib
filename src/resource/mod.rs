@@ -222,7 +222,7 @@ impl SluResourceFile {
 
         writer.write_all(&[2])?; // version
         writer.write_all("SLU".as_bytes())?; // SLU mime type
-        writer.write_all(&vec![0u8; 4])?; // 32 bits reserved
+        writer.write_all(&[0u8; 4])?; // 32 bits reserved
         writer.write_all(encoded.as_bytes())?;
         Ok(())
     }

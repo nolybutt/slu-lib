@@ -59,7 +59,7 @@ impl SluResource for Plugin {
     }
 
     fn load_from_folder(path: &Path) -> Result<Self> {
-        Ok(Self::load_from_file(&path.join("metadata.yml"))?)
+        Self::load_from_file(&path.join("metadata.yml"))
     }
 }
 
