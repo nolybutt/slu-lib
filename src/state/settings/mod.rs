@@ -637,6 +637,8 @@ pub struct Settings {
     pub icon_packs: Vec<String>,
     /// enable or disable dev tools tab in settings
     pub dev_tools: bool,
+    /// discord rich presence
+    pub drpc: bool,
     /// language to use, if null the system locale is used
     pub language: Option<String>,
     /// MomentJS date format
@@ -670,6 +672,7 @@ impl Default for Settings {
             launcher: None,
             // ---
             ahk_enabled: true,
+            drpc: true,
             selected_themes: vec!["default".to_string()],
             icon_packs: vec!["system".to_string()],
             monitors_v2: HashMap::new(),
