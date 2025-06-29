@@ -44,6 +44,7 @@
     "include": [
       "src",
       "src/types",
+      "src/validators",
       "scripts",
       "gen"
     ],
@@ -54,6 +55,7 @@
     "include": [
       "src",
       "src/types",
+      "src/validators",
       "scripts",
       "gen"
     ],
@@ -70,6 +72,7 @@
     "include": [
       "src",
       "src/types",
+      "src/validators",
       "gen",
       "LICENSE",
       "readme.md"

@@ -78,6 +78,8 @@ const createMockIconPacks = (): { packA: IconPack; packB: IconPack; packC: IconP
         icon: onlyBase('CustomA.png'),
       },
     ],
+    remoteEntries: [],
+    downloaded: false,
   },
   packB: {
     id: 'mockedIconPackB',
@@ -112,6 +114,8 @@ const createMockIconPacks = (): { packA: IconPack; packB: IconPack; packC: IconP
         icon: onlyBase('CustomB.png'),
       },
     ],
+    remoteEntries: [],
+    downloaded: false,
   },
   packC: {
     id: 'mockedIconPackC',
@@ -127,6 +131,8 @@ const createMockIconPacks = (): { packA: IconPack; packB: IconPack; packC: IconP
         redirect: null,
       },
     ],
+    remoteEntries: [],
+    downloaded: false,
   },
 });
 
