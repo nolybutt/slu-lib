@@ -6,8 +6,7 @@
   "exports": {
     ".": "./src/lib.ts",
     "./types": "./src/types/mod.ts",
-    "./tauri": "./src/re-exports/tauri.ts",
-    "./validators": "./src/validators/mod.ts"
+    "./tauri": "./src/re-exports/tauri.ts"
   },
   "tasks": {
     "build:npm": "deno run -A ./scripts/build_npm.ts",
@@ -72,7 +71,6 @@
     "include": [
       "src",
       "src/types",
-      "src/validators",
       "gen",
       "LICENSE",
       "readme.md"
