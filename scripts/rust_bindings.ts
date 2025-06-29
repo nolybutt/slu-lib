@@ -1,4 +1,3 @@
-
 await Deno.mkdir('./src/types', { recursive: true });
 // await Deno.mkdir('./src/validators', { recursive: true });
 
