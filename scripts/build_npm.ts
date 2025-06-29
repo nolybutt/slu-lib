@@ -34,10 +34,10 @@ await build({
   }, {
     name: './types',
     path: './src/types/mod.ts',
-  }, {
+  }, /* , {
     name: './validators',
     path: './src/validators/mod.ts',
-  }, {
+  } */ {
     name: './tauri',
     path: './src/re-exports/tauri.ts',
   }],

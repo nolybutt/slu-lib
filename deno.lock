@@ -44,8 +44,7 @@
     "npm:@tauri-apps/plugin-process@^2.2.1": "2.2.1",
     "npm:json-refs@*": "3.0.15",
     "npm:json-refs@3.0.15": "3.0.15",
-    "npm:json-schema-to-zod@2.6.1": "2.6.1",
-    "npm:zod@^3.25.67": "3.25.67"
+    "npm:json-schema-to-zod@2.6.1": "2.6.1"
   },
   "jsr": {
     "@david/code-block-writer@13.0.3": {
@@ -571,9 +570,6 @@
     },
     "wrappy@1.0.2": {
       "integrity": "sha512-l4Sp/DRseor9wL6EvV2+TuQn63dMkPjZ/sp9XkghTEbV9KlPS1xUsZ3u7/IQO4wxtcFB4bgpQPRcR3QCvezPcQ=="
-    },
-    "zod@3.25.67": {
-      "integrity": "sha512-idA2YXwpCdqUSKRCACDE6ItZD9TZzy3OZMtpfLoh6oPR47lipysRrJfjzMqFxQ3uJuUPyUeWe1r9vLH33xO/Qw=="
     }
   },
   "redirects": {
@@ -696,8 +692,7 @@
       "npm:@tauri-apps/plugin-dialog@^2.2.2",
       "npm:@tauri-apps/plugin-fs@^2.3.0",
       "npm:@tauri-apps/plugin-log@^2.4.0",
-      "npm:@tauri-apps/plugin-process@^2.2.1",
-      "npm:zod@^3.25.67"
+      "npm:@tauri-apps/plugin-process@^2.2.1"
     ]
   }
 }

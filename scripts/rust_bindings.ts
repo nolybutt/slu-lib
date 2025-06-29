@@ -1,21 +1,19 @@
-import { jsonSchemaToZod } from 'npm:json-schema-to-zod@2.6.1';
-import { resolveRefs } from 'npm:json-refs@3.0.15';
 
 await Deno.mkdir('./src/types', { recursive: true });
-await Deno.mkdir('./src/validators', { recursive: true });
+// await Deno.mkdir('./src/validators', { recursive: true });
 
 const GenTypesPath = await Deno.realPath('./src/types');
-const GenJsonSchemasPath = await Deno.realPath('./gen/schemas');
-const GenZodSchemasPath = await Deno.realPath('./src/validators');
+// const GenJsonSchemasPath = await Deno.realPath('./gen/schemas');
+// const GenZodSchemasPath = await Deno.realPath('./src/validators');
 
 const libPath = await Deno.realPath('./src/lib.ts');
 
 console.log('[Task] Removing old bindings...');
 await Deno.remove(GenTypesPath, { recursive: true });
-await Deno.remove(GenZodSchemasPath, { recursive: true });
+// await Deno.remove(GenZodSchemasPath, { recursive: true });
 // recreate
 await Deno.mkdir(GenTypesPath, { recursive: true });
-await Deno.mkdir(GenZodSchemasPath, { recursive: true });
+// await Deno.mkdir(GenZodSchemasPath, { recursive: true });
 
 {
   console.log('[Task] Generating Typescript Bindings and JSON Schemas...');
@@ -29,7 +27,7 @@ await Deno.mkdir(GenZodSchemasPath, { recursive: true });
   }).output();
 }
 
-{
+/* {
   console.log('[Task] Converting JSON Schemas to Zod Schemas...');
   for (const file of Deno.readDirSync(GenJsonSchemasPath)) {
     if (file.isFile && file.name.endsWith('.schema.json')) {
@@ -40,11 +38,11 @@ await Deno.mkdir(GenZodSchemasPath, { recursive: true });
       await Deno.writeTextFile(`${GenZodSchemasPath}/${file.name.replace('.schema.json', '.ts')}`, zodCode);
     }
   }
-}
+} */
 
 {
   console.log('[Task] Creating entry points...');
-  const zodMod = await Deno.open(`${GenZodSchemasPath}/mod.ts`, {
+  /* const zodMod = await Deno.open(`${GenZodSchemasPath}/mod.ts`, {
     create: true,
     append: true,
   });
@@ -54,7 +52,7 @@ await Deno.mkdir(GenZodSchemasPath, { recursive: true });
         new TextEncoder().encode(`export { default as ${file.name.replace('.ts', '')} } from './${file.name}';\n`),
       );
     }
-  }
+  } */
 
   const typesMod = await Deno.open(`${GenTypesPath}/mod.ts`, {
     create: true,

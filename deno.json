@@ -28,8 +28,7 @@
     "@tauri-apps/plugin-dialog": "npm:@tauri-apps/plugin-dialog@^2.2.2",
     "@tauri-apps/plugin-fs": "npm:@tauri-apps/plugin-fs@^2.3.0",
     "@tauri-apps/plugin-log": "npm:@tauri-apps/plugin-log@^2.4.0",
-    "@tauri-apps/plugin-process": "npm:@tauri-apps/plugin-process@^2.2.1",
-    "zod": "npm:zod@^3.25.67"
+    "@tauri-apps/plugin-process": "npm:@tauri-apps/plugin-process@^2.2.1"
   },
   "compilerOptions": {
     "lib": [
@@ -43,7 +42,6 @@
     "include": [
       "src",
       "src/types",
-      "src/validators",
       "scripts",
       "gen"
     ],
@@ -54,7 +52,6 @@
     "include": [
       "src",
       "src/types",
-      "src/validators",
       "scripts",
       "gen"
     ],
