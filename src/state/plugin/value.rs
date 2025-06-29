@@ -1,7 +1,7 @@
 use schemars::JsonSchema;
 
 use crate::{
-    resource::ResourceId,
+    resource::WidgetId,
     state::{ToolbarItem, WindowManagerLayout},
     utils::TsUnknown,
 };
@@ -19,7 +19,7 @@ pub enum KnownPlugin {
 pub struct ThirdPartyPlugin {
     /// The friendly id of the widget that will use this plugin
     /// example: `@username/widget-name`
-    target: ResourceId,
+    target: WidgetId,
     /// The plugin data, this can be anything and depends on the widget using this plugin
     /// to handle it, parse it and use it.
     plugin: TsUnknown,

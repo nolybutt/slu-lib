@@ -1022,7 +1022,7 @@
         },
         "target": {
           "description": "The friendly id of the widget that will use this plugin\n example: `@username/widget-name`",
-          "$ref": "#/$defs/ResourceId"
+          "$ref": "#/$defs/WidgetId"
         }
       },
       "required": [
@@ -1361,6 +1361,10 @@
           "default": false
         }
       }
+    },
+    "WidgetId": {
+      "description": "Visual id composed of the creator username and the resource name. e.g. `@username/resource-name`",
+      "$ref": "#/$defs/ResourceId"
     },
     "WindowManagerLayout": {
       "type": "object",

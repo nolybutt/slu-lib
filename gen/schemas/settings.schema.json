@@ -478,6 +478,11 @@
       "type": "boolean",
       "default": false
     },
+    "drpc": {
+      "description": "discord rich presence",
+      "type": "boolean",
+      "default": true
+    },
     "fancyToolbar": {
       "description": "@deprecated since v2.1.0, will be removed in v3.0.0",
       "anyOf": [

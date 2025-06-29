@@ -37,6 +37,10 @@
     }
   },
   "$defs": {
+    "CssVariableName": {
+      "description": "Valid CSS variable name that starts with `--` and follows CSS naming conventions",
+      "type": "string"
+    },
     "ResourceId": {
       "description": "Visual id composed of the creator username and the resource name. e.g. `@username/resource-name`",
       "type": "string"
@@ -234,7 +238,7 @@
         },
         "name": {
           "description": "Css variable name, example: `--my-css-variable`",
-          "type": "string"
+          "$ref": "#/$defs/CssVariableName"
         }
       },
       "required": [
@@ -258,7 +262,7 @@
         },
         "name": {
           "description": "Css variable name, example: `--my-css-variable`",
-          "type": "string"
+          "$ref": "#/$defs/CssVariableName"
         }
       },
       "required": [
@@ -281,7 +285,7 @@
         },
         "name": {
           "description": "Css variable name, example: `--my-css-variable`",
-          "type": "string"
+          "$ref": "#/$defs/CssVariableName"
         }
       },
       "required": [
@@ -303,7 +307,7 @@
         },
         "name": {
           "description": "Css variable name, example: `--my-css-variable`",
-          "type": "string"
+          "$ref": "#/$defs/CssVariableName"
         }
       },
       "required": [

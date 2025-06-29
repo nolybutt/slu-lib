@@ -100,35 +100,9 @@ impl SluResource for Theme {
         }
         Ok(theme)
     }
-
-    fn sanitize(&mut self) {
-        self.migrate_old_keys();
-    }
 }
 
 impl Theme {
-    fn migrate_old_keys(&mut self) {
-        if let Some(css) = self.styles.remove(&"toolbar".into()) {
-            self.styles.insert(WidgetId::known_toolbar(), css);
-        }
-
-        if let Some(css) = self.styles.remove(&"weg".into()) {
-            self.styles.insert(WidgetId::known_weg(), css);
-        }
-
-        if let Some(css) = self.styles.remove(&"wm".into()) {
-            self.styles.insert(WidgetId::known_wm(), css);
-        }
-
-        if let Some(css) = self.styles.remove(&"launcher".into()) {
-            self.styles.insert(WidgetId::known_launcher(), css);
-        }
-
-        if let Some(css) = self.styles.remove(&"wall".into()) {
-            self.styles.insert(WidgetId::known_wall(), css);
-        }
-    }
-
     /// Load theme from a folder using old deprecated paths since v2.1.0 will be removed in v3
     fn load_old_folder_schema(path: &Path) -> Result<Theme> {
         if !path.is_dir() {

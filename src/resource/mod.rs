@@ -156,10 +156,6 @@ pub struct Resource {
 
 impl Resource {
     pub fn verify(&self) -> Result<()> {
-        if !self.friendly_id.is_valid() {
-            return Err("invalid resource id".into());
-        }
-
         if let ResourceText::Localized(map) = &self.metadata.display_name {
             if map.get("en").is_none() {
                 return Err("missing mandatory english display name".into());

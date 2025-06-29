@@ -49,8 +49,10 @@ macro_rules! impl_common_traits {
 /// Visual id composed of the creator username and the resource name. e.g. `@username/resource-name`
 pub struct ResourceId(String);
 
-static REGEX: LazyLock<regex::Regex> =
-    LazyLock::new(|| regex::Regex::new("^@[\\w\\-]{3,31}\\w\\/[\\w\\-]+\\w$").unwrap());
+static REGEX: LazyLock<regex::Regex> = LazyLock::new(|| {
+    regex::Regex::new(r"^@[a-zA-Z0-9][\w\-]{2,31}[a-zA-Z0-9]\/[a-zA-Z0-9][\w\-]+[a-zA-Z0-9]$")
+        .unwrap()
+});
 
 impl ResourceId {
     fn regex() -> &'static regex::Regex {
@@ -61,13 +63,12 @@ impl ResourceId {
         Self::regex().is_match(&self.0)
     }
 
-    pub fn validate(&self) -> Result<()> {
+    pub fn validate(&self) -> Result<(), String> {
         if !self.is_valid() {
             return Err(format!(
-                "invalid resource id, should follow the regex: {}",
+                "Invalid resource id, should follow the regex: {}",
                 Self::regex()
-            )
-            .into());
+            ));
         }
         Ok(())
     }
@@ -126,7 +127,17 @@ impl<'de> Deserialize<'de> for ResourceId {
             where
                 E: serde::de::Error,
             {
-                let id = ResourceId(value.to_string());
+                // this step is to allow deserialize old ids used on older schemas (themes)
+                let id = match value {
+                    "toolbar" => WidgetId::known_toolbar().0,
+                    "weg" => WidgetId::known_weg().0,
+                    "wm" => WidgetId::known_wm().0,
+                    "launcher" => WidgetId::known_launcher().0,
+                    "wall" => WidgetId::known_wall().0,
+                    "settings" => WidgetId::known_settings().0,
+                    "popup" => WidgetId::known_popup().0,
+                    _ => ResourceId(value.to_string()),
+                };
                 id.validate().map_err(serde::de::Error::custom)?;
                 Ok(id)
             }
