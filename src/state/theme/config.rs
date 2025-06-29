@@ -92,7 +92,7 @@ static CSS_VAR_REGEX: LazyLock<regex::Regex> =
 
 impl CssVariableName {
     /// Creates a new CssVariableName after validation
-    pub fn from_str(name: &str) -> Result<Self> {
+    pub fn from_string(name: &str) -> Result<Self> {
         if !CSS_VAR_REGEX.is_match(name) {
             return Err(format!(
                 "Invalid CSS variable name '{name}'. Must start with '--' and follow CSS naming rules"
@@ -130,7 +130,7 @@ impl<'de> Deserialize<'de> for CssVariableName {
             where
                 E: serde::de::Error,
             {
-                CssVariableName::from_str(value).map_err(serde::de::Error::custom)
+                CssVariableName::from_string(value).map_err(serde::de::Error::custom)
             }
         }
 
