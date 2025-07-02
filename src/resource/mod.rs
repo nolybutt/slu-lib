@@ -300,12 +300,13 @@ pub trait SluResource: Sized + Serialize {
     }
 
     fn save(&self) -> Result<()> {
-        let mut path = self.metadata().path.to_path_buf();
-        if path.is_dir() {
-            path = search_for_metadata_file(&path).unwrap_or_else(|| path.join("metadata.yml"));
+        let mut save_path = self.metadata().path.to_path_buf();
+        if save_path.is_dir() {
+            save_path = search_for_metadata_file(&save_path)
+                .unwrap_or_else(|| save_path.join("metadata.yml"));
         }
 
-        let extension = path
+        let extension = save_path
             .extension()
             .ok_or("Invalid path extension")?
             .to_string_lossy()
@@ -315,14 +316,14 @@ pub trait SluResource: Sized + Serialize {
             "slu" => {
                 let mut slu_file = SluResourceFile::load(&self.metadata().path)?;
                 slu_file.data = serde_json::to_value(self)?.into();
-                slu_file.store(&self.metadata().path)?;
+                slu_file.store(&save_path)?;
             }
             "yml" | "yaml" => {
-                let file = File::create(path)?;
+                let file = File::create(save_path)?;
                 serde_yaml::to_writer(file, self)?;
             }
             "json" | "jsonc" => {
-                let file = File::create(path)?;
+                let file = File::create(save_path)?;
                 serde_json::to_writer_pretty(file, self)?;
             }
             _ => {
