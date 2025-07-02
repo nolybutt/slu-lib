@@ -10,6 +10,7 @@ use ts_rs::TS;
 use crate::{
     error::Result,
     resource::{ConcreteResource, ResourceMetadata, SluResource, SluResourceFile, WidgetId},
+    utils::search_for_metadata_file,
 };
 
 #[derive(Debug, Clone, Default, Serialize, Deserialize, JsonSchema, TS)]
@@ -66,7 +67,8 @@ impl SluResource for Widget {
     }
 
     fn load_from_folder(path: &Path) -> Result<Widget> {
-        let mut widget = Self::load_from_file(&path.join("metadata.yml"))?;
+        let file = search_for_metadata_file(path).ok_or("No metadata file found")?;
+        let mut widget = Self::load_from_file(&file)?;
 
         for stem in ["index.js", "main.js", "mod.js"] {
             if path.join(stem).exists() {

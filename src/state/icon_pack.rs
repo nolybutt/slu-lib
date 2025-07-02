@@ -10,6 +10,7 @@ use ts_rs::TS;
 use crate::{
     error::Result,
     resource::{ConcreteResource, IconPackId, ResourceMetadata, SluResource, SluResourceFile},
+    utils::search_for_metadata_file,
 };
 
 #[derive(Debug, Default, PartialEq, Eq, Clone, Serialize, Deserialize, JsonSchema, TS)]
@@ -71,7 +72,8 @@ impl SluResource for IconPack {
     }
 
     fn load_from_folder(path: &Path) -> Result<Self> {
-        Self::load_from_file(&path.join("metadata.yml"))
+        let file = search_for_metadata_file(path).ok_or("No metadata file found")?;
+        Self::load_from_file(&file)
     }
 }
 
