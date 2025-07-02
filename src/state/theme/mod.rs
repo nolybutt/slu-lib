@@ -12,6 +12,7 @@ use crate::{
     resource::{
         ConcreteResource, ResourceMetadata, SluResource, SluResourceFile, ThemeId, WidgetId,
     },
+    utils::search_for_metadata_file,
 };
 
 #[derive(Debug, Clone, Default, Serialize, Deserialize, JsonSchema, TS)]
@@ -105,11 +106,10 @@ impl SluResource for Theme {
 impl Theme {
     /// Load theme from a folder using old deprecated paths since v2.1.0 will be removed in v3
     fn load_old_folder_schema(path: &Path) -> Result<Theme> {
-        if !path.is_dir() {
-            return Err("Invalid theme path".into());
-        }
-
-        let mut theme = Self::load_from_file(&path.join("theme.yml"))?;
+        let file = search_for_metadata_file(path).unwrap_or_else(|| {
+            path.join("theme.yml") // backward compatibility to be removed in v3
+        });
+        let mut theme = Self::load_from_file(&file)?;
 
         if path.join("theme.weg.css").exists() {
             theme.styles.insert(
