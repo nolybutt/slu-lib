@@ -19,7 +19,7 @@ use uuid::Uuid;
 use crate::{
     error::Result,
     state::{IconPack, Plugin, Theme, Widget},
-    utils::TsUnknown,
+    utils::{search_for_metadata_file, TsUnknown},
 };
 
 // =============================================================================
@@ -300,9 +300,9 @@ pub trait SluResource: Sized + Serialize {
     }
 
     fn save(&self) -> Result<()> {
-        let mut path = self.metadata().path.clone();
+        let mut path = self.metadata().path.to_path_buf();
         if path.is_dir() {
-            path.push("metadata.yml");
+            path = search_for_metadata_file(&path).unwrap_or_else(|| path.join("metadata.yml"));
         }
 
         let extension = path
