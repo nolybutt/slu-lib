@@ -314,7 +314,7 @@ pub trait SluResource: Sized + Serialize {
 
         match extension.as_str() {
             "slu" => {
-                let mut slu_file = SluResourceFile::load(&self.metadata().path)?;
+                let mut slu_file = SluResourceFile::load(&save_path)?;
                 slu_file.data = serde_json::to_value(self)?.into();
                 slu_file.store(&save_path)?;
             }
