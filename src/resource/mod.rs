@@ -74,7 +74,7 @@ pub struct ResourceMetadata {
     /// internal field used by the app on load of the resource
     #[serde(skip_deserializing)]
     pub path: PathBuf,
-    /// internal field used by the app on load of the resource
+    /// internal field used by the app on load of the resource, will be removed on v3
     #[serde(skip_deserializing)]
     pub filename: String,
     /// internal field that indicates if the resource is bundled

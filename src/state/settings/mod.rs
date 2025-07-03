@@ -18,7 +18,8 @@ use ts_rs::TS;
 use crate::{
     error::Result,
     rect::Rect,
-    resource::{PluginId, ResourceId, ThemeId},
+    resource::{IconPackId, PluginId, ThemeId},
+    state::Theme,
 };
 
 // ============== Fancy Toolbar Settings ==============
@@ -630,11 +631,13 @@ pub struct Settings {
     pub ahk_enabled: bool,
     /// ahk variables
     pub ahk_variables: AhkVarList,
-    /// list of selected themes, can be ResourceId or filename as backguard compatibility for versions before v2.3.8
-    #[serde(alias = "selected_theme", alias = "selected_themes")] // remove alias on v3
-    pub active_themes: Vec<String>,
+    /// list of selected themes as filename as backguard compatibility for versions before v2.3.8, will be removed in v3
+    #[serde(alias = "selected_theme", alias = "selected_themes")]
+    pub old_active_themes: Vec<String>,
+    /// list of selected themes
+    pub active_themes: Vec<ThemeId>,
     /// list of selected icon packs
-    pub active_icon_packs: Vec<ResourceId>,
+    pub active_icon_packs: Vec<IconPackId>,
     /// enable or disable dev tools tab in settings
     pub dev_tools: bool,
     /// discord rich presence
@@ -673,6 +676,7 @@ impl Default for Settings {
             // ---
             ahk_enabled: true,
             drpc: true,
+            old_active_themes: Vec::new(),
             active_themes: vec!["@default/theme".into()],
             active_icon_packs: vec!["@system/icon-pack".into()],
             monitors_v2: HashMap::new(),
@@ -698,6 +702,16 @@ impl Settings {
             Some(l) => l.split('-').next().unwrap_or("en").to_string(),
             None => "en".to_string(),
         }
+    }
+
+    /// Migrate old settings (before v2.3.8) (will be removed in v3.0.0)
+    pub fn migrate_active_themes(&mut self, themes: &[Theme]) {
+        for theme in themes {
+            if self.old_active_themes.contains(&theme.metadata.filename) {
+                self.active_themes.push(theme.id.clone());
+            }
+        }
+        self.old_active_themes.clear();
     }
 
     /// Migrate old settings (before v2.1.0) (will be removed in v3.0.0)
