@@ -10,7 +10,7 @@
         "@system/icon-pack"
       ],
       "items": {
-        "$ref": "#/$defs/ResourceId"
+        "$ref": "#/$defs/IconPackId"
       }
     },
     "activeThemes": {
@@ -20,7 +20,7 @@
         "@default/theme"
       ],
       "items": {
-        "$ref": "#/$defs/ResourceId"
+        "$ref": "#/$defs/ThemeId"
       }
     },
     "ahkEnabled": {
@@ -542,6 +542,14 @@
         "$ref": "#/$defs/MonitorConfiguration"
       },
       "default": {}
+    },
+    "oldActiveThemes": {
+      "description": "list of selected themes as filename as backguard compatibility for versions before v2.3.8, will be removed in v3",
+      "type": "array",
+      "default": [],
+      "items": {
+        "type": "string"
+      }
     },
     "seelenweg": {
       "description": "@deprecated since v2.1.0, will be removed in v3.0.0",
@@ -1281,6 +1289,10 @@
         }
       ]
     },
+    "IconPackId": {
+      "description": "Visual id composed of the creator username and the resource name. e.g. `@username/resource-name`",
+      "$ref": "#/$defs/ResourceId"
+    },
     "MonitorConfiguration": {
       "type": "object",
       "properties": {
@@ -1817,6 +1829,10 @@
           }
         }
       ]
+    },
+    "ThemeId": {
+      "description": "Visual id composed of the creator username and the resource name. e.g. `@username/resource-name`",
+      "$ref": "#/$defs/ResourceId"
     },
     "ThirdPartyWidgetSettings": {
       "description": "This struct is intented to work with ts-rs flattening",

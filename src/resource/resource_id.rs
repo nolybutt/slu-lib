@@ -45,8 +45,9 @@ macro_rules! impl_common_traits {
     };
 }
 
-#[derive(Debug, Clone, Hash, PartialEq, Eq, PartialOrd, Ord, Serialize, JsonSchema, TS)]
 /// Visual id composed of the creator username and the resource name. e.g. `@username/resource-name`
+#[derive(Debug, Clone, Hash, PartialEq, Eq, PartialOrd, Ord, Serialize, JsonSchema, TS)]
+#[ts(type = "string & { __brand: 'ResourceId' }")]
 pub struct ResourceId(String);
 
 static REGEX: LazyLock<regex::Regex> = LazyLock::new(|| {
