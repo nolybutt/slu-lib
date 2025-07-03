@@ -1,4 +1,4 @@
-import type { Icon, IconPack, ResourceMetadata } from '@seelen-ui/types';
+import type { Icon, IconPack, IconPackId, ResourceMetadata } from '@seelen-ui/types';
 import { IconPackManager } from './icon_pack.ts';
 import { assertEquals } from '@std/assert';
 
@@ -33,7 +33,7 @@ const cloneIconPack = (pack: IconPack): IconPack => JSON.parse(JSON.stringify(pa
 // Factory function for mock icon packs
 const createMockIconPacks = (): { packA: IconPack; packB: IconPack; packC: IconPack } => ({
   packA: {
-    id: 'a',
+    id: 'a' as IconPackId,
     metadata: { path: A_PATH } as ResourceMetadata,
     missing: onlyBase('MissingIconA.png'),
     entries: [
@@ -86,7 +86,7 @@ const createMockIconPacks = (): { packA: IconPack; packB: IconPack; packC: IconP
     downloaded: false,
   },
   packB: {
-    id: 'b',
+    id: 'b' as IconPackId,
     metadata: { path: B_PATH } as ResourceMetadata,
     missing: onlyBase('MissingIconB.png'),
     entries: [
@@ -122,7 +122,7 @@ const createMockIconPacks = (): { packA: IconPack; packB: IconPack; packC: IconP
     downloaded: false,
   },
   packC: {
-    id: 'c',
+    id: 'c' as IconPackId,
     metadata: { path: C_PATH } as ResourceMetadata,
     missing: null,
     entries: [

@@ -8,13 +8,13 @@ import { PhysicalPosition, PhysicalSize } from '@tauri-apps/api/dpi';
 import { monitorFromPoint } from '@tauri-apps/api/window';
 import { debounce } from '../../utils/async.ts';
 
-export const SeelenSettingsWidgetId: WidgetId = '@seelen/settings';
-export const SeelenPopupWidgetId: WidgetId = '@seelen/popup';
-export const SeelenWegWidgetId: WidgetId = '@seelen/weg';
-export const SeelenToolbarWidgetId: WidgetId = '@seelen/fancy-toolbar';
-export const SeelenWindowManagerWidgetId: WidgetId = '@seelen/window-manager';
-export const SeelenLauncherWidgetId: WidgetId = '@seelen/launcher';
-export const SeelenWallWidgetId: WidgetId = '@seelen/wallpaper-manager';
+export const SeelenSettingsWidgetId: WidgetId = '@seelen/settings' as WidgetId;
+export const SeelenPopupWidgetId: WidgetId = '@seelen/popup' as WidgetId;
+export const SeelenWegWidgetId: WidgetId = '@seelen/weg' as WidgetId;
+export const SeelenToolbarWidgetId: WidgetId = '@seelen/fancy-toolbar' as WidgetId;
+export const SeelenWindowManagerWidgetId: WidgetId = '@seelen/window-manager' as WidgetId;
+export const SeelenLauncherWidgetId: WidgetId = '@seelen/launcher' as WidgetId;
+export const SeelenWallWidgetId: WidgetId = '@seelen/wallpaper-manager' as WidgetId;
 
 export class WidgetList extends List<IWidget> {
   static getAsync(): Promise<WidgetList> {
