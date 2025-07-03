@@ -3,6 +3,26 @@
   "title": "Settings",
   "type": "object",
   "properties": {
+    "activeIconPacks": {
+      "description": "list of selected icon packs",
+      "type": "array",
+      "default": [
+        "@system/icon-pack"
+      ],
+      "items": {
+        "$ref": "#/$defs/ResourceId"
+      }
+    },
+    "activeThemes": {
+      "description": "list of selected themes",
+      "type": "array",
+      "default": [
+        "@default/theme"
+      ],
+      "items": {
+        "$ref": "#/$defs/ResourceId"
+      }
+    },
     "ahkEnabled": {
       "description": "enable or disable ahk",
       "type": "boolean",
@@ -495,16 +515,6 @@
       ],
       "writeOnly": true
     },
-    "iconPacks": {
-      "description": "list of selected icon packs",
-      "type": "array",
-      "default": [
-        "system"
-      ],
-      "items": {
-        "type": "string"
-      }
-    },
     "language": {
       "description": "language to use, if null the system locale is used",
       "type": [
@@ -544,16 +554,6 @@
         }
       ],
       "writeOnly": true
-    },
-    "selectedThemes": {
-      "description": "list of selected themes",
-      "type": "array",
-      "default": [
-        "default"
-      ],
-      "items": {
-        "type": "string"
-      }
     },
     "updater": {
       "description": "Updater Settings",

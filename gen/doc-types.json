@@ -31981,9 +31981,9 @@
       "isDefault": false,
       "location": {
         "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/Settings.ts",
-        "line": 9,
+        "line": 10,
         "col": 0,
-        "byteIndex": 476
+        "byteIndex": 527
       },
       "declarationKind": "export",
       "kind": "typeAlias",
@@ -32002,9 +32002,9 @@
                 },
                 "location": {
                   "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/Settings.ts",
-                  "line": 13,
+                  "line": 14,
                   "col": 0,
-                  "byteIndex": 555
+                  "byteIndex": 606
                 },
                 "params": [],
                 "computed": false,
@@ -32041,9 +32041,9 @@
                 },
                 "location": {
                   "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/Settings.ts",
-                  "line": 17,
+                  "line": 18,
                   "col": 0,
-                  "byteIndex": 645
+                  "byteIndex": 696
                 },
                 "params": [],
                 "computed": false,
@@ -32062,9 +32062,9 @@
                 },
                 "location": {
                   "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/Settings.ts",
-                  "line": 21,
+                  "line": 22,
                   "col": 0,
-                  "byteIndex": 692
+                  "byteIndex": 743
                 },
                 "params": [],
                 "computed": false,
@@ -32080,15 +32080,15 @@
                 "typeParams": []
               },
               {
-                "name": "selectedThemes",
+                "name": "activeThemes",
                 "jsDoc": {
                   "doc": "list of selected themes"
                 },
                 "location": {
                   "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/Settings.ts",
-                  "line": 25,
+                  "line": 26,
                   "col": 0,
-                  "byteIndex": 754
+                  "byteIndex": 805
                 },
                 "params": [],
                 "computed": false,
@@ -32099,9 +32099,12 @@
                   "typeRef": {
                     "typeParams": [
                       {
-                        "repr": "string",
-                        "kind": "keyword",
-                        "keyword": "string"
+                        "repr": "ResourceId",
+                        "kind": "typeRef",
+                        "typeRef": {
+                          "typeParams": null,
+                          "typeName": "ResourceId"
+                        }
                       }
                     ],
                     "typeName": "Array"
@@ -32110,15 +32113,15 @@
                 "typeParams": []
               },
               {
-                "name": "iconPacks",
+                "name": "activeIconPacks",
                 "jsDoc": {
                   "doc": "list of selected icon packs"
                 },
                 "location": {
                   "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/Settings.ts",
-                  "line": 29,
+                  "line": 30,
                   "col": 0,
-                  "byteIndex": 825
+                  "byteIndex": 878
                 },
                 "params": [],
                 "computed": false,
@@ -32129,9 +32132,12 @@
                   "typeRef": {
                     "typeParams": [
                       {
-                        "repr": "string",
-                        "kind": "keyword",
-                        "keyword": "string"
+                        "repr": "ResourceId",
+                        "kind": "typeRef",
+                        "typeRef": {
+                          "typeParams": null,
+                          "typeName": "ResourceId"
+                        }
                       }
                     ],
                     "typeName": "Array"
@@ -32146,9 +32152,9 @@
                 },
                 "location": {
                   "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/Settings.ts",
-                  "line": 33,
+                  "line": 34,
                   "col": 0,
-                  "byteIndex": 907
+                  "byteIndex": 970
                 },
                 "params": [],
                 "computed": false,
@@ -32167,9 +32173,9 @@
                 },
                 "location": {
                   "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/Settings.ts",
-                  "line": 37,
+                  "line": 38,
                   "col": 0,
-                  "byteIndex": 960
+                  "byteIndex": 1023
                 },
                 "params": [],
                 "computed": false,
@@ -32188,9 +32194,9 @@
                 },
                 "location": {
                   "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/Settings.ts",
-                  "line": 41,
+                  "line": 42,
                   "col": 0,
-                  "byteIndex": 1038
+                  "byteIndex": 1101
                 },
                 "params": [],
                 "computed": false,
@@ -32220,9 +32226,9 @@
                 },
                 "location": {
                   "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/Settings.ts",
-                  "line": 45,
+                  "line": 46,
                   "col": 0,
-                  "byteIndex": 1096
+                  "byteIndex": 1159
                 },
                 "params": [],
                 "computed": false,
@@ -32241,9 +32247,9 @@
                 },
                 "location": {
                   "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/Settings.ts",
-                  "line": 49,
+                  "line": 50,
                   "col": 0,
-                  "byteIndex": 1224
+                  "byteIndex": 1287
                 },
                 "params": [],
                 "computed": false,
@@ -32265,9 +32271,9 @@
                 },
                 "location": {
                   "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/Settings.ts",
-                  "line": 53,
+                  "line": 54,
                   "col": 0,
-                  "byteIndex": 1301
+                  "byteIndex": 1364
                 },
                 "params": [],
                 "computed": false,
@@ -32289,9 +32295,9 @@
                 },
                 "location": {
                   "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/Settings.ts",
-                  "line": 57,
+                  "line": 58,
                   "col": 0,
-                  "byteIndex": 1367
+                  "byteIndex": 1430
                 },
                 "params": [],
                 "computed": false,
@@ -32313,9 +32319,9 @@
                 },
                 "location": {
                   "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/Settings.ts",
-                  "line": 70,
+                  "line": 71,
                   "col": 0,
-                  "byteIndex": 1622
+                  "byteIndex": 1685
                 },
                 "params": [],
                 "computed": false,

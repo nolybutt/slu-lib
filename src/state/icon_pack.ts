@@ -8,7 +8,6 @@ import type {
 import { List } from '../utils/List.ts';
 import { newFromInvoke, newOnEvent } from '../utils/State.ts';
 import { invoke, SeelenCommand, SeelenEvent, type UnSubscriber } from '../handlers/mod.ts';
-import { path } from '@tauri-apps/api';
 import { Settings } from './settings/mod.ts';
 import type { UnlistenFn } from '@tauri-apps/api/event';
 import { convertFileSrc } from '@tauri-apps/api/core';
@@ -35,18 +34,21 @@ export class IconPackManager {
   private activeIconPacks: IconPack[] = [];
 
   protected constructor(
-    protected iconPacksPath: string,
     protected _availableIconPacks: IconPack[],
-    protected _activeIconPackFilenames: string[],
+    protected _activeIconPackIds: string[],
   ) {}
 
   get iconPacks(): IconPack[] {
     return this._availableIconPacks;
   }
 
+  get activeIconPackIds(): string[] {
+    return this._activeIconPackIds;
+  }
+
   protected resolveAvailableIcons(): void {
     for (const pack of this._availableIconPacks) {
-      const path = `${this.iconPacksPath}\\${pack.metadata.filename}`;
+      const path = `${pack.metadata.path}`;
 
       if (pack.missing) {
         pack.missing = resolveIcon(path, pack.missing);
@@ -70,8 +72,8 @@ export class IconPackManager {
 
   protected cacheActiveIconPacks(): void {
     this.activeIconPacks = [];
-    for (const key of this._activeIconPackFilenames.toReversed()) {
-      const pack = this._availableIconPacks.find((p) => p.metadata.filename === key);
+    for (const key of this._activeIconPackIds.toReversed()) {
+      const pack = this._availableIconPacks.find((p) => p.id === key);
       if (pack) {
         this.activeIconPacks.push(pack);
       }
@@ -86,9 +88,8 @@ export class IconPackManager {
    */
   public static async create(): Promise<IconPackManager> {
     const instance = new IconPackManager(
-      await path.resolve(await path.appDataDir(), 'iconpacks'),
       (await IconPackList.getAsync()).asArray(),
-      (await Settings.getAsync()).inner.iconPacks,
+      (await Settings.getAsync()).inner.activeIconPacks,
     );
     instance.resolveAvailableIcons();
     instance.cacheActiveIconPacks();
@@ -138,7 +139,7 @@ export class IconPackManager {
         this.callbacks.forEach((cb) => cb());
       });
       const unlistenerSettings = await Settings.onChange((settings) => {
-        this._activeIconPackFilenames = settings.inner.iconPacks;
+        this._activeIconPackIds = settings.inner.activeIconPacks;
         this.cacheActiveIconPacks();
         this.callbacks.forEach((cb) => cb());
       });

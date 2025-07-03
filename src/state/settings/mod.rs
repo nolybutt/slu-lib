@@ -18,7 +18,7 @@ use ts_rs::TS;
 use crate::{
     error::Result,
     rect::Rect,
-    resource::{PluginId, ThemeId},
+    resource::{PluginId, ResourceId, ThemeId},
 };
 
 // ============== Fancy Toolbar Settings ==============
@@ -630,11 +630,11 @@ pub struct Settings {
     pub ahk_enabled: bool,
     /// ahk variables
     pub ahk_variables: AhkVarList,
-    /// list of selected themes
-    #[serde(alias = "selected_theme")]
-    pub selected_themes: Vec<String>,
+    /// list of selected themes, can be ResourceId or filename as backguard compatibility for versions before v2.3.8
+    #[serde(alias = "selected_theme", alias = "selected_themes")] // remove alias on v3
+    pub active_themes: Vec<String>,
     /// list of selected icon packs
-    pub icon_packs: Vec<String>,
+    pub active_icon_packs: Vec<ResourceId>,
     /// enable or disable dev tools tab in settings
     pub dev_tools: bool,
     /// discord rich presence
@@ -673,8 +673,8 @@ impl Default for Settings {
             // ---
             ahk_enabled: true,
             drpc: true,
-            selected_themes: vec!["default".to_string()],
-            icon_packs: vec!["system".to_string()],
+            active_themes: vec!["@default/theme".into()],
+            active_icon_packs: vec!["@system/icon-pack".into()],
             monitors_v2: HashMap::new(),
             ahk_variables: AhkVarList::default(),
             dev_tools: false,
@@ -723,12 +723,12 @@ impl Settings {
 
     pub fn dedup_themes(&mut self) {
         let mut seen = HashSet::new();
-        self.selected_themes.retain(|x| seen.insert(x.clone())); // dedup
+        self.active_themes.retain(|x| seen.insert(x.clone())); // dedup
     }
 
     pub fn dedup_icon_packs(&mut self) {
         let mut seen = HashSet::new();
-        self.icon_packs.retain(|x| seen.insert(x.clone())); // dedup
+        self.active_icon_packs.retain(|x| seen.insert(x.clone())); // dedup
     }
 
     pub fn sanitize(&mut self) -> Result<()> {
@@ -740,11 +740,10 @@ impl Settings {
         }
 
         // ensure base is always selected
-        self.selected_themes.insert(0, "default".to_owned());
+        self.active_themes.insert(0, "@default/theme".into());
         self.dedup_themes();
-
         // ensure base is always selected
-        self.icon_packs.insert(0, "system".to_owned());
+        self.active_icon_packs.insert(0, "@system/icon-pack".into());
         self.dedup_icon_packs();
 
         for m in self.monitors_v2.values_mut() {
