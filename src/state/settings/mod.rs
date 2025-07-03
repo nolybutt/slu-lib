@@ -631,7 +631,7 @@ pub struct Settings {
     /// ahk variables
     pub ahk_variables: AhkVarList,
     /// list of selected themes as filename as backguard compatibility for versions before v2.3.8, will be removed in v3
-    #[serde(alias = "selected_theme", alias = "selected_themes")]
+    #[serde(alias = "selectedThemes")]
     pub old_active_themes: Vec<String>,
     /// list of selected themes
     pub active_themes: Vec<ThemeId>,
