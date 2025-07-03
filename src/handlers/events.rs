@@ -92,6 +92,8 @@ slu_events_declaration! {
 
     WallStop(bool) as "wall-stop",
 
+    PopupContentChanged(SluPopupConfig) as "popup-content-changed",
+
     StateSettingsChanged(Settings) as "settings-changed",
     StateWegItemsChanged(WegItems) as "weg-items",
     StateToolbarItemsChanged(Placeholder) as "toolbar-items",
