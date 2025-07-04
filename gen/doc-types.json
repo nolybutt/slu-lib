@@ -33370,7 +33370,7 @@
             "methods": [],
             "properties": [
               {
-                "name": "title",
+                "name": "width",
                 "location": {
                   "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/SluPopupConfig.ts",
                   "line": 4,
@@ -33381,26 +33381,32 @@
                 "computed": false,
                 "optional": false,
                 "tsType": {
-                  "repr": "Array",
-                  "kind": "typeRef",
-                  "typeRef": {
-                    "typeParams": [
-                      {
-                        "repr": "SluPopupContent",
-                        "kind": "typeRef",
-                        "typeRef": {
-                          "typeParams": null,
-                          "typeName": "SluPopupContent"
-                        }
-                      }
-                    ],
-                    "typeName": "Array"
-                  }
+                  "repr": "number",
+                  "kind": "keyword",
+                  "keyword": "number"
                 },
                 "typeParams": []
               },
               {
-                "name": "content",
+                "name": "height",
+                "location": {
+                  "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/SluPopupConfig.ts",
+                  "line": 4,
+                  "col": 46,
+                  "byteIndex": 217
+                },
+                "params": [],
+                "computed": false,
+                "optional": false,
+                "tsType": {
+                  "repr": "number",
+                  "kind": "keyword",
+                  "keyword": "number"
+                },
+                "typeParams": []
+              },
+              {
+                "name": "title",
                 "location": {
                   "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/SluPopupConfig.ts",
                   "line": 4,
@@ -33430,12 +33436,42 @@
                 "typeParams": []
               },
               {
+                "name": "content",
+                "location": {
+                  "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/SluPopupConfig.ts",
+                  "line": 4,
+                  "col": 93,
+                  "byteIndex": 264
+                },
+                "params": [],
+                "computed": false,
+                "optional": false,
+                "tsType": {
+                  "repr": "Array",
+                  "kind": "typeRef",
+                  "typeRef": {
+                    "typeParams": [
+                      {
+                        "repr": "SluPopupContent",
+                        "kind": "typeRef",
+                        "typeRef": {
+                          "typeParams": null,
+                          "typeName": "SluPopupContent"
+                        }
+                      }
+                    ],
+                    "typeName": "Array"
+                  }
+                },
+                "typeParams": []
+              },
+              {
                 "name": "footer",
                 "location": {
                   "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/SluPopupConfig.ts",
                   "line": 4,
-                  "col": 95,
-                  "byteIndex": 266
+                  "col": 126,
+                  "byteIndex": 297
                 },
                 "params": [],
                 "computed": false,

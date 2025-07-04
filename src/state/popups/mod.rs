@@ -2,13 +2,27 @@ use std::collections::HashMap;
 
 use url::Url;
 
-#[derive(Debug, Default, Clone, Serialize, Deserialize, TS)]
+#[derive(Debug, Clone, Serialize, Deserialize, TS)]
 #[serde(default, rename_all = "camelCase")]
 #[ts(export)]
 pub struct SluPopupConfig {
+    pub width: f64,
+    pub height: f64,
     pub title: Vec<SluPopupContent>,
     pub content: Vec<SluPopupContent>,
     pub footer: Vec<SluPopupContent>,
+}
+
+impl Default for SluPopupConfig {
+    fn default() -> Self {
+        Self {
+            width: 400.0,
+            height: 200.0,
+            title: vec![],
+            content: vec![],
+            footer: vec![],
+        }
+    }
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, TS)]
