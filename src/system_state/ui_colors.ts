@@ -29,7 +29,7 @@ export class UIColors {
   }
 
   setAsCssVariables(): void {
-    const id = 'slu-lib-system-color-variables';
+    const id = 'system-ui-color-variables';
     document.getElementById(id)?.remove();
     const element = document.createElement('style');
     element.id = id;

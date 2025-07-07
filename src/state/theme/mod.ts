@@ -16,12 +16,25 @@ export class ThemeList extends List<ITheme> {
   }
 
   applyToDocument(activeIds: ThemeId[], variables: ISettings['byTheme']): void {
-    const activeThemes = this.asArray()
-      .filter((theme) => activeIds.includes(theme.id))
-      .sort((a, b) => activeIds.indexOf(a.id) - activeIds.indexOf(b.id));
+    const disabledThemes: Theme[] = [];
+    const enabledThemes: Theme[] = [];
 
-    for (const theme of activeThemes) {
-      new Theme(theme).applyToDocument(variables[theme.id]);
+    for (const theme of this.asArray()) {
+      if (activeIds.includes(theme.id)) {
+        enabledThemes.push(new Theme(theme));
+      } else {
+        disabledThemes.push(new Theme(theme));
+      }
+    }
+
+    // sort by user order
+    enabledThemes.sort((a, b) => activeIds.indexOf(a.id) - activeIds.indexOf(b.id));
+    for (const theme of disabledThemes) {
+      theme.removeFromDocument();
+    }
+
+    for (const theme of enabledThemes) {
+      theme.applyToDocument(variables[theme.id]);
     }
   }
 }
@@ -31,6 +44,10 @@ export interface Theme extends ITheme {}
 export class Theme {
   constructor(plain: ITheme) {
     Object.assign(this, plain);
+  }
+
+  get elementId(): string {
+    return `Theme::${this.id}`;
   }
 
   /** Will add the styles targeting the current widget id */
@@ -60,13 +77,15 @@ export class Theme {
       .join('\n');
     styles += `@layer ${layerName} {\n:root {${variablesContent}}\n${this.styles[widgetId] ?? ''}\n}\n`;
 
-    const elementId = `Theme::${this.id}`;
-    document.getElementById(elementId)?.remove();
-
+    this.removeFromDocument(); // remove old styles
     const styleElement = document.createElement('style');
-    styleElement.id = elementId;
+    styleElement.id = this.elementId;
     styleElement.textContent = styles;
     document.head.appendChild(styleElement);
+  }
+
+  removeFromDocument(): void {
+    document.getElementById(this.elementId)?.remove();
   }
 }
 
