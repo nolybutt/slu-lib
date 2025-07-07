@@ -29,8 +29,11 @@ import {
   Widget,
 } from '../widget/mod.ts';
 
+export interface Settings extends ISettings {}
 export class Settings {
-  constructor(public inner: ISettings) {}
+  constructor(public inner: ISettings) {
+    Object.assign(this, this.inner);
+  }
 
   static default(): Promise<Settings> {
     return newFromInvoke(this, SeelenCommand.StateGetDefaultSettings);

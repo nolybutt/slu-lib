@@ -34746,6 +34746,27 @@
                   }
                 },
                 "typeParams": []
+              },
+              {
+                "name": "sharedStyles",
+                "jsDoc": {
+                  "doc": "Shared css styles for all widgets, commonly used to set styles\nfor the components library"
+                },
+                "location": {
+                  "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/Theme.ts",
+                  "line": 20,
+                  "col": 0,
+                  "byteIndex": 658
+                },
+                "params": [],
+                "computed": false,
+                "optional": false,
+                "tsType": {
+                  "repr": "string",
+                  "kind": "keyword",
+                  "keyword": "string"
+                },
+                "typeParams": []
               }
             ],
             "callSignatures": [],

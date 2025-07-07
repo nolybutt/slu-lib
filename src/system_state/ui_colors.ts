@@ -29,6 +29,12 @@ export class UIColors {
   }
 
   setAsCssVariables(): void {
+    const id = 'slu-lib-system-color-variables';
+    document.getElementById(id)?.remove();
+    const element = document.createElement('style');
+    element.id = id;
+    element.textContent = ':root {\n';
+
     for (const [key, value] of Object.entries(this.inner)) {
       if (typeof value !== 'string') {
         continue;
@@ -40,9 +46,11 @@ export class UIColors {
       const b = color & 255;
       // replace rust snake case with kebab case
       const name = key.replace('_', '-');
-      document.documentElement.style.setProperty(`--config-${name}-color`, value.slice(0, 7));
-      document.documentElement.style.setProperty(`--config-${name}-color-rgb`, `${r}, ${g}, ${b}`);
+      element.textContent += `--config-${name}-color: ${value.slice(0, 7)};\n`;
+      element.textContent += `--config-${name}-color-rgb: ${r}, ${g}, ${b};\n`;
     }
+
+    document.head.appendChild(element);
   }
 }
 

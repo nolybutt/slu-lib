@@ -15,17 +15,22 @@ use crate::{
     utils::search_for_metadata_file,
 };
 
+pub static ALLOWED_STYLE_EXTENSIONS: &[&str] = &["css", "scss", "sass"];
+
 #[derive(Debug, Clone, Default, Serialize, Deserialize, JsonSchema, TS)]
 #[serde(default, rename_all = "camelCase")]
 #[ts(export)]
 pub struct Theme {
     pub id: ThemeId,
     /// Metadata about the theme
-    #[serde(alias = "info")]
+    #[serde(alias = "info")] // for backwards compatibility before v2.0
     pub metadata: ResourceMetadata,
     pub settings: ThemeSettingsDefinition,
     /// Css Styles of the theme
     pub styles: HashMap<WidgetId, String>,
+    /// Shared css styles for all widgets, commonly used to set styles
+    /// for the components library
+    pub shared_styles: String,
 }
 
 impl SluResource for Theme {
@@ -60,26 +65,37 @@ impl SluResource for Theme {
     fn load_from_folder(path: &Path) -> Result<Theme> {
         let mut theme = Self::load_old_folder_schema(path)?;
 
-        for entry in path.read_dir()?.flatten() {
-            let dir_path = entry.path();
-            if !dir_path.is_dir() {
-                continue;
+        'outer: for entry in path.read_dir()?.flatten() {
+            let outer_path = entry.path();
+            if !outer_path.is_dir() {
+                let (Some(file_stem), Some(ext)) = (outer_path.file_stem(), outer_path.extension())
+                else {
+                    continue 'outer;
+                };
+
+                if file_stem == "shared" && ALLOWED_STYLE_EXTENSIONS.iter().any(|e| *e == ext) {
+                    let css = if ext == "scss" || ext == "sass" {
+                        grass::from_path(&outer_path, &grass::Options::default())?
+                    } else {
+                        std::fs::read_to_string(&outer_path)?
+                    };
+                    theme.shared_styles = css;
+                }
+                continue 'outer;
             }
+
             let creator_username = entry.file_name();
-            'inner: for entry in dir_path.read_dir()?.flatten() {
+            'inner: for entry in outer_path.read_dir()?.flatten() {
                 let path = entry.path();
                 if !path.is_file() {
                     continue 'inner;
                 }
-                let ext = match path.extension() {
-                    Some(ext) => ext,
-                    None => continue 'inner,
+
+                let (Some(resource_name), Some(ext)) = (path.file_stem(), path.extension()) else {
+                    continue 'inner;
                 };
-                let resource_name = match path.file_stem() {
-                    Some(name) => name,
-                    None => continue 'inner,
-                };
-                if ext == "css" || ext == "scss" || ext == "sass" {
+
+                if ALLOWED_STYLE_EXTENSIONS.iter().any(|e| *e == ext) {
                     let css = if ext == "scss" || ext == "sass" {
                         grass::from_path(&path, &grass::Options::default())?
                     } else {

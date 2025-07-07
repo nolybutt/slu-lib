@@ -51,8 +51,7 @@ macro_rules! impl_common_traits {
 pub struct ResourceId(String);
 
 static REGEX: LazyLock<regex::Regex> = LazyLock::new(|| {
-    regex::Regex::new(r"^@[a-zA-Z][\w\-]{1,30}[a-zA-Z0-9]\/[a-zA-Z][\w\-]+[a-zA-Z0-9]$")
-        .unwrap()
+    regex::Regex::new(r"^@[a-zA-Z][\w\-]{1,30}[a-zA-Z0-9]\/[a-zA-Z][\w\-]+[a-zA-Z0-9]$").unwrap()
 });
 
 impl ResourceId {

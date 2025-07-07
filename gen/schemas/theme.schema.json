@@ -27,6 +27,11 @@
       "$ref": "#/$defs/ThemeSettingsDefinition",
       "default": []
     },
+    "sharedStyles": {
+      "description": "Shared css styles for all widgets, commonly used to set styles\n for the components library",
+      "type": "string",
+      "default": ""
+    },
     "styles": {
       "description": "Css Styles of the theme",
       "type": "object",

@@ -3057,9 +3057,9 @@
       "isDefault": false,
       "location": {
         "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/state/theme/mod.ts",
-        "line": 6,
+        "line": 7,
         "col": 0,
-        "byteIndex": 245
+        "byteIndex": 320
       },
       "declarationKind": "export",
       "kind": "class",
@@ -3102,9 +3102,9 @@
             },
             "location": {
               "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/state/theme/mod.ts",
-              "line": 7,
+              "line": 8,
               "col": 2,
-              "byteIndex": 292
+              "byteIndex": 368
             }
           },
           {
@@ -3174,9 +3174,9 @@
             },
             "location": {
               "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/state/theme/mod.ts",
-              "line": 11,
+              "line": 12,
               "col": 2,
-              "byteIndex": 401
+              "byteIndex": 477
             }
           }
         ],
@@ -3185,14 +3185,173 @@
         "typeParams": [],
         "superTypeParams": [
           {
-            "repr": "Theme",
+            "repr": "ITheme",
             "kind": "typeRef",
             "typeRef": {
               "typeParams": null,
-              "typeName": "Theme"
+              "typeName": "ITheme"
             }
           }
         ]
+      }
+    },
+    {
+      "name": "Theme",
+      "isDefault": false,
+      "location": {
+        "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/state/theme/mod.ts",
+        "line": 17,
+        "col": 0,
+        "byteIndex": 621
+      },
+      "declarationKind": "export",
+      "kind": "interface",
+      "interfaceDef": {
+        "extends": [
+          {
+            "repr": "ITheme",
+            "kind": "typeRef",
+            "typeRef": {
+              "typeParams": null,
+              "typeName": "ITheme"
+            }
+          }
+        ],
+        "constructors": [],
+        "methods": [],
+        "properties": [],
+        "callSignatures": [],
+        "indexSignatures": [],
+        "typeParams": []
+      }
+    },
+    {
+      "name": "Theme",
+      "isDefault": false,
+      "location": {
+        "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/state/theme/mod.ts",
+        "line": 19,
+        "col": 0,
+        "byteIndex": 663
+      },
+      "declarationKind": "export",
+      "kind": "class",
+      "classDef": {
+        "isAbstract": false,
+        "constructors": [
+          {
+            "accessibility": null,
+            "hasBody": true,
+            "name": "constructor",
+            "params": [
+              {
+                "kind": "identifier",
+                "name": "plain",
+                "optional": false,
+                "tsType": {
+                  "repr": "ITheme",
+                  "kind": "typeRef",
+                  "typeRef": {
+                    "typeParams": null,
+                    "typeName": "ITheme"
+                  }
+                }
+              }
+            ],
+            "location": {
+              "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/state/theme/mod.ts",
+              "line": 20,
+              "col": 2,
+              "byteIndex": 686
+            }
+          }
+        ],
+        "properties": [],
+        "indexSignatures": [],
+        "methods": [
+          {
+            "jsDoc": {
+              "doc": "Will add the styles targeting the current widget id"
+            },
+            "accessibility": null,
+            "optional": false,
+            "isAbstract": false,
+            "isStatic": false,
+            "name": "apply",
+            "kind": "method",
+            "functionDef": {
+              "params": [
+                {
+                  "kind": "assign",
+                  "left": {
+                    "kind": "identifier",
+                    "name": "varValues",
+                    "optional": false,
+                    "tsType": {
+                      "repr": "",
+                      "kind": "indexedAccess",
+                      "indexedAccess": {
+                        "readonly": false,
+                        "objType": {
+                          "repr": "",
+                          "kind": "indexedAccess",
+                          "indexedAccess": {
+                            "readonly": false,
+                            "objType": {
+                              "repr": "Settings",
+                              "kind": "typeRef",
+                              "typeRef": {
+                                "typeParams": null,
+                                "typeName": "Settings"
+                              }
+                            },
+                            "indexType": {
+                              "repr": "byTheme",
+                              "kind": "literal",
+                              "literal": {
+                                "kind": "string",
+                                "string": "byTheme"
+                              }
+                            }
+                          }
+                        },
+                        "indexType": {
+                          "repr": "ResourceId",
+                          "kind": "typeRef",
+                          "typeRef": {
+                            "typeParams": null,
+                            "typeName": "ResourceId"
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "right": "[UNSUPPORTED]",
+                  "tsType": null
+                }
+              ],
+              "returnType": {
+                "repr": "void",
+                "kind": "keyword",
+                "keyword": "void"
+              },
+              "hasBody": true,
+              "isAsync": false,
+              "isGenerator": false,
+              "typeParams": []
+            },
+            "location": {
+              "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/state/theme/mod.ts",
+              "line": 25,
+              "col": 2,
+              "byteIndex": 815
+            }
+          }
+        ],
+        "extends": null,
+        "implements": [],
+        "typeParams": [],
+        "superTypeParams": []
       }
     },
     {
