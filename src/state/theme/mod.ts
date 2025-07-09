@@ -16,23 +16,16 @@ export class ThemeList extends List<ITheme> {
   }
 
   applyToDocument(activeIds: ThemeId[], variables: ISettings['byTheme']): void {
-    const disabledThemes: Theme[] = [];
     const enabledThemes: Theme[] = [];
-
     for (const theme of this.asArray()) {
       if (activeIds.includes(theme.id)) {
         enabledThemes.push(new Theme(theme));
-      } else {
-        disabledThemes.push(new Theme(theme));
       }
     }
-
     // sort by user order
     enabledThemes.sort((a, b) => activeIds.indexOf(a.id) - activeIds.indexOf(b.id));
-    for (const theme of disabledThemes) {
-      theme.removeFromDocument();
-    }
 
+    removeAllThemeStyles();
     for (const theme of enabledThemes) {
       theme.applyToDocument(variables[theme.id]);
     }
@@ -44,10 +37,6 @@ export interface Theme extends ITheme {}
 export class Theme {
   constructor(plain: ITheme) {
     Object.assign(this, plain);
-  }
-
-  get elementId(): string {
-    return `Theme::${this.id}`;
   }
 
   /** Will add the styles targeting the current widget id */
@@ -79,18 +68,26 @@ export class Theme {
 
     this.removeFromDocument(); // remove old styles
     const styleElement = document.createElement('style');
-    styleElement.id = this.elementId;
+    styleElement.id = this.id;
     styleElement.textContent = styles;
+    styleElement.setAttribute('data-resource-type', 'theme');
     document.head.appendChild(styleElement);
   }
 
   removeFromDocument(): void {
-    document.getElementById(this.elementId)?.remove();
+    document.getElementById(this.id)?.remove();
   }
 }
 
 function isValidCssVariableName(name: string): boolean {
   return /^--[\w\d-]*$/.test(name);
+}
+
+export function removeAllThemeStyles(): void {
+  const elements = document.querySelectorAll(`style[data-resource-type="theme"]`);
+  for (const element of elements) {
+    element.remove();
+  }
 }
 
 /**
