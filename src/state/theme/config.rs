@@ -94,9 +94,13 @@ pub struct ThemeVariable<T> {
 pub struct ThemeVariableWithUnit<T> {
     /// Label to show to the user on Settings.
     pub label: ResourceText,
+    /// Extra details to show to the user under the label on Settings.
+    pub description: Option<ResourceText>,
+    /// Will be rendered as a icon with a tooltip side the label.
+    pub tip: Option<ResourceText>,
     /// Css variable name, example: `--my-css-variable`
     pub name: CssVariableName,
-    /// initial variable value, if not manually set by the user.
+    /// Initial variable value, if not manually set by the user.
     pub initial_value: T,
     /// Css unit, example: `px`
     pub initial_value_unit: String,

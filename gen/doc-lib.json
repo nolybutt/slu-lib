@@ -3057,9 +3057,9 @@
       "isDefault": false,
       "location": {
         "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/state/theme/mod.ts",
-        "line": 9,
+        "line": 16,
         "col": 0,
-        "byteIndex": 449
+        "byteIndex": 510
       },
       "declarationKind": "export",
       "kind": "class",
@@ -3102,9 +3102,9 @@
             },
             "location": {
               "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/state/theme/mod.ts",
-              "line": 10,
+              "line": 17,
               "col": 2,
-              "byteIndex": 497
+              "byteIndex": 558
             }
           },
           {
@@ -3174,9 +3174,9 @@
             },
             "location": {
               "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/state/theme/mod.ts",
-              "line": 14,
+              "line": 21,
               "col": 2,
-              "byteIndex": 606
+              "byteIndex": 667
             }
           },
           {
@@ -3246,9 +3246,9 @@
             },
             "location": {
               "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/state/theme/mod.ts",
-              "line": 18,
+              "line": 25,
               "col": 2,
-              "byteIndex": 750
+              "byteIndex": 811
             }
           }
         ],
@@ -3272,9 +3272,9 @@
       "isDefault": false,
       "location": {
         "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/state/theme/mod.ts",
-        "line": 35,
+        "line": 42,
         "col": 0,
-        "byteIndex": 1256
+        "byteIndex": 1317
       },
       "declarationKind": "export",
       "kind": "interface",
@@ -3302,9 +3302,9 @@
       "isDefault": false,
       "location": {
         "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/state/theme/mod.ts",
-        "line": 37,
+        "line": 44,
         "col": 0,
-        "byteIndex": 1298
+        "byteIndex": 1359
       },
       "declarationKind": "export",
       "kind": "class",
@@ -3332,15 +3332,75 @@
             ],
             "location": {
               "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/state/theme/mod.ts",
-              "line": 38,
+              "line": 45,
               "col": 2,
-              "byteIndex": 1321
+              "byteIndex": 1382
             }
           }
         ],
         "properties": [],
         "indexSignatures": [],
         "methods": [
+          {
+            "accessibility": null,
+            "optional": false,
+            "isAbstract": false,
+            "isStatic": false,
+            "name": "forEachVariableDefinition",
+            "kind": "method",
+            "functionDef": {
+              "params": [
+                {
+                  "kind": "identifier",
+                  "name": "cb",
+                  "optional": false,
+                  "tsType": {
+                    "repr": "",
+                    "kind": "fnOrConstructor",
+                    "fnOrConstructor": {
+                      "constructor": false,
+                      "tsType": {
+                        "repr": "void",
+                        "kind": "keyword",
+                        "keyword": "void"
+                      },
+                      "params": [
+                        {
+                          "kind": "identifier",
+                          "name": "def",
+                          "optional": false,
+                          "tsType": {
+                            "repr": "ThemeVariableDefinition",
+                            "kind": "typeRef",
+                            "typeRef": {
+                              "typeParams": null,
+                              "typeName": "ThemeVariableDefinition"
+                            }
+                          }
+                        }
+                      ],
+                      "typeParams": []
+                    }
+                  }
+                }
+              ],
+              "returnType": {
+                "repr": "void",
+                "kind": "keyword",
+                "keyword": "void"
+              },
+              "hasBody": true,
+              "isAsync": false,
+              "isGenerator": false,
+              "typeParams": []
+            },
+            "location": {
+              "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/state/theme/mod.ts",
+              "line": 49,
+              "col": 2,
+              "byteIndex": 1450
+            }
+          },
           {
             "jsDoc": {
               "doc": "Will add the styles targeting the current widget id"
@@ -3414,9 +3474,9 @@
             },
             "location": {
               "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/state/theme/mod.ts",
-              "line": 43,
+              "line": 54,
               "col": 2,
-              "byteIndex": 1450
+              "byteIndex": 1647
             }
           },
           {
@@ -3440,9 +3500,9 @@
             },
             "location": {
               "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/state/theme/mod.ts",
-              "line": 77,
+              "line": 88,
               "col": 2,
-              "byteIndex": 2708
+              "byteIndex": 2912
             }
           }
         ],
@@ -3457,9 +3517,9 @@
       "isDefault": false,
       "location": {
         "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/state/theme/mod.ts",
-        "line": 86,
+        "line": 107,
         "col": 0,
-        "byteIndex": 2888
+        "byteIndex": 3361
       },
       "declarationKind": "export",
       "kind": "function",
@@ -3481,9 +3541,9 @@
       "isDefault": false,
       "location": {
         "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/state/theme/mod.ts",
-        "line": 97,
+        "line": 118,
         "col": 0,
-        "byteIndex": 3262
+        "byteIndex": 3735
       },
       "declarationKind": "export",
       "jsDoc": {

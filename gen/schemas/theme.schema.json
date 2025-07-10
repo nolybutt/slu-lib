@@ -271,8 +271,19 @@
     "ThemeVariableWithUnit_for_double": {
       "type": "object",
       "properties": {
+        "description": {
+          "description": "Extra details to show to the user under the label on Settings.",
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ResourceText"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
         "initialValue": {
-          "description": "initial variable value, if not manually set by the user.",
+          "description": "Initial variable value, if not manually set by the user.",
           "type": "number",
           "format": "double"
         },
@@ -287,6 +298,17 @@
         "name": {
           "description": "Css variable name, example: `--my-css-variable`",
           "$ref": "#/$defs/CssVariableName"
+        },
+        "tip": {
+          "description": "Will be rendered as a icon with a tooltip side the label.",
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ResourceText"
+            },
+            {
+              "type": "null"
+            }
+          ]
         }
       },
       "required": [

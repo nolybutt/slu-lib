@@ -35501,15 +35501,85 @@
                 "typeParams": []
               },
               {
+                "name": "description",
+                "jsDoc": {
+                  "doc": "Extra details to show to the user under the label on Settings."
+                },
+                "location": {
+                  "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/ThemeVariableWithUnit.ts",
+                  "line": 13,
+                  "col": 0,
+                  "byteIndex": 414
+                },
+                "params": [],
+                "computed": false,
+                "optional": false,
+                "tsType": {
+                  "repr": "",
+                  "kind": "union",
+                  "union": [
+                    {
+                      "repr": "ResourceText",
+                      "kind": "typeRef",
+                      "typeRef": {
+                        "typeParams": null,
+                        "typeName": "ResourceText"
+                      }
+                    },
+                    {
+                      "repr": "null",
+                      "kind": "keyword",
+                      "keyword": "null"
+                    }
+                  ]
+                },
+                "typeParams": []
+              },
+              {
+                "name": "tip",
+                "jsDoc": {
+                  "doc": "Will be rendered as a icon with a tooltip side the label."
+                },
+                "location": {
+                  "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/ThemeVariableWithUnit.ts",
+                  "line": 17,
+                  "col": 0,
+                  "byteIndex": 518
+                },
+                "params": [],
+                "computed": false,
+                "optional": false,
+                "tsType": {
+                  "repr": "",
+                  "kind": "union",
+                  "union": [
+                    {
+                      "repr": "ResourceText",
+                      "kind": "typeRef",
+                      "typeRef": {
+                        "typeParams": null,
+                        "typeName": "ResourceText"
+                      }
+                    },
+                    {
+                      "repr": "null",
+                      "kind": "keyword",
+                      "keyword": "null"
+                    }
+                  ]
+                },
+                "typeParams": []
+              },
+              {
                 "name": "name",
                 "jsDoc": {
                   "doc": "Css variable name, example: `--my-css-variable`"
                 },
                 "location": {
                   "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/ThemeVariableWithUnit.ts",
-                  "line": 13,
+                  "line": 21,
                   "col": 0,
-                  "byteIndex": 399
+                  "byteIndex": 604
                 },
                 "params": [],
                 "computed": false,
@@ -35527,13 +35597,13 @@
               {
                 "name": "initialValue",
                 "jsDoc": {
-                  "doc": "initial variable value, if not manually set by the user."
+                  "doc": "Initial variable value, if not manually set by the user."
                 },
                 "location": {
                   "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/ThemeVariableWithUnit.ts",
-                  "line": 17,
+                  "line": 25,
                   "col": 0,
-                  "byteIndex": 491
+                  "byteIndex": 696
                 },
                 "params": [],
                 "computed": false,
@@ -35555,9 +35625,9 @@
                 },
                 "location": {
                   "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/ThemeVariableWithUnit.ts",
-                  "line": 21,
+                  "line": 29,
                   "col": 0,
-                  "byteIndex": 544
+                  "byteIndex": 749
                 },
                 "params": [],
                 "computed": false,
