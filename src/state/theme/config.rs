@@ -7,7 +7,18 @@ use url::Url;
 use crate::{error::Result, resource::ResourceText};
 
 #[derive(Debug, Clone, Default, Serialize, Deserialize, JsonSchema, TS)]
-pub struct ThemeSettingsDefinition(Vec<ThemeVariableDefinition>);
+pub struct ThemeSettingsDefinition(Vec<ThemeConfigDefinition>);
+
+#[derive(Debug, Clone, Serialize, Deserialize, JsonSchema, TS)]
+#[serde(rename_all = "camelCase")]
+pub enum ThemeConfigDefinition {
+    Group {
+        header: ResourceText,
+        items: Vec<ThemeConfigDefinition>,
+    },
+    #[serde(untagged)]
+    Item(Box<ThemeVariableDefinition>),
+}
 
 #[derive(Debug, Clone, Serialize, Deserialize, JsonSchema, TS)]
 #[serde(tag = "syntax")]
@@ -55,6 +66,7 @@ pub enum ThemeVariableDefinition {
     /// ```css
     /// --var-name: url("https://example.com/image.png")
     /// ```
+    /// ### Warning: using this will make your resource dependent of the url and network connection.
     #[serde(rename = "<url>")]
     Url(ThemeVariable<Url>),
 }
@@ -64,10 +76,17 @@ pub enum ThemeVariableDefinition {
 pub struct ThemeVariable<T> {
     /// Label to show to the user on Settings.
     pub label: ResourceText,
+    /// Extra details to show to the user under the label on Settings.
+    pub description: Option<ResourceText>,
+    /// Will be rendered as a icon with a tooltip side the label.
+    pub tip: Option<ResourceText>,
     /// Css variable name, example: `--my-css-variable`
     pub name: CssVariableName,
-    /// initial variable value, if not manually set by the user.
+    /// Initial variable value, if not manually set by the user.
     pub initial_value: T,
+    /// If present, this will be rendered as a selector of options instead of an input.
+    /// `initial_value` should be present in this list.
+    pub options: Option<Vec<T>>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, JsonSchema, TS)]

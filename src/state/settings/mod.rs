@@ -19,6 +19,7 @@ use crate::{
     error::Result,
     rect::Rect,
     resource::{IconPackId, PluginId, ThemeId},
+    state::config::CssVariableName,
 };
 
 // ============== Fancy Toolbar Settings ==============
@@ -661,7 +662,7 @@ pub struct Settings {
     ///     }
     /// }
     /// ```
-    pub by_theme: HashMap<ThemeId, HashMap<String, String>>,
+    pub by_theme: HashMap<ThemeId, HashMap<CssVariableName, String>>,
 }
 
 impl Default for Settings {

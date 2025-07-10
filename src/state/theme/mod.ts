@@ -1,4 +1,11 @@
-import type { ResourceId, Settings as ISettings, Theme as ITheme, ThemeId } from '@seelen-ui/types';
+import type {
+  ResourceId,
+  Settings as ISettings,
+  Theme as ITheme,
+  ThemeConfigDefinition,
+  ThemeId,
+  ThemeVariableDefinition,
+} from '@seelen-ui/types';
 import { SeelenCommand, SeelenEvent, type UnSubscriber } from '../../handlers/mod.ts';
 import { List } from '../../utils/List.ts';
 import { newFromInvoke, newOnEvent } from '../../utils/State.ts';
@@ -39,14 +46,18 @@ export class Theme {
     Object.assign(this, plain);
   }
 
+  forEachVariableDefinition(cb: (def: ThemeVariableDefinition) => void): void {
+    iterateVariableDefinitions(this.settings, cb);
+  }
+
   /** Will add the styles targeting the current widget id */
   applyToDocument(varValues: ISettings['byTheme'][ResourceId] = {}): void {
     const widgetId = Widget.getCurrentWidgetId();
     let styles = ``;
 
-    for (const def of this.settings) {
+    this.forEachVariableDefinition((def) => {
       if (!isValidCssVariableName(def.name)) {
-        continue;
+        return;
       }
       styles += `
         @property ${def.name} {
@@ -55,7 +66,7 @@ export class Theme {
           initial-value: ${def.initialValue}${'initialValueUnit' in def ? def.initialValueUnit : ''}
         }
       `;
-    }
+    });
 
     const layerName = 'theme-' + this.metadata.path.toLowerCase().replaceAll(/[^a-zA-Z0-9]/g, '_');
     styles += `@layer ${layerName}-shared {\n${this.sharedStyles}\n}\n`;
@@ -81,6 +92,16 @@ export class Theme {
 
 function isValidCssVariableName(name: string): boolean {
   return /^--[\w\d-]*$/.test(name);
+}
+
+function iterateVariableDefinitions(defs: ThemeConfigDefinition[], cb: (def: ThemeVariableDefinition) => void): void {
+  for (const def of defs) {
+    if ('group' in def) {
+      iterateVariableDefinitions(def.group.items, cb);
+    } else {
+      cb(def);
+    }
+  }
 }
 
 export function removeAllThemeStyles(): void {

@@ -141,6 +141,49 @@
         }
       ]
     },
+    "ThemeConfigDefinition": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "group": {
+              "type": "object",
+              "properties": {
+                "header": {
+                  "$ref": "#/$defs/ResourceText"
+                },
+                "items": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/$defs/ThemeConfigDefinition"
+                  }
+                }
+              },
+              "required": [
+                "header",
+                "items"
+              ]
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "group"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "item": {
+              "$ref": "#/$defs/ThemeVariableDefinition"
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "item"
+          ]
+        }
+      ]
+    },
     "ThemeId": {
       "description": "Visual id composed of the creator username and the resource name. e.g. `@username/resource-name`",
       "$ref": "#/$defs/ResourceId"
@@ -148,7 +191,7 @@
     "ThemeSettingsDefinition": {
       "type": "array",
       "items": {
-        "$ref": "#/$defs/ThemeVariableDefinition"
+        "$ref": "#/$defs/ThemeConfigDefinition"
       }
     },
     "ThemeVariableDefinition": {
@@ -210,7 +253,7 @@
           ]
         },
         {
-          "description": "This will allow to users to set any url.\\\n Css syntax: https://developer.mozilla.org/en-US/docs/Web/CSS/url_value \\\n ### example:\n ```css\n --var-name: url(\"https://example.com/image.png\")\n ```",
+          "description": "This will allow to users to set any url.\\\n Css syntax: https://developer.mozilla.org/en-US/docs/Web/CSS/url_value \\\n ### example:\n ```css\n --var-name: url(\"https://example.com/image.png\")\n ```\n ### Warning: using this will make your resource dependent of the url and network connection.",
           "type": "object",
           "properties": {
             "syntax": {
@@ -256,8 +299,19 @@
     "ThemeVariable_for_Url": {
       "type": "object",
       "properties": {
+        "description": {
+          "description": "Extra details to show to the user under the label on Settings.",
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ResourceText"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
         "initialValue": {
-          "description": "initial variable value, if not manually set by the user.",
+          "description": "Initial variable value, if not manually set by the user.",
           "type": "string",
           "format": "uri"
         },
@@ -268,6 +322,28 @@
         "name": {
           "description": "Css variable name, example: `--my-css-variable`",
           "$ref": "#/$defs/CssVariableName"
+        },
+        "options": {
+          "description": "If present, this will be rendered as a selector of options instead of an input.\n `initial_value` should be present in this list.",
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "type": "string",
+            "format": "uri"
+          }
+        },
+        "tip": {
+          "description": "Will be rendered as a icon with a tooltip side the label.",
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ResourceText"
+            },
+            {
+              "type": "null"
+            }
+          ]
         }
       },
       "required": [
@@ -279,8 +355,19 @@
     "ThemeVariable_for_double": {
       "type": "object",
       "properties": {
+        "description": {
+          "description": "Extra details to show to the user under the label on Settings.",
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ResourceText"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
         "initialValue": {
-          "description": "initial variable value, if not manually set by the user.",
+          "description": "Initial variable value, if not manually set by the user.",
           "type": "number",
           "format": "double"
         },
@@ -291,6 +378,28 @@
         "name": {
           "description": "Css variable name, example: `--my-css-variable`",
           "$ref": "#/$defs/CssVariableName"
+        },
+        "options": {
+          "description": "If present, this will be rendered as a selector of options instead of an input.\n `initial_value` should be present in this list.",
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "type": "number",
+            "format": "double"
+          }
+        },
+        "tip": {
+          "description": "Will be rendered as a icon with a tooltip side the label.",
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ResourceText"
+            },
+            {
+              "type": "null"
+            }
+          ]
         }
       },
       "required": [
@@ -302,8 +411,19 @@
     "ThemeVariable_for_string": {
       "type": "object",
       "properties": {
+        "description": {
+          "description": "Extra details to show to the user under the label on Settings.",
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ResourceText"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
         "initialValue": {
-          "description": "initial variable value, if not manually set by the user.",
+          "description": "Initial variable value, if not manually set by the user.",
           "type": "string"
         },
         "label": {
@@ -313,6 +433,27 @@
         "name": {
           "description": "Css variable name, example: `--my-css-variable`",
           "$ref": "#/$defs/CssVariableName"
+        },
+        "options": {
+          "description": "If present, this will be rendered as a selector of options instead of an input.\n `initial_value` should be present in this list.",
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "type": "string"
+          }
+        },
+        "tip": {
+          "description": "Will be rendered as a icon with a tooltip side the label.",
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ResourceText"
+            },
+            {
+              "type": "null"
+            }
+          ]
         }
       },
       "required": [

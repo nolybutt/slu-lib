@@ -44,5 +44,6 @@ jobs:
       - uses: denoland/setup-deno@v2
         with:
           deno-version: v2.x
-      - run: deno lint
+      # - run: deno check we don't do check here cuz it needs compile the rust code in ts first
       - run: deno fmt --check
+      - run: deno lint
