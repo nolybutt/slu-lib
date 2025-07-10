@@ -7,7 +7,6 @@
       "type": "array",
       "default": [
         {
-          "type": "Pinned",
           "displayName": "Explorer",
           "id": "",
           "path": "C:\\Windows\\explorer.exe",
@@ -16,6 +15,7 @@
           "relaunchIn": null,
           "relaunchProgram": "C:\\Windows\\explorer.exe",
           "subtype": "App",
+          "type": "Pinned",
           "umid": null,
           "windows": []
         }
@@ -33,8 +33,8 @@
       "type": "array",
       "default": [
         {
-          "type": "StartMenu",
-          "id": ""
+          "id": "",
+          "type": "StartMenu"
         }
       ],
       "items": {
@@ -45,8 +45,8 @@
       "type": "array",
       "default": [
         {
-          "type": "Media",
-          "id": ""
+          "id": "",
+          "type": "Media"
         }
       ],
       "items": {
@@ -172,12 +172,12 @@
         {
           "type": "object",
           "properties": {
+            "id": {
+              "type": "string"
+            },
             "type": {
               "type": "string",
               "const": "Separator"
-            },
-            "id": {
-              "type": "string"
             }
           },
           "required": [
@@ -188,12 +188,12 @@
         {
           "type": "object",
           "properties": {
+            "id": {
+              "type": "string"
+            },
             "type": {
               "type": "string",
               "const": "Media"
-            },
-            "id": {
-              "type": "string"
             }
           },
           "required": [
@@ -204,12 +204,12 @@
         {
           "type": "object",
           "properties": {
+            "id": {
+              "type": "string"
+            },
             "type": {
               "type": "string",
               "const": "StartMenu"
-            },
-            "id": {
-              "type": "string"
             }
           },
           "required": [

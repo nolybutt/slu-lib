@@ -101,7 +101,7 @@
           }
         },
         "id": {
-          "description": "Depending of the kind this can be case sensitive or not.\n - `class` and `title` are case sensitive\n - `exe` and `path` are case insensitive",
+          "description": "Depending of the kind this can be case sensitive or not.\n- `class` and `title` are case sensitive\n- `exe` and `path` are case insensitive",
           "type": "string"
         },
         "kind": {

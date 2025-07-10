@@ -20,7 +20,7 @@
       "default": null
     },
     "icon": {
-      "description": "Optional icon to be used on settings. This have to be a valid react icon name.\\\n You can find all icons here: https://react-icons.github.io/react-icons/.",
+      "description": "Optional icon to be used on settings. This have to be a valid react icon name.\\\nYou can find all icons here: https://react-icons.github.io/react-icons/.",
       "type": [
         "string",
         "null"
@@ -49,10 +49,10 @@
       "description": "Widget metadata, as texts, tags, images, etc.",
       "$ref": "#/$defs/ResourceMetadata",
       "default": {
-        "description": {},
         "appTargetVersion": null,
         "banner": null,
         "bundled": false,
+        "description": {},
         "displayName": {},
         "filename": "",
         "path": "",
@@ -62,7 +62,7 @@
       }
     },
     "settings": {
-      "description": "Widget settings declaration, this is esentially a struct to be used by an\n builder to create the widget settings UI on the Settings window.",
+      "description": "Widget settings declaration, this is esentially a struct to be used by an\nbuilder to create the widget settings UI on the Settings window.",
       "$ref": "#/$defs/WidgetSettingsDeclarationList",
       "default": []
     }
@@ -75,13 +75,8 @@
     "ResourceMetadata": {
       "type": "object",
       "properties": {
-        "description": {
-          "description": "Map of language code to description. Could be a string, mapped to `en`.",
-          "$ref": "#/$defs/ResourceText",
-          "default": {}
-        },
         "appTargetVersion": {
-          "description": "App target version that this resource is compatible with.\\\n Developers are responsible to update the resource so when resource does not\n match the current app version, the resource will be shown with a warning message",
+          "description": "App target version that this resource is compatible with.\\\nDevelopers are responsible to update the resource so when resource does not\nmatch the current app version, the resource will be shown with a warning message",
           "type": [
             "array",
             "null"
@@ -115,6 +110,11 @@
           ],
           "format": "uri",
           "default": null
+        },
+        "description": {
+          "description": "Map of language code to description. Could be a string, mapped to `en`.",
+          "$ref": "#/$defs/ResourceText",
+          "default": {}
         },
         "displayName": {
           "description": "Map of language code to display name. Could be a string, mapped to `en`.",
@@ -170,24 +170,24 @@
     "WidgetInstanceType": {
       "oneOf": [
         {
-          "description": "Default behavior, only one instance of this widget is allowed.\n This is useful for widgets intended to work as custom config window.",
+          "description": "Default behavior, only one instance of this widget is allowed.\nThis is useful for widgets intended to work as custom config window.",
           "type": "string",
           "const": "Single"
         },
         {
-          "description": "The widget is allowed to have multiple instances.\\\n This allow to the user manually create more instances of this same widget.",
+          "description": "The widget is allowed to have multiple instances.\\\nThis allow to the user manually create more instances of this same widget.",
           "type": "string",
           "const": "Multiple"
         },
         {
-          "description": "Seelen UI will create an instance of this widget per each monitor connected.\\\n This can be configured by the user using per monitor settings.\\",
+          "description": "Seelen UI will create an instance of this widget per each monitor connected.\\\nThis can be configured by the user using per monitor settings.\\",
           "type": "string",
           "const": "ReplicaByMonitor"
         }
       ]
     },
     "WidgetSettingsDeclarationList": {
-      "description": "The Widget Settings Declaration is a list of groups\n each group is a list of items and can have subgroups with headers.\n\n This declarations will be used to render and store the settings of the widget on a\n friendy way for the users, also will match the styles of the settings window.\n\n With this, custom windows or widgets to configure an specific widget are not needed.",
+      "description": "The Widget Settings Declaration is a list of groups\neach group is a list of items and can have subgroups with headers.\n\nThis declarations will be used to render and store the settings of the widget on a\nfriendy way for the users, also will match the styles of the settings window.\n\nWith this, custom windows or widgets to configure an specific widget are not needed.",
       "type": "array",
       "items": {
         "$ref": "#/$defs/WsdGroup"
@@ -220,7 +220,7 @@
           }
         },
         "config": {
-          "description": "Declaration of key and value to be used as configuration.\n If children is not empty, this will beused as header of the subgroup.",
+          "description": "Declaration of key and value to be used as configuration.\nIf children is not empty, this will beused as header of the subgroup.",
           "$ref": "#/$defs/WsdItem"
         }
       },
@@ -326,7 +326,7 @@
           "default": ""
         },
         "dependencies": {
-          "description": "Keys of items to be set in order to enable this item.\n\n it uses js logic (!!value) to determine if the item is enabled",
+          "description": "Keys of items to be set in order to enable this item.\n\nit uses js logic (!!value) to determine if the item is enabled",
           "type": "array",
           "default": [],
           "items": {
@@ -334,7 +334,7 @@
           }
         },
         "key": {
-          "description": "Unique key for this item, used to identify it in the settings, should be unique.\\\n If duplicated, duplicated items will be ignored.",
+          "description": "Unique key for this item, used to identify it in the settings, should be unique.\\\nIf duplicated, duplicated items will be ignored.",
           "type": "string"
         },
         "label": {
@@ -362,7 +362,7 @@
           "default": 0.0
         },
         "dependencies": {
-          "description": "Keys of items to be set in order to enable this item.\n\n it uses js logic (!!value) to determine if the item is enabled",
+          "description": "Keys of items to be set in order to enable this item.\n\nit uses js logic (!!value) to determine if the item is enabled",
           "type": "array",
           "default": [],
           "items": {
@@ -370,7 +370,7 @@
           }
         },
         "key": {
-          "description": "Unique key for this item, used to identify it in the settings, should be unique.\\\n If duplicated, duplicated items will be ignored.",
+          "description": "Unique key for this item, used to identify it in the settings, should be unique.\\\nIf duplicated, duplicated items will be ignored.",
           "type": "string"
         },
         "label": {
@@ -410,7 +410,7 @@
           "default": ""
         },
         "dependencies": {
-          "description": "Keys of items to be set in order to enable this item.\n\n it uses js logic (!!value) to determine if the item is enabled",
+          "description": "Keys of items to be set in order to enable this item.\n\nit uses js logic (!!value) to determine if the item is enabled",
           "type": "array",
           "default": [],
           "items": {
@@ -418,7 +418,7 @@
           }
         },
         "key": {
-          "description": "Unique key for this item, used to identify it in the settings, should be unique.\\\n If duplicated, duplicated items will be ignored.",
+          "description": "Unique key for this item, used to identify it in the settings, should be unique.\\\nIf duplicated, duplicated items will be ignored.",
           "type": "string"
         },
         "label": {
@@ -445,7 +445,7 @@
           "default": 0.0
         },
         "dependencies": {
-          "description": "Keys of items to be set in order to enable this item.\n\n it uses js logic (!!value) to determine if the item is enabled",
+          "description": "Keys of items to be set in order to enable this item.\n\nit uses js logic (!!value) to determine if the item is enabled",
           "type": "array",
           "default": [],
           "items": {
@@ -457,7 +457,7 @@
           "format": "double"
         },
         "key": {
-          "description": "Unique key for this item, used to identify it in the settings, should be unique.\\\n If duplicated, duplicated items will be ignored.",
+          "description": "Unique key for this item, used to identify it in the settings, should be unique.\\\nIf duplicated, duplicated items will be ignored.",
           "type": "string"
         },
         "label": {
@@ -496,7 +496,7 @@
           "default": ""
         },
         "dependencies": {
-          "description": "Keys of items to be set in order to enable this item.\n\n it uses js logic (!!value) to determine if the item is enabled",
+          "description": "Keys of items to be set in order to enable this item.\n\nit uses js logic (!!value) to determine if the item is enabled",
           "type": "array",
           "default": [],
           "items": {
@@ -504,7 +504,7 @@
           }
         },
         "key": {
-          "description": "Unique key for this item, used to identify it in the settings, should be unique.\\\n If duplicated, duplicated items will be ignored.",
+          "description": "Unique key for this item, used to identify it in the settings, should be unique.\\\nIf duplicated, duplicated items will be ignored.",
           "type": "string"
         },
         "label": {
@@ -572,7 +572,7 @@
           "default": false
         },
         "dependencies": {
-          "description": "Keys of items to be set in order to enable this item.\n\n it uses js logic (!!value) to determine if the item is enabled",
+          "description": "Keys of items to be set in order to enable this item.\n\nit uses js logic (!!value) to determine if the item is enabled",
           "type": "array",
           "default": [],
           "items": {
@@ -580,7 +580,7 @@
           }
         },
         "key": {
-          "description": "Unique key for this item, used to identify it in the settings, should be unique.\\\n If duplicated, duplicated items will be ignored.",
+          "description": "Unique key for this item, used to identify it in the settings, should be unique.\\\nIf duplicated, duplicated items will be ignored.",
           "type": "string"
         },
         "label": {

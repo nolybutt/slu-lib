@@ -11,10 +11,10 @@
       "description": "Metadata about the theme",
       "$ref": "#/$defs/ResourceMetadata",
       "default": {
-        "description": {},
         "appTargetVersion": null,
         "banner": null,
         "bundled": false,
+        "description": {},
         "displayName": {},
         "filename": "",
         "path": "",
@@ -28,7 +28,7 @@
       "default": []
     },
     "sharedStyles": {
-      "description": "Shared css styles for all widgets, commonly used to set styles\n for the components library",
+      "description": "Shared css styles for all widgets, commonly used to set styles\nfor the components library",
       "type": "string",
       "default": ""
     },
@@ -53,13 +53,8 @@
     "ResourceMetadata": {
       "type": "object",
       "properties": {
-        "description": {
-          "description": "Map of language code to description. Could be a string, mapped to `en`.",
-          "$ref": "#/$defs/ResourceText",
-          "default": {}
-        },
         "appTargetVersion": {
-          "description": "App target version that this resource is compatible with.\\\n Developers are responsible to update the resource so when resource does not\n match the current app version, the resource will be shown with a warning message",
+          "description": "App target version that this resource is compatible with.\\\nDevelopers are responsible to update the resource so when resource does not\nmatch the current app version, the resource will be shown with a warning message",
           "type": [
             "array",
             "null"
@@ -93,6 +88,11 @@
           ],
           "format": "uri",
           "default": null
+        },
+        "description": {
+          "description": "Map of language code to description. Could be a string, mapped to `en`.",
+          "$ref": "#/$defs/ResourceText",
+          "default": {}
         },
         "displayName": {
           "description": "Map of language code to display name. Could be a string, mapped to `en`.",
@@ -142,7 +142,7 @@
       ]
     },
     "ThemeConfigDefinition": {
-      "oneOf": [
+      "anyOf": [
         {
           "type": "object",
           "properties": {
@@ -171,16 +171,7 @@
           ]
         },
         {
-          "type": "object",
-          "properties": {
-            "item": {
-              "$ref": "#/$defs/ThemeVariableDefinition"
-            }
-          },
-          "additionalProperties": false,
-          "required": [
-            "item"
-          ]
+          "$ref": "#/$defs/ThemeVariableDefinition"
         }
       ]
     },
@@ -194,10 +185,176 @@
         "$ref": "#/$defs/ThemeConfigDefinition"
       }
     },
+    "ThemeVariable": {
+      "type": "object",
+      "properties": {
+        "description": {
+          "description": "Extra details to show to the user under the label on Settings.",
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ResourceText"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "initialValue": {
+          "description": "Initial variable value, if not manually set by the user.",
+          "type": "string"
+        },
+        "label": {
+          "description": "Label to show to the user on Settings.",
+          "$ref": "#/$defs/ResourceText"
+        },
+        "name": {
+          "description": "Css variable name, example: `--my-css-variable`",
+          "$ref": "#/$defs/CssVariableName"
+        },
+        "options": {
+          "description": "If present, this will be rendered as a selector of options instead of an input.\n`initial_value` should be present in this list.",
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "type": "string"
+          }
+        },
+        "tip": {
+          "description": "Will be rendered as a icon with a tooltip side the label.",
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ResourceText"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "label",
+        "name",
+        "initialValue"
+      ]
+    },
+    "ThemeVariable2": {
+      "type": "object",
+      "properties": {
+        "description": {
+          "description": "Extra details to show to the user under the label on Settings.",
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ResourceText"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "initialValue": {
+          "description": "Initial variable value, if not manually set by the user.",
+          "type": "number",
+          "format": "double"
+        },
+        "label": {
+          "description": "Label to show to the user on Settings.",
+          "$ref": "#/$defs/ResourceText"
+        },
+        "name": {
+          "description": "Css variable name, example: `--my-css-variable`",
+          "$ref": "#/$defs/CssVariableName"
+        },
+        "options": {
+          "description": "If present, this will be rendered as a selector of options instead of an input.\n`initial_value` should be present in this list.",
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "type": "number",
+            "format": "double"
+          }
+        },
+        "tip": {
+          "description": "Will be rendered as a icon with a tooltip side the label.",
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ResourceText"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "label",
+        "name",
+        "initialValue"
+      ]
+    },
+    "ThemeVariable3": {
+      "type": "object",
+      "properties": {
+        "description": {
+          "description": "Extra details to show to the user under the label on Settings.",
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ResourceText"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "initialValue": {
+          "description": "Initial variable value, if not manually set by the user.",
+          "type": "string",
+          "format": "uri"
+        },
+        "label": {
+          "description": "Label to show to the user on Settings.",
+          "$ref": "#/$defs/ResourceText"
+        },
+        "name": {
+          "description": "Css variable name, example: `--my-css-variable`",
+          "$ref": "#/$defs/CssVariableName"
+        },
+        "options": {
+          "description": "If present, this will be rendered as a selector of options instead of an input.\n`initial_value` should be present in this list.",
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "type": "string",
+            "format": "uri"
+          }
+        },
+        "tip": {
+          "description": "Will be rendered as a icon with a tooltip side the label.",
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ResourceText"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "label",
+        "name",
+        "initialValue"
+      ]
+    },
     "ThemeVariableDefinition": {
       "oneOf": [
         {
-          "description": "This config definition will allow to users write any string.\\\n Css syntax: https://developer.mozilla.org/en-US/docs/Web/CSS/string \\\n ### example:\n ```css\n --var-name: \"user input\"\n ```",
+          "description": "This config definition will allow to users write any string.\\\nCss syntax: https://developer.mozilla.org/en-US/docs/Web/CSS/string \\\n### example:\n```css\n--var-name: \"user input\"\n```",
           "type": "object",
           "properties": {
             "syntax": {
@@ -205,13 +362,13 @@
               "const": "<string>"
             }
           },
-          "$ref": "#/$defs/ThemeVariable_for_string",
+          "$ref": "#/$defs/ThemeVariable",
           "required": [
             "syntax"
           ]
         },
         {
-          "description": "This config definition will allow to users select a color and\n will be stored as a hex value, opacity is always allowed via UI.\\\n Css syntax: https://developer.mozilla.org/en-US/docs/Web/CSS/color_value \\\n ### example:\n ```css\n --var-name: #ff22ee\n --var-name: #ff22ee\n ```",
+          "description": "This config definition will allow to users select a color and\nwill be stored as a hex value, opacity is always allowed via UI.\\\nCss syntax: https://developer.mozilla.org/en-US/docs/Web/CSS/color_value \\\n### example:\n```css\n--var-name: #ff22ee\n--var-name: #ff22ee\n```",
           "type": "object",
           "properties": {
             "syntax": {
@@ -219,13 +376,13 @@
               "const": "<color>"
             }
           },
-          "$ref": "#/$defs/ThemeVariable_for_string",
+          "$ref": "#/$defs/ThemeVariable",
           "required": [
             "syntax"
           ]
         },
         {
-          "description": "This will allow to the user set any lenght in any unit. (px, %, vw, etc).\n If you need force a specific unit, use Number instead lenght and on theme code makes the conversion.\\\n Css syntax: https://developer.mozilla.org/en-US/docs/Web/CSS/length \\\n ### example:\n ```css\n --var-name: 10px\n --var-name: 10%\n --var-name: 10vw\n ```",
+          "description": "This will allow to the user set any lenght in any unit. (px, %, vw, etc).\nIf you need force a specific unit, use Number instead lenght and on theme code makes the conversion.\\\nCss syntax: https://developer.mozilla.org/en-US/docs/Web/CSS/length \\\n### example:\n```css\n--var-name: 10px\n--var-name: 10%\n--var-name: 10vw\n```",
           "type": "object",
           "properties": {
             "syntax": {
@@ -233,13 +390,13 @@
               "const": "<length>"
             }
           },
-          "$ref": "#/$defs/ThemeVariableWithUnit_for_double",
+          "$ref": "#/$defs/ThemeVariableWithUnit",
           "required": [
             "syntax"
           ]
         },
         {
-          "description": "This will allow to users to set any number, without units.\n Css syntax: https://developer.mozilla.org/en-US/docs/Web/CSS/number \\\n ### example:\n ```css\n --var-name: 10\n ```",
+          "description": "This will allow to users to set any number, without units.\nCss syntax: https://developer.mozilla.org/en-US/docs/Web/CSS/number \\\n### example:\n```css\n--var-name: 10\n```",
           "type": "object",
           "properties": {
             "syntax": {
@@ -247,13 +404,13 @@
               "const": "<number>"
             }
           },
-          "$ref": "#/$defs/ThemeVariable_for_double",
+          "$ref": "#/$defs/ThemeVariable2",
           "required": [
             "syntax"
           ]
         },
         {
-          "description": "This will allow to users to set any url.\\\n Css syntax: https://developer.mozilla.org/en-US/docs/Web/CSS/url_value \\\n ### example:\n ```css\n --var-name: url(\"https://example.com/image.png\")\n ```\n ### Warning: using this will make your resource dependent of the url and network connection.",
+          "description": "This will allow to users to set any url.\\\nCss syntax: https://developer.mozilla.org/en-US/docs/Web/CSS/url_value \\\n### example:\n```css\n--var-name: url(\"https://example.com/image.png\")\n```\n### Warning: using this will make your resource dependent of the url and network connection.",
           "type": "object",
           "properties": {
             "syntax": {
@@ -261,14 +418,14 @@
               "const": "<url>"
             }
           },
-          "$ref": "#/$defs/ThemeVariable_for_Url",
+          "$ref": "#/$defs/ThemeVariable3",
           "required": [
             "syntax"
           ]
         }
       ]
     },
-    "ThemeVariableWithUnit_for_double": {
+    "ThemeVariableWithUnit": {
       "type": "object",
       "properties": {
         "description": {
@@ -316,172 +473,6 @@
         "name",
         "initialValue",
         "initialValueUnit"
-      ]
-    },
-    "ThemeVariable_for_Url": {
-      "type": "object",
-      "properties": {
-        "description": {
-          "description": "Extra details to show to the user under the label on Settings.",
-          "anyOf": [
-            {
-              "$ref": "#/$defs/ResourceText"
-            },
-            {
-              "type": "null"
-            }
-          ]
-        },
-        "initialValue": {
-          "description": "Initial variable value, if not manually set by the user.",
-          "type": "string",
-          "format": "uri"
-        },
-        "label": {
-          "description": "Label to show to the user on Settings.",
-          "$ref": "#/$defs/ResourceText"
-        },
-        "name": {
-          "description": "Css variable name, example: `--my-css-variable`",
-          "$ref": "#/$defs/CssVariableName"
-        },
-        "options": {
-          "description": "If present, this will be rendered as a selector of options instead of an input.\n `initial_value` should be present in this list.",
-          "type": [
-            "array",
-            "null"
-          ],
-          "items": {
-            "type": "string",
-            "format": "uri"
-          }
-        },
-        "tip": {
-          "description": "Will be rendered as a icon with a tooltip side the label.",
-          "anyOf": [
-            {
-              "$ref": "#/$defs/ResourceText"
-            },
-            {
-              "type": "null"
-            }
-          ]
-        }
-      },
-      "required": [
-        "label",
-        "name",
-        "initialValue"
-      ]
-    },
-    "ThemeVariable_for_double": {
-      "type": "object",
-      "properties": {
-        "description": {
-          "description": "Extra details to show to the user under the label on Settings.",
-          "anyOf": [
-            {
-              "$ref": "#/$defs/ResourceText"
-            },
-            {
-              "type": "null"
-            }
-          ]
-        },
-        "initialValue": {
-          "description": "Initial variable value, if not manually set by the user.",
-          "type": "number",
-          "format": "double"
-        },
-        "label": {
-          "description": "Label to show to the user on Settings.",
-          "$ref": "#/$defs/ResourceText"
-        },
-        "name": {
-          "description": "Css variable name, example: `--my-css-variable`",
-          "$ref": "#/$defs/CssVariableName"
-        },
-        "options": {
-          "description": "If present, this will be rendered as a selector of options instead of an input.\n `initial_value` should be present in this list.",
-          "type": [
-            "array",
-            "null"
-          ],
-          "items": {
-            "type": "number",
-            "format": "double"
-          }
-        },
-        "tip": {
-          "description": "Will be rendered as a icon with a tooltip side the label.",
-          "anyOf": [
-            {
-              "$ref": "#/$defs/ResourceText"
-            },
-            {
-              "type": "null"
-            }
-          ]
-        }
-      },
-      "required": [
-        "label",
-        "name",
-        "initialValue"
-      ]
-    },
-    "ThemeVariable_for_string": {
-      "type": "object",
-      "properties": {
-        "description": {
-          "description": "Extra details to show to the user under the label on Settings.",
-          "anyOf": [
-            {
-              "$ref": "#/$defs/ResourceText"
-            },
-            {
-              "type": "null"
-            }
-          ]
-        },
-        "initialValue": {
-          "description": "Initial variable value, if not manually set by the user.",
-          "type": "string"
-        },
-        "label": {
-          "description": "Label to show to the user on Settings.",
-          "$ref": "#/$defs/ResourceText"
-        },
-        "name": {
-          "description": "Css variable name, example: `--my-css-variable`",
-          "$ref": "#/$defs/CssVariableName"
-        },
-        "options": {
-          "description": "If present, this will be rendered as a selector of options instead of an input.\n `initial_value` should be present in this list.",
-          "type": [
-            "array",
-            "null"
-          ],
-          "items": {
-            "type": "string"
-          }
-        },
-        "tip": {
-          "description": "Will be rendered as a icon with a tooltip side the label.",
-          "anyOf": [
-            {
-              "$ref": "#/$defs/ResourceText"
-            },
-            {
-              "type": "null"
-            }
-          ]
-        }
-      },
-      "required": [
-        "label",
-        "name",
-        "initialValue"
       ]
     }
   }

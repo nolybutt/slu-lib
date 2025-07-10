@@ -23,10 +23,10 @@
     "metadata": {
       "$ref": "#/$defs/ResourceMetadata",
       "default": {
-        "description": {},
         "appTargetVersion": null,
         "banner": null,
         "bundled": false,
+        "description": {},
         "displayName": {},
         "filename": "",
         "path": "",
@@ -66,7 +66,7 @@
           "$ref": "#/$defs/Icon"
         },
         "key": {
-          "description": "we recomend following the widget id + icon name to avoid collisions\n e.g. \"@username/widgetid::iconname\" but you can use whatever you want",
+          "description": "we recomend following the widget id + icon name to avoid collisions\ne.g. \"@username/widgetid::iconname\" but you can use whatever you want",
           "type": "string"
         }
       },
@@ -167,13 +167,8 @@
     "ResourceMetadata": {
       "type": "object",
       "properties": {
-        "description": {
-          "description": "Map of language code to description. Could be a string, mapped to `en`.",
-          "$ref": "#/$defs/ResourceText",
-          "default": {}
-        },
         "appTargetVersion": {
-          "description": "App target version that this resource is compatible with.\\\n Developers are responsible to update the resource so when resource does not\n match the current app version, the resource will be shown with a warning message",
+          "description": "App target version that this resource is compatible with.\\\nDevelopers are responsible to update the resource so when resource does not\nmatch the current app version, the resource will be shown with a warning message",
           "type": [
             "array",
             "null"
@@ -207,6 +202,11 @@
           ],
           "format": "uri",
           "default": null
+        },
+        "description": {
+          "description": "Map of language code to description. Could be a string, mapped to `en`.",
+          "$ref": "#/$defs/ResourceText",
+          "default": {}
         },
         "displayName": {
           "description": "Map of language code to display name. Could be a string, mapped to `en`.",
@@ -273,7 +273,7 @@
       ]
     },
     "UniqueIconPackEntry": {
-      "description": "Key can be user model id, filename or a full path.\n In case of path this should be an executable or a lnk file or any other file that can\n have an unique/individual icon as are the applications, otherwise use `shared`.",
+      "description": "Key can be user model id, filename or a full path.\nIn case of path this should be an executable or a lnk file or any other file that can\nhave an unique/individual icon as are the applications, otherwise use `shared`.",
       "type": "object",
       "properties": {
         "icon": {
@@ -287,14 +287,14 @@
           ]
         },
         "path": {
-          "description": "Path or filename of the application, mostly this should be present,\n but cases like PWAs on Edge can have no path and be only an UMID.",
+          "description": "Path or filename of the application, mostly this should be present,\nbut cases like PWAs on Edge can have no path and be only an UMID.",
           "type": [
             "string",
             "null"
           ]
         },
         "redirect": {
-          "description": "In case of path be a lnk file this can be set to a different location to use the icon from.\n If present, icon on this entry will be ignored",
+          "description": "In case of path be a lnk file this can be set to a different location to use the icon from.\nIf present, icon on this entry will be ignored",
           "type": [
             "string",
             "null"
