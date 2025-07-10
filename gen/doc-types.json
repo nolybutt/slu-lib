@@ -34786,7 +34786,7 @@
         "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/ThemeConfigDefinition.ts",
         "line": 5,
         "col": 0,
-        "byteIndex": 242
+        "byteIndex": 250
       },
       "declarationKind": "export",
       "kind": "typeAlias",
@@ -34808,72 +34808,17 @@
                       "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/ThemeConfigDefinition.ts",
                       "line": 5,
                       "col": 38,
-                      "byteIndex": 280
+                      "byteIndex": 288
                     },
                     "params": [],
                     "computed": false,
                     "optional": false,
                     "tsType": {
-                      "repr": "",
-                      "kind": "typeLiteral",
-                      "typeLiteral": {
-                        "constructors": [],
-                        "methods": [],
-                        "properties": [
-                          {
-                            "name": "header",
-                            "location": {
-                              "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/ThemeConfigDefinition.ts",
-                              "line": 5,
-                              "col": 49,
-                              "byteIndex": 291
-                            },
-                            "params": [],
-                            "computed": false,
-                            "optional": false,
-                            "tsType": {
-                              "repr": "ResourceText",
-                              "kind": "typeRef",
-                              "typeRef": {
-                                "typeParams": null,
-                                "typeName": "ResourceText"
-                              }
-                            },
-                            "typeParams": []
-                          },
-                          {
-                            "name": "items",
-                            "location": {
-                              "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/ThemeConfigDefinition.ts",
-                              "line": 5,
-                              "col": 71,
-                              "byteIndex": 313
-                            },
-                            "params": [],
-                            "computed": false,
-                            "optional": false,
-                            "tsType": {
-                              "repr": "Array",
-                              "kind": "typeRef",
-                              "typeRef": {
-                                "typeParams": [
-                                  {
-                                    "repr": "ThemeConfigDefinition",
-                                    "kind": "typeRef",
-                                    "typeRef": {
-                                      "typeParams": null,
-                                      "typeName": "ThemeConfigDefinition"
-                                    }
-                                  }
-                                ],
-                                "typeName": "Array"
-                              }
-                            },
-                            "typeParams": []
-                          }
-                        ],
-                        "callSignatures": [],
-                        "indexSignatures": []
+                      "repr": "ThemeConfigGroup",
+                      "kind": "typeRef",
+                      "typeRef": {
+                        "typeParams": null,
+                        "typeName": "ThemeConfigGroup"
                       }
                     },
                     "typeParams": []
@@ -34892,6 +34837,84 @@
               }
             }
           ]
+        },
+        "typeParams": []
+      }
+    },
+    {
+      "name": "ThemeConfigGroup",
+      "isDefault": false,
+      "location": {
+        "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/ThemeConfigGroup.ts",
+        "line": 5,
+        "col": 0,
+        "byteIndex": 238
+      },
+      "declarationKind": "export",
+      "kind": "typeAlias",
+      "typeAliasDef": {
+        "tsType": {
+          "repr": "",
+          "kind": "typeLiteral",
+          "typeLiteral": {
+            "constructors": [],
+            "methods": [],
+            "properties": [
+              {
+                "name": "header",
+                "location": {
+                  "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/ThemeConfigGroup.ts",
+                  "line": 5,
+                  "col": 33,
+                  "byteIndex": 271
+                },
+                "params": [],
+                "computed": false,
+                "optional": false,
+                "tsType": {
+                  "repr": "ResourceText",
+                  "kind": "typeRef",
+                  "typeRef": {
+                    "typeParams": null,
+                    "typeName": "ResourceText"
+                  }
+                },
+                "typeParams": []
+              },
+              {
+                "name": "items",
+                "location": {
+                  "filename": "file:///C:/Users/dlmqc/source/repos/seelen/slu-lib/src/types/ThemeConfigGroup.ts",
+                  "line": 5,
+                  "col": 55,
+                  "byteIndex": 293
+                },
+                "params": [],
+                "computed": false,
+                "optional": false,
+                "tsType": {
+                  "repr": "Array",
+                  "kind": "typeRef",
+                  "typeRef": {
+                    "typeParams": [
+                      {
+                        "repr": "ThemeConfigDefinition",
+                        "kind": "typeRef",
+                        "typeRef": {
+                          "typeParams": null,
+                          "typeName": "ThemeConfigDefinition"
+                        }
+                      }
+                    ],
+                    "typeName": "Array"
+                  }
+                },
+                "typeParams": []
+              }
+            ],
+            "callSignatures": [],
+            "indexSignatures": []
+          }
         },
         "typeParams": []
       }

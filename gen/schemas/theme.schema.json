@@ -147,22 +147,7 @@
           "type": "object",
           "properties": {
             "group": {
-              "type": "object",
-              "properties": {
-                "header": {
-                  "$ref": "#/$defs/ResourceText"
-                },
-                "items": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/$defs/ThemeConfigDefinition"
-                  }
-                }
-              },
-              "required": [
-                "header",
-                "items"
-              ]
+              "$ref": "#/$defs/ThemeConfigGroup"
             }
           },
           "additionalProperties": false,
@@ -173,6 +158,24 @@
         {
           "$ref": "#/$defs/ThemeVariableDefinition"
         }
+      ]
+    },
+    "ThemeConfigGroup": {
+      "type": "object",
+      "properties": {
+        "header": {
+          "$ref": "#/$defs/ResourceText"
+        },
+        "items": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ThemeConfigDefinition"
+          }
+        }
+      },
+      "required": [
+        "header",
+        "items"
       ]
     },
     "ThemeId": {
@@ -197,7 +200,8 @@
             {
               "type": "null"
             }
-          ]
+          ],
+          "default": null
         },
         "initialValue": {
           "description": "Initial variable value, if not manually set by the user.",
@@ -230,7 +234,8 @@
             {
               "type": "null"
             }
-          ]
+          ],
+          "default": null
         }
       },
       "required": [
@@ -251,7 +256,8 @@
             {
               "type": "null"
             }
-          ]
+          ],
+          "default": null
         },
         "initialValue": {
           "description": "Initial variable value, if not manually set by the user.",
@@ -286,63 +292,8 @@
             {
               "type": "null"
             }
-          ]
-        }
-      },
-      "required": [
-        "label",
-        "name",
-        "initialValue"
-      ]
-    },
-    "ThemeVariable3": {
-      "type": "object",
-      "properties": {
-        "description": {
-          "description": "Extra details to show to the user under the label on Settings.",
-          "anyOf": [
-            {
-              "$ref": "#/$defs/ResourceText"
-            },
-            {
-              "type": "null"
-            }
-          ]
-        },
-        "initialValue": {
-          "description": "Initial variable value, if not manually set by the user.",
-          "type": "string",
-          "format": "uri"
-        },
-        "label": {
-          "description": "Label to show to the user on Settings.",
-          "$ref": "#/$defs/ResourceText"
-        },
-        "name": {
-          "description": "Css variable name, example: `--my-css-variable`",
-          "$ref": "#/$defs/CssVariableName"
-        },
-        "options": {
-          "description": "If present, this will be rendered as a selector of options instead of an input.\n`initial_value` should be present in this list.",
-          "type": [
-            "array",
-            "null"
           ],
-          "items": {
-            "type": "string",
-            "format": "uri"
-          }
-        },
-        "tip": {
-          "description": "Will be rendered as a icon with a tooltip side the label.",
-          "anyOf": [
-            {
-              "$ref": "#/$defs/ResourceText"
-            },
-            {
-              "type": "null"
-            }
-          ]
+          "default": null
         }
       },
       "required": [
@@ -418,7 +369,7 @@
               "const": "<url>"
             }
           },
-          "$ref": "#/$defs/ThemeVariable3",
+          "$ref": "#/$defs/ThemeVariable",
           "required": [
             "syntax"
           ]
@@ -437,7 +388,8 @@
             {
               "type": "null"
             }
-          ]
+          ],
+          "default": null
         },
         "initialValue": {
           "description": "Initial variable value, if not manually set by the user.",
@@ -465,7 +417,8 @@
             {
               "type": "null"
             }
-          ]
+          ],
+          "default": null
         }
       },
       "required": [

@@ -1,3 +1,6 @@
+#[cfg(test)]
+mod tests;
+
 pub mod config;
 
 use std::{collections::HashMap, fs::File, path::Path};

@@ -2,22 +2,47 @@ use std::sync::LazyLock;
 
 use schemars::JsonSchema;
 use serde::{de::Visitor, Deserialize, Deserializer};
-use url::Url;
 
 use crate::{error::Result, resource::ResourceText};
 
 #[derive(Debug, Clone, Default, Serialize, Deserialize, JsonSchema, TS)]
 pub struct ThemeSettingsDefinition(Vec<ThemeConfigDefinition>);
 
-#[derive(Debug, Clone, Serialize, Deserialize, JsonSchema, TS)]
+#[derive(Debug, Clone, Serialize, JsonSchema, TS)]
 #[serde(rename_all = "camelCase")]
 pub enum ThemeConfigDefinition {
-    Group {
-        header: ResourceText,
-        items: Vec<ThemeConfigDefinition>,
-    },
+    Group(ThemeConfigGroup),
     #[serde(untagged)]
     Item(Box<ThemeVariableDefinition>),
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, JsonSchema, TS)]
+#[serde(rename_all = "camelCase")]
+pub struct ThemeConfigGroup {
+    header: ResourceText,
+    items: Vec<ThemeConfigDefinition>,
+}
+
+impl<'de> Deserialize<'de> for ThemeConfigDefinition {
+    fn deserialize<D>(deserializer: D) -> Result<Self, D::Error>
+    where
+        D: Deserializer<'de>,
+    {
+        #[derive(Deserialize)]
+        struct GroupVariant {
+            group: ThemeConfigGroup,
+        }
+
+        let value =
+            serde_json::Value::deserialize(deserializer).map_err(serde::de::Error::custom)?;
+        if let Ok(parsed) = GroupVariant::deserialize(value.clone()) {
+            return Ok(ThemeConfigDefinition::Group(parsed.group));
+        }
+
+        Ok(ThemeConfigDefinition::Item(Box::new(
+            serde_json::from_value(value).map_err(serde::de::Error::custom)?,
+        )))
+    }
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, JsonSchema, TS)]
@@ -68,7 +93,7 @@ pub enum ThemeVariableDefinition {
     /// ```
     /// ### Warning: using this will make your resource dependent of the url and network connection.
     #[serde(rename = "<url>")]
-    Url(ThemeVariable<Url>),
+    Url(ThemeVariable<String>),
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, JsonSchema, TS)]
@@ -77,8 +102,10 @@ pub struct ThemeVariable<T> {
     /// Label to show to the user on Settings.
     pub label: ResourceText,
     /// Extra details to show to the user under the label on Settings.
+    #[serde(default)]
     pub description: Option<ResourceText>,
     /// Will be rendered as a icon with a tooltip side the label.
+    #[serde(default)]
     pub tip: Option<ResourceText>,
     /// Css variable name, example: `--my-css-variable`
     pub name: CssVariableName,
@@ -86,6 +113,7 @@ pub struct ThemeVariable<T> {
     pub initial_value: T,
     /// If present, this will be rendered as a selector of options instead of an input.
     /// `initial_value` should be present in this list.
+    #[serde(default)]
     pub options: Option<Vec<T>>,
 }
 
@@ -95,8 +123,10 @@ pub struct ThemeVariableWithUnit<T> {
     /// Label to show to the user on Settings.
     pub label: ResourceText,
     /// Extra details to show to the user under the label on Settings.
+    #[serde(default)]
     pub description: Option<ResourceText>,
     /// Will be rendered as a icon with a tooltip side the label.
+    #[serde(default)]
     pub tip: Option<ResourceText>,
     /// Css variable name, example: `--my-css-variable`
     pub name: CssVariableName,
