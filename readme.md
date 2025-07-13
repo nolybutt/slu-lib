@@ -49,3 +49,7 @@ plugin:
     - CPU_TEMPERATURE
     - GPU_TEMPERATURE
 ```
+
+Place this file inside Seelen UI's `plugins` directory (for example `%APPDATA%/Seelen/plugins` on Windows).
+Seelen UI will automatically detect the plugin at startup and show the CPU and GPU temperatures on the toolbar.
+You only need to clone this repository if you want to modify or build the library itself.
