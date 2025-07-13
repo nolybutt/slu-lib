@@ -1,4 +1,5 @@
 mod bluetooth;
+mod hwinfo;
 mod language;
 mod media;
 mod monitors;
@@ -11,6 +12,7 @@ mod user_apps;
 mod win_explorer;
 
 pub use bluetooth::*;
+pub use hwinfo::*;
 pub use language::*;
 pub use media::*;
 pub use monitors::*;
