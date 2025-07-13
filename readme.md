@@ -35,3 +35,17 @@ let myVariable: SeelenType = { ... };
 - [GitHub Repository](https://github.com/Seelen-Inc/slu-lib)
 - [NPM Package](https://npmjs.com/package/@seelen-ui/lib)
 - [JSR Documentation](https://jsr.io/@seelen-ui/lib)
+## Creating Plugins
+
+To extend Seelen UI with additional functionality, create a `.slu` file containing plugin information. The example below targets `@seelen/fancy-toolbar` and uses the `hwinfo` toolbar item.
+
+```yml
+id: "@username/hwinfo-demo"
+target: "@seelen/fancy-toolbar"
+plugin:
+  type: hwinfo
+  id: hwinfo-toolbar
+  sensors:
+    - CPU_TEMPERATURE
+    - GPU_TEMPERATURE
+```
