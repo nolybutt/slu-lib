@@ -37,7 +37,7 @@ let myVariable: SeelenType = { ... };
 - [JSR Documentation](https://jsr.io/@seelen-ui/lib)
 ## Creating Plugins
 
-To extend Seelen UI with additional functionality, create a `.slu` file containing plugin information. The example below targets `@seelen/fancy-toolbar` and uses the `hwinfo` toolbar item.
+To extend Seelen UI with additional functionality, create a plugin file. Plugin definitions can be stored as YAML (`.yaml` or `.yml`) or JSON, or encoded as `.slu` using `SluResourceFile::encode`. The example below targets `@seelen/fancy-toolbar` and uses the `hwinfo` toolbar item.
 
 ```yml
 id: "@username/hwinfo-demo"
@@ -50,6 +50,5 @@ plugin:
     - GPU_TEMPERATURE
 ```
 
-Place this file inside Seelen UI's `plugins` directory (for example `%APPDATA%/Seelen/plugins` on Windows).
-Seelen UI will automatically detect the plugin at startup and show the CPU and GPU temperatures on the toolbar.
+Place this file inside Seelen UI's `plugins` directory (for example %APPDATA%/Seelen/plugins on Windows). Seelen UI automatically loads `.yaml`, `.yml`, `.json`, `.jsonc`, and `.slu` plugin files at startup, so the CPU and GPU temperatures will appear on the toolbar.
 You only need to clone this repository if you want to modify or build the library itself.
