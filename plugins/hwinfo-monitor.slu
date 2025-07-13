@@ -1,4 +1,9 @@
 id: "@codex/hwinfo-monitor"
+metadata:
+  displayName:
+    en: "HWInfo Monitor"
+  description:
+    en: "Display CPU and GPU temperature in the toolbar"
 target: "@seelen/fancy-toolbar"
 plugin:
   type: hwinfo
