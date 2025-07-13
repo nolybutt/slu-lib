@@ -1,0 +1,8 @@
+id: "@codex/hwinfo-monitor"
+target: "@seelen/fancy-toolbar"
+plugin:
+  type: hwinfo
+  id: hwinfo-toolbar
+  sensors:
+    - CPU_TEMPERATURE
+    - GPU_TEMPERATURE
