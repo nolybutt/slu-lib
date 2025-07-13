@@ -19,6 +19,7 @@ const ToolbarModuleType: Enum<ToolbarItem['type']> = {
   Notifications: 'notifications',
   Device: 'device',
   Settings: 'settings',
+  Hwinfo: 'hwinfo',
   Workspaces: 'workspaces',
 };
 
