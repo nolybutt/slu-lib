@@ -25,6 +25,7 @@ export enum SeelenEvent {
   PowerMode = 'power-mode',
   BatteriesStatus = 'batteries-status',
   ColorsChanged = 'colors-changed',
+  HwinfoDataChanged = 'hwinfo-data-changed',
   TrayInfo = 'tray-info',
   ToolbarOverlaped = 'set-auto-hide',
   WegOverlaped = 'set-auto-hide',

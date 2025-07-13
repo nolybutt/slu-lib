@@ -77,6 +77,8 @@ slu_events_declaration! {
 
     ColorsChanged(UIColors) as "colors-changed",
 
+    HwinfoDataChanged(HwInfo) as "hwinfo-data-changed",
+
     TrayInfo(Vec<TrayIcon>) as "tray-info",
 
     ToolbarOverlaped(bool) as "set-auto-hide",

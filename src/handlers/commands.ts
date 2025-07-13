@@ -70,6 +70,7 @@ export enum SeelenCommand {
   Restart = 'restart',
   Shutdown = 'shutdown',
   Lock = 'lock',
+  GetHwinfoData = 'get_hwinfo_data',
   WegGetItemsForWidget = 'weg_get_items_for_widget',
   WegCloseApp = 'weg_close_app',
   WegKillApp = 'weg_kill_app',
