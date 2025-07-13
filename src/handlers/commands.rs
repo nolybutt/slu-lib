@@ -183,6 +183,9 @@ slu_commands_declaration! {
     Shutdown = shutdown(),
     Lock = lock(),
 
+    // Hwinfo
+    GetHwinfoData = get_hwinfo_data(sensors: Vec<String>) -> HwInfo,
+
     // SeelenWeg
     WegGetItemsForWidget = weg_get_items_for_widget() -> WegItems,
     WegCloseApp = weg_close_app(hwnd: isize),
