@@ -319,6 +319,84 @@
         }
       }
     },
+    "HwinfoToolbarItem": {
+      "type": "object",
+      "properties": {
+        "badge": {
+          "description": "Badge will be displayed over the item, useful as notifications.\n\nShould follow the [mathjs expression syntax](https://mathjs.org/docs/expressions/syntax.html).\n\n## Hwinfo Item Scope\nthis module does no expand the scope of the item",
+          "type": [
+            "string",
+            "null"
+          ],
+          "default": null
+        },
+        "id": {
+          "description": "Id to identify the item, should be unique.",
+          "type": "string",
+          "default": ""
+        },
+        "onClick": {
+          "description": "Deprecated use `onClickV2` instead.",
+          "type": [
+            "string",
+            "null"
+          ],
+          "default": null
+        },
+        "onClickV2": {
+          "description": "This code will be parsed and executed when the item is clicked.\n\nShould follow the [mathjs expression syntax](https://mathjs.org/docs/expressions/syntax.html).\n\n## Hwinfo Item Scope\nthis module does no expand the scope of the item",
+          "type": [
+            "string",
+            "null"
+          ],
+          "default": null
+        },
+        "remoteData": {
+          "description": "Remote data to be added to the item scope.",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/$defs/RemoteDataDeclaration"
+          },
+          "default": {}
+        },
+        "sensors": {
+          "description": "Sensors to query from the system",
+          "type": "array",
+          "default": [],
+          "items": {
+            "type": "string"
+          }
+        },
+        "style": {
+          "description": "Styles to be added to the item. This follow the same interface of React's `style` prop.",
+          "type": "object",
+          "additionalProperties": {
+            "anyOf": [
+              {
+                "$ref": "#/$defs/StyleValue"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "default": {}
+        },
+        "template": {
+          "description": "Content to display in the item.\n\nShould follow the [mathjs expression syntax](https://mathjs.org/docs/expressions/syntax.html).\n\n## Hwinfo Item Scope\nthis module does no expand the scope of the item",
+          "type": "string",
+          "default": ""
+        },
+        "tooltip": {
+          "description": "Content to display in tooltip of the item.\n\nShould follow the [mathjs expression syntax](https://mathjs.org/docs/expressions/syntax.html).\n\n## Hwinfo Item Scope\nthis module does no expand the scope of the item",
+          "type": [
+            "string",
+            "null"
+          ],
+          "default": null
+        }
+      }
+    },
     "KeyboardToolbarItem": {
       "type": "object",
       "properties": {
@@ -1034,6 +1112,19 @@
             }
           },
           "$ref": "#/$defs/SettingsToolbarItem",
+          "required": [
+            "type"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "type": {
+              "type": "string",
+              "const": "hwinfo"
+            }
+          },
+          "$ref": "#/$defs/HwinfoToolbarItem",
           "required": [
             "type"
           ]

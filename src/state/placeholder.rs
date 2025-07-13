@@ -319,6 +319,13 @@ common_item! {
     /// this module does no expand the scope of the item
     struct SettingsToolbarItem {}
 
+    /// ## Hwinfo Item Scope
+    /// this module does no expand the scope of the item
+    struct HwinfoToolbarItem {
+        /// Sensors to query from the system
+        sensors: Vec<String>,
+    }
+
     /// ## Workspace Item Scope
     /// this module does no expand the scope of the item
     struct WorkspaceToolbarItem {
@@ -342,6 +349,7 @@ pub enum ToolbarItem {
     Tray(TrayToolbarItem),
     Device(DeviceToolbarItem),
     Settings(SettingsToolbarItem),
+    Hwinfo(HwinfoToolbarItem),
     Workspaces(WorkspaceToolbarItem),
 }
 
@@ -361,6 +369,7 @@ impl ToolbarItem {
             ToolbarItem::Tray(item) => item.id.clone(),
             ToolbarItem::Device(item) => item.id.clone(),
             ToolbarItem::Settings(item) => item.id.clone(),
+            ToolbarItem::Hwinfo(item) => item.id.clone(),
             ToolbarItem::Workspaces(item) => item.id.clone(),
         }
     }
@@ -380,6 +389,7 @@ impl ToolbarItem {
             ToolbarItem::Tray(item) => item.id = id,
             ToolbarItem::Device(item) => item.id = id,
             ToolbarItem::Settings(item) => item.id = id,
+            ToolbarItem::Hwinfo(item) => item.id = id,
             ToolbarItem::Workspaces(item) => item.id = id,
         }
     }
